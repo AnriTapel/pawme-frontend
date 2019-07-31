@@ -120,8 +120,16 @@ mdb-carousel {
   margin: auto;
 }
 
+.first-slider-section > h3 {
+  display: none;
+}
+
 .first-slider-section mdb-carousel {
   padding: 3% 0 3% 15% !important;
+}
+
+.second-slider-section > h3 {
+  display: none;
 }
 
 .second-slider-section mdb-carousel {
@@ -204,10 +212,13 @@ mdb-carousel {
   mdb-carousel {
     width: 100%;
   }
+  .first-slider-section > h3,
+  .second-slider-section > h3 {
+    display: block;
+  }
   .first-slider-text,
   .second-slider-text {
-    margin: unset;
-    width: 100%;
+    display: none;
   }
   .first-slider-text {
     text-align: cetner;

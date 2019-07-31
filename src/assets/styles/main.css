@@ -70,9 +70,38 @@ p {
   background: #7975ce;
 }
 
+.carousel-caption {
+  display: none;
+}
+
 @media screen and (max-width: 769px) {
   .custom-btn {
     padding: 15px 25px;
+  }
+  .carousel-indicators {
+    bottom: -1em !important;
+  }
+  .carousel .carousel-indicators li {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+  .carousel-indicators li {
+    margin-right: 10px !important;
+    margin-left: 10px !important;
+    background-color: #645fc9 !important;
+  }
+  .carousel-control-prev,
+  .carousel-control-next {
+    display: none !important;
+  }
+  .carousel-caption {
+    display: block;
+    position: static !important;
+  }
+  .carousel-fade .carousel-inner > .carousel-item.active,
+  .carousel-fade .carousel-inner > .carousel-item.next.left,
+  .carousel-fade .carousel-inner > .carousel-item.prev.right {
+    display: block !important;
   }
 }
 /*# sourceMappingURL=main.css.map */

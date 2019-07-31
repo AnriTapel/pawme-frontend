@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { CarouselModule, WavesModule } from 'angular-bootstrap-md'
 
 @Component({
@@ -8,20 +8,28 @@ import { CarouselModule, WavesModule } from 'angular-bootstrap-md'
 })
 export class BreederLandingComponent implements OnInit {
 
-  @ViewChild('firstSlider', {static: true})
-  firstSlider: any;
-  @ViewChild('secondSlider', {static: true})
-  secondSlider: any;
-
   firstSliderData: any[];
   secondSliderData: any[];
 
   firstSliderActiveIndex: number = 0;
   secondSliderActiveIndex: number = 0;
 
+  @HostListener('window:resize', ['$event'])
+  screenResizeListner(event?) {
+    this.firstSlider.isControls = window.innerWidth > 769 ? false : true;
+    this.secondSlider.isControls = window.innerWidth > 769 ? false : true;
+  }
+
+  @ViewChild('firstSlider', { static: true })
+  firstSlider: any;
+  @ViewChild('secondSlider', { static: true })
+  secondSlider: any;
+
   constructor() { }
 
   ngOnInit() {
+    this.screenResizeListner();
+
     this.firstSliderData = [
       { img: '../../assets/img/slider-img.png', text: 'Общая информация + фотографии' },
       { img: '../../assets/img/slider-img.png', text: 'О себе' },
@@ -32,18 +40,16 @@ export class BreederLandingComponent implements OnInit {
 
     this.secondSliderData = [
       { img: '../../assets/img/slider-img.png', text: 'Редактирование своей страницы' },
-      { img: '../../assets/img/slider-img.png', text: 'Обзение с покупателями' },
+      { img: '../../assets/img/slider-img.png', text: 'Общение с покупателями' },
       { img: '../../assets/img/slider-img.png', text: 'Своя форма заявки на щенка' },
       { img: '../../assets/img/slider-img.png', text: 'Обработка заявок от покупателей' },
     ];
 
     this.firstSlider.animation = 'fade';
     this.firstSlider.interval = 4000;
-    this.firstSlider.isControls = false;
 
     this.secondSlider.animation = 'fade';
     this.secondSlider.interval = 4000;
-    this.secondSlider.isControls = false;
   }
 
   onFirstSliderActiveChanged(event: any): void {
@@ -54,11 +60,11 @@ export class BreederLandingComponent implements OnInit {
     this.secondSliderActiveIndex = event.relatedTarget;
   }
 
-  firstSliderTitleClicked(index: number): void{
+  firstSliderTitleClicked(index: number): void {
     this.firstSlider.selectSlide(index);
   }
 
-  secondSliderTitleClicked(index: number): void{
+  secondSliderTitleClicked(index: number): void {
     this.secondSlider.selectSlide(index);
   }
 

@@ -108,12 +108,22 @@ mdb-carousel{
 }
 
 .first-slider-section{
+
+    & > h3 {
+        display: none;
+    }
+
     mdb-carousel{
         padding: 3% 0 3% 15% !important;
     }
 }
 
 .second-slider-section{
+
+    & > h3 {
+        display: none;
+    }
+
     mdb-carousel{
         padding: 3% 15% 3% 0 !important;
     }
@@ -156,7 +166,6 @@ mdb-carousel{
         }
     }
 }
-
 
 @media screen and (max-width: 769px){
 
@@ -203,10 +212,16 @@ mdb-carousel{
         width: 100%;
     }
 
+    .first-slider-section,
+    .second-slider-section{
+        & > h3 {
+            display: block;
+        }
+    }
+
     .first-slider-text,
     .second-slider-text{
-        margin: unset;
-        width: 100%;
+        display: none;
     }
 
     .first-slider-text{
