@@ -52,6 +52,12 @@ p {
   width: fit-content;
 }
 
+.custom-btn:focus, .custom-btn:active {
+  outline: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .btn-purple {
   background: #645fc9;
   color: #ffffff !important;
@@ -72,6 +78,42 @@ p {
 
 .carousel-caption {
   display: none;
+}
+
+.form-group {
+  width: 50%;
+  margin: 15px auto 0;
+  text-align: left;
+}
+
+.form-group label {
+  margin: unset;
+  color: #0e0b4d;
+}
+
+.form-check {
+  width: 50%;
+  margin: 15px auto 0;
+  text-align: left;
+}
+
+.form-check label {
+  color: #0e0b4d;
+  font-size: 12px;
+}
+
+.form-check label a {
+  text-decoration: underline;
+  -webkit-transition: none;
+  transition: none;
+}
+
+.form-check-input {
+  position: absolute;
+  margin-top: unset;
+  margin-left: -20px;
+  height: 16px;
+  width: 16px;
 }
 
 @media screen and (max-width: 769px) {

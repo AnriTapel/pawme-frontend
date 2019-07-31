@@ -1,0 +1,23 @@
+.popup-wrapper {
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(14, 11, 77, 0.5);
+  padding: 0 15vw;
+  z-index: 999;
+}
+
+.popup-wrapper > div {
+  position: relative;
+  margin: 0 auto;
+  top: 10vh;
+  text-align: center;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #e6e8f5;
+  padding: 1em 0;
+}
+/*# sourceMappingURL=popup-template.component.css.map */

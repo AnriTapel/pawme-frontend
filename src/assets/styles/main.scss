@@ -48,6 +48,11 @@ p{
     padding: 10px 25px;
     border: none;
     width: fit-content;
+
+    &:focus, &:active{
+        outline: none !important;
+        box-shadow: none;
+    }
 }
 
 .btn-purple{
@@ -73,6 +78,40 @@ p{
     display: none;
 }
 
+.form-group{
+    width: 50%;
+    margin: 15px auto 0;
+    text-align: left;
+
+    label{
+        margin: unset;
+        color: $regular-text-color;
+    }
+}
+
+.form-check{
+    width: 50%;
+    margin: 15px auto 0;
+    text-align: left;
+
+    label{
+        color: $regular-text-color;
+        font-size: 12px;
+
+        a{
+            text-decoration: underline;
+            transition: none;
+        }
+    }
+}
+
+.form-check-input{
+    position: absolute;
+    margin-top: unset;
+    margin-left: -20px;
+    height: 16px;
+    width: 16px;
+}
 
 @media screen and (max-width: 769px){
 

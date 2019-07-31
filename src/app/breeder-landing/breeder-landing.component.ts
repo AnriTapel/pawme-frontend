@@ -52,20 +52,23 @@ export class BreederLandingComponent implements OnInit {
     this.secondSlider.interval = 4000;
   }
 
-  onFirstSliderActiveChanged(event: any): void {
+  private onFirstSliderActiveChanged(event: any): void {
     this.firstSliderActiveIndex = event.relatedTarget;
   }
 
-  onSecondSliderActiveChanged(event: any): void {
+  private onSecondSliderActiveChanged(event: any): void {
     this.secondSliderActiveIndex = event.relatedTarget;
   }
 
-  firstSliderTitleClicked(index: number): void {
+  private firstSliderTitleClicked(index: number): void {
     this.firstSlider.selectSlide(index);
   }
 
-  secondSliderTitleClicked(index: number): void {
+  private secondSliderTitleClicked(index: number): void {
     this.secondSlider.selectSlide(index);
   }
 
+  private showSignUpPopup(){
+    document.getElementById("popup-wrapper").style.visibility = 'visible';
+  }
 }

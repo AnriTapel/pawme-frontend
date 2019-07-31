@@ -7,13 +7,17 @@ import { BreederLandingComponent } from './breeder-landing/breeder-landing.compo
 import { HomePageComponent } from './home-page/home-page.component';
 import { FooterComponent } from './template-blocks/footer/footer.component';
 import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
+import { PopupTemplateComponent } from './template-blocks/popup-template/popup-template.component';
+import { HeaderComponent } from './template-blocks/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BreederLandingComponent,
     HomePageComponent,
-    FooterComponent
+    FooterComponent,
+    PopupTemplateComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
