@@ -1,0 +1,15 @@
+span {
+  font-size: 12px;
+}
+
+span a {
+  text-decoration: underline;
+  -webkit-transition: none;
+  transition: none;
+  color: #0275d8;
+}
+
+span a:hover {
+  color: #014c8c;
+}
+/*# sourceMappingURL=sign-up.component.css.map */

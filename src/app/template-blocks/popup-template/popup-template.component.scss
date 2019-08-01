@@ -1,5 +1,4 @@
 .popup-wrapper{
-    visibility: hidden;
     width: 100%;
     height: 100%;
     top: 0;
@@ -18,5 +17,14 @@
         border-radius: 5px;
         border: 1px solid #e6e8f5;
         padding: 1em 0;
+
+        & > img{
+            float: right;
+            width: 16px;
+            cursor: pointer;
+            position: absolute;
+            top: 25px;
+            right: 20px;
+        }
     }
 }

@@ -1,0 +1,13 @@
+<h3>ВХОД</h3>
+<form>
+    <div class="form-group">
+        <label for="email">Ваш Email</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="breederEmail">
+    </div>
+    <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="breederPassword">
+    </div>
+    
+    <input type="button" class="custom-btn btn-purple" style="margin-top: 30px;" value="Войти" (click)="loginBreeder()" />
+</form>

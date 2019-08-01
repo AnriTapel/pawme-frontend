@@ -9,6 +9,10 @@ import { FooterComponent } from './template-blocks/footer/footer.component';
 import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
 import { PopupTemplateComponent } from './template-blocks/popup-template/popup-template.component';
 import { HeaderComponent } from './template-blocks/header/header.component';
+import { LoginComponent } from './forms/login/login.component';
+import { SignUpComponent } from './forms/sign-up/sign-up.component';
+import { PopupTemplateService } from './template-blocks/popup-template/popup-template.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,15 +21,18 @@ import { HeaderComponent } from './template-blocks/header/header.component';
     HomePageComponent,
     FooterComponent,
     PopupTemplateComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CarouselModule,
-    WavesModule
+    WavesModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [PopupTemplateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

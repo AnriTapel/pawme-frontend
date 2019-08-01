@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { CarouselModule, WavesModule } from 'angular-bootstrap-md'
+import { PopupTemplateService } from '../template-blocks/popup-template/popup-template.service';
 
 @Component({
   selector: 'app-breeder-landing',
@@ -25,7 +25,7 @@ export class BreederLandingComponent implements OnInit {
   @ViewChild('secondSlider', { static: true })
   secondSlider: any;
 
-  constructor() { }
+  constructor(private popupService: PopupTemplateService) { }
 
   ngOnInit() {
     this.screenResizeListner();
@@ -69,6 +69,7 @@ export class BreederLandingComponent implements OnInit {
   }
 
   private showSignUpPopup(){
-    document.getElementById("popup-wrapper").style.visibility = 'visible';
+    this.popupService.setCurrentForm("sign-up");
+    this.popupService.setShowStatus(true);
   }
 }

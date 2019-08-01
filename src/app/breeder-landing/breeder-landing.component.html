@@ -125,6 +125,9 @@
     </div>
 </div>
 
-<app-popup-template></app-popup-template>
+<app-popup-template [ngSwitch]="popupService.getCurrentForm()">
+    <app-login *ngSwitchCase="'login'"></app-login>
+    <app-sign-up *ngSwitchCase="'sign-up'"></app-sign-up>
+</app-popup-template>
 
 <app-footer></app-footer>

@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { PopupTemplateService } from './popup-template.service';
 
 @Component({
   selector: 'app-popup-template',
   templateUrl: './popup-template.component.html',
   styleUrls: ['./popup-template.component.scss']
 })
-export class PopupTemplateComponent implements OnInit {
+export class PopupTemplateComponent implements AfterViewInit {
 
-  constructor() { }
+  constructor(private popupService: PopupTemplateService) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
   }
 
   closePopup(){
-    document.getElementById("popup-wrapper").style.visibility = 'hidden';
+    this.popupService.setShowStatus(false);
   }
 
 }
