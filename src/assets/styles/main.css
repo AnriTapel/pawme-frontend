@@ -149,5 +149,10 @@ span {
   .carousel-fade .carousel-inner > .carousel-item.prev.right {
     display: block !important;
   }
+  .form-group,
+  .form-check {
+    width: 80% !important;
+    margin: 5px auto 0;
+  }
 }
 /*# sourceMappingURL=main.css.map */

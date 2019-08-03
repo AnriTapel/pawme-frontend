@@ -28,3 +28,15 @@
         }
     }
 }
+
+@media screen and (max-width: 769px){
+
+    .popup-wrapper{
+        padding: 0 5vw;
+
+        & > div{
+            top: 5vh !important;
+        }
+    }
+
+}

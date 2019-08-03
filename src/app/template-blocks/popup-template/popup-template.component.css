@@ -28,4 +28,13 @@
   top: 25px;
   right: 20px;
 }
+
+@media screen and (max-width: 769px) {
+  .popup-wrapper {
+    padding: 0 5vw;
+  }
+  .popup-wrapper > div {
+    top: 5vh !important;
+  }
+}
 /*# sourceMappingURL=popup-template.component.css.map */
