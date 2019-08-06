@@ -43,7 +43,7 @@ p{
     color: $regular-text-color;
 }
 
-span{
+span, label{
     color: $regular-text-color;
 }
 
@@ -64,17 +64,33 @@ span{
     color: #ffffff !important;
 }
 
+.btn-transparent{
+    border: 1px solid #645fc9;
+    color: #645fc9;
+    background-color: #f8f9fb;
+    margin: 10px auto;
+    display: block;
+}
+
 .btn-white{
     background: #ffffff;
     color: #645fc9 !important;
 }
 
-.btn-white:hover{
+.btn-white:hover,
+.btn-transparent:hover{
     background: #efefef;
+    transition: all 0.5s ease;
 }
 
 .btn-purple:hover{
     background: #7975ce;
+    transition: all 0.5s ease;
+}
+
+.popup-form-group,
+.popup-form-check{
+    width: 50% !important;
 }
 
 // Bootstrap overrided classes
@@ -83,7 +99,6 @@ span{
 }
 
 .form-group{
-    width: 50%;
     margin: 15px auto 0;
     text-align: left;
 
@@ -94,7 +109,6 @@ span{
 }
 
 .form-check{
-    width: 50%;
     margin: 15px auto 0;
     text-align: left;
 
@@ -121,6 +135,11 @@ span{
 
     .custom-btn{
         padding: 15px 25px;
+    }
+
+    .popup-form-group,
+    .popup-form-check{
+        width: 80% !important;
     }
 
     // Bootstrap overrided classes
@@ -157,7 +176,6 @@ span{
     
     .form-group,
     .form-check{
-        width: 80% !important;
         margin: 5px auto 0;
     }
 

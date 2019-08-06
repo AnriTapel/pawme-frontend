@@ -36,5 +36,8 @@
   .popup-wrapper > div {
     top: 5vh !important;
   }
+  .popup-from-group {
+    width: 80%;
+  }
 }
 /*# sourceMappingURL=popup-template.component.css.map */

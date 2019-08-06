@@ -13,6 +13,15 @@ import { LoginComponent } from './forms/login/login.component';
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { PopupTemplateService } from './template-blocks/popup-template/popup-template.service';
 import { FormsModule } from '@angular/forms';
+import { BreederProfileComponent } from './breeder-profile/breeder-profile.component';
+import { AboutNurceryProfilePageComponent } from './breeder-profile/about-nurcery-profile-page/about-nurcery-profile-page.component';
+import { AboutPuppiesProfilePageComponent } from './breeder-profile/about-puppies-profile-page/about-puppies-profile-page.component';
+import { PuppiesParentsProfilePageComponent } from './breeder-profile/puppies-parents-profile-page/puppies-parents-profile-page.component';
+import { AboutMeProfilePageComponent } from './breeder-profile/about-me-profile-page/about-me-profile-page.component';
+import { AddPuppyProfilePageComponent } from './breeder-profile/add-puppy-profile-page/add-puppy-profile-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RemindPasswordComponent } from './forms/remind-password/remind-password.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,14 +32,23 @@ import { FormsModule } from '@angular/forms';
     PopupTemplateComponent,
     HeaderComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    BreederProfileComponent,
+    AboutNurceryProfilePageComponent,
+    AboutPuppiesProfilePageComponent,
+    PuppiesParentsProfilePageComponent,
+    AboutMeProfilePageComponent,
+    AddPuppyProfilePageComponent,
+    RemindPasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CarouselModule,
     WavesModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    NgbModule
   ],
   providers: [PopupTemplateService],
   bootstrap: [AppComponent]

@@ -1,1 +1,15 @@
-/* No CSS *//*# sourceMappingURL=login.component.css.map */
+span {
+  font-size: 12px;
+}
+
+span a {
+  text-decoration: underline;
+  -webkit-transition: none;
+  transition: none;
+  color: #0275d8;
+}
+
+span a:hover {
+  color: #014c8c;
+}
+/*# sourceMappingURL=login.component.css.map */

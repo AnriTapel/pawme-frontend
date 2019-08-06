@@ -1,3 +1,5 @@
+<!-- Header with nav bar -->
+
 <div class="breeder-landing-top-block">
     <div class="breeder-landing-title">
         <h1>Платформа для ответственных заводчиков, которым нужны удобные инструменты</h1>
@@ -128,6 +130,7 @@
 <app-popup-template [ngSwitch]="popupService.getCurrentForm()">
     <app-login *ngSwitchCase="'login'"></app-login>
     <app-sign-up *ngSwitchCase="'sign-up'"></app-sign-up>
+    <app-remind-password *ngSwitchCase="'remind-password'"></app-remind-password>
 </app-popup-template>
 
 <app-footer></app-footer>

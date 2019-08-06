@@ -1,0 +1,13 @@
+span{
+    font-size: 12px;
+
+    a{
+        text-decoration: underline;
+        transition: none;
+        color: #0275d8;
+
+        &:hover{
+            color: #014c8c;
+        }
+    }
+}

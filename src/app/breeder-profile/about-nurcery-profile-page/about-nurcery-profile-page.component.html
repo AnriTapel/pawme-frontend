@@ -1,0 +1,105 @@
+<div class="about-nurcery-container">
+
+    <div class="page-header">
+        <h3>О питомнике</h3>
+    </div>
+    <div class="upper-btn">
+        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
+    </div>
+    <div class="about-nurcery-form-group">
+        <label for="nurcery-name">Название питомника (необязательно)</label>
+        <input class="form-control" type="text" name="nurcery-name" [(ngModel)]="nurceryData.nurceryName"
+            placeholder="Название питомника" />
+    </div>
+
+    <div class="about-nurcery-form-group">
+        <label for="nurcery-location">Город / населенный пункт</label>
+        <input type="text" class="form-control" name="nurcery-location" [(ngModel)]="nurceryData.nurceryLocation"
+            [ngbTypeahead]="appService.fieldAutocomplite(availCities, cityFocus$, cityClick$, cityInstance)"
+            (focus)="cityFocus$.next($event.target.value)" (click)="cityClick$.next($event.target.value)"
+            #cityInstance="ngbTypeahead">
+    </div>
+
+    <div class="about-nurcery-form-group">
+        <label for="nurcery-main-breed">Основная порода</label>
+        <input type="text" class="form-control" name="nurcery-main-breed" [(ngModel)]="nurceryData.nurceryMainBreed"
+            [ngbTypeahead]="appService.fieldAutocomplite(availBreeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
+            (focus)="mainBreedFocus$.next($event.target.value)" (click)="mainBreedClick$.next($event.target.value)"
+            #mainBreedInstance="ngbTypeahead">
+    </div>
+
+    <div *ngIf="!isAdditionalBreed" class="about-nurcery-form-group" style="align-self: end;">
+        <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить еще одну"
+            (click)="isAdditionalBreed = true" />
+    </div>
+    <div *ngIf="isAdditionalBreed" class="about-nurcery-form-group">
+        <label for="nurcery-additional-breed">Дополнительная порода</label>
+        <input type="text" class="form-control" name="nurcery-additional-breed" [(ngModel)]="nurceryData.nurceryAdditionalBreed"
+            [ngbTypeahead]="appService.fieldAutocomplite(availBreeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
+            (focus)="addBreedFocus$.next($event.target.value)" (click)="addBreedClick$.next($event.target.value)"
+            #addBreedInstance="ngbTypeahead">
+    </div>
+
+    <div class="about-nurcery-form-group about-your-nurcery-block">
+        <label for="about-your-nurcery">О вашем питомнике</label><br>
+        <span class="block-description">Это одна из первых вещей, которую прочитают потенциальные покупатели на вашей
+            странице. Постарайтесь
+            кратко (в 2-3 предложения) описать ваш питомник и рассказать о его особенностях.</span>
+        <textarea class="form-control" [(ngModel)]="nurceryData.aboutNurcery"></textarea>
+    </div>
+
+    <hr>
+
+    <div class="about-nurcery-profile-image">
+        <div class="image-block" name="image-block">
+            <input type="file" id="profile-image" [(ngModel)]="nurceryData.nurceryProfileImage" accept=".jpg, .png, .jpeg" />
+            <img src="../../../assets/img/thin-plus.png" alt="Добавить изображение" />
+        </div>
+        <div class="profile-image-text-block">
+            <label for="image-block">Фото вашего профиля заводчика</label><br>
+            <span class="block-description">Рекомендуемое разрешение - 256 на 256 пикселей</span>
+        </div>
+    </div>
+
+    <div class="about-nurcery-form-group nurcery-gallery-block">
+        <label for="nurcery-gallery">Фото в основную галерею</label><br>
+        <span class="block-description">Фотографии будут отображаться в галерее на вашей странице заводчика</span>
+
+        <div *ngIf="nurceryData.nurceryGallery.length == 0" class="nurcery-gallery-initial-block">
+            <input type="file" id="nurcery-gallery" [(ngModel)]="nurceryData.nurceryGalleryImage" accept=".jpg, .png, .jpeg"
+                multiple />
+            <img src="../../../assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
+            <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="about-nurcery-form-group">
+        <label for="nurcery-instagram">Instagram (необязательно)</label>
+        <input class="form-control" type="text" name="nurcery-instagram" [(ngModel)]="nurceryData.nurceryInstagram"
+            placeholder="@имя в Instagram" />
+
+        <span class="block-description">Мы автоматически добавим публикации на вашу страницу заводчика</span>
+    </div>
+
+    <div class="about-nurcery-form-group">
+        <label for="nurcery-site">Ваш сайт (необязательно)</label>
+        <input class="form-control" type="text" name="nurcery-site" [(ngModel)]="nurceryData.nurcerySite"
+            placeholder="Ссылка на ваш сайт" />
+
+        <span class="block-description">Например, google.com</span>
+    </div>
+
+    <div class="about-nurcery-form-group">
+        <label for="nurcery-facebook">Ссылка на ваш Facebook (необязательно)</label>
+        <input class="form-control" type="text" name="nurcery-facebook" [(ngModel)]="nurceryData.nurceryFacebook"
+            placeholder="Ссылка на ваш Facebook" />
+
+        <span class="block-description">Формат ссылки: facebook.com/мойпрофиль</span>
+    </div>
+
+    <div class="lower-btn">
+        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
+    </div>
+</div>

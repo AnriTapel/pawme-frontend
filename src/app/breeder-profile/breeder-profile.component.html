@@ -1,0 +1,35 @@
+<!-- Header with nav bar -->
+<hr>
+
+<div class="profile-container">
+
+    <div class="profile-progress-bar"></div>
+
+    <div>
+        <div class="profile-menu">
+            <p [ngClass]="{'active-page': getCurProfilePage() == 'about-nurcery'}"
+                (click)="setCurProfilePage('about-nurcery')">О питомнике</p>
+            <p [ngClass]="{'active-page': getCurProfilePage() == 'about-puppies'}"
+                (click)="setCurProfilePage('about-puppies')">О щенках</p>
+            <p [ngClass]="{'active-page': getCurProfilePage() == 'puppies-parents'}"
+                (click)="setCurProfilePage('puppies-parents')">Родители щенков</p>
+            <p [ngClass]="{'active-page': getCurProfilePage() == 'about-me'}" (click)="setCurProfilePage('about-me')">
+                О себе</p>
+            <p [ngClass]="{'active-page': getCurProfilePage() == 'add-puppy'}" (click)="setCurProfilePage('add-puppy')">
+                Добавить щенка</p>
+        </div>
+
+        <input type="button" class="custom-btn btn-transparent" value="Предварительный просмотр" (click)="showPreview()" />
+    </div>
+
+    <div class="profile-page" [ngSwitch]="getCurProfilePage()">
+        <app-about-nurcery-profile-page *ngSwitchCase="'about-nurcery'"></app-about-nurcery-profile-page>
+        <app-about-puppies-profile-page *ngSwitchCase="'about-puppies'"></app-about-puppies-profile-page>
+        <app-puppies-parents-profile-page *ngSwitchCase="'puppies-parents'"></app-puppies-parents-profile-page>
+        <app-about-me-profile-page *ngSwitchCase="'about-me'"></app-about-me-profile-page>
+        <app-add-puppy-profile-page *ngSwitchCase="'add-puppy'"></app-add-puppy-profile-page>
+    </div>
+
+</div>
+
+<app-footer></app-footer>
