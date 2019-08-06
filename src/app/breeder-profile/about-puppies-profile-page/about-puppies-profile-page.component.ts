@@ -7,9 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutPuppiesProfilePageComponent implements OnInit {
 
+  puppiesData: object;
+
   constructor() { }
 
   ngOnInit() {
+    this.puppiesData = {
+      age: null,
+      priceFrom: null,
+      priceTo: null,
+      kitAvail: false,
+      medicines: {
+        vaccinations: false,
+        worms: false,
+        chip: false,
+        castration: false
+      },
+      contract: false,
+      guaranteePeriod: null,
+      problems: null,
+      gifts: null
+    };
   }
 
+  saveChanges(){
+    console.log(this.puppiesData);
+  }
 }

@@ -1,4 +1,4 @@
-<div class="about-nurcery-container">
+<div class="breeder-profile-subpage-container">
 
     <div class="page-header">
         <h3>О питомнике</h3>
@@ -6,13 +6,13 @@
     <div class="upper-btn">
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
     </div>
-    <div class="about-nurcery-form-group">
+    <div class="breeder-profile-subpage-form-group">
         <label for="nurcery-name">Название питомника (необязательно)</label>
         <input class="form-control" type="text" name="nurcery-name" [(ngModel)]="nurceryData.nurceryName"
             placeholder="Название питомника" />
     </div>
 
-    <div class="about-nurcery-form-group">
+    <div class="breeder-profile-subpage-form-group">
         <label for="nurcery-location">Город / населенный пункт</label>
         <input type="text" class="form-control" name="nurcery-location" [(ngModel)]="nurceryData.nurceryLocation"
             [ngbTypeahead]="appService.fieldAutocomplite(availCities, cityFocus$, cityClick$, cityInstance)"
@@ -20,7 +20,7 @@
             #cityInstance="ngbTypeahead">
     </div>
 
-    <div class="about-nurcery-form-group">
+    <div class="breeder-profile-subpage-form-group">
         <label for="nurcery-main-breed">Основная порода</label>
         <input type="text" class="form-control" name="nurcery-main-breed" [(ngModel)]="nurceryData.nurceryMainBreed"
             [ngbTypeahead]="appService.fieldAutocomplite(availBreeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
@@ -28,11 +28,11 @@
             #mainBreedInstance="ngbTypeahead">
     </div>
 
-    <div *ngIf="!isAdditionalBreed" class="about-nurcery-form-group" style="align-self: end;">
+    <div *ngIf="!isAdditionalBreed" class="breeder-profile-subpage-form-group" style="align-self: end;">
         <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить еще одну"
             (click)="isAdditionalBreed = true" />
     </div>
-    <div *ngIf="isAdditionalBreed" class="about-nurcery-form-group">
+    <div *ngIf="isAdditionalBreed" class="breeder-profile-subpage-form-group">
         <label for="nurcery-additional-breed">Дополнительная порода</label>
         <input type="text" class="form-control" name="nurcery-additional-breed" [(ngModel)]="nurceryData.nurceryAdditionalBreed"
             [ngbTypeahead]="appService.fieldAutocomplite(availBreeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
@@ -40,7 +40,7 @@
             #addBreedInstance="ngbTypeahead">
     </div>
 
-    <div class="about-nurcery-form-group about-your-nurcery-block">
+    <div class="breeder-profile-subpage-form-group about-your-nurcery-block">
         <label for="about-your-nurcery">О вашем питомнике</label><br>
         <span class="block-description">Это одна из первых вещей, которую прочитают потенциальные покупатели на вашей
             странице. Постарайтесь
@@ -61,7 +61,7 @@
         </div>
     </div>
 
-    <div class="about-nurcery-form-group nurcery-gallery-block">
+    <div class="breeder-profile-subpage-form-group nurcery-gallery-block">
         <label for="nurcery-gallery">Фото в основную галерею</label><br>
         <span class="block-description">Фотографии будут отображаться в галерее на вашей странице заводчика</span>
 
@@ -75,7 +75,7 @@
 
     <hr>
 
-    <div class="about-nurcery-form-group">
+    <div class="breeder-profile-subpage-form-group">
         <label for="nurcery-instagram">Instagram (необязательно)</label>
         <input class="form-control" type="text" name="nurcery-instagram" [(ngModel)]="nurceryData.nurceryInstagram"
             placeholder="@имя в Instagram" />
@@ -83,7 +83,7 @@
         <span class="block-description">Мы автоматически добавим публикации на вашу страницу заводчика</span>
     </div>
 
-    <div class="about-nurcery-form-group">
+    <div class="breeder-profile-subpage-form-group">
         <label for="nurcery-site">Ваш сайт (необязательно)</label>
         <input class="form-control" type="text" name="nurcery-site" [(ngModel)]="nurceryData.nurcerySite"
             placeholder="Ссылка на ваш сайт" />
@@ -91,7 +91,7 @@
         <span class="block-description">Например, google.com</span>
     </div>
 
-    <div class="about-nurcery-form-group">
+    <div class="breeder-profile-subpage-form-group">
         <label for="nurcery-facebook">Ссылка на ваш Facebook (необязательно)</label>
         <input class="form-control" type="text" name="nurcery-facebook" [(ngModel)]="nurceryData.nurceryFacebook"
             placeholder="Ссылка на ваш Facebook" />

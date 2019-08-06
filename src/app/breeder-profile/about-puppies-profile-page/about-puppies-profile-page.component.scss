@@ -1,0 +1,90 @@
+input[type='checkbox']{
+    position: relative;
+    top: 2px;
+}
+
+hr{
+    width: 100%;
+    border: 1px solid #cbd8f6;
+    grid-column: 1/3;
+}
+
+.kit-avail-block,
+.contract-block{
+    padding: 2em 1em;
+    border-radius: 4px;
+    grid-column: 1/3;
+    background-image: url("../../../assets/img/about-puppies-paw.png");
+    background-position: bottom right;
+    background-repeat: no-repeat;
+
+    &> input{
+        margin-right: 10px;
+    }
+}
+
+.kit-avail-block{
+    background-color: rgba(77, 190, 187, 0.2);
+
+    &> p{
+        line-height: 19px;
+        font-size: 14px;
+        margin-top: 5px;
+        font-family: 'Intro-Book';
+    }
+
+    &> span{
+        font-size: 16px;
+    }
+}
+
+.contract-block{
+    background-color: rgba(203, 216, 246, 0.5);
+
+    &> span:nth-child(1){
+        font-size: 16px;
+    }
+
+    a{
+        color: #645fc9;
+        border-bottom: 1px dotted #645fc9;
+        margin: 1em 0;
+        display: inline-block;
+
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+
+.medicine-block{
+    grid-column: 1/3;
+
+    &> div{
+        width: 50%;
+        padding: 1em 0;
+        display: inline-grid;
+        
+        div{
+            margin: .2em 0;
+
+            input{
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.why-its-important{
+    text-align: right;
+
+    span{
+        color: #645fc9;
+        font-size: 14px;
+    }
+}
+
+.puppies-problems-block,
+.puppies-gifts-block{
+    grid-column: 1/3;
+}

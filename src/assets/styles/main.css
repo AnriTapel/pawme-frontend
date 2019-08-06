@@ -47,6 +47,12 @@ span, label {
   color: #0e0b4d;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .custom-btn {
   border-radius: 28px;
   padding: 10px 25px;
@@ -98,6 +104,43 @@ span, label {
   width: 50% !important;
 }
 
+.breeder-profile-subpage-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 50%;
+  -ms-grid-columns: 50%;
+      grid-template: 50%/50%;
+  grid-row-gap: 2em;
+  grid-column-gap: 1em;
+  padding: 1em;
+  background-color: #fff;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+}
+
+.breeder-profile-subpage-container .upper-btn {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
+  text-align: right;
+}
+
+.breeder-profile-subpage-container .lower-btn {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  text-align: left;
+}
+
+.breeder-profile-subpage-container .block-description {
+  opacity: 0.5;
+  font-size: 14px;
+  font-family: 'Intro-Book';
+}
+
+.breeder-profile-subpage-form-group {
+  width: 100%;
+  float: left;
+}
+
 .carousel-caption {
   display: none;
 }
@@ -110,6 +153,10 @@ span, label {
 .form-group label {
   margin: unset;
   color: #0e0b4d;
+}
+
+.input-group-text {
+  background-color: #fff !important;
 }
 
 .form-check {

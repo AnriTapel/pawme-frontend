@@ -47,6 +47,12 @@ span, label{
     color: $regular-text-color;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 .custom-btn{
     border-radius: 28px;
     padding: 10px 25px;
@@ -93,6 +99,36 @@ span, label{
     width: 50% !important;
 }
 
+.breeder-profile-subpage-container{
+    display: grid;
+    grid-template: 50%/50%;
+    grid-row-gap: 2em;
+    grid-column-gap: 1em;
+    padding: 1em;
+    background-color: #fff;
+    grid-template-rows: auto;
+
+    .upper-btn{
+        grid-column-start: 2;
+        text-align: right;
+    }
+    
+    .lower-btn{
+        grid-column-start: 1;
+        text-align: left;
+    }
+
+    .block-description{
+        opacity: 0.5;
+        font-size: 14px;
+        font-family: 'Intro-Book';
+    }
+}
+
+.breeder-profile-subpage-form-group{
+    width: 100%;
+    float: left;
+}
 // Bootstrap overrided classes
 .carousel-caption{
     display: none;
@@ -106,6 +142,10 @@ span, label{
         margin: unset;
         color: $regular-text-color;
     }
+}
+
+.input-group-text{
+    background-color: #fff !important;
 }
 
 .form-check{
