@@ -28,6 +28,8 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       problems: null,
       gifts: null
     };
+
+    $('[data-toggle="tooltip"]').tooltip();
   }
 
   saveChanges(){
