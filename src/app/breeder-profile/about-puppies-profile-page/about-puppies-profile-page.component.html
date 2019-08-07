@@ -9,8 +9,8 @@
     <div class="breeder-profile-subpage-form-group">
         <label for="puppies-age">Возраст продажи щенков</label>
         <div class="input-group mb-3">
-            <input type="number" name="puppies-age" class="form-control" [(ngModel)]="puppiesData.age" placeholder="от" aria-label="от"
-                aria-describedby="basic-addon2">
+            <input type="number" name="puppies-age" class="form-control" [(ngModel)]="puppiesData.age" placeholder="от"
+                aria-label="от" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">недель</span>
             </div>
@@ -20,7 +20,8 @@
     <div class="breeder-profile-subpage-form-group">
         <label for="puppies-price">Стоимость щенков в рублях</label>
         <div class="input-group">
-            <input type="number" class="form-control" name="puppies-price" [(ngModel)]="puppiesData.priceFrom" placeholder="от">
+            <input type="number" class="form-control" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
+                placeholder="от">
             <input type="number" class="form-control" [(ngModel)]="puppiesData.priceTo" placeholder="до">
         </div>
     </div>
@@ -46,44 +47,46 @@
         <label>Медицина</label>
         <br>
         <span class="block-description">Отметьте медицинские услуги, которые вы проводятся для ваших щенков</span>
-        <div>
-            <div class="custom-checkbox">
-                <div (click)="puppiesData.medicines.vaccinations = !puppiesData.medicines.vaccinations">
-                    <img *ngIf="puppiesData.medicines.vaccinations" src="../../../assets/img/check-mark.png" />
+        <div class="medicine-checkboxs-list">
+            <div>
+                <div class="custom-checkbox">
+                    <div (click)="puppiesData.medicines.vaccinations = !puppiesData.medicines.vaccinations">
+                        <img *ngIf="puppiesData.medicines.vaccinations" src="../../../assets/img/check-mark.png" />
+                    </div>
+                    <label class="form-check-label">Поставлены прививки</label>
                 </div>
-                <label class="form-check-label">Поставлены прививки</label>
+                <div class="custom-checkbox">
+                    <div (click)="puppiesData.medicines.worms = !puppiesData.medicines.worms">
+                        <img *ngIf="puppiesData.medicines.worms" src="../../../assets/img/check-mark.png" />
+                    </div>
+                    <label class="form-check-label">Обработаны от глистов</label>
+                </div>
+                <div class="custom-checkbox">
+                    <div (click)="puppiesData.medicines.chip = !puppiesData.medicines.chip">
+                        <img *ngIf="puppiesData.medicines.chip" src="../../../assets/img/check-mark.png" />
+                    </div>
+                    <label class="form-check-label">Электронный чип</label>
+                </div>
+                <div class="custom-checkbox">
+                    <div (click)="puppiesData.medicines.castration = !puppiesData.medicines.castration">
+                        <img *ngIf="puppiesData.medicines.castration" src="../../../assets/img/check-mark.png" />
+                    </div>
+                    <label class="form-check-label">Стерилизация/кастрация</label>
+                </div>
             </div>
-            <div class="custom-checkbox">
-                <div (click)="puppiesData.medicines.worms = !puppiesData.medicines.worms">
-                    <img *ngIf="puppiesData.medicines.worms" src="../../../assets/img/check-mark.png" />
+            <div>
+                <div class="custom-checkbox">
+                    <div (click)="puppiesData.medicines.vaccinations = !puppiesData.medicines.vaccinations">
+                        <img *ngIf="puppiesData.medicines.vaccinations" src="../../../assets/img/check-mark.png" />
+                    </div>
+                    <label class="form-check-label">Поставлены прививки</label>
                 </div>
-                <label class="form-check-label">Обработаны от глистов</label>
-            </div>
-            <div class="custom-checkbox">
-                <div (click)="puppiesData.medicines.chip = !puppiesData.medicines.chip">
-                    <img *ngIf="puppiesData.medicines.chip" src="../../../assets/img/check-mark.png" />
+                <div class="custom-checkbox">
+                    <div (click)="puppiesData.medicines.worms = !puppiesData.medicines.worms">
+                        <img *ngIf="puppiesData.medicines.worms" src="../../../assets/img/check-mark.png" />
+                    </div>
+                    <label class="form-check-label">Обработаны от глистов</label>
                 </div>
-                <label class="form-check-label">Электронный чип</label>
-            </div>
-            <div class="custom-checkbox">
-                <div (click)="puppiesData.medicines.castration = !puppiesData.medicines.castration">
-                    <img *ngIf="puppiesData.medicines.castration" src="../../../assets/img/check-mark.png" />
-                </div>
-                <label class="form-check-label">Стерилизация/кастрация</label>
-            </div>
-        </div>
-        <div>
-            <div class="custom-checkbox">
-                <div (click)="puppiesData.medicines.vaccinations = !puppiesData.medicines.vaccinations">
-                    <img *ngIf="puppiesData.medicines.vaccinations" src="../../../assets/img/check-mark.png" />
-                </div>
-                <label class="form-check-label">Поставлены прививки</label>
-            </div>
-            <div class="custom-checkbox">
-                <div (click)="puppiesData.medicines.worms = !puppiesData.medicines.worms">
-                    <img *ngIf="puppiesData.medicines.worms" src="../../../assets/img/check-mark.png" />
-                </div>
-                <label class="form-check-label">Обработаны от глистов</label>
             </div>
         </div>
     </div>
@@ -91,7 +94,8 @@
     <div class="contract-block">
         <span>Обязательный договор PawMe</span>
         <br>
-        <span class="block-description">Для защиты покупателей от недобросовестных заводчиков мы составили стандартный договор купли/продажи.</span>
+        <span class="block-description">Для защиты покупателей от недобросовестных заводчиков мы составили стандартный
+            договор купли/продажи.</span>
         <br>
 
         <a href="#">Посмотреть договор</a>
@@ -111,8 +115,8 @@
     <div class="breeder-profile-subpage-form-group">
         <label for="guarantee-period">На сколько месяцев вы готовы дать гарантию по здоровью щенка?</label>
         <div class="input-group mb-3">
-            <input type="number" name="guarantee-period" class="form-control" [(ngModel)]="puppiesData.guaranteePeriod" placeholder="12"
-                aria-label="12" aria-describedby="basic-addon2">
+            <input type="number" name="guarantee-period" class="form-control" [(ngModel)]="puppiesData.guaranteePeriod"
+                placeholder="12" aria-label="12" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">месяцев</span>
             </div>
@@ -126,7 +130,8 @@
     <div class="puppies-problems-block">
         <label for="problems">Какие проблемы со здоровьем покрывает гарантия?</label>
         <br>
-        <span class="block-description">Обычно заводчики указывают заболевания или проблемные части тела, специфические для конкретной породы.</span>
+        <span class="block-description">Обычно заводчики указывают заболевания или проблемные части тела, специфические
+            для конкретной породы.</span>
         <textarea class="form-control" [(ngModel)]="puppiesData.problems"></textarea>
     </div>
 
@@ -135,7 +140,8 @@
     <div class="puppies-gifts-block">
         <label for="gifts">Подарки к купленному щенку (необязательно)</label>
         <br>
-        <span class="block-description">Многие заводчики дарят новым хозяевам игрушку с запахом однопометников или небольшой мешочек корма</span>
+        <span class="block-description">Многие заводчики дарят новым хозяевам игрушку с запахом однопометников или
+            небольшой мешочек корма</span>
         <textarea class="form-control" [(ngModel)]="puppiesData.gifts"></textarea>
     </div>
 

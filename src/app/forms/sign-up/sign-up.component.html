@@ -16,12 +16,16 @@
         <label for="password">Пароль</label>
         <input type="password" class="form-control" name="password" [(ngModel)]="newBreederPassword" />
     </div>
-    <div class="form-check popup-form-check">
-        <input type="checkbox" class="form-check-input" name="acceptLicense" [(ngModel)]="newBreederAcception" />
-        <label class="form-check-label" for="acceptLicense">Согласен с условиями <a href="#">Пользовательского
+
+    <div class="custom-checkbox popup-form-check">
+        <div (click)="newBreederAcception = !newBreederAcception" style="display: inline-block;">
+            <img *ngIf="newBreederAcception" src="../../../assets/img/check-mark.png" />
+        </div>
+        <label class="form-check-label" style="width: calc(100% - 27px);">Согласен с условиями <a href="#">Пользовательского
                 соглашения</a>
             и <a href="#">Политикой конфиденциальности</a></label>
     </div>
+
     <div class="form-group popup-form-group" style="text-align: center;">
         <span>Уже есть аккаунт? <a (click)="switchToLoginForm()">Войти</a></span>
     </div>

@@ -11,3 +11,27 @@ span{
         }
     }
 }
+
+.sign-up-license-checkbox{
+
+    display: grid;
+    grid-template: 27px/90%;
+
+    &> div:nth-child(1){
+        width: 22px;
+        height: 22px;
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid #cbd8f6;
+        cursor: pointer;
+        margin-right: 5px;
+        grid-column: 1/2;
+
+        img{
+            position: relative;
+            left: 2px;
+            bottom: 1px;
+        }
+    }
+
+}

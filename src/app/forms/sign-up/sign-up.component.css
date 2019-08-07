@@ -12,4 +12,31 @@ span a {
 span a:hover {
   color: #014c8c;
 }
+
+.sign-up-license-checkbox {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 27px;
+  -ms-grid-columns: 90%;
+      grid-template: 27px/90%;
+}
+
+.sign-up-license-checkbox > div:nth-child(1) {
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid #cbd8f6;
+  cursor: pointer;
+  margin-right: 5px;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+}
+
+.sign-up-license-checkbox > div:nth-child(1) img {
+  position: relative;
+  left: 2px;
+  bottom: 1px;
+}
 /*# sourceMappingURL=sign-up.component.css.map */
