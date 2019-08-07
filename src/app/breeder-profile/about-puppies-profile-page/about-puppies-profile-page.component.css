@@ -75,14 +75,6 @@ hr {
   display: inline-grid;
 }
 
-.medicine-block > div div {
-  margin: .2em 0;
-}
-
-.medicine-block > div div input {
-  margin-right: 10px;
-}
-
 .why-its-important {
   text-align: right;
 }
@@ -90,6 +82,7 @@ hr {
 .why-its-important span {
   color: #645fc9;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .puppies-problems-block,

@@ -64,23 +64,16 @@ hr{
         width: 50%;
         padding: 1em 0;
         display: inline-grid;
-        
-        div{
-            margin: .2em 0;
-
-            input{
-                margin-right: 10px;
-            }
-        }
     }
 }
 
 .why-its-important{
     text-align: right;
-
+    
     span{
         color: #645fc9;
         font-size: 14px;
+        cursor: pointer;
     }
 }
 

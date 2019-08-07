@@ -97,6 +97,43 @@ input[type=number]::-webkit-outer-spin-button {
 .popup-form-group,
 .popup-form-check{
     width: 50% !important;
+    margin: 15px auto 0 !important;
+    text-align: left;
+}
+
+.custom-checkbox{
+    display: flex;
+    margin-top: .2em;
+    margin-bottom: .2em;
+
+    &> div{
+        width: 22px;
+        height: 22px;
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid #cbd8f6;
+        cursor: pointer;
+        margin-right: 5px;
+
+        img{
+            position: relative;
+            left: 2px;
+            bottom: 1px;
+        }
+    }
+
+    /*label{
+        color: $regular-text-color;
+        font-size: 12px;
+        position: relative;
+        bottom: 5px;
+
+        a{
+            text-decoration: underline;
+            transition: none;
+        }
+    }*/
+
 }
 
 .breeder-profile-subpage-container{
@@ -106,6 +143,8 @@ input[type=number]::-webkit-outer-spin-button {
     grid-column-gap: 1em;
     padding: 1em;
     background-color: #fff;
+    border: 1px solid #cbd8f6;
+    border-radius: 4px;
     grid-template-rows: auto;
 
     .upper-btn{
