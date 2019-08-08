@@ -1,6 +1,5 @@
-<!-- Header with nav bar -->
-
 <div class="breeder-landing-top-block">
+    <app-header [ngClass]="['header-for-landing']"></app-header>
     <div class="breeder-landing-title">
         <h1>Платформа для ответственных заводчиков, которым нужны удобные инструменты</h1>
 
@@ -12,11 +11,13 @@
 
 <div class="what-is-avail-block">
     <h2>ЧТО УЖЕ ДОСТУПНО?</h2>
-    <p>После регистрации вы бесплатно получите собственную страницу заводчика с личным кабинетом, которую можно смело использовать
+    <p>После регистрации вы бесплатно получите собственную страницу заводчика с личным кабинетом, которую можно смело
+        использовать
         в качестве персонального сайта.</p>
     <section class="first-slider-section">
         <h3>Стильная индивидуальная страница</h3>
-        <mdb-carousel #firstSlider class="carousel slide carousel-fade" (activeSlideChange)="onFirstSliderActiveChanged($event)">
+        <mdb-carousel #firstSlider class="carousel slide carousel-fade"
+            (activeSlideChange)="onFirstSliderActiveChanged($event)">
             <mdb-carousel-item *ngFor="let slide of firstSliderData">
                 <div class="view w-100">
                     <img class="d-block w-100" [src]="slide.img" [alt]="slide.text">
@@ -68,7 +69,8 @@
             </div>
         </div>
         <h3>Удобный личный кабинет</h3>
-        <mdb-carousel #secondSlider class="carousel slide carousel-fade" (activeSlideChange)="onSecondSliderActiveChanged($event)">
+        <mdb-carousel #secondSlider class="carousel slide carousel-fade"
+            (activeSlideChange)="onSecondSliderActiveChanged($event)">
             <mdb-carousel-item *ngFor="let slide of secondSliderData">
                 <div class="view w-100">
                     <img class="d-block w-100" [src]="slide.img" [alt]="slide.text">
@@ -88,10 +90,13 @@
     <div class="our-mission">
         <section class="our-mission-text-block">
             <h2>НАША МИССИЯ</h2>
-            <p style="margin-bottom: 20px;">Жизнь хорошего заводчика полна сложностей - бессонные ночи с щенками, постоянное обучение, отбор достойных покупателей
-                и это лишь малая часть списка. Наша платформа помогает вам искать потенциальных хозяев и взаимодействовать
+            <p style="margin-bottom: 20px;">Жизнь хорошего заводчика полна сложностей - бессонные ночи с щенками,
+                постоянное обучение, отбор достойных покупателей
+                и это лишь малая часть списка. Наша платформа помогает вам искать потенциальных хозяев и
+                взаимодействовать
                 с ними, а также хранить всю необходимую информацию на индивидуальной странице.</p>
-            <p style="color: #645fc9;">Мы хотим, чтобы вы уделяли больше времени самому важному - выращиванию образцовых щенков, а PawMe поможет вам
+            <p style="color: #645fc9;">Мы хотим, чтобы вы уделяли больше времени самому важному - выращиванию образцовых
+                щенков, а PawMe поможет вам
                 со всем остальным.</p>
         </section>
         <section class="dog-in-box-section">
@@ -111,7 +116,8 @@
             <img src="../../assets/img/gears.png" alt="Шестеренки">
             <p></p>
             <p>Автоматизация сделок</p>
-            <p>Покупатели смогут оплачивать щенков внутри платформы, а вы сможете выводить полученные деньги удобным для вас
+            <p>Покупатели смогут оплачивать щенков внутри платформы, а вы сможете выводить полученные деньги удобным для
+                вас
                 способом.</p>
             <p>Чтобы избавить вас от бумажной волокиты, заключение договоров будет также реализовано онлайн</p>
         </section>
@@ -122,7 +128,8 @@
             <p>Вы будете уверены, что для новых щенков сразу найдутся заинтересованные хозяева</p>
         </section>
         <p>
-            <img style="float: right; margin-top: 50px; width: 350px;" src="../../assets/img/dog-head.png" alt="Голова собаки">
+            <img style="float: right; margin-top: 50px; width: 350px;" src="../../assets/img/dog-head.png"
+                alt="Голова собаки">
         </p>
     </div>
 </div>

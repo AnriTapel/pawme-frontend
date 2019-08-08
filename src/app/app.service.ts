@@ -8,6 +8,9 @@ import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators'
 })
 export class AppService {
 
+  // Data of logged-in entity
+  userData: any;
+
   constructor() { }
 
   fieldAutocomplite(searchArray: string[], focus$: Subject<string>, click$: Subject<string>, instance: NgbTypeahead): (text$: Observable<string>) => Observable<any[]> {

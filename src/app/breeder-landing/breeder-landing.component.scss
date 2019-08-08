@@ -1,5 +1,6 @@
 .breeder-landing-top-block{
     display: flex;
+    flex-direction: column;
     height: 100vh;
     
     background-image: url('../../assets/img/breeder-page-top-block-bg.png');
@@ -11,7 +12,7 @@
 .breeder-landing-title{
     display: flex;
     flex-direction: column;
-    margin: auto 2em;
+    margin: 10vh 2em auto;
     width: 50%;
 
     h1{
@@ -178,10 +179,11 @@ mdb-carousel{
     }
 
     .breeder-landing-title{
-        margin: 1em;
+        padding: 1em;
         align-items: center;
         width: 100%;
         text-align: center;
+        margin: unset;
 
         h1{
             font-size: 28px;

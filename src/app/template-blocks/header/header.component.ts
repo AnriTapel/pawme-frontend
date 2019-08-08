@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/app.service';
+import { PopupTemplateService } from '../popup-template/popup-template.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService: AppService, private popupService: PopupTemplateService) { }
 
   ngOnInit() {
   }
 
+  showLoginPopup(){
+    this.popupService.setCurrentForm('login');
+    this.popupService.setShowStatus(true);
+  }
 }

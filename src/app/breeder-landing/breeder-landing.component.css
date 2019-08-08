@@ -2,6 +2,10 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   height: 100vh;
   background-image: url("../../assets/img/breeder-page-top-block-bg.png");
   background-position: center center;
@@ -17,7 +21,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin: auto 2em;
+  margin: 10vh 2em auto;
   width: 50%;
 }
 
@@ -186,12 +190,13 @@ mdb-carousel {
     height: 120vh;
   }
   .breeder-landing-title {
-    margin: 1em;
+    padding: 1em;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
     width: 100%;
     text-align: center;
+    margin: unset;
   }
   .breeder-landing-title h1 {
     font-size: 28px;

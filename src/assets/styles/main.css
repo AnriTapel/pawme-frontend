@@ -53,6 +53,16 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.header-for-landing header {
+  background-color: unset !important;
+  padding: 2em !important;
+}
+
+.header-for-landing header nav {
+  background-color: unset !important;
+  padding: 0 !important;
+}
+
 .custom-btn {
   border-radius: 28px;
   padding: 10px 25px;
@@ -182,6 +192,23 @@ input[type=number]::-webkit-outer-spin-button {
   display: none;
 }
 
+.dropdown-menu {
+  left: unset !important;
+  right: 0;
+}
+
+.dropdown-menu .dropdown-item {
+  font-family: 'Intro-Book';
+  font-size: 13px;
+  color: #0e0b4d;
+  padding: .25rem .5rem;
+}
+
+.dropdown-menu .dropdown-item img {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
 .form-control {
   border: 1px solid #cbd8f6;
 }
@@ -201,6 +228,19 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media screen and (max-width: 769px) {
+  .header-for-landing header {
+    padding: 0 !important;
+  }
+  .header-for-landing nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding-bottom: 0 !important;
+  }
   .custom-btn {
     padding: 15px 25px;
   }
