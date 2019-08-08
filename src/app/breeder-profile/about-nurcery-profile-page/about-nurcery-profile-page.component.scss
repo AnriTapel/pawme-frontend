@@ -54,35 +54,3 @@ hr{
 .nurcery-gallery-block{
     grid-column: 1/3;
 }
-
-.nurcery-gallery-initial-block{
-    position: relative;
-    border: 1px dotted #645fc9;
-    background-color: rgba(203, 216, 246, 0.2);
-    border-radius: 4px;
-    width: 100%;
-    height: auto;
-    padding: 3em;
-    text-align: center;
-
-    &> input{
-        opacity: 0.0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height:100%;
-    }
-
-    span{
-        color: #8685a6;
-        font-size: 14px;
-
-        a{
-            color: #4a90e2;
-            text-decoration: underline #4a90e2;
-        }
-    }
-}

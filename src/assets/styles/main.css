@@ -96,6 +96,22 @@ input[type=number]::-webkit-outer-spin-button {
   color: #645fc9 !important;
 }
 
+.btn-label {
+  font-size: 14px;
+  font-family: 'Intro-Regular';
+  color: #fff;
+  background-color: #4a90e2;
+  border-radius: 25px;
+  border: unset;
+  padding: 2px 8px;
+}
+
+.btn-label:focus, .btn-label:active {
+  outline: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 .btn-white:hover,
 .btn-transparent:hover {
   background: #efefef;
@@ -105,6 +121,12 @@ input[type=number]::-webkit-outer-spin-button {
 
 .btn-purple:hover {
   background: #7975ce;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.btn-label:hover {
+  background-color: #58a0f5;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
@@ -186,6 +208,39 @@ input[type=number]::-webkit-outer-spin-button {
 .breeder-profile-subpage-form-group {
   width: 100%;
   float: left;
+}
+
+.gallery-initial-block {
+  position: relative;
+  border: 1px dotted #645fc9;
+  background-color: rgba(203, 216, 246, 0.2);
+  border-radius: 4px;
+  width: 100%;
+  height: auto;
+  padding: 3em;
+  text-align: center;
+}
+
+.gallery-initial-block > input {
+  opacity: 0.0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-initial-block span {
+  color: #8685a6;
+  font-size: 14px;
+}
+
+.gallery-initial-block span a {
+  color: #4a90e2;
+  -webkit-text-decoration: underline #4a90e2;
+          text-decoration: underline #4a90e2;
 }
 
 .carousel-caption {

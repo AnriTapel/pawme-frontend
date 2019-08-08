@@ -65,7 +65,7 @@
         <label for="nurcery-gallery">Фото в основную галерею</label><br>
         <span class="block-description">Фотографии будут отображаться в галерее на вашей странице заводчика</span>
 
-        <div *ngIf="nurceryData.nurceryGallery.length == 0" class="nurcery-gallery-initial-block">
+        <div *ngIf="nurceryData.nurceryGallery.length == 0" class="gallery-initial-block">
             <input type="file" id="nurcery-gallery" [(ngModel)]="nurceryData.nurceryGalleryImage" accept=".jpg, .png, .jpeg"
                 multiple />
             <img src="../../../assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
