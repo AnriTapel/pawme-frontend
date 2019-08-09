@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-breeder-profile',
@@ -8,24 +9,23 @@ import { Component, OnInit } from '@angular/core';
 export class BreederProfileComponent implements OnInit {
 
   private curProfilePage: string;
-  pageNamesByOrder: string[] = ['about-nurcery', 'about-puppies', 'puppies-parents', 'about-me', 'add-puppy'];
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
     this.setCurProfilePage("about-nurcery");
   }
 
-  setCurProfilePage(page: string): void{
+  setCurProfilePage(page: string): void {
     this.curProfilePage = page;
   }
 
-  getCurProfilePage(): string{
+  getCurProfilePage(): string {
     return this.curProfilePage;
   }
 
-  showPreview(){
-    
+  showPreview() {
+
   }
 
 }
