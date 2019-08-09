@@ -8,7 +8,7 @@ import { PopupTemplateService } from './popup-template.service';
 })
 export class PopupTemplateComponent implements AfterViewInit {
 
-  constructor(private popupService: PopupTemplateService) { }
+  constructor(public popupService: PopupTemplateService) { }
 
   ngAfterViewInit() {
   }

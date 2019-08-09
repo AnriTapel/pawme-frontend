@@ -10,7 +10,7 @@ import { AppService } from 'src/app/app.service';
 })
 export class AboutNurceryProfilePageComponent implements OnInit {
 
-  nurceryData: object;
+  nurceryData: any;
   isAdditionalBreed: boolean = false;
 
   availCities = ["Москва", "Пермь", "Саратов", "Екатеринбург", "Волгоград", "Самара", "Ростов-на-Дону", "Санкт-Петербург", "Владивосток"];
@@ -26,7 +26,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   addBreedFocus$ = new Subject<string>();
   addBreedClick$ = new Subject<string>();
 
-  constructor(private appService: AppService) { }
+  constructor(public appService: AppService) { }
 
   ngOnInit() {
     this.nurceryData = {

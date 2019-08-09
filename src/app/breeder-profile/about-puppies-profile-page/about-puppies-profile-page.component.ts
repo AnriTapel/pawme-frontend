@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutPuppiesProfilePageComponent implements OnInit {
 
-  puppiesData: object;
+  puppiesData: any;
 
   constructor() { }
 

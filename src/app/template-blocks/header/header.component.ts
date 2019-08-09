@@ -9,7 +9,7 @@ import { PopupTemplateService } from '../popup-template/popup-template.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private appService: AppService, private popupService: PopupTemplateService) { }
+  constructor(public appService: AppService, public popupService: PopupTemplateService) { }
 
   ngOnInit() {
   }

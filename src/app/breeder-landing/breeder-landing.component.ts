@@ -25,7 +25,7 @@ export class BreederLandingComponent implements OnInit {
   @ViewChild('secondSlider', { static: true })
   secondSlider: any;
 
-  constructor(private popupService: PopupTemplateService) { }
+  constructor(public popupService: PopupTemplateService) { }
 
   ngOnInit() {
     this.screenResizeListner();
@@ -52,23 +52,23 @@ export class BreederLandingComponent implements OnInit {
     this.secondSlider.interval = 4000;
   }
 
-  private onFirstSliderActiveChanged(event: any): void {
+  onFirstSliderActiveChanged(event: any): void {
     this.firstSliderActiveIndex = event.relatedTarget;
   }
 
-  private onSecondSliderActiveChanged(event: any): void {
+  onSecondSliderActiveChanged(event: any): void {
     this.secondSliderActiveIndex = event.relatedTarget;
   }
 
-  private firstSliderTitleClicked(index: number): void {
+  firstSliderTitleClicked(index: number): void {
     this.firstSlider.selectSlide(index);
   }
 
-  private secondSliderTitleClicked(index: number): void {
+  secondSliderTitleClicked(index: number): void {
     this.secondSlider.selectSlide(index);
   }
 
-  private showSignUpPopup(){
+  showSignUpPopup(){
     this.popupService.setCurrentForm("sign-up");
     this.popupService.setShowStatus(true);
   }
