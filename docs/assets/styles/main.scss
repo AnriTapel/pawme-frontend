@@ -1,0 +1,337 @@
+$regular-text-color: #0e0b4d;
+
+@font-face{
+    font-family: 'Intro-Regular';
+    src: url(../fonts/Intro-Regular.otf);
+}
+
+@font-face{
+    font-family: 'Intro-Bold';
+    src: url(../fonts/Intro-Bold.otf);
+}
+
+@font-face{
+    font-family: 'Intro-Thin';
+    src: url(../fonts/Intro-Thin.otf);
+}
+
+@font-face{
+    font-family: 'Intro-Light';
+    src: url(../fonts/Intro-Light.otf);
+}
+
+@font-face{
+    font-family: 'Intro-Book';
+    src: url(../fonts/Intro-Book.otf);
+}
+
+body{
+    font-family: 'Intro-Regular';
+    justify-content: center;
+    -webkit-font-smoothing: antialiased;
+    -webkit-overflow-scrolling: touch;
+}
+
+h1, h2, h3, h4, h5{
+    color: $regular-text-color;
+    font-family: 'Intro-Bold';
+}
+
+p{
+    font-family: 'Intro-Book';
+    font-size: 18px;
+    color: $regular-text-color;
+}
+
+span, label{
+    color: $regular-text-color;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.header-for-landing{
+
+    header{
+        background-color: unset !important;
+        padding: 2em !important;
+
+        nav{
+            background-color: unset !important;
+            padding: 0 !important;
+        }
+    }
+
+}
+
+.custom-btn{
+    border-radius: 28px;
+    padding: 10px 25px;
+    border: none;
+    width: fit-content;
+
+    &:focus, &:active{
+        outline: none !important;
+        box-shadow: none;
+    }
+}
+
+.btn-purple{
+    background: #645fc9;
+    color: #ffffff !important;
+}
+
+.btn-transparent{
+    border: 1px solid #645fc9;
+    color: #645fc9;
+    background-color: #f8f9fb;
+    margin: 10px auto;
+    display: block;
+}
+
+.btn-white{
+    background: #ffffff;
+    color: #645fc9 !important;
+}
+
+.btn-label{
+    font-size: 14px;
+    font-family: 'Intro-Regular';
+    color: #fff;
+    background-color: #4a90e2;
+    border-radius: 25px;
+    border: unset;
+    padding: 2px 8px;
+
+    &:focus, &:active{
+        outline: none !important;
+        box-shadow: none;
+    }
+}
+
+.btn-white:hover,
+.btn-transparent:hover{
+    background: #efefef;
+    transition: all 0.5s ease;
+}
+
+.btn-purple:hover{
+    background: #7975ce;
+    transition: all 0.5s ease;
+}
+
+.btn-label:hover{
+    background-color: #58a0f5;
+    transition: all 0.5s ease;
+}
+
+.popup-form-group,
+.popup-form-check{
+    width: 50% !important;
+    margin: 15px auto 0 !important;
+    text-align: left;
+}
+
+.popup-form-check{
+
+    div{
+        display: inline-block;
+    }
+
+    label{
+        width: calc(100% - 27px);
+        font-size: 12px;
+    }
+}
+
+.custom-checkbox{
+    display: flex;
+    margin-top: .2em;
+    margin-bottom: .2em;
+
+    &> div{
+        width: 22px;
+        height: 22px;
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid #cbd8f6;
+        cursor: pointer;
+        margin-right: 5px;
+
+        img{
+            position: relative;
+            left: 2px;
+            bottom: 1px;
+        }
+    }
+}
+
+.breeder-profile-subpage-container{
+    display: grid;
+    grid-template: 50%/50%;
+    grid-row-gap: 2em;
+    grid-column-gap: 1em;
+    padding: 1em;
+    background-color: #fff;
+    border: 1px solid #cbd8f6;
+    border-radius: 4px;
+    grid-template-rows: auto;
+
+    .upper-btn{
+        grid-column-start: 2;
+        text-align: right;
+    }
+    
+    .lower-btn{
+        grid-column-start: 1;
+        text-align: left;
+    }
+
+    .block-description{
+        opacity: 0.5;
+        font-size: 14px;
+        font-family: 'Intro-Book';
+    }
+}
+
+.breeder-profile-subpage-form-group{
+    width: 100%;
+    float: left;
+}
+
+.gallery-initial-block{
+    position: relative;
+    border: 1px dotted #645fc9;
+    background-color: rgba(203, 216, 246, 0.2);
+    border-radius: 4px;
+    width: 100%;
+    height: auto;
+    padding: 3em;
+    text-align: center;
+
+    &> input{
+        opacity: 0.0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height:100%;
+    }
+
+    span{
+        color: #8685a6;
+        font-size: 14px;
+
+        a{
+            color: #4a90e2;
+            text-decoration: underline #4a90e2;
+        }
+    }
+}
+// Bootstrap overrided classes
+.carousel-caption{
+    display: none;
+}
+
+.dropdown-menu{
+    left: unset !important;
+    right: 0;
+
+    .dropdown-item{
+        font-family: 'Intro-Book';
+        font-size: 13px;
+        color: #0e0b4d;
+        padding: .25rem .5rem;
+
+        img{
+            object-fit: contain;
+        }
+    }
+}
+
+
+
+.form-control{
+    border: 1px solid #cbd8f6;
+}
+
+.form-group{
+    margin: 15px auto 0;
+    text-align: left;
+
+    label{
+        margin: unset;
+        color: $regular-text-color;
+    }
+}
+
+.input-group-text{
+    background-color: #fff !important;
+}
+
+@media screen and (max-width: 769px){
+
+    .header-for-landing{
+         header{
+            padding: 0 !important;
+         }
+
+         nav{
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 0 !important;
+         }
+    }
+
+    .custom-btn{
+        padding: 15px 25px;
+    }
+
+    .popup-form-group,
+    .popup-form-check{
+        width: 80% !important;
+    }
+
+    // Bootstrap overrided classes
+    .carousel-indicators{
+        bottom: -1em !important;
+    }
+
+    .carousel .carousel-indicators li{
+        width: 1rem !important;
+        height: 1rem !important;
+    }
+
+    .carousel-indicators li{
+        margin-right: 10px !important;
+        margin-left: 10px !important;
+        background-color: #645fc9 !important;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next{
+        display: none !important;
+    }
+
+    .carousel-caption{
+        display: block;
+        position: static !important;
+    }
+
+    .carousel-fade .carousel-inner>.carousel-item.active,
+    .carousel-fade .carousel-inner>.carousel-item.next.left,
+    .carousel-fade .carousel-inner>.carousel-item.prev.right{
+        display: block !important;
+    }
+    
+    .form-group,
+    .form-check{
+        margin: 5px auto 0;
+    }
+
+}
