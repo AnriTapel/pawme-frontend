@@ -164,6 +164,7 @@ mdb-carousel {
 .first-slider-text p,
 .second-slider-text p {
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .first-slider-text p a,
