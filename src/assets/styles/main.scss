@@ -27,7 +27,7 @@ $regular-text-color: #0e0b4d;
 
 body{
     font-family: 'Intro-Regular';
-    justify-content: center;
+    background-color: #f8f9fb;
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
 }
@@ -45,6 +45,7 @@ p{
 
 span, label{
     color: $regular-text-color;
+    margin-bottom: 0 !important;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -88,8 +89,6 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1px solid #645fc9;
     color: #645fc9;
     background-color: #f8f9fb;
-    margin: 10px auto;
-    display: block;
 }
 
 .btn-white{
@@ -147,6 +146,22 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
+.dropdown-text-input{
+    position: relative;
+
+    &> input{
+        display:block;
+        box-sizing: border-box
+    }
+
+    &> img{
+        position: absolute;
+        top: 25%;
+        height: 50%;
+        right: .5em;
+    }
+}
+
 .custom-checkbox{
     display: flex;
     margin-top: .2em;
@@ -173,12 +188,18 @@ input[type=number]::-webkit-outer-spin-button {
     display: grid;
     grid-template: 50%/50%;
     grid-row-gap: 2em;
-    grid-column-gap: 1em;
-    padding: 1em;
+    grid-column-gap: 1.5em;
+    padding: 2.5em;
     background-color: #fff;
     border: 1px solid #cbd8f6;
     border-radius: 4px;
     grid-template-rows: auto;
+
+    hr{
+        width: 100%;
+        border: 1px solid #cbd8f6;
+        grid-column: 1/3;
+    }
 
     .upper-btn{
         grid-column-start: 2;
@@ -233,12 +254,50 @@ input[type=number]::-webkit-outer-spin-button {
         }
     }
 }
+
+.dog-entity-list-block{
+    grid-column: 1/3;
+    margin-top: 2em;
+    display: flex;
+    border: unset;
+    flex-wrap: wrap;
+}
+
+.dog-entity-item{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    border: 1px dotted #645fc9;
+    background-color: rgba(203, 216, 246, 0.2);
+    border-radius: 4px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+
+    div{
+        text-align: center;
+        margin: auto;
+
+        &> label{
+            margin-top: 10px;
+        }
+    }
+}
+
+.btn-label-list{
+
+    grid-column: 1/3;
+
+    &> input{
+        display: inline;
+        margin: .25em .5em;
+    }
+}
 // Bootstrap overrided classes
 .carousel-caption{
     display: none;
 }
 
-.dropdown-menu{
+.custom-header-dropdown-menu{
     left: unset !important;
     right: 0;
 

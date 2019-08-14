@@ -1,1 +1,109 @@
-<p>puppies-parents-profile-page works!</p>
+<div *ngIf="isMainPage" class="breeder-profile-subpage-container">
+
+    <div class="page-header">
+        <h3>О щенках</h3>
+    </div>
+    <div class="upper-btn">
+        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
+    </div>
+
+    <div class="dog-entity-list-block">
+        <div *ngIf="parentsData.parents.length == 0" class="dog-entity-item" (click)="showCurrentParentPage(-1)">
+            <div>
+                <img src="./assets/img/thin-plus.png" alt="Добавить родителя" width="30px" /><br>
+                <label>Добавить родителя</label>
+            </div>
+        </div>
+
+        <div *ngFor="let parent of parentsData.parents; let i = index;" class="dog-entity-item"
+            (click)="showCurrentParentPage(index)">
+
+        </div>
+
+        <div class="dog-entity-item" (click)="showCurrentParentPage(-1)">
+            <div>
+                <img src="./assets/img/thin-plus.png" alt="Добавить родителя" width="30px" /><br>
+                <label>Добавить родителя</label>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!--<div class="parents-medicals-block">
+        <label>Медицинские тесты на родителях</label><br>
+        <span class="block-description">Ответственные заводчики тестируют родителей щенков на специфические для породы
+            заболевания, чтобы они не могли проявиться у щенков. Вы можете выбрать тесты, которые вы проводите в своем
+            питомнике.</span>
+
+        <div class="btn-label-list">
+            <input type="button" class="btn-label" *ngFor="let medical of parentsData.medicals;let i = index"
+                [value]="medical.bodyPart + ' ' + medical.medicalTest + '  X'" (click)="deleteMedical(i)" />
+        </div>
+    </div>
+
+    <div class="breeder-profile-subpage-form-group dropdown-text-input">
+        <input type="text" class="form-control" [(ngModel)]="currentBodyPart"
+            [ngbTypeahead]="appService.fieldAutocomplite(appService.availBodyParts, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
+            (focus)="bodyPartFocus$.next($event.target.value)" (click)="bodyPartClick$.next($event.target.value)"
+            #bodyPartInstance="ngbTypeahead" placeholder="Часть тела">
+        <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+    </div>
+
+    <div class="breeder-profile-subpage-form-group dropdown-text-input">
+        <input type="text" class="form-control" [(ngModel)]="currentMedicalTest"
+            [ngbTypeahead]="appService.fieldAutocomplite(appService.availMedicalTests, medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
+            (focus)="medicalTestFocus$.next($event.target.value)" (click)="medicalTestClick$.next($event.target.value)"
+            #medicalTestInstance="ngbTypeahead" placeholder="Название теста">
+        <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+    </div>-->
+
+</div>
+
+<div *ngIf="!isMainPage" class="breeder-profile-subpage-container">
+
+    <div class="page-header">
+        <h3>Добавить родителя</h3>
+    </div>
+    <div class="upper-btn">
+        <input type="button" class="custom-btn btn-transparent" value="Сохранить черновик" (click)="saveDraft()" />
+    </div>
+
+    <div class="breeder-profile-subpage-form-group">
+        <label for="parent-name">Кличка родителя</label>
+        <input class="form-control" name="parent-name" [(ngModel)]="currentParentData.name" placeholder="Кличка" />
+    </div>
+
+    <div class="breeder-profile-subpage-form-group">
+        <label for="parent-breed">Порода</label>
+
+        <div class="dropdown-text-input">
+            <input type="text" class="form-control" name="parent-breed" [(ngModel)]="currentParentData.breed"
+                [ngbTypeahead]="appService.fieldAutocomplite(appService.availBreeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
+                (focus)="parentBreedFocus$.next($event.target.value)" (click)="parentBreedClick$.next($event.target.value)"
+                #parentBreedInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+        </div>
+
+    </div>
+
+    <div class="add-parent-page-info-block">
+        <label for="parent-info">Расскажите об этом родителе</label><br>
+        <span class="block-description">Опишите достижения, отличительные особенности</span>
+        <textarea class="form-control" [(ngModel)]="currentParentData.info"></textarea>
+    </div>
+
+    <div class="add-parent-page-photos-block">
+        <label>Загрузите фотографии</label>
+
+        <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block">
+            <input type="image" id="add-parent-gallery" [(ngModel)]="curPhotos" accept=".jpg, .png, .jpeg" multiple />
+            <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
+            <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+        </div>
+    </div>
+
+    <div class="lower-btn">
+        <input type="button" class="custom-btn btn-purple" value="Добавить родителя" (click)="addParent()" />
+    </div>
+</div>

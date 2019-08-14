@@ -12,9 +12,6 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
   nurceryData: any;
   isAdditionalBreed: boolean = false;
-
-  availCities = ["Москва", "Пермь", "Саратов", "Екатеринбург", "Волгоград", "Самара", "Ростов-на-Дону", "Санкт-Петербург", "Владивосток"];
-  availBreeds = ["Шпиц", "Далматинец", "Бульдог", "Овчарка", "Лайка", "Хаски", "Доберман", "Ротвейлер"];
   
   @ViewChild('cityInstance', {static: true}) cityInstance: NgbTypeahead;
   @ViewChild('mainBreedInstance', {static: true}) mainBreedInstance: NgbTypeahead;

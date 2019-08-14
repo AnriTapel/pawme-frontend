@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,uBAAuB;AACvB,2BAA2B;AAC3B,6BAA6B,CAAA;EACzB,WAAW,EAAE,GAAG;CACnB",
     "sources": [
         "puppies-parents-profile-page.component.scss"
     ],

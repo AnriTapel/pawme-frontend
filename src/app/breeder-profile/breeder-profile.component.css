@@ -7,13 +7,14 @@ hr {
 .profile-container {
   display: -ms-grid;
   display: grid;
+  width: 80%;
+  max-width: 1440px;
   -ms-grid-rows: 70%;
   -ms-grid-columns: 30%;
       grid-template: 70%/30%;
   -ms-grid-rows: auto;
       grid-template-rows: auto;
-  padding: 2% 10%;
-  background-color: #f8f9fb;
+  margin: 2% auto;
   grid-gap: 20px;
 }
 
@@ -53,7 +54,16 @@ hr {
   height: 40px;
 }
 
+.profile-menu-container {
+  text-align: center;
+}
+
+.profile-menu-container > input {
+  margin-top: 1em;
+}
+
 .profile-menu {
+  text-align: left;
   border: 1px solid #cbd8f6;
   border-radius: 4px;
   background-color: #fff;

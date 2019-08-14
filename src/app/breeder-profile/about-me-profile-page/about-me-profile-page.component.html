@@ -38,7 +38,7 @@
             используют фото с питомцами. </span>
 
         <div *ngIf="!breederData.photo" class="gallery-initial-block">
-            <input type="file" id="nurcery-gallery" [(ngModel)]="curPhoto" accept=".jpg, .png, .jpeg" />
+            <input type="image" id="self-photo-gallery" [(ngModel)]="curPhoto" accept=".jpg, .png, .jpeg" />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
             <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
         </div>
@@ -54,7 +54,7 @@
             (click)="addClub()"/>
     </div>
 
-    <div class="clubs-list">
+    <div class="btn-label-list">
         <input type="button" class="btn-label" *ngFor="let club of breederData.clubs;let i = index" [value]="club + '  X'" (click)="deleteClub(i)"/>
     </div>
 
@@ -65,7 +65,7 @@
             отсканировать/сфотографировать бумажные грамоты и загрузить их сюда.</span>
 
         <div *ngIf="breederData.certificates.length == 0" class="gallery-initial-block">
-            <input type="file" id="nurcery-gallery" [(ngModel)]="curCertificates" accept=".jpg, .png, .jpeg" multiple />
+            <input type="image" id="certificates-gallery" [(ngModel)]="curCertificates" accept=".jpg, .png, .jpeg" multiple />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
             <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
         </div>

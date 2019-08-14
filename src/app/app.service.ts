@@ -11,6 +11,12 @@ export class AppService {
   // Data of logged-in entity
   userData: any;
 
+  // Dog entity parameters
+  availCities = ["Москва", "Пермь", "Саратов", "Екатеринбург", "Волгоград", "Самара", "Ростов-на-Дону", "Санкт-Петербург", "Владивосток"];
+  availBreeds = ["Шпиц", "Далматинец", "Бульдог", "Овчарка", "Лайка", "Хаски", "Доберман", "Ротвейлер"];
+  availBodyParts: string[] = ["Голова", "Туловище", "Уши", "Передние лапы", "Задние лапы", "То самое", "Кости", "Хвост"];
+  availMedicalTests: string[] = ["МРТ", "ЭКГ", "ФСБ", "ПТУ", "ПВА", "МГУ", "ЛГБТ", "ГИБДД", "ТНТ"];
+
   constructor() { }
 
   fieldAutocomplite(searchArray: string[], focus$: Subject<string>, click$: Subject<string>, instance: NgbTypeahead): (text$: Observable<string>) => Observable<any[]> {
