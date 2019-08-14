@@ -13,7 +13,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   // 0 - male, 1 - female
   DEFAULT_PARENT_DATA = {
     name: null,
-    sex: 0,
+    isMale: true,
     breed: null,
     info: null,
     photos: []

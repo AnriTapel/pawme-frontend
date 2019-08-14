@@ -1,7 +1,7 @@
 <div *ngIf="isMainPage" class="breeder-profile-subpage-container">
 
     <div class="page-header">
-        <h3>О щенках</h3>
+        <h3>Родители щенков</h3>
     </div>
     <div class="upper-btn">
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
@@ -10,19 +10,20 @@
     <div class="dog-entity-list-block">
         <div *ngIf="parentsData.parents.length == 0" class="dog-entity-item" (click)="showCurrentParentPage(-1)">
             <div>
-                <img src="./assets/img/thin-plus.png" alt="Добавить родителя" width="30px" /><br>
+                <img src="./assets/img/thin-plus.png" alt="Добавить родителя" width="30px" />
+                <br>
                 <label>Добавить родителя</label>
             </div>
         </div>
 
-        <div *ngFor="let parent of parentsData.parents; let i = index;" class="dog-entity-item"
-            (click)="showCurrentParentPage(index)">
+        <div *ngFor="let parent of parentsData.parents; let i = index;" class="dog-entity-item" (click)="showCurrentParentPage(index)">
 
         </div>
 
         <div class="dog-entity-item" (click)="showCurrentParentPage(-1)">
             <div>
-                <img src="./assets/img/thin-plus.png" alt="Добавить родителя" width="30px" /><br>
+                <img src="./assets/img/thin-plus.png" alt="Добавить родителя" width="30px" />
+                <br>
                 <label>Добавить родителя</label>
             </div>
         </div>
@@ -62,33 +63,46 @@
 
 <div *ngIf="!isMainPage" class="breeder-profile-subpage-container">
 
-    <div class="page-header">
-        <h3>Добавить родителя</h3>
+    <div class="get-back-block" (click)="isMainPage = true;">
+        <span>
+            <img src="./assets/img/arrow-left.svg">&nbsp;&nbsp;&nbsp;НАЗАД</span>
     </div>
+
     <div class="upper-btn">
         <input type="button" class="custom-btn btn-transparent" value="Сохранить черновик" (click)="saveDraft()" />
     </div>
 
+    <div class="page-header adding-entity-page-header">
+        <h3>Добавить родителя</h3>
+    </div>
+
     <div class="breeder-profile-subpage-form-group">
         <label for="parent-name">Кличка родителя</label>
-        <input class="form-control" name="parent-name" [(ngModel)]="currentParentData.name" placeholder="Кличка" />
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="parent-name" aria-label="Кличка" aria-describedby="basic-addon3" [(ngModel)]="currentParentData.name"
+                placeholder="Кличка" />
+            <div class="custom-input-append" (click)="currentParentData.isMale = !currentParentData.isMale">
+                <img *ngIf="currentParentData.isMale" height="17px" src="./assets/img/sex_male.png" alt="Мужской пол"/>
+                <img *ngIf="!currentParentData.isMale" height="17px" src="./assets/img/sex_female.png" alt="Женский пол"/>
+            </div>
+        </div>
     </div>
 
     <div class="breeder-profile-subpage-form-group">
         <label for="parent-breed">Порода</label>
 
         <div class="dropdown-text-input">
-            <input type="text" class="form-control" name="parent-breed" [(ngModel)]="currentParentData.breed"
-                [ngbTypeahead]="appService.fieldAutocomplite(appService.availBreeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
-                (focus)="parentBreedFocus$.next($event.target.value)" (click)="parentBreedClick$.next($event.target.value)"
-                #parentBreedInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" name="parent-breed" [(ngModel)]="currentParentData.breed" [ngbTypeahead]="appService.fieldAutocomplite(appService.availBreeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
+                (focus)="parentBreedFocus$.next($event.target.value)" (click)="parentBreedClick$.next($event.target.value)" #parentBreedInstance="ngbTypeahead"
+                placeholder="Выбрать" aria-describedby="basic-addon2">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
         </div>
 
     </div>
 
     <div class="add-parent-page-info-block">
-        <label for="parent-info">Расскажите об этом родителе</label><br>
+        <label for="parent-info">Расскажите об этом родителе</label>
+        <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
         <textarea class="form-control" [(ngModel)]="currentParentData.info"></textarea>
     </div>
@@ -98,8 +112,10 @@
 
         <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block">
             <input type="image" id="add-parent-gallery" [(ngModel)]="curPhotos" accept=".jpg, .png, .jpeg" multiple />
-            <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
-            <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+            <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
+            <br>
+            <span>
+                <a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
         </div>
     </div>
 
