@@ -174,17 +174,15 @@ input[type=number]::-webkit-outer-spin-button {
 .breeder-profile-subpage-container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 50%;
-  -ms-grid-columns: 50%;
-      grid-template: 50%/50%;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 50% 50%;
+      grid-template: auto / 50% 50%;
   grid-row-gap: 2em;
   grid-column-gap: 1em;
   padding: 1em;
   background-color: #fff;
   border: 1px solid #cbd8f6;
   border-radius: 4px;
-  -ms-grid-rows: auto;
-      grid-template-rows: auto;
 }
 
 .breeder-profile-subpage-container .upper-btn {

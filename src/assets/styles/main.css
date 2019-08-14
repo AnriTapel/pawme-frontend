@@ -32,7 +32,7 @@ body {
 
 h1, h2, h3, h4, h5 {
   color: #0e0b4d;
-  font-family: 'Intro-Bold';
+  font-family: 'Intro-Regular';
 }
 
 p {
@@ -54,7 +54,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .header-for-landing header {
   background-color: unset !important;
-  padding: 2em !important;
+  padding: 2% 8vw !important;
 }
 
 .header-for-landing header nav {
@@ -188,17 +188,20 @@ input[type=number]::-webkit-outer-spin-button {
 .breeder-profile-subpage-container {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 50%;
-  -ms-grid-columns: 50%;
-      grid-template: 50%/50%;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 50% 50%;
+      grid-template: auto / 50% 50%;
   grid-row-gap: 2em;
-  grid-column-gap: 1.5em;
   padding: 2.5em;
   background-color: #fff;
   border: 1px solid #cbd8f6;
   border-radius: 4px;
-  -ms-grid-rows: auto;
-      grid-template-rows: auto;
+}
+
+.breeder-profile-subpage-container input[type=text],
+.breeder-profile-subpage-container input[type=number],
+.breeder-profile-subpage-container textarea {
+  margin-top: 16px;
 }
 
 .breeder-profile-subpage-container hr {
@@ -253,9 +256,12 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 14px;
 }
 
-.breeder-profile-subpage-form-group {
-  width: 100%;
-  float: left;
+.breeder-profile-subpage-form-left {
+  padding-right: 1.25em;
+}
+
+.breeder-profile-subpage-form-right {
+  padding-left: 1.25em;
 }
 
 .gallery-initial-block {
@@ -350,6 +356,7 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 16px;
   padding: 0 10px;
   cursor: pointer;
 }
@@ -375,7 +382,8 @@ input[type=number]::-webkit-outer-spin-button {
      object-fit: contain;
 }
 
-.form-control {
+.form-control,
+.input-group-text {
   border: 1px solid #cbd8f6;
 }
 
@@ -391,6 +399,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 .input-group-text {
   background-color: #fff !important;
+}
+
+.input-group-append {
+  margin-top: 16px;
 }
 
 @media screen and (max-width: 769px) {

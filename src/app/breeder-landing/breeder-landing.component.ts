@@ -31,18 +31,18 @@ export class BreederLandingComponent implements OnInit {
     this.screenResizeListner();
 
     this.firstSliderData = [
-      { img: '../../assets/img/slider-img.png', text: 'Общая информация + фотографии' },
-      { img: '../../assets/img/slider-img.png', text: 'О себе' },
-      { img: '../../assets/img/slider-img.png', text: 'Родители щенков' },
-      { img: '../../assets/img/slider-img.png', text: 'Информация о щенках' },
-      { img: '../../assets/img/slider-img.png', text: 'Подключение аккаунта Instagram' }
+      { img: './assets/img/slider-img.png', text: 'Общая информация + фотографии' },
+      { img: './assets/img/slider-img.png', text: 'О себе' },
+      { img: './assets/img/slider-img.png', text: 'Родители щенков' },
+      { img: './assets/img/slider-img.png', text: 'Информация о щенках' },
+      { img: './assets/img/slider-img.png', text: 'Подключение аккаунта Instagram' }
     ];
 
     this.secondSliderData = [
-      { img: '../../assets/img/slider-img.png', text: 'Редактирование своей страницы' },
-      { img: '../../assets/img/slider-img.png', text: 'Общение с покупателями' },
-      { img: '../../assets/img/slider-img.png', text: 'Своя форма заявки на щенка' },
-      { img: '../../assets/img/slider-img.png', text: 'Обработка заявок от покупателей' },
+      { img: './assets/img/slider-img.png', text: 'Редактирование своей страницы' },
+      { img: './assets/img/slider-img.png', text: 'Общение с покупателями' },
+      { img: './assets/img/slider-img.png', text: 'Своя форма заявки на щенка' },
+      { img: './assets/img/slider-img.png', text: 'Обработка заявок от покупателей' },
     ];
 
     this.firstSlider.animation = 'fade';

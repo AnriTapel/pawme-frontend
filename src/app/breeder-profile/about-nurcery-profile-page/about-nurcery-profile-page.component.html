@@ -6,13 +6,13 @@
     <div class="upper-btn">
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
     </div>
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-name">Название питомника (необязательно)</label>
         <input class="form-control" type="text" name="nurcery-name" [(ngModel)]="nurceryData.nurceryName"
             placeholder="Название питомника" />
     </div>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-right">
         <label for="nurcery-location">Город / населенный пункт</label>
         <div class="dropdown-text-input">
             <input type="text" class="form-control" name="nurcery-location" [(ngModel)]="nurceryData.nurceryLocation"
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-main-breed">Основная порода</label>
         <div class="dropdown-text-input">
             <input type="text" class="form-control" name="nurcery-main-breed" [(ngModel)]="nurceryData.nurceryMainBreed"
@@ -34,11 +34,11 @@
         </div>
     </div>
 
-    <div *ngIf="!isAdditionalBreed" class="breeder-profile-subpage-form-group" style="align-self: end;">
+    <div *ngIf="!isAdditionalBreed" class="breeder-profile-subpage-form-right" style="align-self: end;">
         <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить еще одну"
             (click)="isAdditionalBreed = true" />
     </div>
-    <div *ngIf="isAdditionalBreed" class="breeder-profile-subpage-form-group">
+    <div *ngIf="isAdditionalBreed" class="breeder-profile-subpage-form-right">
         <label for="nurcery-additional-breed">Дополнительная порода</label>
         <div class="dropdown-text-input">
             <input type="text" class="form-control" name="nurcery-additional-breed"
@@ -50,12 +50,12 @@
         </div>
     </div>
 
-    <div class="breeder-profile-subpage-form-group about-your-nurcery-block">
+    <div class="about-your-nurcery-block">
         <label for="about-your-nurcery">О вашем питомнике</label><br>
         <span class="block-description">Это одна из первых вещей, которую прочитают потенциальные покупатели на вашей
             странице. Постарайтесь
             кратко (в 2-3 предложения) описать ваш питомник и рассказать о его особенностях.</span>
-        <textarea class="form-control" [(ngModel)]="nurceryData.aboutNurcery" placeholder="Описание"></textarea>
+        <textarea rows="5" class="form-control" [(ngModel)]="nurceryData.aboutNurcery" placeholder="Описание"></textarea>
     </div>
 
     <hr>
@@ -86,7 +86,7 @@
 
     <hr>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-instagram">Instagram (необязательно)</label>
         <input class="form-control" type="text" name="nurcery-instagram" [(ngModel)]="nurceryData.nurceryInstagram"
             placeholder="@имя в Instagram" />
@@ -94,7 +94,7 @@
         <span class="block-description">Мы автоматически добавим публикации на вашу страницу заводчика</span>
     </div>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-right">
         <label for="nurcery-site">Ваш сайт (необязательно)</label>
         <input class="form-control" type="text" name="nurcery-site" [(ngModel)]="nurceryData.nurcerySite"
             placeholder="Ссылка на ваш сайт" />
@@ -102,7 +102,7 @@
         <span class="block-description">Например, google.com</span>
     </div>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-facebook">Ссылка на ваш Facebook (необязательно)</label>
         <input class="form-control" type="text" name="nurcery-facebook" [(ngModel)]="nurceryData.nurceryFacebook"
             placeholder="Ссылка на ваш Facebook" />

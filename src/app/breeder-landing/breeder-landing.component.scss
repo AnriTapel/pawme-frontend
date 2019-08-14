@@ -1,10 +1,12 @@
+$block-padding: 8vw;
+
 .breeder-landing-top-block{
     display: flex;
     flex-direction: column;
     height: 100vh;
     
     background-image: url('../../assets/img/breeder-page-top-block-bg.png');
-    background-position: center center;
+    background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -12,8 +14,8 @@
 .breeder-landing-title{
     display: flex;
     flex-direction: column;
-    margin: 10vh 2em auto;
-    width: 50%;
+    margin: 3.5vw $block-padding auto;
+    width: 40em;
 
     h1{
         font-size: 38px;
@@ -28,8 +30,13 @@
 .what-is-avail-block{
     display: flex;
     flex-direction: column;
-    padding: 2em;
+    padding: 4em 2em;
     text-align: center;
+
+    &> p{
+        width: 80%;
+        margin: auto;
+    }
 
     section{
         width:100%;
@@ -49,18 +56,19 @@
 }
   
 .our-mission{
-    padding: 2em 0 2em 2em;
+    margin-top: 5em;
     display: inline-block;
     width: 100%
 }
   
 .our-mission-text-block{
     float: left;
-    width: 46%;
+    width: 50%;
+    padding-left: $block-padding;
     max-width: 570px;
     line-height: 29px;
 
-    h3{
+    h2{
         margin-bottom: 25px;
     }
 
@@ -70,9 +78,9 @@
 }
   
 .dog-in-box-section{
-    width: 54%;
+    width: 50%;
     float: right;
-    text-align: right;
+    text-align: center;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;
@@ -84,7 +92,7 @@
 }
   
 .coming-soon{
-    padding: 2em 2em 0;
+    padding: 2em $block-padding 0;
     background-image: url(../../assets/img/oval-coming-soon-section.png);
     background-repeat: no-repeat;
     background-size: contain;
@@ -93,7 +101,7 @@
         width: 33%;
         display: -ms-inline-grid;
         display: inline-grid;
-        padding: 0 40px;
+        padding-left: 25px;
     }
 
     section p:nth-child(3){
@@ -149,6 +157,10 @@ mdb-carousel{
 .first-slider-text,
 .second-slider-text{
     margin: auto 35px;
+
+    &> h3{
+        margin-bottom: .75em;
+    }
 
     p{
         margin-bottom: 10px;

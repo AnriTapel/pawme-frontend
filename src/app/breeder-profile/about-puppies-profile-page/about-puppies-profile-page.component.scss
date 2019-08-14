@@ -57,15 +57,9 @@ input[type='checkbox']{
 
 .medicine-checkboxs-list{
     display: grid;
-    grid-template: 50%/50%;
-
-    &> div:nth-child(1){
-        grid-column: 1/2;
-    }
-
-    &> div:nth-child(2){
-        grid-column: 2/3;
-    }
+    grid-template: auto / 50% 50%;
+    grid-row-gap: .5em;
+    margin-top: 16px;
 }
 
 .why-its-important{

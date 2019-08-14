@@ -34,7 +34,7 @@ body{
 
 h1, h2, h3, h4, h5{
     color: $regular-text-color;
-    font-family: 'Intro-Bold';
+    font-family: 'Intro-Regular';
 }
 
 p{
@@ -58,7 +58,7 @@ input[type=number]::-webkit-outer-spin-button {
 
     header{
         background-color: unset !important;
-        padding: 2em !important;
+        padding: 2% 8vw !important;
 
         nav{
             background-color: unset !important;
@@ -186,14 +186,19 @@ input[type=number]::-webkit-outer-spin-button {
 
 .breeder-profile-subpage-container{
     display: grid;
-    grid-template: 50%/50%;
+    grid-template: auto / 50% 50%;
     grid-row-gap: 2em;
-    grid-column-gap: 1.5em;
     padding: 2.5em;
     background-color: #fff;
     border: 1px solid #cbd8f6;
     border-radius: 4px;
-    grid-template-rows: auto;
+
+    input[type=text],
+    input[type=number],
+    textarea{
+        margin-top: 16px;
+    }
+
 
     hr{
         width: 100%;
@@ -240,9 +245,12 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
-.breeder-profile-subpage-form-group{
-    width: 100%;
-    float: left;
+.breeder-profile-subpage-form-left{
+    padding-right: 1.25em;
+}
+
+.breeder-profile-subpage-form-right{
+    padding-left: 1.25em;
 }
 
 .gallery-initial-block{
@@ -324,6 +332,7 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom-left-radius: 0;
     display: flex;
     align-items: center;
+    margin-top: 16px;
     padding: 0 10px;
     cursor: pointer;
 }
@@ -348,9 +357,8 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
-
-
-.form-control{
+.form-control,
+.input-group-text{
     border: 1px solid #cbd8f6;
 }
 
@@ -366,6 +374,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 .input-group-text{
     background-color: #fff !important;
+}
+
+.input-group-append{
+    margin-top: 16px;
 }
 
 @media screen and (max-width: 769px){

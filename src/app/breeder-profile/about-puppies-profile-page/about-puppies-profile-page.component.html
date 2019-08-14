@@ -6,7 +6,7 @@
     <div class="upper-btn">
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
     </div>
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-left">
         <label for="puppies-age">Возраст продажи щенков</label>
         <div class="input-group mb-3">
             <input type="number" name="puppies-age" class="form-control" [(ngModel)]="puppiesData.age" placeholder="от"
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-right">
         <label for="puppies-price">Стоимость щенков в рублях</label>
         <div class="input-group">
             <input type="number" class="form-control" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
@@ -48,7 +48,7 @@
         <br>
         <span class="block-description">Отметьте медицинские услуги, которые вы проводятся для ваших щенков</span>
         <div class="medicine-checkboxs-list">
-            <div>
+            <div class="breeder-profile-subpage-form-left">
                 <div class="custom-checkbox">
                     <div (click)="puppiesData.medicines.vaccinations = !puppiesData.medicines.vaccinations">
                         <img *ngIf="puppiesData.medicines.vaccinations" src="./assets/img/check-mark.png" />
@@ -74,7 +74,7 @@
                     <label class="form-check-label">Стерилизация/кастрация</label>
                 </div>
             </div>
-            <div>
+            <div class="breeder-profile-subpage-form-right">
                 <div class="custom-checkbox">
                     <div (click)="puppiesData.medicines.vaccinations = !puppiesData.medicines.vaccinations">
                         <img *ngIf="puppiesData.medicines.vaccinations" src="./assets/img/check-mark.png" />
@@ -112,7 +112,7 @@
 
     <hr>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-left">
         <label for="guarantee-period">На сколько месяцев вы готовы дать гарантию по здоровью щенка?</label>
         <div class="input-group mb-3">
             <input type="number" name="guarantee-period" class="form-control" [(ngModel)]="puppiesData.guaranteePeriod"
@@ -133,7 +133,7 @@
         <br>
         <span class="block-description">Обычно заводчики указывают заболевания или проблемные части тела, специфические
             для конкретной породы.</span>
-        <textarea class="form-control" [(ngModel)]="puppiesData.problems"></textarea>
+        <textarea rows="5" class="form-control" [(ngModel)]="puppiesData.problems"></textarea>
     </div>
 
     <hr>
@@ -143,7 +143,7 @@
         <br>
         <span class="block-description">Многие заводчики дарят новым хозяевам игрушку с запахом однопометников или
             небольшой мешочек корма</span>
-        <textarea class="form-control" [(ngModel)]="puppiesData.gifts"></textarea>
+        <textarea rows="5" class="form-control" [(ngModel)]="puppiesData.gifts"></textarea>
     </div>
 
     <div class="lower-btn">

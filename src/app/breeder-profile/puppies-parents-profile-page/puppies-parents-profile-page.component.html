@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div *ngFor="let parent of parentsData.parents; let i = index;" class="dog-entity-item" (click)="showCurrentParentPage(index)">
+        <div *ngFor="let parent of parentsData.parents; let i = index;" class="dog-entity-item" (click)="showCurrentParentPage(i)">
 
         </div>
 
@@ -76,7 +76,7 @@
         <h3>Добавить родителя</h3>
     </div>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-left">
         <label for="parent-name">Кличка родителя</label>
         <div class="input-group mb-3">
             <input type="text" class="form-control" name="parent-name" aria-label="Кличка" aria-describedby="basic-addon3" [(ngModel)]="currentParentData.name"
@@ -88,7 +88,7 @@
         </div>
     </div>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-right">
         <label for="parent-breed">Порода</label>
 
         <div class="dropdown-text-input">
@@ -104,14 +104,14 @@
         <label for="parent-info">Расскажите об этом родителе</label>
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
-        <textarea class="form-control" [(ngModel)]="currentParentData.info"></textarea>
+        <textarea rows="5" class="form-control" [(ngModel)]="currentParentData.info"></textarea>
     </div>
 
     <div class="add-parent-page-photos-block">
         <label>Загрузите фотографии</label>
 
         <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block">
-            <input type="image" id="add-parent-gallery" [(ngModel)]="curPhotos" accept=".jpg, .png, .jpeg" multiple />
+            <input type="image" id="add-parent-gallery" [(ngModel)]="currentPhotos" accept=".jpg, .png, .jpeg" multiple />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>

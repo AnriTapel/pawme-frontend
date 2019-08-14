@@ -12,7 +12,7 @@
         <span class="block-description">Чтобы вам было проще, мы подготовили ряд наводящих вопросов. Какая ваша роль в
             питомнике и помогает ли вам семья? Что вам нравится в вашей породе и какие у вас профессиональные
             цели?</span>
-        <textarea [(ngModel)]="breederData.aboutMe" placeholder="Введите текст" name="about-me"
+        <textarea rows="5" [(ngModel)]="breederData.aboutMe" placeholder="Введите текст" name="about-me"
             class="form-control"></textarea>
     </div>
 
@@ -20,7 +20,7 @@
         <label for="begining">С чего все началось?</label><br>
         <span class="block-description">Почему вы начали заниматься разведением собак? Какие события этому
             предшествовали? Почему была выбрана именно эта порода?</span>
-        <textarea [(ngModel)]="breederData.begining" class="form-control" placeholder="Введите текст"
+        <textarea rows="5" [(ngModel)]="breederData.begining" class="form-control" placeholder="Введите текст"
             name="begining"></textarea>
     </div>
 
@@ -28,7 +28,7 @@
         <label for="features">Что выделяет ваш питомник? (необязательно)</label><br>
         <span class="block-description">Вы используете какие-то определенные методы при работе с щенками? Вы уделяете
             особое внимание определенным деталям?</span>
-        <textarea [(ngModel)]="breederData.nurceryFeatures" class="form-control" placeholder="Введите текст"
+        <textarea rows="5" [(ngModel)]="breederData.nurceryFeatures" class="form-control" placeholder="Введите текст"
             name="features"></textarea>
     </div>
 
@@ -44,12 +44,12 @@
         </div>
     </div>
 
-    <div class="breeder-profile-subpage-form-group">
+    <div class="breeder-profile-subpage-form-left">
         <label for="clubs">В каких клубах заводчиков вы состоите?</label><br>
         <input type="text" class="form-control" name="clubs" [(ngModel)]="currentClub" [disabled]="breederData.clubs.length > 9" (keyup.enter)="addClub()"/>
     </div>
 
-    <div class="breeder-profile-subpage-form-group" style="align-self: end;">
+    <div class="breeder-profile-subpage-form-right" style="align-self: end;">
         <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить клуб"
             (click)="addClub()"/>
     </div>
