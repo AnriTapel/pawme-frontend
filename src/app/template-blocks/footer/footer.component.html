@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="footer-sign-up-button-block">
-        <a href="#" title="Зарегистрируйся сейчас" class="custom-btn btn-white">ЗАРЕГИСТРИРУЙСЯ СЕЙЧАС
+        <a title="Зарегистрируйся сейчас" (click)="showSignUpPopup()" class="custom-btn btn-white">ЗАРЕГИСТРИРУЙСЯ СЕЙЧАС
             <img src="./assets/img/paw-in-signup-btn.png" alt="Лапа"
                 style="width: 20px; margin-left: 10px;" /></a>
     </div>
@@ -19,3 +19,9 @@
         <img src="./assets/img/logo-footer.png" alt="Логотип PawMe">
     </div>
 </footer>
+
+<app-popup-template [ngSwitch]="popupService.getCurrentForm()">
+    <app-login *ngSwitchCase="'login'"></app-login>
+    <app-sign-up *ngSwitchCase="'sign-up'"></app-sign-up>
+    <app-remind-password *ngSwitchCase="'remind-password'"></app-remind-password>
+</app-popup-template>

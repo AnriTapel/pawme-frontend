@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PopupTemplateService } from '../popup-template/popup-template.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public popupService: PopupTemplateService) { }
 
   ngOnInit() {
+  }
+
+  showSignUpPopup(){
+    this.popupService.setCurrentForm("sign-up");
+    this.popupService.setShowStatus(true);
   }
 
 }

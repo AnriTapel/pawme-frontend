@@ -383,15 +383,17 @@ input[type=number]::-webkit-outer-spin-button {
 @media screen and (max-width: 769px){
 
     .header-for-landing{
-         header{
-            padding: 0 !important;
-         }
+        margin-top: 1em;
 
-         nav{
+        header{
+            padding: 0 !important;
+        }
+
+        nav{
             display: flex;
             flex-direction: column;
             padding-bottom: 0 !important;
-         }
+        }
     }
 
     .custom-btn{

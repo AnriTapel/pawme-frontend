@@ -406,6 +406,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media screen and (max-width: 769px) {
+  .header-for-landing {
+    margin-top: 1em;
+  }
   .header-for-landing header {
     padding: 0 !important;
   }

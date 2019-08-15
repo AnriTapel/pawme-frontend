@@ -42,7 +42,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 4em 2em;
+  padding: 4em 2em 2.5em;
   text-align: center;
 }
 
@@ -112,6 +112,12 @@
   background-size: contain;
 }
 
+.coming-soon .dog-head-img {
+  float: right;
+  margin-top: 50px;
+  width: 350px;
+}
+
 .coming-soon section {
   width: 33%;
   display: -ms-inline-grid;
@@ -146,6 +152,10 @@ mdb-carousel {
   padding: 3% 15% 3% 0 !important;
 }
 
+.second-slider-section .mobile-sign-up-button {
+  display: none;
+}
+
 .first-slider-text {
   width: 50%;
   float: right;
@@ -160,6 +170,10 @@ mdb-carousel {
 .second-slider-text div {
   float: right;
   text-align: left;
+}
+
+.second-slider-text button {
+  margin-top: 1em;
 }
 
 .first-slider-text,
@@ -198,9 +212,6 @@ mdb-carousel {
   h2 {
     font-size: 20px;
   }
-  .breeder-landing-top-block {
-    height: 120vh;
-  }
   .breeder-landing-title {
     padding: 1em;
     -webkit-box-align: center;
@@ -209,6 +220,7 @@ mdb-carousel {
     width: 100%;
     text-align: center;
     margin: unset;
+    margin-top: 2em !important;
   }
   .breeder-landing-title h1 {
     font-size: 28px;
@@ -216,6 +228,13 @@ mdb-carousel {
   }
   .breeder-landing-title button {
     margin-top: 10px;
+  }
+  .what-is-avail-block {
+    padding: 3em .5em 0;
+  }
+  .what-is-avail-block > p {
+    width: 95%;
+    margin: 1.5em 0;
   }
   .what-is-avail-block section {
     display: block;
@@ -233,6 +252,11 @@ mdb-carousel {
   .second-slider-section > h3 {
     display: block;
   }
+  .first-slider-section .mobile-sign-up-button,
+  .second-slider-section .mobile-sign-up-button {
+    display: block;
+    margin: auto;
+  }
   .first-slider-text,
   .second-slider-text {
     display: none;
@@ -247,13 +271,16 @@ mdb-carousel {
     float: unset;
   }
   .our-mission {
-    padding: 1em 0 1em 1em;
+    padding: unset;
+    margin-top: 2em;
   }
   .our-mission h2 {
     margin-bottom: 20px;
   }
   .our-mission-text-block {
     width: 100%;
+    padding-left: unset;
+    padding: 0 1em;
   }
   .our-mission-text-block p {
     font-size: 14px;
@@ -266,7 +293,15 @@ mdb-carousel {
     width: 100%;
   }
   .coming-soon {
-    padding: 1em 1em 0;
+    padding: 4em 1em 0;
+  }
+  .coming-soon > p {
+    margin-bottom: 0 !important;
+    text-align: center;
+  }
+  .coming-soon .dog-head-img {
+    width: 70%;
+    float: unset;
   }
   .coming-soon section {
     width: 100%;
@@ -278,6 +313,9 @@ mdb-carousel {
   }
   .coming-soon section p {
     font-size: 14px;
+  }
+  .coming-soon section p:nth-child(3) {
+    min-height: unset !important;
   }
 }
 /*# sourceMappingURL=breeder-landing.component.css.map */

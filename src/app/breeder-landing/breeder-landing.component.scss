@@ -30,7 +30,7 @@ $block-padding: 8vw;
 .what-is-avail-block{
     display: flex;
     flex-direction: column;
-    padding: 4em 2em;
+    padding: 4em 2em 2.5em;
     text-align: center;
 
     &> p{
@@ -97,6 +97,12 @@ $block-padding: 8vw;
     background-repeat: no-repeat;
     background-size: contain;
 
+    .dog-head-img{
+        float: right;
+        margin-top: 50px;
+        width: 350px;
+    }
+
     section{
         width: 33%;
         display: -ms-inline-grid;
@@ -136,6 +142,10 @@ mdb-carousel{
     mdb-carousel{
         padding: 3% 15% 3% 0 !important;
     }
+
+    .mobile-sign-up-button{
+        display: none;
+    }
 }
 
 .first-slider-text{
@@ -151,6 +161,10 @@ mdb-carousel{
     div{
         float: right;
         text-align: left;
+    }
+
+    button{
+        margin-top: 1em;
     }
 }
 
@@ -187,16 +201,13 @@ mdb-carousel{
         font-size: 20px;
     }
 
-    .breeder-landing-top-block{
-        height: 120vh;
-    }
-
     .breeder-landing-title{
         padding: 1em;
         align-items: center;
         width: 100%;
         text-align: center;
         margin: unset;
+        margin-top: 2em !important;
 
         h1{
             font-size: 28px;
@@ -209,6 +220,12 @@ mdb-carousel{
     }
 
     .what-is-avail-block{
+        padding: 3em .5em 0;
+
+        &> p{
+            width: 95%;
+            margin: 1.5em 0;
+        }
 
         section{
             display: block;
@@ -232,6 +249,11 @@ mdb-carousel{
         & > h3 {
             display: block;
         }
+
+        .mobile-sign-up-button{
+            display: block;
+            margin: auto;
+        }
     }
 
     .first-slider-text,
@@ -252,7 +274,8 @@ mdb-carousel{
     }
 
     .our-mission{
-        padding: 1em 0 1em 1em;
+        padding: unset;
+        margin-top: 2em;
 
         h2{
             margin-bottom: 20px;
@@ -261,6 +284,8 @@ mdb-carousel{
 
     .our-mission-text-block{
         width: 100%;
+        padding-left: unset;
+        padding: 0 1em;
 
         p{
             font-size: 14px;
@@ -277,7 +302,17 @@ mdb-carousel{
     }
 
     .coming-soon {
-        padding: 1em 1em 0;
+        padding: 4em 1em 0;
+
+        &> p{
+            margin-bottom: 0 !important;
+            text-align: center;
+        }
+
+        .dog-head-img{
+            width: 70%;
+            float: unset;
+        }
 
         section{
             width: 100%;
@@ -291,6 +326,10 @@ mdb-carousel{
             p{
                 font-size: 14px;
             }
+        }
+
+        section p:nth-child(3){
+            min-height: unset !important;
         }
     }
 
