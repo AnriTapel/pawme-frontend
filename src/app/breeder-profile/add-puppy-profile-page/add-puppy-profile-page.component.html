@@ -1,1 +1,127 @@
-<p>add-puppy-profile-page works!</p>
+<div *ngIf="isMainPage" class="breeder-profile-subpage-container">
+
+    <div class="page-header">
+        <h3>Добавить щенков</h3>
+    </div>
+
+    <div class="dog-entity-list-block">
+
+        <div *ngFor="let puppy of puppiesData.puppies; let i = index;" class="dog-entity-item" (click)="showCurrentPuppyPage(i)">
+
+        </div>
+
+        <div class="dog-entity-item" (click)="showCurrentPuppyPage(-1)">
+            <div>
+                <img src="./assets/img/thin-plus.png" alt="Добавить щенка" width="30px" />
+                <br>
+                <label>Добавить щенка</label>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div *ngIf="!isMainPage" class="breeder-profile-subpage-container">
+
+    <div class="get-back-block" (click)="isMainPage = true;">
+        <span>
+            <img src="./assets/img/arrow-left.svg">&nbsp;&nbsp;&nbsp;НАЗАД</span>
+    </div>
+
+    <div class="upper-btn">
+        <input type="button" class="custom-btn btn-transparent" value="Сохранить черновик" (click)="saveDraft()" />
+    </div>
+
+    <div class="page-header adding-entity-page-header">
+        <h3>Добавить щенка</h3>
+    </div>
+
+    <div class="breeder-profile-subpage-form-left">
+        <label for="puppy-name">Кличка</label>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="puppy-name" aria-label="Кличка" aria-describedby="basic-addon3" [(ngModel)]="currentPuppyData.name"
+                placeholder="Кличка" />
+            <div class="custom-input-append" (click)="currentPuppyData.isMale = !currentPuppyData.isMale">
+                <img *ngIf="currentPuppyData.isMale" height="17px" src="./assets/img/sex_male.png" alt="Мужской пол"/>
+                <img *ngIf="!currentPuppyData.isMale" height="17px" src="./assets/img/sex_female.png" alt="Женский пол"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="breeder-profile-subpage-form-right">
+        <label for="puppy-breed">Порода</label>
+
+        <div class="dropdown-text-input">
+            <input type="text" class="form-control" name="puppy-breed" [(ngModel)]="currentPuppyData.breed" [ngbTypeahead]="appService.fieldAutocomplite(appService.availBreeds, puppyBreedFocus$, puppyBreedClick$, puppyBreedInstance)"
+                (focus)="puppyBreedFocus$.next($event.target.value)" (click)="puppyBreedClick$.next($event.target.value)" #puppyBreedInstance="ngbTypeahead"
+                placeholder="Выбрать" aria-describedby="basic-addon2">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+        </div>
+    </div>
+
+    <div class="breeder-profile-subpage-form-left">
+        <label for="puppy-birthday">Здесь должная быть дата</label>
+        <input type="date" name="puppy-birthday" class="form-control" [(ngModel)]="currentPuppyData.birthday" placeholder="Дата" />
+    </div>
+
+    <div class="breeder-profile-subpage-form-right">
+        <label for="puppy-stigma">Клеймо (видно только вам)</label>
+        <input class="form-control" type="text" name="puppy-stigma" [(ngModel)]="currentPuppyData.stigmaCode"
+            placeholder="Код клейма" />
+    </div>
+    
+
+    <div class="breeder-profile-subpage-form-left">
+        <label for="puppy-dad">Отец</label>
+
+        <div class="dropdown-text-input">
+            <input type="text" class="form-control" name="puppy-dad" [(ngModel)]="currentPuppyData.dadId" [ngbTypeahead]="appService.fieldAutocomplite(puppiesData.parents, dadDogFocus$, dadDogClick$, dadDogInstance)"
+                (focus)="dadDogFocus$.next($event.target.value)" (click)="dadDogClick$.next($event.target.value)" #dadDogInstance="ngbTypeahead"
+                placeholder="Выбрать" aria-describedby="basic-addon2">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+        </div>
+    </div>
+
+
+    <div class="breeder-profile-subpage-form-right">
+        <label for="puppy-mom">Мать</label>
+
+        <div class="dropdown-text-input">
+            <input type="text" class="form-control" name="puppy-mom" [(ngModel)]="currentPuppyData.momId" [ngbTypeahead]="appService.fieldAutocomplite(puppiesData.parents, momDogFocus$, momDogClick$, momDogInstance)"
+                (focus)="momDogFocus$.next($event.target.value)" (click)="momDogClick$.next($event.target.value)" #momDogInstance="ngbTypeahead"
+                placeholder="Выбрать" aria-describedby="basic-addon2">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+        </div>
+    </div>
+
+    <div class="add-puppy-page-info-block">
+        <label for="puppy-info">Расскажите об этом родителе</label>
+        <br>
+        <span class="block-description">Опишите достижения, отличительные особенности</span>
+        <textarea rows="5" class="form-control" [(ngModel)]="currentPuppyData.info"></textarea>
+    </div>
+
+    <div class="breeder-profile-subpage-form-left">
+        <label for="puppy-price">Стоимость щенка в рублях</label>
+        <input type="number" name="puppy-price" class="form-control" [(ngModel)]="currentPuppyData.price" placeholder="₽" />
+    </div>
+
+    <div class="add-puppy-page-photos-block">
+        <label>Загрузите фотографии</label>
+
+        <div *ngIf="currentPuppyData.photos.length == 0" class="gallery-initial-block">
+            <input type="image" id="add-puppy-gallery" [(ngModel)]="currentPhotos" accept=".jpg, .png, .jpeg" multiple />
+            <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
+            <br>
+            <span>
+                <a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+        </div>
+    </div>
+
+    <div class="lower-btn">
+        <input type="button" class="custom-btn btn-purple" value="Сохранить щенка" (click)="addParent()" />
+    </div>
+
+</div>
+

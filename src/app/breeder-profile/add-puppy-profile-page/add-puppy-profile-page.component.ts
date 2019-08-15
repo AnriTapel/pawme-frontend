@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-add-puppy-profile-page',
@@ -7,9 +10,60 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddPuppyProfilePageComponent implements OnInit {
 
-  constructor() { }
+  DEFAULT_PUPPY_DATA = {
+    name: null,
+    isMale: true,
+    birthday: null,
+    breed: null,
+    stigmaCode: null,
+    dadId: null,
+    momId: null,
+    info: null,
+    price: null,
+    photos: []
+  }
+  puppiesData: any;
+  currentPhotos: any;
+  currentPuppyData: any;
+
+  // What page to show - parents page or add/edit current parent
+  isMainPage: boolean = true;
+
+  @ViewChild('momDogInstance', { static: true }) momDogInstance: NgbTypeahead;
+  @ViewChild('dadDogInstance', { static: true }) dadDogInstance: NgbTypeahead;
+  @ViewChild('puppyBreedInstance', { static: true }) puppyBreedInstance: NgbTypeahead;
+  momDogFocus$ = new Subject<string>();
+  dadDogFocus$ = new Subject<string>();
+  puppyBreedFocus$ = new Subject<string>();
+  momDogClick$ = new Subject<string>();
+  dadDogClick$ = new Subject<string>();
+  puppyBreedClick$ = new Subject<string>();
+
+  constructor(public appService: AppService) { }
 
   ngOnInit() {
+    this.puppiesData = {
+      puppies: [],
+      parents: [],
+      puppyDraft: null
+    }
+  }
+
+  showCurrentPuppyPage(index: number): void {
+    if (index == -1)
+      this.currentPuppyData = this.puppiesData.puppyDraft ? this.puppiesData.puppyDraft : this.DEFAULT_PUPPY_DATA;
+    else
+      this.currentPuppyData = this.puppiesData.puppies[index];
+
+    this.isMainPage = false;
+  }
+
+  saveDraft(): void{
+
+  }
+
+  addPuppy(): void{
+
   }
 
 }

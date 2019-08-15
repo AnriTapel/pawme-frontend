@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,0BAA0B;AAC1B,4BAA4B,CAAA;EACxB,WAAW,EAAE,GAAG;CACnB",
     "sources": [
         "add-puppy-profile-page.component.scss"
     ],

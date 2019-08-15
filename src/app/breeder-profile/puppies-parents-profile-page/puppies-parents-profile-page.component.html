@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div class="breeder-profile-subpage-form-group dropdown-text-input">
+    <div class="breeder-profile-subpage-form-left dropdown-text-input">
         <input type="text" class="form-control" [(ngModel)]="currentBodyPart"
             [ngbTypeahead]="appService.fieldAutocomplite(appService.availBodyParts, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
             (focus)="bodyPartFocus$.next($event.target.value)" (click)="bodyPartClick$.next($event.target.value)"
@@ -51,7 +51,7 @@
         <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
     </div>
 
-    <div class="breeder-profile-subpage-form-group dropdown-text-input">
+    <div class="breeder-profile-subpage-form-right dropdown-text-input">
         <input type="text" class="form-control" [(ngModel)]="currentMedicalTest"
             [ngbTypeahead]="appService.fieldAutocomplite(appService.availMedicalTests, medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
             (focus)="medicalTestFocus$.next($event.target.value)" (click)="medicalTestClick$.next($event.target.value)"

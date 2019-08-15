@@ -44,7 +44,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
     this.parentsData = {
       parents: [],
-      medicals: []
+      medicals: [],
+      parentDraft: null
     };
   }
 
