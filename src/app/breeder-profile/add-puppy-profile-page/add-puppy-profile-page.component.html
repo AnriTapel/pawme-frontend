@@ -37,14 +37,15 @@
         <h3>Добавить щенка</h3>
     </div>
 
-    <div class="breeder-profile-subpage-form-left">
+    <div class="breeder-profile-subpage-form-left add-puppy-page-name-block">
         <label for="puppy-name">Кличка</label>
+        <span (click)="currentPuppyData.name = 'Щенок'">Без клички</span>
         <div class="input-group mb-3">
             <input type="text" class="form-control" name="puppy-name" aria-label="Кличка" aria-describedby="basic-addon3" [(ngModel)]="currentPuppyData.name"
                 placeholder="Кличка" />
             <div class="custom-input-append" (click)="currentPuppyData.isMale = !currentPuppyData.isMale">
-                <img *ngIf="currentPuppyData.isMale" height="17px" src="./assets/img/sex_male.png" alt="Мужской пол"/>
-                <img *ngIf="!currentPuppyData.isMale" height="17px" src="./assets/img/sex_female.png" alt="Женский пол"/>
+                <img *ngIf="currentPuppyData.isMale" height="17px" src="./assets/img/sex_male.png" alt="Мужской пол" />
+                <img *ngIf="!currentPuppyData.isMale" height="17px" src="./assets/img/sex_female.png" alt="Женский пол" />
             </div>
         </div>
     </div>
@@ -61,16 +62,25 @@
     </div>
 
     <div class="breeder-profile-subpage-form-left">
-        <label for="puppy-birthday">Здесь должная быть дата</label>
-        <input type="date" name="puppy-birthday" class="form-control" [(ngModel)]="currentPuppyData.birthday" placeholder="Дата" />
+        <label for="puppy-birthday">Дата рождения</label>
+        <div class="input-group">
+            <input class="form-control" style="display: none;" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="birthdayModel" ngbDatepicker #d="ngbDatepicker" (select)="console.log('change')">
+            <input type="number" class="form-control" name="puppies-price" [(ngModel)]="date.day" placeholder="День">
+            <input type="number" class="form-control" [(ngModel)]="date.month" placeholder="Месяц">
+            <input type="number" class="form-control" [(ngModel)]="date.year" placeholder="Год">
+            <div class="custom-input-append" (click)="d.toggle()">
+                <!--<button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>-->
+                <img src="./assets/img/calendar.svg" alt="Календарь" />
+            </div>
+        </div>
     </div>
 
     <div class="breeder-profile-subpage-form-right">
         <label for="puppy-stigma">Клеймо (видно только вам)</label>
-        <input class="form-control" type="text" name="puppy-stigma" [(ngModel)]="currentPuppyData.stigmaCode"
-            placeholder="Код клейма" />
+        <input class="form-control" type="text" name="puppy-stigma" [(ngModel)]="currentPuppyData.stigmaCode" placeholder="Код клейма"
+        />
     </div>
-    
+
 
     <div class="breeder-profile-subpage-form-left">
         <label for="puppy-dad">Отец</label>
@@ -124,4 +134,3 @@
     </div>
 
 </div>
-

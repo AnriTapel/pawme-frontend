@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeahead, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 
@@ -25,6 +25,9 @@ export class AddPuppyProfilePageComponent implements OnInit {
   puppiesData: any;
   currentPhotos: any;
   currentPuppyData: any;
+
+  birthdayModel: NgbDateStruct;
+  date = {day: null, month: null, year: null};
 
   // What page to show - parents page or add/edit current parent
   isMainPage: boolean = true;
@@ -56,6 +59,10 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.currentPuppyData = this.puppiesData.puppies[index];
 
     this.isMainPage = false;
+  }
+
+  setSelectedDate(event: any): void{
+    console.log(event)
   }
 
   saveDraft(): void{

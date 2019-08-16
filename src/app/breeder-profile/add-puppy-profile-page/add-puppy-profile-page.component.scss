@@ -2,3 +2,18 @@
 .add-puppy-page-photos-block{
     grid-column: 1/3;
 }
+
+.add-puppy-page-name-block{
+    
+    span{
+        float: right;
+        color: #645fc9;
+        cursor: pointer;
+        text-decoration: #645fc9 underline;
+        
+        &:hover{
+            transform: translateY(-3px);
+            transition: all 0.5s ease;
+        }
+    }
+}
