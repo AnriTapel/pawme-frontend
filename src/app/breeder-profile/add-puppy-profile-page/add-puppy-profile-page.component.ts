@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbTypeahead, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeahead, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 
@@ -26,8 +26,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   currentPhotos: any;
   currentPuppyData: any;
 
-  birthdayModel: NgbDateStruct;
-  date = {day: null, month: null, year: null};
+  birthdayModel: NgbDateStruct = {day: null, month: null, year: null};
 
   // What page to show - parents page or add/edit current parent
   isMainPage: boolean = true;
@@ -61,8 +60,13 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.isMainPage = false;
   }
 
-  setSelectedDate(event: any): void{
-    console.log(event)
+  getCurrentMaxDate() :any{
+    let date = new Date();
+    return {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
+  }
+
+  updateSelectedDate(){
+   this.birthdayModel = {year: this.birthdayModel.year, month: this.birthdayModel.month, day: this.birthdayModel.day}; 
   }
 
   saveDraft(): void{

@@ -64,12 +64,12 @@
     <div class="breeder-profile-subpage-form-left">
         <label for="puppy-birthday">Дата рождения</label>
         <div class="input-group">
-            <input class="form-control" style="display: none;" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="birthdayModel" ngbDatepicker #d="ngbDatepicker" (select)="console.log('change')">
-            <input type="number" class="form-control" name="puppies-price" [(ngModel)]="date.day" placeholder="День">
-            <input type="number" class="form-control" [(ngModel)]="date.month" placeholder="Месяц">
-            <input type="number" class="form-control" [(ngModel)]="date.year" placeholder="Год">
-            <div class="custom-input-append" (click)="d.toggle()">
-                <!--<button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>-->
+            <input type="number" class="form-control" [(ngModel)]="birthdayModel.day" (change)="updateSelectedDate()" placeholder="День">
+            <input type="number" class="form-control" [(ngModel)]="birthdayModel.month" (change)="updateSelectedDate()" placeholder="Месяц">
+            <input type="number" class="form-control" [(ngModel)]="birthdayModel.year" (change)="updateSelectedDate()" placeholder="Год">
+            <input class="form-control" style="display: none;" [(ngModel)]="birthdayModel" [minDate]="{year: 2000, month: 1, day: 1}" 
+                [maxDate]="getCurrentMaxDate()"ngbDatepicker #datePicker="ngbDatepicker">
+            <div class="custom-input-append" (click)="datePicker.toggle()">
                 <img src="./assets/img/calendar.svg" alt="Календарь" />
             </div>
         </div>

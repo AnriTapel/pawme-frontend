@@ -358,8 +358,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .form-control,
-.input-group-text{
-    border: 1px solid #cbd8f6;
+.input-group-text,
+ngb-datepicker{
+    border: 1px solid #cbd8f6 !important;
 }
 
 .form-group{
@@ -382,10 +383,64 @@ input[type=number]::-webkit-outer-spin-button {
 
 ngb-datepicker{
     left: unset !important;
-    top: 100% !important;
-    right: 0;
+    top: 105% !important;
+    right: -30%;
     margin-top: unset !important;
     transform: unset !important;
+}
+
+.ngb-dp-weekdays{
+    border-bottom: unset !important;
+    padding-top: .5em;
+    padding-bottom: .5em;
+
+    .ngb-dp-weekday{
+        color: #0e0b4d !important;
+        opacity: 0.5 !important;
+        font-size: 12px !important;
+        font-style: unset !important;
+        font-family: 'Intro-Book' !important;
+    }
+}
+
+.ngb-dp-header,
+.bg-light{
+    background-color: #fff !important;
+}
+
+.bg-primary{
+    background-color: #cbd8f6 !important;
+    color: #0e0b4d !important;
+    font-family: 'Intro-Regular' !important;
+    
+    &:focus{
+        outline: none;
+    }
+}
+
+[ngbDatepickerDayView],
+.ngb-dp-day, .ngb-dp-week-number, .ngb-dp-weekday{
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    font-family: 'Intro-Book';
+    color: #0e0b4d !important;
+    font-size: 12px !important;
+    line-height: 2.25rem !important;
+
+    &:focus{
+        outline: none !important;
+    }
+}
+
+.ngb-dp-arrow-btn{
+    .ngb-dp-navigation-chevron{
+        color: #645fc9 !important;
+    }
+
+    &:focus{
+        outline-width: 0 !important;
+        outline-style: unset !important;
+    }
 }
 
 @media screen and (max-width: 769px){
