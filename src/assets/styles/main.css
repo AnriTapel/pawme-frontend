@@ -131,8 +131,16 @@ input[type=number]::-webkit-outer-spin-button {
 .popup-form-group,
 .popup-form-check {
   width: 50% !important;
-  margin: 15px auto 0 !important;
+  margin: 20px auto 0 !important;
   text-align: left;
+}
+
+.popup-form-group label {
+  margin-bottom: 5px !important;
+}
+
+.popup-form-group input {
+  height: 40px;
 }
 
 .popup-form-check div {
@@ -473,20 +481,16 @@ ngb-datepicker {
     margin-top: 1em;
   }
   .header-for-landing header {
-    padding: 0 !important;
+    padding: 0;
   }
   .header-for-landing nav {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    padding-bottom: 0 !important;
+    padding: 0 8vw !important;
   }
   .custom-btn {
-    padding: 15px 25px;
+    /*padding: 15px 25px;*/
   }
   .popup-form-group,
   .popup-form-check {

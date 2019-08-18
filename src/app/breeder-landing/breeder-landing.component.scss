@@ -5,7 +5,7 @@ $block-padding: 8vw;
     flex-direction: column;
     height: 100vh;
     
-    background-image: url('../../assets/img/breeder-page-top-block-bg.png');
+    background-image: url('../../assets/img/breeder-page-top-block-bg.jpg');
     background-position: center bottom;
     background-size: cover;
     background-repeat: no-repeat;
@@ -20,6 +20,7 @@ $block-padding: 8vw;
     h1{
         font-size: 38px;
         line-height: 45px;
+        font-family: 'Intro-Bold';
     }
 
     button{
@@ -100,7 +101,7 @@ $block-padding: 8vw;
     .dog-head-img{
         float: right;
         margin-top: 50px;
-        width: 350px;
+        width: 300px;
     }
 
     section{
@@ -172,7 +173,7 @@ mdb-carousel{
 .second-slider-text{
     margin: auto 35px;
 
-    &> h3{
+    h3{
         margin-bottom: .75em;
     }
 
@@ -201,6 +202,10 @@ mdb-carousel{
         font-size: 20px;
     }
 
+    .breeder-landing-top-block{
+        background-image: url('../../assets/img/breeder-page-top-block-bg-mobile.jpg');
+    }
+
     .breeder-landing-title{
         padding: 1em;
         align-items: center;
@@ -215,7 +220,7 @@ mdb-carousel{
         }
 
         button{
-            margin-top: 10px;
+            margin-top: 2em;
         }
     }
 
@@ -298,11 +303,13 @@ mdb-carousel{
 
         img{
             width: 100%;
+            padding: 1.25em;
         }
     }
 
     .coming-soon {
         padding: 4em 1em 0;
+        background-image: unset;
 
         &> p{
             margin-bottom: 0 !important;

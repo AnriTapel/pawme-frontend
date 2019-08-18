@@ -5,19 +5,21 @@
   bottom: 0;
   position: fixed;
   background-color: rgba(14, 11, 77, 0.5);
-  padding: 0 15vw;
+  padding: 0 25vw;
   z-index: 999;
 }
 
 .popup-wrapper > div {
   position: relative;
   margin: 0 auto;
-  top: 10vh;
+  top: 5vh;
+  max-height: 90vh;
+  overflow-y: scroll;
   text-align: center;
   background: #fff;
   border-radius: 5px;
   border: 1px solid #e6e8f5;
-  padding: 1em 0;
+  padding: 2em 0;
 }
 
 .popup-wrapper > div > img {
@@ -25,8 +27,8 @@
   width: 16px;
   cursor: pointer;
   position: absolute;
-  top: 25px;
-  right: 20px;
+  top: 38px;
+  right: 40px;
 }
 
 @media screen and (max-width: 769px) {
