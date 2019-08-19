@@ -238,6 +238,23 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: left;
 }
 
+.breeder-profile-subpage-container .custom-input-append {
+  border: 1px solid #cbd8f6;
+  border-left: none;
+  border-radius: .25rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 16px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
 .breeder-profile-subpage-container .block-description {
   opacity: 0.5;
   font-size: 14px;
@@ -350,23 +367,6 @@ input[type=number]::-webkit-outer-spin-button {
 .btn-label-list > input {
   display: inline;
   margin: .25em .5em;
-}
-
-.custom-input-append {
-  border: 1px solid #cbd8f6;
-  border-left: none;
-  border-radius: .25rem;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-top: 16px;
-  padding: 0 10px;
-  cursor: pointer;
 }
 
 .invalid-form-field-value,
@@ -491,6 +491,41 @@ ngb-datepicker .bg-light {
 }
 
 @media screen and (max-width: 769px) {
+  .breeder-profile-subpage-container {
+    display: block !important;
+    padding: 0 1em;
+  }
+  .breeder-profile-subpage-container input[type=text],
+  .breeder-profile-subpage-container input[type=number],
+  .breeder-profile-subpage-container textarea {
+    margin-top: .5em;
+  }
+  .breeder-profile-subpage-container .upper-btn,
+  .breeder-profile-subpage-container .lower-btn {
+    text-align: center;
+    -ms-grid-column: 1;
+        grid-column-start: 1;
+  }
+  .breeder-profile-subpage-container .lower-btn {
+    margin-bottom: 2.5em;
+  }
+  .breeder-profile-subpage-container .custom-input-append {
+    margin-top: .5em;
+  }
+  .breeder-profile-subpage-container > div {
+    width: 100% !important;
+    margin: 1.5em auto;
+  }
+  .breeder-profile-subpage-form-left {
+    padding-right: unset;
+  }
+  .breeder-profile-subpage-form-right {
+    padding-left: unset;
+  }
+  .custom-btn {
+    display: block;
+    width: 100%;
+  }
   .header-for-landing {
     margin-top: 1em;
   }
@@ -538,6 +573,9 @@ ngb-datepicker .bg-light {
   .form-group,
   .form-check {
     margin: 5px auto 0;
+  }
+  .input-group-append {
+    margin-top: .5em !important;
   }
 }
 /*# sourceMappingURL=main.css.map */

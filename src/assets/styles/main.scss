@@ -232,6 +232,19 @@ input[type=number]::-webkit-outer-spin-button {
         text-align: left;
     }
 
+    .custom-input-append{
+        border: 1px solid #cbd8f6;
+        border-left: none;
+        border-radius: .25rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        display: flex;
+        align-items: center;
+        margin-top: 16px;
+        padding: 0 10px;
+        cursor: pointer;
+    }
+
     .block-description{
         opacity: 0.5;
         font-size: 14px;
@@ -334,19 +347,6 @@ input[type=number]::-webkit-outer-spin-button {
         display: inline;
         margin: .25em .5em;
     }
-}
-
-.custom-input-append{
-    border: 1px solid #cbd8f6;
-    border-left: none;
-    border-radius: .25rem;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    display: flex;
-    align-items: center;
-    margin-top: 16px;
-    padding: 0 10px;
-    cursor: pointer;
 }
 
 .invalid-form-field-value,
@@ -471,6 +471,49 @@ ngb-datepicker{
 
 @media screen and (max-width: 769px){
 
+    .breeder-profile-subpage-container{
+        display: block !important;
+        padding: 0 1em;
+
+        input[type=text],
+        input[type=number],
+        textarea{
+            margin-top: .5em;
+        }
+
+        .upper-btn,
+        .lower-btn{
+            text-align: center;
+            grid-column-start: 1;
+        }
+
+        .lower-btn{
+            margin-bottom: 2.5em;
+        }
+
+        .custom-input-append{
+            margin-top: .5em
+        }
+
+        &> div{
+            width: 100% !important;
+            margin: 1.5em auto;
+        }
+    }
+
+    .breeder-profile-subpage-form-left{
+        padding-right: unset;
+    }
+
+    .breeder-profile-subpage-form-right{
+        padding-left: unset;
+    }
+
+    .custom-btn{
+        display: block;
+        width: 100%;
+    }
+
     .header-for-landing{
         margin-top: 1em;
 
@@ -528,6 +571,10 @@ ngb-datepicker{
     .form-group,
     .form-check{
         margin: 5px auto 0;
+    }
+
+    .input-group-append{
+        margin-top: .5em !important;
     }
 
 }

@@ -92,3 +92,32 @@ hr{
 .active-page{
     background-color: #cbd8f6 !important;
 }
+
+@media screen and (max-width: 769px){
+
+    hr{
+        width: 90%;
+    }
+
+    .profile-container{
+        grid-template: auto / 100%;
+        width: 90%;
+        grid-row-gap: 2em;
+    }
+
+    .profile-page{
+        margin-bottom: 3em;
+    }
+
+    .profile-menu-container{
+        input{
+            display: none;
+        }
+    }
+
+    .profile-progress-bar{
+        margin-top: 1.5em;
+        margin-bottom: unset;
+        grid-column: 1/2;
+    }
+}
