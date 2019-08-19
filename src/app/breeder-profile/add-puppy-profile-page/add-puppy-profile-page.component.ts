@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgbTypeahead, NgbDateStruct, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeahead, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 
@@ -27,6 +27,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   currentPuppyData: any;
 
   birthdayModel: NgbDateStruct = {day: null, month: null, year: null};
+  invalidFields: any[] = [];
 
   // What page to show - parents page or add/edit current parent
   isMainPage: boolean = true;
@@ -74,7 +75,58 @@ export class AddPuppyProfilePageComponent implements OnInit {
   }
 
   addPuppy(): void{
+    if (!this.validateInputFields())
+      return;
+  }
 
+  validateInputFields(): boolean{
+    let isValid= true;
+    this.invalidFields = [];
+    if (!this.currentPuppyData.name || this.currentPuppyData.name == ""){
+      this.invalidFields.push('name');
+      isValid = false;
+    }
+
+    if (!this.currentPuppyData.breed || this.currentPuppyData.breed == ""){
+      this.invalidFields.push('breed');
+      isValid = false;
+    }
+
+    if (!this.birthdayModel.day || !this.birthdayModel.month || !this.birthdayModel.year){
+      this.invalidFields.push('birthday');
+      isValid = false;
+    }
+
+    if (!this.currentPuppyData.stigmaCode || this.currentPuppyData.stigmaCode == ""){
+      this.invalidFields.push('stigma');
+      isValid = false;
+    }
+
+    if (!this.currentPuppyData.dadId){
+      this.invalidFields.push('dad');
+      isValid = false;
+    }
+
+    if (!this.currentPuppyData.momId){
+      this.invalidFields.push('mom');
+      isValid = false;
+    }
+
+    if (this.currentPuppyData.photos.length == 0){
+      this.invalidFields.push('photos');
+      isValid = false;
+    }
+
+    if (!this.currentPuppyData.info || this.currentPuppyData.info == ""){
+      this.invalidFields.push('info');
+      isValid = false;
+    }
+
+    if (!this.currentPuppyData.price){
+      this.invalidFields.push('price');
+      isValid = false;
+    }
+    return isValid;
   }
 
 }

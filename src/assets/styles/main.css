@@ -369,6 +369,17 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
+.invalid-form-field-value,
+.invalid-form-checkbox {
+  border: 1px solid #eb0000 !important;
+}
+
+.invalid-field-message {
+  color: #eb0000 !important;
+  font-size: 14px !important;
+  font-family: 'Intro-Book' !important;
+}
+
 .carousel-caption {
   display: none;
 }
@@ -394,17 +405,6 @@ input[type=number]::-webkit-outer-spin-button {
 .input-group-text,
 ngb-datepicker {
   border: 1px solid #cbd8f6 !important;
-}
-
-.invalid-form-field-value,
-.invalid-form-checkbox {
-  border: 1px solid #eb0000 !important;
-}
-
-.invalid-field-message {
-  color: #eb0000 !important;
-  font-size: 14px !important;
-  font-family: 'Intro-Book' !important;
 }
 
 .form-group {
@@ -434,6 +434,10 @@ ngb-datepicker {
           transform: unset !important;
 }
 
+ngb-datepicker .bg-light {
+  background-color: #fff !important;
+}
+
 .ngb-dp-weekdays {
   border-bottom: unset !important;
   padding-top: .5em;
@@ -448,8 +452,7 @@ ngb-datepicker {
   font-family: 'Intro-Book' !important;
 }
 
-.ngb-dp-header,
-.bg-light {
+.ngb-dp-header {
   background-color: #fff !important;
 }
 

@@ -24,6 +24,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   currentPhotos: any;
   currentBodyPart: string;
   currentMedicalTest: string;
+  invalidFields: any[] = [];
 
   // What page to show - parents page or add/edit current parent
   isMainPage: boolean = true;
@@ -73,7 +74,34 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   addParent(){
-    
+    if (!this.validateInputFields())
+      return;
+  }
+
+  validateInputFields(): boolean{
+    let isValid= true;
+    this.invalidFields = [];
+    if (!this.currentParentData.name || this.currentParentData.name == ""){
+      this.invalidFields.push('name');
+      isValid = false;
+    }
+
+    if (!this.currentParentData.breed || this.currentParentData.breed == ""){
+      this.invalidFields.push('breed');
+      isValid = false;
+    }
+
+    if (this.currentParentData.photos.length == 0){
+      this.invalidFields.push('photos');
+      isValid = false;
+    }
+
+    if (!this.currentParentData.info || this.currentParentData.info == ""){
+      this.invalidFields.push('info');
+      isValid = false;
+    }
+
+    return isValid;
   }
 
   saveDraft(){

@@ -16,7 +16,8 @@
             </div>
         </div>
 
-        <div *ngFor="let parent of parentsData.parents; let i = index;" class="dog-entity-item" (click)="showCurrentParentPage(i)">
+        <div *ngFor="let parent of parentsData.parents; let i = index;" class="dog-entity-item"
+            (click)="showCurrentParentPage(i)">
 
         </div>
 
@@ -31,7 +32,7 @@
 
     <hr>
 
-    <!--<div class="parents-medicals-block">
+    <div class="parents-medicals-block">
         <label>Медицинские тесты на родителях</label><br>
         <span class="block-description">Ответственные заводчики тестируют родителей щенков на специфические для породы
             заболевания, чтобы они не могли проявиться у щенков. Вы можете выбрать тесты, которые вы проводите в своем
@@ -43,21 +44,26 @@
         </div>
     </div>
 
-    <div class="breeder-profile-subpage-form-left dropdown-text-input">
-        <input type="text" class="form-control" [(ngModel)]="currentBodyPart"
-            [ngbTypeahead]="appService.fieldAutocomplite(appService.availBodyParts, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
-            (focus)="bodyPartFocus$.next($event.target.value)" (click)="bodyPartClick$.next($event.target.value)"
-            #bodyPartInstance="ngbTypeahead" placeholder="Часть тела">
-        <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+    <div class="breeder-profile-subpage-form-left">
+        <div class="dropdown-text-input">
+            <input type="text" class="form-control" [(ngModel)]="currentBodyPart"
+                [ngbTypeahead]="appService.fieldAutocomplite(appService.availBodyParts, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
+                (focus)="bodyPartFocus$.next($event.target.value)" (click)="bodyPartClick$.next($event.target.value)"
+                #bodyPartInstance="ngbTypeahead" placeholder="Часть тела">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+        </div>
     </div>
 
-    <div class="breeder-profile-subpage-form-right dropdown-text-input">
-        <input type="text" class="form-control" [(ngModel)]="currentMedicalTest"
-            [ngbTypeahead]="appService.fieldAutocomplite(appService.availMedicalTests, medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
-            (focus)="medicalTestFocus$.next($event.target.value)" (click)="medicalTestClick$.next($event.target.value)"
-            #medicalTestInstance="ngbTypeahead" placeholder="Название теста">
-        <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
-    </div>-->
+    <div class="breeder-profile-subpage-form-right">
+        <div class="dropdown-text-input">
+            <input type="text" class="form-control" [(ngModel)]="currentMedicalTest"
+                [ngbTypeahead]="appService.fieldAutocomplite(appService.availMedicalTests, medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
+                (focus)="medicalTestFocus$.next($event.target.value)"
+                (click)="medicalTestClick$.next($event.target.value)" #medicalTestInstance="ngbTypeahead"
+                placeholder="Название теста">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+        </div>
+    </div>
 
 </div>
 
@@ -79,11 +85,14 @@
     <div class="breeder-profile-subpage-form-left">
         <label for="parent-name">Кличка родителя</label>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="parent-name" aria-label="Кличка" aria-describedby="basic-addon3" [(ngModel)]="currentParentData.name"
-                placeholder="Кличка" />
+            <input type="text" class="form-control" name="parent-name"
+                [class.invalid-form-field-value]="invalidFields.includes('name')"
+                [class.invalid-form-field-value]="invalidFields.includes('name')" aria-label="Кличка"
+                aria-describedby="basic-addon3" [(ngModel)]="currentParentData.name" placeholder="Кличка" />
             <div class="custom-input-append" (click)="currentParentData.isMale = !currentParentData.isMale">
-                <img *ngIf="currentParentData.isMale" height="17px" src="./assets/img/sex_male.png" alt="Мужской пол"/>
-                <img *ngIf="!currentParentData.isMale" height="17px" src="./assets/img/sex_female.png" alt="Женский пол"/>
+                <img *ngIf="currentParentData.isMale" height="17px" src="./assets/img/sex_male.png" alt="Мужской пол" />
+                <img *ngIf="!currentParentData.isMale" height="17px" src="./assets/img/sex_female.png"
+                    alt="Женский пол" />
             </div>
         </div>
     </div>
@@ -92,8 +101,11 @@
         <label for="parent-breed">Порода</label>
 
         <div class="dropdown-text-input">
-            <input type="text" class="form-control" name="parent-breed" [(ngModel)]="currentParentData.breed" [ngbTypeahead]="appService.fieldAutocomplite(appService.availBreeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
-                (focus)="parentBreedFocus$.next($event.target.value)" (click)="parentBreedClick$.next($event.target.value)" #parentBreedInstance="ngbTypeahead"
+            <input type="text" class="form-control" name="parent-breed" [(ngModel)]="currentParentData.breed"
+                [class.invalid-form-field-value]="invalidFields.includes('breed')"
+                [ngbTypeahead]="appService.fieldAutocomplite(appService.availBreeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
+                (focus)="parentBreedFocus$.next($event.target.value)"
+                (click)="parentBreedClick$.next($event.target.value)" #parentBreedInstance="ngbTypeahead"
                 placeholder="Выбрать" aria-describedby="basic-addon2">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
         </div>
@@ -104,14 +116,17 @@
         <label for="parent-info">Расскажите об этом родителе</label>
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
-        <textarea rows="5" class="form-control" [(ngModel)]="currentParentData.info"></textarea>
+        <textarea rows="5" class="form-control" [class.invalid-form-field-value]="invalidFields.includes('info')"
+            [(ngModel)]="currentParentData.info"></textarea>
     </div>
 
     <div class="add-parent-page-photos-block">
         <label>Загрузите фотографии</label>
 
-        <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block">
-            <input type="image" id="add-parent-gallery" [(ngModel)]="currentPhotos" accept=".jpg, .png, .jpeg" multiple />
+        <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block"
+            [class.invalid-form-field-value]="invalidFields.includes('photos')">
+            <input type="image" id="add-parent-gallery" [(ngModel)]="currentPhotos" accept=".jpg, .png, .jpeg"
+                multiple />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>
@@ -120,6 +135,11 @@
     </div>
 
     <div class="lower-btn">
+        <span *ngIf="invalidFields.length > 0" class="invalid-field-message"
+            style="display: block; margin-bottom: 1em;">
+            Пожалуйста, заполните пропущенные поля
+        </span>
+        <br *ngIf="invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Добавить родителя" (click)="addParent()" />
     </div>
 </div>

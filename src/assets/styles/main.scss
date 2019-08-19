@@ -348,6 +348,17 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 0 10px;
     cursor: pointer;
 }
+
+.invalid-form-field-value,
+.invalid-form-checkbox{
+    border: 1px solid #eb0000 !important;
+}
+
+.invalid-field-message{
+    color: #eb0000 !important;
+    font-size: 14px !important;
+    font-family: 'Intro-Book' !important;
+}
 // Bootstrap overrided classes
 .carousel-caption{
     display: none;
@@ -375,17 +386,6 @@ ngb-datepicker{
     border: 1px solid #cbd8f6 !important;
 }
 
-.invalid-form-field-value,
-.invalid-form-checkbox{
-    border: 1px solid #eb0000 !important;
-}
-
-.invalid-field-message{
-    color: #eb0000 !important;
-    font-size: 14px !important;
-    font-family: 'Intro-Book' !important;
-}
-
 .form-group{
     margin: 15px auto 0;
     text-align: left;
@@ -410,6 +410,10 @@ ngb-datepicker{
     right: -30%;
     margin-top: unset !important;
     transform: unset !important;
+
+    .bg-light{
+        background-color: #fff !important;
+    }
 }
 
 .ngb-dp-weekdays{
@@ -426,8 +430,7 @@ ngb-datepicker{
     }
 }
 
-.ngb-dp-header,
-.bg-light{
+.ngb-dp-header{
     background-color: #fff !important;
 }
 
