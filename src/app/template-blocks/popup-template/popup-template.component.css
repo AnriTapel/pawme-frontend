@@ -14,7 +14,7 @@
   margin: 0 auto;
   top: 5vh;
   max-height: 90vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   text-align: center;
   background: #fff;
   border-radius: 5px;

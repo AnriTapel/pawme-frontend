@@ -14,6 +14,8 @@ export class SignUpComponent implements OnInit {
   newBreederPassword: string = "";
   newBreederAcception: boolean = false;
 
+  invalidFields: any[] = [];
+
   constructor(private popupService: PopupTemplateService) { }
 
   ngOnInit() {
@@ -24,13 +26,40 @@ export class SignUpComponent implements OnInit {
   }
 
   signUpNewBreeder(){
-    console.log({
-      name: this.newBreederName,
-      lastname: this.newBreederLastname,
-      email: this.newBreederEmail,
-      password: this.newBreederPassword,
-      acception: this.newBreederAcception
-    });
+    if (!this.validateFields())
+      return;
+    
+      console.log("Form is valid");
   }
 
+  validateFields(): boolean{
+    this.invalidFields = [];
+    let isValid = true;
+    if (!this.newBreederName || this.newBreederName == ""){
+      isValid = false;
+      this.invalidFields.push("name");
+    }
+
+    if (!this.newBreederLastname || this.newBreederLastname == ""){
+      isValid = false;
+      this.invalidFields.push("lastname");
+    }
+
+    if (!this.newBreederEmail || this.newBreederEmail == "" || !this.popupService.validateEmailInput(this.newBreederEmail)){
+      isValid = false;
+      this.invalidFields.push("email");
+    }
+
+    if (!this.newBreederPassword || this.newBreederPassword == ""){
+      isValid = false;
+      this.invalidFields.push("password");
+    }
+
+    if (!this.newBreederAcception){
+      isValid = false;
+      this.invalidFields.push("acception");
+    }
+
+    return isValid;
+  }
 }

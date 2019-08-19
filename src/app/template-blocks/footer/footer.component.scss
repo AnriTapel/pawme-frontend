@@ -84,10 +84,13 @@ hr{
         div{
             margin: unset;
 
-            span{
+            span:nth-child(1){
                 font-size: 22px;
-                line-height: 30px;
-                font-weight: unset;
+                line-height: 18px;
+            }
+
+            span:nth-child(2){
+                font-size: 16px;
             }
         }
     }

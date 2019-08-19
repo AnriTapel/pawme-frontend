@@ -29,4 +29,9 @@ export class PopupTemplateService {
   setCurrentForm(formName: string): void{
     this.currentForm = formName;
   }
+
+  validateEmailInput(email: string): boolean{
+    let re = /^[A-Za-z]+([\.-]?[A-Za-z]+)*@[A-Za-z]+([\.-]?[A-Za-z]+)*(\.[A-Za-z]{2,3})+$/;
+    return re.test(email);
+  }
 }

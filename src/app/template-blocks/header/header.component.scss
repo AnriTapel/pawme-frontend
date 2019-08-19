@@ -18,5 +18,9 @@ header{
     a{
         color: #fff;
         margin: auto;
+
+        &:hover{
+            color: #fff !important;
+        }
     }
 }

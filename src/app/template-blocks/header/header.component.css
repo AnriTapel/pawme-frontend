@@ -22,4 +22,8 @@ header > img {
   color: #fff;
   margin: auto;
 }
+
+.menu-btn a:hover {
+  color: #fff !important;
+}
 /*# sourceMappingURL=header.component.css.map */

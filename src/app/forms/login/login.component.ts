@@ -11,16 +11,18 @@ export class LoginComponent implements OnInit {
   breederEmail: string;
   breederPassword: string;
 
+  loginError: boolean = false;
+
   constructor(private popupService: PopupTemplateService) { }
 
   ngOnInit() {
   }
 
   loginBreeder(){
-    console.log({
-      email: this.breederEmail,
-      password: this.breederPassword
-    });
+    this.loginError = false;
+    if (!this.popupService.validateEmailInput(this.breederEmail))
+      return this.loginError = true;
+      
   }
 
   switchToRemindPasswordForm(){
