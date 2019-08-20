@@ -12,24 +12,35 @@
         <div><img src="./assets/img/progress-bar-paw.svg" alt="Собачья лапка"></div>
     </div>
 
-    <div class="profile-menu-container">
-        <div class="profile-menu">
-            <p [ngClass]="{'active-page': getCurProfilePage() == 'about-nurcery'}"
-                (click)="setCurProfilePage('about-nurcery')">О питомнике</p>
-            <p [ngClass]="{'active-page': getCurProfilePage() == 'about-puppies'}"
-                (click)="setCurProfilePage('about-puppies')">О щенках</p>
-            <p [ngClass]="{'active-page': getCurProfilePage() == 'puppies-parents'}"
-                (click)="setCurProfilePage('puppies-parents')">Родители щенков</p>
-            <p [ngClass]="{'active-page': getCurProfilePage() == 'about-me'}" (click)="setCurProfilePage('about-me')">
-                О себе</p>
-            <p [ngClass]="{'active-page': getCurProfilePage() == 'add-puppy'}" (click)="setCurProfilePage('add-puppy')">
-                Добавить щенка</p>
+    <div class="profile-menu-container-desktop">
+        <div class="profile-menu-desktop">
+            <div *ngFor="let subpage of profileSubpages"
+                [ngClass]="{'active-page': getCurProfilePage().tag == subpage.tag}"
+                (click)="setCurProfilePage(subpage)">{{subpage.name}}</div>
         </div>
-
-        <input type="button" class="custom-btn btn-transparent" value="Предварительный просмотр" (click)="showPreview()" />
+        <input type="button" class="custom-btn btn-transparent" value="Предварительный просмотр"
+            (click)="showPreview()" />
     </div>
 
-    <div class="profile-page" [ngSwitch]="getCurProfilePage()">
+    <div class="profile-menu-container-mobile">
+        <div class="profile-menu-mobile">
+            <div class="mobile-dropdown-menu-item" [class.invisible-menu]="!isMobileMenuVisible"
+                (click)="isMobileMenuVisible = !isMobileMenuVisible">
+                {{getCurProfilePage().name}}
+                <img *ngIf="!isMobileMenuVisible" src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+                <img *ngIf="isMobileMenuVisible" src="./assets/img/arrow-up.svg" alt="Стрелка вверх" />
+            </div>
+            <ng-container *ngIf="isMobileMenuVisible">
+                <ng-container *ngFor="let subpage of profileSubpages">
+                    <div *ngIf="subpage.tag != getCurProfilePage().tag" class="mobile-dropdown-menu-item"
+                        (click)="setCurProfilePage(subpage)">{{subpage.name}}
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="profile-page" [style.opacity]="isMobileMenuVisible ? 0.5 : 1" [ngSwitch]="getCurProfilePage().tag">
         <app-about-nurcery-profile-page *ngSwitchCase="'about-nurcery'"></app-about-nurcery-profile-page>
         <app-about-puppies-profile-page *ngSwitchCase="'about-puppies'"></app-about-puppies-profile-page>
         <app-puppies-parents-profile-page *ngSwitchCase="'puppies-parents'"></app-puppies-parents-profile-page>

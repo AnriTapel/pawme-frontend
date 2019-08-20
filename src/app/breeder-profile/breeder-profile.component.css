@@ -52,36 +52,59 @@ hr {
   height: 40px;
 }
 
-.profile-menu-container {
+.profile-menu-container-desktop {
   text-align: center;
 }
 
-.profile-menu-container > input {
+.profile-menu-container-desktop > input {
   margin-top: 1em;
 }
 
-.profile-menu {
+.profile-menu-container-mobile {
+  display: none;
+  position: relative;
+  z-index: 999;
+  margin-bottom: 4em;
+}
+
+.profile-menu-container-mobile .mobile-dropdown-menu-item {
+  position: relative;
+}
+
+.profile-menu-container-mobile .mobile-dropdown-menu-item img {
+  position: absolute;
+  top: 30%;
+  height: 40%;
+  right: .5em;
+}
+
+.profile-menu-desktop,
+.profile-menu-mobile {
   text-align: left;
   border: 1px solid #cbd8f6;
   border-radius: 4px;
   background-color: #fff;
 }
 
-.profile-menu p {
+.profile-menu-desktop div,
+.profile-menu-mobile div {
   font-family: 'Intro-Regular';
   font-size: 18px;
+  color: #0e0b4d;
   padding: 20px 15px;
   margin: 0;
   position: relative;
 }
 
-.profile-menu p:hover {
+.profile-menu-desktop div:hover,
+.profile-menu-mobile div:hover {
   background-color: #eeeff1;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
-.profile-menu p:before {
+.profile-menu-desktop div:before,
+.profile-menu-mobile div:before {
   content: "";
   position: absolute;
   left: 5%;
@@ -91,8 +114,19 @@ hr {
   border-bottom: 1px solid #cbd8f6;
 }
 
-.profile-menu p:nth-child(5):before {
+.profile-menu-desktop div:nth-child(5):before,
+.profile-menu-mobile div:nth-child(5):before {
   display: none;
+}
+
+.profile-menu-mobile {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.profile-menu-mobile .invisible-menu:before {
+  display: none !important;
 }
 
 .active-page {
@@ -113,8 +147,11 @@ hr {
   .profile-page {
     margin-bottom: 3em;
   }
-  .profile-menu-container input {
+  .profile-menu-container-desktop {
     display: none;
+  }
+  .profile-menu-container-mobile {
+    display: block;
   }
   .profile-progress-bar {
     margin-top: 1.5em;

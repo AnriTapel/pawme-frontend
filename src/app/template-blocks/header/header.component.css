@@ -26,4 +26,10 @@ header > img {
 .menu-btn a:hover {
   color: #fff !important;
 }
+
+@media screen and (max-width: 769px) {
+  header {
+    padding: 2% 1%;
+  }
+}
 /*# sourceMappingURL=header.component.css.map */
