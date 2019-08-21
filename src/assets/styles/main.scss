@@ -175,13 +175,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .custom-checkbox{
-    display: flex;
+    display: inline-block;
+    width: 100%;
     margin-top: .2em;
     margin-bottom: .2em;
 
     &> div{
         width: 22px;
         height: 22px;
+        display: inline-block;
+        vertical-align: top;
         background-color: #fff;
         border-radius: 2px;
         border: 1px solid #cbd8f6;
@@ -192,6 +195,10 @@ input[type=number]::-webkit-outer-spin-button {
             position: relative;
             left: 2px;
             bottom: 1px;
+        }
+
+        label{
+            max-width: calc(100% - 30px);
         }
     }
 }
@@ -218,8 +225,14 @@ input[type=number]::-webkit-outer-spin-button {
         grid-column: 1/3;
     }
 
+    .page-header{
+        align-self: end;
+    }
+
     .adding-entity-page-header{
-        grid-column: 1/3;
+        /*grid-column: 1/3;*/
+        grid-column: 1/2;
+
     }
 
     .upper-btn{
@@ -246,6 +259,7 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     .block-description{
+        display: block;
         opacity: 0.5;
         font-size: 14px;
         font-family: 'Intro-Book';
@@ -311,6 +325,30 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
+.gallery-upload-button{
+    display: none;
+    position: relative;
+    margin-top: 1.25em;
+
+    &>span{
+        display: block;
+        margin: auto;
+        text-align: center;
+        color: #645fc9;
+    }
+
+    &>input{
+        opacity: 0.0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height:100%;
+    }
+}
+
 .dog-entity-list-block{
     grid-column: 1/3;
     margin-top: 2em;
@@ -342,6 +380,7 @@ input[type=number]::-webkit-outer-spin-button {
 .btn-label-list{
 
     grid-column: 1/3;
+    margin: .5em 0;
 
     &> input{
         display: inline;
@@ -475,10 +514,18 @@ ngb-datepicker{
         display: block !important;
         padding: 0 1em;
 
+        h3{
+            font-size: 18px;
+        }
+
+        label{
+            font-size: 14px;
+        }
+
         input[type=text],
         input[type=number],
         textarea{
-            margin-top: .5em;
+            margin-top: .25em;
         }
 
         .upper-btn,
@@ -492,7 +539,15 @@ ngb-datepicker{
         }
 
         .custom-input-append{
-            margin-top: .5em
+            margin-top: .25em
+        }
+
+        .block-description{
+            font-size: 13px;
+        }
+
+        .get-back-block{
+            margin: 1em 0 0;
         }
 
         &> div{
@@ -507,6 +562,19 @@ ngb-datepicker{
 
     .breeder-profile-subpage-form-right{
         padding-left: unset;
+    }
+
+    .dog-entity-item{
+        width: 100%;
+        height: 80px;
+    }
+
+    .gallery-initial-block{
+        display: none;
+    }
+
+    .gallery-upload-button{
+        display: block;
     }
 
     .custom-btn{
@@ -574,7 +642,12 @@ ngb-datepicker{
     }
 
     .input-group-append{
-        margin-top: .5em !important;
+        margin-top: .25em !important;
     }
+
+    ngb-datepicker{
+        right: 0 !important;
+    }
+
 
 }

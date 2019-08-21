@@ -15,6 +15,10 @@ input[type='checkbox']{
     &> input{
         margin-right: 10px;
     }
+
+    label{
+        max-width: calc(100% - 30px);
+    }
 }
 
 .kit-avail-block{
@@ -76,4 +80,54 @@ input[type='checkbox']{
 .puppies-problems-block,
 .puppies-gifts-block{
     grid-column: 1/3;
+}
+
+@media screen and (max-width: 769px){
+    .form-check-label{
+        font-size: 13px !important;
+    }
+
+    .kit-avail-block{
+        &>span{
+            font-size: 14px;
+        }
+
+        &>p{
+            font-size: 13px;
+        }
+    }
+
+    .contract-block{
+        span:nth-child(1){
+            font-size: 14px;
+        }
+
+        span.block-description{
+            font-size: 13px !important;
+        }
+
+        a{
+            margin: 0 0 1em;
+        }
+    }    
+
+    .medicine-checkboxs-list{
+        display: block;
+
+        .custom-checkbox{
+            margin: .5em 0 .75em;
+        }
+    }
+
+    .why-its-important{
+        text-align: left;
+        margin: -1em 0 1.5em;
+        
+        span{
+            color: #645fc9;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+    }
 }

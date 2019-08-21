@@ -137,15 +137,25 @@
 
     <div class="add-puppy-page-photos-block">
         <label>Загрузите фотографии</label>
+        
+        <div *ngIf="currentPuppyData.photos.length > 0" class="gallery-uploaded-photos-block">
+            <div *ngFor="let photo of currentPuppyData.photos">
+            </div>
+        </div>
 
         <div *ngIf="currentPuppyData.photos.length == 0" class="gallery-initial-block"
             [class.invalid-form-field-value]="invalidFields.includes('photos')">
-            <input type="image" id="add-puppy-gallery" [(ngModel)]="currentPhotos" accept=".jpg, .png, .jpeg"
+            <input type="file" id="add-puppy-gallery" [(ngModel)]="currentPhotos" accept=".jpg, .png, .jpeg"
                 multiple />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>
                 <a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+        </div>
+
+        <div class="gallery-upload-button custom-btn btn-transparent">
+            <input type="file" id="nurcery-gallery" [(ngModel)]="currentPhotos" accept=".jpg, .png, .jpeg" multiple />
+            <span>Выбрать</span>
         </div>
     </div>
 

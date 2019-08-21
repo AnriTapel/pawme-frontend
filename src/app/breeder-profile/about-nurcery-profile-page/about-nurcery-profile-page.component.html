@@ -18,7 +18,7 @@
             <input type="text" class="form-control" name="nurcery-location" [(ngModel)]="nurceryData.nurceryLocation"
                 [ngbTypeahead]="appService.fieldAutocomplite(appService.availCities, cityFocus$, cityClick$, cityInstance)"
                 (focus)="cityFocus$.next($event.target.value)" (click)="cityClick$.next($event.target.value)"
-                #cityInstance="ngbTypeahead">
+                #cityInstance="ngbTypeahead" placeholder="Выбрать">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
         </div>
     </div>
@@ -62,7 +62,7 @@
 
     <div class="about-nurcery-profile-image">
         <div class="image-block" name="image-block">
-            <input type="image" id="profile-image" [(ngModel)]="nurceryData.nurceryProfileImage"
+            <input type="file" id="profile-image" [(ngModel)]="nurceryData.nurceryProfileImage"
                 accept=".jpg, .png, .jpeg" />
             <img src="./assets/img/thin-plus.png" alt="Добавить изображение" />
         </div>
@@ -77,10 +77,20 @@
         <span class="block-description">Фотографии будут отображаться в галерее на вашей странице заводчика</span>
 
         <div *ngIf="nurceryData.nurceryGallery.length == 0" class="gallery-initial-block">
-            <input type="image" id="nurcery-gallery" [(ngModel)]="nurceryData.nurceryGalleryImage"
+            <input type="file" id="nurcery-gallery" [(ngModel)]="nurceryData.nurceryGalleryImage"
                 accept=".jpg, .png, .jpeg" multiple />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
             <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+        </div>
+
+        <div *ngIf="nurceryData.nurceryGallery.length > 0" class="gallery-uploaded-photos-block">
+            <div *ngFor="let photo of nurceryData.nurceryGallery">
+            </div>
+        </div>
+
+        <div class="gallery-upload-button custom-btn btn-transparent">
+            <input type="file" id="nurcery-gallery" [(ngModel)]="nurceryData.nurceryGalleryImage" accept=".jpg, .png, .jpeg" multiple />
+            <span>Выбрать</span>
         </div>
     </div>
 

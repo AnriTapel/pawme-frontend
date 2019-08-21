@@ -3,3 +3,36 @@
 .add-parent-page-photos-block{
     grid-column: 1/3;
 }
+
+.body-part-dropdown,
+.test-dropdown{
+    width: 50%;
+    display: inline-block;
+}
+
+.add-test-button-block{
+    float: right;
+    margin-top: 1.5em;
+}
+
+@media screen and (max-width: 769px){
+
+    .parents-medicals-block{
+        display: flow-root;
+    }
+
+    .body-part-dropdown,
+    .test-dropdown{
+        display: block;
+        width: 100%;
+    }
+
+    .test-dropdown{
+        margin-top: .5em;
+    }
+
+    .add-test-button-block{
+        width: 100%;
+    }
+
+}
