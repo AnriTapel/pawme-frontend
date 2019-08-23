@@ -7,6 +7,7 @@ export class PopupTemplateService {
 
   private show: boolean = false;
   private currentForm: string;
+  public imageUrl: any;
 
   constructor() { }
 

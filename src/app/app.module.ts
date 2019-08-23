@@ -22,6 +22,7 @@ import { AddPuppyProfilePageComponent } from './breeder-profile/add-puppy-profil
 import { HttpClientModule } from '@angular/common/http';
 import { RemindPasswordComponent } from './forms/remind-password/remind-password.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ImageCropperComponent } from './forms/image-cropper/image-cropper.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     PuppiesParentsProfilePageComponent,
     AboutMeProfilePageComponent,
     AddPuppyProfilePageComponent,
-    RemindPasswordComponent
+    RemindPasswordComponent,
+    ImageCropperComponent
   ],
   imports: [
     BrowserModule,

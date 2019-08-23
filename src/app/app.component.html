@@ -1,1 +1,8 @@
 <router-outlet></router-outlet>
+
+<app-popup-template [ngSwitch]="popupService.getCurrentForm()">
+    <app-login *ngSwitchCase="'login'"></app-login>
+    <app-sign-up *ngSwitchCase="'sign-up'"></app-sign-up>
+    <app-remind-password *ngSwitchCase="'remind-password'"></app-remind-password>
+    <app-image-cropper *ngSwitchCase="'image-cropper'"></app-image-cropper>
+</app-popup-template>

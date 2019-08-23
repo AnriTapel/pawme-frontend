@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BreederLandingComponent } from './breeder-landing/breeder-landing.component';
-import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { BreederProfileComponent } from './breeder-profile/breeder-profile.component';
 
