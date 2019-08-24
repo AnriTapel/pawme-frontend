@@ -23,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RemindPasswordComponent } from './forms/remind-password/remind-password.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperComponent } from './forms/image-cropper/image-cropper.component';
+import { BreederPageComponent } from './breeder-page/breeder-page.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ImageCropperComponent } from './forms/image-cropper/image-cropper.compo
     AboutMeProfilePageComponent,
     AddPuppyProfilePageComponent,
     RemindPasswordComponent,
-    ImageCropperComponent
+    ImageCropperComponent,
+    BreederPageComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
