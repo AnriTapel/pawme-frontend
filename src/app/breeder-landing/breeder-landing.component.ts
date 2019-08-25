@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { PopupTemplateService } from '../template-blocks/popup-template/popup-template.service';
+import { PopupTemplateService } from '../services/popup-service/popup-template.service';
 
 @Component({
   selector: 'app-breeder-landing',

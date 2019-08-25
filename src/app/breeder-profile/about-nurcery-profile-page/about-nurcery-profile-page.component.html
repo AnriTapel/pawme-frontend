@@ -61,16 +61,13 @@
     <hr>
 
     <div class="about-nurcery-profile-image">
-        <div class="image-block" name="image-block">
-            <input #image type="file" id="profile-image" accept=".jpg, .png, .jpeg" (change)="preview(image.files)"/>
+        <div class="image-block" name="image-block" (click)="previewNurceryPhoto()">
             <img src="./assets/img/thin-plus.png" alt="Добавить изображение" />
         </div>
         <div class="profile-image-text-block">
             <label for="image-block">Фото вашего профиля заводчика</label><br>
             <span class="block-description">Рекомендуемое разрешение - 256 на 256 пикселей</span>
         </div>
-
-        <img [src]="imageUrl" height="200" *ngIf="imageUrl">
     </div>
 
     <div class="breeder-profile-subpage-form-group nurcery-gallery-block">

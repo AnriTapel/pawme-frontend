@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from 'src/app/app.service';
-import { PopupTemplateService } from '../popup-template/popup-template.service';
+import { AppService } from 'src/app/services/app-service/app.service';
+import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 
 @Component({
   selector: 'app-header',

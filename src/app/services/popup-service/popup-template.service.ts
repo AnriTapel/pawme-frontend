@@ -7,7 +7,6 @@ export class PopupTemplateService {
 
   private show: boolean = false;
   private currentForm: string;
-  public imageUrl: any;
 
   constructor() { }
 
@@ -17,9 +16,9 @@ export class PopupTemplateService {
 
   setShowStatus(status: boolean): void{
     this.show = status;
-    if (status)
+    if (status){
       document.getElementsByTagName("body")[0].style.overflowY = "hidden";
-    else
+    } else
       document.getElementsByTagName("body")[0].style.overflowY = "scroll";
   }
 

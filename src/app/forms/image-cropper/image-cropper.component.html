@@ -1,10 +1,10 @@
 <h3>РЕДАКТОР ФОТО</h3>
 
-<div class="image-cropper-container">
-    <div class="image-container">
-        <img [src]="popupService.imageUrl" />
-    </div>
+<input #_fileInput type="file" id="image-input" (change)="cropping.selectInputEvent($event)" accept="image/*" hidden>
 
-    <div class="cropper-block">
-    </div>
-</div>
+<ly-cropping #cropping [ngClass]="classes.cropping" [config]="myConfig" (cropped)="oncropped($event)"
+    (loaded)="onloaded()" (error)="onerror()">
+    <span>Зашрузите или перетащие изображение</span>
+</ly-cropping>
+
+<input type="button" *ngIf="cropping.isLoaded" class="custom-btn btn-purple" (click)="crop()" value="Обрезать" />

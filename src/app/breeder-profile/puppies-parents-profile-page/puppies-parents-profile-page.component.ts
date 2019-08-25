@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
-import { AppService } from 'src/app/app.service';
+import { AppService } from 'src/app/services/app-service/app.service';
 
 @Component({
   selector: 'app-puppies-parents-profile-page',

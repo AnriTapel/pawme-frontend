@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
-import { AppService } from 'src/app/app.service';
-import { PopupTemplateService } from 'src/app/template-blocks/popup-template/popup-template.service';
+import { AppService } from 'src/app/services/app-service/app.service';
+import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
+import { EventService } from 'src/app/services/event-service/events.service';
 
 @Component({
   selector: 'app-about-nurcery-profile-page',
@@ -14,13 +15,10 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   nurceryData: any;
   isAdditionalBreed: boolean = false;
 
-  imagePath: any;
-  imageUrl;
-  
-  @ViewChild('cityInstance', {static: true}) cityInstance: NgbTypeahead;
-  @ViewChild('mainBreedInstance', {static: true}) mainBreedInstance: NgbTypeahead;
-  @ViewChild('addBreedInstance', {static: true}) addBreedInstance: NgbTypeahead;
-  @ViewChild('image', {static: true}) image: any;
+  @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
+  @ViewChild('mainBreedInstance', { static: true }) mainBreedInstance: NgbTypeahead;
+  @ViewChild('addBreedInstance', { static: true }) addBreedInstance: NgbTypeahead;
+  @ViewChild('image', { static: true }) image: any;
   cityFocus$ = new Subject<string>();
   cityClick$ = new Subject<string>();
   mainBreedFocus$ = new Subject<string>();
@@ -28,7 +26,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   addBreedFocus$ = new Subject<string>();
   addBreedClick$ = new Subject<string>();
 
-  constructor(private appService: AppService, private popupService: PopupTemplateService) { }
+  constructor(private appService: AppService, private popupService: PopupTemplateService, private eventService: EventService) { }
 
   ngOnInit() {
     this.nurceryData = {
@@ -47,21 +45,16 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     };
   }
 
-  preview(files: any): void {
-    if (files.length === 0)
-      return;
- 
-    var reader = new FileReader();
-    this.imagePath = files;
-    reader.readAsDataURL(files[0]); 
-    reader.onload = (_event) => { 
-      this.popupService.imageUrl = reader.result;
-      this.popupService.setCurrentForm('image-cropper');
-      this.popupService.setShowStatus(true); 
-    }
+  previewNurceryPhoto(): void {
+    this.popupService.setShowStatus(true);
+    this.popupService.setCurrentForm('image-cropper');
+    let croppedHandler = this.eventService.subscribe('image-cropped', (event) => {
+      croppedHandler.unsubscribe();
+      this.appService.uploadAvatarImage(event);
+    });
   }
 
-  saveChanges(){
+  saveChanges() {
     console.log(this.nurceryData);
   }
 }

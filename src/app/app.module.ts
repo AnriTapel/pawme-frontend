@@ -11,7 +11,7 @@ import { PopupTemplateComponent } from './template-blocks/popup-template/popup-t
 import { HeaderComponent } from './template-blocks/header/header.component';
 import { LoginComponent } from './forms/login/login.component';
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
-import { PopupTemplateService } from './template-blocks/popup-template/popup-template.service';
+import { PopupTemplateService } from './services/popup-service/popup-template.service';
 import { FormsModule } from '@angular/forms';
 import { BreederProfileComponent } from './breeder-profile/breeder-profile.component';
 import { AboutNurceryProfilePageComponent } from './breeder-profile/about-nurcery-profile-page/about-nurcery-profile-page.component';
@@ -25,6 +25,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ImageCropperComponent } from './forms/image-cropper/image-cropper.component';
 import { BreederPageComponent } from './breeder-page/breeder-page.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AppService } from './services/app-service/app.service';
+import { EventService } from './services/event-service/events.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LyThemeModule, LY_THEME } from '@alyle/ui';
+import { MinimaLight } from '@alyle/ui/themes/minima';
+import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-images'
 
 @NgModule({
   declarations: [
@@ -54,9 +60,18 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     WavesModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    LyThemeModule.setTheme('minima-light'),
+    LyResizingCroppingImageModule
   ],
-  providers: [PopupTemplateService],
+  providers: [
+    AppService,
+    PopupTemplateService,
+    EventService,
+    { provide: LY_THEME, useClass: MinimaLight, multi: true }
+    
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

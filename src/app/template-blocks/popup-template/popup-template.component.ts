@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { PopupTemplateService } from './popup-template.service';
+import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 
 @Component({
   selector: 'app-popup-template',

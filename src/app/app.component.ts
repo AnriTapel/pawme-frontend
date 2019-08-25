@@ -1,5 +1,18 @@
 import { Component } from '@angular/core';
-import { PopupTemplateService } from './template-blocks/popup-template/popup-template.service';
+import { PopupTemplateService } from './services/popup-service/popup-template.service';
+import { LyTheme2, ThemeVariables } from '@alyle/ui';
+
+const STYLES = (theme: ThemeVariables) => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.background.default,
+      color: theme.text.default,
+      fontFamily: theme.typography.fontFamily,
+      margin: 0,
+      direction: theme.direction
+    }
+  }
+});
 
 @Component({
   selector: 'app-root',
@@ -7,7 +20,10 @@ import { PopupTemplateService } from './template-blocks/popup-template/popup-tem
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  readonly classes = this.theme.addStyleSheet(STYLES);
 
-  constructor(public popupService: PopupTemplateService) { }
+
+  constructor(private theme: LyTheme2,
+              public popupService: PopupTemplateService) { }
 
 }
