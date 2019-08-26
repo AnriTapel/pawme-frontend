@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
+import { AppService } from 'src/app/services/app-service/app.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +17,7 @@ export class SignUpComponent implements OnInit {
 
   invalidFields: any[] = [];
 
-  constructor(private popupService: PopupTemplateService) { }
+  constructor(private popupService: PopupTemplateService, private appService: AppService) { }
 
   ngOnInit() {
   }
@@ -28,8 +29,6 @@ export class SignUpComponent implements OnInit {
   signUpNewBreeder(){
     if (!this.validateFields())
       return;
-    
-      console.log("Form is valid");
   }
 
   validateFields(): boolean{
@@ -45,7 +44,7 @@ export class SignUpComponent implements OnInit {
       this.invalidFields.push("lastname");
     }
 
-    if (!this.newBreederEmail || this.newBreederEmail == "" || !this.popupService.validateEmailInput(this.newBreederEmail)){
+    if (!this.newBreederEmail || this.newBreederEmail == "" || !this.appService.validateEmailInput(this.newBreederEmail)){
       isValid = false;
       this.invalidFields.push("email");
     }

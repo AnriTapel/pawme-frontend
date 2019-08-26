@@ -25,6 +25,10 @@ export class AppService {
     return this.http.post('/api/upload/avatar', body);
   }
 
+  public uploadNurceryGalleryImage(body: FormData) {
+    return this.http.post('/api/upload/gallery', body);
+  }
+
   fieldAutocomplite(searchArray: string[], focus$: Subject<string>, click$: Subject<string>, instance: NgbTypeahead): (text$: Observable<string>) => Observable<any[]> {
     return (text$: Observable<string>) => {
       const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
@@ -36,6 +40,22 @@ export class AppService {
           : searchArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
       );
     }
+  }
 
+  validateEmailInput(email: string): boolean {
+    let re = /^[A-Za-z]+([\.-]?[A-Za-z]+)*@[A-Za-z]+([\.-]?[A-Za-z]+)*(\.[A-Za-z]{2,3})+$/;
+    return re.test(email);
+  }
+
+  public getImageDataForUpload(data: any): FormData {
+    const body = new FormData();
+    body.append('image', data.inputFile, data.inputFile.name);
+    body.append('rect',
+      (Math.floor(data.props.position.x - (data.props.width / 2 / data.props.scale)) + "," +
+        (Math.floor(data.props.position.y - data.props.height / 2 / data.props.scale)) + "," +
+        Math.floor(data.props.width / data.props.scale) + "," +
+        Math.floor(data.props.height / data.props.scale)
+      ));
+    return body;
   }
 }
