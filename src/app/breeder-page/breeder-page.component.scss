@@ -1,5 +1,7 @@
 $headerColor: #645fc9;
+$white: #FFFFFF;
 $screen-lg: 1202px;
+$screen-sm: 769px;
 
 @mixin background($width, $height, $url) {
     content: '';
@@ -19,6 +21,17 @@ $screen-lg: 1202px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    // TODO: Временное решение
+    @media (max-width: $screen-sm - 1px) {
+        display: none;
+    }
+}
+
+.slider {
+    @media (max-width: $screen-lg - 1px) {
+        width: 100%;
+        overflow-x: scroll;
+    }
 }
 
 .footer {
@@ -29,6 +42,10 @@ $screen-lg: 1202px;
     justify-content: space-between;
     background-color: #645fc9;
     padding: 63px 135px;
+    // TODO: Временное решение
+    @media (max-width: $screen-sm - 1px) {
+        display: none;
+    }
 }
 
 .logo {
@@ -54,12 +71,15 @@ $screen-lg: 1202px;
 .main-content {
     width: 1170px;
     margin: 50px auto 60px;
-    @media (max-width: $screen-lg) {
-        
+    @media (max-width: $screen-lg - 1px) {
+        width: 100%;
     }
 }
 
 .about-puppies, .about-breeder, .about-parents, .our-instagram {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     width: 100%;
     margin-bottom: 40px;
 
@@ -69,27 +89,66 @@ $screen-lg: 1202px;
     .section {
         width: 772px;
         position: relative;
-        padding: 40px;
     }
 }
 
 .about-puppies, .about-breeder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     .section:after {
         position: absolute;
         right: 40px;
         top: -7px;
         @include background(48px, 82px, '/assets/img/breeder-page/group-27.png');
+        @media (max-width: $screen-sm - 1px) {
+            display: none;
+        }
+    }
+}
+
+.about-puppies, .about-breeder, .about-parents, .our-instagram {
+    .aside, .section {
+        @media (max-width: $screen-lg - 1px) {
+            width: calc(100% - 32px);
+            height: auto;
+        }
+    }
+    .aside {
+        @media (max-width: $screen-lg - 1px) {
+            margin-bottom: 40px;
+        }
+        @media (max-width: $screen-sm - 1px) {
+            &.first-aside {
+                margin-top: -82px;
+                z-index: 1;
+                background-color: $white;
+                border-radius: 4px;
+                border: solid 1px #cbd8f6;
+            }
+        }
+    }
+    @media (max-width: $screen-lg - 1px) {
+        flex-direction: column;
+        align-items: center;
     }
 }
 
 .aside, .section {
     border-radius: 4px;
     border: solid 1px #cbd8f6;
+    @media (max-width: $screen-sm - 1px) {
+        border-radius: 0;
+        border: none;
+    }
 }
 
 .aside {
     padding: 34px 19px 42px 26px;
     height: 557px;
+    @media (max-width: $screen-sm) {
+        padding: 20px;
+    }
     .line {
         border-radius: 4px;
         border: solid 1px #cbd8f6;
@@ -162,6 +221,9 @@ $screen-lg: 1202px;
         text-align: center;
         color: #ffffff;
         text-transform: uppercase;
+        @media (max-width: $screen-sm - 1px) {
+            width: 100%;
+        }
     }
 
     .description {
@@ -174,7 +236,7 @@ $screen-lg: 1202px;
 }
 
 .section {
-
+    padding: 40px;
     .line {
         border-radius: 4px;
         border: solid 1px #cbd8f6;
@@ -183,13 +245,25 @@ $screen-lg: 1202px;
     }
 
     .about-puppies-title {
-        font-size: 20px;
-        color: #0e0b4d;
+        span {
+            font-size: 20px;
+            color: #0e0b4d;
+            @media (max-width: $screen-sm - 1px) {
+                font-size: 18px;
+            }
+        }
     }
 
     .top-info {
         .age-of-sale {
             margin-right: 59px;
+        }
+        @media (max-width: $screen-sm - 1px) {
+            .age-of-sale, .price {
+                display: flex;
+                flex-direction: column;
+                margin-right: auto;
+            }
         }
     }
 
@@ -198,13 +272,12 @@ $screen-lg: 1202px;
     }
 
     .pawme-label-list {
-        span {
-            font-size: 12px;
-            font-weight: bold;
-            color: #0e0b4d;
-        }
         :not(:last-child) {
             margin-right: 13px;
+        }
+        @media (max-width: $screen-sm - 1px) {
+            flex-wrap: wrap;
+            margin-bottom: 12px;
         }
     }
 
@@ -212,9 +285,17 @@ $screen-lg: 1202px;
         padding: 13px 14px 11px;
         border-radius: 19px;
         background-color: #f4e1d5;
+        font-size: 12px;
+        font-weight: bold;
+        color: #0e0b4d;
+        margin-bottom: 12px!important;
+        @media (max-width: $screen-sm - 1px) {
+            font-size: 10px;
+            padding: 10px 12px;
+        }
     }
     .pawme-label-item-plus {
-        font-size: 20px;
+        //font-size: 20px;
         color: #0e0b4d;
     }
 
@@ -223,20 +304,14 @@ $screen-lg: 1202px;
     }
 
     .medical-label-item {
-        width: 210px;
-        height: 120px;
+        //width: 210px;
+        width: calc((100% / 3) - 20px);
+        min-height: 120px;
         padding: 24px 19.5px 22px;
         margin-right: 30px;
+        margin-bottom: 20px;
         border-radius: 19px;
         background-color: #f7f4f1;
-
-        &:not(:last-child){
-            margin-bottom: 20px;
-        }
-
-        &:nth-child(3) {
-            margin-right: 0;
-        }
 
         .text {
             font-size: 15px;
@@ -262,6 +337,26 @@ $screen-lg: 1202px;
         .sterilized-icon {
             display: inline-block;
             @include background(40px, 35px, '/assets/img/breeder-page/collar.svg');
+        }
+
+        @media (min-width: $screen-sm) {
+            &:nth-child(3n + 3) {
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: $screen-sm - 1px) {
+            width: calc((100% / 2) - 8px);
+            margin-right: 16px;
+            min-height: 90px;
+            &:nth-child(2n + 2) {
+                margin-right: 0;
+            }
+
+            .text {
+                font-size: 12px;
+                margin-top: 10px;
+            }
         }
     }
 
@@ -335,6 +430,13 @@ $screen-lg: 1202px;
         border: none;
     }
 
+    .available-puppies-list {
+        @media (max-width: $screen-sm - 1px) {
+            width: 100%;
+            overflow-x: scroll;
+        }
+    }
+
     .available-puppies-item {
         margin-right: 30px;
 
@@ -373,9 +475,23 @@ $screen-lg: 1202px;
         }
     }
 
-    .left-side {
-        max-width: 374px;
-        margin-right: 30px;
+    .about-breeder-content {
+        display: flex;
+        justify-content: space-between;
+        .left-side {
+            max-width: 374px;
+            margin-right: 30px;
+        }
+
+        @media (max-width: $screen-sm - 1px) {
+            flex-direction: column;
+            .right-side {
+                order: 1;
+            }
+            .left-side {
+                order: 2;
+            }
+        }
     }
 
     .about-breeder-post {
@@ -523,6 +639,19 @@ $screen-lg: 1202px;
         .image {
             width: 345px;
             height: 345px;
+        }
+        @media (max-width: $screen-sm - 1px) {
+            .image {
+                width: 50%;
+                height: 50%;
+            }
+        }
+    }
+    @media (max-width: $screen-sm - 1px) {
+        padding: 0;
+        h2 {
+            font-size: 20px;
+            margin-bottom: 22px;
         }
     }
 }
