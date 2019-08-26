@@ -1,10 +1,15 @@
 <h3>РЕДАКТОР ФОТО</h3>
-
-<input #_fileInput type="file" id="image-input" (change)="cropping.selectInputEvent($event)" accept="image/*" hidden>
+<!-- cropping.selectInputEvent($event)  -->
+<input #_fileInput type="file" id="image-input" (change)="inputFileSelected($event)" accept="image/*" hidden>
 
 <ly-cropping #cropping [ngClass]="classes.cropping" [config]="myConfig" (cropped)="oncropped($event)"
     (loaded)="onloaded()" (error)="onerror()">
     <span>Зашрузите или перетащие изображение</span>
 </ly-cropping>
+
+<div class="image-cropper-control-panel">
+    <img src="./assets/img/zoom-out.svg" alt="Уменьшить" (click)="cropping.zoomOut()"/>
+    <img src="./assets/img/zoom-in.svg" alt="Увеличить" (click)="cropping.zoomIn()"/>
+</div>
 
 <input type="button" *ngIf="cropping.isLoaded" class="custom-btn btn-purple" (click)="crop()" value="Обрезать" />

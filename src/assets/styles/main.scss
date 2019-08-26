@@ -49,6 +49,10 @@ span, label{
     margin-bottom: 0 !important;
 }
 
+label{
+    font-family: 'Intro-Regular';
+}
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 

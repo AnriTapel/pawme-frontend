@@ -48,9 +48,20 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   previewNurceryPhoto(): void {
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
-    let croppedHandler = this.eventService.subscribe('image-cropped', (event) => {
+    let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
+      const body = new FormData();
+      body.append('image', data.inputFile, data.inputFile.name);
+      body.append('rect', 
+        (Math.floor(data.props.position.x - (data.props.width / 2 / data.props.scale)) + "," + 
+        (Math.floor(data.props.position.y - data.props.height / 2 / data.props.scale))+ "," +
+        Math.floor(data.props.width / data.props.scale) + "," +
+        Math.floor(data.props.height / data.props.scale)
+      ));
+      
+      this.appService.uploadAvatarImage(body).subscribe((e) => {
+        console.log(e);
+      });
       croppedHandler.unsubscribe();
-      this.appService.uploadAvatarImage(event);
     });
   }
 

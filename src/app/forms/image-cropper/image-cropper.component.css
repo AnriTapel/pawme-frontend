@@ -1,4 +1,21 @@
 ly-cropping {
   margin: 1em auto !important;
 }
+
+.image-cropper-control-panel {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.image-cropper-control-panel img {
+  width: 30px;
+  margin: auto 1.5em;
+  cursor: pointer;
+}
+
+.image-cropper-control-panel img:nth-child(1) {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
 /*# sourceMappingURL=image-cropper.component.css.map */

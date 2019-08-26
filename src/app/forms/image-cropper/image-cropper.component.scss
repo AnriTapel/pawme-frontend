@@ -1,3 +1,19 @@
 ly-cropping{
     margin: 1em auto !important;
 }
+
+.image-cropper-control-panel{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1em;
+
+    img{
+        width: 30px;
+        margin: auto 1.5em;
+        cursor: pointer;
+    }
+
+    img:nth-child(1){
+        transform: scaleX(-1);
+    }
+}

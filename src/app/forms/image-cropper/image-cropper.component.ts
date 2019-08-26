@@ -29,8 +29,10 @@ const styles = (theme) => ({
 })
 export class ImageCropperComponent implements AfterViewInit {
 
-  classes = this.theme.addStyleSheet(styles);
   @ViewChild(LyResizingCroppingImages, {static: true}) img: LyResizingCroppingImages;
+  @ViewChild('cropping', {static: true}) cropping: any;
+  classes = this.theme.addStyleSheet(styles);
+  inputFile: any;
   myConfig: ImgCropperConfig = {
     width: 200, // Default `250`
     height: 200 // Default `200`
@@ -45,16 +47,22 @@ export class ImageCropperComponent implements AfterViewInit {
     }, 250);
   }
 
+  inputFileSelected(event: any){
+    this.inputFile = <File>event.target.files[0];
+    this.cropping.selectInputEvent(event);
+  }
+
   crop() {
     this.img.crop();
   }
   oncropped(e) {
-    this.eventService.raiseEvent('image-cropped', e);
+    this.eventService.raiseEvent('image-cropped', {inputFile: this.inputFile, props: e});
   }
+
+
+
   onloaded() {
-    console.log('img loaded');
   }
   onerror() {
-    console.warn('img not loaded');
   }
 }

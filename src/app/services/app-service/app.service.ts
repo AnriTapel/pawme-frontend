@@ -21,17 +21,8 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  public uploadAvatarImage(image: any) {
-    let param = new HttpParams().set('image', image.originalDataURL)
-      .set('rect', image.position.x + "," + image.position.y + "," + image.width + "," + image.height);
-    this.http.post('http://petman.co/api/upload/avatar', param, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    }).subscribe((data) => {
-        console.log(data);
-        return data
-      });
+  public uploadAvatarImage(body: FormData) {
+    return this.http.post('/api/upload/avatar', body);
   }
 
   fieldAutocomplite(searchArray: string[], focus$: Subject<string>, click$: Subject<string>, instance: NgbTypeahead): (text$: Observable<string>) => Observable<any[]> {
