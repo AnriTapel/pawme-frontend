@@ -303,8 +303,8 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: rgba(203, 216, 246, 0.2);
     border-radius: 4px;
     width: 100%;
-    height: auto;
-    padding: 3em;
+    height: 150px;
+    padding: 2em;
     text-align: center;
     margin-top: 16px;
 
@@ -333,33 +333,43 @@ input[type=number]::-webkit-outer-spin-button {
 .gallery-uploaded-photos-block{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    margin: 2em auto 0;
 
     .active-galley-photo-block,
     .empty-galley-photo-block{
-        width: 360px;
-        height: 360px;
+        width: 150px;
+        height: 150px;
         border-radius: 4px;
         background-color: rgba(203, 216, 246, 0.2);
     }
     
     .active-galley-photo-block{
-        border: 1px solid #645fc9;
+        margin-right: 0 .5em 1em 0;
+        position: relative;
+
+        .close-button{
+            position: absolute;
+            width: 13px;
+            top: 7px;
+            right: 7px;
+        }
         
         img{
             border-radius: 4px;
+            width: 150px;
         }
     }
 
     .empty-galley-photo-block{
-        
         border: 2px dotted #645fc9;
+        display: flex;
+        justify-content: center;
 
         img{
             display: block;
             width: 50px;
-            margin: auto;
         }
     }
 }

@@ -1,9 +1,9 @@
 <h3>РЕДАКТОР ФОТО</h3>
-<!-- cropping.selectInputEvent($event)  -->
+<!--  cropping.selectInputEvent($event)  -->
 <input #_fileInput type="file" id="image-input" (change)="inputFileSelected($event)" accept="image/*" hidden>
 
 <ly-cropping #cropping [ngClass]="classes.cropping" [class.rounded-cropp-area]="!params.isRect"
-        [config]="myConfig" (cropped)="oncropped($event)" (loaded)="onloaded()" (error)="onerror()">
+        [config]="myConfig" (cropped)="onCropped($event)">
     <span>Зашрузите или перетащие изображение</span>
 </ly-cropping>
 

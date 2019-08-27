@@ -15,7 +15,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   nurceryData: any;
   isAdditionalBreed: boolean = false;
   curProfileImage: string;
-  curGallaryPhotos: string[];
+  curGalleryPhotos: string[] = [];
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
   @ViewChild('mainBreedInstance', { static: true }) mainBreedInstance: NgbTypeahead;
@@ -50,7 +50,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
-      this.appService.uploadAvatarImage(body).subscribe((imageData) => {
+      this.appService.uploadAvatarImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         this.nurceryData.nurceryProfileImage = imageData;
         this.curProfileImage = "http://petman.co/img/" + imageData.preview + ".jpg";
@@ -65,13 +65,18 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
-      this.appService.uploadNurceryGalleryImage(body).subscribe((imageData) => {
+      this.appService.uploadNurceryGalleryImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         this.nurceryData.nurceryGallery.push(imageData);
-        this.curGallaryPhotos.push("http://petman.co/img/" + imageData.preview + ".jpg");
+        this.curGalleryPhotos.push("http://petman.co/img/" + imageData.preview + ".jpg");
       });
       croppedHandler.unsubscribe();
     });
+  }
+  
+  deleteGalleryImage(index: number): void{
+    this.curGalleryPhotos.splice(index, 1);
+    this.nurceryData.nurceryGallery.splice(index, 1);
   }
 
   saveChanges() {

@@ -89,10 +89,11 @@
 
         <div *ngIf="nurceryData.nurceryGallery.length > 0" class="gallery-uploaded-photos-block">
             <div *ngFor="let photo of curGalleryPhotos;let i = index" class="active-galley-photo-block">
+                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку" (click)="deleteGalleryImage(i)" />
                 <img [src]="photo" alt="Изображение в галерее"/>
             </div>
             <div class="empty-galley-photo-block" (click)="previewGalleryPhoto()">
-                <img src=./assets/img/photo-camera.svg alt="Камера"/>
+                <img src="./assets/img/photo-camera.svg" alt="Камера"/>
             </div>
         </div>
 

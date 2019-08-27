@@ -14,8 +14,8 @@ const styles = (theme) => ({
     }
   },
   cropping: {
-    maxWidth: '400px',
-    height: '300px'
+    maxWidth: '450px',
+    height: '400px'
   },
   icon: {
     marginEnd: '.25em'
@@ -61,14 +61,8 @@ export class ImageCropperComponent implements AfterViewInit {
   crop() {
     this.img.crop();
   }
-  oncropped(e) {
+  onCropped(e) {
     this.eventService.raiseEvent('image-cropped', {inputFile: this.inputFile, props: e});
   }
 
-
-
-  onloaded() {
-  }
-  onerror() {
-  }
 }
