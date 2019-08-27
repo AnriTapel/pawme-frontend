@@ -29,6 +29,10 @@ export class AppService {
     return this.http.post('/api/upload/gallery', body);
   }
 
+  public uploadPersonalImage(body: FormData) {
+    return this.http.post('/api/upload/personal', body);
+  }
+
   fieldAutocomplite(searchArray: string[], focus$: Subject<string>, click$: Subject<string>, instance: NgbTypeahead): (text$: Observable<string>) => Observable<any[]> {
     return (text$: Observable<string>) => {
       const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());

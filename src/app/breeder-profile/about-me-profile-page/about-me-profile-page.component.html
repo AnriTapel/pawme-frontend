@@ -10,35 +10,41 @@
     <div class="about-me-form-group">
         <label for="about-me">Кратко расскажите о себе</label>
         <br>
-        <span class="block-description">Чтобы вам было проще, мы подготовили ряд наводящих вопросов. Какая ваша роль в питомнике и помогает ли вам семья?
+        <span class="block-description">Чтобы вам было проще, мы подготовили ряд наводящих вопросов. Какая ваша роль в
+            питомнике и помогает ли вам семья?
             Что вам нравится в вашей породе и какие у вас профессиональные цели?
         </span>
-        <textarea rows="5" [(ngModel)]="breederData.aboutMe" placeholder="Введите текст" name="about-me" class="form-control"></textarea>
+        <textarea rows="5" [(ngModel)]="breederData.aboutMe" placeholder="Введите текст" name="about-me"
+            class="form-control"></textarea>
     </div>
 
     <div class="about-me-form-group">
         <label for="begining">С чего все началось?</label>
         <br>
-        <span class="block-description">Почему вы начали заниматься разведением собак? Какие события этому предшествовали? Почему была выбрана именно эта
+        <span class="block-description">Почему вы начали заниматься разведением собак? Какие события этому
+            предшествовали? Почему была выбрана именно эта
             порода?
         </span>
-        <textarea rows="5" [(ngModel)]="breederData.begining" class="form-control" placeholder="Введите текст" name="begining"></textarea>
+        <textarea rows="5" [(ngModel)]="breederData.begining" class="form-control" placeholder="Введите текст"
+            name="begining"></textarea>
     </div>
 
     <div class="about-me-form-group">
         <label for="features">Что выделяет ваш питомник? (необязательно)</label>
         <br>
-        <span class="block-description">Вы используете какие-то определенные методы при работе с щенками? Вы уделяете особое внимание определенным деталям?</span>
-        <textarea rows="5" [(ngModel)]="breederData.nurceryFeatures" class="form-control" placeholder="Введите текст" name="features"></textarea>
+        <span class="block-description">Вы используете какие-то определенные методы при работе с щенками? Вы уделяете
+            особое внимание определенным деталям?</span>
+        <textarea rows="5" [(ngModel)]="breederData.nurceryFeatures" class="form-control" placeholder="Введите текст"
+            name="features"></textarea>
     </div>
 
     <div class="about-me-form-group">
         <label>Ваше личное или семейное фото </label>
         <br>
-        <span class="block-description">Заводчик с хорошим личным фото вызывает больше доверия у покупаетелей. Обычно используют фото с питомцами. </span>
+        <span class="block-description">Заводчик с хорошим личным фото вызывает больше доверия у покупаетелей. Обычно
+            используют фото с питомцами. </span>
 
-        <div *ngIf="!breederData.photo" class="gallery-initial-block">
-            <input type="file" id="self-photo-gallery" [(ngModel)]="curPhoto" accept=".jpg, .png, .jpeg" />
+        <div *ngIf="!breederData.photo" class="gallery-initial-block" (click)="previewPersonalImage()">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>
@@ -46,7 +52,10 @@
         </div>
 
         <div *ngIf="breederData.photo" class="gallery-uploaded-photos-block">
-            <div>
+            <div class="active-galley-photo-block">
+                <img [src]="curPersonalImage" alt="Фото заводчика">
+                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
+                    (click)="deletePersonalImage()" />
             </div>
         </div>
 
@@ -60,28 +69,31 @@
         <label for="clubs">В каких клубах заводчиков вы состоите?</label>
         <br>
         <div class="btn-label-list">
-            <input type="button" class="btn-label" *ngFor="let club of breederData.clubs;let i = index" [value]="club + '  X'" (click)="deleteClub(i)"
-            />
+            <input type="button" class="btn-label" *ngFor="let club of breederData.clubs;let i = index"
+                [value]="club + '  X'" (click)="deleteClub(i)" />
         </div>
-        <input type="text" class="form-control" name="clubs" [(ngModel)]="currentClub" [disabled]="breederData.clubs.length > 9"
-            (keyup.enter)="addClub()" />
+        <input type="text" class="form-control" name="clubs" [(ngModel)]="currentClub"
+            [disabled]="breederData.clubs.length > 9" (keyup.enter)="addClub()" />
     </div>
 
     <div class="breeder-profile-subpage-form-right" style="align-self: end;">
-        <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить клуб" (click)="addClub()"
-        />
+        <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить клуб"
+            (click)="addClub()" />
     </div>
 
 
     <div class="about-me-form-group">
         <label>Награды и сертификаты</label>
         <br>
-        <span class="block-description">Вы наверняка участвовали в выставках или других мероприятиях, после которых у вас остались какие-то награды и сертификаты.
-            Для покупателей важно это увидеть, поэтому мы просим вас отсканировать/сфотографировать бумажные грамоты и загрузить
+        <span class="block-description">Вы наверняка участвовали в выставках или других мероприятиях, после которых у
+            вас остались какие-то награды и сертификаты.
+            Для покупателей важно это увидеть, поэтому мы просим вас отсканировать/сфотографировать бумажные грамоты и
+            загрузить
             их сюда.</span>
 
         <div *ngIf="breederData.certificates.length == 0" class="gallery-initial-block">
-            <input type="file" id="certificates-gallery" [(ngModel)]="curCertificates" accept=".jpg, .png, .jpeg" multiple />
+            <input type="file" accept="image/*" (change)="uploadCertificates($event)"
+                multiple />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>
@@ -89,9 +101,19 @@
         </div>
 
         <div *ngIf="breederData.certificates.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of breederData.certificates">
+            <div *ngFor="let cert of curCertificates;let i = index" class="active-galley-photo-block">
+                <img [src]="cert" alt="Сертификат заводчика" class="certificate-image"/>
+                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить сертификат"
+                    (click)="deleteCertificate(i)" />
+            </div>
+            <div class="empty-galley-photo-block">
+                <input type="file" id="certificate-input" accept="image/*" (change)="uploadCertificates($event)"
+                    multiple />
+                <img src="./assets/img/photo-camera.svg" alt="Камера" />
             </div>
         </div>
+
+
 
         <div class="gallery-upload-button custom-btn btn-transparent">
             <input type="file" id="nurcery-gallery" [(ngModel)]="curCertificates" accept=".jpg, .png, .jpeg" multiple />

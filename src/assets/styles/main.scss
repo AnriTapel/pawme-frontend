@@ -346,7 +346,7 @@ input[type=number]::-webkit-outer-spin-button {
     }
     
     .active-galley-photo-block{
-        margin-right: 0 .5em 1em 0;
+        margin: 0 .5em 1em 0;
         position: relative;
 
         .close-button{
@@ -366,6 +366,7 @@ input[type=number]::-webkit-outer-spin-button {
         border: 2px dotted #645fc9;
         display: flex;
         justify-content: center;
+        position: relative;
 
         img{
             display: block;

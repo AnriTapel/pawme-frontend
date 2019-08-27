@@ -17,5 +17,25 @@
     },
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+
+  "/api/upload/pet": {
+    "target": "http://petman.co/api/upload/pet",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/upload/pet": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+
+  "/api/upload/personal": {
+    "target": "http://petman.co/api/upload/personal",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/upload/personal": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }
