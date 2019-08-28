@@ -28,7 +28,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   curPuppyImages: any = [];
   currentPuppyData: any;
 
-  birthdayModel: NgbDateStruct = {day: null, month: null, year: null};
+  birthdayModel: NgbDateStruct = { day: null, month: null, year: null };
   invalidFields: any[] = [];
 
   // What page to show - parents page or add/edit current parent
@@ -64,21 +64,17 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.isMainPage = false;
   }
 
-  getCurrentMaxDate() :any{
+  getCurrentMaxDate(): any {
     let date = new Date();
-    return {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
+    return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
   }
 
-  updateSelectedDate(){
-   this.birthdayModel = {year: this.birthdayModel.year, month: this.birthdayModel.month, day: this.birthdayModel.day}; 
+  updateSelectedDate() {
+    this.birthdayModel = { year: this.birthdayModel.year, month: this.birthdayModel.month, day: this.birthdayModel.day };
   }
 
-  saveDraft(): void{
-
-  }
-
-  previewPuppyImage(): void{
-    this.popupService.setPopupParams({width: 210, height: 180, isRect: true});
+  previewPuppyImage(): void {
+    this.popupService.setPopupParams({ width: 210, height: 180, isRect: true });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
@@ -92,60 +88,86 @@ export class AddPuppyProfilePageComponent implements OnInit {
     });
   }
 
-  deletePuppyImage(index: number): void{
+  deletePuppyImage(index: number): void {
     this.curPuppyImages.splice(index, 1);
     this.currentPuppyData.photos.splice(index, 1);
   }
 
-  addPuppy(): void{
+  addPuppy(): void {
     if (!this.validateInputFields())
       return;
+    // TODO: change adding or refreshing condition based on parents' id
+    if (this.puppiesData.parents.filter(it => it.name == this.currentPuppyData.name).length > 0)
+      this.puppiesData.parents = this.puppiesData.parents.map(it => {
+        if (it.name == this.currentPuppyData.name)
+          it = this.currentPuppyData;
+      });
+    else
+      this.puppiesData.puppies.push(this.currentPuppyData);
+
+    this.currentPuppyData = null;
+    this.isMainPage = true;
   }
 
-  validateInputFields(): boolean{
-    let isValid= true;
+  deleteParent(index: number): void {
+    this.puppiesData.parents.splice(index, 1);
+  }
+
+  saveDraft() {
+    this.puppiesData.parentDraft = this.currentPuppyData;
+    this.currentPuppyData = null;
+    this.isMainPage = true;
+  }
+
+  saveChanges() {
+
+  }
+
+
+  validateInputFields(): boolean {
+    let isValid = true;
     this.invalidFields = [];
-    if (!this.currentPuppyData.name || this.currentPuppyData.name == ""){
+    if (!this.currentPuppyData.name || this.currentPuppyData.name == "") {
       this.invalidFields.push('name');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.breed || this.currentPuppyData.breed == ""){
+    if (!this.currentPuppyData.breed || this.currentPuppyData.breed == "") {
       this.invalidFields.push('breed');
       isValid = false;
     }
 
-    if (!this.birthdayModel.day || !this.birthdayModel.month || !this.birthdayModel.year){
+    if (!this.birthdayModel.day || !this.birthdayModel.month || !this.birthdayModel.year) {
       this.invalidFields.push('birthday');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.stigmaCode || this.currentPuppyData.stigmaCode == ""){
+    if (!this.currentPuppyData.stigmaCode || this.currentPuppyData.stigmaCode == "") {
       this.invalidFields.push('stigma');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.dadId){
+    if (!this.currentPuppyData.dadId) {
       this.invalidFields.push('dad');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.momId){
+    if (!this.currentPuppyData.momId) {
       this.invalidFields.push('mom');
       isValid = false;
     }
 
-    if (this.currentPuppyData.photos.length == 0){
+    if (this.currentPuppyData.photos.length == 0) {
       this.invalidFields.push('photos');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.info || this.currentPuppyData.info == ""){
+    if (!this.currentPuppyData.info || this.currentPuppyData.info == "") {
       this.invalidFields.push('info');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.price){
+    if (!this.currentPuppyData.price) {
       this.invalidFields.push('price');
       isValid = false;
     }

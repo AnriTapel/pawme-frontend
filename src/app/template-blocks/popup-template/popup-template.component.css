@@ -38,5 +38,9 @@
   .popup-wrapper > div {
     top: 5vh !important;
   }
+  .popup-wrapper > img {
+    top: 10px;
+    right: 10px;
+  }
 }
 /*# sourceMappingURL=popup-template.component.css.map */

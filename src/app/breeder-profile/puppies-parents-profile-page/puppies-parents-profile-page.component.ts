@@ -33,7 +33,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
   @ViewChild('bodyPartInstance', { static: true }) bodyPartInstance: NgbTypeahead;
   @ViewChild('medicalTestInstance', { static: true }) medicalTestInstance: NgbTypeahead;
-  @ViewChild('parentBreedInstance', {static: true}) parentBreedInstance: NgbTypeahead;
+  @ViewChild('parentBreedInstance', { static: true }) parentBreedInstance: NgbTypeahead;
   bodyPartFocus$ = new Subject<string>();
   medicalTestFocus$ = new Subject<string>();
   parentBreedFocus$ = new Subject<string>();
@@ -76,8 +76,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.isMainPage = false;
   }
 
-  previewParentImage(): void{
-    this.popupService.setPopupParams({width: 210, height: 180, isRect: true});
+  previewParentImage(): void {
+    this.popupService.setPopupParams({ width: 210, height: 180, isRect: true });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
@@ -91,48 +91,65 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     });
   }
 
-  deleteParentImage(index: number): void{
+  deleteParentImage(index: number): void {
     this.curParentImages.splice(index, 1);
     this.currentParentData.photos.splice(index, 1);
   }
 
-  addParent(){
+  addParent() {
     if (!this.validateInputFields())
       return;
+    // TODO: change adding or refreshing condition based on parents' id
+    if (this.parentsData.parents.filter(it => it.name == this.currentParentData.name).length > 0)
+      this.parentsData.parents = this.parentsData.parents.map(it => {
+        if (it.name == this.currentParentData.name)
+          it = this.currentParentData;
+      });
+    else
+      this.parentsData.parents.push(this.currentParentData);
+    
+    this.currentParentData = null;
+    this.isMainPage = true;
   }
 
-  validateInputFields(): boolean{
-    let isValid= true;
+  deleteParent(index: number): void{
+    this.parentsData.parents.splice(index, 1);
+  }
+
+  saveDraft() {
+    this.parentsData.parentDraft = this.currentParentData;
+    this.currentParentData = null;
+    this.isMainPage = true;
+  }
+
+  saveChanges() {
+    
+  }
+
+  validateInputFields(): boolean {
+    let isValid = true;
     this.invalidFields = [];
-    if (!this.currentParentData.name || this.currentParentData.name == ""){
+    if (!this.currentParentData.name || this.currentParentData.name == "") {
       this.invalidFields.push('name');
       isValid = false;
     }
 
-    if (!this.currentParentData.breed || this.currentParentData.breed == ""){
+    if (!this.currentParentData.breed || this.currentParentData.breed == "") {
       this.invalidFields.push('breed');
       isValid = false;
     }
 
-    if (this.currentParentData.photos.length == 0){
+    if (this.currentParentData.photos.length == 0) {
       this.invalidFields.push('photos');
       isValid = false;
     }
 
-    if (!this.currentParentData.info || this.currentParentData.info == ""){
+    if (!this.currentParentData.info || this.currentParentData.info == "") {
       this.invalidFields.push('info');
       isValid = false;
     }
 
     return isValid;
-  }
-
-  saveDraft(){
-
-  }
-
-  saveChanges(){
-
   }
 
 }
