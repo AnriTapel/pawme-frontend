@@ -52,7 +52,7 @@ export class AboutMeProfilePageComponent implements OnInit {
     for (let file of event.target.files) {
       this.breederData.certificates.push(file);
       let reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = (e: any) => {
         this.curCertificates.push(e.target.result);
       }
       reader.readAsDataURL(file);
