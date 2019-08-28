@@ -27,7 +27,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   addBreedFocus$ = new Subject<string>();
   addBreedClick$ = new Subject<string>();
 
-  constructor(private appService: AppService, private popupService: PopupTemplateService, private eventService: EventService) { }
+  constructor(public appService: AppService, private popupService: PopupTemplateService, private eventService: EventService) { }
 
   ngOnInit() {
     this.nurceryData = {

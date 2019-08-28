@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { AppService } from 'src/app/services/app-service/app.service';
+import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
+import { EventService } from '../../services/event-service/events.service';
 
 @Component({
   selector: 'app-puppies-parents-profile-page',
@@ -21,7 +23,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   parentsData: any;
   currentParentData: any;
 
-  currentPhotos: any;
+  curParentImages: any[] = [];
   currentBodyPart: string;
   currentMedicalTest: string;
   invalidFields: any[] = [];
@@ -39,7 +41,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   medicalTestClick$ = new Subject<string>();
   parentBreedClick$ = new Subject<string>();
 
-  constructor(public appService: AppService) { }
+  constructor(public appService: AppService, private popupService: PopupTemplateService,
+    private eventService: EventService) { }
 
   ngOnInit() {
 
@@ -71,6 +74,26 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.currentParentData = this.parentsData.parents[index];
 
     this.isMainPage = false;
+  }
+
+  previewParentImage(): void{
+    this.popupService.setPopupParams({width: 210, height: 180, isRect: true});
+    this.popupService.setShowStatus(true);
+    this.popupService.setCurrentForm('image-cropper');
+    let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
+      let body = this.appService.getImageDataForUpload(data);
+      this.appService.uploadPetImage(body).subscribe((imageData: any) => {
+        this.popupService.setShowStatus(false);
+        this.currentParentData.photos.push(imageData);
+        this.curParentImages.push("http://petman.co/img/" + imageData.preview + ".jpg");
+      });
+      croppedHandler.unsubscribe();
+    });
+  }
+
+  deleteParentImage(index: number): void{
+    this.curParentImages.splice(index, 1);
+    this.currentParentData.photos.splice(index, 1);
   }
 
   addParent(){

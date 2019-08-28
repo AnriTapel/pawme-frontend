@@ -53,14 +53,14 @@
 
         <div *ngIf="breederData.photo" class="gallery-uploaded-photos-block">
             <div class="active-galley-photo-block">
-                <img [src]="curPersonalImage" alt="Фото заводчика">
+                <img [src]="curPersonalImage" class="personal-image" alt="Фото заводчика">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
                     (click)="deletePersonalImage()" />
             </div>
         </div>
 
-        <div class="gallery-upload-button custom-btn btn-transparent">
-            <input type="file" id="nurcery-gallery" [(ngModel)]="curPhoto" accept=".jpg, .png, .jpeg" multiple />
+        <div *ngIf="!breederData.photo" (click)="previewPersonalImage()"
+            class="gallery-upload-button custom-btn btn-transparent">
             <span>Выбрать</span>
         </div>
     </div>
@@ -113,10 +113,9 @@
             </div>
         </div>
 
-
-
-        <div class="gallery-upload-button custom-btn btn-transparent">
-            <input type="file" id="nurcery-gallery" [(ngModel)]="curCertificates" accept=".jpg, .png, .jpeg" multiple />
+        <div *ngIf="breederData.certificates.length == 0" class="gallery-upload-button custom-btn btn-transparent">
+            <input type="file" accept="image/*" (change)="uploadCertificates($event)"
+                multiple />
             <span>Выбрать</span>
         </div>
     </div>

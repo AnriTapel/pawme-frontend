@@ -121,21 +121,24 @@
     <div class="add-parent-page-photos-block">
         <label>Загрузите фотографии</label>
 
-        <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block" [class.invalid-form-field-value]="invalidFields.includes('photos')">
-            <input type="file" id="add-parent-gallery" [(ngModel)]="currentPhotos" accept=".jpg, .png, .jpeg" multiple />
-            <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
-            <br>
-            <span>
-                <a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+        <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block"
+                (click)="previewParentImage()" [class.invalid-form-field-value]="invalidFields.includes('photos')">
+            <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
+            <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
         </div>
 
         <div *ngIf="currentParentData.photos.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of currentParentData.photos">
+            <div *ngFor="let photo of curParentImages;let i = index" class="active-galley-photo-block">
+                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку" (click)="deleteParentImage(i)" />
+                <img [src]="photo" class="pet-image" alt="Изображение в галерее"/>
+            </div>
+            <div class="empty-galley-photo-block" (click)="previewParentImage()">
+                <img src="./assets/img/photo-camera.svg" alt="Камера"/>
             </div>
         </div>
 
-        <div class="gallery-upload-button custom-btn btn-transparent">
-            <input type="file" id="nurcery-gallery" [(ngModel)]="currentPhotos" accept=".jpg, .png, .jpeg" multiple />
+        <div *ngIf="currentParentData.photos.length == 0" (click)="previewParentImage()"
+            class="gallery-upload-button custom-btn btn-transparent">
             <span>Выбрать</span>
         </div>
     </div>

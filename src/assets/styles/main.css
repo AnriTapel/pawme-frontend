@@ -368,6 +368,7 @@ input[type=number]::-webkit-outer-spin-button {
 .gallery-uploaded-photos-block .active-galley-photo-block {
   margin: 0 .5em 1em 0;
   position: relative;
+  overflow: hidden;
 }
 
 .gallery-uploaded-photos-block .active-galley-photo-block .close-button {
@@ -375,11 +376,17 @@ input[type=number]::-webkit-outer-spin-button {
   width: 13px;
   top: 7px;
   right: 7px;
+  z-index: 10;
 }
 
 .gallery-uploaded-photos-block .active-galley-photo-block img {
   border-radius: 4px;
-  width: 150px;
+  max-height: 150px;
+}
+
+.gallery-uploaded-photos-block .active-galley-photo-block .pet-image {
+  position: absolute;
+  left: -10px;
 }
 
 .gallery-uploaded-photos-block .empty-galley-photo-block {
@@ -651,6 +658,15 @@ ngb-datepicker .bg-light {
   }
   .gallery-upload-button {
     display: block;
+  }
+  .gallery-uploaded-photos-block {
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  .gallery-uploaded-photos-block .active-galley-photo-block,
+  .gallery-uploaded-photos-block .empty-galley-photo-block {
+    margin: unset;
+    margin-bottom: .5em;
   }
   .custom-btn {
     display: block;

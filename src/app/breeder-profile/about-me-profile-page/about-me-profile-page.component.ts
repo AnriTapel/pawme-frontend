@@ -29,7 +29,7 @@ export class AboutMeProfilePageComponent implements OnInit {
   }
 
   previewPersonalImage() {
-    this.popupService.setPopupParams({ width: 360, height: 360, isRect: true });
+    this.popupService.setPopupParams({ width: 270, height: 200, isRect: true });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
@@ -43,7 +43,7 @@ export class AboutMeProfilePageComponent implements OnInit {
     });
   }
 
-  deletePersonalImage(index: number): void {
+  deletePersonalImage(): void {
     this.curPersonalImage = null;
     this.breederData.photo = null;
   }

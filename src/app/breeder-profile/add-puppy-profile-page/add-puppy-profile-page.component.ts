@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbTypeahead, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { AppService } from 'src/app/services/app-service/app.service';
+import { EventService } from '../../services/event-service/events.service';
+import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 
 @Component({
   selector: 'app-add-puppy-profile-page',
@@ -23,7 +25,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
     photos: []
   }
   puppiesData: any;
-  currentPhotos: any;
+  curPuppyImages: any = [];
   currentPuppyData: any;
 
   birthdayModel: NgbDateStruct = {day: null, month: null, year: null};
@@ -42,7 +44,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
   dadDogClick$ = new Subject<string>();
   puppyBreedClick$ = new Subject<string>();
 
-  constructor(public appService: AppService) { }
+  constructor(public appService: AppService, private popupService: PopupTemplateService,
+    private eventService: EventService) { }
 
   ngOnInit() {
     this.puppiesData = {
@@ -72,6 +75,26 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   saveDraft(): void{
 
+  }
+
+  previewPuppyImage(): void{
+    this.popupService.setPopupParams({width: 210, height: 180, isRect: true});
+    this.popupService.setShowStatus(true);
+    this.popupService.setCurrentForm('image-cropper');
+    let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
+      let body = this.appService.getImageDataForUpload(data);
+      this.appService.uploadPetImage(body).subscribe((imageData: any) => {
+        this.popupService.setShowStatus(false);
+        this.currentPuppyData.photos.push(imageData);
+        this.curPuppyImages.push("http://petman.co/img/" + imageData.preview + ".jpg");
+      });
+      croppedHandler.unsubscribe();
+    });
+  }
+
+  deletePuppyImage(index: number): void{
+    this.curPuppyImages.splice(index, 1);
+    this.currentPuppyData.photos.splice(index, 1);
   }
 
   addPuppy(): void{
