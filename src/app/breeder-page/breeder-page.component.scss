@@ -107,6 +107,14 @@ $screen-sm: 769px;
     }
 }
 
+.about-breeder {
+    @media (max-width: $screen-sm) {
+        .aside {
+            padding: 0;
+        }
+    }
+}
+
 .about-puppies, .about-breeder, .about-parents, .our-instagram {
     .aside, .section {
         @media (max-width: $screen-lg - 1px) {
@@ -165,6 +173,10 @@ $screen-sm: 769px;
         font-size: 23px;
         color: #0e0b4d;
         margin-bottom: 11px;
+        @media (max-width: $screen-sm - 1px) {
+            font-size: 18px;
+            color: #0e0b4d;
+        }
     }
 
     .location, .link {
@@ -413,6 +425,28 @@ $screen-sm: 769px;
                 border-bottom: solid 2px #cbd8f6;
             }
         }
+
+        @media (max-width: $screen-sm - 1px) {
+            width: 100%;
+            max-width: 100%;
+            margin-right: 0!important;
+            margin-bottom: 0!important;
+
+            .title {
+                margin-bottom: 0;
+            }
+
+            .mb-16 {
+                margin-bottom: 16px;
+            }
+
+            .description, .contract-link {
+                display: none;
+            }
+            .collapse {
+                display: block;
+            }
+        }
     }
 
     .button-ask-a-question {
@@ -428,6 +462,18 @@ $screen-sm: 769px;
         padding: 0;
         margin: 0 0 31px 0;
         border: none;
+    }
+
+    .about-puppies-with-btn {
+        @media (max-width: $screen-sm - 1px) {
+
+            .available-puppies-title {
+                margin-bottom: 22px!important;
+            }
+            .button-ask-a-question {
+                display: none;
+            }
+        }
     }
 
     .available-puppies-list {
@@ -489,6 +535,8 @@ $screen-sm: 769px;
                 order: 1;
             }
             .left-side {
+                width: 100%;
+                max-width: 100%;
                 order: 2;
             }
         }
@@ -502,6 +550,12 @@ $screen-sm: 769px;
             font-size: 20px;
             color: #0e0b4d;
             margin-bottom: 16px;
+            @media (max-width: $screen-sm - 1px) {
+                font-size: 14px;
+                font-weight: bold;
+                line-height: 1.36;
+                color: #0e0b4d;
+            }
         }
         p {
             opacity: 0.7;
@@ -509,6 +563,17 @@ $screen-sm: 769px;
             line-height: 1.38;
             color: #0e0b4d;
             margin-bottom: 0;
+            @media (max-width: $screen-sm - 1px) {
+                opacity: 0.7;
+                font-size: 14px;
+                line-height: 1.36;
+                color: #0e0b4d;
+            }
+        }
+        @media (max-width: $screen-sm - 1px) {
+            &:not(:last-child) {
+                margin-bottom: 22px;
+            }
         }
     }
 
@@ -552,6 +617,9 @@ $screen-sm: 769px;
             line-height: 1.5;
             color: #0e0b4d;
         }
+        @media (max-width: $screen-sm - 1px) {
+            margin-bottom: 20px;
+        }
     }
 
     .mb-12 {
@@ -570,10 +638,21 @@ $screen-sm: 769px;
 
         .certificate-item {
             width: 150px;
+            min-width: 150px;
             height: 150px;
             border: solid 1px rgba(14, 11, 77, 0.1);
             &:not(:last-child) {
                 margin-right: 30px;
+            }
+        }
+
+        @media (max-width: $screen-sm - 1px) {
+            .certificates-list {
+                width: 100%;
+                overflow-x: scroll;
+            }
+            .certificates-list.flex-wrap {
+                flex-wrap: nowrap!important;
             }
         }
     }
@@ -619,6 +698,20 @@ $screen-sm: 769px;
             &:after {
                 display: inline-block;
                 @include background(20px, 12px, '/assets/img/breeder-page/eye.svg');
+            }
+        }
+
+        @media (max-width: $screen-sm - 1px) {
+            .tests-list {
+                flex-direction: column!important;
+            }
+
+            .test-item {
+                width: 100%;
+                max-width: 100%;
+                &:not(:last-child) {
+                    margin-right: 0;
+                }
             }
         }
     }

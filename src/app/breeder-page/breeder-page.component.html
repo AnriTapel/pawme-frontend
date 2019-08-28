@@ -114,50 +114,61 @@
 
             <div class="additional-info-list d-flex flex-row flex-wrap">
                 <div class="additional-info-item d-flex flex-column mb-32">
-                    <div class="title d-flex align-items-center">
+                    <div class="title d-flex align-items-center"
+                         [ngClass]="{'mb-16' : collapse.contract}"
+                         (click)="showInfo('contract')">
                         <i class="icon icon-combined-shape d-flex align-items-center justify-content-center"></i>
                         Договор PawMe
                     </div>
-                    <div class="description">
+                    <div class="description" [ngClass]="{'collapse' : collapse.contract}">
                         Значимость этих проблем настолько очевидна,
                         что консультация с широким активом способствует подготовки и реализации новых предложений.
                         С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
                         занимаемых участниками в отношении поставленных задач.
                     </div>
-                    <div class="contract-link">
+                    <div class="contract-link" [ngClass]="{'collapse' : collapse.contract}">
                         <a href="">Посмотреть договор</a>
                     </div>
+                    <div class="line"></div>
                 </div>
                 <div class="additional-info-item d-flex flex-column mb-32">
-                    <div class="title d-flex align-items-center">
+                    <div class="title d-flex align-items-center"
+                         [ngClass]="{'mb-16' : collapse.warranty}"
+                         (click)="showInfo('warranty')">
                         <i class="icon icon-heart d-flex align-items-center justify-content-center"></i>
                         Гарантии по здоровью
                     </div>
-                    <div class="description">
+                    <div class="description" [ngClass]="{'collapse' : collapse.warranty}">
                         Значимость этих проблем настолько очевидна,
                         что консультация с широким активом способствует подготовки и реализации новых предложений.
                         С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
                         занимаемых участниками в отношении поставленных задач.
                     </div>
+                    <div class="line"></div>
                 </div>
                 <div class="additional-info-item d-flex flex-column">
-                    <div class="title d-flex align-items-center">
+                    <div class="title d-flex align-items-center"
+                         [ngClass]="{'mb-16' : collapse.buyPuppy}"
+                         (click)="showInfo('buyPuppy')">
                         <i class="icon icon-certificate-shape d-flex align-items-center justify-content-center"></i>
                         Как приобрести щенка
                     </div>
-                    <div class="description">
+                    <div class="description" [ngClass]="{'collapse' : collapse.buyPuppy}">
                         Значимость этих проблем настолько очевидна,
                         что консультация с широким активом способствует подготовки и реализации новых предложений.
                         С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
                         занимаемых участниками в отношении поставленных задач.
                     </div>
+                    <div class="line"></div>
                 </div>
                 <div class="additional-info-item d-flex flex-column">
-                    <div class="title d-flex align-items-center">
+                    <div class="title d-flex align-items-center"
+                         [ngClass]="{'mb-16' : collapse.gifts}"
+                         (click)="showInfo('gifts')">
                         <i class="icon icon-gift d-flex align-items-center justify-content-center"></i>
                         Подарки
                     </div>
-                    <div class="description">
+                    <div class="description" [ngClass]="{'collapse' : collapse.gifts}">
                         Значимость этих проблем настолько очевидна,
                         что консультация с широким активом способствует подготовки и реализации новых предложений.
                         С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
@@ -169,7 +180,7 @@
             <div class="line"></div>
 
             <div class="about-puppies-title about-puppies-with-btn d-flex justify-content-between">
-                <span>Доступные щенки</span>
+                <span class="available-puppies-title">Доступные щенки</span>
                 <button type="button" class="button-ask-a-question">Задать вопрос</button>
             </div>
 
