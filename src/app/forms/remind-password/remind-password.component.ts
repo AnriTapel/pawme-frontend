@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
+import { AppService } from 'src/app/services/app-service/app.service';
 
 @Component({
   selector: 'app-remind-password',
@@ -11,13 +11,13 @@ export class RemindPasswordComponent implements OnInit {
   remindEmail: string;
   remindError: boolean = false;
 
-  constructor(public popupService: PopupTemplateService) { }
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
   }
 
   resetPassword(){
-    if (!this.popupService.validateEmailInput(this.remindEmail))
+    if (!this.appService.validateEmailInput(this.remindEmail))
       return this.remindError = true;
   }
 

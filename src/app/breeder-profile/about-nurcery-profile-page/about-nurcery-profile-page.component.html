@@ -55,15 +55,23 @@
         <span class="block-description">Это одна из первых вещей, которую прочитают потенциальные покупатели на вашей
             странице. Постарайтесь
             кратко (в 2-3 предложения) описать ваш питомник и рассказать о его особенностях.</span>
-        <textarea rows="5" class="form-control" [(ngModel)]="nurceryData.aboutNurcery" placeholder="Описание"></textarea>
+        <textarea rows="5" class="form-control" [(ngModel)]="nurceryData.aboutNurcery"
+            placeholder="Описание"></textarea>
     </div>
 
     <hr>
 
     <div class="about-nurcery-profile-image">
-        <div class="image-block" name="image-block" (click)="previewNurceryPhoto()">
+        <div *ngIf="!nurceryData.nurceryProfileImage" class="image-block empty-profile-image" id="profile-image-block"
+            (click)="previewNurceryPhoto()">
             <img src="./assets/img/thin-plus.png" alt="Добавить изображение" />
         </div>
+
+        <div *ngIf="nurceryData.nurceryProfileImage" class="image-block active-profile-image" id="profile-image-block"
+            (click)="previewNurceryPhoto()">
+            <img [src]="curProfileImage" alt="Изображение профиля" />
+        </div>
+
         <div class="profile-image-text-block">
             <label for="image-block">Фото вашего профиля заводчика</label><br>
             <span class="block-description">Рекомендуемое разрешение - 256 на 256 пикселей</span>
@@ -74,20 +82,24 @@
         <label for="nurcery-gallery">Фото в основную галерею</label><br>
         <span class="block-description">Фотографии будут отображаться в галерее на вашей странице заводчика</span>
 
-        <div *ngIf="nurceryData.nurceryGallery.length == 0" class="gallery-initial-block">
-            <input type="file" id="nurcery-gallery" [(ngModel)]="nurceryData.nurceryGalleryImage"
-                accept=".jpg, .png, .jpeg" multiple />
+        <div *ngIf="nurceryData.nurceryGallery.length == 0" class="gallery-initial-block" (click)="previewGalleryPhoto()">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
             <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
         </div>
 
         <div *ngIf="nurceryData.nurceryGallery.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of nurceryData.nurceryGallery">
+            <div *ngFor="let photo of curGalleryPhotos;let i = index" class="active-galley-photo-block">
+                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку" (click)="deleteGalleryImage(i)" />
+                <img [src]="photo" alt="Изображение в галерее"/>
+            </div>
+            <div class="empty-galley-photo-block" (click)="previewGalleryPhoto()">
+                <img src="./assets/img/photo-camera.svg" alt="Камера"/>
             </div>
         </div>
 
         <div class="gallery-upload-button custom-btn btn-transparent">
-            <input type="file" id="nurcery-gallery" [(ngModel)]="nurceryData.nurceryGalleryImage" accept=".jpg, .png, .jpeg" multiple />
+            <input type="file" id="nurcery-gallery" [(ngModel)]="nurceryData.nurceryGalleryImage"
+                accept=".jpg, .png, .jpeg" multiple />
             <span>Выбрать</span>
         </div>
     </div>

@@ -7,6 +7,7 @@ export class PopupTemplateService {
 
   private show: boolean = false;
   private currentForm: string;
+  private popupParams: any;
 
   constructor() { }
 
@@ -30,8 +31,11 @@ export class PopupTemplateService {
     this.currentForm = formName;
   }
 
-  validateEmailInput(email: string): boolean{
-    let re = /^[A-Za-z]+([\.-]?[A-Za-z]+)*@[A-Za-z]+([\.-]?[A-Za-z]+)*(\.[A-Za-z]{2,3})+$/;
-    return re.test(email);
+  setPopupParams(params: any): void{
+    this.popupParams = params;
+  }
+
+  getPopupParams(): any{
+    return this.popupParams;
   }
 }

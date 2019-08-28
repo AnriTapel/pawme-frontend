@@ -47,6 +47,10 @@ span, label {
   margin-bottom: 0 !important;
 }
 
+label {
+  font-family: 'Intro-Regular';
+}
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -309,8 +313,8 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: rgba(203, 216, 246, 0.2);
   border-radius: 4px;
   width: 100%;
-  height: auto;
-  padding: 3em;
+  height: 150px;
+  padding: 2em;
   text-align: center;
   margin-top: 16px;
 }
@@ -332,9 +336,66 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .gallery-initial-block span a {
-  color: #4a90e2;
-  -webkit-text-decoration: underline #4a90e2;
-          text-decoration: underline #4a90e2;
+  color: #4a90e2 !important;
+  -webkit-text-decoration: underline #4a90e2 !important;
+          text-decoration: underline #4a90e2 !important;
+}
+
+.gallery-uploaded-photos-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 2em auto 0;
+}
+
+.gallery-uploaded-photos-block .active-galley-photo-block,
+.gallery-uploaded-photos-block .empty-galley-photo-block {
+  width: 150px;
+  height: 150px;
+  border-radius: 4px;
+  background-color: rgba(203, 216, 246, 0.2);
+}
+
+.gallery-uploaded-photos-block .active-galley-photo-block {
+  margin: 0 .5em 1em 0;
+  position: relative;
+}
+
+.gallery-uploaded-photos-block .active-galley-photo-block .close-button {
+  position: absolute;
+  width: 13px;
+  top: 7px;
+  right: 7px;
+}
+
+.gallery-uploaded-photos-block .active-galley-photo-block img {
+  border-radius: 4px;
+  width: 150px;
+}
+
+.gallery-uploaded-photos-block .empty-galley-photo-block {
+  border: 2px dotted #645fc9;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+}
+
+.gallery-uploaded-photos-block .empty-galley-photo-block img {
+  display: block;
+  width: 50px;
 }
 
 .gallery-upload-button {
@@ -527,6 +588,14 @@ ngb-datepicker .bg-light {
 .ngb-dp-arrow-btn:focus {
   outline-width: 0 !important;
   outline-style: unset !important;
+}
+
+.rounded-cropp-area .y-area-i6 {
+  border-radius: 50% !important;
+}
+
+.rounded-cropp-area .y-area-i6:after {
+  border-radius: 50% !important;
 }
 
 @media screen and (max-width: 769px) {

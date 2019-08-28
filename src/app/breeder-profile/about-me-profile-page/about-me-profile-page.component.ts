@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
+import { AppService } from 'src/app/services/app-service/app.service';
+import { EventService } from 'src/app/services/event-service/events.service';
 
 @Component({
   selector: 'app-about-me-profile-page',
@@ -9,10 +12,10 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   breederData: any;
   currentClub: string = null;
-  curCertificates: [];
-  curPhoto: any;
+  curCertificates: string[] = [];
+  curPersonalImage: string;
 
-  constructor() { }
+  constructor(private popupService: PopupTemplateService, private appService: AppService, private eventService: EventService) { }
 
   ngOnInit() {
     this.breederData = {
@@ -23,19 +26,54 @@ export class AboutMeProfilePageComponent implements OnInit {
       clubs: [],
       certificates: []
     }
-
   }
 
-  addClub(): void{
+  previewPersonalImage() {
+    this.popupService.setPopupParams({ width: 360, height: 360, isRect: true });
+    this.popupService.setShowStatus(true);
+    this.popupService.setCurrentForm('image-cropper');
+    let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
+      let body = this.appService.getImageDataForUpload(data);
+      this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
+        this.popupService.setShowStatus(false);
+        this.breederData.photo = imageData;
+        this.curPersonalImage = "http://petman.co/img/" + imageData.preview + ".jpg";
+      });
+      croppedHandler.unsubscribe();
+    });
+  }
+
+  deletePersonalImage(index: number): void {
+    this.curPersonalImage = null;
+    this.breederData.photo = null;
+  }
+
+  uploadCertificates(event: any): void {
+    for (let file of event.target.files) {
+      this.breederData.certificates.push(file);
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.curCertificates.push(e.target.result);
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+
+  deleteCertificate(index: number): void {
+    this.curCertificates.splice(index, 1);
+    this.breederData.certificates.splice(index, 1);
+  }
+
+  addClub(): void {
     this.breederData.clubs.push(this.currentClub);
     this.currentClub = null;
   }
 
-  deleteClub(index: number): void{
+  deleteClub(index: number): void {
     this.breederData.clubs.splice(index, 1);
   }
 
-  saveChanges(){
+  saveChanges() {
 
   }
 

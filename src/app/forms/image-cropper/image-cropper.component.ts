@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, Inject } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, Inject, Input } from '@angular/core';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
 import { LyResizingCroppingImages, ImgCropperConfig } from '@alyle/ui/resizing-cropping-images';
 import { LyTheme2 } from '@alyle/ui';
@@ -14,8 +14,8 @@ const styles = (theme) => ({
     }
   },
   cropping: {
-    maxWidth: '400px',
-    height: '300px'
+    maxWidth: '450px',
+    height: '400px'
   },
   icon: {
     marginEnd: '.25em'
@@ -29,32 +29,40 @@ const styles = (theme) => ({
 })
 export class ImageCropperComponent implements AfterViewInit {
 
-  classes = this.theme.addStyleSheet(styles);
+  @Input() params: any;
   @ViewChild(LyResizingCroppingImages, {static: true}) img: LyResizingCroppingImages;
-  myConfig: ImgCropperConfig = {
-    width: 200, // Default `250`
-    height: 200 // Default `200`
-  };
+  @ViewChild('cropping', {static: true}) cropping: any;
+  classes = this.theme.addStyleSheet(styles);
+  inputFile: any;
+  myConfig: ImgCropperConfig;
 
   constructor(@Inject(LyTheme2) private theme: LyTheme2, public popupService: PopupTemplateService,
     private eventService: EventService) { }
 
   ngAfterViewInit(): void{
     setTimeout(() => {
+      this.myConfig = {
+        width: this.params.width,
+        height: this.params.height
+      };
       document.getElementById('image-input').click();
     }, 250);
+  }
+
+  inputFileSelected(event: any){
+    this.inputFile = <File>event.target.files[0];
+    this.cropping.selectInputEvent(event);
+  }
+
+  changeInputImage(){
+    document.getElementById('change-image-input').click();
   }
 
   crop() {
     this.img.crop();
   }
-  oncropped(e) {
-    this.eventService.raiseEvent('image-cropped', e);
+  onCropped(e) {
+    this.eventService.raiseEvent('image-cropped', {inputFile: this.inputFile, props: e});
   }
-  onloaded() {
-    console.log('img loaded');
-  }
-  onerror() {
-    console.warn('img not loaded');
-  }
+
 }

@@ -1,4 +1,53 @@
 ly-cropping {
   margin: 1em auto !important;
 }
+
+.image-cropper-control-panel {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.image-cropper-control-panel img {
+  width: 30px;
+  margin: auto 1.5em;
+  cursor: pointer;
+}
+
+.image-cropper-control-panel img:nth-child(1) {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+.buttons-block {
+  width: 100%;
+  text-align: center;
+  margin: 2em auto 0;
+}
+
+.buttons-block div {
+  display: inline-block;
+  width: calc(50% - 1px);
+  cursor: pointer;
+}
+
+.buttons-block div:nth-child(1) {
+  border-right: 1px solid #ededed;
+}
+
+.buttons-block div:nth-child(1) input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.buttons-block div:nth-child(1) span {
+  color: #cccccc;
+}
+
+.buttons-block div:nth-child(2) span {
+  color: #645fc9;
+}
 /*# sourceMappingURL=image-cropper.component.css.map */

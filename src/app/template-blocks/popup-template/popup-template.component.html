@@ -1,6 +1,6 @@
 <div *ngIf="popupService.getShowStatus()" id="popup-wrapper" class="popup-wrapper" (click)="closePopup()">
     <div (click)="$event.stopPropagation()">
-        <img src="./assets/img/close-button.svg" (click)="popupService.setShowStatus(false)" />
+        <img src="./assets/img/close-button-black.svg" (click)="popupService.setShowStatus(false)" />
 
         <ng-content></ng-content>
 

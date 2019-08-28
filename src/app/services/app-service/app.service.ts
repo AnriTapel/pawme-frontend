@@ -21,17 +21,16 @@ export class AppService {
 
   constructor(private http: HttpClient) { }
 
-  public uploadAvatarImage(image: any) {
-    let param = new HttpParams().set('image', image.originalDataURL)
-      .set('rect', image.position.x + "," + image.position.y + "," + image.width + "," + image.height);
-    this.http.post('http://petman.co/api/upload/avatar', param, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      })
-    }).subscribe((data) => {
-        console.log(data);
-        return data
-      });
+  public uploadAvatarImage(body: FormData) {
+    return this.http.post('/api/upload/avatar', body);
+  }
+
+  public uploadNurceryGalleryImage(body: FormData) {
+    return this.http.post('/api/upload/gallery', body);
+  }
+
+  public uploadPersonalImage(body: FormData) {
+    return this.http.post('/api/upload/personal', body);
   }
 
   fieldAutocomplite(searchArray: string[], focus$: Subject<string>, click$: Subject<string>, instance: NgbTypeahead): (text$: Observable<string>) => Observable<any[]> {
@@ -45,6 +44,22 @@ export class AppService {
           : searchArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
       );
     }
+  }
 
+  validateEmailInput(email: string): boolean {
+    let re = /^[A-Za-z]+([\.-]?[A-Za-z]+)*@[A-Za-z]+([\.-]?[A-Za-z]+)*(\.[A-Za-z]{2,3})+$/;
+    return re.test(email);
+  }
+
+  public getImageDataForUpload(data: any): FormData {
+    const body = new FormData();
+    body.append('image', data.inputFile, data.inputFile.name);
+    body.append('rect',
+      (Math.floor(data.props.position.x - (data.props.width / 2 / data.props.scale)) + "," +
+        (Math.floor(data.props.position.y - data.props.height / 2 / data.props.scale)) + "," +
+        Math.floor(data.props.width / data.props.scale) + "," +
+        Math.floor(data.props.height / data.props.scale)
+      ));
+    return body;
   }
 }
