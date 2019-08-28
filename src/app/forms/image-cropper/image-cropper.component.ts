@@ -30,8 +30,8 @@ const styles = (theme) => ({
 export class ImageCropperComponent implements AfterViewInit {
 
   @Input() params: any;
-  @ViewChild(LyResizingCroppingImages, {static: true}) img: LyResizingCroppingImages;
-  @ViewChild('cropping', {static: true}) cropping: any;
+  @ViewChild(LyResizingCroppingImages, { static: true }) img: LyResizingCroppingImages;
+  @ViewChild('cropping', { static: true }) cropping: any;
   classes = this.theme.addStyleSheet(styles);
   inputFile: any;
   myConfig: ImgCropperConfig;
@@ -39,7 +39,7 @@ export class ImageCropperComponent implements AfterViewInit {
   constructor(@Inject(LyTheme2) private theme: LyTheme2, public popupService: PopupTemplateService,
     private eventService: EventService) { }
 
-  ngAfterViewInit(): void{
+  ngAfterViewInit(): void {
     setTimeout(() => {
       this.myConfig = {
         width: this.params.width,
@@ -47,22 +47,22 @@ export class ImageCropperComponent implements AfterViewInit {
       };
       document.getElementById('image-input').click();
     }, 250);
-  }
+}
 
-  inputFileSelected(event: any){
-    this.inputFile = <File>event.target.files[0];
-    this.cropping.selectInputEvent(event);
-  }
+inputFileSelected(event: any) {
+  this.inputFile = <File>event.target.files[0];
+  this.cropping.selectInputEvent(event);
+}
 
-  changeInputImage(){
-    document.getElementById('change-image-input').click();
-  }
+changeInputImage() {
+  document.getElementById('change-image-input').click();
+}
 
-  crop() {
-    this.img.crop();
-  }
-  onCropped(e) {
-    this.eventService.raiseEvent('image-cropped', {inputFile: this.inputFile, props: e});
-  }
+crop() {
+  this.img.crop();
+}
+onCropped(e) {
+  this.eventService.raiseEvent('image-cropped', { inputFile: this.inputFile, props: e });
+}
 
 }
