@@ -684,6 +684,11 @@ $screen-sm: 769px;
             &:not(:last-child) {
                 margin-right: 30px;
             }
+
+            img {
+                width: 90px;
+                height: 135px;
+            }
         }
 
         @media (max-width: $screen-sm - 1px) {
