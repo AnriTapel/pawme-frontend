@@ -6,11 +6,21 @@
     <button class="button sign-in-button">Войти</button>
 </header>
 
-<div class="slider d-flex align-items-center justify-content-center">
-    <img src="./assets/img/breeder-page/pic.png" alt="" class="image slider-image">
-    <img src="./assets/img/breeder-page/pic1.png" alt="" class="image slider-image">
-    <img src="./assets/img/breeder-page/pic2.png" alt="" class="image slider-image">
-    <img src="./assets/img/breeder-page/pic3.png" alt="" class="image slider-image">
+<div class="slider-content">
+    <div class="slider d-flex align-items-center justify-content-center">
+        <div class="slider-item d-flex align-items-center">
+            <img src="./assets/img/breeder-page/pic.png" alt="" class="image slider-image">
+        </div>
+        <div class="slider-item d-flex align-items-center">
+            <img src="./assets/img/breeder-page/pic1.png" alt="" class="image slider-image">
+        </div>
+        <div class="slider-item d-flex align-items-center">
+            <img src="./assets/img/breeder-page/pic2.png" alt="" class="image slider-image">
+        </div>
+        <div class="slider-item d-flex align-items-center">
+            <img src="./assets/img/breeder-page/pic3.png" alt="" class="image slider-image">
+        </div>
+    </div>
 </div>
 
 <div class="main-content d-flex align-items-center flex-column">
@@ -55,7 +65,7 @@
                     занимаемых участниками в отношении поставленных задач.
                 </p>
             </div>
-            <button type="button" class="button button-ask-a-question">Задать вопрос</button>
+            <button type="button" class="button button-ask-a-question d-flex align-items-center justify-content-center">Задать вопрос</button>
         </aside>
         <section class="section d-flex flex-column">
             <h2>О ЩЕНКАХ</h2>
@@ -114,11 +124,17 @@
 
             <div class="additional-info-list d-flex flex-row flex-wrap">
                 <div class="additional-info-item d-flex flex-column mb-32">
-                    <div class="title d-flex align-items-center"
+                    <div class="title d-flex align-items-center justify-content-between"
                          [ngClass]="{'mb-16' : collapse.contract}"
                          (click)="showInfo('contract')">
-                        <i class="icon icon-combined-shape d-flex align-items-center justify-content-center"></i>
-                        Договор PawMe
+                        <div class="d-flex">
+                            <i class="icon icon-combined-shape d-flex align-items-center justify-content-center"></i>
+                            Договор PawMe
+                        </div>
+
+                        <div class="arrow-icon hidden-lg show-sm">
+                            <i class="icon arrow-down"></i>
+                        </div>
                     </div>
                     <div class="description" [ngClass]="{'collapse' : collapse.contract}">
                         Значимость этих проблем настолько очевидна,
@@ -132,11 +148,17 @@
                     <div class="line"></div>
                 </div>
                 <div class="additional-info-item d-flex flex-column mb-32">
-                    <div class="title d-flex align-items-center"
+                    <div class="title d-flex align-items-center justify-content-between"
                          [ngClass]="{'mb-16' : collapse.warranty}"
                          (click)="showInfo('warranty')">
-                        <i class="icon icon-heart d-flex align-items-center justify-content-center"></i>
-                        Гарантии по здоровью
+                        <div class="d-flex">
+                            <i class="icon icon-heart d-flex align-items-center justify-content-center"></i>
+                            Гарантии по здоровью
+                        </div>
+
+                        <div class="arrow-icon hidden-lg show-sm">
+                            <i class="icon arrow-down"></i>
+                        </div>
                     </div>
                     <div class="description" [ngClass]="{'collapse' : collapse.warranty}">
                         Значимость этих проблем настолько очевидна,
@@ -147,11 +169,17 @@
                     <div class="line"></div>
                 </div>
                 <div class="additional-info-item d-flex flex-column">
-                    <div class="title d-flex align-items-center"
+                    <div class="title d-flex align-items-center justify-content-between"
                          [ngClass]="{'mb-16' : collapse.buyPuppy}"
                          (click)="showInfo('buyPuppy')">
-                        <i class="icon icon-certificate-shape d-flex align-items-center justify-content-center"></i>
-                        Как приобрести щенка
+                        <div class="d-flex">
+                            <i class="icon icon-certificate-shape d-flex align-items-center justify-content-center"></i>
+                            Как приобрести щенка
+                        </div>
+
+                        <div class="arrow-icon hidden-lg show-sm">
+                            <i class="icon arrow-down"></i>
+                        </div>
                     </div>
                     <div class="description" [ngClass]="{'collapse' : collapse.buyPuppy}">
                         Значимость этих проблем настолько очевидна,
@@ -162,11 +190,17 @@
                     <div class="line"></div>
                 </div>
                 <div class="additional-info-item d-flex flex-column">
-                    <div class="title d-flex align-items-center"
+                    <div class="title d-flex align-items-center justify-content-between"
                          [ngClass]="{'mb-16' : collapse.gifts}"
                          (click)="showInfo('gifts')">
-                        <i class="icon icon-gift d-flex align-items-center justify-content-center"></i>
-                        Подарки
+                        <div class="d-flex">
+                            <i class="icon icon-gift d-flex align-items-center justify-content-center"></i>
+                            Подарки
+                        </div>
+
+                        <div class="arrow-icon hidden-lg show-sm">
+                            <i class="icon arrow-down"></i>
+                        </div>
                     </div>
                     <div class="description" [ngClass]="{'collapse' : collapse.gifts}">
                         Значимость этих проблем настолько очевидна,
@@ -181,7 +215,7 @@
 
             <div class="about-puppies-title about-puppies-with-btn d-flex justify-content-between">
                 <span class="available-puppies-title">Доступные щенки</span>
-                <button type="button" class="button-ask-a-question">Задать вопрос</button>
+                <button type="button" class="button-ask-a-question d-flex align-items-center justify-content-center hidden-sm">Задать вопрос</button>
             </div>
 
             <div class="available-puppies-list d-flex">
@@ -220,48 +254,6 @@
     </div>
 
     <div class="about-breeder">
-        <aside class="aside d-flex flex-column">
-            <div class="top-info d-flex flex-row justify-content-between">
-                <div class="left-side">
-                    <div class="heading">
-                        <span>заводчик мопсов</span>
-                    </div>
-                    <div class="title">
-                        <span>Сладкие мопсы</span>
-                    </div>
-                    <div class="location d-flex align-items-center">
-                        <i class="icon icon-location"></i>
-                        <span>Челябинск</span>
-                    </div>
-                    <div class="link d-flex align-items-center">
-                        <i class="icon icon-link"></i>
-                        <span>sladkiemopsi.ru</span>
-                    </div>
-                    <div class="social-networks d-flex">
-                        <div class="instagram">
-                            <i class="instagram-icon d-flex align-items-center justify-content-center"></i>
-                        </div>
-                        <div class="facebook">
-                            <i class="facebook-icon d-flex align-items-center justify-content-center"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="right-side">
-                    <img src="./assets/img/breeder-page/group-2.png" alt="">
-                </div>
-            </div>
-            <div class="line"></div>
-            <div class="description">
-                <p class="subtitle">О питомнике</p>
-                <p>
-                    Значимость этих проблем настолько очевидна,
-                    что консультация с широким активом способствует подготовки и реализации новых предложений.
-                    С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                    занимаемых участниками в отношении поставленных задач.
-                </p>
-            </div>
-            <button type="button" class="button button-ask-a-question">Задать вопрос</button>
-        </aside>
         <section class="section d-flex flex-column">
             <h2>О ЗАВОДЧИКЕ</h2>
 
