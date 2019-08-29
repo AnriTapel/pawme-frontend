@@ -57,7 +57,7 @@ export class AppService {
 
   public getImageDataForUpload(data: any): FormData {
     const body = new FormData();
-    body.append('image', data.inputFile, data.inputFile.name);
+    body.append('image', data.inputFile, data.inputFile.name || "main_image.jpg");
     body.append('rect',
       (Math.floor(data.props.position.x - (data.props.width / 2 / data.props.scale)) + "," +
         (Math.floor(data.props.position.y - data.props.height / 2 / data.props.scale)) + "," +

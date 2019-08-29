@@ -3,6 +3,7 @@ import { PopupTemplateService } from 'src/app/services/popup-service/popup-templ
 import { LyResizingCroppingImages, ImgCropperConfig } from '@alyle/ui/resizing-cropping-images';
 import { LyTheme2 } from '@alyle/ui';
 import { EventService } from 'src/app/services/event-service/events.service';
+import { Observable } from 'rxjs';
 
 const styles = (theme) => ({
   '@global': {
@@ -30,31 +31,59 @@ const styles = (theme) => ({
 export class ImageCropperComponent implements AfterViewInit {
 
   @Input() params: any;
-  @ViewChild(LyResizingCroppingImages, {static: true}) img: LyResizingCroppingImages;
-  @ViewChild('cropping', {static: true}) cropping: any;
+  @ViewChild(LyResizingCroppingImages, { static: true }) img: LyResizingCroppingImages;
+  @ViewChild('cropping', { static: true }) cropping: any;
   classes = this.theme.addStyleSheet(styles);
   inputFile: any;
   myConfig: ImgCropperConfig;
 
   constructor(@Inject(LyTheme2) private theme: LyTheme2, public popupService: PopupTemplateService,
-    private eventService: EventService) { }
+    public eventService: EventService) { }
 
-  ngAfterViewInit(): void{
+  ngAfterViewInit(): void {
     setTimeout(() => {
       this.myConfig = {
         width: this.params.width,
         height: this.params.height
       };
-      document.getElementById('image-input').click();
+      if (this.params.imageUrl) {
+        this.cropping.setImageUrl(this.params.imageUrl);
+        let base64Handler = this.eventService.subscribe('image-base64-loaded', (base64) => {
+          fetch(base64)
+          .then(res => res.blob())
+          .then(blob => {
+            this.inputFile = new File([blob], "main_image.jpg");
+          });
+          base64Handler.unsubscribe();
+        });
+        this.getBase64ByImageUrl();
+      }
+      else
+        document.getElementById('image-input').click();
     }, 250);
   }
 
-  inputFileSelected(event: any){
+  inputFileSelected(event: any) {
     this.inputFile = <File>event.target.files[0];
     this.cropping.selectInputEvent(event);
   }
 
-  changeInputImage(){
+  getBase64ByImageUrl() {
+    let xhr = new XMLHttpRequest();
+    let result;
+    xhr.onload = () => {
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        this.eventService.raiseEvent('image-base64-loaded', reader.result);
+      }
+      reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', this.params.imageUrl);
+    xhr.responseType = 'blob';
+    xhr.send();
+  }
+
+  changeInputImage() {
     document.getElementById('change-image-input').click();
   }
 
@@ -62,7 +91,7 @@ export class ImageCropperComponent implements AfterViewInit {
     this.img.crop();
   }
   onCropped(e) {
-    this.eventService.raiseEvent('image-cropped', {inputFile: this.inputFile, props: e});
+    this.eventService.raiseEvent('image-cropped', { inputFile: this.inputFile, props: e });
   }
 
 }
