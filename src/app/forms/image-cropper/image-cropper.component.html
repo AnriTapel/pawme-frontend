@@ -1,4 +1,4 @@
-<h3>РЕДАКТОР ФОТО</h3>
+<h4>Выбор миниатюры</h4>
 
 <input #_fileInput type="file" id="image-input" (change)="inputFileSelected($event)" accept="image/*" hidden>
 
@@ -7,6 +7,8 @@
     <span>Зашрузите или перетащие изображение</span>
 </ly-cropping>
 
+<p>Двигайте фото и меняйте его масштаб</p>
+
 <div class="image-cropper-control-panel">
     <img src="./assets/img/zoom-out.svg" alt="Уменьшить" (click)="cropping.zoomOut()" />
     <!--<img src="./assets/img/rotate.svg" alt="Уменьшить" (click)="cropping.rotate(90)" />-->
@@ -14,11 +16,9 @@
 </div>
 
 <div *ngIf="cropping.isLoaded" class="buttons-block">
-    <div (click)="changeInputImage()">
-        <span>Изменить фото</span>
+    <button (click)="changeInputImage()" class="custom-btn btn-transparent">
+        Заменить фото
         <input #_fileInput id="change-image-input" type="file" (change)="inputFileSelected($event)" accept="image/*" hidden>
-    </div>
-    <div (click)="crop()">
-        <span>Применить</span>
-    </div>
+    </button>
+    <button (click)="crop()" class="custom-btn btn-purple">Сохранить</button>
 </div>

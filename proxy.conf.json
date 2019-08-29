@@ -1,40 +1,14 @@
 {
-  "/api/upload/avatar": {
-    "target": "http://petman.co/api/upload/avatar",
+  "/api/*": {
+    "target": "http://petman.co",
     "secure": false,
-    "pathRewrite": {
-      "^/api/upload/avatar": ""
-    },
     "changeOrigin": true,
     "logLevel": "debug"
   },
 
-  "/api/upload/gallery": {
-    "target": "http://petman.co/api/upload/gallery",
+  "/img/*": {
+    "target": "http://petman.co",
     "secure": false,
-    "pathRewrite": {
-      "^/api/upload/gallery": ""
-    },
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-
-  "/api/upload/pet": {
-    "target": "http://petman.co/api/upload/pet",
-    "secure": false,
-    "pathRewrite": {
-      "^/api/upload/pet": ""
-    },
-    "changeOrigin": true,
-    "logLevel": "debug"
-  },
-
-  "/api/upload/personal": {
-    "target": "http://petman.co/api/upload/personal",
-    "secure": false,
-    "pathRewrite": {
-      "^/api/upload/personal": ""
-    },
     "changeOrigin": true,
     "logLevel": "debug"
   }

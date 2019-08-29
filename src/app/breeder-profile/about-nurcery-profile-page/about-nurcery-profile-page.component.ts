@@ -14,7 +14,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
   nurceryData: any;
   isAdditionalBreed: boolean = false;
-  curProfileImage: string;
+  curProfileImage: string = null;
   curGalleryPhotos: string[] = [];
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
@@ -45,7 +45,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   }
 
   previewNurceryPhoto(): void {
-    this.popupService.setPopupParams({width: 200, height: 200, isRect: false});
+    this.popupService.setPopupParams({width: 200, height: 200, isRect: false, 
+      imageUrl: this.curProfileImage ? "/img/" + this.nurceryData.nurceryProfileImage.main + ".jpg" : null});
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {

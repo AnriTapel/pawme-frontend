@@ -13,6 +13,10 @@ $screen-sm: 769px;
     background-size: auto;
 }
 
+span, p, div {
+    font-family: 'Intro-Regular', serif !important;
+}
+
 .header {
     width: 100%;
     max-width: 1440px;
@@ -27,9 +31,29 @@ $screen-sm: 769px;
     }
 }
 
-.slider {
+.slider-content {
+    width: 100%;
+    display: flex;
+
     @media (max-width: $screen-lg - 1px) {
-        width: 100%;
+        overflow-x: scroll;
+    }
+}
+
+.slider {
+    width: 1440px;
+    min-width: 1440px;
+    .slider-item {
+        width: 360px;
+        height: 360px;
+        img {
+            width: 360px;
+            height: 360px;
+            min-width: 360px;
+        }
+    }
+
+    @media (max-width: $screen-lg - 1px) {
         overflow-x: scroll;
     }
 }
@@ -92,7 +116,7 @@ $screen-sm: 769px;
     }
 }
 
-.about-puppies, .about-breeder {
+.about-puppies {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -162,6 +186,7 @@ $screen-sm: 769px;
         border: solid 1px #cbd8f6;
         background-color: #ffffff;
         margin: 21px 0;
+        opacity: 0.5;
     }
 
     .heading {
@@ -200,17 +225,18 @@ $screen-sm: 769px;
             margin-right: 14px;
         }
 
-        .instagram-icon, .facebook-icon {
-            width: 29px;
-            height: 29px;
-            opacity: 0.5;
-            background-color: #645fc9;
+        .instagram-icon {
             border-radius: 50%;
             cursor: pointer;
-            &:after {
-                display: inline-block;
-                @include background(17px, 18px, '/assets/img/breeder-page/path.svg');
-            }
+            display: inline-block;
+            @include background(26px, 26px, '/assets/img/breeder-page/instagram.png');
+        }
+        .facebook-icon {
+            //opacity: 0.5;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-block;
+            @include background(26px, 26px, '/assets/img/breeder-page/facebook.png');
         }
     }
 
@@ -254,6 +280,7 @@ $screen-sm: 769px;
         border: solid 1px #cbd8f6;
         background-color: #ffffff;
         margin: 31px 0;
+        opacity: 0.5;
     }
 
     .about-puppies-title {
@@ -407,7 +434,7 @@ $screen-sm: 769px;
         .icon-certificate-shape {
             &:after {
                 display: inline-block;
-                @include background(18px, 18px, '/assets/img/breeder-page/gift.svg');
+                @include background(17px, 17px, '/assets/img/breeder-page/how.svg');
             }
         }
         .icon-gift {
@@ -415,6 +442,17 @@ $screen-sm: 769px;
                 display: inline-block;
                 @include background(17px, 16px, '/assets/img/breeder-page/gift.svg');
             }
+        }
+        .arrow-down {
+            &.icon {
+                width: 30px;
+                height: 30px;
+                margin-right: 0;
+                background-color: #fafafa;
+                border-radius: 0;
+            }
+            display: inline-block;
+            @include background(16px, 11px, '/assets/img/breeder-page/arrow-down.svg');
         }
         .contract-link {
             margin-top: 16px;
@@ -426,11 +464,23 @@ $screen-sm: 769px;
             }
         }
 
+        .line {
+            display: none;
+        }
+
+        .collapse {
+            display: block;
+        }
+
         @media (max-width: $screen-sm - 1px) {
             width: 100%;
             max-width: 100%;
             margin-right: 0!important;
             margin-bottom: 0!important;
+
+            .line {
+                display: block;
+            }
 
             .title {
                 margin-bottom: 0;
@@ -644,6 +694,11 @@ $screen-sm: 769px;
             &:not(:last-child) {
                 margin-right: 30px;
             }
+
+            img {
+                width: 90px;
+                height: 135px;
+            }
         }
 
         @media (max-width: $screen-sm - 1px) {
@@ -746,6 +801,21 @@ $screen-sm: 769px;
             font-size: 20px;
             margin-bottom: 22px;
         }
+    }
+}
+
+@media (min-width: $screen-sm) {
+    .hidden-lg {
+        display: none!important;
+    }
+}
+
+@media (max-width: $screen-sm - 1px) {
+    .hidden-sm {
+        display: none!important;
+    }
+    .show-sm {
+        display: block!important;
     }
 }
 
