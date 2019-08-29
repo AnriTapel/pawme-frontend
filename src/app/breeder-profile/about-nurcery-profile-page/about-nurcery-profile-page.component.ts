@@ -14,7 +14,6 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
   nurceryData: any;
   isAdditionalBreed: boolean = false;
-  curProfileImage: string = null;
   curGalleryPhotos: string[] = [];
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
@@ -45,8 +44,10 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   }
 
   previewNurceryPhoto(): void {
-    this.popupService.setPopupParams({width: 200, height: 200, isRect: false, 
-      imageUrl: this.curProfileImage ? "/img/" + this.nurceryData.nurceryProfileImage.main + ".jpg" : null});
+    this.popupService.setPopupParams({
+      width: 200, height: 200, isRect: false,
+      imageUrl: this.nurceryData.nurceryProfileImage ? "/img/" + this.nurceryData.nurceryProfileImage.main + ".jpg" : null
+    });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
@@ -54,28 +55,32 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.appService.uploadAvatarImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         this.nurceryData.nurceryProfileImage = imageData;
-        this.curProfileImage = "http://petman.co/img/" + imageData.preview + ".jpg";
       });
       croppedHandler.unsubscribe();
     });
   }
 
-  previewGalleryPhoto(): void {
-    this.popupService.setPopupParams({width: 360, height: 360, isRect: true});
+  previewGalleryPhoto(index: number): void {
+    this.popupService.setPopupParams({
+      width: 360, height: 360, isRect: true,
+      imageUrl: index > -1 ? "/img/" + this.nurceryData.nurceryGallery[index].main + ".jpg" : null
+    });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadNurceryGalleryImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
-        this.nurceryData.nurceryGallery.push(imageData);
-        this.curGalleryPhotos.push("http://petman.co/img/" + imageData.preview + ".jpg");
+        if (index == -1) 
+          this.nurceryData.nurceryGallery.push(imageData);
+        else
+          this.nurceryData.nurceryGallery[index] = imageData;
       });
       croppedHandler.unsubscribe();
     });
   }
-  
-  deleteGalleryImage(index: number): void{
+
+  deleteGalleryImage(index: number): void {
     this.curGalleryPhotos.splice(index, 1);
     this.nurceryData.nurceryGallery.splice(index, 1);
   }

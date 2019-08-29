@@ -16,7 +16,7 @@
         <div *ngFor="let parent of parentsData.parents; let i = index;" class="avail-dog-entity-item"
             (click)="showCurrentParentPage(i)">
             <div class="entity-image-block">
-                <img src='http://petman.co/img/{{parent.photos[0].preview}}.jpg' alt="Изображение родителя" />
+                <img src='/img/{{parent.photos[0].preview}}.jpg' alt="Изображение родителя" />
             </div>
 
             <div class="entity-info-block">
@@ -146,24 +146,24 @@
     <div class="add-parent-page-photos-block">
         <label>Загрузите фотографии</label>
 
-        <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block" (click)="previewParentImage()"
+        <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block" (click)="previewParentImage(-1)"
             [class.invalid-form-field-value]="invalidFields.includes('photos')">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
             <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
         </div>
 
         <div *ngIf="currentParentData.photos.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of curParentImages;let i = index" class="active-galley-photo-block">
+            <div *ngFor="let photo of currentParentData.photos;let i = index" class="active-galley-photo-block">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
                     (click)="deleteParentImage(i)" />
-                <img [src]="photo" class="pet-image" alt="Изображение в галерее" />
+                <img src="/img/{{photo.preview}}.jpg" class="pet-image" alt="Изображение в галерее" (click)="previewParentImage(i)"/>
             </div>
-            <div class="empty-galley-photo-block" (click)="previewParentImage()">
+            <div class="empty-galley-photo-block" (click)="previewParentImage(-1)">
                 <img src="./assets/img/photo-camera.svg" alt="Камера" />
             </div>
         </div>
 
-        <div *ngIf="currentParentData.photos.length == 0" (click)="previewParentImage()"
+        <div *ngIf="currentParentData.photos.length == 0" (click)="previewParentImage(-1)"
             class="gallery-upload-button custom-btn btn-transparent">
             <span>Выбрать</span>
         </div>

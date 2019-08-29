@@ -3,7 +3,6 @@ import { PopupTemplateService } from 'src/app/services/popup-service/popup-templ
 import { LyResizingCroppingImages, ImgCropperConfig } from '@alyle/ui/resizing-cropping-images';
 import { LyTheme2 } from '@alyle/ui';
 import { EventService } from 'src/app/services/event-service/events.service';
-import { Observable } from 'rxjs';
 
 const styles = (theme) => ({
   '@global': {
@@ -70,7 +69,6 @@ export class ImageCropperComponent implements AfterViewInit {
 
   getBase64ByImageUrl() {
     let xhr = new XMLHttpRequest();
-    let result;
     xhr.onload = () => {
       let reader = new FileReader();
       reader.onloadend = () => {

@@ -53,7 +53,7 @@
 
         <div *ngIf="breederData.photo" class="gallery-uploaded-photos-block">
             <div class="active-galley-photo-block">
-                <img [src]="curPersonalImage" class="personal-image" alt="Фото заводчика">
+                <img src="/img/{{breederData.photo.preview}}.jpg" class="personal-image" alt="Фото заводчика" (click)="previewPersonalImage()">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
                     (click)="deletePersonalImage()" />
             </div>

@@ -69,7 +69,7 @@
 
         <div *ngIf="nurceryData.nurceryProfileImage" class="image-block active-profile-image" id="profile-image-block"
             (click)="previewNurceryPhoto()">
-            <img [src]="curProfileImage" alt="Изображение профиля" />
+            <img src="/img/{{nurceryData.nurceryProfileImage.preview}}.jpg" alt="Изображение профиля" />
         </div>
 
         <div class="profile-image-text-block">
@@ -82,23 +82,23 @@
         <label for="nurcery-gallery">Фото в основную галерею</label><br>
         <span class="block-description">Фотографии будут отображаться в галерее на вашей странице заводчика</span>
 
-        <div *ngIf="nurceryData.nurceryGallery.length == 0" class="gallery-initial-block" (click)="previewGalleryPhoto()">
+        <div *ngIf="nurceryData.nurceryGallery.length == 0" class="gallery-initial-block" (click)="previewGalleryPhoto(-1)">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
             <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
         </div>
 
         <div *ngIf="nurceryData.nurceryGallery.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of curGalleryPhotos;let i = index" class="active-galley-photo-block">
+            <div *ngFor="let photo of nurceryData.nurceryGallery;let i = index" class="active-galley-photo-block">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку" (click)="deleteGalleryImage(i)" />
-                <img [src]="photo" alt="Изображение в галерее"/>
+                <img src="/img/{{photo.preview}}.jpg" alt="Изображение в галерее" (click)="previewGalleryPhoto(i)"/>
             </div>
-            <div class="empty-galley-photo-block" (click)="previewGalleryPhoto()">
+            <div class="empty-galley-photo-block" (click)="previewGalleryPhoto(-1)">
                 <img src="./assets/img/photo-camera.svg" alt="Камера"/>
             </div>
         </div>
 
         <div class="gallery-upload-button custom-btn btn-transparent"
-                (click)="previewGalleryPhoto()">
+                (click)="previewGalleryPhoto(-1)">
             <span>Выбрать</span>
         </div>
     </div>

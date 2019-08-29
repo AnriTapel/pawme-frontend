@@ -25,7 +25,6 @@ export class AddPuppyProfilePageComponent implements OnInit {
     photos: []
   }
   puppiesData: any;
-  curPuppyImages: any = [];
   currentPuppyData: any;
 
   birthdayModel: NgbDateStruct = { day: null, month: null, year: null };
@@ -73,23 +72,27 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.birthdayModel = { year: this.birthdayModel.year, month: this.birthdayModel.month, day: this.birthdayModel.day };
   }
 
-  previewPuppyImage(): void {
-    this.popupService.setPopupParams({ width: 210, height: 180, isRect: true });
+  previewPuppyImage(index: number): void {
+    this.popupService.setPopupParams({
+      width: 210, height: 180, isRect: true,
+      imageUrl: index > -1 ? "/img/" + this.currentPuppyData.photos[index].main + ".jpg" : null
+    });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadPetImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
-        this.currentPuppyData.photos.push(imageData);
-        this.curPuppyImages.push("http://petman.co/img/" + imageData.preview + ".jpg");
+        if (index == -1)
+          this.currentPuppyData.photos.push(imageData);
+        else
+          this.currentPuppyData.photos[index] = imageData;
       });
       croppedHandler.unsubscribe();
     });
   }
 
   deletePuppyImage(index: number): void {
-    this.curPuppyImages.splice(index, 1);
     this.currentPuppyData.photos.splice(index, 1);
   }
 
@@ -109,8 +112,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.isMainPage = true;
   }
 
-  deleteParent(index: number): void {
-    this.puppiesData.parents.splice(index, 1);
+  deletePuppy(index: number): void {
+    this.puppiesData.puppies.splice(index, 1);
   }
 
   saveDraft() {

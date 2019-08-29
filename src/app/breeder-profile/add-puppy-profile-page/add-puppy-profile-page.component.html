@@ -9,7 +9,7 @@
             (click)="showCurrentPuppyPage(i)">
 
             <div class="entity-image-block">
-                <img src='http://petman.co/img/{{puppy.photos[0].preview}}.jpg' alt="Изображение щенка" />
+                <img src='/img/{{puppy.photos[0].preview}}.jpg' alt="Изображение щенка" />
             </div>
 
             <div class="entity-info-block">
@@ -160,23 +160,23 @@
         <label>Загрузите фотографии</label>
 
         <div *ngIf="currentPuppyData.photos.length == 0" class="gallery-initial-block"
-            [class.invalid-form-field-value]="invalidFields.includes('photos')" (click)="previewPuppyImage()">
+            [class.invalid-form-field-value]="invalidFields.includes('photos')" (click)="previewPuppyImage(-1)">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
             <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
         </div>
 
         <div *ngIf="currentPuppyData.photos.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of curPuppyImages;let i = index" class="active-galley-photo-block">
+            <div *ngFor="let photo of currentPuppyData.photos;let i = index" class="active-galley-photo-block">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
                     (click)="deletePuppyImage(i)" />
-                <img [src]="photo" class="pet-image" alt="Изображение в галерее" />
+                <img src="/img/{{photo.preview}}.jpg" class="pet-image" (click)="previewPuppyImage(i)" alt="Изображение в галерее" />
             </div>
-            <div class="empty-galley-photo-block" (click)="previewPuppyImage()">
+            <div class="empty-galley-photo-block" (click)="previewPuppyImage(-1)">
                 <img src="./assets/img/photo-camera.svg" alt="Камера" />
             </div>
         </div>
 
-        <div *ngIf="currentPuppyData.photos.length == 0" (click)="previewPuppyImage()"
+        <div *ngIf="currentPuppyData.photos.length == 0" (click)="previewPuppyImage(-1)"
             class="gallery-upload-button custom-btn btn-transparent">
             <span>Выбрать</span>
         </div>

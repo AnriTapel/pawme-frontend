@@ -29,7 +29,8 @@ export class AboutMeProfilePageComponent implements OnInit {
   }
 
   previewPersonalImage() {
-    this.popupService.setPopupParams({ width: 270, height: 200, isRect: true });
+    this.popupService.setPopupParams({ width: 270, height: 200, isRect: true,
+      imageUrl: this.curPersonalImage ? "/img/" + this.breederData.photo.main + ".jpg" : null});
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {

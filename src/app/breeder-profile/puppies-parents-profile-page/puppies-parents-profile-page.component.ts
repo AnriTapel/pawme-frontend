@@ -23,7 +23,6 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   parentsData: any;
   currentParentData: any;
 
-  curParentImages: any[] = [];
   currentBodyPart: string;
   currentMedicalTest: string;
   invalidFields: any[] = [];
@@ -76,23 +75,26 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.isMainPage = false;
   }
 
-  previewParentImage(): void {
-    this.popupService.setPopupParams({ width: 210, height: 180, isRect: true });
+  previewParentImage(index: number): void {
+    this.popupService.setPopupParams({ width: 210, height: 180, isRect: true,
+      imageUrl: index > -1 ? "/img/" + this.currentParentData.photos[index].main + ".jpg" : null
+    });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadPetImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
-        this.currentParentData.photos.push(imageData);
-        this.curParentImages.push("http://petman.co/img/" + imageData.preview + ".jpg");
+        if (index == -1)
+          this.currentParentData.photos.push(imageData);
+        else 
+          this.currentParentData.photos[index] = imageData;
       });
       croppedHandler.unsubscribe();
     });
   }
 
   deleteParentImage(index: number): void {
-    this.curParentImages.splice(index, 1);
     this.currentParentData.photos.splice(index, 1);
   }
 
