@@ -17,6 +17,10 @@ span, p, div {
     font-family: 'Intro-Regular', serif !important;
 }
 
+.font-intro-book {
+    font-family: 'Intro-Book', serif !important;
+}
+
 .header {
     width: 100%;
     max-width: 1440px;
@@ -43,6 +47,7 @@ span, p, div {
 .slider {
     width: 1440px;
     min-width: 1440px;
+    margin: 0 auto;
     .slider-item {
         width: 360px;
         height: 360px;
@@ -283,12 +288,27 @@ span, p, div {
         opacity: 0.5;
     }
 
+    .ml-6 {
+        margin-left: 6px;
+    }
+
     .about-puppies-title {
         span {
             font-size: 20px;
             color: #0e0b4d;
             @media (max-width: $screen-sm - 1px) {
                 font-size: 18px;
+            }
+        }
+
+        .question-icon {
+            width: 20px;
+            height: 20px;
+            background-color: #cbd8f6;
+            border-radius: 50%;
+            &:after {
+                display: inline-block;
+                @include background(7px, 11px, '/assets/img/breeder-page/question.svg')
             }
         }
     }
@@ -336,6 +356,7 @@ span, p, div {
     .pawme-label-item-plus {
         //font-size: 20px;
         color: #0e0b4d;
+        margin-bottom: 12px!important;
     }
 
     .medical-title {
@@ -510,11 +531,11 @@ span, p, div {
         color: #ffffff;
         text-transform: uppercase;
         padding: 0;
-        margin: 0 0 31px 0;
         border: none;
     }
 
     .about-puppies-with-btn {
+        margin-bottom: 32px;
         @media (max-width: $screen-sm - 1px) {
 
             .available-puppies-title {
@@ -574,6 +595,7 @@ span, p, div {
     .about-breeder-content {
         display: flex;
         justify-content: space-between;
+        margin-top: 32px;
         .left-side {
             max-width: 374px;
             margin-right: 30px;
