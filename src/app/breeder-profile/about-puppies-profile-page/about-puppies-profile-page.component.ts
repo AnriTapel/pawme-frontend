@@ -11,7 +11,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
   puppiesData: PuppiesInfo;
 
-  constructor(protected appService: AppService) { }
+  constructor(public appService: AppService) { }
 
   ngOnInit() {
     this.puppiesData = {

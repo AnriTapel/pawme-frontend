@@ -34,8 +34,8 @@
             </strong> и
             <strong>клеймо</strong>.</p>
         <div class="custom-checkbox">
-            <div (click)="puppiesData.kitAvail = !puppiesData.kitAvail">
-                <img *ngIf="puppiesData.kitAvail" src="./assets/img/check-mark.png" />
+            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet">
+                <img *ngIf="puppiesData.petmanSet" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю наличие такого комплекта</label>
         </div>
@@ -83,8 +83,8 @@
 
 
         <div class="custom-checkbox">
-            <div (click)="puppiesData.contract = !puppiesData.contract">
-                <img *ngIf="puppiesData.contract" src="./assets/img/check-mark.png" />
+            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract">
+                <img *ngIf="puppiesData.petmanContract" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю готовность использовать договор</label>
         </div>
@@ -95,7 +95,7 @@
     <div class="breeder-profile-subpage-form-left">
         <label for="guarantee-period">На сколько месяцев вы готовы дать гарантию по здоровью щенка?</label>
         <div class="input-group mb-3">
-            <input type="number" name="guarantee-period" class="form-control" [(ngModel)]="puppiesData.guaranteePeriod"
+            <input type="number" name="guarantee-period" class="form-control" [(ngModel)]="puppiesData.insuranceTerm"
                 placeholder="12" aria-label="12" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">месяцев</span>
@@ -113,7 +113,7 @@
         <br>
         <span class="block-description">Обычно заводчики указывают заболевания или проблемные части тела, специфические
             для конкретной породы.</span>
-        <textarea rows="5" class="form-control" [(ngModel)]="puppiesData.problems"></textarea>
+        <textarea rows="5" class="form-control" [(ngModel)]="puppiesData.insuranceCoverage"></textarea>
     </div>
 
     <hr>

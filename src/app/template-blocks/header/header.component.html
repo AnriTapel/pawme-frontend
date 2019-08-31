@@ -23,7 +23,7 @@
             </div>
         </div>
         <div *ngIf="!appService.userData" class="my-2 my-lg-0">
-            <input type="button" class="custom-btn btn-transparent" value="Войти" (click)="showLoginPopup()" />
+            <input type="button" class="custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
         </div>
     </nav>
 </header>
