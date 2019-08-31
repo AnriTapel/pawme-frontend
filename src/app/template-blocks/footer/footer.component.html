@@ -21,7 +21,6 @@
 </footer>
 
 <app-popup-template *ngIf="popupService.getShowStatus()" [ngSwitch]="popupService.getCurrentForm()">
-    <app-login *ngSwitchCase="'login'"></app-login>
     <app-sign-up *ngSwitchCase="'sign-up'"></app-sign-up>
     <app-remind-password *ngSwitchCase="'remind-password'"></app-remind-password>
     <app-image-cropper *ngSwitchCase="'image-cropper'" [params]="popupService.getPopupParams()"></app-image-cropper>

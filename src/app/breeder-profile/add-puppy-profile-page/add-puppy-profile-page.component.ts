@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { EventService } from '../../services/event-service/events.service';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
+import { BreederProfileService } from 'src/app/services/breeder-profile-service/breeder-profile.service';
 
 @Component({
   selector: 'app-add-puppy-profile-page',
@@ -43,8 +44,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
   dadDogClick$ = new Subject<string>();
   puppyBreedClick$ = new Subject<string>();
 
+  // Should corresponding adding buttons be displayed
+  isDadEmptyButton: boolean = false;
+  isMomEmptyButton: boolean = false;
+
   constructor(public appService: AppService, private popupService: PopupTemplateService,
-    private eventService: EventService) { }
+    private eventService: EventService, public breederService: BreederProfileService) { }
 
   ngOnInit() {
     this.puppiesData = {
@@ -61,6 +66,18 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.currentPuppyData = this.puppiesData.puppies[index];
 
     this.isMainPage = false;
+  }
+
+  onDadInputClick(event: any): void{
+    this.dadDogFocus$.next(event.target.value);
+    if (this.puppiesData.parents.length == 0)
+      this.isDadEmptyButton = true;
+  }
+
+  onMomInputClick(event: any): void{
+    this.momDogFocus$.next(event.target.value);
+    if (this.puppiesData.parents.length == 0)
+      this.isMomEmptyButton = true;
   }
 
   getCurrentMaxDate(): any {

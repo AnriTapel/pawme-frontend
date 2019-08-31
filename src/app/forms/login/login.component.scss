@@ -1,3 +1,13 @@
+h3{
+    display: block;
+    margin: 0 auto 1em;
+    text-align: center;
+}
+
+form{
+    margin-bottom: 5em;
+}
+
 span{
     font-size: 14px;
 
@@ -17,7 +27,7 @@ span{
     margin: 0 auto;
 }
 
-input[type=button]{
+button{
     display: block;
     width: 50%;
     margin: 0 auto;
@@ -25,7 +35,7 @@ input[type=button]{
 }
 
 @media screen and (max-width: 769px){
-    input[type=button]{
+    button{
         width: 80%;
     }
 }

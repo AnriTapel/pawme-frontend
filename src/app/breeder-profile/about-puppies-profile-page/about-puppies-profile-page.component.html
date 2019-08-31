@@ -49,44 +49,24 @@
         <span class="block-description">Отметьте медицинские услуги, которые вы проводятся для ваших щенков</span>
         <div class="medicine-checkboxs-list">
             <div class="breeder-profile-subpage-form-left">
-                <div class="custom-checkbox">
-                    <div (click)="puppiesData.medicines.vaccinations = !puppiesData.medicines.vaccinations">
-                        <img *ngIf="puppiesData.medicines.vaccinations" src="./assets/img/check-mark.png" />
+                <ng-container *ngFor="let test of appService.puppyTests">
+                    <div *ngIf="test.id % 2 == 1" class="custom-checkbox">
+                        <div (click)="puppyTestClicked(test)">
+                            <img *ngIf="getTestStatus(test)" src="./assets/img/check-mark.png" />
+                        </div>
+                        <label>{{test.name}}</label>
                     </div>
-                    <label>Поставлены прививки</label>
-                </div>
-                <div class="custom-checkbox">
-                    <div (click)="puppiesData.medicines.worms = !puppiesData.medicines.worms">
-                        <img *ngIf="puppiesData.medicines.worms" src="./assets/img/check-mark.png" />
-                    </div>
-                    <label>Обработаны от глистов</label>
-                </div>
-                <div class="custom-checkbox">
-                    <div (click)="puppiesData.medicines.chip = !puppiesData.medicines.chip">
-                        <img *ngIf="puppiesData.medicines.chip" src="./assets/img/check-mark.png" />
-                    </div>
-                    <label>Электронный чип</label>
-                </div>
-                <div class="custom-checkbox">
-                    <div (click)="puppiesData.medicines.castration = !puppiesData.medicines.castration">
-                        <img *ngIf="puppiesData.medicines.castration" src="./assets/img/check-mark.png" />
-                    </div>
-                    <label>Стерилизация/кастрация</label>
-                </div>
+                </ng-container>
             </div>
             <div class="breeder-profile-subpage-form-right">
-                <div class="custom-checkbox">
-                    <div (click)="puppiesData.medicines.vaccinations = !puppiesData.medicines.vaccinations">
-                        <img *ngIf="puppiesData.medicines.vaccinations" src="./assets/img/check-mark.png" />
+                <ng-container *ngFor="let test of appService.puppyTests">
+                    <div *ngIf="test.id % 2 == 0" class="custom-checkbox">
+                        <div (click)="puppyTestClicked(test)">
+                            <img *ngIf="getTestStatus(test)" src="./assets/img/check-mark.png" />
+                        </div>
+                        <label>{{test.name}}</label>
                     </div>
-                    <label>Поставлены прививки</label>
-                </div>
-                <div class="custom-checkbox">
-                    <div (click)="puppiesData.medicines.worms = !puppiesData.medicines.worms">
-                        <img *ngIf="puppiesData.medicines.worms" src="./assets/img/check-mark.png" />
-                    </div>
-                    <label>Обработаны от глистов</label>
-                </div>
+                </ng-container>
             </div>
         </div>
     </div>

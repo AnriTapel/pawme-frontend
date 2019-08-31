@@ -17,3 +17,35 @@
         }
     }
 }
+
+.empty-parent-button-block{
+    position: absolute;
+    width: calc(100% - 1.25em);
+    padding: 10px 0 10px 15px;
+    color: #0e0b4d;
+    font-family: 'Intro-Regular';
+    border: 1px solid #cbd8f6;
+    border-radius: 4px;
+    border-top: unset;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    background-color: #fff;
+    z-index: 10;
+    cursor: pointer;
+
+    img{
+        width: 16px;
+        display: inline-block;
+        padding-bottom: 3px;
+    }
+
+    &>hover{
+        background-color: #efefef;
+    }
+}
+
+@media screen and (max-width: 769px){
+    .empty-parent-button-block{
+        width: 100%;
+    }
+}

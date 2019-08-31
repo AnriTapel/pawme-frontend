@@ -1,36 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
 import { AppService } from 'src/app/services/app-service/app.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  breederEmail: string;
-  breederPassword: string;
-
+  credentials = { username: '', password: '' };
   loginError: boolean = false;
 
-  constructor(private popupService: PopupTemplateService, private appService: AppService) { }
+  constructor(private popupService: PopupTemplateService, private appService: AppService, private router: Router) { }
 
-  ngOnInit() {
-  }
-
-  loginBreeder(){
+  loginBreeder() {
     this.loginError = false;
-    if (!this.appService.validateEmailInput(this.breederEmail))
+    if (!this.appService.validateEmailInput(this.credentials.username))
       return this.loginError = true;
-      
+    this.appService.authenticate(this.credentials, () => {
+      this.router.navigateByUrl('/breeder-landing');
+    });
+    return false;
   }
 
-  switchToRemindPasswordForm(){
+  switchToRemindPasswordForm() {
     this.popupService.setCurrentForm("remind-password");
   }
 
-  switchToSignUpForm(){
+  switchToSignUpForm() {
     this.popupService.setCurrentForm("sign-up");
   }
 

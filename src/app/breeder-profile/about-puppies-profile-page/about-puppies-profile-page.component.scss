@@ -19,6 +19,11 @@ input[type='checkbox']{
     label{
         max-width: calc(100% - 30px);
     }
+
+    &> span:nth-child(1){
+        font-size: 16px;
+        font-family: 'Intro-Regular';
+    }
 }
 
 .kit-avail-block{
@@ -30,18 +35,10 @@ input[type='checkbox']{
         margin-top: 5px;
         font-family: 'Intro-Book';
     }
-
-    &> span{
-        font-size: 16px;
-    }
 }
 
 .contract-block{
     background-color: rgba(203, 216, 246, 0.5);
-
-    &> span:nth-child(1){
-        font-size: 16px;
-    }
 
     a{
         color: #645fc9;

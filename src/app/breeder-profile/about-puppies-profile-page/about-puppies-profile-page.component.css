@@ -25,6 +25,12 @@ input[type='checkbox'] {
   max-width: calc(100% - 30px);
 }
 
+.kit-avail-block > span:nth-child(1),
+.contract-block > span:nth-child(1) {
+  font-size: 16px;
+  font-family: 'Intro-Regular';
+}
+
 .kit-avail-block {
   background-color: rgba(77, 190, 187, 0.2);
 }
@@ -36,16 +42,8 @@ input[type='checkbox'] {
   font-family: 'Intro-Book';
 }
 
-.kit-avail-block > span {
-  font-size: 16px;
-}
-
 .contract-block {
   background-color: rgba(203, 216, 246, 0.5);
-}
-
-.contract-block > span:nth-child(1) {
-  font-size: 16px;
 }
 
 .contract-block a {

@@ -13,18 +13,18 @@
             </div>
         </div>
 
-        <div *ngFor="let parent of parentsData.parents; let i = index;" class="avail-dog-entity-item"
+        <div *ngFor="let parent of parentsData.parents;let i = index;" class="avail-dog-entity-item"
             (click)="showCurrentParentPage(i)">
             <div class="entity-image-block">
-                <img src='/img/{{parent.photos[0].preview}}.jpg' alt="Изображение родителя" />
+                <img src='/img/{{parent.gallery[0].preview}}.jpg' alt="Изображение родителя" />
             </div>
 
             <div class="entity-info-block">
                 <div>
-                    <span>{{parent.name}}</span>
+                    <span>{{parent.nickname}}</span>
                     <span>{{parent.breed}}</span>
                 </div>
-                <img src="./assets/img/sex_{{parent.isMale ? 'male' : 'female'}}.png" alt="Пол родителя" />
+                <img src="./assets/img/sex_{{parent.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол родителя" />
 
             </div>
             <div class="delete-dog-entity-button btn-transparent" (click)="deleteParent(i)">
@@ -52,28 +52,34 @@
         </span>
 
         <div class="btn-label-list">
-            <input type="button" class="btn-label" *ngFor="let medical of parentsData.medicals;let i = index"
-                [value]="medical.bodyPart + ' ' + medical.medicalTest + '  X'" (click)="deleteMedical(i)" />
+            <input type="button" class="btn-label" *ngFor="let test of parentsData.parentTests;let i = index"
+                [value]="test.category + ' ' + test.name + '  X'" (click)="deleteMedical(i)" />
         </div>
 
         <div class="breeder-profile-subpage-form-left body-part-dropdown">
             <div class="dropdown-text-input">
-                <input type="text" class="form-control" [(ngModel)]="currentBodyPart"
-                    [ngbTypeahead]="appService.fieldAutocomplite(appService.availBodyParts, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
-                    (focus)="bodyPartFocus$.next($event.target.value)"
-                    (click)="bodyPartClick$.next($event.target.value)" #bodyPartInstance="ngbTypeahead"
-                    placeholder="Часть тела">
+                <input type="text" class="form-control" [(ngModel)]="currentBodyPart" (input)="currentMedicalTest = ''"
+                    [ngbTypeahead]="appService.fieldAutocomplete(testsCategories, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
+                    (focus)="bodyPartFocus$.next($event.target.value)" (click)="bodyPartClick$.next($event.target.value)"
+                    #bodyPartInstance="ngbTypeahead" placeholder="Часть тела">
                 <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
             </div>
         </div>
 
         <div class="breeder-profile-subpage-form-right test-dropdown">
             <div class="dropdown-text-input">
-                <input type="text" class="form-control" [(ngModel)]="currentMedicalTest"
-                    [ngbTypeahead]="appService.fieldAutocomplite(appService.availMedicalTests, medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
-                    (focus)="medicalTestFocus$.next($event.target.value)"
-                    (click)="medicalTestClick$.next($event.target.value)" #medicalTestInstance="ngbTypeahead"
-                    placeholder="Название теста">
+                <ng-container *ngFor="let cat of testsCategories">
+                    <input *ngIf="currentBodyPart == cat" type="text" class="form-control" [(ngModel)]="currentMedicalTest"
+                        [ngbTypeahead]="appService.fieldAutocomplete(parentTests[cat], medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
+                        (focus)="medicalTestFocus$.next($event.target.value)" (click)="medicalTestClick$.next($event.target.value)"
+                        #medicalTestInstance="ngbTypeahead" placeholder="Название теста">
+                    <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+                </ng-container>
+
+                <input *ngIf="!testsCategories.includes(currentBodyPart)" type="text" class="form-control"
+                    [(ngModel)]="currentMedicalTest" [ngbTypeahead]="appService.fieldAutocomplete([], medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
+                    (focus)="medicalTestFocus$.next($event.target.value)" (click)="medicalTestClick$.next($event.target.value)"
+                    #medicalTestInstance="ngbTypeahead" placeholder="Название теста">
                 <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
             </div>
         </div>
@@ -109,13 +115,12 @@
         <label for="parent-name">Кличка родителя</label>
         <div class="input-group mb-3">
             <input type="text" class="form-control" name="parent-name"
-                [class.invalid-form-field-value]="invalidFields.includes('name')"
                 [class.invalid-form-field-value]="invalidFields.includes('name')" aria-label="Кличка"
-                aria-describedby="basic-addon3" [(ngModel)]="currentParentData.name" placeholder="Кличка" />
-            <div class="custom-input-append" (click)="currentParentData.isMale = !currentParentData.isMale">
-                <img *ngIf="currentParentData.isMale" height="17px" src="./assets/img/sex_male.png" alt="Мужской пол" />
-                <img *ngIf="!currentParentData.isMale" height="17px" src="./assets/img/sex_female.png"
-                    alt="Женский пол" />
+                aria-describedby="basic-addon3" [(ngModel)]="currentParentData.nickname" placeholder="Кличка" />
+            <div class="custom-input-append"
+                (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
+                <img height="17px" src="./assets/img/sex_{{currentParentData.gender == 'MALE' ? 'male' : 'female'}}.png"
+                    alt="Пол родителя" />
             </div>
         </div>
     </div>
@@ -124,9 +129,9 @@
         <label for="parent-breed">Порода</label>
 
         <div class="dropdown-text-input">
-            <input type="text" class="form-control" name="parent-breed" [(ngModel)]="currentParentData.breed"
-                [class.invalid-form-field-value]="invalidFields.includes('breed')"
-                [ngbTypeahead]="appService.fieldAutocomplite(appService.availBreeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
+            <input *ngIf="appService.breeds" type="text" class="form-control" name="parent-breed"
+                [(ngModel)]="currentParentData.breed" [class.invalid-form-field-value]="invalidFields.includes('breed')"
+                [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
                 (focus)="parentBreedFocus$.next($event.target.value)"
                 (click)="parentBreedClick$.next($event.target.value)" #parentBreedInstance="ngbTypeahead"
                 placeholder="Выбрать" aria-describedby="basic-addon2">
@@ -146,24 +151,25 @@
     <div class="add-parent-page-photos-block">
         <label>Загрузите фотографии</label>
 
-        <div *ngIf="currentParentData.photos.length == 0" class="gallery-initial-block" (click)="previewParentImage(-1)"
-            [class.invalid-form-field-value]="invalidFields.includes('photos')">
+        <div *ngIf="currentParentData.gallery.length == 0" class="gallery-initial-block"
+            (click)="previewParentImage(-1)" [class.invalid-form-field-value]="invalidFields.includes('photos')">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
             <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
         </div>
 
-        <div *ngIf="currentParentData.photos.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of currentParentData.photos;let i = index" class="active-galley-photo-block">
+        <div *ngIf="currentParentData.gallery.length > 0" class="gallery-uploaded-photos-block">
+            <div *ngFor="let photo of currentParentData.gallery;let i = index" class="active-galley-photo-block">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
                     (click)="deleteParentImage(i)" />
-                <img src="/img/{{photo.preview}}.jpg" class="pet-image" alt="Изображение в галерее" (click)="previewParentImage(i)"/>
+                <img src="/img/{{photo.preview}}.jpg" class="pet-image" alt="Изображение в галерее"
+                    (click)="previewParentImage(i)" />
             </div>
             <div class="empty-galley-photo-block" (click)="previewParentImage(-1)">
                 <img src="./assets/img/photo-camera.svg" alt="Камера" />
             </div>
         </div>
 
-        <div *ngIf="currentParentData.photos.length == 0" (click)="previewParentImage(-1)"
+        <div *ngIf="currentParentData.gallery.length == 0" (click)="previewParentImage(-1)"
             class="gallery-upload-button custom-btn btn-transparent">
             <span>Выбрать</span>
         </div>

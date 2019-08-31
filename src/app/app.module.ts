@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LyThemeModule, LY_THEME } from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
 import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-images'
+import { AdminControllerService, BreederControllerService, DictionaryControllerService, MediaControllerService } from './api/api';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,10 @@ import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-image
     AppService,
     PopupTemplateService,
     EventService,
+    AdminControllerService,
+    BreederControllerService,
+    DictionaryControllerService,
+    MediaControllerService,
     { provide: LY_THEME, useClass: MinimaLight, multi: true }
     
   ],

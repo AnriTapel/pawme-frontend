@@ -15,8 +15,8 @@
     <div class="breeder-profile-subpage-form-right">
         <label for="nurcery-location">Город / населенный пункт</label>
         <div class="dropdown-text-input">
-            <input type="text" class="form-control" name="nurcery-location" [(ngModel)]="nurceryData.nurceryLocation"
-                [ngbTypeahead]="appService.fieldAutocomplite(appService.availCities, cityFocus$, cityClick$, cityInstance)"
+            <input *ngIf="appService.cities" type="text" class="form-control" name="nurcery-location" [(ngModel)]="nurceryData.nurceryLocation"
+                [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"
                 (focus)="cityFocus$.next($event.target.value)" (click)="cityClick$.next($event.target.value)"
                 #cityInstance="ngbTypeahead" placeholder="Выбрать">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
@@ -26,8 +26,8 @@
     <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-main-breed">Основная порода</label>
         <div class="dropdown-text-input">
-            <input type="text" class="form-control" name="nurcery-main-breed" [(ngModel)]="nurceryData.nurceryMainBreed"
-                [ngbTypeahead]="appService.fieldAutocomplite(appService.availBreeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
+            <input *ngIf="appService.breeds" type="text" class="form-control" name="nurcery-main-breed" [(ngModel)]="nurceryData.nurceryMainBreed"
+                [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
                 (focus)="mainBreedFocus$.next($event.target.value)" (click)="mainBreedClick$.next($event.target.value)"
                 #mainBreedInstance="ngbTypeahead" placeholder="Выбрать">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
@@ -43,7 +43,7 @@
         <div class="dropdown-text-input">
             <input type="text" class="form-control" name="nurcery-additional-breed"
                 [(ngModel)]="nurceryData.nurceryAdditionalBreed"
-                [ngbTypeahead]="appService.fieldAutocomplite(appService.availBreeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
+                [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
                 (focus)="addBreedFocus$.next($event.target.value)" (click)="addBreedClick$.next($event.target.value)"
                 #addBreedInstance="ngbTypeahead" placeholder="Выбрать">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />

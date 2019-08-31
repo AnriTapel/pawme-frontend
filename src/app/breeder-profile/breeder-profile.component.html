@@ -14,9 +14,9 @@
 
     <div class="profile-menu-container-desktop">
         <div class="profile-menu-desktop">
-            <div *ngFor="let subpage of profileSubpages"
-                [ngClass]="{'active-page': getCurProfilePage().tag == subpage.tag}"
-                (click)="setCurProfilePage(subpage)">{{subpage.name}}</div>
+            <div *ngFor="let subpage of breederService.profileSubpages"
+                [ngClass]="{'active-page': breederService.getCurProfilePage().tag == subpage.tag}"
+                (click)="breederService.setCurProfilePage(subpage)">{{subpage.name}}</div>
         </div>
         <input type="button" class="custom-btn btn-transparent" value="Предварительный просмотр"
             (click)="showPreview()" />
@@ -24,23 +24,23 @@
 
     <div class="profile-menu-container-mobile">
         <div class="profile-menu-mobile">
-            <div class="mobile-dropdown-menu-item" [class.invisible-menu]="!isMobileMenuVisible"
-                (click)="isMobileMenuVisible = !isMobileMenuVisible">
-                {{getCurProfilePage().name}}
-                <img *ngIf="!isMobileMenuVisible" src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
-                <img *ngIf="isMobileMenuVisible" src="./assets/img/arrow-up.svg" alt="Стрелка вверх" />
+            <div class="mobile-dropdown-menu-item" [class.invisible-menu]="!breederService.isMobileMenuVisible"
+                (click)="breederService.isMobileMenuVisible = !breederService.isMobileMenuVisible">
+                {{breederService.getCurProfilePage().name}}
+                <img *ngIf="!breederService.isMobileMenuVisible" src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+                <img *ngIf="breederService.isMobileMenuVisible" src="./assets/img/arrow-up.svg" alt="Стрелка вверх" />
             </div>
-            <ng-container *ngIf="isMobileMenuVisible">
-                <ng-container *ngFor="let subpage of profileSubpages">
-                    <div *ngIf="subpage.tag != getCurProfilePage().tag" class="mobile-dropdown-menu-item"
-                        (click)="setCurProfilePage(subpage)">{{subpage.name}}
+            <ng-container *ngIf="breederService.isMobileMenuVisible">
+                <ng-container *ngFor="let subpage of breederService.profileSubpages">
+                    <div *ngIf="subpage.tag != breederService.getCurProfilePage().tag" class="mobile-dropdown-menu-item"
+                        (click)="breederService.setCurProfilePage(subpage)">{{subpage.name}}
                     </div>
                 </ng-container>
             </ng-container>
         </div>
     </div>
 
-    <div class="profile-page" [style.opacity]="isMobileMenuVisible ? 0.5 : 1" [ngSwitch]="getCurProfilePage().tag">
+    <div class="profile-page" [style.opacity]="breederService.isMobileMenuVisible ? 0.5 : 1" [ngSwitch]="breederService.getCurProfilePage().tag">
         <app-about-nurcery-profile-page *ngSwitchCase="'about-nurcery'"></app-about-nurcery-profile-page>
         <app-about-puppies-profile-page *ngSwitchCase="'about-puppies'"></app-about-puppies-profile-page>
         <app-puppies-parents-profile-page *ngSwitchCase="'puppies-parents'"></app-puppies-parents-profile-page>

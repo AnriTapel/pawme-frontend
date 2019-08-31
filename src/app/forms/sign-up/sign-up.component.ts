@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
 import { AppService } from 'src/app/services/app-service/app.service';
+import { BreederControllerService } from 'src/app/api/breederController.service';
+import { RegisterBreeder } from 'src/app/model/registerBreeder';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,15 +11,19 @@ import { AppService } from 'src/app/services/app-service/app.service';
 })
 export class SignUpComponent implements OnInit {
 
-  newBreederName: string = "";
-  newBreederLastname: string = "";
-  newBreederEmail: string = "";
-  newBreederPassword: string = "";
+  breederData: RegisterBreeder = {
+    name: "",
+    surname: "",
+    email: "",
+    password: ""
+  }
+
   newBreederAcception: boolean = false;
 
   invalidFields: any[] = [];
 
-  constructor(private popupService: PopupTemplateService, private appService: AppService) { }
+  constructor(private popupService: PopupTemplateService, private appService: AppService,
+    private breederService: BreederControllerService) { }
 
   ngOnInit() {
   }
@@ -29,27 +35,31 @@ export class SignUpComponent implements OnInit {
   signUpNewBreeder(){
     if (!this.validateFields())
       return;
+    this.breederService.registerUsingPOST(this.breederData).subscribe(res => {
+      console.log(res);
+    });
   }
 
   validateFields(): boolean{
     this.invalidFields = [];
     let isValid = true;
-    if (!this.newBreederName || this.newBreederName == ""){
+    if (!this.breederData.name || this.breederData.name == ""){
       isValid = false;
       this.invalidFields.push("name");
     }
 
-    if (!this.newBreederLastname || this.newBreederLastname == ""){
+    if (!this.breederData.surname || this.breederData.surname == ""){
       isValid = false;
       this.invalidFields.push("lastname");
     }
 
-    if (!this.newBreederEmail || this.newBreederEmail == "" || !this.appService.validateEmailInput(this.newBreederEmail)){
+    if (!this.breederData.email || this.breederData.email == ""
+        || !this.appService.validateEmailInput(this.breederData.email)){
       isValid = false;
       this.invalidFields.push("email");
     }
 
-    if (!this.newBreederPassword || this.newBreederPassword == ""){
+    if (!this.breederData.password || this.breederData.password == ""){
       isValid = false;
       this.invalidFields.push("password");
     }

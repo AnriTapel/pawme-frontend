@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../services/app-service/app.service';
+import { BreederProfileService } from '../services/breeder-profile-service/breeder-profile.service';
 
 @Component({
   selector: 'app-breeder-profile',
@@ -8,33 +9,13 @@ import { AppService } from '../services/app-service/app.service';
 })
 export class BreederProfileComponent implements OnInit {
 
-  private curProfilePage: any;
-  profileSubpages: any[] = [
-    {tag: 'about-nurcery', name: 'О питомнике'},
-    {tag: 'about-puppies', name: 'О щенках'},
-    {tag: 'puppies-parents', name: 'Родители щенков'},
-    {tag: 'about-me', name: 'О себе'},
-    {tag: 'add-puppy', name: 'Добавить щенка'}
-  ];
-  isMobileMenuVisible: boolean = false;
-
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, public breederService: BreederProfileService) { }
 
   ngOnInit() {
-    this.setCurProfilePage(this.profileSubpages[0]);
-  }
-
-  setCurProfilePage(page: any): void {
-    this.curProfilePage = page;
-    this.isMobileMenuVisible = false;
-  }
-
-  getCurProfilePage(): any {
-    return this.curProfilePage;
+    this.breederService.setCurProfilePage(this.breederService.profileSubpages[0]);
   }
 
   showPreview() {
-
   }
 
 }

@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 import { EventService } from '../../services/event-service/events.service';
+import { ParentsInfo, ParentTest, Parent } from 'src/app/model/models';
 
 @Component({
   selector: 'app-puppies-parents-profile-page',
@@ -12,20 +13,36 @@ import { EventService } from '../../services/event-service/events.service';
 })
 export class PuppiesParentsProfilePageComponent implements OnInit {
 
-  // 0 - male, 1 - female
-  DEFAULT_PARENT_DATA = {
-    name: null,
-    isMale: true,
+  DEFAULT_PARENT_DATA: Parent = {
+    nickname: null,
+    gender: 'MALE',
     breed: null,
-    info: null,
-    photos: []
+    gallery: [],
+    info: null
   }
-  parentsData: any;
-  currentParentData: any;
+  parentsData: ParentsInfo;
+  parentDraft: any;
+  currentParentData: Parent;
 
   currentBodyPart: string;
   currentMedicalTest: string;
+
+
   invalidFields: any[] = [];
+
+  parentTests: Object = {
+    "Бедра": ["Тест на дисплазию тазобедренного сустава (по стандартам РКФ)"],
+    "Локти": ["Тест на дисплазию локтевых суставов (по стандартам РКФ)"],
+    "Колени": ["Тест на дисплазию коленных суставов (по стандартам РКФ)"],
+    "Глаза": ["Проверка у офтальмолога"],
+    "Сердце": ["Обследование у кардиолога"],
+    "Анализы": ["Общий анализ крови", "Анализ мочи", "Анализ кала", "Биохимический анализ крови"],
+    "Генетика": ["Парочка наших вариантов"],
+    "Щитовидная железа": ["Анализ щитовидной железы"],
+    "Другое": ["Парочка наших вариантов"]
+  };
+
+  testsCategories: Array<string> = Object.keys(this.parentTests);
 
   // What page to show - parents page or add/edit current parent
   isMainPage: boolean = true;
@@ -47,28 +64,27 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
     this.parentsData = {
       parents: [],
-      medicals: [],
-      parentDraft: null
+      parentTests: [],
     };
   }
 
   addMedical(): void {
-    let curMedical = {
-      bodyPart: this.currentBodyPart,
-      medicalTest: this.currentMedicalTest
+    let curMedical: ParentTest = {
+      category: this.currentBodyPart,
+      name: this.currentMedicalTest
     }
-    this.parentsData.medicals.push(curMedical);
+    this.parentsData.parentTests.push(curMedical);
     this.currentBodyPart = null;
     this.currentMedicalTest = null;
   }
 
   deleteMedical(index: number): void {
-    this.parentsData.medicals.splice(index, 1);
+    this.parentsData.parentTests.splice(index, 1);
   }
 
   showCurrentParentPage(index: number): void {
     if (index == -1)
-      this.currentParentData = this.parentsData.parentDraft ? this.parentsData.parentDraft : this.DEFAULT_PARENT_DATA;
+      this.currentParentData = this.parentDraft ? this.parentDraft : this.DEFAULT_PARENT_DATA;
     else
       this.currentParentData = this.parentsData.parents[index];
 
@@ -76,8 +92,9 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   previewParentImage(index: number): void {
-    this.popupService.setPopupParams({ width: 210, height: 180, isRect: true,
-      imageUrl: index > -1 ? "/img/" + this.currentParentData.photos[index].main + ".jpg" : null
+    this.popupService.setPopupParams({
+      width: 210, height: 180, isRect: true,
+      imageUrl: index > -1 ? "/img/" + this.currentParentData.gallery[index].main + ".jpg" : null
     });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
@@ -86,52 +103,52 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.appService.uploadPetImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         if (index == -1)
-          this.currentParentData.photos.push(imageData);
-        else 
-          this.currentParentData.photos[index] = imageData;
+          this.currentParentData.gallery.push(imageData);
+        else
+          this.currentParentData.gallery[index] = imageData;
       });
       croppedHandler.unsubscribe();
     });
   }
 
   deleteParentImage(index: number): void {
-    this.currentParentData.photos.splice(index, 1);
+    this.currentParentData.gallery.splice(index, 1);
   }
 
   addParent() {
     if (!this.validateInputFields())
       return;
     // TODO: change adding or refreshing condition based on parents' id
-    if (this.parentsData.parents.filter(it => it.name == this.currentParentData.name).length > 0)
-      this.parentsData.parents = this.parentsData.parents.map(it => {
-        if (it.name == this.currentParentData.name)
+    if (this.parentsData.parents.filter(it => it.nickname == this.currentParentData.nickname).length > 0)
+      this.parentsData.parents.map(it => {
+        if (it.nickname == this.currentParentData.nickname)
           it = this.currentParentData;
       });
     else
       this.parentsData.parents.push(this.currentParentData);
-    
+
     this.currentParentData = null;
     this.isMainPage = true;
   }
 
-  deleteParent(index: number): void{
+  deleteParent(index: number): void {
     this.parentsData.parents.splice(index, 1);
   }
 
   saveDraft() {
-    this.parentsData.parentDraft = this.currentParentData;
+    this.parentDraft = this.currentParentData;
     this.currentParentData = null;
     this.isMainPage = true;
   }
 
   saveChanges() {
-    
+
   }
 
   validateInputFields(): boolean {
     let isValid = true;
     this.invalidFields = [];
-    if (!this.currentParentData.name || this.currentParentData.name == "") {
+    if (!this.currentParentData.nickname || this.currentParentData.nickname == "") {
       this.invalidFields.push('name');
       isValid = false;
     }
@@ -141,7 +158,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (this.currentParentData.photos.length == 0) {
+    if (this.currentParentData.gallery.length == 0) {
       this.invalidFields.push('photos');
       isValid = false;
     }
