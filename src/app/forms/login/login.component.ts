@@ -19,8 +19,9 @@ export class LoginComponent {
     this.loginError = false;
     if (!this.appService.validateEmailInput(this.credentials.username))
       return this.loginError = true;
-    this.appService.authenticate(this.credentials, () => {
-      this.router.navigateByUrl('/breeder-landing');
+
+    this.appService.authenticateBreeder(this.credentials).subscribe((res) => {
+      this.router.navigateByUrl('/breeder-profile')
     });
     return false;
   }

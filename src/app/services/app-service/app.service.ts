@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable, merge } from 'rxjs';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
-import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { PuppyTest } from 'src/app/model/puppyTest';
+import { BreederControllerService } from 'src/app/api/api';
 
 @Injectable({
   providedIn: 'root'
@@ -11,41 +12,33 @@ import { PuppyTest } from 'src/app/model/puppyTest';
 export class AppService {
 
   // Data of logged-in entity
-  userData: any = [1];
-  authenticated: boolean = false;
+  userData: any;
 
   // Dog entity parameters
   cities: any;
   breeds: any;
   puppyTests: Array<PuppyTest>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private breederService: BreederControllerService) {
     http.get('/api/dict').subscribe((res) => {
       this.breeds = res['breeds'];
       this.cities = res['cities'];
       this.puppyTests = res['puppyTests'];
-    })
+    });
   }
 
-  authenticate(credentials: any, callback) {
-    /*const headers = new HttpHeaders(credentials ? {
-      authorization: 'Basic ' + btoa(credentials.username + ':' + credentials.password)
-    } : {});*/
-
+  authenticateBreeder(credentials: any) {
     let body = new FormData();
-    if (credentials && credentials.username && credentials.password) {
-      body.append('username', credentials.username);
-      body.append('password', credentials.password);
-    }
-
-    return this.http.post('/api/login', body).subscribe((response) => {
-      if (response['name']) {
-        this.authenticated = true;
-      } else {
-        this.authenticated = false;
-      }
-      return callback && callback();
-    });
+    body.append('username', credentials.username);
+    body.append('password', credentials.password);
+    
+    return this.http.post('/api/login', body, {responseType: 'text'}).pipe(
+      tap(
+        data => this.breederService.getBreederUsingGET(JSON.parse(data).id).subscribe(res => {
+          this.userData = res;
+        }), error => {}
+      )
+    );
   }
 
   public uploadAvatarImage(body: FormData) {

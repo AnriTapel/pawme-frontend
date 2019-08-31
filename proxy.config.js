@@ -11,7 +11,6 @@ const PROXY_CONFIG = {
             }
         },
       },
-
       "/img/*": {
         "target": "http://petman.co",
         "secure": false,
