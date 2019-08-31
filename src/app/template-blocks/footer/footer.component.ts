@@ -13,9 +13,4 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
-  showSignUpPopup(){
-    this.popupService.setCurrentForm("sign-up");
-    this.popupService.setShowStatus(true);
-  }
-
 }

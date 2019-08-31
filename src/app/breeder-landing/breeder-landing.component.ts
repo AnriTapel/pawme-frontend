@@ -68,8 +68,4 @@ export class BreederLandingComponent implements OnInit {
     this.secondSlider.selectSlide(index);
   }
 
-  showSignUpPopup(){
-    this.popupService.setCurrentForm("sign-up");
-    this.popupService.setShowStatus(true);
-  }
 }

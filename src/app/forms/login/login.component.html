@@ -17,13 +17,13 @@
     </div>
 
     <div class="form-group popup-form-group">
-        <span><a (click)="switchToRemindPasswordForm()">Забыл пароль</a></span>
+        <span><a [routerLink]="['/remind-password']">Забыл пароль</a></span>
     </div>
 
-    <button type="submit" class="custom-btn btn-purple" style="margin-top: 30px;">Войти</button>
+    <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 30px;">Войти</button>
 
     <div class="form-group popup-form-group" style="text-align: center;">
-        <span>Нет аккаунта? <a (click)="switchToSignUpForm()">Создать</a></span>
+        <span>Нет аккаунта? <a [routerLink]="['/sign-up']">Создать</a></span>
     </div>
 </form>
 

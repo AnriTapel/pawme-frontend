@@ -1,3 +1,13 @@
+h3 {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+form {
+  margin-bottom: 5em;
+}
+
 span {
   font-size: 14px;
 }
@@ -13,16 +23,9 @@ span a:hover {
   color: #014c8c;
 }
 
-input[type=button] {
-  display: block;
-  width: 50%;
-  margin: 0 auto;
-  padding: 15px 35px;
-}
-
 @media screen and (max-width: 769px) {
-  input[type=button] {
-    width: 80%;
+  h3 {
+    margin-top: 1em;
   }
 }
 /*# sourceMappingURL=sign-up.component.css.map */

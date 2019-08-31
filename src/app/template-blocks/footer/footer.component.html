@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="footer-sign-up-button-block">
-        <a title="Зарегистрируйся сейчас" (click)="showSignUpPopup()" class="custom-btn btn-white">ЗАРЕГИСТРИРУЙСЯ СЕЙЧАС
+        <a title="Зарегистрируйся сейчас" [routerLink]="['/sign-up']" class="custom-btn btn-white">ЗАРЕГИСТРИРУЙСЯ СЕЙЧАС
             <img src="./assets/img/paw-in-signup-btn.png" alt="Лапа"
                 style="width: 20px; margin-left: 10px;" /></a>
     </div>
@@ -21,7 +21,5 @@
 </footer>
 
 <app-popup-template *ngIf="popupService.getShowStatus()" [ngSwitch]="popupService.getCurrentForm()">
-    <app-sign-up *ngSwitchCase="'sign-up'"></app-sign-up>
-    <app-remind-password *ngSwitchCase="'remind-password'"></app-remind-password>
     <app-image-cropper *ngSwitchCase="'image-cropper'" [params]="popupService.getPopupParams()"></app-image-cropper>
 </app-popup-template>

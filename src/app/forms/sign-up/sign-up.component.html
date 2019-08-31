@@ -1,4 +1,7 @@
+<app-header></app-header>
+
 <h3>РЕГИСТРАЦИЯ</h3>
+
 <form>
     <div class="form-group popup-form-group">
         <label for="name">Имя</label>
@@ -34,10 +37,12 @@
             и <a href="#">Политикой конфиденциальности</a></label>
     </div>
 
-    <input type="button" class="custom-btn btn-purple" style="margin-top: 20px;" (click)="signUpNewBreeder()"
+    <input type="button" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" (click)="signUpNewBreeder()"
         value="Зарегистрироваться" />
         
     <div class="form-group popup-form-group" style="text-align: center;">
         <span>Уже есть аккаунт? <a [routerLink]="['/login']">Войти</a></span>
     </div>
 </form>
+
+<app-footer></app-footer>

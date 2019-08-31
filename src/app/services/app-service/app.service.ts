@@ -38,10 +38,7 @@ export class AppService {
       body.append('password', credentials.password);
     }
 
-    let headers = new HttpHeaders();
-    headers.set('Accept', 'application/json');
-
-    return this.http.post('/api/login', body, {headers: headers}).subscribe((response) => {
+    return this.http.post('/api/login', body).subscribe((response) => {
       if (response['name']) {
         this.authenticated = true;
       } else {

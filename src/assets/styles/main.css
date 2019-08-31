@@ -138,7 +138,17 @@ input[type=number]::-webkit-outer-spin-button {
 .popup-form-check {
   width: 50% !important;
   margin: 20px auto 0 !important;
+  max-width: 450px;
   text-align: left;
+  display: block !important;
+}
+
+.popup-form-button {
+  display: block;
+  width: 50%;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 15px 35px;
 }
 
 .popup-form-group label {
@@ -759,8 +769,10 @@ ngb-datepicker .bg-light {
     /*padding: 15px 25px;*/
   }
   .popup-form-group,
-  .popup-form-check {
+  .popup-form-check,
+  .popup-form-button {
     width: 80% !important;
+    max-width: unset;
   }
   .carousel-indicators {
     bottom: -1em !important;
