@@ -63,8 +63,13 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.puppiesData.priceFrom || this.puppiesData.priceTo) {
-      this.invalidFields.push('price');
+    if (!this.puppiesData.priceFrom) {
+      this.invalidFields.push('priceFrom');
+      isValid = false;
+    }
+    
+    if (!this.puppiesData.priceTo) {
+      this.invalidFields.push('priceTo');
       isValid = false;
     }
 

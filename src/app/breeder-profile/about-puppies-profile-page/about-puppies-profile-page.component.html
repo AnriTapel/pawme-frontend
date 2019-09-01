@@ -22,9 +22,9 @@
         <label for="puppies-price">Стоимость щенков в рублях</label>
         <div class="input-group">
             <input type="number" class="form-control custom-form-control-border" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
-                placeholder="от" [class.invalid-form-field-value]="invalidFields.includes('price')">
+                placeholder="от" [class.invalid-form-field-value]="invalidFields.includes('priceFrom')">
             <input type="number" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до"
-                [class.invalid-form-field-value]="invalidFields.includes('price')">
+                [class.invalid-form-field-value]="invalidFields.includes('priceTo')">
         </div>
     </div>
 
