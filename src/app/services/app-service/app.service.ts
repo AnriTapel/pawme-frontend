@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable, merge } from 'rxjs';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
-import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { PuppyTest } from 'src/app/model/puppyTest';
 import { BreederControllerService } from 'src/app/api/api';
@@ -25,20 +25,6 @@ export class AppService {
       this.cities = res['cities'];
       this.puppyTests = res['puppyTests'];
     });
-  }
-
-  authenticateBreeder(credentials: any) {
-    let body = new FormData();
-    body.append('username', credentials.username);
-    body.append('password', credentials.password);
-    
-    return this.http.post('/api/login', body, {responseType: 'text'}).pipe(
-      tap(
-        data => this.breederService.getBreederUsingGET(JSON.parse(data).id).subscribe(res => {
-          this.userData = res;
-        }), error => {}
-      )
-    );
   }
 
   public uploadAvatarImage(body: FormData) {

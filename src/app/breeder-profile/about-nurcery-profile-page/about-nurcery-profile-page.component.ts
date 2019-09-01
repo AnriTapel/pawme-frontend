@@ -4,6 +4,8 @@ import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
 import { EventService } from 'src/app/services/event-service/events.service';
+import { BreederInfo } from 'src/app/model/models';
+import { BreederControllerService } from 'src/app/api/api';
 
 @Component({
   selector: 'app-about-nurcery-profile-page',
@@ -12,9 +14,13 @@ import { EventService } from 'src/app/services/event-service/events.service';
 })
 export class AboutNurceryProfilePageComponent implements OnInit {
 
-  nurceryData: any;
+  nurceryData: BreederInfo;
+
+  curMainBreed: string;
+  curExtraBreed: string;
+  curCity: string;
   isAdditionalBreed: boolean = false;
-  curGalleryPhotos: string[] = [];
+  invalidFields: string[] = [];
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
   @ViewChild('mainBreedInstance', { static: true }) mainBreedInstance: NgbTypeahead;
@@ -26,27 +32,31 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   addBreedFocus$ = new Subject<string>();
   addBreedClick$ = new Subject<string>();
 
-  constructor(public appService: AppService, private popupService: PopupTemplateService, private eventService: EventService) { }
+  constructor(public appService: AppService, private popupService: PopupTemplateService,
+    private eventService: EventService, private breederService: BreederControllerService) { }
 
   ngOnInit() {
-    this.nurceryData = {
-      nurceryName: null,
-      nurceryLocation: null,
-      nurceryMainBreed: null,
-      nurceryAdditionalBreed: null,
-      aboutNurcery: null,
-      nurceryProfileImage: null,
-      nurceryGallery: [],
-      nurceryInstagram: null,
-      nurcerySite: null,
-      nurceryFacebook: null
+    this.nurceryData = <BreederInfo>this.appService.userData.generalInfo || {
+      name: null,
+      city: null,
+      mainBreed: null,
+      extraBreed: null,
+      description: null,
+      profilePhoto: null,
+      gallery: [],
+      instagram: null,
+      site: null,
+      facebook: null
     };
+    this.curMainBreed = this.nurceryData.mainBreed ? this.nurceryData.mainBreed.name : null;
+    this.curMainBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
+    this.curCity = this.nurceryData.city ? this.nurceryData.city.name : null;
   }
 
   previewNurceryPhoto(): void {
     this.popupService.setPopupParams({
       width: 200, height: 200, isRect: false,
-      imageUrl: this.nurceryData.nurceryProfileImage ? "/img/" + this.nurceryData.nurceryProfileImage.main + ".jpg" : null
+      imageUrl: this.nurceryData.profilePhoto ? "/img/" + this.nurceryData.profilePhoto.main + ".jpg" : null
     });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
@@ -54,7 +64,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadAvatarImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
-        this.nurceryData.nurceryProfileImage = imageData;
+        this.nurceryData.profilePhoto = imageData;
       });
       croppedHandler.unsubscribe();
     });
@@ -63,7 +73,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   previewGalleryPhoto(index: number): void {
     this.popupService.setPopupParams({
       width: 360, height: 360, isRect: true,
-      imageUrl: index > -1 ? "/img/" + this.nurceryData.nurceryGallery[index].main + ".jpg" : null
+      imageUrl: index > -1 ? "/img/" + this.nurceryData.gallery[index].main + ".jpg" : null
     });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
@@ -72,20 +82,61 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.appService.uploadNurceryGalleryImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         if (index == -1) 
-          this.nurceryData.nurceryGallery.push(imageData);
+          this.nurceryData.gallery.push(imageData);
         else
-          this.nurceryData.nurceryGallery[index] = imageData;
+          this.nurceryData.gallery[index] = imageData;
       });
       croppedHandler.unsubscribe();
     });
   }
 
   deleteGalleryImage(index: number): void {
-    this.curGalleryPhotos.splice(index, 1);
-    this.nurceryData.nurceryGallery.splice(index, 1);
+    this.nurceryData.gallery.splice(index, 1);
   }
 
   saveChanges() {
-    console.log(this.nurceryData);
+    if (!this.validateInputFields())
+      return;
+
+    this.nurceryData.city = this.appService.cities.filter(it => it.name == this.curCity)[0];
+    this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0];
+    if (this.curExtraBreed)
+      this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0];
+    this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
+      .subscribe(() => {
+        this.appService.userData.generalInfo = this.nurceryData;
+        scroll(0, 0);
+      })
+  }
+
+  validateInputFields(): boolean {
+    let isValid = true;
+    this.invalidFields = [];
+
+    if (!this.curMainBreed || this.curMainBreed == "") {
+      this.invalidFields.push('mianBreed');
+      isValid = false;
+    }
+
+    if (!this.nurceryData.city || this.nurceryData.city == "") {
+      this.invalidFields.push('city');
+      isValid = false;
+    }
+
+    if (!this.nurceryData.description) {
+      this.invalidFields.push('desc');
+      isValid = false;
+    }
+
+    if (!this.nurceryData.profilePhoto) {
+      this.invalidFields.push('profilePhoto');
+      isValid = false;
+    }
+
+    if (this.nurceryData.gallery.length == 0) {
+      this.invalidFields.push('gallery');
+      isValid = false;
+    }
+    return isValid;
   }
 }
