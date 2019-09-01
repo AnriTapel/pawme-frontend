@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { PuppiesInfo, PuppyTest } from 'src/app/model/models';
+import { BreederControllerService } from 'src/app/api/api';
 
 @Component({
   selector: 'app-about-puppies-profile-page',
@@ -10,11 +11,12 @@ import { PuppiesInfo, PuppyTest } from 'src/app/model/models';
 export class AboutPuppiesProfilePageComponent implements OnInit {
 
   puppiesData: PuppiesInfo;
+  invalidFields: Array<string> = [];
 
-  constructor(public appService: AppService) { }
+  constructor(public appService: AppService, private breederService: BreederControllerService) { }
 
   ngOnInit() {
-    this.puppiesData = {
+    this.puppiesData = <PuppiesInfo>this.appService.userData.puppiesInfo || {
       age: null,
       priceFrom: null,
       priceTo: null,
@@ -25,6 +27,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       insuranceCoverage: null,
       gifts: null
     };
+
     // @ts-ignore
     $('[data-toggle="tooltip"]').tooltip();
   }
@@ -42,6 +45,53 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   }
 
   saveChanges(){
-    console.log(this.puppiesData);
+    if (!this.validateInputFields())
+      return;
+
+    this.breederService.setPuppiesInfoUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(() => {
+      this.appService.userData.puppiesInfo = this.puppiesData;
+      scroll(0,0);
+    });
+  }
+
+  validateInputFields(): boolean {
+    let isValid = true;
+    this.invalidFields = [];
+
+    if (!this.puppiesData.age) {
+      this.invalidFields.push('age');
+      isValid = false;
+    }
+
+    if (!this.puppiesData.priceFrom || this.puppiesData.priceTo) {
+      this.invalidFields.push('price');
+      isValid = false;
+    }
+
+    if (!this.puppiesData.petmanSet) {
+      this.invalidFields.push('set');
+      isValid = false;
+    }
+
+    if (this.puppiesData.puppyTests.length == 0) {
+      this.invalidFields.push('tests');
+      isValid = false;
+    }
+
+    if (!this.puppiesData.petmanContract) {
+      this.invalidFields.push('contract');
+      isValid = false;
+    }
+
+    if (!this.puppiesData.insuranceTerm) {
+      this.invalidFields.push('term');
+      isValid = false;
+    }
+
+    if (!this.puppiesData.insuranceCoverage || this.puppiesData.insuranceCoverage == "") {
+      this.invalidFields.push('coverage');
+      isValid = false;
+    }
+    return isValid;
   }
 }

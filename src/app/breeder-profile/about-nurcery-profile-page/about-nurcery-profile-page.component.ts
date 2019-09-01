@@ -114,11 +114,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.invalidFields = [];
 
     if (!this.curMainBreed || this.curMainBreed == "") {
-      this.invalidFields.push('mianBreed');
+      this.invalidFields.push('mainBreed');
       isValid = false;
     }
 
-    if (!this.nurceryData.city || this.nurceryData.city == "") {
+    if (!this.curCity || this.curCity == "") {
       this.invalidFields.push('city');
       isValid = false;
     }
