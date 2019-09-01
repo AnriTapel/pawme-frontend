@@ -6,7 +6,7 @@
 
 .personal-image {
   position: absolute;
-  left: -20px;
+  left: -30px;
 }
 
 .certificate-image {
@@ -16,6 +16,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  max-width: 150px;
 }
 
 #certificate-input {

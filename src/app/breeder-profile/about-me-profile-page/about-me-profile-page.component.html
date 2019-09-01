@@ -14,19 +14,19 @@
             питомнике и помогает ли вам семья?
             Что вам нравится в вашей породе и какие у вас профессиональные цели?
         </span>
-        <textarea rows="5" [(ngModel)]="breederData.aboutMe" placeholder="Введите текст" name="about-me"
-            class="form-control"></textarea>
+        <textarea rows="5" [(ngModel)]="breederData.about" placeholder="Введите текст" name="about-me"
+            class="custom-form-control" [class.invalid-form-field-value]="invalidFields.includes('about')"></textarea>
     </div>
 
     <div class="about-me-form-group">
-        <label for="begining">С чего все началось?</label>
+        <label for="howItStarted">С чего все началось?</label>
         <br>
         <span class="block-description">Почему вы начали заниматься разведением собак? Какие события этому
             предшествовали? Почему была выбрана именно эта
             порода?
         </span>
-        <textarea rows="5" [(ngModel)]="breederData.begining" class="form-control" placeholder="Введите текст"
-            name="begining"></textarea>
+        <textarea rows="5" [(ngModel)]="breederData.howItStarted" class="custom-form-control" placeholder="Введите текст"
+            name="howItStarted" [class.invalid-form-field-value]="invalidFields.includes('howItStarted')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -34,7 +34,7 @@
         <br>
         <span class="block-description">Вы используете какие-то определенные методы при работе с щенками? Вы уделяете
             особое внимание определенным деталям?</span>
-        <textarea rows="5" [(ngModel)]="breederData.nurceryFeatures" class="form-control" placeholder="Введите текст"
+        <textarea rows="5" [(ngModel)]="breederData.outstandingInfo" class="custom-form-control" placeholder="Введите текст"
             name="features"></textarea>
     </div>
 
@@ -44,7 +44,8 @@
         <span class="block-description">Заводчик с хорошим личным фото вызывает больше доверия у покупаетелей. Обычно
             используют фото с питомцами. </span>
 
-        <div *ngIf="!breederData.photo" class="gallery-initial-block" (click)="previewPersonalImage()">
+        <div *ngIf="!breederData.photo" class="gallery-initial-block"
+                [class.invalid-form-field-value]="invalidFields.includes('photo')"(click)="previewPersonalImage()">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>
@@ -53,7 +54,8 @@
 
         <div *ngIf="breederData.photo" class="gallery-uploaded-photos-block">
             <div class="active-galley-photo-block">
-                <img src="/img/{{breederData.photo.preview}}.jpg" class="personal-image" alt="Фото заводчика" (click)="previewPersonalImage()">
+                <img src="/img/{{breederData.photo.preview}}.jpg" class="personal-image" alt="Фото заводчика"
+                    (click)="previewPersonalImage()">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
                     (click)="deletePersonalImage()" />
             </div>
@@ -72,8 +74,8 @@
             <input type="button" class="btn-label" *ngFor="let club of breederData.clubs;let i = index"
                 [value]="club + '  X'" (click)="deleteClub(i)" />
         </div>
-        <input type="text" class="form-control" name="clubs" [(ngModel)]="currentClub"
-            [disabled]="breederData.clubs.length > 9" (keyup.enter)="addClub()" />
+        <input type="text" class="custom-form-control" name="clubs" [(ngModel)]="currentClub" [disabled]="breederData.clubs.length > 9"
+            [class.invalid-form-field-value]="invalidFields.includes('clubs')" (keyup.enter)="addClub()" />
     </div>
 
     <div class="breeder-profile-subpage-form-right" style="align-self: end;">
@@ -83,7 +85,7 @@
 
 
     <div class="about-me-form-group">
-        <label>Награды и сертификаты</label>
+        <label>Награды и сертификаты (необязательно)</label>
         <br>
         <span class="block-description">Вы наверняка участвовали в выставках или других мероприятиях, после которых у
             вас остались какие-то награды и сертификаты.
@@ -92,8 +94,7 @@
             их сюда.</span>
 
         <div *ngIf="breederData.certificates.length == 0" class="gallery-initial-block">
-            <input type="file" accept="image/*" (change)="uploadCertificates($event)"
-                multiple />
+            <input type="file" accept="image/*" (change)="uploadCertificates($event)" multiple />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>
@@ -101,8 +102,8 @@
         </div>
 
         <div *ngIf="breederData.certificates.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let cert of curCertificates;let i = index" class="active-galley-photo-block">
-                <img [src]="cert" alt="Сертификат заводчика" class="certificate-image"/>
+            <div *ngFor="let cert of breederData.certificates;let i = index" class="active-galley-photo-block">
+                <img src="/img/{{cert.main}}.jpg" alt="Сертификат заводчика" class="certificate-image" />
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить сертификат"
                     (click)="deleteCertificate(i)" />
             </div>
@@ -114,13 +115,17 @@
         </div>
 
         <div *ngIf="breederData.certificates.length == 0" class="gallery-upload-button custom-btn btn-transparent">
-            <input type="file" accept="image/*" (change)="uploadCertificates($event)"
-                multiple />
+            <input type="file" accept="image/*" (change)="uploadCertificates($event)" multiple />
             <span>Выбрать</span>
         </div>
     </div>
 
     <div class="lower-btn">
+        <span *ngIf="invalidFields.length > 0" class="invalid-field-message"
+            style="display: block; margin-bottom: 1em;">
+            Пожалуйста, заполните пропущенные поля
+        </span>
+        <br *ngIf="invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
     </div>
 </div>

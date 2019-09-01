@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { EventService } from 'src/app/services/event-service/events.service';
+import { BreederAbout } from 'src/app/model/models';
+import { BreederControllerService } from 'src/app/api/api';
 
 @Component({
   selector: 'app-about-me-profile-page',
@@ -10,18 +12,19 @@ import { EventService } from 'src/app/services/event-service/events.service';
 })
 export class AboutMeProfilePageComponent implements OnInit {
 
-  breederData: any;
+  breederData: BreederAbout;
   currentClub: string = null;
-  curCertificates: string[] = [];
-  curPersonalImage: string;
 
-  constructor(private popupService: PopupTemplateService, private appService: AppService, private eventService: EventService) { }
+  invalidFields: Array<string> = [];
+
+  constructor(private popupService: PopupTemplateService, private appService: AppService, private eventService: EventService,
+      private breederService: BreederControllerService) { }
 
   ngOnInit() {
-    this.breederData = {
-      aboutMe: null,
-      begining: null,
-      nurceryFeatures: null,
+    this.breederData = <BreederAbout>this.appService.userData.about || {
+      about: null,
+      howItStarted: null,
+      outstandingInfo: null,
       photo: null,
       clubs: [],
       certificates: []
@@ -29,8 +32,10 @@ export class AboutMeProfilePageComponent implements OnInit {
   }
 
   previewPersonalImage() {
-    this.popupService.setPopupParams({ width: 270, height: 200, isRect: true,
-      imageUrl: this.curPersonalImage ? "/img/" + this.breederData.photo.main + ".jpg" : null});
+    this.popupService.setPopupParams({
+      width: 270, height: 200, isRect: true,
+      imageUrl: this.breederData.photo ? "/img/" + this.breederData.photo.main + ".jpg" : null
+    });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
@@ -38,30 +43,35 @@ export class AboutMeProfilePageComponent implements OnInit {
       this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         this.breederData.photo = imageData;
-        this.curPersonalImage = "http://petman.co/img/" + imageData.preview + ".jpg";
       });
       croppedHandler.unsubscribe();
     });
   }
 
   deletePersonalImage(): void {
-    this.curPersonalImage = null;
     this.breederData.photo = null;
   }
 
   uploadCertificates(event: any): void {
     for (let file of event.target.files) {
-      this.breederData.certificates.push(file);
       let reader = new FileReader();
       reader.onload = (e: any) => {
-        this.curCertificates.push(e.target.result);
+        let img = new Image();
+        img.onload = () => {
+          let body = new FormData();
+          body.append('image', file, file.name);
+          body.append('rect', '0,0,' + img.width + ',' + img.height);
+          this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
+            this.breederData.certificates.push(imageData);
+          });
+        }
+        img.src = e.target.result;
       }
       reader.readAsDataURL(file);
     }
   }
 
   deleteCertificate(index: number): void {
-    this.curCertificates.splice(index, 1);
     this.breederData.certificates.splice(index, 1);
   }
 
@@ -74,8 +84,41 @@ export class AboutMeProfilePageComponent implements OnInit {
     this.breederData.clubs.splice(index, 1);
   }
 
-  saveChanges() {
+  validateInputFields(): boolean {
+    let isValid = true;
+    this.invalidFields = [];
 
+    if (!this.breederData.about || this.breederData.about == "") {
+      this.invalidFields.push('about');
+      isValid = false;
+    }
+
+    if (!this.breederData.howItStarted || this.breederData.howItStarted == "") {
+      this.invalidFields.push('howItStarted');
+      isValid = false;
+    }
+
+    if (!this.breederData.photo) {
+      this.invalidFields.push('photo');
+      isValid = false;
+    }
+
+    if (this.breederData.clubs.length == 0) {
+      this.invalidFields.push('clubs');
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
+  saveChanges() {
+    if (!this.validateInputFields())
+      return;
+
+    this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(() => {
+      this.appService.userData.about = this.breederData;
+      scroll(0, 0);
+    })
   }
 
 }
