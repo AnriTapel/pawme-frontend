@@ -1,3 +1,5 @@
+$progress-bar-height: 18px;
+
 hr{
     width: 80%;
     margin: 0 auto;
@@ -13,35 +15,59 @@ hr{
     grid-gap: 20px;
 }
 
-.profile-progress-bar{
-    grid-column: 1/3;
-    background-image: linear-gradient(to left, #84e0df, #4dbebb);
-    border-radius: 8px;
-    height: 16px;
-    // opacity: 0.4;
+.progress-bar-container{
+    position: relative;
+    width: 100%;
+    height: $progress-bar-height;
     margin-bottom: 2em;
-    display: flex;
-
-    div{
-        width: 20%;
-        border-right: 1px solid #fff; 
+    
+    .progress-bar-base{
+        grid-column: 1/3;
+        background-image: linear-gradient(to left, rgba(132, 224, 223, 0.4), rgba(77, 190, 187, 0.4));
+        border-radius: 8px;
+        position: absolute;
+        width: 100%;
+        display: list-item;
     }
 
-    div:nth-child(1){
-        border-radius: 25px 0 0 25px;
-    }
-
-    div:nth-child(5){
-        text-align: right;
-        border-radius: 0 25px 25px 0;
-
-        img{
-            position: relative;
-            top: -15px;
-            right: -5px;
-            width: 40px;
-            height: 40px;
+    .progress-bar-sections{
+        position: absolute;
+        width: 100%;
+        height: $progress-bar-height;
+        display: inline-flex;
+        z-index: 10;
+  
+        div{
+            width: 20%;
+            border-right: 1px solid #fff; 
         }
+
+        div:nth-child(1){
+            border-radius: 25px 0 0 25px;
+        }
+
+        div:nth-child(5){
+            text-align: right;
+            border-radius: 0 25px 25px 0;
+
+            img{
+                position: relative;
+                top: -12px;
+                right: -5px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+
+    .progress-line{
+        height: $progress-bar-height;
+        position: absolute;
+        background-image: linear-gradient(to left, #645fc9, #5ed7d5);
+        border-radius: 8px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
     }
 }
 
@@ -150,7 +176,7 @@ hr{
     .profile-menu-container-mobile{
         display: block;
     }
-    .profile-progress-bar{
+    .progress-bar-container{
         margin-top: 1.5em;
         margin-bottom: unset;
         grid-column: 1/2;

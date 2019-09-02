@@ -14,6 +14,7 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   breederData: BreederAbout;
   currentClub: string = null;
+  currentClubs: Array<string> = [];
 
   invalidFields: Array<string> = [];
 
@@ -26,9 +27,13 @@ export class AboutMeProfilePageComponent implements OnInit {
       howItStarted: null,
       outstandingInfo: null,
       photo: null,
-      clubs: [],
+      clubs: null,
       certificates: []
     }
+    if (this.breederData.clubs){
+      this.currentClubs = this.breederData.clubs.split(";");
+    }
+
   }
 
   previewPersonalImage() {
@@ -76,12 +81,12 @@ export class AboutMeProfilePageComponent implements OnInit {
   }
 
   addClub(): void {
-    this.breederData.clubs.push(this.currentClub);
+    this.currentClubs.push(this.currentClub);
     this.currentClub = null;
   }
 
   deleteClub(index: number): void {
-    this.breederData.clubs.splice(index, 1);
+    this.currentClubs.splice(index, 1);
   }
 
   validateInputFields(): boolean {
@@ -103,7 +108,7 @@ export class AboutMeProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (this.breederData.clubs.length == 0) {
+    if (this.currentClubs.length == 0) {
       this.invalidFields.push('clubs');
       isValid = false;
     }
@@ -114,7 +119,8 @@ export class AboutMeProfilePageComponent implements OnInit {
   saveChanges() {
     if (!this.validateInputFields())
       return;
-
+    
+    this.breederData.clubs = this.currentClubs.join(";");
     this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(() => {
       this.appService.userData.about = this.breederData;
       scroll(0, 0);

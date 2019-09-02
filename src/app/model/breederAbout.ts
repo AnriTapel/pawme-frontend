@@ -14,7 +14,7 @@ import { Photo } from './photo';
 
 export interface BreederAbout { 
     about: string;
-    clubs?: Array<string>;
+    clubs?: string;
     howItStarted: string;
     id?: number;
     outstandingInfo?: string;

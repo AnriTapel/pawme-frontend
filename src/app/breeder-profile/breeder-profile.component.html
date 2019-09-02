@@ -4,36 +4,43 @@
 
 <div class="profile-container">
 
-    <div class="profile-progress-bar">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div><img src="./assets/img/progress-bar-paw.svg" alt="Собачья лапка"></div>
+    <div class="progress-bar-container">
+        <div class="progress-bar-base">
+        </div>
+
+        <div class="progress-bar-sections">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div>
+                <img src="./assets/img/progress-bar-paw.svg" alt="Собачья лапка">
+            </div>
+        </div>
+
+        <div class="progress-line">
+        </div>
+
     </div>
 
     <div class="profile-menu-container-desktop">
         <div class="profile-menu-desktop">
-            <div *ngFor="let subpage of breederService.profileSubpages"
-                [ngClass]="{'active-page': breederService.getCurProfilePage().tag == subpage.tag}"
+            <div *ngFor="let subpage of breederService.profileSubpages" [ngClass]="{'active-page': breederService.getCurProfilePage().tag == subpage.tag}"
                 (click)="breederService.setCurProfilePage(subpage)">{{subpage.name}}</div>
         </div>
-        <input type="button" class="custom-btn btn-transparent" value="Предварительный просмотр"
-            (click)="showPreview()" />
+        <input type="button" class="custom-btn btn-transparent" value="Предварительный просмотр" (click)="showPreview()" />
     </div>
 
     <div class="profile-menu-container-mobile">
         <div class="profile-menu-mobile">
-            <div class="mobile-dropdown-menu-item" [class.invisible-menu]="!breederService.isMobileMenuVisible"
-                (click)="breederService.isMobileMenuVisible = !breederService.isMobileMenuVisible">
+            <div class="mobile-dropdown-menu-item" [class.invisible-menu]="!breederService.isMobileMenuVisible" (click)="breederService.isMobileMenuVisible = !breederService.isMobileMenuVisible">
                 {{breederService.getCurProfilePage().name}}
                 <img *ngIf="!breederService.isMobileMenuVisible" src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
                 <img *ngIf="breederService.isMobileMenuVisible" src="./assets/img/arrow-up.svg" alt="Стрелка вверх" />
             </div>
             <ng-container *ngIf="breederService.isMobileMenuVisible">
                 <ng-container *ngFor="let subpage of breederService.profileSubpages">
-                    <div *ngIf="subpage.tag != breederService.getCurProfilePage().tag" class="mobile-dropdown-menu-item"
-                        (click)="breederService.setCurProfilePage(subpage)">{{subpage.name}}
+                    <div *ngIf="subpage.tag != breederService.getCurProfilePage().tag" class="mobile-dropdown-menu-item" (click)="breederService.setCurProfilePage(subpage)">{{subpage.name}}
                     </div>
                 </ng-container>
             </ng-container>

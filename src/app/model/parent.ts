@@ -18,8 +18,8 @@ export interface Parent {
     gallery?: Array<Photo>;
     gender: Parent.GenderEnum;
     id?: number;
-    nickname: string;
     info: string;
+    nickname: string;
 }
 export namespace Parent {
     export type GenderEnum = 'MALE' | 'FEMALE';
