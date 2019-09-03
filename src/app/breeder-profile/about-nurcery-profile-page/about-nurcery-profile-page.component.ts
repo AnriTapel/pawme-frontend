@@ -98,12 +98,16 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     if (!this.validateInputFields())
       return;
 
-    this.nurceryData.city = this.appService.cities.filter(it => it.name == this.curCity)[0];
-    this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0];
+    this.nurceryData.city = this.appService.cities.filter(it => it.name == this.curCity)[0] || {name: this.curCity};
+    this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || {name: this.curMainBreed};
+    if (!this.nurceryData.name)
+      this.nurceryData.name = this.appService.userData.name + " " + this.appService.userData.surname;
     if (this.curExtraBreed)
-      this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0];
+      this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || {name: this.curExtraBreed};
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
+        if (!this.appService.userData.generalInfo)
+          this.appService.userData.profileFill++;
         this.appService.userData.generalInfo = this.nurceryData;
         scroll(0, 0);
       })

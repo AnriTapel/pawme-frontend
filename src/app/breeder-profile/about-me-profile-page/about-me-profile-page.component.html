@@ -71,10 +71,10 @@
         <label for="clubs">В каких клубах заводчиков вы состоите?</label>
         <br>
         <div class="btn-label-list">
-            <input type="button" class="btn-label" *ngFor="let club of breederData.clubs;let i = index"
+            <input type="button" class="btn-label" *ngFor="let club of currentClubs;let i = index"
                 [value]="club + '  X'" (click)="deleteClub(i)" />
         </div>
-        <input type="text" class="form-control custom-form-control-border" name="clubs" [(ngModel)]="currentClub" [disabled]="breederData.clubs.length > 9"
+        <input type="text" class="form-control custom-form-control-border" name="clubs" [(ngModel)]="currentClub" [disabled]="currentClubs.length > 9"
             [class.invalid-form-field-value]="invalidFields.includes('clubs')" (keyup.enter)="addClub()" />
     </div>
 

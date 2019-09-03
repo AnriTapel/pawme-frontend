@@ -5,6 +5,7 @@ import { AppService } from 'src/app/services/app-service/app.service';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 import { EventService } from '../../services/event-service/events.service';
 import { ParentsInfo, ParentTest, Parent } from 'src/app/model/models';
+import { BreederControllerService } from 'src/app/api/api';
 
 @Component({
   selector: 'app-puppies-parents-profile-page',
@@ -21,14 +22,14 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     info: null
   }
   parentsData: ParentsInfo;
-  parentDraft: any;
   currentParentData: Parent;
 
   currentBodyPart: string;
   currentMedicalTest: string;
+  currentBreed: string;
 
-
-  invalidFields: any[] = [];
+  invalidAddingFields: any[] = [];
+  invalidGeneralFields: any[] = [];
 
   parentTests: Object = {
     "Бедра": ["Тест на дисплазию тазобедренного сустава (по стандартам РКФ)"],
@@ -58,11 +59,11 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   parentBreedClick$ = new Subject<string>();
 
   constructor(public appService: AppService, private popupService: PopupTemplateService,
-    private eventService: EventService) { }
+    private eventService: EventService, private breederService: BreederControllerService) { }
 
   ngOnInit() {
 
-    this.parentsData = {
+    this.parentsData = <ParentsInfo>this.appService.userData.parentsInfo || {
       parents: [],
       parentTests: [],
     };
@@ -84,10 +85,11 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
   showCurrentParentPage(index: number): void {
     if (index == -1)
-      this.currentParentData = this.parentDraft ? this.parentDraft : this.DEFAULT_PARENT_DATA;
-    else
+      this.currentParentData = this.appService.userData.parentDraft || this.DEFAULT_PARENT_DATA;
+    else { 
       this.currentParentData = this.parentsData.parents[index];
-
+      this.currentBreed = this.currentParentData.breed.name;
+    }
     this.isMainPage = false;
   }
 
@@ -116,9 +118,10 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   addParent() {
-    if (!this.validateInputFields())
+    if (!this.validateAddingFields())
       return;
     // TODO: change adding or refreshing condition based on parents' id
+    this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || {name: this.currentBreed};
     if (this.parentsData.parents.filter(it => it.nickname == this.currentParentData.nickname).length > 0)
       this.parentsData.parents.map(it => {
         if (it.nickname == this.currentParentData.nickname)
@@ -128,7 +131,9 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.parentsData.parents.push(this.currentParentData);
 
     this.currentParentData = null;
+    this.currentBreed = null;
     this.isMainPage = true;
+    scroll(0,0);
   }
 
   deleteParent(index: number): void {
@@ -136,39 +141,64 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   saveDraft() {
-    this.parentDraft = this.currentParentData;
+    // TODO: add setParentDraftUsingPUT(id, this.currentParentData)
+    // this.appService.userData.parentDraft = this.currentParentData;
     this.currentParentData = null;
     this.isMainPage = true;
   }
 
   saveChanges() {
-
+    if (!this.validateGeneralFields())
+      return;
+    this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe((res) => {
+      if (!this.appService.userData.parentsInfo)
+        this.appService.userData.profileFill++;
+      this.appService.userData.parentsInfo = this.parentsData;
+      this.isMainPage = true;
+      scroll(0,0);
+    });
   }
 
-  validateInputFields(): boolean {
+  validateGeneralFields(): boolean {
     let isValid = true;
-    this.invalidFields = [];
-    if (!this.currentParentData.nickname || this.currentParentData.nickname == "") {
-      this.invalidFields.push('name');
+    this.invalidGeneralFields = [];
+    if (this.parentsData.parents.length == 0) {
+      this.invalidGeneralFields.push('parents');
       isValid = false;
     }
 
-    if (!this.currentParentData.breed || this.currentParentData.breed == "") {
-      this.invalidFields.push('breed');
-      isValid = false;
-    }
-
-    if (this.currentParentData.gallery.length == 0) {
-      this.invalidFields.push('photos');
-      isValid = false;
-    }
-
-    if (!this.currentParentData.info || this.currentParentData.info == "") {
-      this.invalidFields.push('info');
+    if (this.parentsData.parentTests.length == 0) {
+      this.invalidGeneralFields.push('tests');
       isValid = false;
     }
 
     return isValid;
+  }
+
+  validateAddingFields(): boolean{
+    let isValid = true;
+    this.invalidAddingFields = [];
+    if (!this.currentParentData.nickname || this.currentParentData.nickname == "") {
+      this.invalidAddingFields.push('name');
+      isValid = false;
+    }
+
+    if (!this.currentBreed || this.currentBreed == "") {
+      this.invalidAddingFields.push('breed');
+      isValid = false;
+    }
+
+    if (this.currentParentData.gallery.length == 0) {
+      this.invalidAddingFields.push('photos');
+      isValid = false;
+    }
+
+    if (!this.currentParentData.info || this.currentParentData.info == "") {
+      this.invalidAddingFields.push('info');
+      isValid = false;
+    }
+
+    return isValid; 
   }
 
 }

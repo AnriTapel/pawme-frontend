@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AppService } from '../app-service/app.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class BreederProfileService {
     {tag: 'add-puppy', name: 'Добавить щенка'}
   ];
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   setCurProfilePage(page: any): void {
     this.curProfilePage = page;

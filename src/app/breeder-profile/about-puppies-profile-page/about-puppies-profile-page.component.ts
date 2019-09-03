@@ -49,6 +49,8 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       return;
 
     this.breederService.setPuppiesInfoUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(() => {
+      if (!this.appService.userData.puppiesInfo)
+        this.appService.userData.profileFill++;
       this.appService.userData.puppiesInfo = this.puppiesData;
       scroll(0,0);
     });

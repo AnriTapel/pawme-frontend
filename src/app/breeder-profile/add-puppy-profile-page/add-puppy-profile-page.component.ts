@@ -4,7 +4,8 @@ import { Subject } from 'rxjs';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { EventService } from '../../services/event-service/events.service';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
-import { BreederProfileService } from 'src/app/services/breeder-profile-service/breeder-profile.service';
+import { Parent, Puppy } from 'src/app/model/models';
+import { BreederControllerService } from 'src/app/api/api';
 
 @Component({
   selector: 'app-add-puppy-profile-page',
@@ -13,20 +14,24 @@ import { BreederProfileService } from 'src/app/services/breeder-profile-service/
 })
 export class AddPuppyProfilePageComponent implements OnInit {
 
-  DEFAULT_PUPPY_DATA = {
-    name: null,
-    isMale: true,
-    birthday: null,
+  DEFAULT_PUPPY_DATA: Puppy = {
+    nickname: null,
+    gender: "MALE",
+    birthDate: null,
     breed: null,
-    stigmaCode: null,
-    dadId: null,
-    momId: null,
-    info: null,
+    earmark: null,
+    father: null,
+    mother: null,
+    about: null,
     price: null,
-    photos: []
+    gallery: []
   }
-  puppiesData: any;
-  currentPuppyData: any;
+
+  puppiesData: Array<Puppy>;
+  puppyDraft: Puppy;
+  currentPuppyData: Puppy;
+  fathers: Array<Parent> = [];
+  mothers: Array<Parent> = [];
 
   birthdayModel: NgbDateStruct = { day: null, month: null, year: null };
   invalidFields: any[] = [];
@@ -49,35 +54,34 @@ export class AddPuppyProfilePageComponent implements OnInit {
   isMomEmptyButton: boolean = false;
 
   constructor(public appService: AppService, private popupService: PopupTemplateService,
-    private eventService: EventService, public breederService: BreederProfileService) { }
+    private eventService: EventService, public breederService: BreederControllerService) { }
 
   ngOnInit() {
-    this.puppiesData = {
-      puppies: [],
-      parents: [],
-      puppyDraft: null
+    this.puppiesData = this.appService.userData.puppies;
+    if (this.appService.userData.parentsInfo){
+      this.fathers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "MALE");
+      this.mothers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
     }
   }
 
   showCurrentPuppyPage(index: number): void {
     if (index == -1)
-      this.currentPuppyData = this.puppiesData.puppyDraft ? this.puppiesData.puppyDraft : this.DEFAULT_PUPPY_DATA;
+      this.currentPuppyData = this.appService.userData.puppyDraft 
+        ? this.appService.userData.puppyDraft : this.DEFAULT_PUPPY_DATA;
     else
-      this.currentPuppyData = this.puppiesData.puppies[index];
+      this.currentPuppyData = this.puppiesData[index];
 
     this.isMainPage = false;
   }
 
   onDadInputClick(event: any): void{
     this.dadDogFocus$.next(event.target.value);
-    if (this.puppiesData.parents.length == 0)
-      this.isDadEmptyButton = true;
+    this.isDadEmptyButton = this.fathers.length == 0;
   }
 
   onMomInputClick(event: any): void{
     this.momDogFocus$.next(event.target.value);
-    if (this.puppiesData.parents.length == 0)
-      this.isMomEmptyButton = true;
+    this.isMomEmptyButton = this.mothers.length == 0;
   }
 
   getCurrentMaxDate(): any {
@@ -92,7 +96,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   previewPuppyImage(index: number): void {
     this.popupService.setPopupParams({
       width: 210, height: 180, isRect: true,
-      imageUrl: index > -1 ? "/img/" + this.currentPuppyData.photos[index].main + ".jpg" : null
+      imageUrl: index > -1 ? "/img/" + this.currentPuppyData.gallery[index].main + ".jpg" : null
     });
     this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
@@ -101,45 +105,57 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.appService.uploadPetImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         if (index == -1)
-          this.currentPuppyData.photos.push(imageData);
+          this.currentPuppyData.gallery.push(imageData);
         else
-          this.currentPuppyData.photos[index] = imageData;
+          this.currentPuppyData.gallery[index] = imageData;
       });
       croppedHandler.unsubscribe();
     });
   }
 
   deletePuppyImage(index: number): void {
-    this.currentPuppyData.photos.splice(index, 1);
+    this.currentPuppyData.gallery.splice(index, 1);
   }
 
   addPuppy(): void {
     if (!this.validateInputFields())
       return;
     // TODO: change adding or refreshing condition based on parents' id
-    if (this.puppiesData.parents.filter(it => it.name == this.currentPuppyData.name).length > 0)
-      this.puppiesData.parents = this.puppiesData.parents.map(it => {
-        if (it.name == this.currentPuppyData.name)
+    if (this.puppiesData.filter(it => it.nickname == this.currentPuppyData.nickname).length > 0)
+      this.puppiesData.map(it => {
+        if (it.nickname == this.currentPuppyData.nickname)
           it = this.currentPuppyData;
       });
     else
-      this.puppiesData.puppies.push(this.currentPuppyData);
+      this.puppiesData.push(this.currentPuppyData);
 
     this.currentPuppyData = null;
     this.isMainPage = true;
   }
 
   deletePuppy(index: number): void {
-    this.puppiesData.puppies.splice(index, 1);
+    this.puppiesData.splice(index, 1);
   }
 
   saveDraft() {
-    this.puppiesData.parentDraft = this.currentPuppyData;
-    this.currentPuppyData = null;
-    this.isMainPage = true;
+    this.breederService.setPuppyDraftUsingPUT(this.appService.userData.id, this.currentPuppyData).subscribe(() => {
+      this.appService.userData.puppyDraft = this.currentPuppyData;
+      this.currentPuppyData = null;
+      this.isMainPage = true;
+      scroll(0,0);
+    })
   }
 
   saveChanges() {
+    if (!this.validateInputFields())
+      return;
+
+    this.breederService.setPuppiesUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(() => {
+      this.appService.userData.puppies = this.puppiesData;
+      this.isMainPage = true;
+      scroll(0,0);
+
+    })
 
   }
 
@@ -147,7 +163,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   validateInputFields(): boolean {
     let isValid = true;
     this.invalidFields = [];
-    if (!this.currentPuppyData.name || this.currentPuppyData.name == "") {
+    if (!this.currentPuppyData.nickname || this.currentPuppyData.nickname == "") {
       this.invalidFields.push('name');
       isValid = false;
     }
@@ -162,27 +178,27 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentPuppyData.stigmaCode || this.currentPuppyData.stigmaCode == "") {
+    if (!this.currentPuppyData.earmark || this.currentPuppyData.earmark == "") {
       this.invalidFields.push('stigma');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.dadId) {
+    if (!this.currentPuppyData.father) {
       this.invalidFields.push('dad');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.momId) {
+    if (!this.currentPuppyData.mother) {
       this.invalidFields.push('mom');
       isValid = false;
     }
 
-    if (this.currentPuppyData.photos.length == 0) {
+    if (this.currentPuppyData.gallery.length == 0) {
       this.invalidFields.push('photos');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.info || this.currentPuppyData.info == "") {
+    if (!this.currentPuppyData.about || this.currentPuppyData.about == "") {
       this.invalidFields.push('info');
       isValid = false;
     }

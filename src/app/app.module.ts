@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +31,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LyThemeModule, LY_THEME } from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
 import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-images'
-import { AdminControllerService, BreederControllerService, DictionaryControllerService, MediaControllerService } from './api/api';
+import { BreederControllerService, AdminControllerService, DictionaryControllerService, MediaControllerService } from './api/api';
+
+export function initApp(appSerivce: AppService){
+  return (): Promise<any> => {
+    return appSerivce.initApplication();
+  }
+}
 
 @NgModule({
   declarations: [
@@ -74,6 +80,7 @@ import { AdminControllerService, BreederControllerService, DictionaryControllerS
     BreederControllerService,
     DictionaryControllerService,
     MediaControllerService,
+    { provide: APP_INITIALIZER, useFactory: initApp, deps: [AppService], multi: true },
     { provide: LY_THEME, useClass: MinimaLight, multi: true }
     
   ],

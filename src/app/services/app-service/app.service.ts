@@ -11,8 +11,9 @@ import { BreederControllerService } from 'src/app/api/api';
 })
 export class AppService {
 
-  // Data of logged-in entity
-  userData: any;
+  // Current user info
+  userData: any = null;
+  meData: any = null;
 
   // Dog entity parameters
   cities: any;
@@ -20,10 +21,28 @@ export class AppService {
   puppyTests: Array<PuppyTest>;
 
   constructor(private http: HttpClient, private breederService: BreederControllerService) {
-    http.get('/api/dict').subscribe((res) => {
-      this.breeds = res['breeds'];
-      this.cities = res['cities'];
-      this.puppyTests = res['puppyTests'];
+  }
+
+  initApplication() {
+    return new Promise<void>((resolve, reject) => {
+      console.log("AppInitService.init() called");
+      this.breederService.meUsingGET().subscribe(res => {
+        this.meData = res;
+        
+        this.http.get('/api/dict').subscribe(dict => {
+          console.log("Init finished");
+          this.breeds = dict['breeds'];
+          this.cities = dict['cities'];
+          this.puppyTests = dict['puppyTests'];
+        });
+
+        if (this.meData.type == 'BREEDER')
+          this.breederService.getBreederUsingGET(this.meData.id).subscribe(res => {
+            this.userData = res;
+            resolve();
+          });
+
+      });
     });
   }
 
@@ -47,7 +66,7 @@ export class AppService {
     return (text$: Observable<string>) => {
       let values = searchArray;
       if (searchArray[0] && searchArray[0].name)
-        values = searchArray.map(it => {return it.name});
+        values = searchArray.map(it => { return it.name });
       const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
       const clicksWithClosedPopup$ = click$.pipe(filter(() => instance.isPopupOpen()));
       const inputFocus$ = focus$;
@@ -64,7 +83,7 @@ export class AppService {
     return re.test(email);
   }
 
-  public getImageDataForUpload(data: any): FormData {
+  getImageDataForUpload(data: any): FormData {
     const body = new FormData();
     body.append('image', data.inputFile, data.inputFile.name || "main_image.jpg");
     body.append('rect',

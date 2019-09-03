@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
 import { BreederControllerService } from 'src/app/api/api';
 
 @Component({
@@ -16,7 +15,10 @@ export class LoginComponent {
   loginError: boolean = false;
 
   constructor(private appService: AppService, private router: Router, private http: HttpClient,
-    private breederService: BreederControllerService) { }
+    private breederService: BreederControllerService) {
+    if (this.appService.meData.type == "BREEDER")
+      this.router.navigateByUrl('/breeder-profile');
+  }
 
   loginBreeder(): void {
     this.loginError = false;
@@ -27,22 +29,23 @@ export class LoginComponent {
       body.append('username', this.credentials.username);
       body.append('password', this.credentials.password);
 
-      /*this.http.post('/api/login', body, { responseType: 'text' }).pipe(
-        tap(
-          data => this.breederService.getBreederUsingGET(JSON.parse(data).id).subscribe(res => {
-            this.appService.userData = res;
-            this.router.navigateByUrl('/breeder-profile');
-          }), error => this.loginError = true
-        )
-      );*/
-
       this.http.post('/api/login', body, { responseType: 'text' }).subscribe(
-          data => this.breederService.getBreederUsingGET(JSON.parse(data).id).subscribe(res => {
-            this.appService.userData = res;
-            this.router.navigateByUrl('/breeder-profile');
-          }), error => this.loginError = true
-        );
+        data => this.onLoginSuccess(),
+        error => this.loginError = true
+      );
     }
   }
 
+  private onLoginSuccess(): void {
+    this.breederService.meUsingGET().subscribe(me => {
+      this.appService.meData = me;
+      if (me.type == 'BREEDER')
+        this.breederService.getBreederUsingGET(me.id).subscribe(res => {
+          this.appService.userData = res;
+          this.router.navigateByUrl('/breeder-profile');
+        });
+      else
+        this.router.navigateByUrl('/breeder-landing');
+    });
+  }
 }

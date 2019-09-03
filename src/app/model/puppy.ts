@@ -11,6 +11,7 @@
  */
 import { Parent } from './parent';
 import { Photo } from './photo';
+import { Breed } from './breed';
 
 
 export interface Puppy { 
@@ -24,6 +25,7 @@ export interface Puppy {
     mother: Parent;
     nickname: string;
     price: number;
+    breed: Breed
 }
 export namespace Puppy {
     export type GenderEnum = 'MALE' | 'FEMALE';
