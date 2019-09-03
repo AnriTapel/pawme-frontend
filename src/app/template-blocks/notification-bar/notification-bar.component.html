@@ -1,0 +1,5 @@
+<div *ngIf="notificationService.getVisibility()" class="bar-container">
+    <div [style.background-color]="notificationService.getColor()"></div>
+    <p [style.color]="notificationService.getColor()">{{notificationService.getMessage()}}</p>
+    <img src="./assets/img/close-button-black.svg" alt="Закрыть" (click)="notificationService.setVisibility(false)" />
+</div>

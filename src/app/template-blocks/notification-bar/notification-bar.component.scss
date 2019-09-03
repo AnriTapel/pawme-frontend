@@ -1,0 +1,37 @@
+.bar-container{
+    position: fixed;
+    top: 1em;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 70px;
+    background-color: #fff;
+    border: 1px solid #cbd8f6;
+    border-left: none;
+    border-right: none;
+    z-index: 20;
+
+    div{
+        height: 100%;
+        width: 8px;
+        position: absolute;
+        left: 0;
+    }
+
+    p{
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: auto;
+        font-size: 16px;
+        font-family: 'Intro-Regular';
+    }
+
+    img{
+        vertical-align: middle;
+        width: 16px;
+        opacity: 0.6;
+        margin: auto 4em auto auto; 
+        cursor: pointer;
+    }
+}

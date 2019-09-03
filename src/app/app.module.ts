@@ -32,6 +32,7 @@ import { LyThemeModule, LY_THEME } from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
 import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-images'
 import { BreederControllerService, AdminControllerService, DictionaryControllerService, MediaControllerService } from './api/api';
+import { NotificationBarComponent } from './template-blocks/notification-bar/notification-bar.component';
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -58,7 +59,8 @@ export function initApp(appSerivce: AppService){
     RemindPasswordComponent,
     ImageCropperComponent,
     BreederPageComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    NotificationBarComponent
   ],
   imports: [
     BrowserModule,
