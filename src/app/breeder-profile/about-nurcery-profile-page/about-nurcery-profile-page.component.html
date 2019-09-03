@@ -16,12 +16,12 @@
         <label for="nurcery-location">Город / населенный пункт</label>
         <div class="dropdown-text-input">
             <input *ngIf="appService.cities" type="text" class="form-control custom-form-control-border" name="nurcery-location"
-                [(ngModel)]="curCity"
+                [(ngModel)]="curCity" [class.invalid-form-field-value]="invalidFields.includes('city')" id="city"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"
                 (focus)="cityFocus$.next($event.target.value)" (click)="cityClick$.next($event.target.value)"
-                [class.invalid-form-field-value]="invalidFields.includes('city')" #cityInstance="ngbTypeahead"
+                #cityInstance="ngbTypeahead"
                 placeholder="Выбрать">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('city', $event)"/>
         </div>
     </div>
 
@@ -29,12 +29,11 @@
         <label for="nurcery-main-breed">Основная порода</label>
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="nurcery-main-breed"
-                [(ngModel)]="curMainBreed"
+                [(ngModel)]="curMainBreed" [class.invalid-form-field-value]="invalidFields.includes('mainBreed')" id="main-breed" 
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
                 (focus)="mainBreedFocus$.next($event.target.value)" (click)="mainBreedClick$.next($event.target.value)"
-                [class.invalid-form-field-value]="invalidFields.includes('mainBreed')" #mainBreedInstance="ngbTypeahead"
-                placeholder="Выбрать">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+                #mainBreedInstance="ngbTypeahead" placeholder="Выбрать">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('main-breed', $event)"/>
         </div>
     </div>
 
@@ -47,9 +46,9 @@
         <div class="dropdown-text-input">
             <input type="text" class="form-control custom-form-control-border" name="nurcery-additional-breed" [(ngModel)]="curExtraBreed"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
-                (focus)="addBreedFocus$.next($event.target.value)" (click)="addBreedClick$.next($event.target.value)"
+                (focus)="addBreedFocus$.next($event.target.value)" (click)="addBreedClick$.next($event.target.value)" id="extra-breed"
                 #addBreedInstance="ngbTypeahead" placeholder="Выбрать">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('extra-breed', $event)"/>
         </div>
     </div>
 
@@ -58,7 +57,7 @@
         <span class="block-description">Это одна из первых вещей, которую прочитают потенциальные покупатели на вашей
             странице. Постарайтесь
             кратко (в 2-3 предложения) описать ваш питомник и рассказать о его особенностях.</span>
-        <textarea rows="5" class="form-control custom-form-control-border" [(ngModel)]="nurceryData.description"
+        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="nurceryData.description"
             [class.invalid-form-field-value]="invalidFields.includes('desc')" placeholder="Описание"></textarea>
     </div>
 

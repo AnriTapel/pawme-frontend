@@ -1,6 +1,6 @@
 hr {
   width: 80%;
-  margin: 0 auto;
+  margin: -15px auto 0;
   background-color: #f8f9fb;
 }
 
@@ -10,10 +10,10 @@ hr {
   width: 80%;
   max-width: 1440px;
   -ms-grid-rows: auto;
-  -ms-grid-columns: 30% 70%;
-      grid-template: auto / 30% 70%;
-  margin: 2% auto;
-  grid-gap: 20px;
+  -ms-grid-columns: 3fr 7fr;
+      grid-template: auto / 3fr 7fr;
+  margin: 4em auto 6em;
+  grid-gap: 10px 20px;
 }
 
 .progress-bar-container {
@@ -62,7 +62,7 @@ hr {
 .progress-bar-container .progress-bar-sections div:nth-child(5) img {
   position: relative;
   top: -12px;
-  right: -5px;
+  right: -1px;
   width: 40px;
   height: 40px;
 }
@@ -73,6 +73,9 @@ hr {
   background-image: -webkit-gradient(linear, right top, left top, from(#645fc9), to(#5ed7d5));
   background-image: linear-gradient(to left, #645fc9, #5ed7d5);
   border-radius: 8px;
+}
+
+.progress-bar-container .partial-progress-lin {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -116,7 +119,7 @@ hr {
   font-family: 'Intro-Regular';
   font-size: 18px;
   color: #0e0b4d;
-  padding: 20px 15px;
+  padding: 20px 20px;
   margin: 0;
   position: relative;
 }
@@ -132,10 +135,10 @@ hr {
 .profile-menu-mobile div:before {
   content: "";
   position: absolute;
-  left: 5%;
+  left: 6%;
   bottom: 0;
   height: 1px;
-  width: 90%;
+  width: 87.5%;
   border-bottom: 1px solid #cbd8f6;
 }
 

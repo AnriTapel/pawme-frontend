@@ -49,6 +49,7 @@ input[type=checkbox] {
 .contract-block a {
   color: #645fc9;
   border-bottom: 1px dotted #645fc9;
+  font-family: 'Intro-Regular';
   margin: 1em 0;
   display: inline-block;
 }
@@ -79,7 +80,8 @@ input[type=checkbox] {
 
 .why-its-important span {
   color: #645fc9;
-  font-size: 14px;
+  font-size: 16px;
+  font-family: 'Intro-Regular';
   cursor: pointer;
   white-space: nowrap;
 }

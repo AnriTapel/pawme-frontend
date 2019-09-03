@@ -61,10 +61,10 @@
         <div class="breeder-profile-subpage-form-left body-part-dropdown">
             <div class="dropdown-text-input">
                 <input type="text" class="form-control custom-form-control-border" [(ngModel)]="currentBodyPart" (input)="currentMedicalTest = ''"
-                    [ngbTypeahead]="appService.fieldAutocomplete(testsCategories, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
+                    [ngbTypeahead]="appService.fieldAutocomplete(testsCategories, bodyPartFocus$, bodyPartClick$, bodyPartInstance)" id="body-part"
                     (focus)="bodyPartFocus$.next($event.target.value)" (click)="bodyPartClick$.next($event.target.value)" #bodyPartInstance="ngbTypeahead"
                     [class.invalid-form-field-value]="invalidGeneralFields.includes('tests')" placeholder="Часть тела">
-                <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+                <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('body-part', $event)"/>
             </div>
         </div>
 
@@ -73,12 +73,12 @@
                 <ng-container *ngFor="let cat of testsCategories">
                     <input *ngIf="currentBodyPart == cat" type="text" class="form-control custom-form-control-border" [(ngModel)]="currentMedicalTest"
                         [ngbTypeahead]="appService.fieldAutocomplete(parentTests[cat], medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
-                        (focus)="medicalTestFocus$.next($event.target.value)" (click)="medicalTestClick$.next($event.target.value)"
+                        (focus)="medicalTestFocus$.next($event.target.value)" (click)="medicalTestClick$.next($event.target.value)" id="parent-test"
                         #medicalTestInstance="ngbTypeahead" placeholder="Название теста">
-                    <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+                    <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('parent-test', $event)"/>
                 </ng-container>
 
-                <input *ngIf="!testsCategories.includes(currentBodyPart)" type="text" class="form-control custom-form-control-border"
+                <input *ngIf="!testsCategories.includes(currentBodyPart)" type="text" class="form-control custom-form-control-border" id="parent-test"
                     [(ngModel)]="currentMedicalTest" [ngbTypeahead]="appService.fieldAutocomplete([], medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
                     (focus)="medicalTestFocus$.next($event.target.value)" (click)="medicalTestClick$.next($event.target.value)" #medicalTestInstance="ngbTypeahead"
                     [class.invalid-form-field-value]="invalidGeneralFields.includes('tests')" placeholder="Название теста">
@@ -87,7 +87,7 @@
         </div>
 
         <div class="add-test-button-block">
-            <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить тест"
+            <input type="button" class="custom-btn btn-transparent" style="margin: unset;width:220px;" value="+ Добавить тест"
                 (click)="addMedical()" />
         </div>
     </div>
@@ -141,11 +141,11 @@
 
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="parent-breed"
-                [(ngModel)]="currentBreed" [class.invalid-form-field-value]="invalidAddingFields.includes('breed')"
+                [(ngModel)]="currentBreed" [class.invalid-form-field-value]="invalidAddingFields.includes('breed')" id="breed"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
                 (focus)="parentBreedFocus$.next($event.target.value)" (click)="parentBreedClick$.next($event.target.value)"
                 #parentBreedInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('breed', $event)"/>
         </div>
 
     </div>
@@ -154,7 +154,7 @@
         <label for="parent-info">Расскажите об этом родителе</label>
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
-        <textarea rows="5" class="form-control custom-form-control-border" [(ngModel)]="currentParentData.info"
+        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="currentParentData.info"
             [class.invalid-form-field-value]="invalidAddingFields.includes('info')"></textarea>
     </div>
 

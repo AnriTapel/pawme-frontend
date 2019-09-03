@@ -28,19 +28,23 @@ export class AppService {
       console.log("AppInitService.init() called");
       this.breederService.meUsingGET().subscribe(res => {
         this.meData = res;
+
         
         this.http.get('/api/dict').subscribe(dict => {
           console.log("Init finished");
           this.breeds = dict['breeds'];
           this.cities = dict['cities'];
           this.puppyTests = dict['puppyTests'];
+          
+          if (this.meData.type == 'BREEDER')
+            this.breederService.getBreederUsingGET(this.meData.id).subscribe(res => {
+              this.userData = res;
+              resolve();
+            });
+          else
+            resolve();
         });
 
-        if (this.meData.type == 'BREEDER')
-          this.breederService.getBreederUsingGET(this.meData.id).subscribe(res => {
-            this.userData = res;
-            resolve();
-          });
 
       });
     });
@@ -76,6 +80,10 @@ export class AppService {
           : values.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
       );
     }
+  }
+
+  toggleDropdownTextInput(id: string, event: any): void{
+    document.getElementById(id).focus(event.target.value);
   }
 
   validateEmailInput(email: string): boolean {

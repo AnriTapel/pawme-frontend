@@ -10,6 +10,14 @@
     display: inline-block;
 }
 
+.body-part-dropdown{
+    padding-right: 1.25em;
+}
+
+.test-dropdown{
+    padding-left: 1.25em;
+}
+
 .add-test-button-block{
     float: right;
     margin-top: 1.5em;
@@ -27,8 +35,13 @@
         width: 100%;
     }
 
+    .body-part-dropdown{
+        padding-right: unset;
+    }
+
     .test-dropdown{
         margin-top: .5em;
+        padding-left: unset;
     }
 
     .add-test-button-block{

@@ -14,7 +14,7 @@
             питомнике и помогает ли вам семья?
             Что вам нравится в вашей породе и какие у вас профессиональные цели?
         </span>
-        <textarea rows="5" [(ngModel)]="breederData.about" placeholder="Введите текст" name="about-me"
+        <textarea rows="3" [(ngModel)]="breederData.about" placeholder="Введите текст" name="about-me"
             class="form-control custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('about')"></textarea>
     </div>
 
@@ -25,7 +25,7 @@
             предшествовали? Почему была выбрана именно эта
             порода?
         </span>
-        <textarea rows="5" [(ngModel)]="breederData.howItStarted" class="form-control custom-form-control-border" placeholder="Введите текст"
+        <textarea rows="3" [(ngModel)]="breederData.howItStarted" class="form-control custom-form-control-border" placeholder="Введите текст"
             name="howItStarted" [class.invalid-form-field-value]="invalidFields.includes('howItStarted')"></textarea>
     </div>
 
@@ -34,7 +34,7 @@
         <br>
         <span class="block-description">Вы используете какие-то определенные методы при работе с щенками? Вы уделяете
             особое внимание определенным деталям?</span>
-        <textarea rows="5" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border" placeholder="Введите текст"
+        <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border" placeholder="Введите текст"
             name="features"></textarea>
     </div>
 
@@ -79,7 +79,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-right" style="align-self: end;">
-        <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить клуб"
+        <input type="button" class="custom-btn btn-transparent" style="margin: unset;width:220px;" value="+ Добавить клуб"
             (click)="addClub()" />
     </div>
 

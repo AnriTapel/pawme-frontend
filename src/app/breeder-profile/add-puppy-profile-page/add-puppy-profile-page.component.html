@@ -58,7 +58,7 @@
 
     <div class="breeder-profile-subpage-form-left add-puppy-page-name-block">
         <label for="puppy-name">Кличка</label>
-        <span (click)="currentPuppyData.name = 'Щенок'">Без клички</span>
+        <span (click)="currentPuppyData.nickname = 'Щенок'" style="font-family: 'Intro-Regular'">Без клички</span>
         <div class="input-group mb-3">
             <input type="text" class="form-control custom-form-control-border" name="puppy-name" aria-label="Кличка"
                 [class.invalid-form-field-value]="invalidFields.includes('name')" aria-describedby="basic-addon3"
@@ -76,12 +76,12 @@
 
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="puppy-breed" [(ngModel)]="currentPuppyData.breed"
-                [class.invalid-form-field-value]="invalidFields.includes('breed')"
+                [class.invalid-form-field-value]="invalidFields.includes('breed')" id="breed"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, puppyBreedFocus$, puppyBreedClick$, puppyBreedInstance)"
                 (focus)="puppyBreedFocus$.next($event.target.value)"
                 (click)="puppyBreedClick$.next($event.target.value)" #puppyBreedInstance="ngbTypeahead"
                 placeholder="Выбрать" aria-describedby="basic-addon2">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('breed', $event)"/>
         </div>
     </div>
 
@@ -119,11 +119,11 @@
 
         <div class="dropdown-text-input">
             <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-dad" [(ngModel)]="currentPuppyData.father"
-                [class.invalid-form-field-value]="invalidFields.includes('dad')"
+                [class.invalid-form-field-value]="invalidFields.includes('dad')" id="dad"
                 [ngbTypeahead]="appService.fieldAutocomplete(puppiesData.parents, dadDogFocus$, dadDogClick$, dadDogInstance)"
                 (focus)="dadDogFocus$.next($event.target.value)" (click)="onDadInputClick($event)" (blur)="isDadEmptyButton = false"
                 #dadDogInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('dad', $event)"/>
         </div>
         <div *ngIf="isDadEmptyButton" class="empty-parent-button-block"
             (mousedown)="breederService.setCurProfilePage(breederService.profileSubpages[2])">
@@ -138,11 +138,11 @@
 
         <div class="dropdown-text-input">
             <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-mom" [(ngModel)]="currentPuppyData.mother"
-                [class.invalid-form-field-value]="invalidFields.includes('mom')"
+                [class.invalid-form-field-value]="invalidFields.includes('mom')" id="mom"
                 [ngbTypeahead]="appService.fieldAutocomplete(puppiesData.parents, momDogFocus$, momDogClick$, momDogInstance)"
                 (focus)="momDogFocus$.next($event.target.value)" (click)="onMomInputClick($event)" (blur)="isMomEmptyButton = false"
                 #momDogInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('mom', $event)"/>
         </div>
         <div *ngIf="isMomEmptyButton" class="empty-parent-button-block"
             (mousedown)="breederService.setCurProfilePage(breederService.profileSubpages[2])">
@@ -155,7 +155,7 @@
         <label for="puppy-info">Расскажите об этом родителе</label>
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
-        <textarea rows="5" class="form-control custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('info')"
+        <textarea rows="3" class="form-control custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('info')"
             [(ngModel)]="currentPuppyData.about"></textarea>
     </div>
 

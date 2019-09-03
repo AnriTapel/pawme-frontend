@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header class="header-for-profile"></app-header>
 
 <hr>
 
@@ -18,7 +18,8 @@
             </div>
         </div>
 
-        <div class="progress-line" [style.width.%]="this.appService.userData.profileFill * 20">
+        <div class="progress-line" [style.width.%]="this.appService.userData.profileFill * 20" 
+            [class.partial-progress-line]="this.appService.userData.profileFill != 5">
         </div>
 
     </div>

@@ -13,7 +13,7 @@ export class BreederProfileService {
     {tag: 'about-puppies', name: 'О щенках'},
     {tag: 'puppies-parents', name: 'Родители щенков'},
     {tag: 'about-me', name: 'О себе'},
-    {tag: 'add-puppy', name: 'Добавить щенка'}
+    {tag: 'add-puppy', name: 'Добавить щенков'}
   ];
 
   constructor(private appService: AppService) { }

@@ -79,7 +79,6 @@
         <br>
         <span class="block-description">Для защиты покупателей от недобросовестных заводчиков мы составили стандартный
             договор купли/продажи.</span>
-        <br>
 
         <a href="#">Посмотреть договор</a>
         <br>
@@ -119,7 +118,7 @@
         <br>
         <span class="block-description">Обычно заводчики указывают заболевания или проблемные части тела, специфические
             для конкретной породы.</span>
-        <textarea rows="5" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceCoverage"
+        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceCoverage"
             [class.invalid-form-field-value]="invalidFields.includes('coverage')"></textarea>
     </div>
 
@@ -130,7 +129,7 @@
         <br>
         <span class="block-description">Многие заводчики дарят новым хозяевам игрушку с запахом однопометников или
             небольшой мешочек корма</span>
-        <textarea rows="5" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts"></textarea>
+        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts"></textarea>
     </div>
 
     <div class="lower-btn">
