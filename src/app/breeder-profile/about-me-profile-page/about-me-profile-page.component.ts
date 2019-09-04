@@ -4,6 +4,7 @@ import { AppService } from 'src/app/services/app-service/app.service';
 import { EventService } from 'src/app/services/event-service/events.service';
 import { BreederAbout } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
+import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 
 @Component({
   selector: 'app-about-me-profile-page',
@@ -19,7 +20,7 @@ export class AboutMeProfilePageComponent implements OnInit {
   invalidFields: Array<string> = [];
 
   constructor(private popupService: PopupTemplateService, private appService: AppService, private eventService: EventService,
-      private breederService: BreederControllerService) { }
+    private breederService: BreederControllerService, private notificationService: NotificationBarService) { }
 
   ngOnInit() {
     this.breederData = <BreederAbout>this.appService.userData.about || {
@@ -30,7 +31,7 @@ export class AboutMeProfilePageComponent implements OnInit {
       clubs: null,
       certificates: []
     }
-    if (this.breederData.clubs){
+    if (this.breederData.clubs) {
       this.currentClubs = this.breederData.clubs.split(";");
     }
 
@@ -119,14 +120,23 @@ export class AboutMeProfilePageComponent implements OnInit {
   saveChanges() {
     if (!this.validateInputFields())
       return;
-    
+
     this.breederData.clubs = this.currentClubs.join(";");
-    this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(() => {
-      if (!this.appService.userData.about)
-        this.appService.userData.profileFill++;
-      this.appService.userData.about = this.breederData;
-      scroll(0, 0);
-    })
+    this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
+      () => {
+        if (!this.appService.userData.about)
+          this.appService.userData.profileFill++;
+        this.appService.userData.about = this.breederData;
+        this.notificationService.setContext('Изменения успешно сохранены', true);
+        this.notificationService.setVisibility(true);
+        scroll(0, 0);
+      },
+      () => {
+        this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+        this.notificationService.setVisibility(true);
+        scroll(0, 0);
+      }
+      );
   }
 
 }

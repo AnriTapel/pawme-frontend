@@ -6,26 +6,21 @@ import { Injectable } from '@angular/core';
 export class NotificationBarService {
 
   private message: string = "Test message";
-  private isVisible: boolean = true;
+  private isVisible: boolean = false;
   private color: string = "#ff00ff";
 
   constructor() { }
 
-  getMessage(): string{
-    return this.message;
+  getContext(): Object{
+    return {
+      color: this.color,
+      message: this.message
+    }
   }
 
-  setMessage(message: string): void{
+  setContext(message: string, isSuccess: boolean): void {
     this.message = message;
-  }
-
-  
-  getColor(): string{
-    return this.color;
-  }
-
-  setColor(color: string): void{
-    this.color = color;
+    this.color = isSuccess ? '#46b0ad' : '#eb0000';
   }
 
   getVisibility(): boolean{

@@ -6,6 +6,7 @@ import { PopupTemplateService } from '../../services/popup-service/popup-templat
 import { EventService } from '../../services/event-service/events.service';
 import { ParentsInfo, ParentTest, Parent } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
+import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 
 @Component({
   selector: 'app-puppies-parents-profile-page',
@@ -59,7 +60,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   parentBreedClick$ = new Subject<string>();
 
   constructor(public appService: AppService, private popupService: PopupTemplateService,
-    private eventService: EventService, private breederService: BreederControllerService) { }
+    private eventService: EventService, private breederService: BreederControllerService,
+    private notificationService: NotificationBarService) { }
 
   ngOnInit() {
 
@@ -145,18 +147,35 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     // this.appService.userData.parentDraft = this.currentParentData;
     this.currentParentData = null;
     this.isMainPage = true;
+     /*this.notificationService.setContext('Черновик успешно сохранен', true);
+      this.notificationService.setVisibility(true);
+      scroll(0, 0);
+    },
+      () => {
+        this.notificationService.setContext('Черновик не были сохранены, попробуйте еще раз', false);
+        this.notificationService.setVisibility(true);
+        scroll(0, 0);
+      }*/
   }
 
   saveChanges() {
     if (!this.validateGeneralFields())
       return;
-    this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe((res) => {
+    this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe( () => {
       if (!this.appService.userData.parentsInfo)
         this.appService.userData.profileFill++;
       this.appService.userData.parentsInfo = this.parentsData;
       this.isMainPage = true;
+      this.notificationService.setContext('Изменения успешно сохранены', true);
+      this.notificationService.setVisibility(true);
       scroll(0,0);
-    });
+    },
+    () => {
+      this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+      this.notificationService.setVisibility(true);
+      scroll(0,0);
+    }
+    );
   }
 
   validateGeneralFields(): boolean {

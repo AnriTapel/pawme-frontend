@@ -6,6 +6,7 @@ import { EventService } from '../../services/event-service/events.service';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 import { Parent, Puppy } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
+import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 
 @Component({
   selector: 'app-add-puppy-profile-page',
@@ -53,12 +54,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
   isDadEmptyButton: boolean = false;
   isMomEmptyButton: boolean = false;
 
-  constructor(public appService: AppService, private popupService: PopupTemplateService,
+  constructor(public appService: AppService, private popupService: PopupTemplateService, private notificationService: NotificationBarService,
     private eventService: EventService, public breederService: BreederControllerService) { }
 
   ngOnInit() {
     this.puppiesData = this.appService.userData.puppies;
-    if (this.appService.userData.parentsInfo){
+    if (this.appService.userData.parentsInfo) {
       this.fathers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "MALE");
       this.mothers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
     }
@@ -66,7 +67,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   showCurrentPuppyPage(index: number): void {
     if (index == -1)
-      this.currentPuppyData = this.appService.userData.puppyDraft 
+      this.currentPuppyData = this.appService.userData.puppyDraft
         ? this.appService.userData.puppyDraft : this.DEFAULT_PUPPY_DATA;
     else
       this.currentPuppyData = this.puppiesData[index];
@@ -74,12 +75,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.isMainPage = false;
   }
 
-  onDadInputClick(event: any): void{
+  onDadInputClick(event: any): void {
     this.dadDogFocus$.next(event.target.value);
     this.isDadEmptyButton = this.fathers.length == 0;
   }
 
-  onMomInputClick(event: any): void{
+  onMomInputClick(event: any): void {
     this.momDogFocus$.next(event.target.value);
     this.isMomEmptyButton = this.mothers.length == 0;
   }
@@ -142,8 +143,16 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.appService.userData.puppyDraft = this.currentPuppyData;
       this.currentPuppyData = null;
       this.isMainPage = true;
-      scroll(0,0);
-    })
+      this.notificationService.setContext('Черновик успешно сохранен', true);
+      this.notificationService.setVisibility(true);
+      scroll(0, 0);
+    },
+      () => {
+        this.notificationService.setContext('Черновик не были сохранены, попробуйте еще раз', false);
+        this.notificationService.setVisibility(true);
+        scroll(0, 0);
+      }
+    );
   }
 
   saveChanges() {
@@ -153,10 +162,16 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.breederService.setPuppiesUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(() => {
       this.appService.userData.puppies = this.puppiesData;
       this.isMainPage = true;
-      scroll(0,0);
-
-    })
-
+      this.notificationService.setContext('Изменения успешно сохранены', true);
+      this.notificationService.setVisibility(true);
+      scroll(0, 0);
+    },
+      () => {
+        this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+        this.notificationService.setVisibility(true);
+        scroll(0, 0);
+      }
+    );
   }
 
 

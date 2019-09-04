@@ -6,6 +6,7 @@ import { PopupTemplateService } from 'src/app/services/popup-service/popup-templ
 import { EventService } from 'src/app/services/event-service/events.service';
 import { BreederInfo } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
+import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 
 @Component({
   selector: 'app-about-nurcery-profile-page',
@@ -32,7 +33,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   addBreedFocus$ = new Subject<string>();
   addBreedClick$ = new Subject<string>();
 
-  constructor(public appService: AppService, private popupService: PopupTemplateService,
+  constructor(public appService: AppService, private popupService: PopupTemplateService, private notificationService: NotificationBarService,
     private eventService: EventService, private breederService: BreederControllerService) { }
 
   ngOnInit() {
@@ -49,7 +50,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       facebook: null
     };
     this.curMainBreed = this.nurceryData.mainBreed ? this.nurceryData.mainBreed.name : null;
-    this.curMainBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
+    this.curExtraBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
     this.curCity = this.nurceryData.city ? this.nurceryData.city.name : null;
   }
 
@@ -81,7 +82,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadNurceryGalleryImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
-        if (index == -1) 
+        if (index == -1)
           this.nurceryData.gallery.push(imageData);
         else
           this.nurceryData.gallery[index] = imageData;
@@ -98,19 +99,27 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     if (!this.validateInputFields())
       return;
 
-    this.nurceryData.city = this.appService.cities.filter(it => it.name == this.curCity)[0] || {name: this.curCity};
-    this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || {name: this.curMainBreed};
+    this.nurceryData.city = this.appService.cities.filter(it => it.name == this.curCity)[0] || { name: this.curCity };
+    this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
     if (!this.nurceryData.name)
       this.nurceryData.name = this.appService.userData.name + " " + this.appService.userData.surname;
     if (this.curExtraBreed)
-      this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || {name: this.curExtraBreed};
+      this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
         if (!this.appService.userData.generalInfo)
           this.appService.userData.profileFill++;
         this.appService.userData.generalInfo = this.nurceryData;
+        this.notificationService.setContext('Изменения успешно сохранены', true);
+        this.notificationService.setVisibility(true);
         scroll(0, 0);
-      })
+      },
+        () => {
+          this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+          this.notificationService.setVisibility(true);
+          scroll(0, 0);
+        }
+      );
   }
 
   validateInputFields(): boolean {
