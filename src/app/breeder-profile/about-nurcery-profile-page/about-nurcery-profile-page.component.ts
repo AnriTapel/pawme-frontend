@@ -19,7 +19,6 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
   curMainBreed: string;
   curExtraBreed: string;
-  curCity: string;
   isAdditionalBreed: boolean = false;
   invalidFields: string[] = [];
 
@@ -51,7 +50,6 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     };
     this.curMainBreed = this.nurceryData.mainBreed ? this.nurceryData.mainBreed.name : null;
     this.curExtraBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
-    this.curCity = this.nurceryData.city ? this.nurceryData.city.name : null;
   }
 
   previewNurceryPhoto(): void {
@@ -99,7 +97,6 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     if (!this.validateInputFields())
       return;
 
-    this.nurceryData.city = this.appService.cities.filter(it => it.name == this.curCity)[0] || { name: this.curCity };
     this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
     if (!this.nurceryData.name)
       this.nurceryData.name = this.appService.userData.name + " " + this.appService.userData.surname;
@@ -131,7 +128,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.curCity || this.curCity == "") {
+    if (!this.nurceryData.city || this.nurceryData.city == "") {
       this.invalidFields.push('city');
       isValid = false;
     }

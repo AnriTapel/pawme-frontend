@@ -7,6 +7,7 @@ import { PopupTemplateService } from '../../services/popup-service/popup-templat
 import { Parent, Puppy } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
+import { BreederProfileService } from 'src/app/services/breeder-profile-service/breeder-profile.service';
 
 @Component({
   selector: 'app-add-puppy-profile-page',
@@ -55,7 +56,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   isMomEmptyButton: boolean = false;
 
   constructor(public appService: AppService, private popupService: PopupTemplateService, private notificationService: NotificationBarService,
-    private eventService: EventService, public breederService: BreederControllerService) { }
+    private eventService: EventService, public profileService: BreederProfileService, public breederService: BreederControllerService) { }
 
   ngOnInit() {
     this.puppiesData = this.appService.userData.puppies;
@@ -69,9 +70,11 @@ export class AddPuppyProfilePageComponent implements OnInit {
     if (index == -1)
       this.currentPuppyData = this.appService.userData.puppyDraft
         ? this.appService.userData.puppyDraft : this.DEFAULT_PUPPY_DATA;
-    else
+    else {
+      let birthDate = this.puppiesData[index].birthDate.split("-");
+      this.birthdayModel = { year: parseInt(birthDate[0]), month: parseInt(birthDate[1]), day: parseInt(birthDate[2]) };
       this.currentPuppyData = this.puppiesData[index];
-
+    }
     this.isMainPage = false;
   }
 
@@ -88,6 +91,10 @@ export class AddPuppyProfilePageComponent implements OnInit {
   getCurrentMaxDate(): any {
     let date = new Date();
     return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
+  }
+
+  switchGender(): void{
+    this.currentPuppyData.gender = this.currentPuppyData.gender == 'MALE' ? 'FEMALE' : 'MALE';
   }
 
   updateSelectedDate() {
@@ -121,6 +128,11 @@ export class AddPuppyProfilePageComponent implements OnInit {
   addPuppy(): void {
     if (!this.validateInputFields())
       return;
+    let month = this.birthdayModel.month > 9 ? this.birthdayModel.month : "0" + this.birthdayModel.month;
+    let day = this.birthdayModel.month > 9 ? this.birthdayModel.day : "0" + this.birthdayModel.day;
+    this.currentPuppyData.birthDate = this.birthdayModel.year + "-" + month + "-" + day;
+    this.birthdayModel = { day: null, month: null, year: null };
+    
     // TODO: change adding or refreshing condition based on parents' id
     if (this.puppiesData.filter(it => it.nickname == this.currentPuppyData.nickname).length > 0)
       this.puppiesData.map(it => {

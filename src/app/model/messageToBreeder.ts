@@ -9,7 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Breeder } from './breeder';
 
 
-export interface IterableCity { 
+export interface MessageToBreeder { 
+    breeder?: Breeder;
+    email: string;
+    id?: number;
+    message: string;
+    name: string;
+    phone: string;
 }

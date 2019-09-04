@@ -10,12 +10,11 @@
  * Do not edit the class manually.
  */
 import { Breed } from './breed';
-import { City } from './city';
 import { Photo } from './photo';
 
 
 export interface BreederInfo { 
-    city: City;
+    city: string;
     description: string;
     extraBreed?: Breed;
     facebook?: string;

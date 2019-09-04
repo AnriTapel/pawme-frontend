@@ -11,6 +11,7 @@
  */
 import { BreederAbout } from './breederAbout';
 import { BreederInfo } from './breederInfo';
+import { Parent } from './parent';
 import { ParentsInfo } from './parentsInfo';
 import { PuppiesInfo } from './puppiesInfo';
 import { Puppy } from './puppy';
@@ -21,7 +22,8 @@ export interface Breeder {
     createDate?: Date;
     generalInfo?: BreederInfo;
     id?: number;
-    name?: string;
+    name: string;
+    parentDraft?: Parent;
     parentsInfo?: ParentsInfo;
     profileFill?: number;
     puppies?: Array<Puppy>;
@@ -29,7 +31,7 @@ export interface Breeder {
     puppyDraft?: Puppy;
     questions?: Array<string>;
     status?: Breeder.StatusEnum;
-    surname?: string;
+    surname: string;
 }
 export namespace Breeder {
     export type StatusEnum = 'UNCONFIRMED' | 'ACTIVE' | 'HIDDEN' | 'BLOCKED' | 'DELETED';

@@ -5,7 +5,7 @@
     </div>
 
     <div class="dog-entity-list-block">
-        <div *ngFor="let puppy of puppiesData.puppies;let i = index;" class="avail-dog-entity-item"
+        <div *ngFor="let puppy of puppiesData;let i = index;" class="avail-dog-entity-item"
             (click)="showCurrentPuppyPage(i)">
 
             <div class="entity-image-block">
@@ -63,10 +63,10 @@
             <input type="text" class="form-control custom-form-control-border" name="puppy-name" aria-label="Кличка"
                 [class.invalid-form-field-value]="invalidFields.includes('name')" aria-describedby="basic-addon3"
                 [(ngModel)]="currentPuppyData.nickname" placeholder="Кличка" />
-            <div class="custom-input-append" (click)="currentPuppyData.isMale = !currentPuppyData.isMale">
-                <img *ngIf="currentPuppyData.isMale" height="17px" src="./assets/img/sex_male.png" alt="Мужской пол" />
-                <img *ngIf="!currentPuppyData.isMale" height="17px" src="./assets/img/sex_female.png"
-                    alt="Женский пол" />
+            <div class="custom-input-append"
+                (click)="currentPuppyData.gender = currentPuppyData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
+                <img height="17px" src="./assets/img/sex_{{currentPuppyData.gender == 'MALE' ? 'male' : 'female'}}.png"
+                    alt="Пол родителя" />
             </div>
         </div>
     </div>
@@ -75,13 +75,15 @@
         <label for="puppy-breed">Порода</label>
 
         <div class="dropdown-text-input">
-            <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="puppy-breed" [(ngModel)]="currentPuppyData.breed"
+            <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border"
+                name="puppy-breed" [(ngModel)]="currentPuppyData.breed"
                 [class.invalid-form-field-value]="invalidFields.includes('breed')" id="breed"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, puppyBreedFocus$, puppyBreedClick$, puppyBreedInstance)"
                 (focus)="puppyBreedFocus$.next($event.target.value)"
                 (click)="puppyBreedClick$.next($event.target.value)" #puppyBreedInstance="ngbTypeahead"
                 placeholder="Выбрать" aria-describedby="basic-addon2">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('breed', $event)"/>
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
+                (click)="appService.toggleDropdownTextInput('breed', $event)" />
         </div>
     </div>
 
@@ -109,8 +111,8 @@
     <div class="breeder-profile-subpage-form-right">
         <label for="puppy-stigma">Клеймо (видно только вам)</label>
         <input class="form-control custom-form-control-border" type="text" name="puppy-stigma"
-            [class.invalid-form-field-value]="invalidFields.includes('stigma')"
-            [(ngModel)]="currentPuppyData.earmark" placeholder="Код клейма" />
+            [class.invalid-form-field-value]="invalidFields.includes('stigma')" [(ngModel)]="currentPuppyData.earmark"
+            placeholder="Код клейма" />
     </div>
 
 
@@ -118,15 +120,18 @@
         <label for="puppy-dad">Отец</label>
 
         <div class="dropdown-text-input">
-            <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-dad" [(ngModel)]="currentPuppyData.father"
-                [class.invalid-form-field-value]="invalidFields.includes('dad')" id="dad"
-                [ngbTypeahead]="appService.fieldAutocomplete(puppiesData.parents, dadDogFocus$, dadDogClick$, dadDogInstance)"
-                (focus)="dadDogFocus$.next($event.target.value)" (click)="onDadInputClick($event)" (blur)="isDadEmptyButton = false"
-                #dadDogInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('dad', $event)"/>
+            <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-dad"
+                [(ngModel)]="currentPuppyData.father" [class.invalid-form-field-value]="invalidFields.includes('dad')"
+                id="dad"
+                [ngbTypeahead]="appService.fieldAutocomplete(fathers, dadDogFocus$, dadDogClick$, dadDogInstance)"
+                (focus)="dadDogFocus$.next($event.target.value)" (click)="onDadInputClick($event)"
+                (blur)="isDadEmptyButton = false" #dadDogInstance="ngbTypeahead" placeholder="Выбрать"
+                aria-describedby="basic-addon2">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
+                (click)="appService.toggleDropdownTextInput('dad', $event)" />
         </div>
         <div *ngIf="isDadEmptyButton" class="empty-parent-button-block"
-            (mousedown)="breederService.setCurProfilePage(breederService.profileSubpages[2])">
+            (mousedown)="profileService.setCurProfilePage(profileService.profileSubpages[2])">
             <img src="./assets/img/thin-plus.png" alt="Добавить родителя" />
             &nbsp;&nbsp;Добавить родителя
         </div>
@@ -137,15 +142,18 @@
         <label for="puppy-mom">Мать</label>
 
         <div class="dropdown-text-input">
-            <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-mom" [(ngModel)]="currentPuppyData.mother"
-                [class.invalid-form-field-value]="invalidFields.includes('mom')" id="mom"
-                [ngbTypeahead]="appService.fieldAutocomplete(puppiesData.parents, momDogFocus$, momDogClick$, momDogInstance)"
-                (focus)="momDogFocus$.next($event.target.value)" (click)="onMomInputClick($event)" (blur)="isMomEmptyButton = false"
-                #momDogInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('mom', $event)"/>
+            <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-mom"
+                [(ngModel)]="currentPuppyData.mother" [class.invalid-form-field-value]="invalidFields.includes('mom')"
+                id="mom"
+                [ngbTypeahead]="appService.fieldAutocomplete(mothers, momDogFocus$, momDogClick$, momDogInstance)"
+                (focus)="momDogFocus$.next($event.target.value)" (click)="onMomInputClick($event)"
+                (blur)="isMomEmptyButton = false" #momDogInstance="ngbTypeahead" placeholder="Выбрать"
+                aria-describedby="basic-addon2">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
+                (click)="appService.toggleDropdownTextInput('mom', $event)" />
         </div>
         <div *ngIf="isMomEmptyButton" class="empty-parent-button-block"
-            (mousedown)="breederService.setCurProfilePage(breederService.profileSubpages[2])">
+            (mousedown)="profileService.setCurProfilePage(profileService.profileSubpages[2])">
             <img src="./assets/img/thin-plus.png" alt="Добавить родителя" />
             &nbsp;&nbsp;Добавить родителя
         </div>
@@ -155,7 +163,8 @@
         <label for="puppy-info">Расскажите об этом родителе</label>
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
-        <textarea rows="3" class="form-control custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('info')"
+        <textarea rows="3" class="form-control custom-form-control-border"
+            [class.invalid-form-field-value]="invalidFields.includes('info')"
             [(ngModel)]="currentPuppyData.about"></textarea>
     </div>
 
@@ -176,10 +185,11 @@
         </div>
 
         <div *ngIf="currentPuppyData.gallery.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of currentPuppyData.photos;let i = index" class="active-galley-photo-block">
+            <div *ngFor="let photo of currentPuppyData.gallery;let i = index" class="active-galley-photo-block">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
                     (click)="deletePuppyImage(i)" />
-                <img src="/img/{{photo.preview}}.jpg" class="pet-image" (click)="previewPuppyImage(i)" alt="Изображение в галерее" />
+                <img src="/img/{{photo.preview}}.jpg" class="pet-image" (click)="previewPuppyImage(i)"
+                    alt="Изображение в галерее" />
             </div>
             <div class="empty-galley-photo-block" (click)="previewPuppyImage(-1)">
                 <img src="./assets/img/photo-camera.svg" alt="Камера" />

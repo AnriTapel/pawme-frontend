@@ -11,7 +11,7 @@ export class NotificationBarService {
 
   constructor() { }
 
-  getContext(): Object{
+  getContext(): any{
     return {
       color: this.color,
       message: this.message

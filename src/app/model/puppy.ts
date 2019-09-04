@@ -9,14 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Breed } from './breed';
 import { Parent } from './parent';
 import { Photo } from './photo';
-import { Breed } from './breed';
 
 
 export interface Puppy { 
     about: string;
     birthDate: string;
+    breed: Breed;
     earmark: string;
     father: Parent;
     gallery?: Array<Photo>;
@@ -25,7 +26,6 @@ export interface Puppy {
     mother: Parent;
     nickname: string;
     price: number;
-    breed: Breed
 }
 export namespace Puppy {
     export type GenderEnum = 'MALE' | 'FEMALE';
