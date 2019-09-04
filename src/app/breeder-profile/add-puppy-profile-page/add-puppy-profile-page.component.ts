@@ -34,6 +34,10 @@ export class AddPuppyProfilePageComponent implements OnInit {
   currentPuppyData: Puppy;
   fathers: Array<Parent> = [];
   mothers: Array<Parent> = [];
+  
+  curMotherNickname: string;
+  curFatherNickname: string;
+  curBreed: string;
 
   birthdayModel: NgbDateStruct = { day: null, month: null, year: null };
   invalidFields: any[] = [];
@@ -73,6 +77,9 @@ export class AddPuppyProfilePageComponent implements OnInit {
     else {
       let birthDate = this.puppiesData[index].birthDate.split("-");
       this.birthdayModel = { year: parseInt(birthDate[0]), month: parseInt(birthDate[1]), day: parseInt(birthDate[2]) };
+      this.curFatherNickname = this.puppiesData[index].father.nickname;
+      this.curMotherNickname = this.puppiesData[index].mother.nickname;
+      this.curBreed = this.puppiesData[index].breed.name;
       this.currentPuppyData = this.puppiesData[index];
     }
     this.isMainPage = false;
@@ -129,9 +136,14 @@ export class AddPuppyProfilePageComponent implements OnInit {
     if (!this.validateInputFields())
       return;
     let month = this.birthdayModel.month > 9 ? this.birthdayModel.month : "0" + this.birthdayModel.month;
-    let day = this.birthdayModel.month > 9 ? this.birthdayModel.day : "0" + this.birthdayModel.day;
+    let day = this.birthdayModel.day > 9 ? this.birthdayModel.day : "0" + this.birthdayModel.day;
     this.currentPuppyData.birthDate = this.birthdayModel.year + "-" + month + "-" + day;
-    this.birthdayModel = { day: null, month: null, year: null };
+    
+    // Recovering father & mother objects by nickname
+    this.currentPuppyData.father = this.fathers.filter(it => it.nickname = this.curFatherNickname)[0];
+    this.currentPuppyData.mother = this.mothers.filter(it => it.nickname = this.curMotherNickname)[0];
+    // Recovering breed
+    this.currentPuppyData.breed = this.appService.breeds.filter(it => it.name == this.curBreed)[0] || {name: this.curBreed};
     
     // TODO: change adding or refreshing condition based on parents' id
     if (this.puppiesData.filter(it => it.nickname == this.currentPuppyData.nickname).length > 0)
@@ -142,18 +154,19 @@ export class AddPuppyProfilePageComponent implements OnInit {
     else
       this.puppiesData.push(this.currentPuppyData);
 
-    this.currentPuppyData = null;
-    this.isMainPage = true;
+    this.saveChanges();
   }
 
   deletePuppy(index: number): void {
     this.puppiesData.splice(index, 1);
+    this.saveChanges();
   }
 
   saveDraft() {
     this.breederService.setPuppyDraftUsingPUT(this.appService.userData.id, this.currentPuppyData).subscribe(() => {
       this.appService.userData.puppyDraft = this.currentPuppyData;
       this.currentPuppyData = null;
+      this.birthdayModel = { day: null, month: null, year: null };
       this.isMainPage = true;
       this.notificationService.setContext('Черновик успешно сохранен', true);
       this.notificationService.setVisibility(true);
@@ -168,14 +181,13 @@ export class AddPuppyProfilePageComponent implements OnInit {
   }
 
   saveChanges() {
-    if (!this.validateInputFields())
-      return;
-
     this.breederService.setPuppiesUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(() => {
       this.appService.userData.puppies = this.puppiesData;
-      this.isMainPage = true;
       this.notificationService.setContext('Изменения успешно сохранены', true);
       this.notificationService.setVisibility(true);
+      this.isMainPage = true;
+      this.currentPuppyData = null;
+      this.birthdayModel = { day: null, month: null, year: null };
       scroll(0, 0);
     },
       () => {
@@ -195,7 +207,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentPuppyData.breed || this.currentPuppyData.breed == "") {
+    if (!this.curBreed || this.curBreed == "") {
       this.invalidFields.push('breed');
       isValid = false;
     }
@@ -210,12 +222,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentPuppyData.father) {
+    if (!this.curFatherNickname || this.curFatherNickname == "") {
       this.invalidFields.push('dad');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.mother) {
+    if (!this.curMotherNickname || this.curMotherNickname == "") {
       this.invalidFields.push('mom');
       isValid = false;
     }

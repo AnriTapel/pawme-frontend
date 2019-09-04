@@ -9,15 +9,15 @@
             (click)="showCurrentPuppyPage(i)">
 
             <div class="entity-image-block">
-                <img src='/img/{{puppy.photos[0].preview}}.jpg' alt="Изображение щенка" />
+                <img src='/img/{{puppy.gallery[0].preview}}.jpg' alt="Изображение щенка" />
             </div>
 
             <div class="entity-info-block">
                 <div>
-                    <span>{{puppy.name}}</span>
-                    <span>{{puppy.breed}}</span>
+                    <span>{{puppy.nickname}}</span>
+                    <span>{{puppy.breed.name}}</span>
                 </div>
-                <img src="./assets/img/sex_{{puppy.isMale ? 'male' : 'female'}}.png" alt="Пол щенка" />
+                <img src="./assets/img/sex_{{puppy.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол щенка" />
 
             </div>
             <div class="delete-dog-entity-button btn-transparent" (click)="deletePuppy(i)">
@@ -76,12 +76,10 @@
 
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border"
-                name="puppy-breed" [(ngModel)]="currentPuppyData.breed"
-                [class.invalid-form-field-value]="invalidFields.includes('breed')" id="breed"
+                name="puppy-breed" [(ngModel)]="curBreed" [class.invalid-form-field-value]="invalidFields.includes('breed')"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, puppyBreedFocus$, puppyBreedClick$, puppyBreedInstance)"
-                (focus)="puppyBreedFocus$.next($event.target.value)"
-                (click)="puppyBreedClick$.next($event.target.value)" #puppyBreedInstance="ngbTypeahead"
-                placeholder="Выбрать" aria-describedby="basic-addon2">
+                (focus)="puppyBreedFocus$.next($event.target.value)" (click)="puppyBreedClick$.next($event.target.value)"
+                #puppyBreedInstance="ngbTypeahead" id="breed" placeholder="Выбрать" aria-describedby="basic-addon2">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                 (click)="appService.toggleDropdownTextInput('breed', $event)" />
         </div>
@@ -121,8 +119,7 @@
 
         <div class="dropdown-text-input">
             <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-dad"
-                [(ngModel)]="currentPuppyData.father" [class.invalid-form-field-value]="invalidFields.includes('dad')"
-                id="dad"
+                [(ngModel)]="curFatherNickname" [class.invalid-form-field-value]="invalidFields.includes('dad')" id="dad"
                 [ngbTypeahead]="appService.fieldAutocomplete(fathers, dadDogFocus$, dadDogClick$, dadDogInstance)"
                 (focus)="dadDogFocus$.next($event.target.value)" (click)="onDadInputClick($event)"
                 (blur)="isDadEmptyButton = false" #dadDogInstance="ngbTypeahead" placeholder="Выбрать"
@@ -143,8 +140,7 @@
 
         <div class="dropdown-text-input">
             <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-mom"
-                [(ngModel)]="currentPuppyData.mother" [class.invalid-form-field-value]="invalidFields.includes('mom')"
-                id="mom"
+                [(ngModel)]="curMotherNickname" [class.invalid-form-field-value]="invalidFields.includes('mom')" id="mom"
                 [ngbTypeahead]="appService.fieldAutocomplete(mothers, momDogFocus$, momDogClick$, momDogInstance)"
                 (focus)="momDogFocus$.next($event.target.value)" (click)="onMomInputClick($event)"
                 (blur)="isMomEmptyButton = false" #momDogInstance="ngbTypeahead" placeholder="Выбрать"
@@ -160,7 +156,7 @@
     </div>
 
     <div class="add-puppy-page-info-block">
-        <label for="puppy-info">Расскажите об этом родителе</label>
+        <label for="puppy-info">Расскажите об этом щенке</label>
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
         <textarea rows="3" class="form-control custom-form-control-border"

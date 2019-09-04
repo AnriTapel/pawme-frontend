@@ -38,7 +38,6 @@ footer{
 }
 
 .footer-sign-up-button-block{
-    min-width: 315px;
     text-align: right;
     margin: auto 0;
 }
@@ -102,6 +101,7 @@ hr{
         margin: 15px 0 10px;
 
         &> a{
+            font-size: 14px;
             width: 100%;
             display: block;
             text-align: center;

@@ -30,12 +30,12 @@
     </div>
 
     <div class="about-me-form-group">
-        <label for="features">Что выделяет ваш питомник? (необязательно)</label>
+        <label for="features">Что выделяет ваш питомник?</label>
         <br>
         <span class="block-description">Вы используете какие-то определенные методы при работе с щенками? Вы уделяете
             особое внимание определенным деталям?</span>
-        <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border" placeholder="Введите текст"
-            name="features"></textarea>
+        <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border"
+            placeholder="Введите текст" name="features" [class.invalid-form-field-value]="invalidFields.includes('outstanding')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -45,7 +45,7 @@
             используют фото с питомцами. </span>
 
         <div *ngIf="!breederData.photo" class="gallery-initial-block"
-                [class.invalid-form-field-value]="invalidFields.includes('photo')"(click)="previewPersonalImage()">
+                [class.invalid-form-field-value]="invalidFields.includes('photo')" (click)="previewPersonalImage()">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>

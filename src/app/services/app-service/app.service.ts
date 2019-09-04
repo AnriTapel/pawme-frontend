@@ -81,8 +81,12 @@ export class AppService {
   fieldAutocomplete(searchArray: any[], focus$: Subject<string>, click$: Subject<string>, instance: NgbTypeahead): (text$: Observable<string>) => Observable<any[]> {
     return (text$: Observable<string>) => {
       let values = searchArray;
+      // For breeds & parent tests
       if (searchArray[0] && searchArray[0].name)
         values = searchArray.map(it => { return it.name });
+      // For mother & fathers
+      else if (searchArray[0] && searchArray[0].nickname)
+        values = searchArray.map(it => { return it.nickname });
       const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
       const clicksWithClosedPopup$ = click$.pipe(filter(() => instance.isPopupOpen()));
       const inputFocus$ = focus$;

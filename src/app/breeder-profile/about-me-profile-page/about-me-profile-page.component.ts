@@ -99,6 +99,11 @@ export class AboutMeProfilePageComponent implements OnInit {
       isValid = false;
     }
 
+    if (!this.breederData.outstandingInfo || this.breederData.outstandingInfo == "") {
+      this.invalidFields.push('outstanding');
+      isValid = false;
+    }
+
     if (!this.breederData.howItStarted || this.breederData.howItStarted == "") {
       this.invalidFields.push('howItStarted');
       isValid = false;

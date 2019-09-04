@@ -67,7 +67,7 @@ hr{
         border-radius: 8px;
     }
 
-    .partial-progress-lin{
+    .partial-progress-line{
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }
@@ -113,6 +113,7 @@ hr{
         padding: 20px 20px;
         margin: 0; 
         position: relative; 
+        cursor: pointer;
 
         &:hover{
             background-color: #eeeff1;

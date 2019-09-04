@@ -135,7 +135,6 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.currentParentData = null;
     this.currentBreed = null;
     this.isMainPage = true;
-    scroll(0,0);
   }
 
   deleteParent(index: number): void {
@@ -143,11 +142,11 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   saveDraft() {
-    // TODO: add setParentDraftUsingPUT(id, this.currentParentData)
-    // this.appService.userData.parentDraft = this.currentParentData;
-    this.currentParentData = null;
-    this.isMainPage = true;
-     /*this.notificationService.setContext('Черновик успешно сохранен', true);
+    this.breederService.setParentDraftUsingPUT(this.appService.userData.id, this.currentParentData).subscribe(() => {
+      this.appService.userData.parentDraft = this.currentParentData;
+      this.currentParentData = null;
+      this.isMainPage = true;
+      this.notificationService.setContext('Черновик успешно сохранен', true);
       this.notificationService.setVisibility(true);
       scroll(0, 0);
     },
@@ -155,7 +154,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         this.notificationService.setContext('Черновик не были сохранены, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
         scroll(0, 0);
-      }*/
+      }
+    );
   }
 
   saveChanges() {
