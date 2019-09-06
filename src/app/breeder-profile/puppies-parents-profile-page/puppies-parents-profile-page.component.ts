@@ -24,7 +24,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     id: null
   }
   parentsData: ParentsInfo;
-  currentParentData: Parent;
+  currentParentData: any;
 
   currentBodyPart: string;
   currentMedicalTest: string;
@@ -40,11 +40,11 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     "Глаза": ["Проверка у офтальмолога"],
     "Сердце": ["Обследование у кардиолога"],
     "Анализы": ["Общий анализ крови", "Анализ мочи", "Анализ кала", "Биохимический анализ крови"],
-    "Генетика": ['Прогрессирующая атрофия сетчатки папильонов и фаленов pap-PRA',	'Семейная нефропатия английских кокер спаниелей (FN)',	'Болезнь Фон Виллебранда 2 типа (vWDII)',	'Прогрессирующая атрофия сетчатки CRD-SWD / PRA-cord2',	'Прогрессирующая атрофия сетчатки PRA-CNGA1',	'Глобоидно-клеточная лейкодистрофия (Болезнь Краббе)',	'Дефицит пируваткиназы (PKdef) ',	'Миотубулярная миопатия (MTM1, XL-MTM) ',	'Недостаточность фактора VII (FVIID)',	'Тяжелый комбинированный иммунодефицит, сцепленный с Х-хромосомой, Бассет хаунд (XSCID)',	'Ахроматопсия (дневная слепота, ACHM) ',	'Гемофилия B (дефицит фактора IX, FIXD) ',	'Макротромбоцитопения (MTC) ',	'Мозжечковая абиотрофия (NCCD) ',	'Генетика окраса, Локус H (арлекин)',
-      'Паспорт генетической идентификации (ДНК паспорт)',	'Дегенеративная миелопатия. Экзон 1 (DM Ex1) ',	'Дегенеративная миелопатия. Два экзона (DM Ex1,Ex2) ',	'Наследственная миотония (шнауцер)',	'Краниомандибулярная остеопатия (CMO)',	'Недостаточность фосфофруктокиназы ',	'Центроядерная миопатия ',	'Аномалия глаз колли (CEA от Collie Eye Anomaly)',	'Прогрессирующая атрофия сетчатки (PRA) собак',	'Циклическая нейтропения ',	'Цистинурия ',	'Первичный вывих хрусталика (PLL)',	'Гликогеноз IIIa типа',	'Дегенеративная миелопатия. Экзон 2 (DM Ex2)',	'Мукополисахаридоз третьего Б типа ',	'Гиперурикозурия (Hyperuricosuria, HUU)',	'Мозжечковая атаксия 4А типа',	'Болезнь Виллибранда (von Willebrand disease, vWD)',
-      'Прогрессирующая атрофия сетчатки (PRA) голден-ретриверов (GR-PRA1+prcd-PRA)',	'Наследственная катаракта (HSF4)',	'Длина шерсти, мутация p.A193V (c.578C>T)',	'Синдром эпизодического падения (EFS)',	'Синдром сухого глаза и курчавошерстности (CKCSID)',	'Наследственный гиперкератоз подушечек лап (HFH)',	'Дилатационная кардиомиопатия (DCM)',	'Ихтиоз голден ретриверов (ICT-A)',	'Злокачественная гипертермия (MH) ',	'Мышечная дистрофия кавалер кинг чарльз спаниэлей (DMD-CKCS)',	'Мультифокальная ретинопатия (CMR1)',	'Врожденный гипотиреоз с зобом Terier (CHG)',	'Длина шерсти на морде(furnishings)',	'Сертификат Зооген',	'Наследственный носовой паракератоз ретриверов (HNPK)',	'Наследственный энцефалит мопсов (NME)',
-      'Прогрессирующая атрофия сетчатки голден ретриверов GR-PRA2',	'Прогрессирующая атрофия сетчатки PRA-crd1',	'Прогрессирующая атрофия сетчатки PRA-crd2 ',	'Голость китайских хохлатых собак',	'Нарколепсия ',	'Дилатационная кардиомиопатия',	'Куриная слепота бриаров (CSNB)',	'Ювенильный паралич гортани/Полинейропатия (JLPP)',	'Синдром Фанкони басенджи (FBS)',	'L-2-гидроксиглутаровая ацидурия / L2HGA',	'Поликистоз почек бультерьеров (BTPKD)',	'Ранняя прогрессирующая полинейропатия маламутов (AMPN)',	'Куцехвостость',	'Дварфизм (гипофизарная недостаточность)',	'Нейроаксональная дистрофия (NAD)',	'Первичная цилиарная дискинезия (PCD)',	'Ювенильная миоклоническая эпилепсия Родезийских риджбеков (JME)',	'Поздняя мозжечковая атаксия (LOA)',
-      'Спиноцеребеллярная атаксия с миокимией и/или судорогами (SCA)',	'Летальный акродерматит бультерьров (LAD)',	'Ювенильная идиопатическая эпилепсия (BFJE)',	'Дерматомиозит (DMS) ',	'Болезнь фон Виллебранда III-го типа (vWD type III) ',	'Ганглиозидоз 1 типа (GM1) ',	'Лихорадка шарпеев (SPAID)',	'Нейрональный цероидный липофусциноз 1-го типа (NCL1) ', 'Нейрональный цероидный липофусциноз 2-го типа (NCL2) ',	'Нефропатия с потерей белка (PLN) ',	'Синдром акральной матуляции (AMS)'],
+    "Генетика": ['Прогрессирующая атрофия сетчатки папильонов и фаленов pap-PRA', 'Семейная нефропатия английских кокер спаниелей (FN)', 'Болезнь Фон Виллебранда 2 типа (vWDII)', 'Прогрессирующая атрофия сетчатки CRD-SWD / PRA-cord2', 'Прогрессирующая атрофия сетчатки PRA-CNGA1', 'Глобоидно-клеточная лейкодистрофия (Болезнь Краббе)', 'Дефицит пируваткиназы (PKdef) ', 'Миотубулярная миопатия (MTM1, XL-MTM) ', 'Недостаточность фактора VII (FVIID)', 'Тяжелый комбинированный иммунодефицит, сцепленный с Х-хромосомой, Бассет хаунд (XSCID)', 'Ахроматопсия (дневная слепота, ACHM) ', 'Гемофилия B (дефицит фактора IX, FIXD) ', 'Макротромбоцитопения (MTC) ', 'Мозжечковая абиотрофия (NCCD) ', 'Генетика окраса, Локус H (арлекин)',
+      'Паспорт генетической идентификации (ДНК паспорт)', 'Дегенеративная миелопатия. Экзон 1 (DM Ex1) ', 'Дегенеративная миелопатия. Два экзона (DM Ex1,Ex2) ', 'Наследственная миотония (шнауцер)', 'Краниомандибулярная остеопатия (CMO)', 'Недостаточность фосфофруктокиназы ', 'Центроядерная миопатия ', 'Аномалия глаз колли (CEA от Collie Eye Anomaly)', 'Прогрессирующая атрофия сетчатки (PRA) собак', 'Циклическая нейтропения ', 'Цистинурия ', 'Первичный вывих хрусталика (PLL)', 'Гликогеноз IIIa типа', 'Дегенеративная миелопатия. Экзон 2 (DM Ex2)', 'Мукополисахаридоз третьего Б типа ', 'Гиперурикозурия (Hyperuricosuria, HUU)', 'Мозжечковая атаксия 4А типа', 'Болезнь Виллибранда (von Willebrand disease, vWD)',
+      'Прогрессирующая атрофия сетчатки (PRA) голден-ретриверов (GR-PRA1+prcd-PRA)', 'Наследственная катаракта (HSF4)', 'Длина шерсти, мутация p.A193V (c.578C>T)', 'Синдром эпизодического падения (EFS)', 'Синдром сухого глаза и курчавошерстности (CKCSID)', 'Наследственный гиперкератоз подушечек лап (HFH)', 'Дилатационная кардиомиопатия (DCM)', 'Ихтиоз голден ретриверов (ICT-A)', 'Злокачественная гипертермия (MH) ', 'Мышечная дистрофия кавалер кинг чарльз спаниэлей (DMD-CKCS)', 'Мультифокальная ретинопатия (CMR1)', 'Врожденный гипотиреоз с зобом Terier (CHG)', 'Длина шерсти на морде(furnishings)', 'Сертификат Зооген', 'Наследственный носовой паракератоз ретриверов (HNPK)', 'Наследственный энцефалит мопсов (NME)',
+      'Прогрессирующая атрофия сетчатки голден ретриверов GR-PRA2', 'Прогрессирующая атрофия сетчатки PRA-crd1', 'Прогрессирующая атрофия сетчатки PRA-crd2 ', 'Голость китайских хохлатых собак', 'Нарколепсия ', 'Дилатационная кардиомиопатия', 'Куриная слепота бриаров (CSNB)', 'Ювенильный паралич гортани/Полинейропатия (JLPP)', 'Синдром Фанкони басенджи (FBS)', 'L-2-гидроксиглутаровая ацидурия / L2HGA', 'Поликистоз почек бультерьеров (BTPKD)', 'Ранняя прогрессирующая полинейропатия маламутов (AMPN)', 'Куцехвостость', 'Дварфизм (гипофизарная недостаточность)', 'Нейроаксональная дистрофия (NAD)', 'Первичная цилиарная дискинезия (PCD)', 'Ювенильная миоклоническая эпилепсия Родезийских риджбеков (JME)', 'Поздняя мозжечковая атаксия (LOA)',
+      'Спиноцеребеллярная атаксия с миокимией и/или судорогами (SCA)', 'Летальный акродерматит бультерьров (LAD)', 'Ювенильная идиопатическая эпилепсия (BFJE)', 'Дерматомиозит (DMS) ', 'Болезнь фон Виллебранда III-го типа (vWD type III) ', 'Ганглиозидоз 1 типа (GM1) ', 'Лихорадка шарпеев (SPAID)', 'Нейрональный цероидный липофусциноз 1-го типа (NCL1) ', 'Нейрональный цероидный липофусциноз 2-го типа (NCL2) ', 'Нефропатия с потерей белка (PLN) ', 'Синдром акральной матуляции (AMS)'],
     "Щитовидная железа": ["Анализ щитовидной железы"],
     "Другое": ["Тест на гипоплазию трахеи", "Ультразвуковое исследование почек"]
   };
@@ -73,6 +73,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.parentsData = <ParentsInfo>this.appService.userData.parentsInfo || {
       parents: [],
       parentTests: [],
+      parentDraft: null
     };
   }
 
@@ -92,10 +93,11 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
   showCurrentParentPage(index: number): void {
     if (index == -1)
-      this.currentParentData = this.appService.userData.parentDraft || this.DEFAULT_PARENT_DATA;
-    else 
-      this.currentParentData = this.parentsData.parents[index];
-    
+      this.currentParentData = JSON.parse(JSON.stringify(this.parentsData.parentDraft))
+        || JSON.parse(JSON.stringify(this.DEFAULT_PARENT_DATA));
+    else
+      this.currentParentData = JSON.parse(JSON.stringify(this.parentsData.parents[index]));
+
     this.currentBreed = this.currentParentData.breed ? this.currentParentData.breed.name : null;
     this.isMainPage = false;
   }
@@ -128,19 +130,34 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     if (!this.validateAddingFields())
       return;
     // TODO: change adding or refreshing condition based on parents' id
-    this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || {name: this.currentBreed};
-    if (this.parentsData.parents.filter(it => it.nickname == this.currentParentData.nickname && it.id == this.currentParentData.id ).length > 0)
-      this.parentsData.parents.map(it => {
-        if (it.nickname == this.currentParentData.nickname)
-          it = this.currentParentData;
-      });
-    else
+    this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
+    if (this.parentsData.parents.filter(it => it.id == this.currentParentData.id).length > 0){
+      for (let i = 0; i < this.parentsData.parents.length; i++)
+        if (this.parentsData.parents[i].id == this.currentParentData.id){
+          this.parentsData.parents[i] = this.currentParentData;
+          break;
+        }
+    } else
       this.parentsData.parents.push(this.currentParentData);
 
-    this.currentParentData = null;
-    this.currentBreed = null;
-    this.isMainPage = true;
-    scroll(0, 0);
+    this.parentsData.parentDraft = null;
+    this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
+      this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {
+        this.appService.userData = res;
+        this.parentsData = res.parentsInfo;
+        this.currentParentData = null;
+        this.currentBreed = null;
+        this.isMainPage = true;
+        this.notificationService.setContext('Изменения успешно сохранены', true);
+        this.notificationService.setVisibility(true);
+        scroll(0, 0);
+      });
+    }, () => {
+      this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+      this.notificationService.setVisibility(true);
+      scroll(0, 0);
+    }
+    );
   }
 
   deleteParent(index: number): void {
@@ -150,40 +167,38 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   saveDraft() {
     if (this.currentBreed && this.currentBreed != "")
       this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
-    this.breederService.setParentDraftUsingPUT(this.appService.userData.id, this.currentParentData).subscribe(() => {
-      this.appService.userData.parentDraft = this.currentParentData;
+    this.parentsData.parentDraft = JSON.parse(JSON.stringify(this.currentParentData));
+    this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
+      this.appService.userData.parentsInfo = this.parentsData;
       this.currentParentData = null;
       this.isMainPage = true;
       this.notificationService.setContext('Черновик успешно сохранен', true);
       this.notificationService.setVisibility(true);
       scroll(0, 0);
-    },
-      () => {
-        this.notificationService.setContext('Черновик не были сохранены, попробуйте еще раз', false);
-        this.notificationService.setVisibility(true);
-        scroll(0, 0);
-      }
+    }, () => {
+      this.notificationService.setContext('Черновик не были сохранены, попробуйте еще раз', false);
+      this.notificationService.setVisibility(true);
+      scroll(0, 0);
+    }
     );
   }
 
   saveChanges() {
     if (!this.validateGeneralFields())
       return;
-    this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe( () => {
+    this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
       if (!this.appService.userData.parentsInfo)
         this.appService.userData.profileFill++;
       this.appService.userData.parentsInfo = this.parentsData;
       this.currentParentData = null;
-      this.appService.userData.parentDraft = null;
       this.isMainPage = true;
       this.notificationService.setContext('Изменения успешно сохранены', true);
       this.notificationService.setVisibility(true);
-      scroll(0,0);
-    },
-    () => {
+      scroll(0, 0);
+    }, () => {
       this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);
-      scroll(0,0);
+      scroll(0, 0);
     }
     );
   }
@@ -204,7 +219,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     return isValid;
   }
 
-  validateAddingFields(): boolean{
+  validateAddingFields(): boolean {
     let isValid = true;
     this.invalidAddingFields = [];
     if (!this.currentParentData.nickname || this.currentParentData.nickname == "") {
@@ -227,7 +242,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    return isValid; 
+    return isValid;
   }
 
 }

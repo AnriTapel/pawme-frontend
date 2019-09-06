@@ -11,7 +11,6 @@
  */
 import { BreederAbout } from './breederAbout';
 import { BreederInfo } from './breederInfo';
-import { Parent } from './parent';
 import { ParentsInfo } from './parentsInfo';
 import { PuppiesInfo } from './puppiesInfo';
 import { Puppy } from './puppy';
@@ -23,7 +22,6 @@ export interface Breeder {
     generalInfo?: BreederInfo;
     id?: number;
     name: string;
-    parentDraft?: Parent;
     parentsInfo?: ParentsInfo;
     profileFill?: number;
     puppies?: Array<Puppy>;

@@ -10,6 +10,7 @@ export * from './iterableParentTest';
 export * from './iterablePuppyTest';
 export * from './messageToBreeder';
 export * from './parent';
+export * from './parentDraft';
 export * from './parentTest';
 export * from './parentsInfo';
 export * from './photo';

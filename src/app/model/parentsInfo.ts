@@ -10,11 +10,13 @@
  * Do not edit the class manually.
  */
 import { Parent } from './parent';
+import { ParentDraft } from './parentDraft';
 import { ParentTest } from './parentTest';
 
 
 export interface ParentsInfo { 
     id?: number;
+    parentDraft?: ParentDraft;
     parentTests?: Array<ParentTest>;
     parents?: Array<Parent>;
 }

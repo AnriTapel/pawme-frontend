@@ -21,8 +21,11 @@ export class HeaderComponent implements OnInit {
 
   logout(): void{
     this.http.get('/api/logout').subscribe(
-      data =>  this.router.navigateByUrl('/breeder-landing'),
-      error => {
+      data =>  {
+        this.appService.meData = { type: 'ANONYMOUS' };
+        this.appService.userData = null;
+        this.router.navigateByUrl('/breeder-landing');
+      }, error => {
         this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
       }

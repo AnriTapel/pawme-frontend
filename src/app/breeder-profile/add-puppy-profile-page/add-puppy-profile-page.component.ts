@@ -72,15 +72,16 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   showCurrentPuppyPage(index: number): void {
     if (index == -1)
-      this.currentPuppyData = this.appService.userData.puppyDraft
-        ? this.appService.userData.puppyDraft : this.DEFAULT_PUPPY_DATA;
+      this.currentPuppyData = this.appService.userData.puppyDraft ? JSON.parse(JSON.stringify(this.appService.userData.puppyDraft))
+        : JSON.parse(JSON.stringify(this.DEFAULT_PUPPY_DATA));
     else
-      this.currentPuppyData = this.puppiesData[index];
+      this.currentPuppyData = JSON.parse(JSON.stringify(this.puppiesData[index]));
 
     if (this.currentPuppyData.birthDate) {
       let birthDate = this.currentPuppyData.birthDate.split("-");
       this.birthdayModel = { year: parseInt(birthDate[0]) || null, month: parseInt(birthDate[1]) || null, day: parseInt(birthDate[2]) || null };
-    }
+    } else 
+      this.birthdayModel = {year: null, month: null, day: null};
     this.curFatherNickname = this.currentPuppyData.father ? this.currentPuppyData.father.nickname : null;
     this.curMotherNickname = this.currentPuppyData.mother ? this.currentPuppyData.mother.nickname : null;
     this.curBreed = this.currentPuppyData.breed ? this.currentPuppyData.breed.name : null;
@@ -139,13 +140,13 @@ export class AddPuppyProfilePageComponent implements OnInit {
       return;
 
     this.preSaveOperation();
-    // TODO: change adding or refreshing condition based on parents' id
-    if (this.puppiesData.filter(it => it.nickname == this.currentPuppyData.nickname && it.id == this.currentPuppyData.id).length > 0)
-      this.puppiesData.map(it => {
-        if (it.nickname == this.currentPuppyData.nickname)
-          it = this.currentPuppyData;
-      });
-    else
+    if (this.puppiesData.filter(it => it.id == this.currentPuppyData.id).length > 0){
+      for (let i = 0; i < this.puppiesData.length; i++)
+        if (this.puppiesData[i].id == this.currentPuppyData.id){
+          this.puppiesData[i] = this.currentPuppyData;
+          break;
+        }
+    }else
       this.puppiesData.push(this.currentPuppyData);
     this.saveChanges();
   }
@@ -158,7 +159,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   saveDraft() {
     this.preSaveOperation();
     this.breederService.setPuppyDraftUsingPUT(this.appService.userData.id, this.currentPuppyData).subscribe(() => {
-      this.appService.userData.puppyDraft = null;
+      this.appService.userData.puppyDraft = JSON.parse(JSON.stringify(this.currentPuppyData));
       this.currentPuppyData = null;
       this.birthdayModel = { day: null, month: null, year: null };
       this.isMainPage = true;
@@ -176,14 +177,17 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   saveChanges() {
     this.breederService.setPuppiesUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(() => {
-      this.appService.userData.puppies = this.puppiesData;
-      this.notificationService.setContext('Изменения успешно сохранены', true);
-      this.notificationService.setVisibility(true);
-      this.isMainPage = true;
-      this.currentPuppyData = null;
-      this.appService.userData.puppyDraft = null;
-      this.birthdayModel = { day: null, month: null, year: null };
-      scroll(0, 0);
+      this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe(res => {
+        this.appService.userData = res;
+        this.puppiesData = res.puppies;
+        this.notificationService.setContext('Изменения успешно сохранены', true);
+        this.notificationService.setVisibility(true);
+        this.isMainPage = true;
+        this.currentPuppyData = null;
+        this.appService.userData.puppyDraft = null;
+        this.birthdayModel = { day: null, month: null, year: null };
+        scroll(0, 0);
+      });
     },
       () => {
         this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
@@ -194,20 +198,29 @@ export class AddPuppyProfilePageComponent implements OnInit {
   }
 
   preSaveOperation(): void {
-
-    let month = this.birthdayModel.month > 9 && this.birthdayModel.month ? this.birthdayModel.month : "0" + this.birthdayModel.month;
-    let day = this.birthdayModel.day > 9 && this.birthdayModel.day ? this.birthdayModel.day : "0" + this.birthdayModel.day;
-    let year = this.birthdayModel.year < 100 && this.birthdayModel.year ? "20" + this.birthdayModel.year : this.birthdayModel.year;
-    this.currentPuppyData.birthDate = (year || "") + "-" + (month || "") + "-" + (day || "");
-
+    if (this.birthdayModel.day && this.birthdayModel.month && this.birthdayModel.year )
+      this.currentPuppyData.birthDate = this.getDateAsString();
+    else
+      this.currentPuppyData.birthDate = null;
     // Recovering father & mother objects by nickname
     if (this.curFatherNickname && this.curFatherNickname != "")
-      this.currentPuppyData.father = this.fathers.filter(it => it.nickname = this.curFatherNickname)[0];
+      this.currentPuppyData.father = this.fathers.filter(it => it.nickname == this.curFatherNickname)[0];
     if (this.curMotherNickname && this.curMotherNickname != "")
-      this.currentPuppyData.mother = this.mothers.filter(it => it.nickname = this.curMotherNickname)[0];
+      this.currentPuppyData.mother = this.mothers.filter(it => it.nickname == this.curMotherNickname)[0];
     // Recovering breed
     if (this.curBreed && this.curBreed != "")
       this.currentPuppyData.breed = this.appService.breeds.filter(it => it.name == this.curBreed)[0] || { name: this.curBreed };
+  }
+
+  getDateAsString(): string{
+    let day = '00', month = '00', year = '0000';
+    if (this.birthdayModel.day)
+      day = this.birthdayModel.day > 9 ? this.birthdayModel.day.toString() : "0" + this.birthdayModel.day;
+    if (this.birthdayModel.month)
+      month = this.birthdayModel.month > 9 ? this.birthdayModel.month.toString() : "0" + this.birthdayModel.month;
+    if (this.birthdayModel.year)
+      year = this.birthdayModel.year < 100 ? "20" + this.birthdayModel.year : this.birthdayModel.year.toString();
+    return year + "-" + month + "-" + day;
   }
 
   validateInputFields(): boolean {
