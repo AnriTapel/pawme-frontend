@@ -1,12 +1,4 @@
-<header class="header d-flex align-items-center justify-content-between">
-    <a class="navbar-brand">
-        <img src="./assets/img/logo.png" alt="PawMe логотип" width="150px;">
-    </a>
-
-    <button class="button lb-button d-flex align-items-center justify-content-center">
-        <span>ЛВ</span>
-    </button>
-</header>
+<app-header class="header-for-profile"></app-header>
 
 <div class="main-content">
     <div class="mail">
@@ -25,7 +17,7 @@
                 <div class="mb-16">Не можете найти письмо от no-reply@takepet.ru? Внимательно проверьте все папки, включая "Спам"</div>
 
                 <div>Если вы не получили письма в течение 5 минут, <br>
-                    <a href="" class="repeat">отправьте</a> письмо повторно</div>
+                    <a class="repeat" (click)="confirmEmailAgain()">отправьте</a> письмо повторно</div>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { LoginComponent } from './forms/login/login.component';
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { RemindPasswordComponent } from './forms/remind-password/remind-password.component';
-import { MailPageComponent } from './mail-page/mail-page.component';
+import { MailPageComponent } from './forms/mail-page/mail-page.component';
 
 
 const routes: Routes = [
@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'breeder-profile', component: BreederProfileComponent},
   {path: 'breeder-page', component: BreederPageComponent},
   {path: 'admin-panel', component: AdminPanelComponent},
-  {path: 'mail-page', component: MailPageComponent}
+  {path: 'confirm-email', component: MailPageComponent}
 ];
 
 @NgModule({

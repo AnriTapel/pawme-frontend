@@ -3,6 +3,7 @@ import { PopupTemplateService } from 'src/app/services/popup-service/popup-templ
 import { AppService } from 'src/app/services/app-service/app.service';
 import { BreederControllerService } from 'src/app/api/breederController.service';
 import { RegisterBreeder } from 'src/app/model/registerBreeder';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -23,7 +24,7 @@ export class SignUpComponent implements OnInit {
   invalidFields: any[] = [];
 
   constructor(private popupService: PopupTemplateService, private appService: AppService,
-    private breederService: BreederControllerService) { }
+    private breederService: BreederControllerService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -36,7 +37,7 @@ export class SignUpComponent implements OnInit {
     if (!this.validateFields())
       return;
     this.breederService.registerUsingPOST(this.breederData).subscribe(res => {
-      console.log(res);
+      this.router.navigateByUrl('confirm-email');
     });
   }
 
