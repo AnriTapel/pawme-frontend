@@ -5,14 +5,14 @@
             <img src="./assets/img/logo.png" alt="PawMe логотип" width="150px;">
         </a>
 
-        <div *ngIf="appService.userData" class="my-2 my-lg-0">
+        <div *ngIf="appService.meData.type != 'ANONYMOUS'" class="my-2 my-lg-0">
             <div class="menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <a>ЛК</a>
             </div>
             <div class="dropdown-menu custom-header-dropdown-menu">
-                <a class="dropdown-item" style="color: #4dbebb;"><img src="./assets/img/menu-user.png"
-                        alt="Личный кабинет" width="13px" height="15px" style="margin-right: 10px;" />Заполнить
-                    анкету</a>
+                <a class="dropdown-item" style="color: #4dbebb;" [routerLink]="['/breeder-profile']"><img src="./assets/img/menu-user.png"
+                        alt="Личный кабинет" width="13px" height="15px" style="margin-right: 10px;" />{{appService.userData.profileFill > 4 
+                            ? 'Личный кабинет' : 'Заполнить анкету'}}</a>
                 <a class="dropdown-item"><img src="./assets/img/menu-eye.png" alt="Моя страница"
                         width="16px" height="12px" style="margin-right: 8px;" />Моя
                     страница</a>
@@ -23,7 +23,7 @@
                         height="15px" alt="Выйти" style="margin-right: 9px;" />Выйти</a>
             </div>
         </div>
-        <div *ngIf="!appService.userData" class="my-2 my-lg-0">
+        <div *ngIf="appService.meData.type == 'ANONYMOUS'" class="my-2 my-lg-0">
             <input type="button" class="custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
         </div>
     </nav>
