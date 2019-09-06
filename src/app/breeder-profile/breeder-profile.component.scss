@@ -160,12 +160,14 @@ hr{
 
     hr{
         width: 90%;
+        margin: .5em auto 0;
     }
 
     .profile-container{
         grid-template: auto / 100%;
         width: 90%;
         grid-row-gap: 2em;
+        margin: 1.5em auto 4em;
     }
 
     .profile-page{

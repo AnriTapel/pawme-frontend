@@ -165,6 +165,7 @@ hr {
 @media screen and (max-width: 769px) {
   hr {
     width: 90%;
+    margin: .5em auto 0;
   }
   .profile-container {
     -ms-grid-rows: auto;
@@ -172,6 +173,7 @@ hr {
         grid-template: auto / 100%;
     width: 90%;
     grid-row-gap: 2em;
+    margin: 1.5em auto 4em;
   }
   .profile-page {
     margin-bottom: 3em;

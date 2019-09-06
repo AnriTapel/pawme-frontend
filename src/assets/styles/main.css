@@ -699,6 +699,9 @@ ngb-datepicker .bg-light {
 }
 
 @media screen and (max-width: 769px) {
+  .header-for-profile header {
+    padding: 2% 5% 0 !important;
+  }
   .breeder-profile-subpage-container {
     display: block !important;
     padding: 0 1em;
