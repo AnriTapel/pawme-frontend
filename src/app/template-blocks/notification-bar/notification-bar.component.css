@@ -1,6 +1,6 @@
 .bar-container {
   position: fixed;
-  top: 1em;
+  top: 2%;
   left: 0;
   right: 0;
   display: -webkit-box;
@@ -36,5 +36,14 @@
   opacity: 0.6;
   margin: auto 4em auto auto;
   cursor: pointer;
+}
+
+@media screen and (max-width: 769px) {
+  .bar-container {
+    top: 1.5%;
+  }
+  .bar-container img {
+    margin: auto 1em auto auto;
+  }
 }
 /*# sourceMappingURL=notification-bar.component.css.map */
