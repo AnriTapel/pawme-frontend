@@ -103,7 +103,7 @@ export class AppService {
   }
 
   validateEmailInput(email: string): boolean {
-    let re = /^[A-Za-z]+([\.-]?[A-Za-z]+)*@[A-Za-z]+([\.-]?[A-Za-z]+)*(\.[A-Za-z]{2,3})+$/;
+    let re = /^[A-Za-z0-9]+([\.-]?[A-Za-z0-9]+)*@[A-Za-z]+([\.-]?[A-Za-z]+)*(\.[A-Za-z]{2,3})+$/;
     return re.test(email);
   }
 

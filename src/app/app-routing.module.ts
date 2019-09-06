@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'breeder-profile', component: BreederProfileComponent},
   {path: 'breeder-page', component: BreederPageComponent},
   {path: 'admin-panel', component: AdminPanelComponent},
-  {path: 'confirm-email', component: MailPageComponent}
+  {path: 'confirm-email/:mail', component: MailPageComponent}
 ];
 
 @NgModule({

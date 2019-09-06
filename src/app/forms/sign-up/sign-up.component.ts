@@ -37,7 +37,7 @@ export class SignUpComponent implements OnInit {
     if (!this.validateFields())
       return;
     this.breederService.registerUsingPOST(this.breederData).subscribe(res => {
-      this.router.navigateByUrl('confirm-email');
+      this.router.navigate(['/confirm-email', this.breederData.email]);
     });
   }
 
