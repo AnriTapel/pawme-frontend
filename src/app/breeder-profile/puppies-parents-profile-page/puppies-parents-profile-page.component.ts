@@ -20,7 +20,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     gender: 'MALE',
     breed: null,
     gallery: [],
-    info: null
+    info: null,
+    id: null
   }
   parentsData: ParentsInfo;
   currentParentData: Parent;
@@ -88,10 +89,10 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   showCurrentParentPage(index: number): void {
     if (index == -1)
       this.currentParentData = this.appService.userData.parentDraft || this.DEFAULT_PARENT_DATA;
-    else { 
+    else 
       this.currentParentData = this.parentsData.parents[index];
-      this.currentBreed = this.currentParentData.breed.name;
-    }
+    
+    this.currentBreed = this.currentParentData.breed ? this.currentParentData.breed.name : null;
     this.isMainPage = false;
   }
 
@@ -124,7 +125,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       return;
     // TODO: change adding or refreshing condition based on parents' id
     this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || {name: this.currentBreed};
-    if (this.parentsData.parents.filter(it => it.nickname == this.currentParentData.nickname).length > 0)
+    if (this.parentsData.parents.filter(it => it.nickname == this.currentParentData.nickname && it.id == this.currentParentData.id ).length > 0)
       this.parentsData.parents.map(it => {
         if (it.nickname == this.currentParentData.nickname)
           it = this.currentParentData;
@@ -135,6 +136,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.currentParentData = null;
     this.currentBreed = null;
     this.isMainPage = true;
+    scroll(0, 0);
   }
 
   deleteParent(index: number): void {
@@ -142,6 +144,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   saveDraft() {
+    if (this.currentBreed && this.currentBreed != "")
+      this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
     this.breederService.setParentDraftUsingPUT(this.appService.userData.id, this.currentParentData).subscribe(() => {
       this.appService.userData.parentDraft = this.currentParentData;
       this.currentParentData = null;
@@ -165,6 +169,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       if (!this.appService.userData.parentsInfo)
         this.appService.userData.profileFill++;
       this.appService.userData.parentsInfo = this.parentsData;
+      this.currentParentData = null;
+      this.appService.userData.parentDraft = null;
       this.isMainPage = true;
       this.notificationService.setContext('Изменения успешно сохранены', true);
       this.notificationService.setVisibility(true);
