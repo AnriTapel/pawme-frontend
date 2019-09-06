@@ -75,6 +75,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 28px;
   padding: 10px 25px;
   border: none;
+  font-family: 'Intro-Regular';
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;

@@ -4,8 +4,9 @@ footer {
   padding: 5% 7%;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 70% 30%;
-      grid-template-columns: 70% 30%;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 65% 35%;
+      grid-template: auto / 65% 35%;
 }
 
 .footer-info-block {
@@ -35,15 +36,17 @@ footer {
 .footer-info-block div span:nth-child(1) {
   font-size: 28px;
   line-height: 24px;
+  font-family: 'Intro-Regular';
 }
 
 .footer-info-block div span:nth-child(2) {
   font-size: 18px;
+  font-family: 'Intro-Regular';
 }
 
 .footer-sign-up-button-block {
   text-align: right;
-  margin: auto 0;
+  margin: 1.25em 0 0;
 }
 
 .footer-logo-block {
