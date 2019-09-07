@@ -6,28 +6,6 @@ span, p, div {
   font-family: 'Intro-Book', serif !important;
 }
 
-.header {
-  width: 100%;
-  max-width: 1440px;
-  height: 136px;
-  margin: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-@media (max-width: 768px) {
-  .header {
-    display: none;
-  }
-}
-
 .slider-content {
   width: 100%;
   display: -webkit-box;
@@ -87,34 +65,6 @@ span, p, div {
   }
 }
 
-.logo {
-  width: 209.3px;
-  margin-left: 135px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.logo:after {
-  content: '';
-  width: 31.7px;
-  height: 33.3px;
-  background-image: url("/assets/img/breeder-page/combined-shape.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-.sign-in-button {
-  width: 135px;
-  height: 52px;
-  margin-right: 137px;
-  color: #645fc9;
-  border-radius: 25px;
-  border: solid 2px #645fc9;
-  background-color: #FFFFFF;
-}
-
 .main-content {
   width: 1170px;
   margin: 50px auto 60px;
@@ -143,11 +93,21 @@ span, p, div {
 
 .about-puppies .aside, .about-breeder .aside, .about-parents .aside, .our-instagram .aside {
   width: 368px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2em;
 }
 
 .about-puppies .section, .about-breeder .section, .about-parents .section, .our-instagram .section {
   width: 772px;
   position: relative;
+}
+
+@media screen and (max-width: 769px) {
+  .about-puppies .aside, .about-breeder .aside, .about-parents .aside, .our-instagram .aside {
+    position: relative;
+    top: unset;
+  }
 }
 
 .about-puppies {

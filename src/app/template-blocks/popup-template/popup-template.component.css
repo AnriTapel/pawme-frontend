@@ -38,8 +38,7 @@
   .popup-wrapper > div {
     top: 5vh !important;
   }
-  .popup-wrapper > img {
-    top: 10px;
+  .popup-wrapper > div > img {
     right: 10px;
   }
 }

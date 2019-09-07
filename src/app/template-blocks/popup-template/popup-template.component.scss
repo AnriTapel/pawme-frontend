@@ -38,11 +38,11 @@
 
         & > div{
             top: 5vh !important;
+            
+            & > img{
+                right: 10px;
+            }
         }
 
-        & > img{
-            top: 10px;
-            right: 10px;
-        }
     }
 }

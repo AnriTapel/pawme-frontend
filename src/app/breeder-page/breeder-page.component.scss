@@ -21,20 +21,6 @@ span, p, div {
     font-family: 'Intro-Book', serif !important;
 }
 
-.header {
-    width: 100%;
-    max-width: 1440px;
-    height: 136px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    // TODO: Временное решение
-    @media (max-width: $screen-sm - 1px) {
-        display: none;
-    }
-}
-
 .slider-content {
     width: 100%;
     display: flex;
@@ -77,26 +63,6 @@ span, p, div {
     }
 }
 
-.logo {
-    width: 209.3px;
-    margin-left: 135px;
-    display: flex;
-
-    &:after {
-        @include background(31.7px, 33.3px, '/assets/img/breeder-page/combined-shape.svg');
-    }
-}
-
-.sign-in-button {
-    width: 135px;
-    height: 52px;
-    margin-right: 137px;
-    color: $headerColor;
-    border-radius: 25px;
-    border: solid 2px $headerColor;
-    background-color: #FFFFFF;
-}
-
 .main-content {
     width: 1170px;
     margin: 50px auto 60px;
@@ -114,10 +80,19 @@ span, p, div {
 
     .aside {
         width: 368px;
+        position: sticky;
+        top: 2em;
     }
     .section {
         width: 772px;
         position: relative;
+    }
+
+    @media screen and (max-width: $screen-sm){
+        .aside {
+            position: relative;
+            top: unset;
+        }
     }
 }
 

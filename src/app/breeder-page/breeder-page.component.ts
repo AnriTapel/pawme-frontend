@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { PopupTemplateService } from '../services/popup-service/popup-template.service';
 
 @Component({
     selector: 'app-breeder-page',
@@ -15,7 +16,7 @@ export class BreederPageComponent implements OnInit {
 
     };
 
-    constructor() {
+    constructor(private popupService: PopupTemplateService) {
     }
 
     ngOnInit() {
@@ -25,4 +26,8 @@ export class BreederPageComponent implements OnInit {
         this.collapse[property] = !this.collapse[property];
     }
 
+    showBreederMessagePopup(): void{
+        this.popupService.setCurrentForm('breeder-message');
+        this.popupService.setShowStatus(true);
+    }
 }

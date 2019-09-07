@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,CAAC,CAAC;EACE,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,UAAU;EAClB,OAAO,EAAE,GAAG;CACf;;AAED,MAAM,CAAC,MAAM,MAAM,SAAS,EAAE,KAAK;EAE/B,AAAA,EAAE,CAAA;IACE,SAAS,EAAE,IAAI;GAClB;EAED,AAAA,CAAC,CAAA;IACG,KAAK,EAAE,GAAG;GACb",
+    "sources": [
+        "breeder-message.component.scss"
+    ],
+    "names": [],
+    "file": "breeder-message.component.css"
+}

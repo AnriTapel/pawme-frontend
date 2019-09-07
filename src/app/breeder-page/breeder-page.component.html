@@ -1,10 +1,4 @@
-<header class="header">
-    <div class="logo">
-
-    </div>
-
-    <button class="button sign-in-button">Войти</button>
-</header>
+<app-header></app-header>
 
 <div class="slider-content">
     <div class="slider d-flex align-items-center justify-content-center">
@@ -65,7 +59,7 @@
                     занимаемых участниками в отношении поставленных задач.
                 </p>
             </div>
-            <button type="button" class="button button-ask-a-question d-flex align-items-center justify-content-center">Задать вопрос</button>
+            <button type="button" class="custom-btn btn-purple" style="width: 100%" (click)="showBreederMessagePopup()">ЗАДАТЬ ВОПРОС</button>
         </aside>
         <section class="section d-flex flex-column">
             <h2>О ЩЕНКАХ</h2>
@@ -217,7 +211,7 @@
 
             <div class="about-puppies-title about-puppies-with-btn d-flex align-items-center justify-content-between">
                 <span class="available-puppies-title">Доступные щенки</span>
-                <button type="button" class="button-ask-a-question d-flex align-items-center justify-content-center hidden-sm">Задать вопрос</button>
+                <button type="button" class="custom-btn btn-purple" (click)="showBreederMessagePopup()">ЗАДАТЬ ВОПРОС</button>
             </div>
 
             <div class="available-puppies-list d-flex">
@@ -443,7 +437,7 @@
     </div>
 </div>
 
-<footer class="footer">
+<!--<footer class="footer">
     <div class="logo">
 
     </div>
@@ -457,4 +451,6 @@
     <div class="registration-link">
         <a href="" class="link">Регистрация</a>
     </div>
-</footer>
+</footer>-->
+
+<app-footer></app-footer>

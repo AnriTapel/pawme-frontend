@@ -107,6 +107,11 @@ export class AppService {
     return re.test(email);
   }
 
+  validatePhoneInput(phone: string): boolean{
+    let re = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+    return re.test(phone);
+  }
+
   getImageDataForUpload(data: any): FormData {
     const body = new FormData();
     body.append('image', data.inputFile, data.inputFile.name || "main_image.jpg");
