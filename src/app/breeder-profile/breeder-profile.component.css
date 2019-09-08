@@ -1,5 +1,6 @@
 hr {
   width: 80%;
+  max-width: 1210px;
   margin: -15px auto 0;
   background-color: #f8f9fb;
 }
@@ -8,7 +9,7 @@ hr {
   display: -ms-grid;
   display: grid;
   width: 80%;
-  max-width: 1440px;
+  max-width: 1210px;
   -ms-grid-rows: auto;
   -ms-grid-columns: 3fr 7fr;
       grid-template: auto / 3fr 7fr;

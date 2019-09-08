@@ -42,29 +42,6 @@ span, p, div {
   }
 }
 
-.footer {
-  width: 100%;
-  height: 154px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  background-color: #645fc9;
-  padding: 63px 135px;
-}
-
-@media (max-width: 768px) {
-  .footer {
-    display: none;
-  }
-}
-
 .main-content {
   width: 1170px;
   margin: 50px auto 60px;
@@ -158,6 +135,7 @@ span, p, div {
 @media (max-width: 1201px) {
   .about-puppies .aside, .about-breeder .aside, .about-parents .aside, .our-instagram .aside {
     margin-bottom: 40px;
+    position: relative;
   }
 }
 
@@ -197,7 +175,9 @@ span, p, div {
 
 .aside {
   padding: 34px 19px 42px 26px;
-  height: 557px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 @media (max-width: 769px) {
@@ -449,37 +429,9 @@ span, p, div {
   color: #0e0b4d;
 }
 
-.section .medical-label-item .vaccine-icon {
-  display: inline-block;
-  content: '';
-  width: 34px;
-  height: 42px;
-  background-image: url("/assets/img/breeder-page/injection.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-.section .medical-label-item .worm-icon {
-  display: inline-block;
-  content: '';
-  width: 34px;
-  height: 42px;
-  background-image: url("/assets/img/breeder-page/flea.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-.section .medical-label-item .sterilized-icon {
-  display: inline-block;
-  content: '';
-  width: 40px;
-  height: 35px;
-  background-image: url("/assets/img/breeder-page/collar.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
+.section .medical-label-item img {
+  max-width: 40px;
+  max-height: 40px;
 }
 
 @media (min-width: 769px) {
@@ -662,63 +614,6 @@ span, p, div {
   }
 }
 
-@media (max-width: 768px) {
-  .section .available-puppies-list {
-    width: 100%;
-    overflow-x: scroll;
-  }
-}
-
-.section .available-puppies-item {
-  margin-right: 30px;
-}
-
-.section .available-puppies-item .image {
-  width: 210px;
-  height: 180px;
-  margin-bottom: 12px;
-}
-
-.section .available-puppies-item .name {
-  font-size: 16px;
-  font-weight: bold;
-  color: #0e0b4d;
-}
-
-.section .available-puppies-item .icon-male {
-  display: inline-block;
-  content: '';
-  width: 17px;
-  height: 18px;
-  background-image: url("/assets/img/breeder-page/male.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-.section .available-puppies-item .icon-female {
-  display: inline-block;
-  content: '';
-  width: 18px;
-  height: 18px;
-  background-image: url("/assets/img/breeder-page/female.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-
-.section .available-puppies-item .text {
-  opacity: 0.5;
-  font-size: 14px;
-  color: #0e0b4d;
-}
-
-.section .available-puppies-item .additional-info {
-  opacity: 0.5;
-  font-size: 14px;
-  color: #0e0b4d;
-}
-
 .section .about-breeder-content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -858,6 +753,7 @@ span, p, div {
   width: 150px;
   min-width: 150px;
   height: 150px;
+  position: relative;
   border: solid 1px rgba(14, 11, 77, 0.1);
 }
 
@@ -866,8 +762,13 @@ span, p, div {
 }
 
 .section .awards-and-certificates .certificate-item img {
-  width: 90px;
-  height: 135px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 149px;
 }
 
 @media (max-width: 768px) {

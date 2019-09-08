@@ -60,11 +60,19 @@ input[type=number]::-webkit-outer-spin-button {
 .header-for-landing header {
   background-color: unset !important;
   padding: 2% 8vw !important;
+  width: 100%;
 }
 
 .header-for-landing header nav {
   background-color: unset !important;
   padding: 0 !important;
+}
+
+.header-for-profile header {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 1210px;
+  padding: 2% 0;
 }
 
 .header-for-profile nav {
@@ -701,7 +709,7 @@ ngb-datepicker .bg-light {
 
 @media screen and (max-width: 769px) {
   .header-for-profile header {
-    padding: 2% 5% 0 !important;
+    width: 90%;
   }
   .breeder-profile-subpage-container {
     display: block !important;

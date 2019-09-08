@@ -18,9 +18,10 @@ const routes: Routes = [
   {path: 'remind-password', component: RemindPasswordComponent},
   {path: 'breeder-landing', component: BreederLandingComponent},
   {path: 'breeder-profile', component: BreederProfileComponent},
-  {path: 'breeder-page', component: BreederPageComponent},
+  {path: 'breeder/:id', component: BreederPageComponent, pathMatch: 'full'},
   {path: 'admin-panel', component: AdminPanelComponent},
-  {path: 'confirm-email/:mail', component: MailPageComponent}
+  {path: 'confirm-email/:mail', component: MailPageComponent},
+  {path: '**', component: BreederLandingComponent}
 ];
 
 @NgModule({

@@ -66,6 +66,7 @@ input[type=number]::-webkit-outer-spin-button {
     header{
         background-color: unset !important;
         padding: 2% 8vw !important;
+        width: 100%;
 
         nav{
             background-color: unset !important;
@@ -76,6 +77,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .header-for-profile{
+
+    header{
+        width: 80%;
+        margin: 0 auto;
+        max-width: 1210px;
+        padding: 2% 0;
+    }
 
     nav{
         padding: unset;
@@ -680,7 +688,7 @@ ngb-datepicker{
 
     .header-for-profile{
         header{
-            padding: 2% 5% 0 !important;
+            width: 90%;
         }
     }
 

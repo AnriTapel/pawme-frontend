@@ -1,441 +1,425 @@
-<app-header></app-header>
+<app-header class="header-for-landing"></app-header>
 
-<div class="slider-content">
-    <div class="slider d-flex align-items-center justify-content-center">
-        <div class="slider-item d-flex align-items-center">
-            <img src="./assets/img/breeder-page/pic.png" alt="" class="image slider-image">
-        </div>
-        <div class="slider-item d-flex align-items-center">
-            <img src="./assets/img/breeder-page/pic1.png" alt="" class="image slider-image">
-        </div>
-        <div class="slider-item d-flex align-items-center">
-            <img src="./assets/img/breeder-page/pic2.png" alt="" class="image slider-image">
-        </div>
-        <div class="slider-item d-flex align-items-center">
-            <img src="./assets/img/breeder-page/pic3.png" alt="" class="image slider-image">
+<ng-container *ngIf="appService.userData">
+
+    <div class="slider-content">
+        <div class="slider d-flex align-items-center justify-content-center">
+            <div class="slider-item d-flex align-items-center">
+                <img src="./assets/img/breeder-page/pic.png" alt="" class="image slider-image">
+            </div>
+            <div class="slider-item d-flex align-items-center">
+                <img src="./assets/img/breeder-page/pic1.png" alt="" class="image slider-image">
+            </div>
+            <div class="slider-item d-flex align-items-center">
+                <img src="./assets/img/breeder-page/pic2.png" alt="" class="image slider-image">
+            </div>
+            <div class="slider-item d-flex align-items-center">
+                <img src="./assets/img/breeder-page/pic3.png" alt="" class="image slider-image">
+            </div>
         </div>
     </div>
-</div>
 
-<div class="main-content d-flex align-items-center flex-column">
-    <div class="about-puppies">
-        <aside class="aside d-flex flex-column first-aside">
-            <div class="top-info d-flex flex-row justify-content-between">
-                <div class="left-side">
-                    <div class="heading">
-                        <span>ЗАВОДЧИК МОПСОВ</span>
+    <div class="main-content d-flex align-items-center flex-column">
+        <div class="about-puppies">
+            <aside class="aside d-flex flex-column first-aside">
+                <div class="top-info d-flex flex-row justify-content-between">
+                    <div class="left-side">
+                        <div class="heading">
+                            <span>ЗАВОДЧИК {{appService.userData.generalInfo.mainBreed.name.toUpperCase()}}</span>
+                        </div>
+                        <div class="title">
+                            <span>{{appService.userData.generalInfo.name}}</span>
+                        </div>
+                        <div class="location d-flex align-items-center">
+                            <i class="icon icon-location"></i>
+                            <span>{{appService.userData.generalInfo.city}}</span>
+                        </div>
+                        <div *ngIf="appService.userData.generalInfo.site" class="link d-flex align-items-center">
+                            <i class="icon icon-link"></i>
+                            <span>{{appService.userData.generalInfo.site}}</span>
+                        </div>
+                        <div class="social-networks d-flex">
+                            <div *ngIf="appService.userData.generalInfo.instagram" class="instagram">
+                                <i class="instagram-icon d-flex align-items-center justify-content-center"></i>
+                            </div>
+                            <div *ngIf="appService.userData.generalInfo.facebook" class="facebook">
+                                <i class="facebook-icon d-flex align-items-center justify-content-center"></i>
+                            </div>
+                        </div>
                     </div>
+                    <div class="right-side">
+                        <img style="border-radius: 50%"
+                            src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg"
+                            alt="Фото питомника">
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="description">
+                    <p class="subtitle">О питомнике</p>
+                    <p>{{appService.userData.generalInfo.description}}</p>
+                </div>
+                <button type="button" class="custom-btn btn-purple" style="width: 100%"
+                    (click)="showBreederMessagePopup()">ЗАДАТЬ ВОПРОС</button>
+            </aside>
+            <section class="section d-flex flex-column">
+                <h2>О ЩЕНКАХ</h2>
+
+                <div class="top-info d-flex">
+                    <div class="age-of-sale">
+                        <span class="bold">Возраст продажи: </span>
+                        <span>от {{appService.userData.puppiesInfo.age}}
+                            {{appService.userData.puppiesInfo.age > 1 ? 'недель' : 'недели'}}</span>
+                    </div>
+                    <div class="price">
+                        <span class="bold">Стоимость: </span>
+                        <span>{{appService.userData.puppiesInfo.priceFrom}}-{{appService.userData.puppiesInfo.priceTo}}
+                            Р</span>
+                    </div>
+                </div>
+
+                <div class="line"></div>
+
+                <div class="about-puppies-title pawme-title">
+                    <span class="d-flex align-items-center">
+                        Обязательный комплект PawMe <i
+                            class="icon question-icon d-flex align-items-center justify-content-center ml-6"></i>
+                    </span>
+                </div>
+
+                <div class="pawme-label-list d-flex align-items-center">
+                    <span class="pawme-label-item">МЕТРИКА / РОДОСЛОВНАЯ</span>
+                    <span class="pawme-label-item-plus">+</span>
+                    <span class="pawme-label-item">ВЕТЕРИНАРНЫЙ ПАСПОРТ</span>
+                    <span class="pawme-label-item-plus">+</span>
+                    <span class="pawme-label-item">КЛЕЙМО</span>
+                </div>
+
+                <div class="line"></div>
+
+                <div class="about-puppies-title medical-title">
+                    <span>Медицина</span>
+                </div>
+
+                <div class="medical-label-list d-flex align-items-center flex-wrap">
+                    <div *ngIf="getPuppyMedicalStatus(1)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/injection.svg" alt="Комплексная прививка" />
+                        <span class="text">Комплексная прививка</span>
+                    </div>
+                    <div *ngIf="getPuppyMedicalStatus(2)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/injection.svg" alt="Прививка от бешенства" />
+                        <span class="text">Прививка от бешенства</span>
+                    </div>
+                    <div *ngIf="getPuppyMedicalStatus(3)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/flea.svg" alt="Обработка от глистов" />
+                        <span class="text">Обработка от глистов</span>
+                    </div>
+                    <div *ngIf="getPuppyMedicalStatus(4)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/collar.svg" alt="Стерилизация/Кастрация" />
+                        <span class="text">Стерилизация/Кастрация</span>
+                    </div>
+                    <div *ngIf="getPuppyMedicalStatus(5)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/analysis.svg" alt="Анализ крови" />
+                        <span class="text">Анализ крови</span>
+                    </div>
+                    <div *ngIf="getPuppyMedicalStatus(6)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/analysis.svg" alt="Анализ мочи" />
+                        <span class="text">Анализ мочи</span>
+                    </div>
+                    <div *ngIf="getPuppyMedicalStatus(7)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/analysis.svg" alt="Анализ кала" />
+                        <span class="text">Анализ кала</span>
+                    </div>
+                    <div *ngIf="getPuppyMedicalStatus(8)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/vision.svg" alt="Проверка у офтальмолога" />
+                        <span class="text">Проверка у офтальмолога</span>
+                    </div>
+                    <div *ngIf="getPuppyMedicalStatus(9)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/pet.svg" alt="Проверка у кардиолога" />
+                        <span class="text">Проверка у кардиолога</span>
+                    </div>
+                    <div *ngIf="getPuppyMedicalStatus(10)"
+                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                        <img src="./assets/img/breeder-page/joint.svg" alt="Ортопедические исследования" />
+                        <span class="text">Ортопедические исследования</span>
+                    </div>
+                </div>
+
+                <div class="line"></div>
+
+                <div class="additional-info-list d-flex flex-row flex-wrap">
+                    <div class="additional-info-item d-flex flex-column mb-32">
+                        <div class="title d-flex align-items-center justify-content-between"
+                            [ngClass]="{'mb-16' : collapse.contract}" (click)="showInfo('contract')">
+                            <div class="d-flex">
+                                <i
+                                    class="icon icon-combined-shape d-flex align-items-center justify-content-center"></i>
+                                Договор PawMe
+                            </div>
+
+                            <div class="arrow-icon hidden-lg show-sm">
+                                <i class="icon arrow-down"></i>
+                            </div>
+                        </div>
+                        <div class="description" [ngClass]="{'collapse' : collapse.contract}">
+                            Значимость этих проблем настолько очевидна,
+                            что консультация с широким активом способствует подготовки и реализации новых предложений.
+                            С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
+                            занимаемых участниками в отношении поставленных задач.
+                        </div>
+                        <div class="contract-link" [ngClass]="{'collapse' : collapse.contract}">
+                            <a href="">Посмотреть договор</a>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="additional-info-item d-flex flex-column mb-32">
+                        <div class="title d-flex align-items-center justify-content-between"
+                            [ngClass]="{'mb-16' : collapse.warranty}" (click)="showInfo('warranty')">
+                            <div class="d-flex">
+                                <i class="icon icon-heart d-flex align-items-center justify-content-center"></i>
+                                Гарантии по здоровью
+                            </div>
+
+                            <div class="arrow-icon hidden-lg show-sm">
+                                <i class="icon arrow-down"></i>
+                            </div>
+                        </div>
+                        <div class="description" [ngClass]="{'collapse' : collapse.warranty}">
+                            Значимость этих проблем настолько очевидна,
+                            что консультация с широким активом способствует подготовки и реализации новых предложений.
+                            С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
+                            занимаемых участниками в отношении поставленных задач.
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="additional-info-item d-flex flex-column">
+                        <div class="title d-flex align-items-center justify-content-between"
+                            [ngClass]="{'mb-16' : collapse.buyPuppy}" (click)="showInfo('buyPuppy')">
+                            <div class="d-flex">
+                                <i
+                                    class="icon icon-certificate-shape d-flex align-items-center justify-content-center"></i>
+                                Как приобрести щенка
+                            </div>
+
+                            <div class="arrow-icon hidden-lg show-sm">
+                                <i class="icon arrow-down"></i>
+                            </div>
+                        </div>
+                        <div class="description" [ngClass]="{'collapse' : collapse.buyPuppy}">
+                            Значимость этих проблем настолько очевидна,
+                            что консультация с широким активом способствует подготовки и реализации новых предложений.
+                            С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
+                            занимаемых участниками в отношении поставленных задач.
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                    <div *ngIf="appService.userData.puppiesInfo.gifts" class="additional-info-item d-flex flex-column">
+                        <div class="title d-flex align-items-center justify-content-between"
+                            [ngClass]="{'mb-16' : collapse.gifts}" (click)="showInfo('gifts')">
+                            <div class="d-flex">
+                                <i class="icon icon-gift d-flex align-items-center justify-content-center"></i>
+                                Подарки
+                            </div>
+
+                            <div class="arrow-icon hidden-lg show-sm">
+                                <i class="icon arrow-down"></i>
+                            </div>
+                        </div>
+                        <div class="description" [ngClass]="{'collapse' : collapse.gifts}">
+                            {{appService.userData.puppiesInfo.gifts}}</div>
+                    </div>
+                </div>
+
+                <div class="line"></div>
+
+                <div
+                    class="about-puppies-title about-puppies-with-btn d-flex align-items-center justify-content-between">
+                    <span class="available-puppies-title">Доступные щенки</span>
+                    <button type="button" class="custom-btn btn-purple" (click)="showBreederMessagePopup()">ЗАДАТЬ
+                        ВОПРОС</button>
+                </div>
+
+                <div class="dog-entity-list-block">
+                    <div *ngFor="let puppy of appService.userData.puppies;let i = index;" class="avail-dog-entity-item"
+                        (click)="showDogInfoPopup(i)">
+
+                        <div class="entity-image-block">
+                            <img src='/img/{{puppy.gallery[0].preview}}.jpg' alt="Изображение щенка" />
+                        </div>
+
+                        <div class="entity-info-block">
+                            <div>
+                                <span>{{puppy.nickname}}</span>
+                                <span>{{puppy.breed.name}}</span>
+                            </div>
+                            <img src="./assets/img/sex_{{puppy.gender == 'MALE' ? 'male' : 'female'}}.png"
+                                alt="Пол щенка" />
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="about-breeder">
+            <section class="section d-flex flex-column">
+                <h2>О ЗАВОДЧИКЕ</h2>
+
+                <div class="about-breeder-content">
+                    <div class="left-side">
+                        <div class="about-breeder-post">
+                            <div class="title">Расскажите о себе</div>
+
+                            <p>{{appService.userData.about.about}}</p>
+                        </div>
+
+                        <div class="about-breeder-post">
+                            <div class="title">С чего все началось?</div>
+
+                            <p>{{appService.userData.about.howItStarted}}</p>
+                        </div>
+
+                        <div class="about-breeder-post">
+                            <div class="title">Что выделяет ваш питомник?</div>
+
+                            <p>{{appService.userData.about.outstandingInfo}}</p>
+                        </div>
+                    </div>
+                    <div class="right-side">
+                        <div class="image-block mb-12">
+                            <img src="/img/{{appService.userData.about.photo.preview}}.jpg" class="image"
+                                alt="Фото заводчика">
+                        </div>
+
+                        <div class="info-block">
+                            <div class="title mb-12">
+                                <span>{{appService.userData.name}} {{appService.userData.surname}}</span>
+                            </div>
+                            <span class="clubs">Клубы:</span>
+
+                            <ul>
+                                <li *ngFor="let club of appService.userData.about.clubs.split(';')">
+                                    <span class="circle"></span>
+                                    <span class="font-intro-book">{{club}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="line"></div>
+
+                <div *ngIf="appService.userData.about.certificates.length > 0" class="awards-and-certificates">
                     <div class="title">
-                        <span>Сладкие мопсы</span>
+                        <span>Награды & Сертификаты</span>
                     </div>
-                    <div class="location d-flex align-items-center">
-                        <i class="icon icon-location"></i>
-                        <span>Челябинск</span>
-                    </div>
-                    <div class="link d-flex align-items-center">
-                        <i class="icon icon-link"></i>
-                        <span>sladkiemopsi.ru</span>
-                    </div>
-                    <div class="social-networks d-flex">
-                        <div class="instagram">
-                            <i class="instagram-icon d-flex align-items-center justify-content-center"></i>
-                        </div>
-                        <div class="facebook">
-                            <i class="facebook-icon d-flex align-items-center justify-content-center"></i>
+
+                    <div class="certificates-list d-flex flex-wrap">
+                        <div *ngFor="let cert of appService.userData.about.certificates"
+                            class="certificate-item d-flex align-items-center justify-content-center">
+                            <img src="/img/{{cert.preview}}.jpg" alt="Сертификат заводчика">
                         </div>
                     </div>
                 </div>
-                <div class="right-side">
-                    <img src="./assets/img/breeder-page/group-2.png" alt="">
+            </section>
+        </div>
+
+        <div class="about-parents">
+            <section class="section d-flex flex-column">
+                <div class="about-parents-title">
+                    <h2>О РОДИТЕЛЯХ</h2>
                 </div>
-            </div>
-            <div class="line"></div>
-            <div class="description">
-                <p class="subtitle">О питомнике</p>
-                <p>
-                    Значимость этих проблем настолько очевидна,
-                    что консультация с широким активом способствует подготовки и реализации новых предложений.
-                    С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                    занимаемых участниками в отношении поставленных задач.
-                </p>
-            </div>
-            <button type="button" class="custom-btn btn-purple" style="width: 100%" (click)="showBreederMessagePopup()">ЗАДАТЬ ВОПРОС</button>
-        </aside>
-        <section class="section d-flex flex-column">
-            <h2>О ЩЕНКАХ</h2>
 
-            <div class="top-info d-flex">
-                <div class="age-of-sale">
-                    <span class="bold">Возраст продажи: </span>
-                    <span>от 10 недель</span>
-                </div>
-                <div class="price">
-                    <span class="bold">Стоимость: </span>
-                    <span>20000-30000 Р</span>
-                </div>
-            </div>
+                <div class="dog-entity-list-block">
+                    <div *ngFor="let parent of appService.userData.parentsInfo.parents;let i = index;"
+                        class="avail-dog-entity-item" (click)="showDogInfoPopup(i)">
 
-            <div class="line"></div>
-
-            <div class="about-puppies-title pawme-title">
-                <span class="d-flex align-items-center">
-                    Обязательный комплект PawMe <i class="icon question-icon d-flex align-items-center justify-content-center ml-6"></i>
-                </span>
-            </div>
-
-            <div class="pawme-label-list d-flex align-items-center">
-                <span class="pawme-label-item">МЕТРИКА / РОДОСЛОВНАЯ</span>
-                <span class="pawme-label-item-plus">+</span>
-                <span class="pawme-label-item">ВЕТЕРИНАРНЫЙ ПАСПОРТ</span>
-                <span class="pawme-label-item-plus">+</span>
-                <span class="pawme-label-item">КЛЕЙМО</span>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="about-puppies-title medical-title">
-                <span>Медицина</span>
-            </div>
-
-            <div class="medical-label-list d-flex align-items-center flex-wrap">
-                <div class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                    <i class="icon vaccine-icon"></i>
-                    <span class="text">Поставлены прививки</span>
-                </div>
-                <div class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                    <i class="icon worm-icon"></i>
-                    <span class="text">Обработаны от глистов</span>
-                </div>
-                <div class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                    <i class="icon sterilized-icon"></i>
-                    <span class="text">Стерилизованы/Кастрированы</span>
-                </div>
-                <div class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                    <i class="icon sterilized-icon"></i>
-                    <span class="text">Стерилизованы/Кастрированы</span>
-                </div>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="additional-info-list d-flex flex-row flex-wrap">
-                <div class="additional-info-item d-flex flex-column mb-32">
-                    <div class="title d-flex align-items-center justify-content-between"
-                         [ngClass]="{'mb-16' : collapse.contract}"
-                         (click)="showInfo('contract')">
-                        <div class="d-flex">
-                            <i class="icon icon-combined-shape d-flex align-items-center justify-content-center"></i>
-                            Договор PawMe
+                        <div class="entity-image-block">
+                            <img src='/img/{{parent.gallery[0].preview}}.jpg' alt="Изображение щенка" />
                         </div>
 
-                        <div class="arrow-icon hidden-lg show-sm">
-                            <i class="icon arrow-down"></i>
+                        <div class="entity-info-block">
+                            <div>
+                                <span>{{parent.nickname}}</span>
+                                <span>{{parent.breed.name}}</span>
+                            </div>
+                            <img src="./assets/img/sex_{{parent.gender == 'MALE' ? 'male' : 'female'}}.png"
+                                alt="Пол щенка" />
+
                         </div>
                     </div>
-                    <div class="description" [ngClass]="{'collapse' : collapse.contract}">
-                        Значимость этих проблем настолько очевидна,
-                        что консультация с широким активом способствует подготовки и реализации новых предложений.
-                        С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                        занимаемых участниками в отношении поставленных задач.
-                    </div>
-                    <div class="contract-link" [ngClass]="{'collapse' : collapse.contract}">
-                        <a href="">Посмотреть договор</a>
-                    </div>
-                    <div class="line"></div>
                 </div>
-                <div class="additional-info-item d-flex flex-column mb-32">
-                    <div class="title d-flex align-items-center justify-content-between"
-                         [ngClass]="{'mb-16' : collapse.warranty}"
-                         (click)="showInfo('warranty')">
-                        <div class="d-flex">
-                            <i class="icon icon-heart d-flex align-items-center justify-content-center"></i>
-                            Гарантии по здоровью
-                        </div>
 
-                        <div class="arrow-icon hidden-lg show-sm">
-                            <i class="icon arrow-down"></i>
-                        </div>
-                    </div>
-                    <div class="description" [ngClass]="{'collapse' : collapse.warranty}">
-                        Значимость этих проблем настолько очевидна,
-                        что консультация с широким активом способствует подготовки и реализации новых предложений.
-                        С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                        занимаемых участниками в отношении поставленных задач.
-                    </div>
-                    <div class="line"></div>
-                </div>
-                <div class="additional-info-item d-flex flex-column">
-                    <div class="title d-flex align-items-center justify-content-between"
-                         [ngClass]="{'mb-16' : collapse.buyPuppy}"
-                         (click)="showInfo('buyPuppy')">
-                        <div class="d-flex">
-                            <i class="icon icon-certificate-shape d-flex align-items-center justify-content-center"></i>
-                            Как приобрести щенка
-                        </div>
+                <div class="line"></div>
 
-                        <div class="arrow-icon hidden-lg show-sm">
-                            <i class="icon arrow-down"></i>
+                <div class="medical-test-parents">
+                    <div class="title">Медицинские тесты родителей</div>
+
+                    <div class="tests-list d-flex flex-row">
+                        <div class="test-item">
+                            <div class="test-item-title d-flex align-items-center">
+                                <i class="icon icon-eye d-flex align-items-center justify-content-center"></i>
+                                <span>Глаза</span>
+                            </div>
+
+                            <div class="test-item-description">
+                                <p>
+                                    Значимость этих проблем настолько очевидна,
+                                    что консультация с широким активом способствует подготовки и реализации новых
+                                    предложений.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="test-item">
+                            <div class="test-item-title d-flex align-items-center">
+                                <i class="icon icon-eye d-flex align-items-center justify-content-center"></i>
+                                <span>Глаза</span>
+                            </div>
+
+                            <div class="test-item-description">
+                                <p>
+                                    Значимость этих проблем настолько очевидна,
+                                    что консультация с широким активом способствует.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="description" [ngClass]="{'collapse' : collapse.buyPuppy}">
-                        Значимость этих проблем настолько очевидна,
-                        что консультация с широким активом способствует подготовки и реализации новых предложений.
-                        С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                        занимаемых участниками в отношении поставленных задач.
-                    </div>
-                    <div class="line"></div>
                 </div>
-                <div class="additional-info-item d-flex flex-column">
-                    <div class="title d-flex align-items-center justify-content-between"
-                         [ngClass]="{'mb-16' : collapse.gifts}"
-                         (click)="showInfo('gifts')">
-                        <div class="d-flex">
-                            <i class="icon icon-gift d-flex align-items-center justify-content-center"></i>
-                            Подарки
-                        </div>
+            </section>
+        </div>
 
-                        <div class="arrow-icon hidden-lg show-sm">
-                            <i class="icon arrow-down"></i>
-                        </div>
-                    </div>
-                    <div class="description" [ngClass]="{'collapse' : collapse.gifts}">
-                        Значимость этих проблем настолько очевидна,
-                        что консультация с широким активом способствует подготовки и реализации новых предложений.
-                        С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                        занимаемых участниками в отношении поставленных задач.
+        <div class="our-instagram">
+            <section class="section d-flex flex-column">
+                <div class="our-instagram-title d-flex flex-row justify-content-between">
+                    <h2>НАШ INSTAGRAM</h2>
+                    <div class="instagram-link">
+                        <a class="link" href="">@sweet_mops</a>
                     </div>
                 </div>
-            </div>
 
-            <div class="line"></div>
-
-            <div class="about-puppies-title about-puppies-with-btn d-flex align-items-center justify-content-between">
-                <span class="available-puppies-title">Доступные щенки</span>
-                <button type="button" class="custom-btn btn-purple" (click)="showBreederMessagePopup()">ЗАДАТЬ ВОПРОС</button>
-            </div>
-
-            <div class="available-puppies-list d-flex">
-                <div class="available-puppies-item d-flex flex-column">
-                    <img src="./assets/img/breeder-page/rectangle-1.png" class="image" alt="">
-
-                    <span class="name d-flex align-items-center justify-content-between">
-                        Ворчун
-                        <i class="icon icon-male"></i>
-                    </span>
-                    <span class="text">Американский стаффордширский терьер</span>
-                    <span class="additional-info">После 1 июня</span>
+                <div class="our-instagram-content">
+                    <div class="images-list d-flex flex-wrap">
+                        <img src="./assets/img/breeder-page/pic.png" alt="" class="image">
+                        <img src="./assets/img/breeder-page/pic1.png" alt="" class="image">
+                        <img src="./assets/img/breeder-page/pic2.png" alt="" class="image">
+                        <img src="./assets/img/breeder-page/pic3.png" alt="" class="image">
+                        <img src="./assets/img/breeder-page/pic.png" alt="" class="image">
+                        <img src="./assets/img/breeder-page/pic1.png" alt="" class="image">
+                    </div>
                 </div>
-                <div class="available-puppies-item d-flex flex-column">
-                    <img src="./assets/img/breeder-page/rectangle-2.png" class="image" alt="">
-
-                    <span class="name d-flex align-items-center justify-content-between">
-                        Азирафель
-                        <i class="icon icon-female"></i>
-                    </span>
-                    <span class="text">Мопс</span>
-                    <span class="additional-info">После 1 июня</span>
-                </div>
-                <div class="available-puppies-item d-flex flex-column">
-                    <img src="./assets/img/breeder-page/rectangle-3.png" class="image" alt="">
-
-                    <span class="name d-flex align-items-center justify-content-between">
-                        Вечнокруглый Шарик
-                        <i class="icon icon-male"></i>
-                    </span>
-                    <span class="text">Мопс</span>
-                    <span class="additional-info">После 1 июня</span>
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </div>
 
-    <div class="about-breeder">
-        <section class="section d-flex flex-column">
-            <h2>О ЗАВОДЧИКЕ</h2>
-
-            <div class="about-breeder-content">
-                <div class="left-side">
-                    <div class="about-breeder-post">
-                        <div class="title">Расскажите о себе</div>
-
-                        <p>
-                            Значимость этих проблем настолько очевидна,
-                            что консультация с широким активом способствует подготовки и реализации новых предложений.
-                            С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                            занимаемых участниками в отношении поставленных задач.
-                        </p>
-                    </div>
-
-                    <div class="about-breeder-post">
-                        <div class="title">С чего все началось?</div>
-
-                        <p>
-                            Значимость этих проблем настолько очевидна,
-                            что консультация с широким активом способствует подготовки и реализации новых предложений.
-                            С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                            занимаемых участниками в отношении поставленных задач.
-                        </p>
-                    </div>
-
-                    <div class="about-breeder-post">
-                        <div class="title">Что выделяет ваш питомник?</div>
-
-                        <p>
-                            Значимость этих проблем настолько очевидна,
-                            что консультация с широким активом способствует подготовки и реализации новых предложений.
-                            С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                            занимаемых участниками в отношении поставленных задач.
-                        </p>
-                    </div>
-                </div>
-                <div class="right-side">
-                    <div class="image-block mb-12">
-                        <img src="./assets/img/breeder-page/group-21.png" class="image" alt="">
-                    </div>
-
-                    <div class="info-block">
-                        <div class="title mb-12">
-                            <span>Иванова Владислава</span>
-                        </div>
-                        <span class="clubs">Клубы:</span>
-
-                        <ul>
-                            <li>
-                                <span class="circle"></span>
-                                <span class="font-intro-book">Ассоциация мопсов</span>
-                            </li>
-                            <li>
-                                <span class="circle"></span>
-                                <span class="font-intro-book">Галактические заводчики</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="awards-and-certificates">
-                <div class="title">
-                    <span>Награды & Сертификаты</span>
-                </div>
-
-                <div class="certificates-list d-flex flex-wrap">
-                    <div class="certificate-item d-flex align-items-center justify-content-center">
-                        <img src="./assets/img/breeder-page/certificate_breeder.jpg" alt="">
-                    </div>
-                    <div class="certificate-item d-flex align-items-center justify-content-center">
-                        <img src="./assets/img/breeder-page/certificate_breeder.jpg" alt="">
-                    </div>
-                    <div class="certificate-item d-flex align-items-center justify-content-center">
-                        <img src="./assets/img/breeder-page/certificate_breeder.jpg" alt="">
-                    </div>
-                    <div class="certificate-item d-flex align-items-center justify-content-center">
-                        <img src="./assets/img/breeder-page/certificate_breeder.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div class="about-parents">
-        <section class="section d-flex flex-column">
-            <div class="about-parents-title">
-                <h2>О РОДИТЕЛЯХ</h2>
-            </div>
-
-            <div class="available-puppies-list d-flex">
-                <div class="available-puppies-item d-flex flex-column">
-                    <img src="./assets/img/breeder-page/rectangle-1.png" class="image" alt="">
-
-                    <span class="name d-flex align-items-center justify-content-between">
-                        Ворчун
-                        <i class="icon icon-male"></i>
-                    </span>
-                    <span class="text">Американский стаффордширский терьер</span>
-                    <span class="additional-info">После 1 июня</span>
-                </div>
-                <div class="available-puppies-item d-flex flex-column">
-                    <img src="./assets/img/breeder-page/rectangle-2.png" class="image" alt="">
-
-                    <span class="name d-flex align-items-center justify-content-between">
-                        Азирафель
-                        <i class="icon icon-female"></i>
-                    </span>
-                    <span class="text">Мопс</span>
-                    <span class="additional-info">После 1 июня</span>
-                </div>
-                <div class="available-puppies-item d-flex flex-column">
-                    <img src="./assets/img/breeder-page/rectangle-3.png" class="image" alt="">
-
-                    <span class="name d-flex align-items-center justify-content-between">
-                        Вечнокруглый Шарик
-                        <i class="icon icon-male"></i>
-                    </span>
-                    <span class="text">Мопс</span>
-                    <span class="additional-info">После 1 июня</span>
-                </div>
-            </div>
-
-            <div class="line"></div>
-
-            <div class="medical-test-parents">
-                <div class="title">Медицинские тесты родителей</div>
-
-                <div class="tests-list d-flex flex-row">
-                    <div class="test-item">
-                        <div class="test-item-title d-flex align-items-center">
-                            <i class="icon icon-eye d-flex align-items-center justify-content-center"></i>
-                            <span>Глаза</span>
-                        </div>
-
-                        <div class="test-item-description">
-                            <p>
-                                Значимость этих проблем настолько очевидна,
-                                что консультация с широким активом способствует подготовки и реализации новых предложений.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="test-item">
-                        <div class="test-item-title d-flex align-items-center">
-                            <i class="icon icon-eye d-flex align-items-center justify-content-center"></i>
-                            <span>Глаза</span>
-                        </div>
-
-                        <div class="test-item-description">
-                            <p>
-                                Значимость этих проблем настолько очевидна,
-                                что консультация с широким активом способствует.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div class="our-instagram">
-        <section class="section d-flex flex-column">
-            <div class="our-instagram-title d-flex flex-row justify-content-between">
-                <h2>НАШ INSTAGRAM</h2>
-                <div class="instagram-link">
-                    <a class="link" href="">@sweet_mops</a>
-                </div>
-            </div>
-
-            <div class="our-instagram-content">
-                <div class="images-list d-flex flex-wrap">
-                    <img src="./assets/img/breeder-page/pic.png" alt="" class="image">
-                    <img src="./assets/img/breeder-page/pic1.png" alt="" class="image">
-                    <img src="./assets/img/breeder-page/pic2.png" alt="" class="image">
-                    <img src="./assets/img/breeder-page/pic3.png" alt="" class="image">
-                    <img src="./assets/img/breeder-page/pic.png" alt="" class="image">
-                    <img src="./assets/img/breeder-page/pic1.png" alt="" class="image">
-                </div>
-            </div>
-        </section>
-    </div>
-</div>
+</ng-container>
 
 <!--<footer class="footer">
     <div class="logo">

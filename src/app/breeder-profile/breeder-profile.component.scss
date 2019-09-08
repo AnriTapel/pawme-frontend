@@ -2,6 +2,7 @@ $progress-bar-height: 18px;
 
 hr{
     width: 80%;
+    max-width: 1210px;
     margin: -15px auto 0;
     background-color: #f8f9fb;
 }
@@ -9,7 +10,7 @@ hr{
 .profile-container{
     display: grid;
     width: 80%;
-    max-width: 1440px;
+    max-width: 1210px;
     grid-template: auto / 3fr 7fr;
     margin: 4em auto 6em;
     grid-gap: 10px 20px;
