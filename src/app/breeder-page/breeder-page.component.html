@@ -3,18 +3,9 @@
 <ng-container *ngIf="appService.userData">
 
     <div class="slider-content">
-        <div class="slider d-flex align-items-center justify-content-center">
-            <div class="slider-item d-flex align-items-center">
-                <img src="./assets/img/breeder-page/pic.png" alt="" class="image slider-image">
-            </div>
-            <div class="slider-item d-flex align-items-center">
-                <img src="./assets/img/breeder-page/pic1.png" alt="" class="image slider-image">
-            </div>
-            <div class="slider-item d-flex align-items-center">
-                <img src="./assets/img/breeder-page/pic2.png" alt="" class="image slider-image">
-            </div>
-            <div class="slider-item d-flex align-items-center">
-                <img src="./assets/img/breeder-page/pic3.png" alt="" class="image slider-image">
+        <div class="slider d-flex align-items-center">
+            <div *ngFor="let photo of appService.userData.generalInfo.gallery" class="slider-item d-flex align-items-center">
+                <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image">
             </div>
         </div>
     </div>

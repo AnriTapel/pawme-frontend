@@ -34,6 +34,7 @@ span, p, div {
     width: 1440px;
     min-width: 1440px;
     margin: 0 auto;
+    overflow-x: scroll;
     .slider-item {
         width: 360px;
         height: 360px;
@@ -43,10 +44,11 @@ span, p, div {
             min-width: 360px;
         }
     }
+}
 
-    @media (max-width: $screen-lg - 1px) {
-        overflow-x: scroll;
-    }
+.slider::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .main-content {
