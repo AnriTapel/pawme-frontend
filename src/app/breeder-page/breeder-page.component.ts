@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../services/app-service/app.service';
 import { BreederControllerService } from '../api/api';
 import { Breeder } from '../model/models';
+import { DogCardService } from '../services/dog-card-service/dog-card.service';
 
 @Component({
     selector: 'app-breeder-page',
@@ -21,7 +22,7 @@ export class BreederPageComponent implements OnInit {
     };
 
     constructor(private popupService: PopupTemplateService, private route: ActivatedRoute, public appService: AppService,
-        private breederService: BreederControllerService) {
+        private breederService: BreederControllerService, public dogCardService: DogCardService) {
 
         if (!this.appService.userData)
             this.breederService.getBreederUsingGET(parseInt(this.route.snapshot.paramMap.get('id')))
@@ -41,9 +42,16 @@ export class BreederPageComponent implements OnInit {
         this.popupService.setShowStatus(true);
     }
 
-    showDogInfoPopup(index: number): void{
-        let puppy = this.appService.userData.puppies[index];
-        console.log(puppy);
+    showPuppyCard(index: number): void{
+        this.dogCardService.setIsPuppy(true);
+        this.dogCardService.setDog(this.appService.userData.puppies[index]);
+        this.dogCardService.setVisible(true);
+    }
+
+    showParentCard(index: number): void{
+        this.dogCardService.setIsPuppy(false);
+        this.dogCardService.setDog(this.appService.userData.parentsInfo.parents[index]);
+        this.dogCardService.setVisible(true);
     }
 
     getPuppyMedicalStatus(id: number): boolean{

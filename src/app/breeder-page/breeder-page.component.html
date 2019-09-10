@@ -249,7 +249,7 @@
 
                 <div class="dog-entity-list-block">
                     <div *ngFor="let puppy of appService.userData.puppies;let i = index;" class="avail-dog-entity-item"
-                        (click)="showDogInfoPopup(i)">
+                        (click)="showPuppyCard(i)">
 
                         <div class="entity-image-block">
                             <img src='/img/{{puppy.gallery[0].preview}}.jpg' alt="Изображение щенка" />
@@ -340,7 +340,7 @@
 
                 <div class="dog-entity-list-block">
                     <div *ngFor="let parent of appService.userData.parentsInfo.parents;let i = index;"
-                        class="avail-dog-entity-item" (click)="showDogInfoPopup(i)">
+                        class="avail-dog-entity-item" (click)="showParentCard(i)">
 
                         <div class="entity-image-block">
                             <img src='/img/{{parent.gallery[0].preview}}.jpg' alt="Изображение щенка" />
@@ -421,20 +421,5 @@
 
 </ng-container>
 
-<!--<footer class="footer">
-    <div class="logo">
-
-    </div>
-
-    <div class="links">
-        <a href="" class="link">О платформе</a>
-        <a href="" class="link">Преимущества</a>
-        <a href="" class="link">Скоро</a>
-    </div>
-
-    <div class="registration-link">
-        <a href="" class="link">Регистрация</a>
-    </div>
-</footer>-->
-
 <app-footer></app-footer>
+<app-dog-card *ngIf="dogCardService.getVisibility()"></app-dog-card>

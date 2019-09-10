@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { BreederForAdmin } from '../model/breederForAdmin';
+import { MessageToBreeder } from '../model/messageToBreeder';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -27,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class AdminControllerService {
 
-    protected basePath = '';
+    protected basePath = 'https://petman.co';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -83,6 +84,42 @@ export class AdminControllerService {
         ];
 
         return this.httpClient.get<Array<BreederForAdmin>>(`${this.basePath}/api/admin/breeders`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * listMessages
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listMessagesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<MessageToBreeder>>;
+    public listMessagesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<MessageToBreeder>>>;
+    public listMessagesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<MessageToBreeder>>>;
+    public listMessagesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<MessageToBreeder>>(`${this.basePath}/api/admin/messages`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

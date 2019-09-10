@@ -1,0 +1,65 @@
+<div class="dog-card-wrapper" (click)="closeCard()">
+    <div class="dog-cart-container" (click)="$event.stopPropagation()">
+        <img src="./assets/img/close-button-black.svg" alt="Закрыть" (click)="closeCard()" />
+        <div class="dog-gallery">
+            <mdb-carousel [isControls]="true" class="carousel slide carousel-fade custom-carousel" [animation]="'fade'">
+                <mdb-carousel-item *ngFor="let photo of dog.gallery">
+                    <div class="view w-100">
+                        <img class="d-block w-100" src="/img/{{photo.main}}.jpg" alt="Собака">
+                        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                    </div>
+                </mdb-carousel-item>
+            </mdb-carousel>
+        </div>
+
+        <div *ngIf="!isPuppy" class="parent-info-block">
+            <div>
+                <span>{{dog.nickname}}</span>
+                <span>{{dog.breed.name}}</span>
+            </div>
+            <img src="./assets/img/sex_{{dog.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол щенка" />
+            <p>{{dog.info}}</p>
+        </div>
+
+        <div *ngIf="isPuppy">
+            <div class="puppy-info-container">
+                <div class="puppy-info-block">
+                    <div>
+                        <span>{{dog.nickname}}</span>
+                        <span>{{dog.breed.name}}</span>
+                    </div>
+                    <img src="./assets/img/sex_{{dog.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол щенка" />
+                    <p>{{dog.about}}</p>
+                </div>
+                <div class="ask-question-block">
+                    <input type="button" class="custom-btn btn-purple" (click)="showMessageForm()"
+                        value="ЗАДАТЬ ВОПРОС" />
+                </div>
+                <hr>
+                <div class="puppy-meta-parents-block">
+                    <div class="puppy-meta-block">
+                        <span>Возраст: <strong>{{dog.birthDate}}</strong></span><br/>
+                        <span>Поедет в новый дома: <strong>после 16 августа</strong></span><br/>
+                        <span>Стоимость: <strong>{{dog.price}}</strong></span>
+                    </div>
+                    <div class="puppy-parents-block">
+                        <span><strong>Родители:</strong></span><br/>
+                        <div>
+                            <img src="/img/{{dog.father.gallery[0].preview}}.jpg" alt="Отец щенка" />
+                            <div class="puppy-parent-info">
+                                <span>{{dog.father.nickname}}</span><br/>
+                                <span style="opacity: 0.5">(папа)</span>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="/img/{{dog.mother.gallery[0].preview}}.jpg" alt="Мама щенка" />
+                            <div class="puppy-parent-info">
+                                <span>{{dog.mother.nickname}}</span><br/>
+                                <span style="opacity: 0.5">(мама)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

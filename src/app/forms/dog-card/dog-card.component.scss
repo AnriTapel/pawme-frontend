@@ -1,0 +1,159 @@
+$image-height: 250px;
+
+p{
+    font-size: 16px;
+}
+
+.dog-card-wrapper{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    background-color: rgba(14, 11, 77, 0.5);
+    z-index: 999;
+}
+
+.dog-cart-container{
+    width: 45vw;
+    max-width: 770px;
+    max-height: 90vh;
+    top: 5vh;
+    margin: 0 auto;
+    position: relative;
+    overflow-y: auto;
+
+    &>img{
+        position: absolute;
+        top: 1em;
+        right: 1em;
+        width: 16px;
+        z-index: 10;
+    }
+}
+
+.dog-gallery{
+    width: 100%;
+    background-color: #fff;
+}
+
+.parent-info-block,
+.puppy-info-container{
+    width: 100%;
+    background-color: #fff;
+    position: relative;
+}
+
+.parent-info-block,
+.puppy-info-block{
+
+    &>div:nth-child(1){
+        width: calc(100% - 20px);
+        display: inline-block;
+    }
+
+    span{
+        display: inline-block;
+        font-size: 14px;
+    }
+
+    span:nth-child(1){
+        font-family: 'Intro-Bold';
+        display: block;
+    }
+
+    span:nth-child(2){
+        font-family: 'Intro-Book';
+        opacity: 0.5;
+    }
+
+    img{
+        position: absolute;
+    }
+
+}
+
+.parent-info-block{
+    padding: 1.5em 6em;
+}
+
+.puppy-info-container{
+    padding: 1em 2em;
+
+    .puppy-info-block{
+        width: 60%;
+        display: inline-block;
+    }
+
+    .ask-question-block{
+        width: 40%;
+        display: inline-block;
+        text-align: right;
+        float: right;
+    }
+}
+
+.puppy-meta-parents-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    span{
+        font-size: 14px;
+    }
+
+    img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .puppy-parents-block{
+        width: 45%;
+
+        &>div{
+            margin-top: .5em;
+            padding: 0 5px;
+            display: inline-block;
+            width: 50%;
+            vertical-align: top;
+        }
+    }
+}
+
+.custom-carousel{
+    img{
+        max-height: $image-height !important;   
+        width: auto !important;
+        margin: auto;
+    }
+
+    ol,.carousel-indicators{
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 769px){
+
+    .dog-cart-container{
+        width: 90%;
+    }
+
+    .parent-info-block{
+        padding: .5em;
+    }
+
+    .puppy-info-block,
+    .ask-question-block{
+        width: 100%;
+    }
+
+    .puppy-meta-parents-block{
+        flex-direction: column;
+
+        .puppy-parents-block{
+            width: 100%;
+        }
+    }
+
+}

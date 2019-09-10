@@ -1,19 +1,19 @@
 const PROXY_CONFIG = {
     "/api/*": {
-        "target": "http://petman.co",
-        "secure": false,
+        "target": "https://petman.co",
+        "secure": true,
         "changeOrigin": true,
         "logLevel": "debug",
         "onProxyRes": function (proxyRes, req, res) {
             if (proxyRes.statusCode == 302){
                 console.log(proxyRes.headers);
-                proxyRes.headers.location = proxyRes.headers.location.replace('http://petman.co', '');
+                proxyRes.headers.location = proxyRes.headers.location.replace('https://petman.co', '');
             }
         },
       },
       "/img/*": {
-        "target": "http://petman.co",
-        "secure": false,
+        "target": "https://petman.co",
+        "secure": true,
         "changeOrigin": true,
         "logLevel": "debug"
       }

@@ -34,7 +34,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class BreederControllerService {
 
-    protected basePath = '';
+    protected basePath = 'https://petman.co';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -407,24 +407,24 @@ export class BreederControllerService {
     }
 
     /**
-     * sendMessageTobreeder
+     * sendMessageToBreeder
      * 
      * @param id id
      * @param message message
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public sendMessageTobreederUsingPOST(id: number, message: MessageToBreeder, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public sendMessageTobreederUsingPOST(id: number, message: MessageToBreeder, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public sendMessageTobreederUsingPOST(id: number, message: MessageToBreeder, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public sendMessageTobreederUsingPOST(id: number, message: MessageToBreeder, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public sendMessageToBreederUsingPOST(id: number, message: MessageToBreeder, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public sendMessageToBreederUsingPOST(id: number, message: MessageToBreeder, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public sendMessageToBreederUsingPOST(id: number, message: MessageToBreeder, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public sendMessageToBreederUsingPOST(id: number, message: MessageToBreeder, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling sendMessageTobreederUsingPOST.');
+            throw new Error('Required parameter id was null or undefined when calling sendMessageToBreederUsingPOST.');
         }
 
         if (message === null || message === undefined) {
-            throw new Error('Required parameter message was null or undefined when calling sendMessageTobreederUsingPOST.');
+            throw new Error('Required parameter message was null or undefined when calling sendMessageToBreederUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
