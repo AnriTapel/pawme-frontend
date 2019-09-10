@@ -35,6 +35,24 @@ p{
 .dog-gallery{
     width: 100%;
     background-color: #fff;
+    position: relative;
+
+    .previous-img,
+    .next-img{
+        width: 16px;
+        height: 16px;
+        z-index: 1000;
+        position: absolute;
+        top: calc(50% - 8px);
+    }
+
+    .previous-img{
+        left: 1em;
+    }
+
+    .next-img{
+        right: 1em;
+    }
 }
 
 .parent-info-block,
@@ -127,13 +145,13 @@ p{
         width: auto !important;
         margin: auto;
     }
-
-    ol,.carousel-indicators{
-        display: none !important;
-    }
 }
 
 @media screen and (max-width: 769px){
+
+    hr{
+        display: none;
+    }
 
     .dog-cart-container{
         width: 90%;
@@ -145,11 +163,14 @@ p{
 
     .puppy-info-block,
     .ask-question-block{
-        width: 100%;
+        width: 100% !important;
+        display: block !important;
     }
 
     .puppy-meta-parents-block{
-        flex-direction: column;
+        display: inline-block;
+        margin-top: 1em;
+        width: 100%;
 
         .puppy-parents-block{
             width: 100%;

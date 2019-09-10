@@ -33,6 +33,24 @@ p {
 .dog-gallery {
   width: 100%;
   background-color: #fff;
+  position: relative;
+}
+
+.dog-gallery .previous-img,
+.dog-gallery .next-img {
+  width: 16px;
+  height: 16px;
+  z-index: 1000;
+  position: absolute;
+  top: calc(50% - 8px);
+}
+
+.dog-gallery .previous-img {
+  left: 1em;
+}
+
+.dog-gallery .next-img {
+  right: 1em;
 }
 
 .parent-info-block,
@@ -132,11 +150,10 @@ p {
   margin: auto;
 }
 
-.custom-carousel ol, .custom-carousel .carousel-indicators {
-  display: none !important;
-}
-
 @media screen and (max-width: 769px) {
+  hr {
+    display: none;
+  }
   .dog-cart-container {
     width: 90%;
   }
@@ -145,13 +162,13 @@ p {
   }
   .puppy-info-block,
   .ask-question-block {
-    width: 100%;
+    width: 100% !important;
+    display: block !important;
   }
   .puppy-meta-parents-block {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    display: inline-block;
+    margin-top: 1em;
+    width: 100%;
   }
   .puppy-meta-parents-block .puppy-parents-block {
     width: 100%;

@@ -2,7 +2,9 @@
     <div class="dog-cart-container" (click)="$event.stopPropagation()">
         <img src="./assets/img/close-button-black.svg" alt="Закрыть" (click)="closeCard()" />
         <div class="dog-gallery">
-            <mdb-carousel [isControls]="true" class="carousel slide carousel-fade custom-carousel" [animation]="'fade'">
+            <img *ngIf="dog.gallery.length > 1" class="previous-img" src="./assets/img/arrow-left.svg" alt="Предыдущая" 
+                (click)="gallery.previousSlide()"/>
+            <mdb-carousel #gallery [isControls]="false" class="carousel slide carousel-fade custom-carousel" [animation]="'fade'">
                 <mdb-carousel-item *ngFor="let photo of dog.gallery">
                     <div class="view w-100">
                         <img class="d-block w-100" src="/img/{{photo.main}}.jpg" alt="Собака">
@@ -10,6 +12,8 @@
                     </div>
                 </mdb-carousel-item>
             </mdb-carousel>
+            <img *ngIf="dog.gallery.length > 1" class="next-img" src="./assets/img/arrow-right.svg" alt="Предыдущая"
+                (click)="gallery.nextSlide()"/>
         </div>
 
         <div *ngIf="!isPuppy" class="parent-info-block">

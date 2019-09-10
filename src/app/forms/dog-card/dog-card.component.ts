@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DogCardService } from 'src/app/services/dog-card-service/dog-card.service';
+import { CarouselComponent } from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-dog-card',
@@ -10,6 +11,9 @@ export class DogCardComponent implements OnInit {
 
   dog: any;
   isPuppy: boolean;
+
+  @ViewChild(CarouselComponent, {static: true})
+  gallery: CarouselComponent
 
   constructor(public dogCardService: DogCardService) {
     this.dog = dogCardService.getDog();
