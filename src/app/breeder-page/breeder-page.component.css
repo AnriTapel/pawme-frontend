@@ -811,24 +811,10 @@ span, p, div {
   margin-right: 30px;
 }
 
-.section .medical-test-parents .icon {
+.section .medical-test-parents .test-item img {
   width: 29px;
   height: 29px;
   margin-right: 11px;
-  background-color: #cbd8f6;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.section .medical-test-parents .icon:after {
-  display: inline-block;
-  content: '';
-  width: 20px;
-  height: 12px;
-  background-image: url("/assets/img/breeder-page/eye.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
 }
 
 @media (max-width: 768px) {

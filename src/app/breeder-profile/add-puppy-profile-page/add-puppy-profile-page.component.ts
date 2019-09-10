@@ -71,17 +71,18 @@ export class AddPuppyProfilePageComponent implements OnInit {
   }
 
   showCurrentPuppyPage(index: number): void {
-    if (index == -1)
+    if (index == -1) {
       this.currentPuppyData = this.appService.userData.puppyDraft ? JSON.parse(JSON.stringify(this.appService.userData.puppyDraft))
         : JSON.parse(JSON.stringify(this.DEFAULT_PUPPY_DATA));
-    else
+      this.currentPuppyData.id = null;
+    } else
       this.currentPuppyData = JSON.parse(JSON.stringify(this.puppiesData[index]));
 
     if (this.currentPuppyData.birthDate) {
       let birthDate = this.currentPuppyData.birthDate.split("-");
       this.birthdayModel = { year: parseInt(birthDate[0]) || null, month: parseInt(birthDate[1]) || null, day: parseInt(birthDate[2]) || null };
-    } else 
-      this.birthdayModel = {year: null, month: null, day: null};
+    } else
+      this.birthdayModel = { year: null, month: null, day: null };
     this.curFatherNickname = this.currentPuppyData.father ? this.currentPuppyData.father.nickname : null;
     this.curMotherNickname = this.currentPuppyData.mother ? this.currentPuppyData.mother.nickname : null;
     this.curBreed = this.currentPuppyData.breed ? this.currentPuppyData.breed.name : null;
@@ -140,13 +141,13 @@ export class AddPuppyProfilePageComponent implements OnInit {
       return;
 
     this.preSaveOperation();
-    if (this.puppiesData.filter(it => it.id == this.currentPuppyData.id).length > 0){
+    if (this.puppiesData.filter(it => it.id == this.currentPuppyData.id).length > 0) {
       for (let i = 0; i < this.puppiesData.length; i++)
-        if (this.puppiesData[i].id == this.currentPuppyData.id){
+        if (this.puppiesData[i].id == this.currentPuppyData.id) {
           this.puppiesData[i] = this.currentPuppyData;
           break;
         }
-    }else
+    } else
       this.puppiesData.push(this.currentPuppyData);
     this.saveChanges();
   }
@@ -198,7 +199,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   }
 
   preSaveOperation(): void {
-    if (this.birthdayModel.day && this.birthdayModel.month && this.birthdayModel.year )
+    if (this.birthdayModel.day && this.birthdayModel.month && this.birthdayModel.year)
       this.currentPuppyData.birthDate = this.getDateAsString();
     else
       this.currentPuppyData.birthDate = null;
@@ -212,7 +213,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.currentPuppyData.breed = this.appService.breeds.filter(it => it.name == this.curBreed)[0] || { name: this.curBreed };
   }
 
-  getDateAsString(): string{
+  getDateAsString(): string {
     let day = '00', month = '00', year = '0000';
     if (this.birthdayModel.day)
       day = this.birthdayModel.day > 9 ? this.birthdayModel.day.toString() : "0" + this.birthdayModel.day;

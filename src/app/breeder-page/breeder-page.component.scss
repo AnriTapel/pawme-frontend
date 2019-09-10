@@ -677,19 +677,14 @@ span, p, div {
             &:not(:last-child) {
                 margin-right: 30px;
             }
-        }
-        .icon {
-            width: 29px;
-            height: 29px;
-            margin-right: 11px;
-            background-color: #cbd8f6;
-            border-radius: 50%;
-            cursor: pointer;
-            &:after {
-                display: inline-block;
-                @include background(20px, 12px, '/assets/img/breeder-page/eye.svg');
+
+            img{
+                width: 29px;
+                height: 29px;
+                margin-right: 11px;
             }
         }
+        
 
         @media (max-width: $screen-sm - 1px) {
             .tests-list {
