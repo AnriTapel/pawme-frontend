@@ -1,3 +1,6 @@
+$screen-lg: 1202px;
+$screen-sm: 769px;
+
 footer{
     width: 100%;
     background: #645fc9;
@@ -114,4 +117,104 @@ hr{
         margin: 10% 0;
     }
 
+}
+
+// Muzaffar styles
+.footer {
+    width: 100%;
+    height: auto;
+    background-color: #645fc9;
+    padding: 5% 7%;
+
+    @media (max-width: $screen-lg - 1px) {
+        flex-direction: column;
+        align-items: flex-start!important;
+    }
+    @media (max-width: $screen-sm - 1px) {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .copyright {
+
+        margin-bottom: 24px;
+        &-logo {
+            margin-bottom: 26px;
+        }
+
+        &-text {
+            font-family: Intro-Book;
+            font-size: 14px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #ffffff;
+        }
+    }
+
+    .links-item {
+        a {
+            font-family: Intro-Book;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-decoration: none;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+    .fs-18 {
+        font-size: 18px;
+    }
+    .fs-14 {
+        font-size: 14px;
+    }
+    .white {
+        color: #ffffff;
+    }
+    .first {
+        :not(:last-child) {
+            margin-right: 50px;
+        }
+        margin-bottom: 28px;
+
+        @media (max-width: $screen-lg - 1px) {
+            :not(:last-child) {
+                margin-right: 24px;
+                margin-bottom: 24px;
+            }
+        }
+
+        @media (max-width: $screen-sm - 1px) {
+            margin-bottom: 54px;
+            margin-top: 54px;
+        }
+    }
+    .second {
+        opacity: 0.5;
+        font-family: Intro-Book;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+
+        :not(:last-child) {
+            margin-right: 33px;
+        }
+
+        @media (max-width: $screen-lg - 1px) {
+            justify-content: flex-start!important;
+
+            :not(:last-child) {
+                margin-right: 24px;
+                margin-bottom: 24px;
+            }
+        }
+    }
 }

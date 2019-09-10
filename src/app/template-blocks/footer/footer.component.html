@@ -1,4 +1,4 @@
-<footer>
+<footer *ngIf="getCurRoute() == '/breeder-landing'">
     <div class="footer-info-block">
         <span>100</span>
         <div>
@@ -17,6 +17,29 @@
 
     <div class="footer-logo-block">
         <img src="./assets/img/logo-footer.png" alt="Логотип PawMe">
+    </div>
+</footer>
+
+<footer *ngIf="getCurRoute() != '/breeder-landing'" class="footer d-flex align-items-center justify-content-between">
+    <div class="copyright">
+        <img src="./assets/img/logo-footer.png" class="copyright-logo" alt="">
+
+        <div class="copyright-text">
+            © 2019 Petman. All rights reserved
+        </div>
+    </div>
+
+    <div class="links d-flex flex-column">
+        <div class="d-flex flex-wrap links-item first white fs-18">
+            <a href="" class="white" title="О платформе">О платформе</a>
+            <a href="" class="white" title="Связаться с нами">Связаться с нами</a>
+            <a href="" class="white" title="Регистрация заводчика">Регистрация заводчика</a>
+        </div>
+
+        <div class="d-flex justify-content-end flex-wrap links-item second fs-14">
+            <a href="" class="white" title="Пользовательское соглашение">Пользовательское соглашение</a>
+            <a href="" class="white" title="Политика конфиденциальности">Политика конфиденциальности</a>
+        </div>
     </div>
 </footer>
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
+import { AppService } from '../../services/app-service/app.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -12,5 +14,10 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  getCurRoute(): string{
+    return window.location.pathname;
+  }
+
 
 }

@@ -119,4 +119,123 @@ hr {
     margin: 10% 0;
   }
 }
+
+.footer {
+  width: 100%;
+  height: auto;
+  background-color: #645fc9;
+  padding: 5% 7%;
+}
+
+@media (max-width: 1201px) {
+  .footer {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start !important;
+        -ms-flex-align: start !important;
+            align-items: flex-start !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+.footer .copyright {
+  margin-bottom: 24px;
+}
+
+.footer .copyright-logo {
+  margin-bottom: 26px;
+}
+
+.footer .copyright-text {
+  font-family: Intro-Book;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+.footer .links-item a {
+  font-family: Intro-Book;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-decoration: none;
+}
+
+.footer .links-item a:hover {
+  text-decoration: none;
+}
+
+.footer .fs-18 {
+  font-size: 18px;
+}
+
+.footer .fs-14 {
+  font-size: 14px;
+}
+
+.footer .white {
+  color: #ffffff;
+}
+
+.footer .first {
+  margin-bottom: 28px;
+}
+
+.footer .first :not(:last-child) {
+  margin-right: 50px;
+}
+
+@media (max-width: 1201px) {
+  .footer .first :not(:last-child) {
+    margin-right: 24px;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer .first {
+    margin-bottom: 54px;
+    margin-top: 54px;
+  }
+}
+
+.footer .second {
+  opacity: 0.5;
+  font-family: Intro-Book;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.footer .second :not(:last-child) {
+  margin-right: 33px;
+}
+
+@media (max-width: 1201px) {
+  .footer .second {
+    -webkit-box-pack: start !important;
+        -ms-flex-pack: start !important;
+            justify-content: flex-start !important;
+  }
+  .footer .second :not(:last-child) {
+    margin-right: 24px;
+    margin-bottom: 24px;
+  }
+}
 /*# sourceMappingURL=footer.component.css.map */
