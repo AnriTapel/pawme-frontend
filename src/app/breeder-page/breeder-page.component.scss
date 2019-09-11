@@ -24,6 +24,7 @@ span, p, div {
 .slider-content {
     width: 100%;
     display: flex;
+    overflow-x: hidden;
 
     @media (max-width: $screen-lg - 1px) {
         overflow-x: scroll;

@@ -502,7 +502,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .avail-dog-entity-item {
-  width: 180px;
+  width: calc(25% - .5em);
   margin: 0 .5em .5em 0;
 }
 
@@ -516,7 +516,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .avail-dog-entity-item .entity-image-block img {
   position: absolute;
-  left: -10px;
+  left: -15%;
 }
 
 .avail-dog-entity-item .entity-info-block {
@@ -762,6 +762,7 @@ ngb-datepicker .bg-light {
   }
   .avail-dog-entity-item {
     margin: 1em auto 2em;
+    width: calc(50% - 1em);
   }
   .gallery-initial-block {
     display: none;
