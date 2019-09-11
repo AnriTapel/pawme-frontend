@@ -50,6 +50,13 @@ export class BreederPageComponent implements OnInit {
     ngOnInit() {
     }
 
+    getNameByBreeds(): string{
+        let name = "ЗАДОЧИК " + this.appService.userData.generalInfo.mainBreed.name.toUpperCase();
+        if (this.appService.userData.generalInfo.extraBreed)
+            name += " И " + this.appService.userData.generalInfo.extraBreed.name.toUpperCase();
+        return name;
+    }
+
     getParentsTestsList(): void {
         let availCats = this.appService.userData.parentsInfo.parentTests.map(it => { return it.category });
         this.availParentsTests = this.parentsTests.filter(it => availCats.includes(it.name));

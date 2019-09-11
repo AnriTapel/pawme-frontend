@@ -2,6 +2,17 @@
     font-size: 22px;
 }
 
+.gallery-container{
+    height: 70vh;
+    width: 100%;
+    display: inline-flex;
+    position: relative;
+
+    .custom-carousel{
+        margin: auto;
+    }
+}
+
 .previous-img,
 .next-img{
     width: 20px;
@@ -22,9 +33,18 @@
     height: 100%;
 
     img{
-        width: 85%;
-        height: 85%;
+        max-width: 85%;
         display: block;
         margin: auto;
+    }
+}
+
+@media screen and (max-width: 769px){
+    .previous-img{
+        left: .5em
+    }
+
+    .next-img{
+        right: .5em;
     }
 }

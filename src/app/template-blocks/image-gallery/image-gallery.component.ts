@@ -15,7 +15,7 @@ export class ImageGalleryComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit() {
-    this.gallery.selectSlide(this.params.initIndex);
+    this.gallery.activeSlideIndex = this.params.initIndex;
   }
 
 }
