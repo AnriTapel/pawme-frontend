@@ -46,4 +46,5 @@
 <app-popup-template *ngIf="popupService.getShowStatus()" [ngSwitch]="popupService.getCurrentForm()">
     <app-image-cropper *ngSwitchCase="'image-cropper'" [params]="popupService.getPopupParams()"></app-image-cropper>
     <app-breeder-message *ngSwitchCase="'breeder-message'"></app-breeder-message>
+    <app-image-gallery *ngSwitchCase="'image-gallery'" [params]="popupService.getPopupParams()"></app-image-gallery>
 </app-popup-template>

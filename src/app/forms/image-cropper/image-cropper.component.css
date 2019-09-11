@@ -31,10 +31,6 @@ ly-cropping {
   width: 100%;
   text-align: center;
   margin: 2em auto 0;
-  /*div{
-        margin: auto 2em;
-        display: inline-block;
-    }*/
 }
 
 .buttons-block button {

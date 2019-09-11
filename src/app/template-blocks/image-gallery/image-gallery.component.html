@@ -1,0 +1,15 @@
+<h4>Галерея</h4>
+
+<div class="gallery-container">
+    <img *ngIf="params.gallery.length > 1" class="previous-img" src="./assets/img/arrow-left.svg" alt="Предыдущая" (click)="gallery.previousSlide()"/>
+    <mdb-carousel [isControls]="false" class="carousel slide carousel-fade custom-carousel" [animation]="'fade'">
+        <mdb-carousel-item *ngFor="let photo of params.gallery">
+            <div class="img-container">
+                <img src="/img/{{photo.main}}.jpg" alt="Собака">
+                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+            </div>
+        </mdb-carousel-item>
+    </mdb-carousel>
+    <img *ngIf="params.gallery.length > 1" class="next-img" src="./assets/img/arrow-right.svg" alt="Следующая"
+        (click)="gallery.nextSlide()"/>
+</div>

@@ -36,8 +36,7 @@ export class ImageCropperComponent implements AfterViewInit {
   inputFile: any;
   myConfig: ImgCropperConfig;
 
-  constructor(@Inject(LyTheme2) private theme: LyTheme2, public popupService: PopupTemplateService,
-    public eventService: EventService) { }
+  constructor(@Inject(LyTheme2) private theme: LyTheme2, public eventService: EventService) { }
 
   ngAfterViewInit(): void {
     setTimeout(() => {

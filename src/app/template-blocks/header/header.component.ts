@@ -32,6 +32,10 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  openMyPage(): void{
+    window.open('/breeder/' + this.appService.meData.id, '_blank');
+  }
+
   showLoginPopup(){
     this.popupService.setCurrentForm('login');
     this.popupService.setShowStatus(true);

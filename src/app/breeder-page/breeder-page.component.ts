@@ -59,6 +59,15 @@ export class BreederPageComponent implements OnInit {
         this.collapse[property] = !this.collapse[property];
     }
 
+    showImageGalley(i: number): void{
+        this.popupService.setPopupParams({
+            gallery: this.appService.userData.generalInfo.gallery,
+            initIndex: i
+        });
+        this.popupService.setCurrentForm('image-gallery');
+        this.popupService.setShowStatus(true);
+    }
+
     showBreederMessagePopup(): void {
         this.popupService.setCurrentForm('breeder-message');
         this.popupService.setShowStatus(true);

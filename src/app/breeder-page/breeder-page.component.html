@@ -4,8 +4,8 @@
 
     <div class="slider-content">
         <div class="slider d-flex align-items-center">
-            <div *ngFor="let photo of appService.userData.generalInfo.gallery" class="slider-item d-flex align-items-center">
-                <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image">
+            <div *ngFor="let photo of appService.userData.generalInfo.gallery;let i = index" class="slider-item d-flex align-items-center">
+                <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image" (click)="showImageGalley(i)">
             </div>
         </div>
     </div>

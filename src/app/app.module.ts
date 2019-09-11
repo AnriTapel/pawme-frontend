@@ -36,6 +36,7 @@ import { BreederControllerService, AdminControllerService, DictionaryControllerS
 import { NotificationBarComponent } from './template-blocks/notification-bar/notification-bar.component';
 import { BreederMessageComponent } from './forms/breeder-message/breeder-message.component';
 import { DogCardComponent } from './forms/dog-card/dog-card.component';
+import { ImageGalleryComponent } from './template-blocks/image-gallery/image-gallery.component';
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -66,7 +67,8 @@ export function initApp(appSerivce: AppService){
     AdminPanelComponent,
     NotificationBarComponent,
     BreederMessageComponent,
-    DogCardComponent
+    DogCardComponent,
+    ImageGalleryComponent
   ],
   imports: [
     BrowserModule,

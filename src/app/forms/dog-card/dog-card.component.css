@@ -38,11 +38,11 @@ p {
 
 .dog-gallery .previous-img,
 .dog-gallery .next-img {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   z-index: 1000;
   position: absolute;
-  top: calc(50% - 8px);
+  top: calc(50% - 10px);
 }
 
 .dog-gallery .previous-img {
