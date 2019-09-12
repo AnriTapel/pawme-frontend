@@ -4,54 +4,55 @@
 
     <div class="slider-content">
         <div class="slider d-flex align-items-center">
-            <div *ngFor="let photo of appService.userData.generalInfo.gallery;let i = index" class="slider-item d-flex align-items-center">
-                <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image" (click)="showImageGalley(i)">
+            <div *ngFor="let photo of appService.userData.generalInfo.gallery;let i = index"
+                class="slider-item d-flex align-items-center">
+                <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image"
+                    (click)="showImageGalley(i)">
             </div>
         </div>
     </div>
 
-    <div class="main-content d-flex align-items-center flex-column">
+    <div class="main-content align-items-center flex-column">
+        <aside class="aside d-flex flex-column first-aside">
+            <div class="top-info d-flex flex-row justify-content-between">
+                <div class="left-side">
+                    <div class="heading">
+                        <span>{{getNameByBreeds()}}</span>
+                    </div>
+                    <div class="title">
+                        <span>{{appService.userData.generalInfo.name}}</span>
+                    </div>
+                    <div class="location d-flex align-items-center">
+                        <i class="icon icon-location"></i>
+                        <span>{{appService.userData.generalInfo.city}}</span>
+                    </div>
+                    <div *ngIf="appService.userData.generalInfo.site" class="link d-flex align-items-center">
+                        <i class="icon icon-link"></i>
+                        <span>{{appService.userData.generalInfo.site}}</span>
+                    </div>
+                    <div class="social-networks d-flex">
+                        <div *ngIf="appService.userData.generalInfo.instagram" class="instagram">
+                            <i class="instagram-icon d-flex align-items-center justify-content-center"></i>
+                        </div>
+                        <div *ngIf="appService.userData.generalInfo.facebook" class="facebook">
+                            <i class="facebook-icon d-flex align-items-center justify-content-center"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <img style="border-radius: 50%"
+                        src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg" alt="Фото питомника">
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="description">
+                <p class="subtitle">О питомнике</p>
+                <p>{{appService.userData.generalInfo.description}}</p>
+            </div>
+            <button type="button" class="custom-btn btn-purple" style="width: 100%"
+                (click)="showBreederMessagePopup()">ЗАДАТЬ ВОПРОС</button>
+        </aside>
         <div class="about-puppies">
-            <aside class="aside d-flex flex-column first-aside">
-                <div class="top-info d-flex flex-row justify-content-between">
-                    <div class="left-side">
-                        <div class="heading">
-                            <span>{{getNameByBreeds()}}</span>
-                        </div>
-                        <div class="title">
-                            <span>{{appService.userData.generalInfo.name}}</span>
-                        </div>
-                        <div class="location d-flex align-items-center">
-                            <i class="icon icon-location"></i>
-                            <span>{{appService.userData.generalInfo.city}}</span>
-                        </div>
-                        <div *ngIf="appService.userData.generalInfo.site" class="link d-flex align-items-center">
-                            <i class="icon icon-link"></i>
-                            <span>{{appService.userData.generalInfo.site}}</span>
-                        </div>
-                        <div class="social-networks d-flex">
-                            <div *ngIf="appService.userData.generalInfo.instagram" class="instagram">
-                                <i class="instagram-icon d-flex align-items-center justify-content-center"></i>
-                            </div>
-                            <div *ngIf="appService.userData.generalInfo.facebook" class="facebook">
-                                <i class="facebook-icon d-flex align-items-center justify-content-center"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="right-side">
-                        <img style="border-radius: 50%"
-                            src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg"
-                            alt="Фото питомника">
-                    </div>
-                </div>
-                <div class="line"></div>
-                <div class="description">
-                    <p class="subtitle">О питомнике</p>
-                    <p>{{appService.userData.generalInfo.description}}</p>
-                </div>
-                <button type="button" class="custom-btn btn-purple" style="width: 100%"
-                    (click)="showBreederMessagePopup()">ЗАДАТЬ ВОПРОС</button>
-            </aside>
             <section class="section d-flex flex-column">
                 <h2>О ЩЕНКАХ</h2>
 
