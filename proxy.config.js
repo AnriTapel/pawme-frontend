@@ -6,8 +6,12 @@ const PROXY_CONFIG = {
         "logLevel": "debug",
         "onProxyRes": function (proxyRes, req, res) {
             if (proxyRes.statusCode == 302){
-                console.log(proxyRes.headers);
-                proxyRes.headers.location = proxyRes.headers.location.replace('https://petman.co', '');
+                if (proxyRes.headers.location.indexOf('pass-link-fail') != -1)
+                    proxyRes.headers.location = '/login';
+                else if (proxyRes.headers.location.indexOf('pass-link-success') != -1)
+                    proxyRes.headers.location = '/sign-up';
+                else
+                    proxyRes.headers.location = proxyRes.headers.location.replace('https://petman.co', '');
             }
         },
       },

@@ -37,6 +37,7 @@ import { NotificationBarComponent } from './template-blocks/notification-bar/not
 import { BreederMessageComponent } from './forms/breeder-message/breeder-message.component';
 import { DogCardComponent } from './forms/dog-card/dog-card.component';
 import { ImageGalleryComponent } from './template-blocks/image-gallery/image-gallery.component';
+import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -68,7 +69,8 @@ export function initApp(appSerivce: AppService){
     NotificationBarComponent,
     BreederMessageComponent,
     DogCardComponent,
-    ImageGalleryComponent
+    ImageGalleryComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

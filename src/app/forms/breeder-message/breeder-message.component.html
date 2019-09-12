@@ -2,6 +2,8 @@
 
 <p>Напишите свое сообщение заводчику, и он ответит вам на email или позвонит</p>
 
+<span *ngIf="isError" class="invalid-field-message">Произошла ошибка при отправке, попробуйте еще раз.</span>
+
 <form>
     <div class="form-group popup-form-group">
         <label for="name">Имя</label>

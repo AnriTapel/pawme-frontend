@@ -3,6 +3,7 @@ import { MessageToBreeder } from 'src/app/model/messageToBreeder';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { BreederControllerService } from 'src/app/api/api';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
+import { NotificationBarService } from '../../services/nofitication-service/notification-bar.service';
 
 @Component({
   selector: 'app-breeder-message',
@@ -13,6 +14,7 @@ export class BreederMessageComponent implements OnInit {
 
   invalidFields: Array<string> = [];
   acception: boolean = false;
+  isError: boolean = false;
 
   breederMessage: MessageToBreeder = {
     name: null,
@@ -23,7 +25,7 @@ export class BreederMessageComponent implements OnInit {
   }
 
   constructor(private appService: AppService, private breederService: BreederControllerService,
-    public popupService: PopupTemplateService) { }
+    public popupService: PopupTemplateService, private notificationService: NotificationBarService) { }
 
   ngOnInit() {
   }
@@ -31,6 +33,16 @@ export class BreederMessageComponent implements OnInit {
   sendMessage(): void{
     if (!this.validateFields())
       return;
+
+    this.breederMessage.breeder = this.appService.userData;
+    this.breederService.sendMessageToBreederUsingPOST(this.appService.userData.id, this.breederMessage).subscribe(
+      () => {
+        this.popupService.setShowStatus(false);
+        this.notificationService.setContext('Письмо заводчику успешно отправлено', true);
+        this.notificationService.setVisibility(true);
+      },
+      () => this.isError = true
+    )
   }
 
   validateFields(): boolean{
