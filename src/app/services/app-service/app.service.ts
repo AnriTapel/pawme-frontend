@@ -35,6 +35,14 @@ export class AppService {
           this.breeds = dict['breeds'];
           this.puppyTests = dict['puppyTests'];
 
+          if (window.location.href.indexOf('/pass-link-fail') != -1){
+            let router = this.injector.get(Router);
+            router.navigateByUrl('/remind-password');
+            this.notificationServie.setContext('Ссылка для смены пароля устарела. Сделайте повторный запрос.', false);
+            this.notificationServie.setVisibility(true);
+            resolve();
+          }
+
           if (this.meData.type == 'BREEDER')
             this.breederService.getBreederUsingGET(this.meData.id).subscribe(res => {
               this.userData = res;

@@ -1,15 +1,20 @@
-p {
+p, .error-message {
   font-size: 14px;
   width: 50%;
   margin: 1em auto 0;
   opacity: 0.5;
 }
 
+.error-message {
+  color: #eb0000;
+  opacity: 1 !important;
+}
+
 @media screen and (max-width: 769px) {
   h3 {
     font-size: 20px;
   }
-  p {
+  p, .error-message {
     width: 80%;
   }
 }

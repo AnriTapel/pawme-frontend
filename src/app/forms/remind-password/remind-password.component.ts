@@ -26,7 +26,7 @@ export class RemindPasswordComponent implements OnInit {
       (res) => this.mailSent = true,
       (error) => {
         this.mailSent = false;
-        this.remindError = false;
+        this.remindError = true;
       }
     );
   }

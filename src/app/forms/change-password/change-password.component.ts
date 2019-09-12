@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BreederControllerService } from '../..';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 
 @Component({
   selector: 'app-change-password',
@@ -10,11 +11,13 @@ import { ActivatedRoute } from '@angular/router';
 export class ChangePasswordComponent implements OnInit {
 
   uuid: string = null;
-  newPasswrod = null;
+  newPassword = null;
   repeatPassword = null;
-  isError: boolean = false;
+  matchError: boolean = false;
+  respError: boolean = false;
 
-  constructor(private breederService: BreederControllerService, private route: ActivatedRoute) {
+  constructor(private breederService: BreederControllerService, private route: ActivatedRoute, private notificationService: NotificationBarService,
+      private router: Router) {
     this.uuid = this.route.snapshot.paramMap.get('uuid');
   }
 
@@ -22,14 +25,24 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword(): void{
-    if (this.newPasswrod !== this.repeatPassword){
-      this.isError = true;
+    this.respError = false;
+    this.matchError = false;
+    if (this.newPassword !== this.repeatPassword){
+      this.matchError = true;
       return;
     }
 
-    this.breederService.changePasswordUsingPOST(this.newPasswrod, this.uuid).subscribe(
-      (res) => console.log("Success: " + res),
-      (error) => console.log("Error: " + error)
+    this.breederService.changePasswordUsingPOST(this.newPassword, this.uuid).subscribe(
+      () => {
+        this.router.navigateByUrl('/login');
+        scroll(0,0);
+        this.notificationService.setContext('Пароль успешно изменен', true);
+        this.notificationService.setVisibility(true);
+      },
+      () => {
+        this.respError = true;
+        scroll(0,0);
+      }
     );
 
   }
