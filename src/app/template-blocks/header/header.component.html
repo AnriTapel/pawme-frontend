@@ -1,5 +1,5 @@
 <app-notification-bar></app-notification-bar>
-<header>
+<header [ngClass]="{'header-for-profile': isHeaderForProfile()}">
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand">
             <img src="./assets/img/logo.png" alt="PawMe логотип" width="150px;">

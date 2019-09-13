@@ -13,6 +13,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit {
 
+  // '/changepass/13pjfwnf2-f2-f'
+  private profileHeaderRoutes = ['/sign-up', '/remind-password', '/mail-page', '/login', '/breeder-profile'];
+
   constructor(public appService: AppService, public popupService: PopupTemplateService, private http: HttpClient,
     private notificationService: NotificationBarService, private router: Router) { }
 
@@ -30,6 +33,14 @@ export class HeaderComponent implements OnInit {
         this.notificationService.setVisibility(true);
       }
     );
+  }
+
+  isHeaderForProfile(): boolean{
+    let isProfile = this.profileHeaderRoutes.includes(this.router.url);
+    if (!isProfile){
+      isProfile = this.router.url.indexOf('/changepass/') != -1 || this.router.url.indexOf('/breeder/') != -1;
+    }
+    return isProfile;
   }
 
   openMyPage(): void{

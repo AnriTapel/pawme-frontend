@@ -73,17 +73,13 @@ input[type=number]::-webkit-outer-spin-button {
             padding: 0 !important;
         }
     }
-
 }
 
 .header-for-profile{
-
-    header{
         width: 80%;
         margin: 0 auto;
         max-width: 1210px;
         padding: 2% 0;
-    }
 
     nav{
         padding: unset;
@@ -687,10 +683,8 @@ ngb-datepicker{
 @media screen and (max-width: 769px){
 
     .header-for-profile{
-        header{
             width: 90%;
         }
-    }
 
     .breeder-profile-subpage-container{
         display: block !important;
