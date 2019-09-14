@@ -25,4 +25,9 @@ header > img {
 .menu-btn a:hover {
   color: #fff !important;
 }
+
+.menu-btn img {
+  border-radius: 50%;
+  height: 100%;
+}
 /*# sourceMappingURL=header.component.css.map */
