@@ -125,14 +125,14 @@ hr{
             content : "";
             position: absolute;
             left: 6%;
-            bottom: 0;
+            top: 0;
             height: 1px;
             width: 87.5%;
-            border-bottom: 1px solid #cbd8f6;
+            border-top: 1px solid #cbd8f6;
         }
     }
 
-    div:nth-child(5){
+    div:nth-child(1){
         &:before{
             display: none;
         }
@@ -155,6 +155,12 @@ hr{
 
 .active-page{
     background-color: #cbd8f6 !important;
+}
+
+.hidden-underline{
+    &:before{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 769px){

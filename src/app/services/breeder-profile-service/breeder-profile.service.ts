@@ -27,4 +27,9 @@ export class BreederProfileService {
   getCurProfilePage(): any {
     return this.curProfilePage;
   }
+
+  removeUnderlineForBlock(): any{
+    let curSubpageIndex = this.profileSubpages.findIndex(it => it.tag == this.curProfilePage.tag);
+    return this.profileSubpages[curSubpageIndex + 1];
+  }
 }

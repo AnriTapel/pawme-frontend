@@ -24,8 +24,11 @@
 
     <div class="profile-menu-container-desktop">
         <div class="profile-menu-desktop">
-            <div *ngFor="let subpage of breederService.profileSubpages" [ngClass]="{'active-page': breederService.getCurProfilePage().tag == subpage.tag}"
-                (click)="breederService.setCurProfilePage(subpage)">{{subpage.name}}</div>
+            <div *ngFor="let subpage of breederService.profileSubpages" (click)="breederService.setCurProfilePage(subpage)"
+                [class.active-page]="breederService.getCurProfilePage().tag == subpage.tag" 
+                [class.hidden-underline]="breederService.removeUnderlineForBlock().tag == subpage.tag">
+                {{subpage.name}}
+            </div>
         </div>
         <input type="button" class="custom-btn btn-transparent" value="Предварительный просмотр" (click)="showPreview()" />
     </div>

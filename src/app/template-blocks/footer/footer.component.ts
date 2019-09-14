@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FooterComponent implements OnInit {
 
-  constructor(public popupService: PopupTemplateService) { }
+  constructor() { }
 
   ngOnInit() {
   }

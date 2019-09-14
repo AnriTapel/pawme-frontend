@@ -23,12 +23,20 @@ const STYLES = (theme: ThemeVariables) => ({
 })
 export class AppComponent {
   readonly classes = this.theme.addStyleSheet(STYLES);
+  // Routes of pages with custom header
+  private noGeneralHeaderRoutes = ['/breeder-landing'];
+  // Routes of pages with custom footer
+  private noGeneralFooterRoutes = [];
 
+  constructor(private theme: LyTheme2, private appService: AppService, public popupService: PopupTemplateService,
+    private router: Router) {}
 
-  constructor(private theme: LyTheme2, private appService: AppService, public popupService: PopupTemplateService, private router: Router) {}
+  showGeneralHeader(): boolean{
+    return this.noGeneralHeaderRoutes.filter(it => this.router.url.indexOf(it) != -1).length == 0;
+  }
 
-  isHeaderForLanding(): boolean{
-    return this.router.url.indexOf('/breeder-landing') != -1;
+  showGeneralFooter(): boolean{
+    return this.noGeneralFooterRoutes.filter(it => this.router.url.indexOf(it) != -1).length == 0;
   }
 
 }

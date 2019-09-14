@@ -55,7 +55,7 @@
 
         <div class="btn-label-list">
             <input type="button" class="btn-label" *ngFor="let test of parentsData.parentTests;let i = index"
-                [value]="test.category + ' ' + test.name + '  X'" (click)="deleteMedical(i)" />
+                [value]="test.name + '  X'" (click)="deleteMedical(i)" />
         </div>
 
         <div class="breeder-profile-subpage-form-left body-part-dropdown">
