@@ -26,6 +26,7 @@ export class LoginComponent {
       this.loginError = true;
     else {
       let body = new FormData();
+      this.credentials.username = this.credentials.username.toLowerCase();
       body.append('username', this.credentials.username);
       body.append('password', this.credentials.password);
 

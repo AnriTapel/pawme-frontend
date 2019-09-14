@@ -34,7 +34,7 @@ export class BreederMessageComponent implements OnInit {
     if (!this.validateFields())
       return;
 
-    this.breederMessage.breeder = this.appService.userData;
+    this.breederMessage.email = this.breederMessage.email.toLowerCase();
     this.breederService.sendMessageToBreederUsingPOST(this.appService.userData.id, this.breederMessage).subscribe(
       () => {
         this.popupService.setShowStatus(false);

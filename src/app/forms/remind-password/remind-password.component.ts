@@ -22,7 +22,7 @@ export class RemindPasswordComponent implements OnInit {
     if (!this.appService.validateEmailInput(this.remindEmail))
       return this.remindError = true;
   
-    this.breederService.forgotPasswordUsingPOST(this.remindEmail).subscribe(
+    this.breederService.forgotPasswordUsingPOST(this.remindEmail.toLowerCase()).subscribe(
       (res) => this.mailSent = true,
       (error) => {
         this.mailSent = false;

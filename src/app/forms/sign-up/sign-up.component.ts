@@ -36,6 +36,7 @@ export class SignUpComponent implements OnInit {
   signUpNewBreeder(){
     if (!this.validateFields())
       return;
+    this.breederData.email = this.breederData.email.toLowerCase();
     this.breederService.registerUsingPOST(this.breederData).subscribe(res => {
       this.router.navigate(['/confirm-email', this.breederData.email]);
     });
