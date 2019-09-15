@@ -1,6 +1,5 @@
 $regular-text-color: #0e0b4d;
-$gallery-image-block-size: 150px;
-$dog-entity-item-size: 180px;
+$profile-image-block-size: 150px;
 
 @font-face{
     font-family: 'Intro-Regular';
@@ -33,7 +32,7 @@ body{
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
-    margin: 0;
+    margin: 0 !important;
 }
 
 h1, h2, h3, h4, h5{
@@ -338,7 +337,7 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: rgba(203, 216, 246, 0.2);
     border-radius: 4px;
     width: 100%;
-    height: $gallery-image-block-size;
+    height: $profile-image-block-size;
     padding: 2em;
     text-align: center;
     margin-top: 16px;
@@ -375,8 +374,8 @@ input[type=number]::-webkit-outer-spin-button {
 
     .active-galley-photo-block,
     .empty-galley-photo-block{
-        width: $gallery-image-block-size;
-        height: $gallery-image-block-size;
+        width: $profile-image-block-size;
+        height: $profile-image-block-size;
         border-radius: 4px;
         background-color: rgba(203, 216, 246, 0.2);
     }
@@ -396,7 +395,7 @@ input[type=number]::-webkit-outer-spin-button {
         
         img{
             border-radius: 4px;
-            max-height: $gallery-image-block-size;
+            max-height: $profile-image-block-size;
         }
 
         .pet-image{
@@ -451,8 +450,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .add-dog-entity-item{
-    width: $dog-entity-item-size;
-    height: $dog-entity-item-size;
+    width: $profile-image-block-size;
+    height: $profile-image-block-size;
     display: flex;
     border: 1px dotted #645fc9;
     background-color: rgba(203, 216, 246, 0.2);
@@ -473,19 +472,20 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .avail-dog-entity-item{
-    width: calc(25% - .5em);
+    width: $profile-image-block-size;
     margin: 0 .5em .5em 0;
 
     .entity-image-block{
         width: 100%;
-        height: $dog-entity-item-size;
+        height: $profile-image-block-size;
         border-radius: 4px;
         position: relative;
         overflow: hidden;
 
         img{
             position: absolute;
-            left: -15%;
+            left: -30px;
+            top: -15px;
         }
     }
 
@@ -750,7 +750,7 @@ ngb-datepicker{
 
     .avail-dog-entity-item{
         margin: 1em auto 2em;
-        width: calc(50% - 1em);
+        width: $profile-image-block-size;
     }
 
     .gallery-initial-block{

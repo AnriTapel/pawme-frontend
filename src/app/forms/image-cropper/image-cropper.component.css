@@ -37,4 +37,13 @@ ly-cropping {
   display: inline-block;
   margin: auto 2em;
 }
+
+@media screen and (max-width: 769px) {
+  .buttons-block button {
+    margin: unset;
+  }
+  .buttons-block button:nth-child(1) {
+    margin-bottom: .5em;
+  }
+}
 /*# sourceMappingURL=image-cropper.component.css.map */

@@ -29,7 +29,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
-  margin: 0;
+  margin: 0 !important;
 }
 
 h1, h2, h3, h4, h5 {
@@ -479,8 +479,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .add-dog-entity-item {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -503,13 +503,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .avail-dog-entity-item {
-  width: calc(25% - .5em);
+  width: 150px;
   margin: 0 .5em .5em 0;
 }
 
 .avail-dog-entity-item .entity-image-block {
   width: 100%;
-  height: 180px;
+  height: 150px;
   border-radius: 4px;
   position: relative;
   overflow: hidden;
@@ -517,7 +517,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .avail-dog-entity-item .entity-image-block img {
   position: absolute;
-  left: -15%;
+  left: -30px;
+  top: -15px;
 }
 
 .avail-dog-entity-item .entity-info-block {
@@ -763,7 +764,7 @@ ngb-datepicker .bg-light {
   }
   .avail-dog-entity-item {
     margin: 1em auto 2em;
-    width: calc(50% - 1em);
+    width: 150px;
   }
   .gallery-initial-block {
     display: none;
