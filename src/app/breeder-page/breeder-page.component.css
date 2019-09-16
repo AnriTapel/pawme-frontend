@@ -1,9 +1,9 @@
 span, p, div {
-  font-family: 'Intro-Regular', serif !important;
+  font-family: 'Intro-Regular' !important;
 }
 
 .font-intro-book {
-  font-family: 'Intro-Book', serif !important;
+  font-family: 'Intro-Book' !important;
 }
 
 .slider-content {
@@ -651,8 +651,11 @@ span, p, div {
 }
 
 .section .about-breeder-content .left-side {
-  max-width: 374px;
   margin-right: 30px;
+}
+
+.section .about-breeder-content .right-side {
+  max-width: 271px;
 }
 
 @media (max-width: 768px) {
@@ -696,6 +699,7 @@ span, p, div {
 }
 
 .section .about-breeder-post p {
+  font-family: 'Intro-Book' !important;
   opacity: 0.7;
   font-size: 16px;
   line-height: 1.38;

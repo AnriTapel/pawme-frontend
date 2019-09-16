@@ -14,11 +14,11 @@ $screen-sm: 769px;
 }
 
 span, p, div {
-    font-family: 'Intro-Regular', serif !important;
+    font-family: 'Intro-Regular' !important;
 }
 
 .font-intro-book {
-    font-family: 'Intro-Book', serif !important;
+    font-family: 'Intro-Book' !important;
 }
 
 .slider-content {
@@ -523,8 +523,10 @@ span, p, div {
         justify-content: space-between;
         margin-top: 32px;
         .left-side {
-            max-width: 374px;
             margin-right: 30px;
+        }
+        .right-side{
+            max-width: 271px;
         }
 
         @media (max-width: $screen-sm - 1px) {
@@ -556,6 +558,7 @@ span, p, div {
             }
         }
         p {
+            font-family: 'Intro-Book' !important;
             opacity: 0.7;
             font-size: 16px;
             line-height: 1.38;
