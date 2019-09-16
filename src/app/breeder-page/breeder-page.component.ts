@@ -51,7 +51,7 @@ export class BreederPageComponent implements OnInit {
     }
 
     getNameByBreeds(): string{
-        let name = "ЗАДОЧИК " + this.appService.userData.generalInfo.mainBreed.name.toUpperCase();
+        let name = "ЗАВОДЧИК " + this.appService.userData.generalInfo.mainBreed.name.toUpperCase();
         if (this.appService.userData.generalInfo.extraBreed)
             name += " И " + this.appService.userData.generalInfo.extraBreed.name.toUpperCase();
         return name;

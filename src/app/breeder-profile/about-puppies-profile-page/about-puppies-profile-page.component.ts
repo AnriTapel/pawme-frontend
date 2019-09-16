@@ -29,9 +29,6 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       insuranceCoverage: null,
       gifts: null
     };
-
-    // @ts-ignore
-    $('[data-toggle="tooltip"]').tooltip();
   }
 
   puppyTestClicked(test: PuppyTest): void {
