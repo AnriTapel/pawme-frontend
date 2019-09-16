@@ -582,6 +582,14 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
+ngb-typeahead-window{
+    font-size: 14px !important;
+    max-height: 250px;
+    max-width: 350px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 ngb-datepicker{
     border: 1px solid #cbd8f6 !important;
 }
@@ -799,6 +807,10 @@ ngb-datepicker{
 
 
     // Bootstrap overrided classes
+    ngb-typeahead-window{
+        max-width: 100%;
+    }
+
     .carousel-indicators{
         bottom: -1em !important;
     }
