@@ -824,6 +824,17 @@ span, p, div {
 
 .section .medical-test-parents .test-item-title {
   margin-bottom: 22px;
+  width: 100%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.section .medical-test-parents .test-item-title span {
+  width: calc(100% - 40px);
 }
 
 .section .medical-test-parents .test-item-description p {
@@ -837,7 +848,7 @@ span, p, div {
   max-width: 330px;
 }
 
-.section .medical-test-parents .test-item:not(:last-child) {
+.section .medical-test-parents .test-item:not(:nth-child(even)) {
   margin-right: 30px;
 }
 

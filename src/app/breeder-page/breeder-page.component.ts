@@ -58,8 +58,17 @@ export class BreederPageComponent implements OnInit {
     }
 
     getParentsTestsList(): void {
-        let availCats = this.appService.userData.parentsInfo.parentTests.map(it => { return it.category });
-        this.availParentsTests = this.parentsTests.filter(it => availCats.includes(it.name));
+        for (let testCat of this.parentsTests){
+            let tests = this.appService.userData.parentsInfo.parentTests.filter(it => it.category == testCat.name);
+            if (tests.length == 0)
+                continue;
+            let name = tests[0].name;
+            if (tests.length > 1){
+                for (let i = 1; i < tests.length; i++)
+                    name += ", " + tests[i].name.toLowerCase();
+            }
+            this.availParentsTests.push({name: name, img: testCat.img, desc: testCat.desc});
+        }
     }
 
     showInfo(property) {

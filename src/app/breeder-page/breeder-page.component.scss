@@ -683,6 +683,13 @@ span, p, div {
 
         .test-item-title {
             margin-bottom: 22px;
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            
+            span{
+                width: calc(100% - 40px);
+            }
         }
 
         .test-item-description {
@@ -696,7 +703,7 @@ span, p, div {
 
         .test-item {
             max-width: 330px;
-            &:not(:last-child) {
+            &:not(:nth-child(even)) {
                 margin-right: 30px;
             }
 

@@ -354,9 +354,9 @@
                 <div class="medical-test-parents">
                     <div class="title">Медицинские тесты родителей</div>
 
-                    <div class="tests-list d-flex flex-row">
+                    <div class="tests-list d-flex flex-row flex-wrap">
                         <div *ngFor="let test of availParentsTests" class="test-item">
-                            <div class="test-item-title d-flex align-items-center">
+                            <div class="test-item-title">
                                 <img src="{{test.img}}" alt="{{test.name}}">
                                 <span>{{test.name}}</span>
                             </div>
