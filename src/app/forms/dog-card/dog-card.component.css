@@ -13,10 +13,10 @@ p {
 }
 
 .dog-cart-container {
-  width: 45vw;
+  width: 60vw;
   max-width: 770px;
   max-height: 90vh;
-  top: 5vh;
+  top: 2vh;
   margin: 0 auto;
   position: relative;
   overflow-y: auto;
@@ -145,9 +145,13 @@ p {
 }
 
 .custom-carousel img {
-  max-height: 250px !important;
+  max-height: 350px !important;
   width: auto !important;
   margin: auto;
+}
+
+.view {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 @media screen and (max-width: 769px) {
