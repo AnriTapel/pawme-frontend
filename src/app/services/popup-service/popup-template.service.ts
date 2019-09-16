@@ -19,8 +19,11 @@ export class PopupTemplateService {
     this.show = status;
     if (status){
       document.getElementsByTagName("body")[0].style.overflowY = "hidden";
-    } else
+      document.getElementsByTagName("body")[0].style.paddingRight = "15px";
+    } else{
       document.getElementsByTagName("body")[0].style.overflowY = "scroll";
+      document.getElementsByTagName("body")[0].style.paddingRight = "0";
+    }
   }
 
   getCurrentForm(): string{

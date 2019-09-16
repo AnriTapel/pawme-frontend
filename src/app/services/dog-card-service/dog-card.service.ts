@@ -35,7 +35,10 @@ export class DogCardService {
     this.visible = visible;
     if (visible){
       document.getElementsByTagName("body")[0].style.overflowY = "hidden";
-    } else
+      document.getElementsByTagName("body")[0].style.paddingRight = "15px";
+    } else{
       document.getElementsByTagName("body")[0].style.overflowY = "scroll";
+      document.getElementsByTagName("body")[0].style.paddingRight = "0";
+    }
   }
 }

@@ -167,7 +167,8 @@ hr {
 }
 
 .footer .links-item a {
-  font-family: Intro-Book;
+  color: #fff;
+  font-family: 'Intro-Book';
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -186,10 +187,6 @@ hr {
 
 .footer .fs-14 {
   font-size: 14px;
-}
-
-.footer .white {
-  color: #ffffff;
 }
 
 .footer .first {
