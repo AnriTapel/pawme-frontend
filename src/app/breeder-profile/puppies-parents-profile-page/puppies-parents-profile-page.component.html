@@ -54,8 +54,10 @@
         </span>
 
         <div class="btn-label-list">
-            <input type="button" class="btn-label" *ngFor="let test of parentsData.parentTests;let i = index"
-                [value]="test.name + '  X'" (click)="deleteMedical(i)" />
+            <div *ngFor="let test of parentsData.parentTests;let i = index" class="btn-label" (click)="deleteMedical(i)">
+                <div class="btn-label-text">{{test.name}}</div> 
+                <div>&nbsp;&nbsp;X</div>
+            </div>
         </div>
 
         <div class="breeder-profile-subpage-form-left body-part-dropdown">
