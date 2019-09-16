@@ -748,7 +748,7 @@ ngb-datepicker .bg-light {
     margin-bottom: 2.5em;
   }
   .breeder-profile-subpage-container .custom-input-append {
-    margin-top: .25em;
+    margin-top: 3px;
   }
   .breeder-profile-subpage-container .block-description {
     font-size: 13px;
@@ -836,7 +836,7 @@ ngb-datepicker .bg-light {
     margin: 5px auto 0;
   }
   .input-group-append {
-    margin-top: .25em !important;
+    margin-top: 3px !important;
   }
   ngb-datepicker {
     right: 0 !important;
