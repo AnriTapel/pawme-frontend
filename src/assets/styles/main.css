@@ -817,6 +817,9 @@ ngb-datepicker .bg-light {
     width: 80% !important;
     max-width: unset;
   }
+  .form-control {
+    font-size: 16px;
+  }
   ngb-typeahead-window {
     max-width: 100%;
   }

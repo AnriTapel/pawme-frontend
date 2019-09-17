@@ -811,6 +811,10 @@ ngb-datepicker{
 
 
     // Bootstrap overrided classes
+    .form-control{
+        font-size: 16px;
+    }
+
     ngb-typeahead-window{
         max-width: 100%;
     }
