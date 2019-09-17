@@ -508,8 +508,10 @@ span, p, div {
     .about-puppies-with-btn {
         margin-bottom: 32px;
         @media (max-width: $screen-sm - 1px) {
+            display: block !important;
 
             .available-puppies-title {
+                display: block;
                 margin-bottom: 22px!important;
             }
             .button-ask-a-question {

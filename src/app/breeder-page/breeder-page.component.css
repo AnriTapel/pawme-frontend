@@ -632,7 +632,11 @@ span, p, div {
 }
 
 @media (max-width: 768px) {
+  .section .about-puppies-with-btn {
+    display: block !important;
+  }
   .section .about-puppies-with-btn .available-puppies-title {
+    display: block;
     margin-bottom: 22px !important;
   }
   .section .about-puppies-with-btn .button-ask-a-question {
