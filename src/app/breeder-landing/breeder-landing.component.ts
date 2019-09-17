@@ -8,7 +8,12 @@ import { PopupTemplateService } from '../services/popup-service/popup-template.s
 })
 export class BreederLandingComponent implements OnInit {
 
-  firstSliderData: any[];
+  constructor(){}
+
+  ngOnInit(): void{
+  }
+
+  /*firstSliderData: any[];
   secondSliderData: any[];
 
   firstSliderActiveIndex: number = 0;
@@ -66,6 +71,6 @@ export class BreederLandingComponent implements OnInit {
 
   secondSliderTitleClicked(index: number): void {
     this.secondSlider.selectSlide(index);
-  }
+  }*/
 
 }

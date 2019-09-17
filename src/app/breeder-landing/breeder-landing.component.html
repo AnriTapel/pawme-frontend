@@ -1,7 +1,7 @@
 <div class="breeder-landing-top-block">
     <app-header class='header-for-landing'></app-header>
     <div class="breeder-landing-title">
-        <h1>Платформа для ответственных заводчиков, которым нужны удобные инструменты</h1>
+        <h1>Удобная платформа для ответственных заводчиков</h1>
 
         <button class="custom-btn btn-purple" [routerLink]="['/sign-up']">БЕСПЛАТНАЯ РЕГИСТРАЦИЯ</button>
     </div>
@@ -11,80 +11,29 @@
 
 <div class="what-is-avail-block">
     <h2>ЧТО УЖЕ ДОСТУПНО?</h2>
-    <p>После регистрации вы бесплатно получите собственную страницу заводчика с личным кабинетом, которую можно смело
-        использовать
-        в качестве персонального сайта.</p>
-    <section class="first-slider-section">
-        <h3>Стильная индивидуальная страница</h3>
-        <mdb-carousel #firstSlider class="carousel slide carousel-fade"
-            (activeSlideChange)="onFirstSliderActiveChanged($event)">
-            <mdb-carousel-item *ngFor="let slide of firstSliderData">
-                <div class="view w-100">
-                    <img class="d-block w-100" [src]="slide.img" [alt]="slide.text">
-                    <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-                </div>
-                <div class="carousel-caption">
-                    <p style="font-family: 'Intro-Regular'">{{slide.text}}</p>
-                </div>
-            </mdb-carousel-item>
-        </mdb-carousel>
-        <div class="first-slider-text">
+
+    <section class="breeder-page-block">
+        <img src="./assets/img/group-18.png" alt="Стильная индивидуальная страница"/>
+        <div>
             <h3>Стильная индивидуальная страница</h3>
-            <p [class.active]="firstSliderActiveIndex == 0" (click)="firstSliderTitleClicked(0)">
-                <a [class.active]="firstSliderActiveIndex == 0">&#11044;</a>Общая информация + фотографии
-            </p>
-            <p [class.active]="firstSliderActiveIndex == 1" (click)="firstSliderTitleClicked(1)">
-                <a [class.active]="firstSliderActiveIndex == 1">&#11044;</a>О себе
-            </p>
-            <p [class.active]="firstSliderActiveIndex == 2" (click)="firstSliderTitleClicked(2)">
-                <a [class.active]="firstSliderActiveIndex == 2">&#11044;</a>Родители щенков
-            </p>
-            <p [class.active]="firstSliderActiveIndex == 3" (click)="firstSliderTitleClicked(3)">
-                <a [class.active]="firstSliderActiveIndex == 3">&#11044;</a>Информация о щенках
-            </p>
-            <p [class.active]="firstSliderActiveIndex == 4" (click)="firstSliderTitleClicked(4)">
-                <a [class.active]="firstSliderActiveIndex == 4">&#11044;</a>Подключение аккаунта Instagram
-            </p>
+            <p>После регистрации вы бесплатно получите собственную страницу заводчика, которую можно использовать в качестве персонального сайта.</p>
+            <p>Грамотно оформленная информация показывает ваш профессионализм и повышает доверие 
+                    у потенциальных покупателей.</p>
         </div>
     </section>
+    <section class="breeder-profile-block">
+        <div>
+            <h3>Удобный личный кабинет</h3>
+            <p>Заполнить свою страницу можно с любого устройства - неважно, компьютер у вас под рукой или телефон. 
+                Сам процесс не требует никаких навыков и будет интуитивно понятен любому заводчику. </p>
 
-    <section class="second-slider-section">
-        <div class="second-slider-text">
-            <div>
-                <h3>Удобный личный кабинет</h3>
-                <p [class.active]="secondSliderActiveIndex == 0" (click)="secondSliderTitleClicked(0)">
-                    <a [class.active]="secondSliderActiveIndex == 0">&#11044;</a>Редактирование своей страницы
-                </p>
-                <p [class.active]="secondSliderActiveIndex == 1" (click)="secondSliderTitleClicked(1)">
-                    <a [class.active]="secondSliderActiveIndex == 1">&#11044;</a>Общение с покупателями
-                </p>
-                <p [class.active]="secondSliderActiveIndex == 2" (click)="secondSliderTitleClicked(2)">
-                    <a [class.active]="secondSliderActiveIndex == 2">&#11044;</a>Своя форма заявки на щенка
-                </p>
-                <p [class.active]="secondSliderActiveIndex == 3" (click)="secondSliderTitleClicked(3)">
-                    <a [class.active]="secondSliderActiveIndex == 3">&#11044;</a>Обработка заявок от покупателей
-                </p>
-
-                <button class="custom-btn btn-purple" [routerLink]="['/sign-up']">БЕСПЛАТНАЯ РЕГИСТРАЦИЯ</button>
-            </div>
+            <button class="custom-btn btn-purple" [routerLink]="['/sign-up']">БЕСПЛАТНАЯ РЕГИСТРАЦИЯ</button>
         </div>
-        <h3>Удобный личный кабинет</h3>
-        <mdb-carousel #secondSlider class="carousel slide carousel-fade"
-            (activeSlideChange)="onSecondSliderActiveChanged($event)">
-            <mdb-carousel-item *ngFor="let slide of secondSliderData">
-                <div class="view w-100">
-                    <img class="d-block w-100" [src]="slide.img" [alt]="slide.text">
-                    <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-                </div>
-                <div class="carousel-caption">
-                    <p style="font-family: 'Intro-Regular'">{{slide.text}}</p>
-                </div>
-            </mdb-carousel-item>
-        </mdb-carousel>
-
-        <button class="custom-btn btn-purple mobile-sign-up-button" [routerLink]="['/sign-up']">БЕСПЛАТНАЯ РЕГИСТРАЦИЯ</button>
-
+        <img src="./assets/img/group-18.png" alt="Удобный личный кабинет" />
     </section>
+
+    <button class="custom-btn btn-purple mobile-sign-up-button" [routerLink]="['/sign-up']">БЕСПЛАТНАЯ РЕГИСТРАЦИЯ</button>
+
 </div>
 
 
@@ -110,25 +59,25 @@
     <div class="coming-soon">
         <h2 style="margin-bottom: 2em;">УЖЕ СОВСЕМ СКОРО...</h2>
         <section>
-            <img src="./assets/img/dog-in-hands.png" alt="Собака в руках">
+            <img src="./assets/img/dog-in-hands.svg" alt="Собака в руках">
             <p></p>
-            <p>Общая платформа для всех проверенных заводчиков</p>
-            <p>Вы получите доступ к потоку потенциальных покупателей, которых мы будем привлекать за свои деньги</p>
+            <p>Покупатели, которым не все равно</p>
+            <p>Будущие хозяева приходят на Petman, потому что не доверяют "стандартным" площадкам по поиску питомцев. Вы можете быть в числе проверенных заводчиков, которые помогут им 
+                    обрести нового члена семьи.</p>
         </section>
         <section>
-            <img src="./assets/img/gears.png" alt="Шестеренки">
+            <img src="./assets/img/gears.svg" alt="Шестеренки">
             <p></p>
-            <p>Автоматизация сделок</p>
-            <p>Покупатели смогут оплачивать щенков внутри платформы, а вы сможете выводить полученные деньги удобным для
-                вас
-                способом.</p>
-            <p>Чтобы избавить вас от бумажной волокиты, заключение договоров будет также реализовано онлайн</p>
+            <p>Все взаимодействие в одном месте</p>
+            <p>Покупатели смогут общаться с вами 
+                    через персональные чаты, прямо как в мессенджерах. Кроме этого, все заявки 
+                    на щенков будут собраны в одном месте, ожидая вашего одобрения или отказа.</p>
         </section>
         <section>
-            <img src="./assets/img/fundraising.png" alt="Сбор средств">
+            <img src="./assets/img/fundraising.svg" alt="Сбор средств">
             <p></p>
-            <p>Сбор депозитов с будущих покупателей</p>
-            <p>Вы будете уверены, что для новых щенков сразу найдутся заинтересованные хозяева</p>
+            <p>Бронирование щенка для покупателя</p>
+            <p>Если для конкретного щенка найдется заинтересованный покупатель, вы сможете временно скрыть его от других людей.</p>
         </section>
         <p>
             <img class="dog-head-img" src="./assets/img/dog-head.png" alt="Голова собаки">
