@@ -44,12 +44,13 @@
 }
 
 .what-is-avail-block section {
-  width: 100%;
-  display: inline-block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   margin: 3em auto;
 }
 
-.what-is-avail-block section h3 {
+.what-is-avail-block section h3, .what-is-avail-block section h4 {
   margin-bottom: 1em;
 }
 
@@ -58,20 +59,76 @@
 }
 
 .what-is-avail-block section img {
-  width: 50%;
-  vertical-align: middle;
+  width: 100%;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  max-width: 620px;
 }
 
-.what-is-avail-block section div {
-  display: inline-block;
+.what-is-avail-block .breeder-page-block div:nth-child(1) {
+  width: 50%;
+}
+
+.what-is-avail-block .breeder-page-block div:nth-child(1) h4 {
+  display: none;
+}
+
+.what-is-avail-block .breeder-page-block div:nth-child(1) img {
+  float: right;
+}
+
+.what-is-avail-block .breeder-page-block div:nth-child(2) {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-item-align: center;
+      align-self: center;
   width: 50%;
   padding-left: 5%;
-  vertical-align: middle;
 }
 
-.what-is-avail-block section div p {
+.what-is-avail-block .breeder-page-block div:nth-child(2) p {
+  max-width: 620px;
   font-size: 20px;
   line-height: 26px;
+}
+
+.what-is-avail-block .breeder-profile-block > div:nth-child(1) {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 50%;
+  padding-left: 5%;
+}
+
+.what-is-avail-block .breeder-profile-block > div:nth-child(1) div {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  max-width: 620px;
+}
+
+.what-is-avail-block .breeder-profile-block > div:nth-child(1) p {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.what-is-avail-block .breeder-profile-block div:nth-child(2) {
+  width: 50%;
+}
+
+.what-is-avail-block .breeder-profile-block div:nth-child(2) h4 {
+  display: none;
 }
 
 .what-is-avail-block .mobile-sign-up-button {
@@ -173,15 +230,55 @@
   .breeder-landing-title button {
     margin-top: 2em;
   }
-  .what-is-avail-block section {
+  .what-is-avail-block section img, .what-is-avail-block section > div {
+    width: 100%;
+  }
+  .what-is-avail-block .breeder-page-block {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .what-is-avail-block .breeder-page-block div:nth-child(1) {
+    margin-bottom: 1.5em;
+    width: 100%;
+  }
+  .what-is-avail-block .breeder-page-block div:nth-child(1) h4 {
     display: block;
   }
-  .what-is-avail-block section img, .what-is-avail-block section div {
-    width: 90%;
-    margin: 0 auto;
+  .what-is-avail-block .breeder-page-block div:nth-child(2) {
+    width: 100%;
+    padding-left: 0;
+  }
+  .what-is-avail-block .breeder-page-block div:nth-child(2) h3 {
+    display: none;
+  }
+  .what-is-avail-block .breeder-profile-block {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .what-is-avail-block .breeder-profile-block div:nth-child(1) {
+    width: 100%;
+    padding-left: 0;
+  }
+  .what-is-avail-block .breeder-profile-block div:nth-child(1) h3 {
+    display: none;
+  }
+  .what-is-avail-block .breeder-profile-block div:nth-child(2) {
+    margin-bottom: 1.5em;
+    width: 100%;
+  }
+  .what-is-avail-block .breeder-profile-block div:nth-child(2) h4 {
+    display: block;
+  }
+  .what-is-avail-block .breeder-profile-block button {
+    display: none;
   }
   .what-is-avail-block .mobile-sign-up-button {
     display: block;
+    font-size: 14px;
   }
   .our-mission-coming-soon-blocks {
     background-position-x: left;

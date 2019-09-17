@@ -36,11 +36,10 @@ $block-padding: 8vw;
     }
 
     section{
-        width: 100%;
-        display: inline-block;
+        display: flex;
         margin: 3em auto;
 
-        h3{
+        h3, h4{
             margin-bottom: 1em;
         }
 
@@ -49,19 +48,62 @@ $block-padding: 8vw;
         }
 
         img{
-            width: 50%;
-            vertical-align: middle;
+            width: 100%;
+            align-self: center;
+            max-width: 620px;
         }
+    }
 
-        div{
-            display: inline-block;
+    .breeder-page-block{
+        div:nth-child(1){
+            width: 50%;
+            h4{
+                display: none;
+            }
+
+            img{
+                float: right;
+            }
+        }
+        div:nth-child(2){
+            display: inline-flex;
+            flex-direction: column;
+            align-self: center;
             width: 50%;
             padding-left: 5%;
-            vertical-align: middle;
+
+            p{
+                max-width: 620px;
+                font-size: 20px;
+                line-height: 26px;
+            }
+        }
+    }
+
+    .breeder-profile-block{
+        &>div:nth-child(1){
+            display: inline-flex;
+            flex-direction: column;
+            align-self: center;
+            width: 50%;
+            padding-left: 5%;
+
+            div{
+                align-self: flex-end;
+                max-width: 620px;
+            }
 
             p{
                 font-size: 20px;
                 line-height: 26px;
+            }
+        }
+
+        div:nth-child(2){
+            width: 50%;
+
+            h4{
+                display: none;
             }
         }
     }
@@ -173,16 +215,61 @@ $block-padding: 8vw;
     .what-is-avail-block{
 
         section{
-            display: block;
+            img, &>div{
+                width: 100%;
+                
+            }
+        }
 
-            img, div{
-                width: 90%;
-                margin: 0 auto;
+        .breeder-page-block{
+            flex-direction: column;
+
+            div:nth-child(1){
+                margin-bottom: 1.5em;
+                width: 100%;
+                h4{
+                    display: block;
+                }
+            }
+
+            div:nth-child(2){
+                width: 100%;
+                padding-left: 0;
+                h3{
+                    display: none;
+                }
+            }
+        }
+
+        .breeder-profile-block{
+            flex-direction: column-reverse;
+
+            div:nth-child(1){
+                width: 100%;
+                padding-left: 0;
+                h3{
+                    display: none;
+
+                }
+            }
+
+            div:nth-child(2){
+                margin-bottom: 1.5em;
+                width: 100%;
+
+                h4{
+                    display: block;
+                }
+            }
+            
+            button{
+                display: none;
             }
         }
 
         .mobile-sign-up-button{
             display: block;
+            font-size: 14px;
         }
     }
 
