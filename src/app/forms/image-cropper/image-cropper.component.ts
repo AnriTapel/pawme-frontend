@@ -56,7 +56,7 @@ export class ImageCropperComponent implements AfterViewInit {
         });
         this.getBase64ByImageUrl();
       }
-      else
+      else if (window.innerWidth < 770)
         document.getElementById('image-input').click();
     }, 250);
 }
