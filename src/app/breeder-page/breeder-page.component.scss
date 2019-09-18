@@ -25,6 +25,21 @@ span, p, div {
     width: 100%;
     display: flex;
     overflow-x: hidden;
+    position: relative;
+
+    &>img{
+        width: 26px;
+        position: absolute;
+        top: calc(50% - 13px);
+        z-index: 999;
+    }
+    
+    .scroll-left-button{
+        left: 20px;
+    }
+    .scroll-right-button{
+        right: 20px;
+    }
 
     @media (max-width: $screen-lg - 1px) {
         overflow-x: scroll;

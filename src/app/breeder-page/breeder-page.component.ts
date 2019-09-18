@@ -34,6 +34,9 @@ export class BreederPageComponent implements OnInit {
     ]
     availParentsTests = [];
 
+    timeoutHandlerRight: any;
+    timeoutHandlerLeft: any;
+
     constructor(private popupService: PopupTemplateService, private route: ActivatedRoute, public appService: AppService,
         private breederService: BreederControllerService, public dogCardService: DogCardService) {
 
@@ -50,7 +53,7 @@ export class BreederPageComponent implements OnInit {
     ngOnInit() {
     }
 
-    getNameByBreeds(): string{
+    getNameByBreeds(): string {
         let name = "ЗАВОДЧИК " + this.appService.userData.generalInfo.mainBreed.name.toUpperCase();
         if (this.appService.userData.generalInfo.extraBreed)
             name += " И " + this.appService.userData.generalInfo.extraBreed.name.toUpperCase();
@@ -58,16 +61,16 @@ export class BreederPageComponent implements OnInit {
     }
 
     getParentsTestsList(): void {
-        for (let testCat of this.parentsTests){
+        for (let testCat of this.parentsTests) {
             let tests = this.appService.userData.parentsInfo.parentTests.filter(it => it.category == testCat.name);
             if (tests.length == 0)
                 continue;
             let name = tests[0].name;
-            if (tests.length > 1){
+            if (tests.length > 1) {
                 for (let i = 1; i < tests.length; i++)
                     name += ", " + tests[i].name.toLowerCase();
             }
-            this.availParentsTests.push({name: name, img: testCat.img, desc: testCat.desc});
+            this.availParentsTests.push({ name: name, img: testCat.img, desc: testCat.desc });
         }
     }
 
@@ -75,13 +78,45 @@ export class BreederPageComponent implements OnInit {
         this.collapse[property] = !this.collapse[property];
     }
 
-    showImageGalley(i: number): void{
+    showImageGalley(i: number): void {
         this.popupService.setPopupParams({
             gallery: this.appService.userData.generalInfo.gallery,
             initIndex: i
         });
         this.popupService.setCurrentForm('image-gallery');
         this.popupService.setShowStatus(true);
+    }
+
+    getScrollLeftValue(): number {
+        if (document.getElementsByClassName('slider')[0].scrollLeft == 0)
+            this.mouseupLeft();
+        return document.getElementsByClassName('slider')[0].scrollLeft;
+    }
+
+    mouseupRight() {
+        if (this.timeoutHandlerRight) {
+            clearInterval(this.timeoutHandlerRight);
+            this.timeoutHandlerRight = null;
+        }
+    }
+
+    mousedownRight() {
+        this.timeoutHandlerRight = setInterval(() => {
+            document.getElementsByClassName('slider')[0].scrollLeft += 10;
+        }, 50);
+    }
+
+    mouseupLeft() {
+        if (this.timeoutHandlerLeft) {
+            clearInterval(this.timeoutHandlerLeft);
+            this.timeoutHandlerLeft = null;
+        }
+    }
+
+    mousedownLeft() {
+        this.timeoutHandlerLeft = setInterval(() => {
+            document.getElementsByClassName('slider')[0].scrollLeft -= 10;
+        }, 50);
     }
 
     showBreederMessagePopup(): void {
