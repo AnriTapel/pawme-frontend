@@ -20,6 +20,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   curMainBreed: string;
   curExtraBreed: string;
   isAdditionalBreed: boolean = false;
+  changesSaved: boolean = true;
   invalidFields: string[] = [];
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
@@ -48,6 +49,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       site: null,
       facebook: null
     };
+    this.isAdditionalBreed = this.nurceryData.extraBreed ? true : false;
     this.curMainBreed = this.nurceryData.mainBreed ? this.nurceryData.mainBreed.name : null;
     this.curExtraBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
   }
@@ -64,6 +66,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.appService.uploadAvatarImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         this.nurceryData.profilePhoto = imageData;
+        this.changesSaved = false;
       });
       croppedHandler.unsubscribe();
     });
@@ -80,6 +83,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadNurceryGalleryImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
+        this.changesSaved = false;
         if (index == -1)
           this.nurceryData.gallery.push(imageData);
         else
@@ -91,6 +95,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
   deleteGalleryImage(index: number): void {
     this.nurceryData.gallery.splice(index, 1);
+    this.changesSaved = false;
   }
 
   saveChanges() {
@@ -109,6 +114,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         this.appService.userData.generalInfo = this.nurceryData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
+        this.changesSaved = true;
         scroll(0, 0);
       },
         () => {

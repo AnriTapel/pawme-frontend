@@ -588,6 +588,11 @@ ngb-typeahead-window{
     max-width: 350px;
     overflow-x: hidden;
     overflow-y: auto;
+
+    .active{
+        color: unset !important; 
+        background-color: unset !important;
+    }
 }
 
 ngb-datepicker{

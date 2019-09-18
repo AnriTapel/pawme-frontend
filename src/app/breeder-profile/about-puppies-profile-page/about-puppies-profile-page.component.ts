@@ -13,6 +13,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
   puppiesData: PuppiesInfo;
   invalidFields: Array<string> = [];
+  changesSaved: boolean = true;
 
   constructor(public appService: AppService, private breederService: BreederControllerService,
     private notificationService: NotificationBarService) { }
@@ -37,6 +38,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       this.puppiesData.puppyTests.splice(testIndex, 1);
     else
       this.puppiesData.puppyTests.push(test);
+    this.changesSaved = false;
   }
 
   getTestStatus(test: PuppyTest): boolean {
@@ -54,6 +56,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
         this.appService.userData.puppiesInfo = this.puppiesData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
+        this.changesSaved = true;
         scroll(0, 0);
       },
       () => {

@@ -44,6 +44,13 @@ span, p, div {
     @media (max-width: $screen-lg - 1px) {
         overflow-x: scroll;
     }
+
+    @media (max-width: $screen-sm - 1px) {
+        .scroll-left-button,
+        .scroll-right-button{
+            display: none;
+        }
+    }
 }
 
 .slider {

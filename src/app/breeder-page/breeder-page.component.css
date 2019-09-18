@@ -36,6 +36,13 @@ span, p, div {
   }
 }
 
+@media (max-width: 768px) {
+  .slider-content .scroll-left-button,
+  .slider-content .scroll-right-button {
+    display: none;
+  }
+}
+
 .slider {
   width: 1440px;
   min-width: 1440px;

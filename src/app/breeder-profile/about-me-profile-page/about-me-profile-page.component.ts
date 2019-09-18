@@ -16,6 +16,7 @@ export class AboutMeProfilePageComponent implements OnInit {
   breederData: BreederAbout;
   currentClub: string = null;
   currentClubs: Array<string> = [];
+  changesSaved: boolean = true;
 
   invalidFields: Array<string> = [];
 
@@ -49,6 +50,7 @@ export class AboutMeProfilePageComponent implements OnInit {
       this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         this.breederData.photo = imageData;
+        this.changesSaved = false;
       });
       croppedHandler.unsubscribe();
     });
@@ -56,6 +58,7 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   deletePersonalImage(): void {
     this.breederData.photo = null;
+    this.changesSaved = false;
   }
 
   uploadCertificates(event: any): void {
@@ -69,6 +72,7 @@ export class AboutMeProfilePageComponent implements OnInit {
           body.append('rect', '0,0,' + img.width + ',' + img.height);
           this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
             this.breederData.certificates.push(imageData);
+            this.changesSaved = false;
           });
         }
         img.src = e.target.result;
@@ -79,15 +83,18 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   deleteCertificate(index: number): void {
     this.breederData.certificates.splice(index, 1);
+    this.changesSaved = false;
   }
 
   addClub(): void {
     this.currentClubs.push(this.currentClub);
     this.currentClub = null;
+    this.changesSaved = false;
   }
 
   deleteClub(index: number): void {
     this.currentClubs.splice(index, 1);
+    this.changesSaved = false;
   }
 
   validateInputFields(): boolean {
@@ -135,6 +142,7 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         scroll(0, 0);
+        this.changesSaved = true;
       },
       () => {
         this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);

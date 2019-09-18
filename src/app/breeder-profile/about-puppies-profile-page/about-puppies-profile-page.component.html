@@ -10,7 +10,7 @@
         <label for="puppies-age">Возраст продажи щенков</label>
         <div class="input-group mb-3">
             <input type="number" name="puppies-age" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.age" placeholder="от"
-                aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="invalidFields.includes('age')">
+                (change)="changesSaved = false" aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="invalidFields.includes('age')">
             <div class="input-group-append">
                 <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('age')"
                     id="basic-addon2">недель</span>
@@ -22,9 +22,9 @@
         <label for="puppies-price">Стоимость щенков в рублях</label>
         <div class="input-group">
             <input type="number" class="form-control custom-form-control-border" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
-                placeholder="от" [class.invalid-form-field-value]="invalidFields.includes('priceFrom')">
+                (change)="changesSaved = false" placeholder="от" [class.invalid-form-field-value]="invalidFields.includes('priceFrom')">
             <input type="number" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до"
-                [class.invalid-form-field-value]="invalidFields.includes('priceTo')">
+                (change)="changesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('priceTo')">
         </div>
     </div>
 
@@ -100,7 +100,7 @@
         <div class="input-group mb-3">
             <input type="number" name="guarantee-period" class="form-control custom-form-control-border"
                 [(ngModel)]="puppiesData.insuranceTerm" placeholder="12" aria-label="12" aria-describedby="basic-addon2"
-                [class.invalid-form-field-value]="invalidFields.includes('term')">
+                (change)="changesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('term')">
             <div class="input-group-append">
                 <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('term')"
                 id="basic-addon2">месяцев</span>
@@ -119,7 +119,7 @@
         <span class="block-description">Обычно заводчики указывают заболевания или проблемные части тела, специфические
             для конкретной породы.</span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceCoverage"
-            [class.invalid-form-field-value]="invalidFields.includes('coverage')"></textarea>
+            (change)="changesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('coverage')"></textarea>
     </div>
 
     <hr>
@@ -129,7 +129,8 @@
         <br>
         <span class="block-description">Многие заводчики дарят новым хозяевам игрушку с запахом однопометников или
             небольшой мешочек корма</span>
-        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts"></textarea>
+        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts"
+            (change)="changesSaved = false" ></textarea>
     </div>
 
     <div class="lower-btn">

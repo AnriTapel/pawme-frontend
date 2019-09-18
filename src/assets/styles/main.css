@@ -625,6 +625,11 @@ ngb-typeahead-window {
   overflow-y: auto;
 }
 
+ngb-typeahead-window .active {
+  color: unset !important;
+  background-color: unset !important;
+}
+
 ngb-datepicker {
   border: 1px solid #cbd8f6 !important;
 }
