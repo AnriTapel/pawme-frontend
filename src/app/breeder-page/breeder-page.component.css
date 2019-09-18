@@ -239,6 +239,7 @@ span, p, div {
 .aside .heading {
   opacity: 0.5;
   color: #0e0b4d;
+  margin-bottom: .5em;
 }
 
 .aside .title {
