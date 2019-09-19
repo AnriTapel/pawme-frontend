@@ -7,6 +7,7 @@ import { EventService } from 'src/app/services/event-service/events.service';
 import { BreederInfo } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
+import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
 
 @Component({
   selector: 'app-about-nurcery-profile-page',
@@ -34,7 +35,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   addBreedClick$ = new Subject<string>();
 
   constructor(public appService: AppService, private popupService: PopupTemplateService, private notificationService: NotificationBarService,
-    private eventService: EventService, private breederService: BreederControllerService) { }
+    private eventService: EventService, private breederService: BreederControllerService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
     this.nurceryData = <BreederInfo>this.appService.userData.generalInfo || {
@@ -66,7 +67,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.appService.uploadAvatarImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         this.nurceryData.profilePhoto = imageData;
-        this.changesSaved = false;
+        this.profileService.dataChangesSaved = false;
       });
       croppedHandler.unsubscribe();
     });
@@ -83,7 +84,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadNurceryGalleryImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
-        this.changesSaved = false;
+        this.profileService.dataChangesSaved = false;
         if (index == -1)
           this.nurceryData.gallery.push(imageData);
         else
@@ -95,7 +96,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
   deleteGalleryImage(index: number): void {
     this.nurceryData.gallery.splice(index, 1);
-    this.changesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   saveChanges() {
@@ -114,7 +115,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         this.appService.userData.generalInfo = this.nurceryData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
-        this.changesSaved = true;
+        this.profileService.dataChangesSaved = true;
         scroll(0, 0);
       },
         () => {

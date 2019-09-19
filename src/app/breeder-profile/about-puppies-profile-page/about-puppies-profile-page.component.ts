@@ -3,6 +3,7 @@ import { AppService } from 'src/app/services/app-service/app.service';
 import { PuppiesInfo, PuppyTest } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
+import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
 
 @Component({
   selector: 'app-about-puppies-profile-page',
@@ -16,7 +17,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   changesSaved: boolean = true;
 
   constructor(public appService: AppService, private breederService: BreederControllerService,
-    private notificationService: NotificationBarService) { }
+    private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
     this.puppiesData = <PuppiesInfo>this.appService.userData.puppiesInfo || {
@@ -38,7 +39,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       this.puppiesData.puppyTests.splice(testIndex, 1);
     else
       this.puppiesData.puppyTests.push(test);
-    this.changesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   getTestStatus(test: PuppyTest): boolean {
@@ -56,7 +57,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
         this.appService.userData.puppiesInfo = this.puppiesData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
-        this.changesSaved = true;
+        this.profileService.dataChangesSaved = true;
         scroll(0, 0);
       },
       () => {

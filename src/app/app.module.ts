@@ -13,6 +13,7 @@ import { HeaderComponent } from './template-blocks/header/header.component';
 import { LoginComponent } from './forms/login/login.component';
 import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { PopupTemplateService } from './services/popup-service/popup-template.service';
+import { AlertService } from './services/alert-service/alert.service';
 import { FormsModule } from '@angular/forms';
 import { BreederProfileComponent } from './breeder-profile/breeder-profile.component';
 import { AboutNurceryProfilePageComponent } from './breeder-profile/about-nurcery-profile-page/about-nurcery-profile-page.component';
@@ -38,6 +39,7 @@ import { BreederMessageComponent } from './forms/breeder-message/breeder-message
 import { DogCardComponent } from './forms/dog-card/dog-card.component';
 import { ImageGalleryComponent } from './template-blocks/image-gallery/image-gallery.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
+import { AlertComponent } from './template-blocks/alert/alert.component';
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -70,7 +72,8 @@ export function initApp(appSerivce: AppService){
     BreederMessageComponent,
     DogCardComponent,
     ImageGalleryComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -92,6 +95,7 @@ export function initApp(appSerivce: AppService){
     BreederControllerService,
     DictionaryControllerService,
     MediaControllerService,
+    AlertService,
     { provide: APP_INITIALIZER, useFactory: initApp, deps: [AppService], multi: true },
     { provide: LY_THEME, useClass: MinimaLight, multi: true }
     

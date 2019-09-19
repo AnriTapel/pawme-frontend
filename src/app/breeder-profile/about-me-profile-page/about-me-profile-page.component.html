@@ -14,7 +14,7 @@
             Что вам нравится в вашей породе и какие у вас профессиональные цели?
         </span>
         <textarea rows="3" [(ngModel)]="breederData.about" placeholder="Введите текст" name="about-me" class="form-control custom-form-control-border"
-            (change)="changesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('about')"></textarea>
+            (change)="this.profileService.dataChangesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('about')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -24,7 +24,7 @@
             порода?
         </span>
         <textarea rows="3" [(ngModel)]="breederData.howItStarted" class="form-control custom-form-control-border" placeholder="Введите текст"
-            (change)="changesSaved = false" name="howItStarted" [class.invalid-form-field-value]="invalidFields.includes('howItStarted')"></textarea>
+            (change)="this.profileService.dataChangesSaved = false" name="howItStarted" [class.invalid-form-field-value]="invalidFields.includes('howItStarted')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -32,7 +32,7 @@
         <br>
         <span class="block-description">Вы используете какие-то определенные методы при работе с щенками? Вы уделяете особое внимание определенным деталям?</span>
         <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border" placeholder="Введите текст"
-            (change)="changesSaved = false" name="features" [class.invalid-form-field-value]="invalidFields.includes('outstanding')"></textarea>
+            (change)="this.profileService.dataChangesSaved = false" name="features" [class.invalid-form-field-value]="invalidFields.includes('outstanding')"></textarea>
     </div>
 
     <div class="about-me-form-group">

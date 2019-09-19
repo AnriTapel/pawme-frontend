@@ -5,6 +5,7 @@ import { EventService } from 'src/app/services/event-service/events.service';
 import { BreederAbout } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
+import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
 
 @Component({
   selector: 'app-about-me-profile-page',
@@ -16,12 +17,11 @@ export class AboutMeProfilePageComponent implements OnInit {
   breederData: BreederAbout;
   currentClub: string = null;
   currentClubs: Array<string> = [];
-  changesSaved: boolean = true;
 
   invalidFields: Array<string> = [];
 
   constructor(private popupService: PopupTemplateService, private appService: AppService, private eventService: EventService,
-    private breederService: BreederControllerService, private notificationService: NotificationBarService) { }
+    private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
     this.breederData = <BreederAbout>this.appService.userData.about || {
@@ -50,7 +50,7 @@ export class AboutMeProfilePageComponent implements OnInit {
       this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
         this.breederData.photo = imageData;
-        this.changesSaved = false;
+        this.profileService.dataChangesSaved = false;
       });
       croppedHandler.unsubscribe();
     });
@@ -58,7 +58,7 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   deletePersonalImage(): void {
     this.breederData.photo = null;
-    this.changesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   uploadCertificates(event: any): void {
@@ -72,7 +72,7 @@ export class AboutMeProfilePageComponent implements OnInit {
           body.append('rect', '0,0,' + img.width + ',' + img.height);
           this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
             this.breederData.certificates.push(imageData);
-            this.changesSaved = false;
+            this.profileService.dataChangesSaved = false;
           });
         }
         img.src = e.target.result;
@@ -83,18 +83,18 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   deleteCertificate(index: number): void {
     this.breederData.certificates.splice(index, 1);
-    this.changesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   addClub(): void {
     this.currentClubs.push(this.currentClub);
     this.currentClub = null;
-    this.changesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   deleteClub(index: number): void {
     this.currentClubs.splice(index, 1);
-    this.changesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   validateInputFields(): boolean {
@@ -142,7 +142,7 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         scroll(0, 0);
-        this.changesSaved = true;
+        this.profileService.dataChangesSaved = true;
       },
       () => {
         this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
