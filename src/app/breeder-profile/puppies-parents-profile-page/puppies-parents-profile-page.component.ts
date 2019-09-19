@@ -96,10 +96,11 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   showCurrentParentPage(index: number): void {
-    if (index == -1)
-      this.currentParentData = JSON.parse(JSON.stringify(this.parentsData.parentDraft))
-        || JSON.parse(JSON.stringify(this.DEFAULT_PARENT_DATA));
-    else
+    if (index == -1){
+      this.currentParentData = this.parentsData.parentDraft ? JSON.parse(JSON.stringify(this.parentsData.parentDraft))
+        : JSON.parse(JSON.stringify(this.DEFAULT_PARENT_DATA));
+      this.currentParentData.id = null;  
+    } else
       this.currentParentData = JSON.parse(JSON.stringify(this.parentsData.parents[index]));
 
     this.currentBreed = this.currentParentData.breed ? this.currentParentData.breed.name : null;
@@ -146,7 +147,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     } else
       this.parentsData.parents.push(this.currentParentData);
 
-    this.parentsData.parentDraft = null;
+    if (!this.currentParentData.id)
+      this.parentsData.parentDraft = null;
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {
         this.parentsChangesSaved = true;
