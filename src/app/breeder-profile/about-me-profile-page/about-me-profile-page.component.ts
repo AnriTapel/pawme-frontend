@@ -38,6 +38,11 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   }
 
+  ngOnDestroy(): void{
+    if (this.appService.userData)
+      this.appService.userData.about = this.breederData;
+  }
+
   previewPersonalImage() {
     this.popupService.setPopupParams({
       width: 270, height: 200, isRect: true,

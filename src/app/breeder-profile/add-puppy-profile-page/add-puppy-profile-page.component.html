@@ -62,7 +62,7 @@
         <div class="input-group mb-3">
             <input type="text" class="form-control custom-form-control-border" name="puppy-name" aria-label="Кличка"
                 [class.invalid-form-field-value]="invalidFields.includes('name')" aria-describedby="basic-addon3"
-                [(ngModel)]="currentPuppyData.nickname" (change)="changesSaved = false" placeholder="Кличка" />
+                [(ngModel)]="currentPuppyData.nickname" (change)="profileService.dataChangesSaved = false" placeholder="Кличка" />
             <div class="custom-input-append"
                 (click)="currentPuppyData.gender = currentPuppyData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
                 <img height="17px" src="./assets/img/sex_{{currentPuppyData.gender == 'MALE' ? 'male' : 'female'}}.png"
@@ -79,7 +79,7 @@
                 name="puppy-breed" [(ngModel)]="curBreed" [class.invalid-form-field-value]="invalidFields.includes('breed')"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, puppyBreedFocus$, puppyBreedClick$, puppyBreedInstance)"
                 (focus)="puppyBreedFocus$.next($event.target.value)" (click)="puppyBreedClick$.next($event.target.value)"
-                (change)="changesSaved = false" #puppyBreedInstance="ngbTypeahead" id="breed" placeholder="Выбрать" aria-describedby="basic-addon2">
+                (change)="profileService.dataChangesSaved = false" #puppyBreedInstance="ngbTypeahead" id="breed" placeholder="Выбрать" aria-describedby="basic-addon2">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                 (click)="appService.toggleDropdownTextInput('breed', $event)" />
         </div>
@@ -98,7 +98,7 @@
                 [class.invalid-form-field-value]="invalidFields.includes('birthday')" [(ngModel)]="birthdayModel.year"
                 (change)="updateSelectedDate()" placeholder="Год">
             <input class="form-control custom-form-control-border" style="display: none;" [(ngModel)]="birthdayModel"
-                [minDate]="{year: 2000, month: 1, day: 1}" [maxDate]="getCurrentMaxDate()" ngbDatepicker (change)="changesSaved = false"
+                [minDate]="{year: 2000, month: 1, day: 1}" [maxDate]="getCurrentMaxDate()" ngbDatepicker (change)="profileService.dataChangesSaved = false"
                 #datePicker="ngbDatepicker">
             <div class="custom-input-append" (click)="datePicker.toggle()">
                 <img src="./assets/img/calendar.svg" alt="Календарь" />
@@ -110,7 +110,7 @@
         <label for="puppy-stigma">Клеймо (видно только вам)</label>
         <input class="form-control custom-form-control-border" type="text" name="puppy-stigma"
             [class.invalid-form-field-value]="invalidFields.includes('stigma')" [(ngModel)]="currentPuppyData.earmark"
-            (change)="changesSaved = false" placeholder="Код клейма" />
+            (change)="profileService.dataChangesSaved = false" placeholder="Код клейма" />
     </div>
 
 
@@ -123,7 +123,7 @@
                 [ngbTypeahead]="appService.fieldAutocomplete(fathers, dadDogFocus$, dadDogClick$, dadDogInstance)"
                 (focus)="dadDogFocus$.next($event.target.value)" (click)="onDadInputClick($event)"
                 (blur)="isDadEmptyButton = false" #dadDogInstance="ngbTypeahead" placeholder="Выбрать"
-                (change)="changesSaved = false" aria-describedby="basic-addon2">
+                (change)="profileService.dataChangesSaved = false" aria-describedby="basic-addon2">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                 (click)="appService.toggleDropdownTextInput('dad', $event)" />
         </div>
@@ -144,7 +144,7 @@
                 [ngbTypeahead]="appService.fieldAutocomplete(mothers, momDogFocus$, momDogClick$, momDogInstance)"
                 (focus)="momDogFocus$.next($event.target.value)" (click)="onMomInputClick($event)"
                 (blur)="isMomEmptyButton = false" #momDogInstance="ngbTypeahead" placeholder="Выбрать"
-                (change)="changesSaved = false" aria-describedby="basic-addon2">
+                (change)="profileService.dataChangesSaved = false" aria-describedby="basic-addon2">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                 (click)="appService.toggleDropdownTextInput('mom', $event)" />
         </div>
@@ -159,14 +159,14 @@
         <label for="puppy-info">Расскажите об этом щенке</label>
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
-        <textarea rows="3" class="form-control custom-form-control-border" (change)="changesSaved = false"
+        <textarea rows="3" class="form-control custom-form-control-border" (change)="profileService.dataChangesSaved = false"
             [class.invalid-form-field-value]="invalidFields.includes('info')"
             [(ngModel)]="currentPuppyData.about"></textarea>
     </div>
 
     <div class="breeder-profile-subpage-form-left">
         <label for="puppy-price">Стоимость щенка в рублях</label>
-        <input type="number" name="puppy-price" class="form-control custom-form-control-border" (change)="changesSaved = false"
+        <input type="number" name="puppy-price" class="form-control custom-form-control-border" (change)="profileService.dataChangesSaved = false"
             [class.invalid-form-field-value]="invalidFields.includes('price')" [(ngModel)]="currentPuppyData.price"
             placeholder="₽" />
     </div>

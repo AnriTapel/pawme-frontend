@@ -11,6 +11,7 @@ export class BreederProfileService {
   isMobileMenuVisible: boolean = false;
 
   dataChangesSaved: boolean = true;
+  parentTestsChangesSaved: boolean = true;
 
   profileSubpages: any[] = [
     { tag: 'about-nurcery', name: 'О питомнике' },
@@ -23,9 +24,10 @@ export class BreederProfileService {
   constructor(private appService: AppService, private alertService: AlertService) { }
 
   setCurProfilePage(page: any): void {
-    if (!this.dataChangesSaved) {
+    if (!this.dataChangesSaved || !this.parentTestsChangesSaved) {
       let onSuccess = () => {
         this.dataChangesSaved = true;
+        this.parentTestsChangesSaved = true;
         this.curProfilePage = page;
         this.isMobileMenuVisible = false;
         scroll(0, 0);

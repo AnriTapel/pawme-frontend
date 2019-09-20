@@ -41,7 +41,6 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   birthdayModel: NgbDateStruct = { day: null, month: null, year: null };
   invalidFields: any[] = [];
-  changesSaved: boolean = true;
 
   // What page to show - parents page or add/edit current parent
   isMainPage: boolean = true;
@@ -71,13 +70,18 @@ export class AddPuppyProfilePageComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void{
+    if (this.appService.userData)
+      this.appService.userData.puppies = this.puppiesData;
+  }
+
   showCurrentPuppyPage(index: number): void {
     if (index == -1) {
-      this.currentPuppyData = this.appService.userData.puppyDraft ? JSON.parse(JSON.stringify(this.appService.userData.puppyDraft))
+      this.currentPuppyData = this.appService.userData.puppyDraft ? this.appService.userData.puppyDraft
         : JSON.parse(JSON.stringify(this.DEFAULT_PUPPY_DATA));
       this.currentPuppyData.id = null;
     } else
-      this.currentPuppyData = JSON.parse(JSON.stringify(this.puppiesData[index]));
+      this.currentPuppyData = this.puppiesData[index];
 
     if (this.currentPuppyData.birthDate) {
       let birthDate = this.currentPuppyData.birthDate.split("-");
@@ -107,12 +111,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   switchGender(): void {
     this.currentPuppyData.gender = this.currentPuppyData.gender == 'MALE' ? 'FEMALE' : 'MALE';
-    this.changesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   updateSelectedDate() {
     this.birthdayModel = { year: this.birthdayModel.year, month: this.birthdayModel.month, day: this.birthdayModel.day };
-    this.changesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   previewPuppyImage(index: number): void {
@@ -126,7 +130,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadPetImage(body).subscribe((imageData: any) => {
         this.popupService.setShowStatus(false);
-        this.changesSaved = false;
+        this.profileService.dataChangesSaved = false;
         if (index == -1)
           this.currentPuppyData.gallery.push(imageData);
         else
@@ -138,7 +142,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   deletePuppyImage(index: number): void {
     this.currentPuppyData.gallery.splice(index, 1);
-    this.changesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   addPuppy(): void {
@@ -146,13 +150,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       return;
 
     this.preSaveOperation();
-    if (this.puppiesData.filter(it => it.id == this.currentPuppyData.id).length > 0) {
-      for (let i = 0; i < this.puppiesData.length; i++)
-        if (this.puppiesData[i].id == this.currentPuppyData.id) {
-          this.puppiesData[i] = this.currentPuppyData;
-          break;
-        }
-    } else
+    if (!this.currentPuppyData.id)
       this.puppiesData.push(this.currentPuppyData);
     this.saveChanges();
   }
@@ -165,7 +163,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   saveDraft() {
     this.preSaveOperation();
     this.breederService.setPuppyDraftUsingPUT(this.appService.userData.id, this.currentPuppyData).subscribe(() => {
-      this.changesSaved = true;
+      this.profileService.dataChangesSaved = true;
       this.appService.userData.puppyDraft = JSON.parse(JSON.stringify(this.currentPuppyData));
       this.currentPuppyData = null;
       this.birthdayModel = { day: null, month: null, year: null };
@@ -185,7 +183,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   saveChanges() {
     this.breederService.setPuppiesUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(() => {
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe(res => {
-        this.changesSaved = true;
+        this.profileService.dataChangesSaved = true;
         this.appService.userData = res;
         this.puppiesData = res.puppies;
         this.notificationService.setContext('Изменения успешно сохранены', true);

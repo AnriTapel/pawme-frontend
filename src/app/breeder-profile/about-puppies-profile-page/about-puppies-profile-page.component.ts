@@ -33,6 +33,11 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     };
   }
 
+  ngOnDestroy(): void{
+    if (this.appService.userData)
+      this.appService.userData.puppiesInfo = this.puppiesData;
+  }
+
   puppyTestClicked(test: PuppyTest): void {
     let testIndex = this.puppiesData.puppyTests.map(it => { return it.id }).indexOf(test.id);
     if (testIndex > -1)

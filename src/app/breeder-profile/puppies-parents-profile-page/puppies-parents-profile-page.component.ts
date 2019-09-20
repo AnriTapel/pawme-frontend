@@ -7,6 +7,7 @@ import { EventService } from '../../services/event-service/events.service';
 import { ParentsInfo, ParentTest, Parent } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
+import { BreederProfileService } from 'src/app/services/breeder-profile-service/breeder-profile.service';
 
 @Component({
   selector: 'app-puppies-parents-profile-page',
@@ -53,8 +54,6 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
   // What page to show - parents page or add/edit current parent
   isMainPage: boolean = true;
-  testsChangesSaved: boolean = true;
-  parentsChangesSaved: boolean = true;
 
   @ViewChild('bodyPartInstance', { static: true }) bodyPartInstance: NgbTypeahead;
   @ViewChild('medicalTestInstance', { static: true }) medicalTestInstance: NgbTypeahead;
@@ -68,7 +67,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
   constructor(public appService: AppService, private popupService: PopupTemplateService,
     private eventService: EventService, private breederService: BreederControllerService,
-    private notificationService: NotificationBarService) { }
+    private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
 
@@ -79,6 +78,11 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     };
   }
 
+  ngOnDestroy(): void{
+    if (this.appService.userData)
+      this.appService.userData.parentsInfo = this.parentsData;
+  }
+
   addMedical(): void {
     let curMedical: ParentTest = {
       category: this.currentBodyPart,
@@ -87,21 +91,21 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.parentsData.parentTests.push(curMedical);
     this.currentBodyPart = null;
     this.currentMedicalTest = null;
-    this.testsChangesSaved = false;
+    this.profileService.parentTestsChangesSaved = false;
   }
 
   deleteMedical(index: number): void {
     this.parentsData.parentTests.splice(index, 1);
-    this.testsChangesSaved = false;
+    this.profileService.parentTestsChangesSaved = false;
   }
 
   showCurrentParentPage(index: number): void {
     if (index == -1){
-      this.currentParentData = this.parentsData.parentDraft ? JSON.parse(JSON.stringify(this.parentsData.parentDraft))
+      this.currentParentData = this.parentsData.parentDraft ? this.parentsData.parentDraft
         : JSON.parse(JSON.stringify(this.DEFAULT_PARENT_DATA));
       this.currentParentData.id = null;  
     } else
-      this.currentParentData = JSON.parse(JSON.stringify(this.parentsData.parents[index]));
+      this.currentParentData = this.parentsData.parents[index];
 
     this.currentBreed = this.currentParentData.breed ? this.currentParentData.breed.name : null;
     this.isMainPage = false;
@@ -117,7 +121,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadPetImage(body).subscribe((imageData: any) => {
-        this.parentsChangesSaved = false;
+        this.profileService.dataChangesSaved = false;
         this.popupService.setShowStatus(false);
         if (index == -1)
           this.currentParentData.gallery.push(imageData);
@@ -130,28 +134,21 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
   deleteParentImage(index: number): void {
     this.currentParentData.gallery.splice(index, 1);
-    this.parentsChangesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   addParent() {
     if (!this.validateAddingFields())
       return;
-    // TODO: change adding or refreshing condition based on parents' id
     this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
-    if (this.parentsData.parents.filter(it => it.id == this.currentParentData.id).length > 0){
-      for (let i = 0; i < this.parentsData.parents.length; i++)
-        if (this.parentsData.parents[i].id == this.currentParentData.id){
-          this.parentsData.parents[i] = this.currentParentData;
-          break;
-        }
-    } else
-      this.parentsData.parents.push(this.currentParentData);
 
-    if (!this.currentParentData.id)
+    if (!this.currentParentData.id){
+      this.parentsData.parents.push(this.currentParentData);
       this.parentsData.parentDraft = null;
+    }
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {
-        this.parentsChangesSaved = true;
+        this.profileService.dataChangesSaved = true;
         this.appService.userData = res;
         this.parentsData = res.parentsInfo;
         this.currentParentData = null;
@@ -171,7 +168,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
   deleteParent(index: number): void {
     this.parentsData.parents.splice(index, 1);
-    this.parentsChangesSaved = false;
+    this.profileService.dataChangesSaved = false;
   }
 
   saveDraft() {
@@ -180,7 +177,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.parentsData.parentDraft = JSON.parse(JSON.stringify(this.currentParentData));
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
       this.appService.userData.parentsInfo = this.parentsData;
-      this.parentsChangesSaved = true;
+      this.profileService.dataChangesSaved = true;
       this.currentParentData = null;
       this.isMainPage = true;
       this.notificationService.setContext('Черновик успешно сохранен', true);
@@ -200,7 +197,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
       if (!this.appService.userData.parentsInfo)
         this.appService.userData.profileFill++;
-      this.parentsChangesSaved = true;
+      this.profileService.dataChangesSaved = true;
+      this.profileService.parentTestsChangesSaved = true;
       this.appService.userData.parentsInfo = this.parentsData;
       this.currentParentData = null;
       this.isMainPage = true;

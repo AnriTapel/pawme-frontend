@@ -55,6 +55,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.curExtraBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
   }
 
+  ngOnDestroy(): void {
+    if (this.appService.userData)
+      this.appService.userData.generalInfo = this.nurceryData;
+  }
+
   previewNurceryPhoto(): void {
     this.popupService.setPopupParams({
       width: 200, height: 200, isRect: false,

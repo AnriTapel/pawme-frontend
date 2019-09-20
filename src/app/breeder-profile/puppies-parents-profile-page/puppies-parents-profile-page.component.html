@@ -129,7 +129,7 @@
         <div class="input-group mb-3">
             <input type="text" class="form-control custom-form-control-border" name="parent-name"
                 [class.invalid-form-field-value]="invalidAddingFields.includes('name')" aria-label="Кличка"
-                (change)="parentsChangesSaved = false" aria-describedby="basic-addon3" [(ngModel)]="currentParentData.nickname" placeholder="Кличка" />
+                (change)="profileService.dataChangesSaved = false" aria-describedby="basic-addon3" [(ngModel)]="currentParentData.nickname" placeholder="Кличка" />
             <div class="custom-input-append"
                 (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
                 <img height="17px" src="./assets/img/sex_{{currentParentData.gender == 'MALE' ? 'male' : 'female'}}.png"
@@ -146,7 +146,7 @@
                 [(ngModel)]="currentBreed" [class.invalid-form-field-value]="invalidAddingFields.includes('breed')" id="breed"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
                 (focus)="parentBreedFocus$.next($event.target.value)" (click)="parentBreedClick$.next($event.target.value)"
-                (change)="parentsChangesSaved = false" #parentBreedInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
+                (change)="profileService.dataChangesSaved = false" #parentBreedInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('breed', $event)"/>
         </div>
 
@@ -157,7 +157,7 @@
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="currentParentData.info"
-            (change)="parentsChangesSaved = false" [class.invalid-form-field-value]="invalidAddingFields.includes('info')"></textarea>
+            (change)="profileService.dataChangesSaved = false" [class.invalid-form-field-value]="invalidAddingFields.includes('info')"></textarea>
     </div>
 
     <div class="add-parent-page-photos-block">
