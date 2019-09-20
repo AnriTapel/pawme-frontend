@@ -10,10 +10,10 @@ import { Router } from '@angular/router';
 })
 export class BreederProfileComponent implements OnInit {
 
-  constructor(public appService: AppService, public breederService: BreederProfileService, private router: Router) {
+  constructor(public appService: AppService, public profileService: BreederProfileService, private router: Router) {
     if (this.appService.meData.type != 'BREEDER')
       router.navigateByUrl('/login');
-    this.breederService.setCurProfilePage(this.breederService.profileSubpages[0]); 
+    this.profileService.setCurProfilePage(this.profileService.profileSubpages[0]); 
   }
 
   ngOnInit() {

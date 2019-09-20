@@ -115,8 +115,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
-        if (!this.appService.userData.generalInfo)
-          this.appService.userData.profileFill++;
+        this.profileService.updateProfileFullness();
         this.appService.userData.generalInfo = this.nurceryData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);

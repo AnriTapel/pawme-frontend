@@ -195,8 +195,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     if (!this.validateGeneralFields())
       return;
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
-      if (!this.appService.userData.parentsInfo)
-        this.appService.userData.profileFill++;
+      this.profileService.updateProfileFullness();
       this.profileService.dataChangesSaved = true;
       this.profileService.parentTestsChangesSaved = true;
       this.appService.userData.parentsInfo = this.parentsData;

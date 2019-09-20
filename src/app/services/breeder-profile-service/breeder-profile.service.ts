@@ -23,6 +23,20 @@ export class BreederProfileService {
 
   constructor(private appService: AppService, private alertService: AlertService) { }
 
+  updateProfileFullness() {
+    let index = 1;
+    if (this.appService.userData.generalInfo)
+      index++;
+    if (this.appService.userData.puppiesInfo)
+      index++;
+    if (this.appService.userData.about)
+      index++;
+    if (this.appService.userData.parentsInfo)
+      index++;
+    
+    this.appService.userData.profileFill = index;
+  }
+
   setCurProfilePage(page: any): void {
     if (!this.dataChangesSaved || !this.parentTestsChangesSaved) {
       let onSuccess = () => {
