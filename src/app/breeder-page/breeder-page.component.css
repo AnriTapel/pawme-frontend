@@ -31,12 +31,6 @@ span, p, div {
 }
 
 @media (max-width: 1201px) {
-  .slider-content {
-    overflow-x: scroll;
-  }
-}
-
-@media (max-width: 768px) {
   .slider-content .scroll-left-button,
   .slider-content .scroll-right-button {
     display: none;
@@ -44,8 +38,6 @@ span, p, div {
 }
 
 .slider {
-  width: 1440px;
-  min-width: 1440px;
   margin: 0 auto;
   overflow-x: scroll;
 }
@@ -93,11 +85,13 @@ span, p, div {
   top: 2em;
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 1201px) {
   .aside {
     position: relative;
     top: unset;
-    width: auto;
+    width: 100%;
+    border-radius: 0;
+    border: none;
   }
 }
 

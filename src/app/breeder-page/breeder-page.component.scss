@@ -42,10 +42,6 @@ span, p, div {
     }
 
     @media (max-width: $screen-lg - 1px) {
-        overflow-x: scroll;
-    }
-
-    @media (max-width: $screen-sm - 1px) {
         .scroll-left-button,
         .scroll-right-button{
             display: none;
@@ -54,8 +50,6 @@ span, p, div {
 }
 
 .slider {
-    width: 1440px;
-    min-width: 1440px;
     margin: 0 auto;
     overflow-x: scroll;
     .slider-item {
@@ -92,11 +86,13 @@ span, p, div {
     top: 2em;
 }
 
-@media screen and (max-width: $screen-sm){
+@media screen and (max-width: $screen-lg - 1){
     .aside {
         position: relative;
         top: unset;
-        width: auto;
+        width: 100%;
+        border-radius: 0;
+        border: none;
     }
 }
 
