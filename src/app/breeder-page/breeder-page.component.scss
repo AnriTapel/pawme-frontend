@@ -750,31 +750,7 @@ span, p, div {
             }
         }
     }
-
-    .our-instagram-title {
-        margin-bottom: 24px;
-
-        .instagram-link .link {
-            font-size: 20px;
-            color: #4a90e2;
-            &:hover {
-                text-decoration: none;
-            }
-        }
-    }
-
-    .our-instagram-content {
-        .image {
-            width: 345px;
-            height: 345px;
-        }
-        @media (max-width: $screen-sm - 1px) {
-            .image {
-                width: 50%;
-                height: 50%;
-            }
-        }
-    }
+    
     @media (max-width: $screen-sm - 1px) {
         padding: 0;
         h2 {

@@ -896,31 +896,6 @@ span, p, div {
   }
 }
 
-.section .our-instagram-title {
-  margin-bottom: 24px;
-}
-
-.section .our-instagram-title .instagram-link .link {
-  font-size: 20px;
-  color: #4a90e2;
-}
-
-.section .our-instagram-title .instagram-link .link:hover {
-  text-decoration: none;
-}
-
-.section .our-instagram-content .image {
-  width: 345px;
-  height: 345px;
-}
-
-@media (max-width: 768px) {
-  .section .our-instagram-content .image {
-    width: 50%;
-    height: 50%;
-  }
-}
-
 @media (max-width: 768px) {
   .section {
     padding: 0;
