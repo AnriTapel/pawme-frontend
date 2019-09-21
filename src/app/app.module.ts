@@ -41,6 +41,7 @@ import { ImageGalleryComponent } from './template-blocks/image-gallery/image-gal
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { AlertComponent } from './template-blocks/alert/alert.component';
 import { AboutUsComponent } from './secondary-page/about-us/about-us.component';
+import { ContactUsComponent } from './secondary-page/contact-us/contact-us.component';
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -75,7 +76,8 @@ export function initApp(appSerivce: AppService){
     ImageGalleryComponent,
     ChangePasswordComponent,
     AlertComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,

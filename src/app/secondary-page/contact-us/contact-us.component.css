@@ -23,7 +23,7 @@ h2 {
 .page-container .text-block {
   width: 90%;
   max-width: 670px;
-  margin: 0 auto 2em;
+  margin: 0 auto 5em;
 }
 
 .page-container .text-block img {
@@ -38,4 +38,4 @@ h2 {
     padding: 10% 5%;
   }
 }
-/*# sourceMappingURL=about-us.component.css.map */
+/*# sourceMappingURL=contact-us.component.css.map */

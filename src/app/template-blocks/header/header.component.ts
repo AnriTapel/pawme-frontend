@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit {
 
-  private profileHeaderRoutes = ['/sign-up', '/remind-password', '/mail-page', '/login', '/breeder-profile', '/about-us'];
+  private profileHeaderRoutes = ['/sign-up', '/remind-password', '/mail-page', '/login', '/breeder-profile', '/about-us', '/contact-us'];
   private profileHeaderPathnames = ['/changepass/', '/breeder/', '/preview/'];
 
   constructor(public appService: AppService, public popupService: PopupTemplateService, private http: HttpClient,

@@ -11,6 +11,7 @@ import { RemindPasswordComponent } from './forms/remind-password/remind-password
 import { MailPageComponent } from './forms/mail-page/mail-page.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { AboutUsComponent } from './secondary-page/about-us/about-us.component';
+import { ContactUsComponent } from './secondary-page/contact-us/contact-us.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'about-us', component: AboutUsComponent},
+  {path: 'contact-us', component: ContactUsComponent},
   {path: 'remind-password', component: RemindPasswordComponent},
   {path: 'changepass/:uuid', component: ChangePasswordComponent, pathMatch: 'full'},
   {path: 'breeder-landing', component: BreederLandingComponent},
