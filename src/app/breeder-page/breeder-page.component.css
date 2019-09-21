@@ -162,7 +162,7 @@ span, p, div {
   }
 }
 
-.our-instagram {
+.about-parents {
   margin-bottom: 0;
 }
 
@@ -677,6 +677,7 @@ span, p, div {
 }
 
 .section .about-breeder-content .right-side {
+  min-width: 271px;
   max-width: 271px;
 }
 
@@ -929,5 +930,19 @@ span, p, div {
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
+}
+
+.back-to-profile-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 9999;
+}
+
+@media (max-width: 768px) {
+  .back-to-profile-btn {
+    width: 90%;
+    left: 5%;
+  }
 }
 /*# sourceMappingURL=breeder-page.component.css.map */

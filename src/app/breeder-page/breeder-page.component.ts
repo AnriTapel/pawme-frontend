@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PopupTemplateService } from '../services/popup-service/popup-template.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../services/app-service/app.service';
 import { BreederControllerService } from '../api/api';
-import { Breeder } from '../model/models';
 import { DogCardService } from '../services/dog-card-service/dog-card.service';
 
 @Component({
@@ -13,6 +12,7 @@ import { DogCardService } from '../services/dog-card-service/dog-card.service';
 })
 export class BreederPageComponent implements OnInit {
 
+    isPreviewMode: boolean;
     collapse = {
         contract: false,
         warranty: false,
@@ -37,8 +37,17 @@ export class BreederPageComponent implements OnInit {
     timeoutHandlerRight: any;
     timeoutHandlerLeft: any;
 
-    constructor(private popupService: PopupTemplateService, private route: ActivatedRoute, public appService: AppService,
+    constructor(private popupService: PopupTemplateService, private router: Router, private route: ActivatedRoute, public appService: AppService,
         private breederService: BreederControllerService, public dogCardService: DogCardService) {
+
+        if (this.router.url.indexOf("/preview/") != -1) {
+            this.isPreviewMode = true;
+            if (this.appService.meData.type != "BREEDER") {
+                this.router.navigateByUrl('/login');
+                return;
+            }
+        } else
+            this.isPreviewMode = false;
 
         if (!this.appService.userData)
             this.breederService.getBreederUsingGET(parseInt(this.route.snapshot.paramMap.get('id')))
@@ -52,15 +61,40 @@ export class BreederPageComponent implements OnInit {
 
     ngOnInit() {
     }
+    
+    subpageStatus(): any {
+        let status = {
+            generalInfo: this.appService.userData.generalInfo != null,
+            puppiesInfo: this.appService.userData.puppiesInfo != null,
+            parentsInfo: this.appService.userData.parentsInfo != null,
+            about: this.appService.userData.about != null,
+            puppies: this.appService.userData.puppies.length > 0
+        }
+        return status;
+    }
+
+    getNurceryName(): string{
+        if (this.subpageStatus().generalInfo && this.appService.userData.generalInfo.name)
+            return this.appService.userData.generalInfo.name;
+        else
+            return this.appService.userData.name + " " + this.appService.userData.surname;
+
+    }
 
     getNameByBreeds(): string {
-        let name = "ЗАВОДЧИК " + this.appService.userData.generalInfo.mainBreed.name.toUpperCase();
+        let name = "ЗАВОДЧИК ";
+        if (!this.appService.userData.generalInfo )
+            return name;
+        else if (this.appService.userData.generalInfo.mainBreed)
+            name += this.appService.userData.generalInfo.mainBreed.name.toUpperCase();
         if (this.appService.userData.generalInfo.extraBreed)
             name += " И " + this.appService.userData.generalInfo.extraBreed.name.toUpperCase();
         return name;
     }
 
     getParentsTestsList(): void {
+        if (!this.appService.userData.parentsInfo)
+            return;
         for (let testCat of this.parentsTests) {
             let tests = this.appService.userData.parentsInfo.parentTests.filter(it => it.category == testCat.name);
             if (tests.length == 0)
@@ -137,6 +171,13 @@ export class BreederPageComponent implements OnInit {
     }
 
     getPuppyMedicalStatus(id: number): boolean {
+        if (!this.appService.userData.puppiesInfo)
+            return false;
         return this.appService.userData.puppiesInfo.puppyTests.filter(it => it.id == id).length > 0
+    }
+
+    backToProfile(){
+        scroll(0, 0);
+        this.router.navigateByUrl('/breeder-profile');
     }
 }

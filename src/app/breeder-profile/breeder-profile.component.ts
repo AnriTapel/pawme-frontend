@@ -13,13 +13,13 @@ export class BreederProfileComponent implements OnInit {
   constructor(public appService: AppService, public profileService: BreederProfileService, private router: Router) {
     if (this.appService.meData.type != 'BREEDER')
       router.navigateByUrl('/login');
-    this.profileService.setCurProfilePage(this.profileService.profileSubpages[0]); 
   }
 
   ngOnInit() {
   }
 
   showPreview() {
+    this.router.navigateByUrl('/preview/' + this.appService.userData.id);
   }
 
 }

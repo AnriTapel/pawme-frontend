@@ -13,8 +13,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit {
 
-  // '/changepass/13pjfwnf2-f2-f'
   private profileHeaderRoutes = ['/sign-up', '/remind-password', '/mail-page', '/login', '/breeder-profile'];
+  private profileHeaderPathnames = ['/changepass/', '/breeder/', '/preview/'];
 
   constructor(public appService: AppService, public popupService: PopupTemplateService, private http: HttpClient,
     private notificationService: NotificationBarService, private router: Router) { }
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
   isHeaderForProfile(): boolean{
     let isProfile = this.profileHeaderRoutes.includes(this.router.url);
     if (!isProfile){
-      isProfile = this.router.url.indexOf('/changepass/') != -1 || this.router.url.indexOf('/breeder/') != -1;
+      isProfile = this.profileHeaderPathnames.filter(it => this.router.url.indexOf(it) != -1).length != 0;
     }
     return isProfile;
   }

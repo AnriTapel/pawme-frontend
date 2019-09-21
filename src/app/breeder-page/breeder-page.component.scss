@@ -137,7 +137,7 @@ span, p, div {
     }
 }
 
-.our-instagram{
+.about-parents{
     margin-bottom: 0;
 }
 
@@ -547,6 +547,7 @@ span, p, div {
             margin-right: 30px;
         }
         .right-side{
+            min-width: 271px;
             max-width: 271px;
         }
 
@@ -783,4 +784,16 @@ span, p, div {
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto;
+}
+
+.back-to-profile-btn{
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+
+    @media (max-width: $screen-sm - 1px) {
+        width: 90%;
+        left: 5%;
+    }
 }

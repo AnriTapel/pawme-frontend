@@ -7,12 +7,6 @@ import { AlertService } from 'src/app/services/alert-service/alert.service';
 })
 export class BreederProfileService {
 
-  private curProfilePage: any;
-  isMobileMenuVisible: boolean = false;
-
-  dataChangesSaved: boolean = true;
-  parentTestsChangesSaved: boolean = true;
-
   profileSubpages: any[] = [
     { tag: 'about-nurcery', name: 'О питомнике' },
     { tag: 'about-puppies', name: 'О щенках' },
@@ -20,7 +14,13 @@ export class BreederProfileService {
     { tag: 'about-me', name: 'О себе' },
     { tag: 'add-puppy', name: 'Добавить щенков' }
   ];
-
+  
+  private curProfilePage: any = this.profileSubpages[0];
+  isMobileMenuVisible: boolean = false;
+  
+  dataChangesSaved: boolean = true;
+  parentTestsChangesSaved: boolean = true;
+  
   constructor(private appService: AppService, private alertService: AlertService) { }
 
   updateProfileFullness() {

@@ -16,7 +16,6 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   breederData: BreederAbout;
   currentClub: string = null;
-  currentClubs: Array<string> = [];
 
   invalidFields: Array<string> = [];
 
@@ -32,10 +31,6 @@ export class AboutMeProfilePageComponent implements OnInit {
       clubs: null,
       certificates: []
     }
-    if (this.breederData.clubs) {
-      this.currentClubs = this.breederData.clubs.split(";");
-    }
-
   }
 
   ngOnDestroy(): void{
@@ -92,13 +87,18 @@ export class AboutMeProfilePageComponent implements OnInit {
   }
 
   addClub(): void {
-    this.currentClubs.push(this.currentClub);
+    if (this.breederData.clubs = "")
+      this.breederData.clubs = this.currentClub;
+    else
+      this.breederData.clubs += ";" + this.currentClub;
     this.currentClub = null;
     this.profileService.dataChangesSaved = false;
   }
 
   deleteClub(index: number): void {
-    this.currentClubs.splice(index, 1);
+    let clubs = this.breederData.clubs.split(";")
+    clubs.splice(index, 1);
+    this.breederData.clubs = clubs.join(";");
     this.profileService.dataChangesSaved = false;
   }
 
@@ -126,7 +126,7 @@ export class AboutMeProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (this.currentClubs.length == 0) {
+    if (!this.breederData.clubs || this.breederData.clubs == "") {
       this.invalidFields.push('clubs');
       isValid = false;
     }
@@ -138,8 +138,7 @@ export class AboutMeProfilePageComponent implements OnInit {
     if (!this.validateInputFields())
       return;
 
-    this.breederData.clubs = this.currentClubs.join(";");
-    this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
+      this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
       () => {
         this.profileService.updateProfileFullness();
         this.appService.userData.about = this.breederData;
