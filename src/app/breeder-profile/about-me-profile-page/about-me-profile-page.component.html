@@ -65,7 +65,7 @@
         <label for="clubs">В каких клубах заводчиков вы состоите?</label>
         <br>
         <div class="btn-label-list">
-            <div *ngFor="let club of breederData.clubs.split(';');let i = index" class="btn-label" (click)="deleteClub(i)">
+            <div *ngFor="let club of currentClubs;let i = index" class="btn-label" (click)="deleteClub(i)">
                 <div class="btn-label-text">{{club}}</div>
                 <div>&nbsp;&nbsp;X</div>
             </div>

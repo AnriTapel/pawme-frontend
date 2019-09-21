@@ -56,8 +56,17 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this.appService.userData)
+    if (this.appService.userData){
+      if (this.curMainBreed && this.curMainBreed != "")
+        this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
+      else
+        this.nurceryData.mainBreed = null;
+      if (this.curExtraBreed && this.curExtraBreed != "" && this.nurceryData.mainBreed)
+        this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
+      else
+        this.nurceryData.extraBreed = null;
       this.appService.userData.generalInfo = this.nurceryData;
+    }
   }
 
   previewNurceryPhoto(): void {
@@ -111,7 +120,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
     if (!this.nurceryData.name)
       this.nurceryData.name = this.appService.userData.name + " " + this.appService.userData.surname;
-    if (this.curExtraBreed)
+    if (this.curExtraBreed && this.curExtraBreed != "")
       this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {

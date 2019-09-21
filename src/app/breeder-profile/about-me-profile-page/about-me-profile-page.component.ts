@@ -16,6 +16,7 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   breederData: BreederAbout;
   currentClub: string = null;
+  currentClubs: Array<string> = [];
 
   invalidFields: Array<string> = [];
 
@@ -31,9 +32,12 @@ export class AboutMeProfilePageComponent implements OnInit {
       clubs: null,
       certificates: []
     }
+    if (this.breederData.clubs) {
+      this.currentClubs = this.breederData.clubs.split(";");
+    }
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     if (this.appService.userData)
       this.appService.userData.about = this.breederData;
   }
@@ -87,18 +91,13 @@ export class AboutMeProfilePageComponent implements OnInit {
   }
 
   addClub(): void {
-    if (this.breederData.clubs = "")
-      this.breederData.clubs = this.currentClub;
-    else
-      this.breederData.clubs += ";" + this.currentClub;
+    this.currentClubs.push(this.currentClub);
     this.currentClub = null;
     this.profileService.dataChangesSaved = false;
   }
 
   deleteClub(index: number): void {
-    let clubs = this.breederData.clubs.split(";")
-    clubs.splice(index, 1);
-    this.breederData.clubs = clubs.join(";");
+    this.currentClubs.splice(index, 1);
     this.profileService.dataChangesSaved = false;
   }
 
@@ -126,7 +125,7 @@ export class AboutMeProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.breederData.clubs || this.breederData.clubs == "") {
+    if (this.currentClubs.length == 0) {
       this.invalidFields.push('clubs');
       isValid = false;
     }
@@ -138,7 +137,8 @@ export class AboutMeProfilePageComponent implements OnInit {
     if (!this.validateInputFields())
       return;
 
-      this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
+    this.breederData.clubs = this.currentClubs.join(";");
+    this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
       () => {
         this.profileService.updateProfileFullness();
         this.appService.userData.about = this.breederData;
@@ -152,7 +152,7 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.notificationService.setVisibility(true);
         scroll(0, 0);
       }
-      );
+    );
   }
 
 }

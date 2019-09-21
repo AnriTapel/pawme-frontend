@@ -310,7 +310,7 @@
                             </div>
                             <span class="clubs">Клубы:</span>
 
-                            <ul *ngIf="subpageStatus().about && subpageStatus().about.clubs">
+                            <ul *ngIf="subpageStatus().about && appService.userData.about.clubs">
                                 <li *ngFor="let club of appService.userData.about.clubs.split(';')">
                                     <span class="circle"></span>
                                     <span class="font-intro-book">{{club}}</span>
