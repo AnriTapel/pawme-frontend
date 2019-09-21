@@ -546,6 +546,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 5px 10px;
   font-size: 12px;
   font-family: 'Intro-Book';
+  cursor: pointer;
 }
 
 .btn-label-list {
@@ -567,6 +568,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 25px;
   border: unset;
   padding: 2px 8px;
+  cursor: pointer;
 }
 
 .btn-label-list .btn-label:focus, .btn-label-list .btn-label:active {
