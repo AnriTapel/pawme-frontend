@@ -10,12 +10,14 @@ import { SignUpComponent } from './forms/sign-up/sign-up.component';
 import { RemindPasswordComponent } from './forms/remind-password/remind-password.component';
 import { MailPageComponent } from './forms/mail-page/mail-page.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
+import { AboutUsComponent } from './secondary-page/about-us/about-us.component';
 
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignUpComponent},
+  {path: 'about-us', component: AboutUsComponent},
   {path: 'remind-password', component: RemindPasswordComponent},
   {path: 'changepass/:uuid', component: ChangePasswordComponent, pathMatch: 'full'},
   {path: 'breeder-landing', component: BreederLandingComponent},

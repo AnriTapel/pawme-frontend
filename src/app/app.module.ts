@@ -40,6 +40,7 @@ import { DogCardComponent } from './forms/dog-card/dog-card.component';
 import { ImageGalleryComponent } from './template-blocks/image-gallery/image-gallery.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { AlertComponent } from './template-blocks/alert/alert.component';
+import { AboutUsComponent } from './secondary-page/about-us/about-us.component';
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -73,7 +74,8 @@ export function initApp(appSerivce: AppService){
     DogCardComponent,
     ImageGalleryComponent,
     ChangePasswordComponent,
-    AlertComponent
+    AlertComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

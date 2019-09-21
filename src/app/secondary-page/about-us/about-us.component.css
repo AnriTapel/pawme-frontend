@@ -1,0 +1,41 @@
+h2 {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.page-wrapper {
+  width: 100%;
+  background-color: #f8f9fb;
+  padding: 5% 5% 10%;
+}
+
+.page-container {
+  max-width: 1170px;
+  margin: 0 auto;
+  border: 1px solid #cbd8f6;
+  background-color: #fff;
+}
+
+.page-container > img {
+  max-width: 100%;
+}
+
+.page-container .text-block {
+  width: 90%;
+  max-width: 670px;
+  margin: 0 auto 2em;
+}
+
+.page-container .text-block img {
+  margin: 3em 0;
+}
+
+@media screen and (max-width: 769px) {
+  h2 {
+    margin: 1em 0;
+  }
+  .page-wrapper {
+    padding: 10% 5%;
+  }
+}
+/*# sourceMappingURL=about-us.component.css.map */
