@@ -19,7 +19,7 @@ export class SignUpComponent implements OnInit {
     password: ""
   }
 
-  newBreederAcception: boolean = false;
+  newBreederAcception: boolean = true;
 
   invalidFields: any[] = [];
 

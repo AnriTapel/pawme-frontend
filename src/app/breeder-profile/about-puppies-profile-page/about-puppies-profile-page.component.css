@@ -86,7 +86,6 @@ input[type=checkbox] {
   white-space: nowrap;
 }
 
-.puppies-problems-block,
 .puppies-gifts-block {
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;

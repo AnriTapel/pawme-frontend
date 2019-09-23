@@ -113,15 +113,6 @@
             ngbTooltip="Текст подсказки, которая будет всплывать при наведении!">Почему это важно?</span>
     </div>
 
-    <div class="puppies-problems-block">
-        <label for="problems">Какие проблемы со здоровьем покрывает гарантия?</label>
-        <br>
-        <span class="block-description">Обычно заводчики указывают заболевания или проблемные части тела, специфические
-            для конкретной породы.</span>
-        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceCoverage"
-            (change)="profileService.dataChangesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('coverage')"></textarea>
-    </div>
-
     <hr>
 
     <div class="puppies-gifts-block">

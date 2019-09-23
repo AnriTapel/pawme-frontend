@@ -109,11 +109,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       this.invalidFields.push('term');
       isValid = false;
     }
-
-    if (!this.puppiesData.insuranceCoverage || this.puppiesData.insuranceCoverage == "") {
-      this.invalidFields.push('coverage');
-      isValid = false;
-    }
+    
     return isValid;
   }
 }
