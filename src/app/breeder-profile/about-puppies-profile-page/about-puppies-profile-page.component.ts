@@ -4,6 +4,7 @@ import { PuppiesInfo, PuppyTest } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
+import { EventService } from 'src/app/services/event-service/events.service';
 
 @Component({
   selector: 'app-about-puppies-profile-page',
@@ -14,13 +15,13 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
   puppiesData: PuppiesInfo;
   invalidFields: Array<string> = [];
-  changesSaved: boolean = true;
+  saveChagesEvent: any;
 
-  constructor(public appService: AppService, private breederService: BreederControllerService,
+  constructor(public appService: AppService, private breederService: BreederControllerService, private eventService: EventService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
-    this.puppiesData = <PuppiesInfo>this.appService.userData.puppiesInfo || {
+    this.puppiesData = this.appService.userData.puppiesInfo ? <PuppiesInfo>JSON.parse(JSON.stringify(this.appService.userData.puppiesInfo)) : {
       age: null,
       priceFrom: null,
       priceTo: null,
@@ -31,11 +32,11 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       insuranceCoverage: null,
       gifts: null
     };
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
   }
 
   ngOnDestroy(): void{
-    if (this.appService.userData)
-      this.appService.userData.puppiesInfo = this.puppiesData;
+    this.saveChagesEvent.unsubscribe();
   }
 
   puppyTestClicked(test: PuppyTest): void {
@@ -109,7 +110,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       this.invalidFields.push('term');
       isValid = false;
     }
-    
+
     return isValid;
   }
 }

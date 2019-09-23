@@ -127,6 +127,27 @@ input[type=number]::-webkit-outer-spin-button {
     transition: all 0.5s ease;
 }
 
+.custom-tooltip .tooltip-inner{
+    background-color: #fff;
+    border: 1px solid #cbd8f6;
+    padding: 1em;
+    color: #0e0b4d !important;
+    font-size: 14px !important;
+    font-family: 'Intro-Regular' !important;
+
+    p{
+        text-align: left;
+        margin-bottom: .5em;
+        color: #0e0b4d !important;
+        font-size: 14px !important;
+        font-family: 'Intro-Regular' !important;
+    }
+}
+
+.custom-tooltip .arrow::before{
+    border-bottom-color: #cbd8f6;
+}
+
 .overlay-block{
     width: 100%;
     height: 100%;

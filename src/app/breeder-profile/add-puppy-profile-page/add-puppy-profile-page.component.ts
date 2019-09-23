@@ -38,6 +38,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   curMotherNickname: string;
   curFatherNickname: string;
   curBreed: string;
+  saveChagesEvent: any;
 
   birthdayModel: NgbDateStruct = { day: null, month: null, year: null };
   invalidFields: any[] = [];
@@ -63,16 +64,16 @@ export class AddPuppyProfilePageComponent implements OnInit {
     private eventService: EventService, public profileService: BreederProfileService, public breederService: BreederControllerService) { }
 
   ngOnInit() {
-    this.puppiesData = this.appService.userData.puppies;
+    this.puppiesData = JSON.parse(JSON.stringify(this.appService.userData.puppies));
     if (this.appService.userData.parentsInfo) {
       this.fathers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "MALE");
       this.mothers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
     }
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
   }
 
   ngOnDestroy(): void{
-    if (this.appService.userData)
-      this.appService.userData.puppies = this.puppiesData;
+    this.saveChagesEvent.unsubscribe();
   }
 
   showCurrentPuppyPage(index: number): void {
@@ -185,7 +186,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe(res => {
         this.profileService.dataChangesSaved = true;
         this.appService.userData = res;
-        this.puppiesData = res.puppies;
+        this.puppiesData = JSON.parse(JSON.stringify(res.puppies));
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.isMainPage = true;

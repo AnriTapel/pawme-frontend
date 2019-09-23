@@ -30,6 +30,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   currentBodyPart: string;
   currentMedicalTest: string;
   currentBreed: string;
+  saveChagesEvent: any;
 
   invalidAddingFields: any[] = [];
   invalidGeneralFields: any[] = [];
@@ -70,17 +71,16 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
-
-    this.parentsData = <ParentsInfo>this.appService.userData.parentsInfo || {
+    this.parentsData = this.appService.userData.parentsInfo ? <ParentsInfo>JSON.parse(JSON.stringify(this.appService.userData.parentsInfo)) : {
       parents: [],
       parentTests: [],
       parentDraft: null
     };
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
   }
 
   ngOnDestroy(): void{
-    if (this.appService.userData)
-      this.appService.userData.parentsInfo = this.parentsData;
+    this.saveChagesEvent.unsubscribe();
   }
 
   addMedical(): void {
@@ -150,7 +150,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {
         this.profileService.dataChangesSaved = true;
         this.appService.userData = res;
-        this.parentsData = res.parentsInfo;
+        this.parentsData = JSON.parse(JSON.stringify(res.parentsInfo));
         this.currentParentData = null;
         this.currentBreed = null;
         this.isMainPage = true;
@@ -176,7 +176,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
     this.parentsData.parentDraft = JSON.parse(JSON.stringify(this.currentParentData));
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
-      this.appService.userData.parentsInfo = this.parentsData;
+      this.appService.userData.parentsInfo = JSON.parse(JSON.stringify(this.parentsData));
       this.profileService.dataChangesSaved = true;
       this.currentParentData = null;
       this.isMainPage = true;
@@ -198,7 +198,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.profileService.updateProfileFullness();
       this.profileService.dataChangesSaved = true;
       this.profileService.parentTestsChangesSaved = true;
-      this.appService.userData.parentsInfo = this.parentsData;
+      this.appService.userData.parentsInfo = JSON.parse(JSON.stringify(this.parentsData));
       this.currentParentData = null;
       this.isMainPage = true;
       this.notificationService.setContext('Изменения успешно сохранены', true);

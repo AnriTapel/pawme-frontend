@@ -21,8 +21,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   curMainBreed: string;
   curExtraBreed: string;
   isAdditionalBreed: boolean = false;
-  changesSaved: boolean = true;
   invalidFields: string[] = [];
+  saveChagesEvent: any;
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
   @ViewChild('mainBreedInstance', { static: true }) mainBreedInstance: NgbTypeahead;
@@ -38,7 +38,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     private eventService: EventService, private breederService: BreederControllerService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
-    this.nurceryData = <BreederInfo>this.appService.userData.generalInfo || {
+    this.nurceryData = this.appService.userData.generalInfo ? <BreederInfo>JSON.parse(JSON.stringify(this.appService.userData.generalInfo)) : {
       name: null,
       city: null,
       mainBreed: null,
@@ -53,20 +53,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.isAdditionalBreed = this.nurceryData.extraBreed ? true : false;
     this.curMainBreed = this.nurceryData.mainBreed ? this.nurceryData.mainBreed.name : null;
     this.curExtraBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
   }
 
   ngOnDestroy(): void {
-    if (this.appService.userData){
-      if (this.curMainBreed && this.curMainBreed != "")
-        this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
-      else
-        this.nurceryData.mainBreed = null;
-      if (this.curExtraBreed && this.curExtraBreed != "" && this.nurceryData.mainBreed)
-        this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
-      else
-        this.nurceryData.extraBreed = null;
-      this.appService.userData.generalInfo = this.nurceryData;
-    }
+    this.saveChagesEvent.unsubscribe();
   }
 
   previewNurceryPhoto(): void {

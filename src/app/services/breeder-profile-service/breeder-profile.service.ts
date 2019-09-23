@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppService } from '../app-service/app.service';
 import { AlertService } from 'src/app/services/alert-service/alert.service';
+import { EventService } from '../event-service/events.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class BreederProfileService {
   dataChangesSaved: boolean = true;
   parentTestsChangesSaved: boolean = true;
   
-  constructor(private appService: AppService, private alertService: AlertService) { }
+  constructor(private appService: AppService, private alertService: AlertService, private eventService: EventService) { }
 
   updateProfileFullness() {
     let index = 1;
@@ -48,7 +49,10 @@ export class BreederProfileService {
       };
 
       this.alertService.showDialog(["Все несохраненные изменения будут утеряны. Перейти в другой раздел?"], 
-        onSuccess, () => {this.isMobileMenuVisible = false});
+        onSuccess, () => {
+          this.eventService.raiseEvent('save-changes-after-dialog', null);
+          this.isMobileMenuVisible = false;
+        });
     } else {
       this.curProfilePage = page;
       this.isMobileMenuVisible = false;

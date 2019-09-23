@@ -1,3 +1,11 @@
+<ng-template #progessBarTooltip>
+    <p>Чтобы получить статус "Заводчик Petman", заполните эти разделы:</p>
+    <p><img *ngIf="appService.userData.generalInfo" src="./assets/img/check-mark.png" width="14px" style="margin: 0 5px 5px 0"/>О питомнике</p>
+    <p><img *ngIf="appService.userData.puppiesInfo" src="./assets/img/check-mark.png" width="14px" style="margin: 0 5px 5px 0"/>О щенках</p>
+    <p><img *ngIf="appService.userData.parentsInfo" src="./assets/img/check-mark.png" width="14px" style="margin: 0 5px 5px 0"/>Родители щенков</p>
+    <p><img *ngIf="appService.userData.about" src="./assets/img/check-mark.png" width="14px" style="margin: 0 5px 5px 0"/>О себе</p>
+</ng-template>
+
 <hr>
 
 <div class="profile-container">
@@ -6,7 +14,7 @@
         <div class="progress-bar-base">
         </div>
 
-        <div class="progress-bar-sections">
+        <div class="progress-bar-sections" placement="bottom" tooltipClass="custom-tooltip" [ngbTooltip]="progessBarTooltip">
             <div></div>
             <div></div>
             <div></div>
@@ -16,16 +24,14 @@
             </div>
         </div>
 
-        <div class="progress-line" [style.width.%]="this.appService.userData.profileFill * 20" 
-            [class.partial-progress-line]="this.appService.userData.profileFill != 5">
+        <div class="progress-line" [style.width.%]="this.appService.userData.profileFill * 20" [class.partial-progress-line]="this.appService.userData.profileFill != 5">
         </div>
 
     </div>
 
     <div class="profile-menu-container-desktop">
         <div class="profile-menu-desktop">
-            <div *ngFor="let subpage of profileService.profileSubpages" (click)="profileService.setCurProfilePage(subpage)"
-                [class.active-page]="profileService.getCurProfilePage().tag == subpage.tag" 
+            <div *ngFor="let subpage of profileService.profileSubpages" (click)="profileService.setCurProfilePage(subpage)" [class.active-page]="profileService.getCurProfilePage().tag == subpage.tag"
                 [class.hidden-underline]="profileService.removeUnderlineForBlock().tag == subpage.tag">
                 {{subpage.name}}
             </div>

@@ -19,12 +19,13 @@ export class AboutMeProfilePageComponent implements OnInit {
   currentClubs: Array<string> = [];
 
   invalidFields: Array<string> = [];
+  saveChagesEvent: any;
 
   constructor(private popupService: PopupTemplateService, private appService: AppService, private eventService: EventService,
     private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
-    this.breederData = <BreederAbout>this.appService.userData.about || {
+    this.breederData = this.appService.userData.about ? <BreederAbout>JSON.parse(JSON.stringify(this.appService.userData.about)) : {
       about: null,
       howItStarted: null,
       outstandingInfo: null,
@@ -35,11 +36,11 @@ export class AboutMeProfilePageComponent implements OnInit {
     if (this.breederData.clubs) {
       this.currentClubs = this.breederData.clubs.split(";");
     }
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
   }
 
   ngOnDestroy(): void {
-    if (this.appService.userData)
-      this.appService.userData.about = this.breederData;
+    this.saveChagesEvent.unsubscribe();
   }
 
   previewPersonalImage() {
