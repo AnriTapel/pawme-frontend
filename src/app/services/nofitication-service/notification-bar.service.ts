@@ -29,5 +29,7 @@ export class NotificationBarService {
 
   setVisibility(isVisible: boolean): void{
     this.isVisible = isVisible;
+    if (isVisible)
+      setTimeout(() => this.isVisible = false, 2500);
   }
 }

@@ -127,6 +127,10 @@ input[type=number]::-webkit-outer-spin-button {
     transition: all 0.5s ease;
 }
 
+.custom-tooltip{
+    opacity: 1 !important;
+}
+
 .custom-tooltip .tooltip-inner{
     background-color: #fff;
     border: 1px solid #cbd8f6;

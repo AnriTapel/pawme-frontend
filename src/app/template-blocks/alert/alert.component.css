@@ -1,3 +1,12 @@
+h3 {
+  font-size: 24px;
+  font-family: 'Intro-Regular';
+}
+
+.warning-title {
+  color: #c80000;
+}
+
 .message-block {
   position: relative;
   margin: 0 auto;
@@ -10,24 +19,31 @@
   background: #fff;
   border-radius: 5px;
   border: 1px solid #e6e8f5;
-  padding: 2em;
+  padding: 3.5em;
 }
 
 .message-body {
-  margin: 40px 20px;
+  margin: 40px 0;
   text-align: center;
 }
 
 .message-body div {
   font-size: 16px;
-  font-family: 'Intro-Regular';
+  font-family: 'Intro-Book';
   color: #0e0b4d;
 }
 
 .message-buttons {
-  display: block;
   width: 100%;
-  text-align: right;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .message-buttons a {
@@ -38,12 +54,19 @@
   .message-block {
     top: 2vh;
     width: 90vw;
+    padding: 1.5em;
   }
   .message-buttons {
-    text-align: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column;
   }
   .message-buttons a {
-    margin-right: unset;
+    width: 90%;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
   }
   .message-buttons a:nth-child(1) {
     margin-bottom: 1em;

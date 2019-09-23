@@ -15,13 +15,13 @@ export class BreederProfileService {
     { tag: 'about-me', name: 'О себе' },
     { tag: 'add-puppy', name: 'Добавить щенков' }
   ];
-  
+
   private curProfilePage: any = this.profileSubpages[0];
   isMobileMenuVisible: boolean = false;
-  
+
   dataChangesSaved: boolean = true;
   parentTestsChangesSaved: boolean = true;
-  
+
   constructor(private appService: AppService, private alertService: AlertService, private eventService: EventService) { }
 
   updateProfileFullness() {
@@ -34,7 +34,7 @@ export class BreederProfileService {
       index++;
     if (this.appService.userData.parentsInfo)
       index++;
-    
+
     this.appService.userData.profileFill = index;
   }
 
@@ -48,11 +48,14 @@ export class BreederProfileService {
         scroll(0, 0);
       };
 
-      this.alertService.showDialog(["Все несохраненные изменения будут утеряны. Перейти в другой раздел?"], 
-        onSuccess, () => {
-          this.eventService.raiseEvent('save-changes-after-dialog', null);
-          this.isMobileMenuVisible = false;
-        });
+      let onError = () => {
+        this.eventService.raiseEvent('save-changes-after-dialog', null);
+        this.isMobileMenuVisible = false;
+      };
+
+      this.alertService.showDialog("Вы не сохранили изменения", "warning-title", 
+      ["Все несохраненные изменения будут утеряны. Перейти в другой раздел?"],
+        "Перейти без сохранения", "custom-btn btn-transparent", "Сохранить изменения", "custom-btn btn-purple", onSuccess, onError );
     } else {
       this.curProfilePage = page;
       this.isMobileMenuVisible = false;

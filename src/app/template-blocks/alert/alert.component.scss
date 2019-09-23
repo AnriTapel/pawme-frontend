@@ -1,3 +1,12 @@
+h3{
+    font-size: 24px;
+    font-family: 'Intro-Regular';
+}
+
+.warning-title{
+    color: #c80000;
+}
+
 .message-block {
     position: relative;
     margin: 0 auto;
@@ -10,24 +19,25 @@
     background: #fff;
     border-radius: 5px;
     border: 1px solid #e6e8f5;
-    padding: 2em;
+    padding: 3.5em;
 }
 
 .message-body {
-    margin: 40px 20px;
+    margin: 40px 0;
     text-align: center;
 
     div{
         font-size: 16px;
-        font-family: 'Intro-Regular';
+        font-family: 'Intro-Book';
         color: #0e0b4d;
     }
 }
 
 .message-buttons {
-    display: block;
     width: 100%;
-    text-align: right;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-around;
 
     a{
         margin-right: 1em;
@@ -35,16 +45,19 @@
 }
 
 @media screen and (max-width: 769px){
+    
     .message-block{
         top: 2vh;
         width: 90vw;
+        padding: 1.5em;
     }
 
     .message-buttons{
-        text-align: center;
+        flex-flow: column;
 
         a{
-            margin-right: unset;
+            width: 90%;
+            align-self: center;
         }
 
         a:nth-child(1){

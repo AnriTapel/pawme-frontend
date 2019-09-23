@@ -1,11 +1,12 @@
 <div *ngIf="alertService.visible" class="overlay-block">
     <div class="message-block">
+        <h3 [class]="titleClass">{{titleText}}</h3>
         <div class="message-body" *ngIf="messageList != null">
             <div *ngFor="let message of messageList">{{message}}</div>
         </div>
         <div class="message-buttons">
-            <a *ngIf="button1Text" (click)="onButton1Click()" class="custom-btn btn-purple">{{button1Text}}</a>
-            <a *ngIf="button2Text" (click)="onButton2Click()" class="custom-btn btn-transparent">{{button2Text}}</a>
+            <a *ngIf="button1Text" (click)="onButton1Click()" [class]="button1Class">{{button1Text}}</a>
+            <a *ngIf="button2Text" (click)="onButton2Click()" [class]="button2Class">{{button2Text}}</a>
         </div>
     </div>
 </div>

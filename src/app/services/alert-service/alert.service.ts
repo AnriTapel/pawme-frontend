@@ -25,11 +25,14 @@ export class AlertService {
     this.alertStatus.next(alertObj);
   }
 
-  showDialog(messageList: string[], onSuccessFunction: Function, onCancelFunction: Function): Observable<void> {
+  showDialog(titleText: string, titleClass: string, messageList: string[], button1Text: string, button1Class: string, button2Text: string, 
+      button2Class: string, onSuccessFunction: Function, onCancelFunction: Function): Observable<void> {
     let alertObj: AlertMessage = { 
       messageList: messageList,
-      button1Text: 'Да', button1Function: onSuccessFunction,
-      button2Text: 'Нет', button2Function: onCancelFunction
+      titleText: titleText,
+      titleClass: titleClass,
+      button1Text: button1Text, button1Class: button1Class, button1Function: onSuccessFunction,
+      button2Text: button2Text,  button2Class: button2Class, button2Function: onCancelFunction
     };
     this.alertStatus.next(alertObj);
     return;
