@@ -1,6 +1,6 @@
 <div class="overlay-block" (click)="closeCard()">
     <div class="dog-cart-container" (click)="$event.stopPropagation()">
-        <img src="./assets/img/close-button-black.svg" alt="Закрыть" (click)="closeCard()" />
+        <img src="./assets/img/close-button-white.svg" alt="Закрыть" (click)="closeCard()" />
         <div class="dog-gallery">
             <img *ngIf="dog.gallery.length > 1" class="previous-img" src="./assets/img/arrow-left.svg" alt="Предыдущая" 
                 (click)="gallery.previousSlide()"/>
@@ -19,9 +19,10 @@
         <div *ngIf="!isPuppy" class="parent-info-block">
             <div>
                 <span>{{dog.nickname}}</span>
+                <img src="./assets/img/sex_{{dog.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол щенка" /><br/>
                 <span>{{dog.breed.name}}</span>
             </div>
-            <img src="./assets/img/sex_{{dog.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол щенка" />
+            
             <p>{{dog.info}}</p>
         </div>
 
@@ -30,9 +31,9 @@
                 <div class="puppy-info-block">
                     <div>
                         <span>{{dog.nickname}}</span>
+                        <img src="./assets/img/sex_{{dog.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол щенка" /><br/>
                         <span>{{dog.breed.name}}</span>
                     </div>
-                    <img src="./assets/img/sex_{{dog.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол щенка" />
                     <p>{{dog.about}}</p>
                 </div>
                 <div class="ask-question-block">

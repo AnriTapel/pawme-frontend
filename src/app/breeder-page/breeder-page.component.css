@@ -932,17 +932,49 @@ span, p, div {
   background-size: auto;
 }
 
-.back-to-profile-btn {
+.back-to-profile-bar {
   position: fixed;
-  bottom: 30px;
-  left: 30px;
+  top: 0;
+  height: 50px;
+  width: 100%;
+  padding: 0 5em;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background-color: #736cd1;
   z-index: 9999;
 }
 
+.back-to-profile-bar img {
+  width: 100px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-right: 25px;
+}
+
+.back-to-profile-bar span {
+  font-size: 18px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  color: #fff;
+}
+
 @media (max-width: 768px) {
-  .back-to-profile-btn {
-    width: 90%;
-    left: 5%;
+  .back-to-profile-bar {
+    padding: 0 1.5em;
+  }
+  .back-to-profile-bar img {
+    width: 65px;
+    margin-right: 10px;
+  }
+  .back-to-profile-bar span {
+    font-size: 14px;
   }
 }
 /*# sourceMappingURL=breeder-page.component.css.map */

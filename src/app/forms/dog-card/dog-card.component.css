@@ -5,8 +5,8 @@ p {
 .dog-cart-container {
   width: 60vw;
   max-width: 770px;
-  max-height: 90vh;
-  top: 2vh;
+  max-height: 94vh;
+  top: 3vh;
   margin: 0 auto;
   position: relative;
   overflow-y: auto;
@@ -52,31 +52,31 @@ p {
 
 .parent-info-block > div:nth-child(1),
 .puppy-info-block > div:nth-child(1) {
-  width: calc(100% - 20px);
+  width: 100%;
   display: inline-block;
 }
 
 .parent-info-block span,
 .puppy-info-block span {
   display: inline-block;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .parent-info-block span:nth-child(1),
 .puppy-info-block span:nth-child(1) {
   font-family: 'Intro-Bold';
-  display: block;
 }
 
-.parent-info-block span:nth-child(2),
-.puppy-info-block span:nth-child(2) {
+.parent-info-block span:nth-child(4),
+.puppy-info-block span:nth-child(4) {
   font-family: 'Intro-Book';
   opacity: 0.5;
 }
 
 .parent-info-block img,
 .puppy-info-block img {
-  position: absolute;
+  margin-left: .75em;
+  margin-bottom: 5px;
 }
 
 .parent-info-block {
@@ -149,7 +149,7 @@ p {
     display: none;
   }
   .dog-cart-container {
-    width: 90%;
+    width: 100%;
   }
   .parent-info-block {
     padding: .5em;
@@ -166,6 +166,7 @@ p {
   }
   .puppy-meta-parents-block .puppy-parents-block {
     width: 100%;
+    margin-top: 2em;
   }
 }
 /*# sourceMappingURL=dog-card.component.css.map */

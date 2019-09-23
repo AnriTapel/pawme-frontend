@@ -38,6 +38,13 @@ ly-cropping {
   margin: auto 2em;
 }
 
+.upload-btn {
+  color: #645fc9 !important;
+  -webkit-text-decoration: underline #645fc9 !important;
+          text-decoration: underline #645fc9 !important;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 769px) {
   .buttons-block button {
     margin: unset;

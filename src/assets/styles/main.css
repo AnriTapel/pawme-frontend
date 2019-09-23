@@ -798,7 +798,7 @@ ngb-datepicker .bg-light {
     display: block;
   }
   .breeder-profile-subpage-container .lower-btn {
-    margin-bottom: 2.5em;
+    margin: 2.5em 0;
   }
   .breeder-profile-subpage-container .custom-input-append {
     margin-top: 3px;

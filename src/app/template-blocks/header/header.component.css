@@ -2,8 +2,9 @@ header {
   background-color: #f8f9fb;
 }
 
-header > img {
+.navbar-brand > img {
   width: 150px;
+  outline: none;
 }
 
 .menu-btn {

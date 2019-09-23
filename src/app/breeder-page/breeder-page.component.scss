@@ -786,14 +786,39 @@ span, p, div {
     background-size: auto;
 }
 
-.back-to-profile-btn{
+.back-to-profile-bar{
     position: fixed;
-    bottom: 30px;
-    left: 30px;
+    top: 0;
+    height: 50px;
+    width: 100%;
+    padding: 0 5em;
+    display: inline-flex;
+    flex-direction: row;
+    background-color: #736cd1;
     z-index: 9999;
 
+    img{
+        width: 100px;
+        align-self: center;
+        margin-right: 25px;
+    }
+
+    span{
+        font-size: 18px;
+        align-self: center;
+        color: #fff;
+    }
+
     @media (max-width: $screen-sm - 1px) {
-        width: 90%;
-        left: 5%;
+        padding: 0 1.5em;
+
+        img{
+            width: 65px;
+            margin-right: 10px;
+        }
+
+        span{
+            font-size: 14px;
+        }
     }
 }

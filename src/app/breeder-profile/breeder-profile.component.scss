@@ -116,11 +116,6 @@ hr{
         position: relative; 
         cursor: pointer;
 
-        &:hover{
-            background-color: #eeeff1;
-            transition: all 0.5s ease;
-        }
-
         &:before{
             content : "";
             position: absolute;
@@ -136,6 +131,14 @@ hr{
         &:before{
             display: none;
         }
+    }
+}
+
+.profile-menu-desktop{
+
+    div:hover{
+        background-color: #eeeff1;
+        transition: all 0.5s ease;
     }
 }
 

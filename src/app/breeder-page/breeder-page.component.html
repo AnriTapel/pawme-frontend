@@ -1,5 +1,10 @@
 <ng-container *ngIf="appService.userData">
 
+    <div *ngIf="isPreviewMode" class="back-to-profile-bar" (click)="backToProfile()">
+        <img src="./assets/img/long-arrow.svg" alt="Вернуться в кабинет" />
+        <span>Вернуться в личный кабинет</span>
+    </div>
+
     <div *ngIf="subpageStatus().generalInfo" class="slider-content">
         <img *ngIf="getScrollLeftValue() > 0 && appService.userData.generalInfo.gallery.length > 3"
             class="scroll-left-button" src="./assets/img/arrow-left.svg" alt="Стрелка влево"
@@ -384,9 +389,6 @@
             </section>
         </div>
     </div>
-
-    <input *ngIf="isPreviewMode" type="button" class="custom-btn btn-purple back-to-profile-btn"
-        value="Вернуться в кабинет" (click)="backToProfile()" />
 
 </ng-container>
 

@@ -1,7 +1,7 @@
 <header [ngClass]="{'header-for-profile': isHeaderForProfile()}">
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand">
-            <img src="./assets/img/logo.png" alt="PawMe логотип" width="150px;">
+            <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
         </a>
 
         <div *ngIf="appService.meData.type != 'ANONYMOUS'" class="my-2 my-lg-0">

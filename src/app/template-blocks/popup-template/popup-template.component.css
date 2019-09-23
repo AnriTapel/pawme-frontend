@@ -24,11 +24,14 @@
 
 @media screen and (max-width: 769px) {
   .popup-block {
-    width: 80vw;
-    top: 2vh !important;
+    width: 100%;
+    max-height: 94vh !important;
+    top: 3vh !important;
+    padding: 1em 0;
   }
   .popup-block > img {
     right: 10px;
+    top: 24px;
   }
 }
 /*# sourceMappingURL=popup-template.component.css.map */

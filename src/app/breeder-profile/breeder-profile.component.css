@@ -126,13 +126,6 @@ hr {
   cursor: pointer;
 }
 
-.profile-menu-desktop div:hover,
-.profile-menu-mobile div:hover {
-  background-color: #eeeff1;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-
 .profile-menu-desktop div:before,
 .profile-menu-mobile div:before {
   content: "";
@@ -147,6 +140,12 @@ hr {
 .profile-menu-desktop div:nth-child(1):before,
 .profile-menu-mobile div:nth-child(1):before {
   display: none;
+}
+
+.profile-menu-desktop div:hover {
+  background-color: #eeeff1;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .profile-menu-mobile {
