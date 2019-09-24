@@ -47,7 +47,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 3em auto;
 }
 
 .what-is-avail-block section h3, .what-is-avail-block section h4 {
@@ -64,6 +63,10 @@
       -ms-grid-row-align: center;
       align-self: center;
   max-width: 620px;
+}
+
+.what-is-avail-block .breeder-page-block {
+  margin: 4em auto 5.5em;
 }
 
 .what-is-avail-block .breeder-page-block div:nth-child(1) {
@@ -96,6 +99,10 @@
   max-width: 620px;
   font-size: 20px;
   line-height: 26px;
+}
+
+.what-is-avail-block .breeder-profile-block {
+  margin-bottom: 2em;
 }
 
 .what-is-avail-block .breeder-profile-block > div:nth-child(1) {
@@ -230,14 +237,25 @@
   .breeder-landing-title button {
     margin-top: 2em;
   }
+  .what-is-avail-block section h4 {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 1.5px;
+  }
   .what-is-avail-block section img, .what-is-avail-block section > div {
     width: 100%;
+  }
+  .what-is-avail-block section p {
+    font-size: 14px !important;
+    line-height: 19px !important;
+    text-align: center;
   }
   .what-is-avail-block .breeder-page-block {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    margin: 2em auto 3em;
   }
   .what-is-avail-block .breeder-page-block div:nth-child(1) {
     margin-bottom: 1.5em;

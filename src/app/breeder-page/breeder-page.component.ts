@@ -123,10 +123,12 @@ export class BreederPageComponent implements OnInit {
     }
 
     scrollLeft(): void{
+        //@ts-ignore
         $('.slider').animate( { scrollLeft: '-=360' }, 250);
     }
     
     scrollRight(): void{
+        //@ts-ignore
         $('.slider').animate( { scrollLeft: '+=360' }, 250);
     }
 
