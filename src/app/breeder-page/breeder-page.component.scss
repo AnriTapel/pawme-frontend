@@ -73,7 +73,7 @@ span, p, div {
     margin: 50px auto 60px;
     display: grid;
     grid-template: auto / 3fr 7fr;
-    grid-column-gap: 10px;
+    grid-column-gap: 40px;
     @media (max-width: $screen-lg - 1px) {
         width: 100%;
         display: flex;
@@ -424,7 +424,7 @@ span, p, div {
     }
 
     .additional-info-item {
-        max-width: 330px;
+        max-width: 47%;
         &:not(:nth-child(even)) {
             margin-right: 30px;
         }
@@ -738,7 +738,7 @@ span, p, div {
         }
 
         .test-item {
-            max-width: 330px;
+            max-width: 47%;
             margin-bottom: 30px;
             &:not(:nth-child(even)) {
                 margin-right: 30px;
