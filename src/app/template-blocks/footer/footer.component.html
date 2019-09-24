@@ -1,39 +1,39 @@
-<footer *ngIf="getCurRoute() == '/breeder-landing'">
-    <div class="footer-info-block">
-        <span>Готовы создать свою страницу на платформе Petman?</span>
-    </div>
-    <div class="footer-sign-up-button-block">
-        <a title="Зарегистрируйся сейчас" [routerLink]="['/sign-up']" class="custom-btn btn-white">ЗАРЕГИСТРИРУЙСЯ СЕЙЧАС
-            <img src="./assets/img/paw-in-signup-btn.png" alt="Лапа"
-                style="width: 20px; margin-left: 10px;" /></a>
-    </div>
-
-    <hr>
-
-    <div class="footer-logo-block">
-        <img src="./assets/img/logo-footer.png" alt="Логотип PawMe">
-    </div>
-</footer>
-
-<footer *ngIf="getCurRoute() != '/breeder-landing'" class="footer d-flex align-items-center justify-content-between">
-    <div class="copyright">
-        <img src="./assets/img/logo-footer.png" class="copyright-logo" alt="">
-
-        <div class="copyright-text">
-            © 2019 Petman. All rights reserved
+<footer>
+    <div *ngIf="getCurRoute() == '/breeder-landing'" class="footer-breeder-landing-block">
+        <div class="footer-info-block">
+            <span>Готовы создать свою страницу на платформе Petman?</span>
+        </div>
+        <div class="footer-sign-up-button-block">
+            <a title="Зарегистрируйся сейчас" [routerLink]="['/sign-up']" class="custom-btn btn-white">ЗАРЕГИСТРИРУЙТЕСЬ
+                СЕЙЧАС
+                <img src="./assets/img/paw-in-signup-btn.png" alt="Лапа" style="width: 20px; margin-left: 10px;" /></a>
         </div>
     </div>
 
-    <div class="links d-flex flex-column">
-        <div class="d-flex flex-wrap links-item first fs-18">
-            <a [routerLink]="['/about-us']" title="О платформе">О платформе</a>
-            <a [routerLink]="['/contact-us']" title="Связаться с нами">Связаться с нами</a>
-            <a [routerLink]="['/sign-up']" title="Регистрация заводчика">Регистрация заводчика</a>
+    <hr *ngIf="getCurRoute() == '/breeder-landing'"/>
+
+    <div class="base-footer d-flex align-items-center justify-content-between">
+        <div class="copyright">
+            <img src="./assets/img/logo-footer.png" class="copyright-logo" alt="">
+
+            <div class="copyright-text">
+                © 2019 Petman. All rights reserved
+            </div>
         </div>
 
-        <div class="d-flex justify-content-end flex-wrap links-item second fs-14">
-            <a href="https://petman.co/agreement.pdf" target="_blank" title="Пользовательское соглашение">Пользовательское соглашение</a>
-            <a href="https://petman.co/policy.pdf" target="_blank" title="Политика конфиденциальности">Политика конфиденциальности</a>
+        <div class="links d-flex flex-column">
+            <div class="d-flex flex-wrap links-item first fs-18">
+                <a [routerLink]="['/about-us']" title="О платформе">О платформе</a>
+                <a [routerLink]="['/contact-us']" title="Связаться с нами">Связаться с нами</a>
+                <a [routerLink]="['/sign-up']" title="Регистрация заводчика">Регистрация заводчика</a>
+            </div>
+
+            <div class="d-flex justify-content-end flex-wrap links-item second fs-14">
+                <a href="https://petman.co/agreement.pdf" target="_blank"
+                    title="Пользовательское соглашение">Пользовательское соглашение</a>
+                <a href="https://petman.co/policy.pdf" target="_blank" title="Политика конфиденциальности">Политика
+                    конфиденциальности</a>
+            </div>
         </div>
     </div>
 </footer>
