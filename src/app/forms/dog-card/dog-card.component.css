@@ -62,11 +62,6 @@ p {
   font-size: 18px;
 }
 
-.parent-info-block span:nth-child(1),
-.puppy-info-block span:nth-child(1) {
-  font-family: 'Intro-Bold';
-}
-
 .parent-info-block span:nth-child(4),
 .puppy-info-block span:nth-child(4) {
   font-family: 'Intro-Book';
@@ -112,8 +107,13 @@ p {
           justify-content: space-between;
 }
 
+.puppy-meta-parents-block .puppy-meta-block span {
+  font-family: 'Intro-Book';
+  line-height: 30px;
+}
+
 .puppy-meta-parents-block span {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .puppy-meta-parents-block img {
@@ -132,6 +132,10 @@ p {
   display: inline-block;
   width: 50%;
   vertical-align: top;
+}
+
+.puppy-meta-parents-block .puppy-parents-block .puppy-parent-info span {
+  font-family: 'Intro-Book';
 }
 
 .custom-carousel img {

@@ -225,7 +225,7 @@ span, p, div {
 
 @media (max-width: 769px) {
   .aside {
-    padding: 20px;
+    padding: 20px 20px 50px;
   }
 }
 
@@ -239,6 +239,7 @@ span, p, div {
 
 .aside .heading {
   opacity: 0.5;
+  font-size: 12px;
   color: #0e0b4d;
   margin-bottom: .5em;
 }
@@ -246,7 +247,7 @@ span, p, div {
 .aside .title {
   font-size: 23px;
   color: #0e0b4d;
-  margin-bottom: 11px;
+  margin-bottom: .5em;
 }
 
 @media (max-width: 768px) {
@@ -348,6 +349,14 @@ span, p, div {
   color: #0e0b4d;
 }
 
+.aside .description p:nth-child(1) {
+  font-family: 'Intro-Bold' !important;
+}
+
+.aside .description p:nth-child(2) {
+  font-family: 'Intro-Book' !important;
+}
+
 .section {
   padding: 40px;
 }
@@ -391,6 +400,10 @@ span, p, div {
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
+}
+
+.section .top-info .age-of-sale, .section .top-info .price {
+  font-size: 18px;
 }
 
 .section .top-info .age-of-sale {
@@ -464,6 +477,7 @@ span, p, div {
 
 .section .medical-label-item .text {
   font-size: 15px;
+  font-family: 'Intro-Book' !important;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -861,6 +875,7 @@ span, p, div {
 }
 
 .section .medical-test-parents .test-item-description p {
+  font-family: 'Intro-Book' !important;
   opacity: 0.7;
   font-size: 16px;
   line-height: 1.38;
@@ -869,6 +884,7 @@ span, p, div {
 
 .section .medical-test-parents .test-item {
   max-width: 330px;
+  margin-bottom: 30px;
 }
 
 .section .medical-test-parents .test-item:not(:nth-child(even)) {

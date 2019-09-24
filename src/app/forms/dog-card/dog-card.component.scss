@@ -65,10 +65,6 @@ p{
         font-size: 18px;
     }
 
-    span:nth-child(1){
-        font-family: 'Intro-Bold';
-    }
-
     span:nth-child(4){
         font-family: 'Intro-Book';
         opacity: 0.5;
@@ -106,8 +102,15 @@ p{
     flex-direction: row;
     justify-content: space-between;
 
+    .puppy-meta-block{
+        span{
+            font-family: 'Intro-Book';
+            line-height: 30px;
+        }
+    }
+
     span{
-        font-size: 14px;
+        font-size: 16px;
     }
 
     img{
@@ -125,6 +128,12 @@ p{
             display: inline-block;
             width: 50%;
             vertical-align: top;
+        }
+
+        .puppy-parent-info{
+            span{
+                font-family: 'Intro-Book';
+            }
         }
     }
 }

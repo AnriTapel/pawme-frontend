@@ -183,7 +183,7 @@ span, p, div {
     height: fit-content;
     align-self: flex-start;
     @media (max-width: $screen-sm) {
-        padding: 20px;
+        padding: 20px 20px 50px;
     }
     .line {
         border-radius: 4px;
@@ -195,14 +195,14 @@ span, p, div {
 
     .heading {
         opacity: 0.5;
-        //font-size: 12px;
+        font-size: 12px;
         color: #0e0b4d;
         margin-bottom: .5em;
     }
     .title {
         font-size: 23px;
         color: #0e0b4d;
-        margin-bottom: 11px;
+        margin-bottom: .5em;
         @media (max-width: $screen-sm - 1px) {
             font-size: 18px;
             color: #0e0b4d;
@@ -275,6 +275,14 @@ span, p, div {
             line-height: 1.38;
             color: #0e0b4d;
         }
+
+        p:nth-child(1){
+            font-family: 'Intro-Bold' !important;
+        }
+
+        p:nth-child(2){
+            font-family: 'Intro-Book' !important;
+        }
     }
 }
 
@@ -314,6 +322,10 @@ span, p, div {
     }
 
     .top-info {
+        .age-of-sale, .price{
+            font-size: 18px;
+        }
+
         .age-of-sale {
             margin-right: 59px;
         }
@@ -375,6 +387,7 @@ span, p, div {
 
         .text {
             font-size: 15px;
+            font-family: 'Intro-Book' !important;
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
@@ -716,6 +729,7 @@ span, p, div {
 
         .test-item-description {
             p {
+                font-family: 'Intro-Book' !important;
                 opacity: 0.7;
                 font-size: 16px;
                 line-height: 1.38;
@@ -725,6 +739,7 @@ span, p, div {
 
         .test-item {
             max-width: 330px;
+            margin-bottom: 30px;
             &:not(:nth-child(even)) {
                 margin-right: 30px;
             }
