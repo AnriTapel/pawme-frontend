@@ -7,8 +7,7 @@
 
     <div *ngIf="subpageStatus().generalInfo" class="slider-content">
         <img *ngIf="getScrollLeftValue() > 0 && appService.userData.generalInfo.gallery.length > 3"
-            class="scroll-left-button" src="./assets/img/arrow-left.svg" alt="Стрелка влево"
-            (mousedown)="mousedownLeft()" (mouseup)="mouseupLeft()" (mouseleave)="mouseupLeft()" />
+            class="scroll-left-button" src="./assets/img/arrow-left.svg" alt="Стрелка влево" (click)="scrollLeft()" />
         <div class="slider d-flex align-items-center">
             <div *ngFor="let photo of appService.userData.generalInfo.gallery;let i = index"
                 class="slider-item d-flex align-items-center">
@@ -17,8 +16,7 @@
             </div>
         </div>
         <img *ngIf="appService.userData.generalInfo.gallery.length > 3"
-            src="./assets/img/arrow-right.svg" class="scroll-right-button" alt="Стрелка вправо"
-            (mousedown)="mousedownRight()" (mouseup)="mouseupRight()" (mouseleave)="mouseupRight()" />
+            src="./assets/img/arrow-right.svg" class="scroll-right-button" alt="Стрелка вправо" (click)="scrollRight()" />
     </div>
 
     <div class="main-content align-items-center flex-column">

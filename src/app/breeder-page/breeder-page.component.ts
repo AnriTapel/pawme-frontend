@@ -34,9 +34,6 @@ export class BreederPageComponent implements OnInit {
     ]
     availParentsTests = [];
 
-    timeoutHandlerRight: any;
-    timeoutHandlerLeft: any;
-
     constructor(private popupService: PopupTemplateService, private router: Router, private route: ActivatedRoute, public appService: AppService,
         private breederService: BreederControllerService, public dogCardService: DogCardService) {
 
@@ -122,35 +119,15 @@ export class BreederPageComponent implements OnInit {
     }
 
     getScrollLeftValue(): number {
-        if (document.getElementsByClassName('slider')[0].scrollLeft == 0)
-            this.mouseupLeft();
         return document.getElementsByClassName('slider')[0].scrollLeft;
     }
 
-    mouseupRight() {
-        if (this.timeoutHandlerRight) {
-            clearInterval(this.timeoutHandlerRight);
-            this.timeoutHandlerRight = null;
-        }
+    scrollLeft(): void{
+        $('.slider').animate( { scrollLeft: '-=360' }, 250);
     }
-
-    mousedownRight() {
-        this.timeoutHandlerRight = setInterval(() => {
-            document.getElementsByClassName('slider')[0].scrollLeft += 10;
-        }, 50);
-    }
-
-    mouseupLeft() {
-        if (this.timeoutHandlerLeft) {
-            clearInterval(this.timeoutHandlerLeft);
-            this.timeoutHandlerLeft = null;
-        }
-    }
-
-    mousedownLeft() {
-        this.timeoutHandlerLeft = setInterval(() => {
-            document.getElementsByClassName('slider')[0].scrollLeft -= 10;
-        }, 50);
+    
+    scrollRight(): void{
+        $('.slider').animate( { scrollLeft: '+=360' }, 250);
     }
 
     showBreederMessagePopup(): void {
