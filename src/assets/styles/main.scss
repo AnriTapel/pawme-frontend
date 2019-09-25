@@ -152,6 +152,10 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom-color: #cbd8f6;
 }
 
+.custom-tooltip .arrow::after{
+    border-top-color: #cbd8f6;
+}
+
 .overlay-block{
     width: 100%;
     height: 100%;

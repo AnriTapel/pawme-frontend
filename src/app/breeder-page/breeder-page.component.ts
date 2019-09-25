@@ -118,6 +118,10 @@ export class BreederPageComponent implements OnInit {
         this.popupService.setShowStatus(true);
     }
 
+    getTooltipPlacement(): string{
+        return window.innerWidth < 770 ? 'bottom-right' : 'bottom';
+    }
+
     getScrollLeftValue(): number {
         return document.getElementsByClassName('slider')[0].scrollLeft;
     }

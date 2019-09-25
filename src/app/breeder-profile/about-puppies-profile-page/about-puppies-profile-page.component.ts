@@ -39,6 +39,10 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     this.saveChagesEvent.unsubscribe();
   }
 
+  getTooltipPlacement(): string{
+    return window.innerWidth < 770 ? 'bottom-left' : 'bottom';
+  }
+
   puppyTestClicked(test: PuppyTest): void {
     let testIndex = this.puppiesData.puppyTests.map(it => { return it.id }).indexOf(test.id);
     if (testIndex > -1)
