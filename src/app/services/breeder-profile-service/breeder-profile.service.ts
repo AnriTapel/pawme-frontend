@@ -32,8 +32,12 @@ export class BreederProfileService {
       index++;
     if (this.appService.userData.about)
       index++;
-    if (this.appService.userData.parentsInfo)
-      index++;
+    if (this.appService.userData.parentsInfo){
+      let male = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "MALE");
+      let female = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
+      if (male.length > 0 && female.length > 0)
+        index++;
+    }
 
     this.appService.userData.profileFill = index;
   }
