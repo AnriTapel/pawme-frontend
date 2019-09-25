@@ -753,7 +753,7 @@ ngb-datepicker{
         input[type=text],
         input[type=number],
         textarea{
-            margin-top: .25em;
+            margin-top: 4px;
         }
 
         .upper-btn,
@@ -776,7 +776,7 @@ ngb-datepicker{
         }
 
         .custom-input-append{
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
         .block-description{
@@ -895,7 +895,7 @@ ngb-datepicker{
     }
 
     .input-group-append{
-        margin-top: 3px !important;
+        margin-top: 4px !important;
     }
 
     ngb-datepicker{

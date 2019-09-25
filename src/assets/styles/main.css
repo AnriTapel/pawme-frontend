@@ -779,7 +779,7 @@ ngb-datepicker .bg-light {
   .breeder-profile-subpage-container input[type=text],
   .breeder-profile-subpage-container input[type=number],
   .breeder-profile-subpage-container textarea {
-    margin-top: .25em;
+    margin-top: 4px;
   }
   .breeder-profile-subpage-container .upper-btn,
   .breeder-profile-subpage-container .lower-btn {
@@ -798,7 +798,7 @@ ngb-datepicker .bg-light {
     margin: 2.5em 0;
   }
   .breeder-profile-subpage-container .custom-input-append {
-    margin-top: 3px;
+    margin-top: 4px;
   }
   .breeder-profile-subpage-container .block-description {
     font-size: 13px;
@@ -892,7 +892,7 @@ ngb-datepicker .bg-light {
     margin: 5px auto 0;
   }
   .input-group-append {
-    margin-top: 3px !important;
+    margin-top: 4px !important;
   }
   ngb-datepicker {
     right: 0 !important;
