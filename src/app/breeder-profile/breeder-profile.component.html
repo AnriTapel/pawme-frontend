@@ -14,7 +14,8 @@
         <div class="progress-bar-base">
         </div>
 
-        <div class="progress-bar-sections" placement="bottom" tooltipClass="custom-tooltip" triggers="hover:click" [ngbTooltip]="progessBarTooltip">
+        <div class="progress-bar-sections" placement="bottom" tooltipClass="custom-tooltip" [triggers]="appService.getTooltipTrigger()"
+                [ngbTooltip]="progessBarTooltip">
             <div></div>
             <div></div>
             <div></div>
@@ -24,7 +25,7 @@
             </div>
         </div>
 
-        <div class="progress-line" [style.width.%]="this.appService.userData.profileFill * 20" [class.partial-progress-line]="this.appService.userData.profileFill != 5">
+        <div class="progress-line" [style.width.%]="appService.userData.profileFill * 20" [class.partial-progress-line]="appService.userData.profileFill != 5">
         </div>
 
     </div>

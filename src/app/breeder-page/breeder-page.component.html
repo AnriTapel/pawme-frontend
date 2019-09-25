@@ -88,7 +88,7 @@
                     <span class="d-flex align-items-center">
                         Обязательный комплект Petman
                         <i class="icon question-icon d-flex align-items-center justify-content-center ml-6"
-                            triggers="hover:click" tooltipClass="custom-tooltip" [placement]="getTooltipPlacement()"
+                            [triggers]="appService.getTooltipTrigger()" tooltipClass="custom-tooltip" [placement]="getTooltipPlacement()"
                             ngbTooltip="Любой щенок ответственного заводчика проходит процедуру официальной регистрации и получает комплект необходимых документов"></i>
                     </span>
                 </div>

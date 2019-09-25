@@ -110,6 +110,10 @@ export class AppService {
     document.getElementById(id).focus(event.target.value);
   }
 
+  getTooltipTrigger(): string{
+    return window.innerWidth < 770 ? 'click' : 'hover';
+  }
+
   validateEmailInput(email: string): boolean {
     let re = /^[A-Za-z0-9]+([\.-]?[A-Za-z0-9]+)*@[A-Za-z]+([\.-]?[A-Za-z]+)*(\.[A-Za-z]{2,3})+$/;
     return re.test(email);

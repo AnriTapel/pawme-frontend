@@ -109,7 +109,7 @@
     </div>
 
     <div class="why-its-important">
-        <span [placement]="getTooltipPlacement()" tooltipClass="custom-tooltip" triggers="hover:click"
+        <span [placement]="getTooltipPlacement()" tooltipClass="custom-tooltip" [triggers]="appService.getTooltipTrigger()"
             ngbTooltip="Текст подсказки, которая будет всплывать при наведении!">Почему это важно?</span>
     </div>
 
