@@ -1,0 +1,128 @@
+h2{
+    font-size: 28px;
+}
+
+hr{
+    width: 80%;
+    margin: 0 auto;
+    max-width: 1210px;
+    border: 1px solid #cbd8f6;
+}
+
+.page-wrapper{
+    width: 100%;
+    background-color: #f8f9fb;
+    padding: 5% 5% 10%;
+}
+
+.page-container{
+    max-width: 965px;
+    margin: 0 auto;
+
+    .faq-block{
+        width: 100%;
+        padding: 3.5em 2em;
+        margin-top: 3em;
+        border: 1px solid #cbd8f6;
+        border-radius: 4px;
+        background-color: #fff;
+
+        .faq-item{
+            padding: 2.5em 0 1.5em;
+            position: relative;
+
+            &:before{
+                content : "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 1px;
+                width: 100%;
+                border-top: 1px solid #cbd8f6;
+            }
+        }
+        
+        .faq-item:first-child{
+            padding-top: 0 !important;
+
+            &:before{
+                display: none;
+            }
+        }
+
+        .faq-item:last-child{
+            padding-bottom: 0 !important;
+        }
+    }
+}
+
+
+.question-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    p{
+        font-family: 'Intro-Regular';
+        font-size: 20px;
+        max-width: calc(100% - 30px);
+    }
+
+    img{
+        width: 24px;
+        align-self: baseline;
+    }
+}
+
+.answer-block{
+    width: 100%;
+    padding-top: .5em;
+
+    span{
+        font-size: 14px;
+        line-height: 19px;
+        font-family: 'Intro-Book';
+        opacity: .6;
+    }
+}
+
+
+@media screen and (max-width: 769px){
+
+    h2{
+        font-size: 18px;
+    }
+
+    hr{
+        width: 90%;
+        margin-top: .5em;
+    }
+
+    .page-wrapper{
+        padding: 8% 5% 10% !important;
+    }
+
+    .faq-block{
+        margin-top: 1.5em !important;
+        padding: 2em 1em !important;
+
+        .faq-item{
+            padding: 1.5em 0 .5em !important;
+        }
+    }
+
+    .question-block{
+        p{
+            font-size: 14px;
+        }
+    }
+
+    .answer-block{
+        padding-top: 0 !important;
+
+        span{
+            font-size: 13px;
+        }
+    }
+
+}

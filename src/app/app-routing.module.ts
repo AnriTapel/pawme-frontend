@@ -12,6 +12,7 @@ import { MailPageComponent } from './forms/mail-page/mail-page.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { AboutUsComponent } from './secondary-page/about-us/about-us.component';
 import { ContactUsComponent } from './secondary-page/contact-us/contact-us.component';
+import { FaqComponent } from './secondary-page/faq/faq.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'sign-up', component: SignUpComponent},
   {path: 'about-us', component: AboutUsComponent},
   {path: 'contact-us', component: ContactUsComponent},
+  {path: 'faq', component: FaqComponent},
   {path: 'remind-password', component: RemindPasswordComponent},
   {path: 'changepass/:uuid', component: ChangePasswordComponent, pathMatch: 'full'},
   {path: 'breeder-landing', component: BreederLandingComponent},

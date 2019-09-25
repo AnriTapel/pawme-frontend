@@ -1,4 +1,4 @@
-<header [ngClass]="{'header-for-profile': isHeaderForProfile()}">
+<header [ngClass]="{'header-for-profile': !isNonProfileHeader()}">
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand">
             <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
@@ -18,7 +18,7 @@
                         width="16px" height="12px" style="margin-right: 8px;" />Моя
                     страница</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item"><img src="./assets/img/menu-help.png" alt="Помощь" width="16px"
+                <a class="dropdown-item" [routerLink]="['/faq']"><img src="./assets/img/menu-help.png" alt="Помощь" width="16px"
                         height="16px" style="margin-right: 8px;" />Помощь</a>
                 <a class="dropdown-item" (click)="logout()"><img src="./assets/img/menu-log-out.png" width="15px"
                         height="15px" alt="Выйти" style="margin-right: 9px;" />Выйти</a>

@@ -13,8 +13,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit {
 
-  private profileHeaderRoutes = ['/sign-up', '/remind-password', '/mail-page', '/login', '/breeder-profile', '/about-us', '/contact-us'];
-  private profileHeaderPathnames = ['/changepass/', '/breeder/', '/preview/'];
+  private nonProfileHeaderRoutes = ['/breeder-landing'];
+  private nonProfileHeaderPathnames = [];
 
   constructor(public appService: AppService, public popupService: PopupTemplateService, private http: HttpClient,
     private notificationService: NotificationBarService, private router: Router) { }
@@ -35,12 +35,12 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  isHeaderForProfile(): boolean{
-    let isProfile = this.profileHeaderRoutes.includes(this.router.url);
-    if (!isProfile){
-      isProfile = this.profileHeaderPathnames.filter(it => this.router.url.indexOf(it) != -1).length != 0;
+  isNonProfileHeader(): boolean{
+    let isNonProfile = this.nonProfileHeaderRoutes.includes(this.router.url);
+    if (!isNonProfile){
+      isNonProfile = this.nonProfileHeaderPathnames.filter(it => this.router.url.indexOf(it) != -1).length != 0;
     }
-    return isProfile;
+    return isNonProfile;
   }
 
   openMyPage(): void{
