@@ -56,8 +56,13 @@
  * Zone JS is required by default for Angular itself.
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
-
+import * as Sharer from './assets/js/sharer.min.js';
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+declare global {
+    interface Window {
+      Sharer: Sharer;
+    }
+  }

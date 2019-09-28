@@ -1,0 +1,38 @@
+.container{
+    margin: 1em auto 0;
+    padding: 0;
+}
+
+#share-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: .5em;
+
+    button{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 1px solid #cbd8f6;
+        background-color: #fff;
+
+        img{
+            max-height: 30px;
+            max-width: 30px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        &:focus, &:active{
+            outline: none !important;
+            box-shadow: none;
+        }
+    }
+}
+
+@media screen and (max-width: 769px){
+    .container{
+        margin: .5em auto 1.5em;
+        padding: 0 1em;
+    }
+}

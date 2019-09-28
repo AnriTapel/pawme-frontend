@@ -1,0 +1,46 @@
+.container {
+  margin: 1em auto 0;
+  padding: 0;
+}
+
+#share-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: .5em;
+}
+
+#share-buttons button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #cbd8f6;
+  background-color: #fff;
+}
+
+#share-buttons button img {
+  max-height: 30px;
+  max-width: 30px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#share-buttons button:focus, #share-buttons button:active {
+  outline: none !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+@media screen and (max-width: 769px) {
+  .container {
+    margin: .5em auto 1.5em;
+    padding: 0 1em;
+  }
+}
+/*# sourceMappingURL=share-buttons.component.css.map */

@@ -43,6 +43,7 @@ import { AlertComponent } from './template-blocks/alert/alert.component';
 import { AboutUsComponent } from './secondary-page/about-us/about-us.component';
 import { ContactUsComponent } from './secondary-page/contact-us/contact-us.component';
 import { FaqComponent } from './secondary-page/faq/faq.component';
+import { ShareButtonsComponent } from './template-blocks/share-buttons/share-buttons.component';
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -79,7 +80,8 @@ export function initApp(appSerivce: AppService){
     AlertComponent,
     AboutUsComponent,
     ContactUsComponent,
-    FaqComponent
+    FaqComponent,
+    ShareButtonsComponent
   ],
   imports: [
     BrowserModule,

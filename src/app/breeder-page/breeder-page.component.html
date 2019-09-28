@@ -15,54 +15,59 @@
                     (click)="showImageGalley(i)">
             </div>
         </div>
-        <img *ngIf="appService.userData.generalInfo.gallery.length > 3"
-            src="./assets/img/arrow-right.svg" class="scroll-right-button" alt="Стрелка вправо" (click)="scrollRight()" />
+        <img *ngIf="appService.userData.generalInfo.gallery.length > 3" src="./assets/img/arrow-right.svg"
+            class="scroll-right-button" alt="Стрелка вправо" (click)="scrollRight()" />
     </div>
 
     <div class="main-content align-items-center flex-column">
-        <aside class="aside d-flex flex-column first-aside">
-            <div class="top-info d-flex flex-row justify-content-between">
-                <div class="left-side">
-                    <div class="title">
-                        <span>{{getNurceryName()}}</span>
-                    </div>
-                    <div class="heading">
-                        <span>{{getNameByBreeds()}}</span>
-                    </div>
-                    <div class="location d-flex align-items-center">
-                        <i class="icon icon-location"></i>
-                        <span>{{subpageStatus().generalInfo ? appService.userData.generalInfo.city : ''}}</span>
-                    </div>
-                    <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.site"
-                        class="link d-flex align-items-center">
-                        <i class="icon icon-link"></i>
-                        <span>{{appService.userData.generalInfo.site}}</span>
-                    </div>
-                    <div class="social-networks d-flex">
-                        <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.instagram"
-                            class="instagram">
-                            <i class="instagram-icon d-flex align-items-center justify-content-center"></i>
+        <div class="sidebar-block d-flex flex-column first-aside">
+            <aside class="aside">
+                <div class="top-info d-flex flex-row justify-content-between">
+                    <div class="left-side">
+                        <div class="title">
+                            <span>{{getNurceryName()}}</span>
                         </div>
-                        <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.facebook"
-                            class="facebook">
-                            <i class="facebook-icon d-flex align-items-center justify-content-center"></i>
+                        <div class="heading">
+                            <span>{{getNameByBreeds()}}</span>
                         </div>
+                        <div class="location d-flex align-items-center">
+                            <i class="icon icon-location"></i>
+                            <span>{{subpageStatus().generalInfo ? appService.userData.generalInfo.city : ''}}</span>
+                        </div>
+                        <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.site"
+                            class="link d-flex align-items-center">
+                            <i class="icon icon-link"></i>
+                            <span>{{appService.userData.generalInfo.site}}</span>
+                        </div>
+                        <div class="social-networks d-flex">
+                            <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.instagram"
+                                class="instagram">
+                                <i class="instagram-icon d-flex align-items-center justify-content-center"></i>
+                            </div>
+                            <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.facebook"
+                                class="facebook">
+                                <i class="facebook-icon d-flex align-items-center justify-content-center"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-side">
+                        <img *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.profilePhoto"
+                            style="border-radius: 50%"
+                            src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg"
+                            alt="Фото питомника">
                     </div>
                 </div>
-                <div class="right-side">
-                    <img *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.profilePhoto"
-                        style="border-radius: 50%"
-                        src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg" alt="Фото питомника">
+                <div class="line"></div>
+                <div class="description">
+                    <p class="subtitle">О питомнике</p>
+                    <p>{{subpageStatus().generalInfo ? appService.userData.generalInfo.description : ''}}</p>
                 </div>
-            </div>
-            <div class="line"></div>
-            <div class="description">
-                <p class="subtitle">О питомнике</p>
-                <p>{{subpageStatus().generalInfo ? appService.userData.generalInfo.description : ''}}</p>
-            </div>
-            <button type="button" class="custom-btn btn-purple" style="width: 100%"
-                (click)="showBreederMessagePopup()">НАПИСАТЬ ЗАВОДЧИКУ</button>
-        </aside>
+                <button type="button" class="custom-btn btn-purple" style="width: 100%"
+                    (click)="showBreederMessagePopup()">НАПИСАТЬ ЗАВОДЧИКУ</button>
+            </aside>
+            <app-share-buttons></app-share-buttons>
+        </div>
+        
         <div class="about-puppies">
             <section class="section d-flex flex-column">
                 <h2>О ЩЕНКАХ</h2>
@@ -88,7 +93,8 @@
                     <span class="d-flex align-items-center">
                         Обязательный комплект Petman
                         <i class="icon question-icon d-flex align-items-center justify-content-center ml-6"
-                            [triggers]="appService.getTooltipTrigger()" tooltipClass="custom-tooltip" [placement]="getTooltipPlacement()"
+                            [triggers]="appService.getTooltipTrigger()" tooltipClass="custom-tooltip"
+                            [placement]="getTooltipPlacement()"
                             ngbTooltip="Любой щенок ответственного заводчика проходит процедуру официальной регистрации и получает комплект необходимых документов"></i>
                     </span>
                 </div>
@@ -183,7 +189,7 @@
                             занимаемых участниками в отношении поставленных задач.
                         </div>
                         <div class="contract-link" [ngClass]="{'collapse' : collapse.contract}">
-                            <a href="">Посмотреть договор</a>
+                            <a href="https://petman.co/contract.docx" target="_blank">Посмотреть договор</a>
                         </div>
                         <div class="line"></div>
                     </div>
@@ -228,7 +234,8 @@
                         </div>
                         <div class="line"></div>
                     </div>
-                    <div *ngIf="subpageStatus().puppiesInfo && appService.userData.puppiesInfo.gifts" class="additional-info-item d-flex flex-column">
+                    <div *ngIf="subpageStatus().puppiesInfo && appService.userData.puppiesInfo.gifts"
+                        class="additional-info-item d-flex flex-column">
                         <div class="title d-flex align-items-center justify-content-between"
                             [ngClass]="{'mb-16' : collapse.gifts}" (click)="showInfo('gifts')">
                             <div class="d-flex">
@@ -325,7 +332,8 @@
 
                 <div class="line"></div>
 
-                <div *ngIf="subpageStatus().about && appService.userData.about.certificates.length > 0" class="awards-and-certificates">
+                <div *ngIf="subpageStatus().about && appService.userData.about.certificates.length > 0"
+                    class="awards-and-certificates">
                     <div class="title">
                         <span>Награды & Сертификаты</span>
                     </div>
