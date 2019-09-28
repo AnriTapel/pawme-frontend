@@ -956,7 +956,8 @@ span, p, div {
 }
 
 .back-to-profile-bar {
-  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
   top: 0;
   height: 50px;
   width: 100%;
@@ -973,11 +974,11 @@ span, p, div {
 }
 
 .back-to-profile-bar img {
-  width: 100px;
+  height: 16px;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  margin-right: 25px;
+  margin-right: 20px;
 }
 
 .back-to-profile-bar span {
@@ -993,7 +994,7 @@ span, p, div {
     padding: 0 1.5em;
   }
   .back-to-profile-bar img {
-    width: 65px;
+    height: 14px;
     margin-right: 10px;
   }
   .back-to-profile-bar span {
