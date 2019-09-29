@@ -10,7 +10,8 @@
             <div class="buttons-block">
                 <input *ngIf="index < 6" type="button" class="custom-btn btn-transparent" value="Пропустить тур" (click)="close()"/>
                 <input *ngIf="index < 6" type="button" class="custom-btn btn-purple" value="Далее" (click)="next()"/>
-                <input *ngIf="index == 6" type="button" class="custom-btn btn-purple finish-btn" value="Открыть пример и закончить тур"/>
+                <input *ngIf="index == 6" type="button" class="custom-btn btn-purple finish-btn" value="Открыть пример и закончить тур"
+                    (click)="close()"/>
             </div>
         </div>
     </div>
