@@ -24,9 +24,9 @@ const STYLES = (theme: ThemeVariables) => ({
 export class AppComponent {
   readonly classes = this.theme.addStyleSheet(STYLES);
   // Routes of pages with custom header
-  private noGeneralHeaderRoutes = ['/breeder-landing'];
+  private noGeneralHeaderRoutes = ['/breeder-landing', '/admin-panel'];
   // Routes of pages with custom footer
-  private noGeneralFooterRoutes = [];
+  private noGeneralFooterRoutes = ['/admin-panel'];
 
   constructor(private theme: LyTheme2, private appService: AppService, public popupService: PopupTemplateService,
     private router: Router) {}

@@ -1,8 +1,6 @@
 <app-notification-bar></app-notification-bar>
 <app-header *ngIf="showGeneralHeader()"></app-header>
-<main id="main-container">
-    <router-outlet></router-outlet>
-</main>
+<router-outlet></router-outlet>
 <app-footer *ngIf="showGeneralFooter()"></app-footer>
 <app-popup-template *ngIf="popupService.getShowStatus()" [ngSwitch]="popupService.getCurrentForm()">
     <app-image-cropper *ngSwitchCase="'image-cropper'" [params]="popupService.getPopupParams()"></app-image-cropper>

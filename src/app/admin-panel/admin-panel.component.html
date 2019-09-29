@@ -1,1 +1,83 @@
-<p>admin-panel works!</p>
+<header>
+    <nav>
+        <img src="./assets/img/logo.png" alt="Логотип"/>
+        <input type="button" class="custom-btn btn-transparent" value="Выйти" (click)="logout()" />
+    </nav>
+</header>
+
+<main>
+    <aside>
+        <div (click)="switchSection('breeders')">
+            <span [class.active]="activeSection == 'breeders'" >Заводчики</span>
+        </div>
+        <div (click)="switchSection('customers')">
+            <span [class.active]="activeSection == 'customers'">Покупатели</span>
+        </div>
+    </aside>
+    <section>
+        <div *ngIf="activeSection == 'breeders'">
+            <div class="section-top-bar">
+                <span>Заводчиков на платформе: </span>
+                <a (click)="downloadBreedersList()">Скачать список</a>
+            </div>
+
+            <div class="data-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>id</td>
+                            <td>Имя</td>
+                            <td>Фамилия</td>
+                            <td>Email</td>
+                            <td>Профиль</td>
+                            <td>Статус</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let breeder of breeders">
+                            <td (click)="openBreederPage(breeder.id)">{{breeder.id}}</td>
+                            <td>{{breeder.name}}</td>
+                            <td>{{breeder.lastname}}</td>
+                            <td>{{breeder.email}}</td>
+                            <td>&#9675; &#9675; &#9675;</td>
+                            <td>
+                                <select (change)="changeBreederStatus(breeder.id, $event)">
+                                    <option>Активен</option>
+                                    <option>Заблокирован</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div *ngIf="activeSection == 'customers'">
+            <div class="section-top-bar">
+                <span>Отправлено сообщений: </span>
+                <a (click)="downloadMessagesList()">Скачать список</a>
+            </div>
+
+            <div class="data-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Имя</td>
+                            <td>Email</td>
+                            <td>Телефон</td>
+                            <td>Cообщение</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let message of messages">
+                            <td>{{message.name}}</td>
+                            <td>{{message.email}}</td>
+                            <td>{{message.phone}}</td>
+                            <td>{{message.message}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
