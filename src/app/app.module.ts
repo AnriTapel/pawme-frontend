@@ -44,6 +44,7 @@ import { AboutUsComponent } from './secondary-page/about-us/about-us.component';
 import { ContactUsComponent } from './secondary-page/contact-us/contact-us.component';
 import { FaqComponent } from './secondary-page/faq/faq.component';
 import { ShareButtonsComponent } from './template-blocks/share-buttons/share-buttons.component';
+import { OnboardingComponent } from './forms/onboarding/onboarding.component';
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -81,7 +82,8 @@ export function initApp(appSerivce: AppService){
     AboutUsComponent,
     ContactUsComponent,
     FaqComponent,
-    ShareButtonsComponent
+    ShareButtonsComponent,
+    OnboardingComponent
   ],
   imports: [
     BrowserModule,

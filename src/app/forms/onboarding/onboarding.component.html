@@ -1,0 +1,17 @@
+<div class="overlay-block">
+    <div class="onboarding-container">
+        <img [src]="data[index].img" [alt]="data[index].title"/>
+
+        <div class="main-block">
+            <p class="slide-counter">{{index + 1}} из {{data.length}}</p>
+            <p class="title">{{data[index].title}}</p>
+            <p class="desc">{{data[index].desc}}</p>
+
+            <div class="buttons-block">
+                <input *ngIf="index < 6" type="button" class="custom-btn btn-transparent" value="Пропустить тур" (click)="close()"/>
+                <input *ngIf="index < 6" type="button" class="custom-btn btn-purple" value="Далее" (click)="next()"/>
+                <input *ngIf="index == 6" type="button" class="custom-btn btn-purple finish-btn" value="Открыть пример и закончить тур"/>
+            </div>
+        </div>
+    </div>
+</div>

@@ -23,6 +23,8 @@ export class AppService {
   breeds: any;
   puppyTests: Array<PuppyTest>;
 
+  isOnboardingVisible: boolean = true;
+
   constructor(private http: HttpClient, private breederService: BreederControllerService, private injector: Injector,
     private notificationServie: NotificationBarService) {
   }
