@@ -105,6 +105,18 @@ export class BreederPageComponent implements OnInit {
         }
     }
 
+    openInstagramPage(nickname: string): void{
+        let url = 'https://instagram.com/' + (nickname[0] == '@' ? nickname.substr(1) : nickname);
+        window.open(url, '_blank');
+    }
+
+    // For Facebook & Web-site
+    openPageByUrl(url: string): void{
+        if (!url.startsWith('http'))
+            url = 'http://' + url;
+        window.open(url, '_blank');
+    }
+
     showInfo(property) {
         this.collapse[property] = !this.collapse[property];
     }

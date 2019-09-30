@@ -36,17 +36,19 @@
                         </div>
                         <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.site"
                             class="link d-flex align-items-center">
-                            <i class="icon icon-link"></i>
+                            <i class="icon icon-link" (click)="openPageByUrl(appService.userData.generalInfo.site)"></i>
                             <span>{{appService.userData.generalInfo.site}}</span>
                         </div>
                         <div class="social-networks d-flex">
                             <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.instagram"
                                 class="instagram">
-                                <i class="instagram-icon d-flex align-items-center justify-content-center"></i>
+                                <i class="instagram-icon d-flex align-items-center justify-content-center" 
+                                    (click)="openInstagramPage(appService.userData.generalInfo.instagram)"></i>
                             </div>
                             <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.facebook"
                                 class="facebook">
-                                <i class="facebook-icon d-flex align-items-center justify-content-center"></i>
+                                <i class="facebook-icon d-flex align-items-center justify-content-center"
+                                    (click)="openPageByUrl(appService.userData.generalInfo.facebook)"></i>
                             </div>
                         </div>
                     </div>

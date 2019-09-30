@@ -13,7 +13,7 @@ import { NotificationBarService } from '../../services/nofitication-service/noti
 export class BreederMessageComponent implements OnInit {
 
   invalidFields: Array<string> = [];
-  acception: boolean = false;
+  acception: boolean = true;
   isError: boolean = false;
 
   breederMessage: MessageToBreeder = {
