@@ -16,13 +16,11 @@ export class AdminPanelComponent implements OnInit {
   messages: any[] = [];
 
   constructor(private router: Router, private adminService: AdminControllerService, private appService: AppService, private http: HttpClient) {
-    /*if (this.appService.meData.type != "ADMIN") {
-      this.router.navigateByUrl('/breeder-landing');
-      return;
-    }*/
   }
 
   ngOnInit() {
+    this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = res);
+    this.adminService.listMessagesUsingGET().subscribe(res => this.messages = res);
   }
 
   logout(): void {
@@ -34,25 +32,47 @@ export class AdminPanelComponent implements OnInit {
       });
   }
 
-  switchSection(section: string): void{
+  switchSection(section: string): void {
     if (section == this.activeSection)
       return;
     this.activeSection = section;
   }
 
-  downloadBreedersList(): void{
-
-  }
-
-  downloadMessagesList(): void{
-
-  }
-
-  openBreederPage(id: number): void{
+  openBreederPage(id: number): void {
     window.open('https://petman.co/breeder/' + id, '_blank');
   }
 
-  changeBreederStatus(id: number, event: any): void{
-
+  changeBreederStatus(id: number, event: any): void {
+    
   }
+
+  tableToExcel = (function () {
+    var uri = 'data:application/vnd.ms-excel;base64,'
+      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
+      , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+      , format = function (s, c) {
+        return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; })
+      }
+      , downloadURI = function (uri, name) {
+        var link = document.createElement("a");
+        link.download = name + '.xls';
+        link.href = uri;
+        link.click();
+      }
+
+    return (table, fileName) => {
+      if (!table.nodeType)
+        table = document.getElementById(table).cloneNode(true);
+      if (table.getAttribute('id') == 'breeders-table'){
+        for (let i = 1; i < table.childElementCount; i++){
+          let value = table.children[i].lastElementChild.firstElementChild.selectedOptions[0].value;
+          table.children[i].lastElementChild.innerHTML = null;
+          table.children[i].lastElementChild.innerText = value;
+        }
+      }
+      var ctx = { worksheet: 'Worksheet', table: table.innerHTML }
+      var resuri = uri + base64(format(template, ctx))
+      downloadURI(resuri, fileName);
+    }
+  })();
 }

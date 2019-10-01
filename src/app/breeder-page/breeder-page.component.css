@@ -268,6 +268,10 @@ span, p, div {
   margin-bottom: 8px;
 }
 
+.aside .link {
+  cursor: pointer;
+}
+
 .aside .icon-location {
   margin-right: 13px;
   display: inline-block;
@@ -971,6 +975,7 @@ span, p, div {
           flex-direction: row;
   background-color: #736cd1;
   z-index: 9999;
+  cursor: pointer;
 }
 
 .back-to-profile-bar img {

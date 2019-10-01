@@ -77,6 +77,7 @@ section .section-top-bar {
 section .section-top-bar a {
   -webkit-text-decoration: underline #0e0b4d;
           text-decoration: underline #0e0b4d;
+  cursor: pointer;
 }
 
 section .data-container {
@@ -90,15 +91,15 @@ section .data-container table {
   width: 100%;
 }
 
-section .data-container table thead td {
+section .data-container table th {
   text-align: center;
 }
 
-section .data-container table tbody:nth-child(odd) {
-  background-color: slategrey;
+section .data-container table tr:nth-child(even) {
+  background-color: #e4e4e4;
 }
 
 section .data-container table tr {
-  min-height: 3em;
+  height: 3em;
 }
 /*# sourceMappingURL=admin-panel.component.css.map */

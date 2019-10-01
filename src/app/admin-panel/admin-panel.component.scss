@@ -64,6 +64,7 @@ section{
 
         a{
             text-decoration: underline #0e0b4d;
+            cursor: pointer;
         }
     }
 
@@ -76,16 +77,16 @@ section{
         table{
             width: 100%;
             
-            thead td{
+            th{
                 text-align: center;
             }
-        
-            tbody:nth-child(odd){
-                background-color: slategrey;
+            
+            tr:nth-child(even){
+                background-color: #e4e4e4;
             }
 
             tr{
-                min-height: 3em;
+                height: 3em;
             }
         }
     }
