@@ -64,7 +64,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
     private eventService: EventService, public profileService: BreederProfileService, public breederService: BreederControllerService) { }
 
   ngOnInit() {
-    this.puppiesData = JSON.parse(JSON.stringify(this.appService.userData.puppies));
+    this.puppiesData = this.appService.userData.puppies;
     if (this.appService.userData.parentsInfo) {
       this.fathers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "MALE");
       this.mothers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
@@ -186,7 +186,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe(res => {
         this.profileService.dataChangesSaved = true;
         this.appService.userData = res;
-        this.puppiesData = JSON.parse(JSON.stringify(res.puppies));
+        this.puppiesData = res.puppies;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.isMainPage = true;

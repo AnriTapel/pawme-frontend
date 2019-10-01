@@ -21,7 +21,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
-    this.puppiesData = this.appService.userData.puppiesInfo ? <PuppiesInfo>JSON.parse(JSON.stringify(this.appService.userData.puppiesInfo)) : {
+    this.puppiesData = this.appService.userData.puppiesInfo ? <PuppiesInfo>this.appService.userData.puppiesInfo : {
       age: null,
       priceFrom: null,
       priceTo: null,

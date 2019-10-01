@@ -38,7 +38,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     private eventService: EventService, private breederService: BreederControllerService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
-    this.nurceryData = this.appService.userData.generalInfo ? <BreederInfo>JSON.parse(JSON.stringify(this.appService.userData.generalInfo)) : {
+    this.nurceryData = this.appService.userData.generalInfo ? <BreederInfo>this.appService.userData.generalInfo : {
       name: null,
       city: null,
       mainBreed: null,

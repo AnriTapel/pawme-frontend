@@ -25,7 +25,7 @@ export class AboutMeProfilePageComponent implements OnInit {
     private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
-    this.breederData = this.appService.userData.about ? <BreederAbout>JSON.parse(JSON.stringify(this.appService.userData.about)) : {
+    this.breederData = this.appService.userData.about ? <BreederAbout>this.appService.userData.about : {
       about: null,
       howItStarted: null,
       outstandingInfo: null,
