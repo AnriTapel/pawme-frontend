@@ -3,7 +3,7 @@
     height: 600px;
     background-color: #fff;
     position: relative;
-    top: 2vh;
+    top: calc(50% - 300px);
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -60,7 +60,8 @@
     .onboarding-container{
         width: auto;
         max-width: 500px;
-        height: 90vh;
+        top: calc(50% - 48vh);
+        height: 96vh;
         overflow-y: auto;
 
         img{

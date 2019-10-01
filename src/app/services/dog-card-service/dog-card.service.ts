@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AppService } from '../app-service/app.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class DogCardService {
   private isPuppy: boolean;
   private visible: boolean;
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   getDog(): any{
     return this.dog;
@@ -33,12 +34,9 @@ export class DogCardService {
 
   setVisible(visible: boolean): void{
     this.visible = visible;
-    if (visible){
-      document.getElementsByTagName("body")[0].style.overflowY = "hidden";
-      document.getElementsByTagName("body")[0].style.paddingRight = "15px";
-    } else{
-      document.getElementsByTagName("body")[0].style.overflowY = "scroll";
-      document.getElementsByTagName("body")[0].style.paddingRight = "0";
-    }
+    if (visible)
+      this.appService.disableBodyScrolling();
+    else
+      this.appService.enableBodyScrolling();
   }
 }

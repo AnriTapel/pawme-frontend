@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AppService } from '../app-service/app.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class PopupTemplateService {
   private currentForm: string;
   private popupParams: any;
 
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   getShowStatus(): boolean{
     return this.show;
@@ -17,13 +18,10 @@ export class PopupTemplateService {
 
   setShowStatus(status: boolean): void{
     this.show = status;
-    if (status){
-      document.getElementsByTagName("body")[0].style.overflowY = "hidden";
-      document.getElementsByTagName("body")[0].style.paddingRight = "15px";
-    } else{
-      document.getElementsByTagName("body")[0].style.overflowY = "scroll";
-      document.getElementsByTagName("body")[0].style.paddingRight = "0";
-    }
+    if (status)
+      this.appService.disableBodyScrolling();
+    else
+      this.appService.enableBodyScrolling();
   }
 
   getCurrentForm(): string{

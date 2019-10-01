@@ -37,7 +37,7 @@ export class AppService {
           this.breeds = dict['breeds'];
           this.puppyTests = dict['puppyTests'];
 
-          if (window.location.href.indexOf('/pass-link-fail') != -1){
+          if (window.location.href.indexOf('/pass-link-fail') != -1) {
             let router = this.injector.get(Router);
             router.navigateByUrl('/remind-password');
             this.notificationServie.setContext('Ссылка для смены пароля устарела. Сделайте повторный запрос.', false);
@@ -59,13 +59,13 @@ export class AppService {
     });
   }
 
-  resolveEmailConfirm(): void{
+  resolveEmailConfirm(): void {
     let router = this.injector.get(Router);
-    if (window.location.href.indexOf('/email-success') != -1){
+    if (window.location.href.indexOf('/email-success') != -1) {
       router.navigateByUrl('/breeder-profile');
       this.notificationServie.setContext('Ваша почта успешно подтверждена', true);
       this.notificationServie.setVisibility(true);
-    } else if (window.location.href.indexOf('/email-fail') != -1){
+    } else if (window.location.href.indexOf('/email-fail') != -1) {
       router.navigateByUrl('/breeder-landing');
       this.notificationServie.setContext('Ошибка подтверждения почты', false);
       this.notificationServie.setVisibility(true);
@@ -108,11 +108,27 @@ export class AppService {
     }
   }
 
+  disableBodyScrolling(target?): void {
+    if (target){
+      target.ontouchmove = (e) => {
+        e.stopPropagation();
+      };
+    }
+    document.body.style.overflowY = "hidden";
+    document.body.style.paddingRight = "15px";
+  }
+
+  enableBodyScrolling(): void {
+    document.body.ontouchmove = (e) => {return true};
+    document.getElementsByTagName("body")[0].style.overflowY = "scroll";
+    document.getElementsByTagName("body")[0].style.paddingRight = "0";
+  }
+
   toggleDropdownTextInput(id: string, event: any): void {
     document.getElementById(id).focus(event.target.value);
   }
 
-  getTooltipTrigger(): string{
+  getTooltipTrigger(): string {
     return window.innerWidth < 770 ? 'click' : 'hover';
   }
 
@@ -121,7 +137,7 @@ export class AppService {
     return re.test(email);
   }
 
-  validatePhoneInput(phone: string): boolean{
+  validatePhoneInput(phone: string): boolean {
     let re = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
     return re.test(phone);
   }

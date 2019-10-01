@@ -46,19 +46,16 @@ export class BreederPageComponent implements OnInit {
         } else
             this.isPreviewMode = false;
 
-        if (!this.appService.userData)
-            this.breederService.getBreederUsingGET(parseInt(this.route.snapshot.paramMap.get('id')))
-                .subscribe(res => {
-                    this.appService.userData = res;
-                    this.getParentsTestsList();
-                });
-        else
-            this.getParentsTestsList();
+        this.breederService.getBreederUsingGET(parseInt(this.route.snapshot.paramMap.get('id')))
+            .subscribe(res => {
+                this.appService.userData = res;
+                this.getParentsTestsList();
+            });
     }
 
     ngOnInit() {
     }
-    
+
     subpageStatus(): any {
         let status = {
             generalInfo: this.appService.userData.generalInfo != null,
@@ -70,7 +67,7 @@ export class BreederPageComponent implements OnInit {
         return status;
     }
 
-    getNurceryName(): string{
+    getNurceryName(): string {
         if (this.subpageStatus().generalInfo && this.appService.userData.generalInfo.name)
             return this.appService.userData.generalInfo.name;
         else
@@ -80,7 +77,7 @@ export class BreederPageComponent implements OnInit {
 
     getNameByBreeds(): string {
         let name = "ЗАВОДЧИК ";
-        if (!this.appService.userData.generalInfo )
+        if (!this.appService.userData.generalInfo)
             return name;
         else if (this.appService.userData.generalInfo.mainBreed)
             name += this.appService.userData.generalInfo.mainBreed.name.toUpperCase();
@@ -105,13 +102,13 @@ export class BreederPageComponent implements OnInit {
         }
     }
 
-    openInstagramPage(nickname: string): void{
+    openInstagramPage(nickname: string): void {
         let url = 'https://instagram.com/' + (nickname[0] == '@' ? nickname.substr(1) : nickname);
         window.open(url, '_blank');
     }
 
     // For Facebook & Web-site
-    openPageByUrl(url: string): void{
+    openPageByUrl(url: string): void {
         if (!url.startsWith('http'))
             url = 'http://' + url;
         window.open(url, '_blank');
@@ -130,7 +127,7 @@ export class BreederPageComponent implements OnInit {
         this.popupService.setShowStatus(true);
     }
 
-    getTooltipPlacement(): string{
+    getTooltipPlacement(): string {
         return window.innerWidth < 770 ? 'bottom-right' : 'bottom';
     }
 
@@ -138,14 +135,14 @@ export class BreederPageComponent implements OnInit {
         return document.getElementsByClassName('slider')[0].scrollLeft;
     }
 
-    scrollLeft(): void{
+    scrollLeft(): void {
         //@ts-ignore
-        $('.slider').animate( { scrollLeft: '-=360' }, 250);
+        $('.slider').animate({ scrollLeft: '-=360' }, 250);
     }
-    
-    scrollRight(): void{
+
+    scrollRight(): void {
         //@ts-ignore
-        $('.slider').animate( { scrollLeft: '+=360' }, 250);
+        $('.slider').animate({ scrollLeft: '+=360' }, 250);
     }
 
     showBreederMessagePopup(): void {
@@ -171,7 +168,7 @@ export class BreederPageComponent implements OnInit {
         return this.appService.userData.puppiesInfo.puppyTests.filter(it => it.id == id).length > 0
     }
 
-    backToProfile(){
+    backToProfile() {
         scroll(0, 0);
         this.router.navigateByUrl('/breeder-profile');
     }
