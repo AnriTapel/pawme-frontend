@@ -28,14 +28,16 @@
                         <th>Имя</th>
                         <th>Фамилия</th>
                         <th>Email</th>
+                        <th>Ссылка</th>
                         <th>Профиль</th>
                         <th>Статус</th>
                     </tr>
                     <tr *ngFor="let breeder of breeders">
-                        <td (click)="openBreederPage(breeder.id)" style="text-align: center;">{{breeder.id}}</td>
+                        <td style="text-align: center;">{{breeder.id}}</td>
                         <td>{{breeder.name}}</td>
                         <td>{{breeder.surname}}</td>
                         <td>{{breeder.email}}</td>
+                        <td (click)="openBreederPage(breeder.id)" style="cursor: pointer;color: #0094c5;">https://petman.co/breeder/{{breeder.id}}</td>
                         <td style="text-align: center;">&#9675; &#9675; &#9675;</td>
                         <td style="text-align: right;">
                             <select (change)="changeBreederStatus(breeder.id, $event)">
