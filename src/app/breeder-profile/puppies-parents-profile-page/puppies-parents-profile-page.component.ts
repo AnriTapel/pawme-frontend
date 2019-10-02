@@ -215,13 +215,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   validateGeneralFields(): boolean {
     let isValid = true;
     this.invalidGeneralFields = [];
-    if (this.parentsData.parents.length == 0) {
+    if (this.parentsData.parents.length < 2) {
       this.invalidGeneralFields.push('parents');
-      isValid = false;
-    }
-
-    if (this.parentsData.parentTests.length == 0) {
-      this.invalidGeneralFields.push('tests');
       isValid = false;
     }
 

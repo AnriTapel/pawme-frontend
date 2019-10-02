@@ -2,6 +2,10 @@ header {
   background-color: #f8f9fb;
 }
 
+.navbar-brand {
+  cursor: pointer;
+}
+
 .navbar-brand > img {
   width: 150px;
   outline: none;

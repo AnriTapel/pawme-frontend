@@ -22,9 +22,9 @@ export class LoginComponent {
 
   loginBreeder(): void {
     this.loginError = false;
-    /*if (!this.appService.validateEmailInput(this.credentials.username))
+    if (!this.appService.validateEmailInput(this.credentials.username))
       this.loginError = true;
-    else {*/
+    else {
       let body = new FormData();
       this.credentials.username = this.credentials.username.toLowerCase();
       body.append('username', this.credentials.username);
@@ -34,17 +34,20 @@ export class LoginComponent {
         data => this.onLoginSuccess(),
         error => this.loginError = true
       );
-    //}
+    }
   }
 
   private onLoginSuccess(): void {
     this.breederService.meUsingGET().subscribe(me => {
+      scroll(0,0);
       this.appService.meData = me;
       if (me.type == 'BREEDER')
         this.breederService.getBreederUsingGET(me.id).subscribe(res => {
           this.appService.userData = res;
           this.router.navigateByUrl('/breeder-profile');
         });
+      else if (me.type == 'ADMIN')
+        this.router.navigateByUrl('/admin-panel');
       else
         this.router.navigateByUrl('/breeder-landing');
     });

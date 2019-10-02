@@ -16,7 +16,8 @@ import { FaqComponent } from './secondary-page/faq/faq.component';
 
 
 const routes: Routes = [
-  {path: '', component: HomePageComponent},
+  {path: '', component: BreederLandingComponent},
+  {path: 'breeder-landing', component: BreederLandingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'about-us', component: AboutUsComponent},
@@ -24,7 +25,6 @@ const routes: Routes = [
   {path: 'faq', component: FaqComponent},
   {path: 'remind-password', component: RemindPasswordComponent},
   {path: 'changepass/:uuid', component: ChangePasswordComponent, pathMatch: 'full'},
-  {path: 'breeder-landing', component: BreederLandingComponent},
   {path: 'breeder-profile', component: BreederProfileComponent},
   {path: 'breeder/:id', component: BreederPageComponent, pathMatch: 'full'},
   {path: 'preview/:id', component: BreederPageComponent, pathMatch: 'full'},

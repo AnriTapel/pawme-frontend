@@ -32,6 +32,14 @@
   background-color: rgba(203, 216, 246, 0.2);
 }
 
+.extra-breed-block > img {
+  width: 14px;
+  opacity: .6;
+  margin-top: 5px;
+  float: right;
+  cursor: pointer;
+}
+
 .active-profile-image {
   border: 1px solid #cbd8f6;
 }

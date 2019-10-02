@@ -177,7 +177,7 @@
         <div *ngIf="currentPuppyData.gallery.length == 0" class="gallery-initial-block"
             [class.invalid-form-field-value]="invalidFields.includes('photos')" (click)="previewPuppyImage(-1)">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
-            <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+            <span>Нажмите для загрузки фотографий</span>
         </div>
 
         <div *ngIf="currentPuppyData.gallery.length > 0" class="gallery-uploaded-photos-block">

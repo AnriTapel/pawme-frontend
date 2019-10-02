@@ -126,11 +126,6 @@ export class AboutMeProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (this.currentClubs.length == 0) {
-      this.invalidFields.push('clubs');
-      isValid = false;
-    }
-
     return isValid;
   }
 

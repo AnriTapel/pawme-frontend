@@ -44,8 +44,7 @@
             (click)="previewPersonalImage()">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
-            <span>
-                <a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+            <span>Нажмите для загрузки фотографий</span>
         </div>
 
         <div *ngIf="breederData.photo" class="gallery-uploaded-photos-block">
@@ -62,7 +61,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-left">
-        <label for="clubs">В каких клубах заводчиков вы состоите?</label>
+        <label for="clubs">В каких клубах заводчиков вы состоите? (необязательно)</label>
         <br>
         <div class="btn-label-list">
             <div *ngFor="let club of currentClubs;let i = index" class="btn-label" (click)="deleteClub(i)">
@@ -91,8 +90,7 @@
             <input type="file" accept="image/*" (change)="uploadCertificates($event)" multiple />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
-            <span>
-                <a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+            <span>Нажмите для загрузки фотографий</span>
         </div>
 
         <div *ngIf="breederData.certificates.length > 0" class="gallery-uploaded-photos-block">

@@ -48,6 +48,7 @@ h3 {
 
 .message-buttons a {
   margin-right: 1em;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 769px) {

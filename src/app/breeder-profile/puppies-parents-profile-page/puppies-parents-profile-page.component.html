@@ -46,7 +46,7 @@
     <hr>
 
     <div class="parents-medicals-block">
-        <label>Медицинские тесты на родителях</label>
+        <label>Медицинские тесты на родителях (необязательно)</label>
         <br>
         <span class="block-description">Ответственные заводчики тестируют родителей щенков на специфические для породы
             заболевания, чтобы они не могли проявиться
@@ -166,7 +166,7 @@
         <div *ngIf="currentParentData.gallery.length == 0" class="gallery-initial-block"
             (click)="previewParentImage(-1)" [class.invalid-form-field-value]="invalidAddingFields.includes('photos')">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
-            <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+            <span>Нажмите для загрузки фотографий</span>
         </div>
 
         <div *ngIf="currentParentData.gallery.length > 0" class="gallery-uploaded-photos-block">

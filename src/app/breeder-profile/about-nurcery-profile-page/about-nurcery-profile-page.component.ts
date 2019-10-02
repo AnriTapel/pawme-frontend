@@ -99,6 +99,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     });
   }
 
+  deleteExtraBreed(): void{
+    this.nurceryData.extraBreed = null;
+    this.isAdditionalBreed = false;
+  }
+
   deleteGalleryImage(index: number): void {
     this.nurceryData.gallery.splice(index, 1);
     this.profileService.dataChangesSaved = false;

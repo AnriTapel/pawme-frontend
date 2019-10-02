@@ -2,9 +2,13 @@ header{
     background-color: #f8f9fb;
 }
 
-.navbar-brand > img{
-    width: 150px;
-    outline: none;
+.navbar-brand{
+    cursor: pointer;
+
+    &>img{
+        width: 150px;
+        outline: none;
+    }
 }
 
 .menu-btn{

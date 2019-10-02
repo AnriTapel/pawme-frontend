@@ -23,21 +23,20 @@
         <div class="input-group">
             <input type="number" class="form-control custom-form-control-border" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
                 (change)="profileService.dataChangesSaved = false" placeholder="от" [class.invalid-form-field-value]="invalidFields.includes('priceFrom')">
-            <input type="number" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до"
-                (change)="profileService.dataChangesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('priceTo')">
+            <input type="number" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до" (change)="profileService.dataChangesSaved = false"
+                [class.invalid-form-field-value]="invalidFields.includes('priceTo')">
         </div>
     </div>
 
     <div class="kit-avail-block">
-        <span>Обязательный комплект PawMe</span>
+        <span>Обязательный комплект Petman</span>
         <br>
         <p>Мы против мошенников, поэтому у каждого щенка должна быть
             <strong>метрика (родословная), ветеринарный паспорт
             </strong> и
             <strong>клеймо</strong>.</p>
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet"
-                    [class.invalid-form-field-value]="invalidFields.includes('set')">
+            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet" [class.invalid-form-field-value]="invalidFields.includes('set')">
                 <img *ngIf="puppiesData.petmanSet" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю наличие такого комплекта</label>
@@ -49,7 +48,7 @@
     <div class="medicine-block">
         <label>Медицина</label>
         <br>
-        <span class="block-description">Отметьте медицинские услуги, которые вы проводятся для ваших щенков</span>
+        <span class="block-description">Отметьте медицинские услуги, которые вы проводите для своих щенков.</span>
         <div class="medicine-checkboxs-list">
             <div class="breeder-profile-subpage-form-left">
                 <ng-container *ngFor="let test of appService.puppyTests">
@@ -75,58 +74,53 @@
     </div>
 
     <div class="contract-block">
-        <span>Обязательный договор PawMe</span>
+        <span>Обязательный договор Petman c гарантией</span>
         <br>
-        <span class="block-description">Для защиты покупателей от недобросовестных заводчиков мы составили стандартный
-            договор купли/продажи.</span>
+        <span class="block-description">Для защиты покупателей от недобросовестных заводчиков наши юристы составили стандартный договор купли/продажи. В
+            него включена гарантия по здоровью щенка на момент покупки.</span>
 
-        <a href="#">Посмотреть договор</a>
+        <a href="https://petman.co/contract.pdf" target="_blank">Посмотреть договор</a>
         <br>
 
 
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract"
-                    [class.invalid-form-field-value]="invalidFields.includes('contract')">
+            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract" [class.invalid-form-field-value]="invalidFields.includes('contract')">
                 <img *ngIf="puppiesData.petmanContract" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю готовность использовать договор</label>
         </div>
     </div>
 
-    <hr>
+    <!--<hr>
 
     <div class="breeder-profile-subpage-form-left">
         <label for="guarantee-period">На сколько месяцев вы готовы дать гарантию по здоровью щенка?</label>
         <div class="input-group mb-3">
-            <input type="number" name="guarantee-period" class="form-control custom-form-control-border"
-                [(ngModel)]="puppiesData.insuranceTerm" placeholder="12" aria-label="12" aria-describedby="basic-addon2"
-                (change)="profileService.dataChangesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('term')">
+            <input type="number" name="guarantee-period" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceTerm"
+                placeholder="12" aria-label="12" aria-describedby="basic-addon2" (change)="profileService.dataChangesSaved = false"
+                [class.invalid-form-field-value]="invalidFields.includes('term')">
             <div class="input-group-append">
                 <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('term')"
-                id="basic-addon2">месяцев</span>
+                    id="basic-addon2">месяцев</span>
             </div>
         </div>
     </div>
 
     <div class="why-its-important">
-        <span [placement]="getTooltipPlacement()" tooltipClass="custom-tooltip" [triggers]="appService.getTooltipTrigger()"
-            ngbTooltip="Текст подсказки, которая будет всплывать при наведении!">Почему это важно?</span>
-    </div>
+        <span [placement]="getTooltipPlacement()" tooltipClass="custom-tooltip" [triggers]="appService.getTooltipTrigger()" ngbTooltip="Текст подсказки, которая будет всплывать при наведении!">Почему это важно?</span>
+    </div>-->
 
     <hr>
 
     <div class="puppies-gifts-block">
         <label for="gifts">Подарки к купленному щенку (необязательно)</label>
         <br>
-        <span class="block-description">Многие заводчики дарят новым хозяевам игрушку с запахом однопометников или
-            небольшой мешочек корма</span>
-        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts"
-            (change)="profileService.dataChangesSaved = false" ></textarea>
+        <span class="block-description">Многие заводчики дарят новым хозяевам игрушку с запахом однопометников или небольшой мешочек корма.</span>
+        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts" (change)="profileService.dataChangesSaved = false"></textarea>
     </div>
 
     <div class="lower-btn">
-        <span *ngIf="invalidFields.length > 0" class="invalid-field-message"
-            style="display: block; margin-bottom: 1em;">
+        <span *ngIf="invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
             Пожалуйста, заполните пропущенные поля
         </span>
         <br *ngIf="invalidFields.length > 0" />

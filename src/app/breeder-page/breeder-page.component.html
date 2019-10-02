@@ -191,7 +191,7 @@
                             занимаемых участниками в отношении поставленных задач.
                         </div>
                         <div class="contract-link" [ngClass]="{'collapse' : collapse.contract}">
-                            <a href="https://petman.co/contract.docx" target="_blank">Посмотреть договор</a>
+                            <a href="https://petman.co/contract.pdf" target="_blank">Посмотреть договор</a>
                         </div>
                         <div class="line"></div>
                     </div>
@@ -378,7 +378,7 @@
 
                 <div class="line"></div>
 
-                <div class="medical-test-parents">
+                <div *ngIf="availParentsTests.length > 0" class="medical-test-parents">
                     <div class="title">Медицинские тесты родителей</div>
 
                     <div class="tests-list d-flex flex-row flex-wrap">

@@ -40,8 +40,9 @@
         <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить еще одну"
             (click)="isAdditionalBreed = true" />
     </div>
-    <div *ngIf="isAdditionalBreed" class="breeder-profile-subpage-form-right">
+    <div *ngIf="isAdditionalBreed" class="breeder-profile-subpage-form-right extra-breed-block">
         <label for="nurcery-additional-breed">Дополнительная порода</label>
+        <img src="./assets/img/close-button-black.svg" alt="Удалить дополнительную породу" (click)="deleteExtraBreed()"/>
         <div class="dropdown-text-input">
             <input type="text" class="form-control custom-form-control-border" name="nurcery-additional-breed" [(ngModel)]="curExtraBreed"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
@@ -80,13 +81,13 @@
     </div>
 
     <div class="breeder-profile-subpage-form-group nurcery-gallery-block">
-        <label for="nurcery-gallery">Фото в основную галерею</label><br>
+        <label for="nurcery-gallery">Фото в основную галерею (минимум 4)</label><br>
         <span class="block-description">Фотографии будут отображаться в галерее на вашей странице заводчика</span>
 
         <div *ngIf="nurceryData.gallery.length == 0" class="gallery-initial-block"
             [class.invalid-form-field-value]="invalidFields.includes('gallery')" (click)="previewGalleryPhoto(-1)">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
-            <span><a>Загрузите</a> фотографии или перетащите их в выделенную область</span>
+            <span>Нажмите для загрузки фотографий</span>
         </div>
 
         <div *ngIf="nurceryData.gallery.length > 0" class="gallery-uploaded-photos-block">
@@ -104,8 +105,8 @@
             <span>Выбрать</span>
         </div>
     </div>
-
-    <hr>
+    
+    <!--<hr>
 
     <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-instagram">Instagram (необязательно)</label>
@@ -129,8 +130,8 @@
             (change)="profileService.dataChangesSaved = false" placeholder="Ссылка на ваш Facebook" />
 
         <span class="block-description">Формат ссылки: facebook.com/мойпрофиль</span>
-    </div>
-
+    </div>-->
+    
     <div class="lower-btn">
         <span *ngIf="invalidFields.length > 0" class="invalid-field-message"
             style="display: block; margin-bottom: 1em;">
