@@ -32,14 +32,16 @@ export class BreederProfileService {
       index++;
     if (this.appService.userData.about)
       index++;
-    if (this.appService.userData.parentsInfo){
-      let male = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "MALE");
-      let female = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
-      if (male.length > 0 && female.length > 0)
-        index++;
-    }
+    if (this.appService.userData.parentsInfo && this.isParentsInfoFilled())
+      index++;
 
     this.appService.userData.profileFill = index;
+  }
+
+  isParentsInfoFilled(): boolean {
+    let male = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "MALE");
+    let female = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
+    return male.length > 0 && female.length > 0;
   }
 
   setCurProfilePage(page: any): void {
@@ -57,9 +59,9 @@ export class BreederProfileService {
         this.isMobileMenuVisible = false;
       };
 
-      this.alertService.showDialog("Вы не сохранили изменения", "warning-title", 
-      ["Все несохраненные изменения будут утеряны. Перейти в другой раздел?"],
-        "Перейти без сохранения", "custom-btn btn-transparent", "Сохранить изменения", "custom-btn btn-purple", onSuccess, onError );
+      this.alertService.showDialog("Вы не сохранили изменения", "warning-title",
+        ["Все несохраненные изменения будут утеряны. Перейти в другой раздел?"],
+        "Перейти без сохранения", "custom-btn btn-transparent", "Сохранить изменения", "custom-btn btn-purple", onSuccess, onError);
     } else {
       this.curProfilePage = page;
       this.isMobileMenuVisible = false;

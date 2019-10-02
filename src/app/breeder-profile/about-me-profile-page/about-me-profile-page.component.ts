@@ -136,11 +136,11 @@ export class AboutMeProfilePageComponent implements OnInit {
     this.breederData.clubs = this.currentClubs.join(";");
     this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
       () => {
-        this.profileService.updateProfileFullness();
         this.appService.userData.about = this.breederData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         scroll(0, 0);
+        this.profileService.updateProfileFullness();
         this.profileService.dataChangesSaved = true;
       },
       () => {

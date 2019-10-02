@@ -60,8 +60,8 @@
     .onboarding-container{
         width: auto;
         max-width: 500px;
-        top: calc(50% - 48vh);
-        height: 96vh;
+        height: 100%;
+        top: 0;
         overflow-y: auto;
 
         img{
@@ -70,13 +70,16 @@
     }
 
     .main-block{
+        display: block;
 
         .title{
             font-size: 16px;
+            margin-bottom: 2em;
         }
 
         .desc{
             font-size: 14px;
+            margin-bottom: 3em;
         }
 
         .buttons-block{

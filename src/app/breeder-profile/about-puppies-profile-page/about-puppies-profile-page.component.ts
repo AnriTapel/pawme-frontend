@@ -62,12 +62,12 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
     this.breederService.setPuppiesInfoUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(
       () => {
-        this.profileService.updateProfileFullness();
         this.appService.userData.puppiesInfo = this.puppiesData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.profileService.dataChangesSaved = true;
         scroll(0, 0);
+        this.profileService.updateProfileFullness();
       },
       () => {
         this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
@@ -107,11 +107,6 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
     if (!this.puppiesData.petmanContract) {
       this.invalidFields.push('contract');
-      isValid = false;
-    }
-
-    if (!this.puppiesData.insuranceTerm) {
-      this.invalidFields.push('term');
       isValid = false;
     }
 

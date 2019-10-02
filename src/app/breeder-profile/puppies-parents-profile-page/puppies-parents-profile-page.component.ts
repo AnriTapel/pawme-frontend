@@ -183,6 +183,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.notificationService.setContext('Черновик успешно сохранен', true);
       this.notificationService.setVisibility(true);
       scroll(0, 0);
+      this.profileService.updateProfileFullness();
     }, () => {
       this.notificationService.setContext('Черновик не были сохранены, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);
@@ -195,7 +196,6 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     if (!this.validateGeneralFields())
       return;
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
-      this.profileService.updateProfileFullness();
       this.profileService.dataChangesSaved = true;
       this.profileService.parentTestsChangesSaved = true;
       this.appService.userData.parentsInfo = this.parentsData;
@@ -204,6 +204,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.notificationService.setContext('Изменения успешно сохранены', true);
       this.notificationService.setVisibility(true);
       scroll(0, 0);
+      this.profileService.updateProfileFullness();
     }, () => {
       this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);

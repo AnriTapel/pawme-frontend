@@ -120,12 +120,12 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
-        this.profileService.updateProfileFullness();
         this.appService.userData.generalInfo = this.nurceryData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.profileService.dataChangesSaved = true;
         scroll(0, 0);
+        this.profileService.updateProfileFullness();
       },
         () => {
           this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);

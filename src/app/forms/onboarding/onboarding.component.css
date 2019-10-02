@@ -78,18 +78,23 @@
   .onboarding-container {
     width: auto;
     max-width: 500px;
-    top: calc(50% - 48vh);
-    height: 96vh;
+    height: 100%;
+    top: 0;
     overflow-y: auto;
   }
   .onboarding-container img {
     max-width: 100%;
   }
+  .main-block {
+    display: block;
+  }
   .main-block .title {
     font-size: 16px;
+    margin-bottom: 2em;
   }
   .main-block .desc {
     font-size: 14px;
+    margin-bottom: 3em;
   }
   .main-block .buttons-block {
     -webkit-box-orient: vertical;

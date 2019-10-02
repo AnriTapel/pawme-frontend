@@ -4,7 +4,7 @@
 
 <ly-cropping #cropping [ngClass]="classes.cropping" (change)="inputFileSelected($event)" [class.rounded-cropp-area]="!params.isRect"
         [config]="myConfig" (cropped)="onCropped($event)">
-    <span><a class="upload-btn">Загрузите</a> или перетащите изображение</span>
+    <span>Нажмите для загрузки фотографий</span>
 </ly-cropping>
 
 <p>Двигайте фото и меняйте его масштаб</p>

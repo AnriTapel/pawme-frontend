@@ -40,6 +40,10 @@
 }
 
 @media screen and (max-width: 769px){
+    .gallery-container{
+        height: 80vh;
+    }
+
     .previous-img{
         left: .5em
     }
