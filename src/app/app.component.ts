@@ -24,19 +24,26 @@ const STYLES = (theme: ThemeVariables) => ({
 export class AppComponent {
   readonly classes = this.theme.addStyleSheet(STYLES);
   // Routes of pages with custom header
-  private noGeneralHeaderRoutes = ['/breeder-landing', '/admin-panel'];
+  private noGeneralHeaderRoutes = ['/breeder-landing', '/admin-panel', '/'];
+  private noGeneralHeaderPathnames = [];
   // Routes of pages with custom footer
   private noGeneralFooterRoutes = ['/admin-panel'];
+  private noGeneralFooterPathnames = [];
 
   constructor(private theme: LyTheme2, private appService: AppService, public popupService: PopupTemplateService,
     private router: Router) {}
 
   showGeneralHeader(): boolean{
-    return this.noGeneralHeaderRoutes.filter(it => this.router.url.indexOf(it) != -1).length == 0;
+    if (this.noGeneralHeaderRoutes.includes(this.router.url))
+      return false;
+    else
+      return this.noGeneralHeaderPathnames.filter(it => this.router.url.indexOf(it) != -1).length == 0;
   }
 
   showGeneralFooter(): boolean{
-    return this.noGeneralFooterRoutes.filter(it => this.router.url.indexOf(it) != -1).length == 0;
+    if (this.noGeneralFooterRoutes.includes(this.router.url))
+      return false;
+    return this.noGeneralFooterPathnames.filter(it => this.router.url.indexOf(it) != -1).length == 0;
   }
 
 }

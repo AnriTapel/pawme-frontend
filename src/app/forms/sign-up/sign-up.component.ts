@@ -22,6 +22,7 @@ export class SignUpComponent implements OnInit {
   newBreederAcception: boolean = true;
 
   invalidFields: any[] = [];
+  errorText: string = null;
 
   constructor(private popupService: PopupTemplateService, private appService: AppService,
     private breederService: BreederControllerService, private router: Router) { }
@@ -36,9 +37,16 @@ export class SignUpComponent implements OnInit {
   signUpNewBreeder(){
     if (!this.validateFields())
       return;
+    this.errorText = null;
     this.breederData.email = this.breederData.email.toLowerCase();
-    this.breederService.registerUsingPOST(this.breederData).subscribe(res => {
+    this.breederService.registerUsingPOST(this.breederData).subscribe(
+    res => {
       this.router.navigate(['/confirm-email', this.breederData.email]);
+    },error => {
+      if (error.status == 409)
+        this.errorText = "Этот email уже зарегистрирован";
+      else
+        this.errorText = "Произошла ошибка, попробуйте еще раз"
     });
   }
 

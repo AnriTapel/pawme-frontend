@@ -2,7 +2,9 @@
 
 <p>Напишите свое сообщение заводчику, и он ответит вам на email или позвонит</p>
 
-<span *ngIf="isError" class="invalid-field-message">Произошла ошибка при отправке, попробуйте еще раз.</span>
+<div *ngIf="isError" class="form-error-message-block">
+    <span class="invalid-field-message">Произошла ошибка при отправке, попробуйте еще раз.</span>
+</div>
 
 <form>
     <div class="form-group popup-form-group">

@@ -620,6 +620,13 @@ input[type=number]::-webkit-outer-spin-button {
   border: 1px solid #eb0000 !important;
 }
 
+.form-error-message-block {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .invalid-field-message {
   color: #eb0000 !important;
   font-size: 14px !important;
@@ -861,6 +868,9 @@ ngb-datepicker .bg-light {
   .popup-form-button {
     width: 80% !important;
     max-width: unset;
+  }
+  .form-error-message-block {
+    width: 80%;
   }
   .form-control {
     font-size: 16px;

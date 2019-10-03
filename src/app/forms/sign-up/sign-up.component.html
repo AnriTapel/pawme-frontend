@@ -1,5 +1,9 @@
 <h3>РЕГИСТРАЦИЯ</h3>
 
+<div *ngIf="errorText" class="form-error-message-block">
+    <span class="invalid-field-message">{{errorText}}</span>
+</div>
+
 <form>
     <div class="form-group popup-form-group">
         <label for="name">Имя</label>

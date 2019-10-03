@@ -23,12 +23,6 @@ span a:hover {
   color: #014c8c;
 }
 
-.login-error-message-block {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-}
-
 @media screen and (max-width: 769px) {
   h3 {
     margin-top: 1em;

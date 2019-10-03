@@ -199,6 +199,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
       () => {
         this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
+        if (!this.currentPuppyData.id)
+          this.puppiesData.pop();
         scroll(0, 0);
       }
     );

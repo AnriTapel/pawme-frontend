@@ -13,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit {
 
-  private nonProfileHeaderRoutes = ['/breeder-landing'];
+  private nonProfileHeaderRoutes = ['/breeder-landing', '/'];
   private nonProfileHeaderPathnames = [];
 
   constructor(public appService: AppService, public popupService: PopupTemplateService, private http: HttpClient,
