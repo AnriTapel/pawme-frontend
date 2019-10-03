@@ -185,8 +185,44 @@ $block-padding: 8vw;
         font-weight: 600;
         min-height: 75px;
     }
+
+    .requirements-desktop {
+        transition: all .2s linear;
+        display: block;
+        float: left;
+        width: 33%;
+    }
+
+    .requirements-mobile{
+        display: none;
+    }
+    
+    .hidden {
+        display: none !important;
+        opacity: 0;
+    }
+
+    .visuallyhidden {
+        opacity: 0;
+    }
+
+    li{
+        color: #0e0b4d;
+        font-size: 18px;
+        font-family: 'Intro-Book';
+        padding-left: 5px;
+    }
 }
 
+.coming-soon > section:first-of-type{
+    padding-left: 0;
+
+    a{
+        color: #645fc9;
+        border-bottom: 1px solid;
+        cursor: pointer;
+    }
+}
 @media screen and (max-width: 769px){
 
     h2{
@@ -221,7 +257,7 @@ $block-padding: 8vw;
             h4{
                 font-size: 18px;
                 text-align: center;
-                margin-bottom: 1.5px;
+                margin-bottom: 1.5em;
             }
 
             img, &>div{
@@ -351,6 +387,19 @@ $block-padding: 8vw;
 
         section p:nth-child(3){
             min-height: unset !important;
+        }
+
+        .requirements-desktop{
+            display: none !important;
+        }
+
+        .requirements-mobile {
+            transition: all .2s linear;
+            display: block;
+            
+            li{
+                font-size: 14px;
+            }
         }
     }
 

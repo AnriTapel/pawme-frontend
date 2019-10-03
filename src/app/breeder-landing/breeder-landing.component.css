@@ -213,6 +213,44 @@
   min-height: 75px;
 }
 
+.coming-soon .requirements-desktop {
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
+  display: block;
+  float: left;
+  width: 33%;
+}
+
+.coming-soon .requirements-mobile {
+  display: none;
+}
+
+.coming-soon .hidden {
+  display: none !important;
+  opacity: 0;
+}
+
+.coming-soon .visuallyhidden {
+  opacity: 0;
+}
+
+.coming-soon li {
+  color: #0e0b4d;
+  font-size: 18px;
+  font-family: 'Intro-Book';
+  padding-left: 5px;
+}
+
+.coming-soon > section:first-of-type {
+  padding-left: 0;
+}
+
+.coming-soon > section:first-of-type a {
+  color: #645fc9;
+  border-bottom: 1px solid;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 769px) {
   h2 {
     font-size: 20px;
@@ -240,7 +278,7 @@
   .what-is-avail-block section h4 {
     font-size: 18px;
     text-align: center;
-    margin-bottom: 1.5px;
+    margin-bottom: 1.5em;
   }
   .what-is-avail-block section img, .what-is-avail-block section > div {
     width: 100%;
@@ -349,6 +387,17 @@
   }
   .coming-soon section p:nth-child(3) {
     min-height: unset !important;
+  }
+  .coming-soon .requirements-desktop {
+    display: none !important;
+  }
+  .coming-soon .requirements-mobile {
+    -webkit-transition: all .2s linear;
+    transition: all .2s linear;
+    display: block;
+  }
+  .coming-soon .requirements-mobile li {
+    font-size: 14px;
   }
 }
 /*# sourceMappingURL=breeder-landing.component.css.map */

@@ -8,9 +8,9 @@ import { PopupTemplateService } from '../services/popup-service/popup-template.s
 })
 export class BreederLandingComponent implements OnInit {
 
-  constructor(){}
+  constructor() { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
   }
 
   /*firstSliderData: any[];
@@ -72,5 +72,36 @@ export class BreederLandingComponent implements OnInit {
   secondSliderTitleClicked(index: number): void {
     this.secondSlider.selectSlide(index);
   }*/
+
+  toogleRequirements(): void {
+    //@ts-ignore
+    var boxMobile = $('#requirements-mobile');
+    if (boxMobile.hasClass('hidden')) {
+      boxMobile.removeClass('hidden');
+      setTimeout(function () {
+        boxMobile.removeClass('visuallyhidden');
+      }, 5);
+    } else {
+      boxMobile.addClass('visuallyhidden');
+      boxMobile.one('transitionend', function (e) {
+        boxMobile.addClass('hidden');
+      });
+    }
+    //@ts-ignore
+    var boxDesktop = $('#requirements-desktop');
+    if (boxDesktop.hasClass('hidden')) {
+      boxDesktop.removeClass('hidden');
+      setTimeout(function () {
+        boxDesktop.removeClass('visuallyhidden');
+      }, 5);
+    } else {
+      boxDesktop.addClass('visuallyhidden');
+      boxDesktop.one('transitionend', function (e) {
+        boxDesktop.addClass('hidden');
+      });
+    }
+    //document.getElementById('requirements').style.display = document.getElementById('requirements').style.display == 'none' ?
+    //  'block' : 'none';
+  }
 
 }
