@@ -127,8 +127,7 @@
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                 (click)="appService.toggleDropdownTextInput('dad', $event)" />
         </div>
-        <div *ngIf="isDadEmptyButton" class="empty-parent-button-block"
-            (mousedown)="profileService.setCurProfilePage(profileService.profileSubpages[2])">
+        <div *ngIf="isDadEmptyButton" class="empty-parent-button-block" (mousedown)="switchToParentsSubpage()">
             <img src="./assets/img/thin-plus.png" alt="Добавить родителя" />
             &nbsp;&nbsp;Добавить родителя
         </div>
@@ -148,8 +147,7 @@
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                 (click)="appService.toggleDropdownTextInput('mom', $event)" />
         </div>
-        <div *ngIf="isMomEmptyButton" class="empty-parent-button-block"
-            (mousedown)="profileService.setCurProfilePage(profileService.profileSubpages[2])">
+        <div *ngIf="isMomEmptyButton" class="empty-parent-button-block" (mousedown)="switchToParentsSubpage()">
             <img src="./assets/img/thin-plus.png" alt="Добавить родителя" />
             &nbsp;&nbsp;Добавить родителя
         </div>

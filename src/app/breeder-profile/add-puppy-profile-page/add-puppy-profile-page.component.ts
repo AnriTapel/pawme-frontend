@@ -8,6 +8,7 @@ import { Parent, Puppy } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { BreederProfileService } from 'src/app/services/breeder-profile-service/breeder-profile.service';
+import { AlertService } from '../../services/alert-service/alert.service';
 
 @Component({
   selector: 'app-add-puppy-profile-page',
@@ -39,6 +40,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   curFatherNickname: string;
   curBreed: string;
   saveChagesEvent: any;
+  addNewParentEvent: any;
 
   birthdayModel: NgbDateStruct = { day: null, month: null, year: null };
   invalidFields: any[] = [];
@@ -61,7 +63,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
   isMomEmptyButton: boolean = false;
 
   constructor(public appService: AppService, private popupService: PopupTemplateService, private notificationService: NotificationBarService,
-    private eventService: EventService, public profileService: BreederProfileService, public breederService: BreederControllerService) { }
+    private eventService: EventService, public profileService: BreederProfileService, public breederService: BreederControllerService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.puppiesData = this.appService.userData.puppies;
@@ -70,10 +73,31 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.mothers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
     }
     this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
+    
+    this.addNewParentEvent = this.eventService.subscribe('save-puppy-draft-before-parents-page', () => {
+      this.preSaveOperation();
+      this.breederService.setPuppyDraftUsingPUT(this.appService.userData.id, this.currentPuppyData).subscribe(() => {
+        this.profileService.dataChangesSaved = true;
+        this.appService.userData.puppyDraft = JSON.parse(JSON.stringify(this.currentPuppyData));
+        this.currentPuppyData = null;
+        this.birthdayModel = { day: null, month: null, year: null };
+        this.notificationService.setContext('Черновик успешно сохранен', true);
+        this.notificationService.setVisibility(true);
+        this.profileService.setCurProfilePage(this.profileService.profileSubpages[2]);
+        scroll(0, 0);
+      },
+        () => {
+          this.notificationService.setContext('Черновик не были сохранены, попробуйте еще раз', false);
+          this.notificationService.setVisibility(true);
+          scroll(0, 0);
+        }
+      );
+    });
   }
 
   ngOnDestroy(): void{
     this.saveChagesEvent.unsubscribe();
+    this.addNewParentEvent.unsubscribe();
   }
 
   showCurrentPuppyPage(index: number): void {
@@ -115,9 +139,28 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.profileService.dataChangesSaved = false;
   }
 
-  updateSelectedDate() {
+  updateSelectedDate(): void {
     this.birthdayModel = { year: this.birthdayModel.year, month: this.birthdayModel.month, day: this.birthdayModel.day };
     this.profileService.dataChangesSaved = false;
+  }
+
+  switchToParentsSubpage(): void {
+    if (!this.profileService.dataChangesSaved) {
+      let onSuccess = () => {
+        this.profileService.dataChangesSaved = true;
+        this.profileService.setCurProfilePage(this.profileService.profileSubpages[2]);
+        scroll(0, 0);
+      };
+
+      let onError = () => {
+        this.eventService.raiseEvent('save-puppy-draft-before-parents-page', null);
+      };
+
+      this.alertService.showDialog("Вы не сохранили изменения", "warning-title",
+        ["Все несохраненные изменения будут утеряны. Перейти в другой раздел?"],
+        "Перейти без сохранения", "custom-btn btn-transparent", "Сохранить изменения", "custom-btn btn-purple", onSuccess, onError);
+    } else 
+      this.profileService.setCurProfilePage(this.profileService.profileSubpages[2]);
   }
 
   previewPuppyImage(index: number): void {
