@@ -39,6 +39,8 @@ export class BreederProfileService {
   }
 
   isParentsInfoFilled(): boolean {
+    if (!this.appService.userData.parentsInfo)
+      return false;
     let male = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "MALE");
     let female = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
     return male.length > 0 && female.length > 0;

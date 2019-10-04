@@ -6,17 +6,19 @@
     </div>
 
     <div *ngIf="subpageStatus().generalInfo" class="slider-content">
-        <img *ngIf="getScrollLeftValue() > 0 && appService.userData.generalInfo.gallery.length > 3"
-            class="scroll-left-button" src="./assets/img/arrow-left.svg" alt="Стрелка влево" (click)="scrollLeft()" />
+        <img *ngIf="getScrollLeftValue() > 0" class="scroll-left-button" alt="Стрелка влево"
+            src="./assets/img/arrow-left.svg" (click)="scrollLeft()" />
         <div class="slider d-flex align-items-center">
-            <div *ngFor="let photo of appService.userData.generalInfo.gallery;let i = index"
-                class="slider-item d-flex align-items-center">
-                <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image"
-                    (click)="showImageGalley(i)">
-            </div>
+            <ng-container *ngFor="let loop of galleryLoopArray">
+                <div *ngFor="let photo of appService.userData.generalInfo.gallery;let i = index"
+                    class="slider-item d-flex align-items-center">
+                    <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image"
+                        (click)="showImageGalley(i)">
+                </div>
+            </ng-container>
         </div>
-        <img *ngIf="appService.userData.generalInfo.gallery.length > 3" src="./assets/img/arrow-right.svg"
-            class="scroll-right-button" alt="Стрелка вправо" (click)="scrollRight()" />
+        <img src="./assets/img/arrow-right.svg" class="scroll-right-button" alt="Стрелка вправо"
+            (click)="scrollRight()" />
     </div>
 
     <div class="main-content align-items-center flex-column">

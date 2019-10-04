@@ -12,6 +12,7 @@ import { DogCardService } from '../services/dog-card-service/dog-card.service';
 })
 export class BreederPageComponent implements OnInit {
 
+    galleryLoopArray = Array(100).fill(1);
     isPreviewMode: boolean;
     collapse = {
         contract: false,
