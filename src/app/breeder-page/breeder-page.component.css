@@ -394,6 +394,10 @@ span, p, div {
   font-family: 'Intro-Book' !important;
 }
 
+.aside .left-side {
+  padding-left: .75em;
+}
+
 .section {
   padding: 40px;
 }
@@ -1075,6 +1079,22 @@ span, p, div {
   }
   .back-to-profile-bar span {
     font-size: 14px;
+  }
+}
+
+@media (max-width: 1201px) {
+  .share-buttons-desktop {
+    display: none;
+  }
+}
+
+.share-buttons-mobile {
+  display: none;
+}
+
+@media (max-width: 1201px) {
+  .share-buttons-mobile {
+    display: block;
   }
 }
 /*# sourceMappingURL=breeder-page.component.css.map */
