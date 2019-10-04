@@ -266,7 +266,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .breeder-profile-subpage-container input[type=text],
 .breeder-profile-subpage-container input[type=number],
-.breeder-profile-subpage-container textarea {
+.breeder-profile-subpage-container button, .breeder-profile-subpage-container textarea {
   margin-top: 16px;
 }
 
@@ -360,6 +360,23 @@ input[type=number]::-webkit-outer-spin-button {
 .breeder-profile-subpage-form-left,
 .breeder-profile-subpage-form-right {
   position: relative;
+}
+
+.breeder-profile-subpage-form-left .dog-name-block, .breeder-profile-subpage-form-left .dog-sex-block,
+.breeder-profile-subpage-form-right .dog-name-block,
+.breeder-profile-subpage-form-right .dog-sex-block {
+  display: inline-block;
+}
+
+.breeder-profile-subpage-form-left .dog-name-block,
+.breeder-profile-subpage-form-right .dog-name-block {
+  width: 70%;
+}
+
+.breeder-profile-subpage-form-left .dog-sex-block,
+.breeder-profile-subpage-form-right .dog-sex-block {
+  width: 45px;
+  float: right;
 }
 
 .gallery-initial-block {
@@ -791,7 +808,7 @@ ngb-datepicker .bg-light {
   }
   .breeder-profile-subpage-container input[type=text],
   .breeder-profile-subpage-container input[type=number],
-  .breeder-profile-subpage-container textarea {
+  .breeder-profile-subpage-container textarea, .breeder-profile-subpage-container button {
     margin-top: 4px;
   }
   .breeder-profile-subpage-container .upper-btn,

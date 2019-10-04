@@ -125,16 +125,19 @@
     </div>
 
     <div class="breeder-profile-subpage-form-left add-puppy-page-name-block">
-        <label for="parent-name">Кличка родителя</label>
-        <div class="input-group mb-3">
+        <div class="dog-name-block">
+            <label for="parent-name">Кличка родителя</label>
             <input type="text" class="form-control custom-form-control-border" name="parent-name"
-                [class.invalid-form-field-value]="invalidAddingFields.includes('name')" aria-label="Кличка"
-                (change)="profileService.dataChangesSaved = false" aria-describedby="basic-addon3" [(ngModel)]="currentParentData.nickname" placeholder="Кличка" />
-            <div class="custom-input-append"
-                (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
+                [class.invalid-form-field-value]="invalidAddingFields.includes('name')" [(ngModel)]="currentParentData.nickname"
+                (change)="profileService.dataChangesSaved = false" placeholder="Кличка" />
+        </div>
+
+        <div class="dog-sex-block">
+            <label for="parent-sex">Пол</label>
+            <button class="form-control custom-form-control-border" (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
                 <img height="17px" src="./assets/img/sex_{{currentParentData.gender == 'MALE' ? 'male' : 'female'}}.png"
                     alt="Пол родителя" />
-            </div>
+            </button>
         </div>
     </div>
 

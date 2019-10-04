@@ -57,18 +57,21 @@
     </div>
 
     <div class="breeder-profile-subpage-form-left add-puppy-page-name-block">
-        <label for="puppy-name">Кличка</label>
-        <span (click)="currentPuppyData.nickname = 'Щенок'" style="font-family: 'Intro-Regular'">Без клички</span>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control custom-form-control-border" name="puppy-name" aria-label="Кличка"
-                [class.invalid-form-field-value]="invalidFields.includes('name')" aria-describedby="basic-addon3"
-                [(ngModel)]="currentPuppyData.nickname" (change)="profileService.dataChangesSaved = false" placeholder="Кличка" />
-            <div class="custom-input-append"
-                (click)="currentPuppyData.gender = currentPuppyData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
+        <div class="dog-name-block">
+            <label for="puppy-name">Кличка</label>
+            <input type="text" class="form-control custom-form-control-border" name="puppy-name"
+                [class.invalid-form-field-value]="invalidFields.includes('name')" [(ngModel)]="currentPuppyData.nickname"
+                (change)="profileService.dataChangesSaved = false" placeholder="Кличка" />
+        </div>
+
+        <div class="dog-sex-block">
+            <label for="puppy-sex">Пол</label>
+            <button class="form-control custom-form-control-border" (click)="currentPuppyData.gender = currentPuppyData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
                 <img height="17px" src="./assets/img/sex_{{currentPuppyData.gender == 'MALE' ? 'male' : 'female'}}.png"
                     alt="Пол родителя" />
-            </div>
+            </button>
         </div>
+
     </div>
 
     <div class="breeder-profile-subpage-form-right">

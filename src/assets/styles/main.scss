@@ -269,7 +269,7 @@ input[type=number]::-webkit-outer-spin-button {
 
     input[type=text],
     input[type=number],
-    textarea{
+    button, textarea{
         margin-top: 16px;
     }
 
@@ -350,6 +350,19 @@ input[type=number]::-webkit-outer-spin-button {
 .breeder-profile-subpage-form-left,
 .breeder-profile-subpage-form-right{
     position: relative;
+
+    .dog-name-block, .dog-sex-block{
+        display: inline-block;
+    }
+
+    .dog-name-block{
+        width: 70%;
+    }
+
+    .dog-sex-block{
+        width: 45px;
+        float: right;
+    }
 }
 
 .gallery-initial-block{
@@ -765,7 +778,7 @@ ngb-datepicker{
 
         input[type=text],
         input[type=number],
-        textarea{
+        textarea, button{
             margin-top: 4px;
         }
 
