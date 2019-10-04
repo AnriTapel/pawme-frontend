@@ -90,6 +90,20 @@ span, p, div {
     width: 368px;
 }
 
+.line-mobile{
+    display: none;
+    @media (max-width: $screen-sm - 1px) {
+        display: block;
+    }
+}
+
+.line-desktop{
+    display: block;
+    @media (max-width: $screen-sm - 1px) {
+        display: none;
+    }
+}
+
 @media screen and (max-width: $screen-lg - 1){
     .sidebar-block{
         position: relative;
@@ -133,6 +147,10 @@ span, p, div {
         @media (max-width: $screen-sm - 1px) {
             display: none;
         }
+    }
+
+    @media (max-width: $screen-sm - 1px) {
+        margin-bottom: 20px;
     }
 }
 
@@ -311,12 +329,25 @@ span, p, div {
         margin-left: 6px;
     }
 
+    .puppies-block-message-btn-mobile{
+        display: none;
+        @media (max-width: $screen-sm - 1px) {
+            display: block;
+        }
+    }
+
     .about-puppies-title {
         span {
             font-size: 20px;
             color: #0e0b4d;
             @media (max-width: $screen-sm - 1px) {
                 font-size: 18px;
+            }
+        }
+
+        .puppies-block-message-btn-desktop {
+            @media (max-width: $screen-sm - 1px) {
+                display: none;
             }
         }
 
@@ -337,11 +368,17 @@ span, p, div {
             font-size: 18px;
         }
 
+        .age-of-sale > span:nth-child(2),
+        .price > span:nth-child(2){
+            font-family: 'Intro-Book' !important;
+        }
+        
         .age-of-sale {
             margin-right: 59px;
         }
         @media (max-width: $screen-sm - 1px) {
             .age-of-sale, .price {
+                font-size: 16px;
                 display: flex;
                 flex-direction: column;
                 margin-right: auto;
@@ -507,6 +544,11 @@ span, p, div {
             display: block;
         }
 
+        .description{
+            font-family: 'Intro-Book' !important;
+            color: #0e0b4d;
+        }
+
         @media (max-width: $screen-sm - 1px) {
             width: 100%;
             max-width: 100%;
@@ -519,6 +561,10 @@ span, p, div {
 
             .title {
                 margin-bottom: 0;
+
+                &:first-child{
+                    font-size: 18px;
+                }
             }
 
             .mb-16 {
@@ -577,6 +623,7 @@ span, p, div {
 
         @media (max-width: $screen-sm - 1px) {
             flex-direction: column;
+            margin-top: 0;
             .right-side {
                 order: 1;
             }
@@ -597,7 +644,7 @@ span, p, div {
             color: #0e0b4d;
             margin-bottom: 16px;
             @media (max-width: $screen-sm - 1px) {
-                font-size: 14px;
+                font-size: 16px;
                 font-weight: bold;
                 line-height: 1.36;
                 color: #0e0b4d;
@@ -619,7 +666,11 @@ span, p, div {
         }
         @media (max-width: $screen-sm - 1px) {
             &:not(:last-child) {
-                margin-bottom: 22px;
+                margin-bottom: 30px;
+            }
+
+            &:first-child{
+                margin-top: 10px;
             }
         }
     }
@@ -638,6 +689,10 @@ span, p, div {
                 font-size: 20px;
                 text-align: center;
                 color: #0e0b4d;
+
+                @media (max-width: $screen-sm - 1px) {
+                    font-size: 18px;
+                }
             }
         }
 
@@ -683,6 +738,10 @@ span, p, div {
             }
         }
 
+        .certificates-list{
+            margin-top: .5em;
+        }
+
         .certificate-item {
             width: 150px;
             min-width: 150px;
@@ -701,6 +760,7 @@ span, p, div {
                 right: 0;
                 bottom: 0;
                 max-width: 149px;
+                max-height: 149px;
             }
         }
 

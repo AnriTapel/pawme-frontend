@@ -81,9 +81,9 @@ export class BreederPageComponent implements OnInit {
         if (!this.appService.userData.generalInfo)
             return name;
         else if (this.appService.userData.generalInfo.mainBreed)
-            name += this.appService.userData.generalInfo.mainBreed.name.toUpperCase();
+            name += this.appService.userData.generalInfo.mainBreed.nameGen.toUpperCase();
         if (this.appService.userData.generalInfo.extraBreed)
-            name += " И " + this.appService.userData.generalInfo.extraBreed.name.toUpperCase();
+            name += " И " + this.appService.userData.generalInfo.extraBreed.nameGen.toUpperCase();
         return name;
     }
 
@@ -119,9 +119,9 @@ export class BreederPageComponent implements OnInit {
         this.collapse[property] = !this.collapse[property];
     }
 
-    showImageGalley(i: number): void {
+    showImageGalley(i: number, source: any): void {
         this.popupService.setPopupParams({
-            gallery: this.appService.userData.generalInfo.gallery,
+            gallery: source,
             initIndex: i
         });
         this.popupService.setCurrentForm('image-gallery');

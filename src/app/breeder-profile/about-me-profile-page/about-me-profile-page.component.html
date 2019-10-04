@@ -30,7 +30,8 @@
     <div class="about-me-form-group">
         <label for="features">Что выделяет ваш питомник?</label>
         <br>
-        <span class="block-description">Вы используете какие-то определенные методы при работе с щенками? Вы уделяете особое внимание определенным деталям?</span>
+        <span class="block-description">Возможно, вы используете какие-то определенные методы при работе с щенками? Уделяете особое внимание определенным
+            вещам?</span>
         <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border" placeholder="Введите текст"
             (change)="this.profileService.dataChangesSaved = false" name="features" [class.invalid-form-field-value]="invalidFields.includes('outstanding')"></textarea>
     </div>
@@ -82,8 +83,8 @@
     <div class="about-me-form-group">
         <label>Награды и сертификаты (необязательно)</label>
         <br>
-        <span class="block-description">Вы наверняка участвовали в выставках или других мероприятиях, после которых у вас остались какие-то награды и сертификаты.
-            Для покупателей важно это увидеть, поэтому мы просим вас отсканировать/сфотографировать бумажные грамоты и загрузить
+        <span class="block-description">Вы наверняка участвовали в выставках или других мероприятиях, после которых у вас остались награды и сертификаты.
+            Для покупателей важно их увидеть, поэтому мы просим вас отсканировать/сфотографировать бумажные грамоты и загрузить
             их сюда.</span>
 
         <div *ngIf="breederData.certificates.length == 0" class="gallery-initial-block">

@@ -13,7 +13,7 @@
                 <div *ngFor="let photo of appService.userData.generalInfo.gallery;let i = index"
                     class="slider-item d-flex align-items-center">
                     <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image"
-                        (click)="showImageGalley(i)">
+                        (click)="showImageGalley(i, appService.userData.generalInfo.gallery)">
                 </div>
             </ng-container>
         </div>
@@ -179,7 +179,7 @@
                             <div class="d-flex">
                                 <i
                                     class="icon icon-combined-shape d-flex align-items-center justify-content-center"></i>
-                                Договор PawMe
+                                Договор Petman
                             </div>
 
                             <div class="arrow-icon hidden-lg show-sm">
@@ -256,12 +256,12 @@
                     </div>
                 </div>
 
-                <div class="line"></div>
+                <div *ngIf="subpageStatus().puppies" class="line line-desktop"></div>
 
-                <div
+                <div *ngIf="subpageStatus().puppies"
                     class="about-puppies-title about-puppies-with-btn d-flex align-items-center justify-content-between">
                     <span class="available-puppies-title">Доступные щенки</span>
-                    <button type="button" class="custom-btn btn-purple" (click)="showBreederMessagePopup()">НАПИСАТЬ
+                    <button type="button" class="custom-btn btn-purple puppies-block-message-btn-desktop" (click)="showBreederMessagePopup()">НАПИСАТЬ
                         ЗАВОДЧИКУ</button>
                 </div>
 
@@ -284,11 +284,14 @@
                         </div>
                     </div>
                 </div>
+                <button type="button" class="custom-btn btn-purple puppies-block-message-btn-mobile" (click)="showBreederMessagePopup()">НАПИСАТЬ
+                        ЗАВОДЧИКУ</button>
             </section>
         </div>
 
         <div class="about-breeder">
             <section class="section d-flex flex-column">
+                <div class="line line-mobile"></div>
                 <h2>О ЗАВОДЧИКЕ</h2>
 
                 <div class="about-breeder-content">
@@ -322,7 +325,7 @@
                             <div class="title mb-12">
                                 <span>{{appService.userData.name}} {{appService.userData.surname}}</span>
                             </div>
-                            <span class="clubs">Клубы:</span>
+                            <span *ngIf="subpageStatus().about && appService.userData.about.clubs" class="clubs">Клубы:</span>
 
                             <ul *ngIf="subpageStatus().about && appService.userData.about.clubs">
                                 <li *ngFor="let club of appService.userData.about.clubs.split(';')">
@@ -343,9 +346,9 @@
                     </div>
 
                     <div class="certificates-list d-flex flex-wrap">
-                        <div *ngFor="let cert of appService.userData.about.certificates"
+                        <div *ngFor="let cert of appService.userData.about.certificates; let i = index"
                             class="certificate-item d-flex align-items-center justify-content-center">
-                            <img src="/img/{{cert.preview}}.jpg" alt="Сертификат заводчика">
+                            <img src="/img/{{cert.preview}}.jpg" (click)="showImageGalley(i, appService.userData.about.certificates)" alt="Сертификат заводчика">
                         </div>
                     </div>
                 </div>

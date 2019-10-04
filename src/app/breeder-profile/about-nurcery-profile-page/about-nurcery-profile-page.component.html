@@ -8,55 +8,55 @@
     </div>
     <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-name">Название питомника (необязательно)</label>
-        <input class="form-control custom-form-control-border" type="text" name="nurcery-name" [(ngModel)]="nurceryData.name"
-            (change)="profileService.dataChangesSaved = false" placeholder="Название питомника" />
+        <input class="form-control custom-form-control-border" type="text" name="nurcery-name" [(ngModel)]="nurceryData.name" (change)="profileService.dataChangesSaved = false"
+            placeholder="Название питомника" />
     </div>
 
     <div class="breeder-profile-subpage-form-right">
         <label for="nurcery-location">Город / населенный пункт</label>
         <div class="dropdown-text-input">
-            <input *ngIf="appService.cities" type="text" class="form-control custom-form-control-border" name="nurcery-location"
-                [(ngModel)]="nurceryData.city" [class.invalid-form-field-value]="invalidFields.includes('city')" id="city"
-                [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"
-                (focus)="cityFocus$.next($event.target.value)" (click)="cityClick$.next($event.target.value)" 
-                #cityInstance="ngbTypeahead" (change)="profileService.dataChangesSaved = false" placeholder="Выбрать">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('city', $event)"/>
+            <input *ngIf="appService.cities" type="text" class="form-control custom-form-control-border" name="nurcery-location" [(ngModel)]="nurceryData.city"
+                [class.invalid-form-field-value]="invalidFields.includes('city')" id="city" [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"
+                (focus)="cityFocus$.next($event.target.value)" (click)="cityClick$.next($event.target.value)" #cityInstance="ngbTypeahead"
+                (change)="profileService.dataChangesSaved = false" placeholder="Выбрать">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('city', $event)" />
         </div>
     </div>
 
     <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-main-breed">Основная порода</label>
         <div class="dropdown-text-input">
-            <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="nurcery-main-breed"
-                [(ngModel)]="curMainBreed" [class.invalid-form-field-value]="invalidFields.includes('mainBreed')" id="main-breed" 
-                [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
-                (focus)="mainBreedFocus$.next($event.target.value)" (click)="mainBreedClick$.next($event.target.value)"
-                (change)="profileService.dataChangesSaved = false" #mainBreedInstance="ngbTypeahead" placeholder="Выбрать">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('main-breed', $event)"/>
+            <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="nurcery-main-breed" [(ngModel)]="curMainBreed"
+                [class.invalid-form-field-value]="invalidFields.includes('mainBreed')" id="main-breed" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
+                (focus)="mainBreedFocus$.next($event.target.value)" (click)="mainBreedClick$.next($event.target.value)" (change)="profileService.dataChangesSaved = false"
+                #mainBreedInstance="ngbTypeahead" placeholder="Выбрать">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('main-breed', $event)"
+            />
         </div>
     </div>
 
     <div *ngIf="!isAdditionalBreed" class="breeder-profile-subpage-form-right" style="align-self: end;">
-        <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить еще одну"
-            (click)="isAdditionalBreed = true" />
+        <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить еще одну" (click)="isAdditionalBreed = true"
+        />
     </div>
     <div *ngIf="isAdditionalBreed" class="breeder-profile-subpage-form-right extra-breed-block">
         <label for="nurcery-additional-breed">Дополнительная порода</label>
-        <img src="./assets/img/close-button-black.svg" alt="Удалить дополнительную породу" (click)="deleteExtraBreed()"/>
+        <img src="./assets/img/close-button-black.svg" alt="Удалить дополнительную породу" (click)="deleteExtraBreed()" />
         <div class="dropdown-text-input">
             <input type="text" class="form-control custom-form-control-border" name="nurcery-additional-breed" [(ngModel)]="curExtraBreed"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
                 (focus)="addBreedFocus$.next($event.target.value)" (click)="addBreedClick$.next($event.target.value)" id="extra-breed"
                 (change)="profileService.dataChangesSaved = false" #addBreedInstance="ngbTypeahead" placeholder="Выбрать">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('extra-breed', $event)"/>
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('extra-breed', $event)"
+            />
         </div>
     </div>
 
     <div class="about-your-nurcery-block">
-        <label for="about-your-nurcery">О вашем питомнике</label><br>
-        <span class="block-description">Это одна из первых вещей, которую прочитают потенциальные покупатели на вашей
-            странице. Постарайтесь
-            кратко (в 2-3 предложения) описать ваш питомник и рассказать о его особенностях.</span>
+        <label for="about-your-nurcery">О вашем питомнике</label>
+        <br>
+        <span class="block-description">Это одна из первых вещей, которую прочитают потенциальные покупатели на вашей странице. Постарайтесь кратко (в 2-3
+            предложения) описать ваш питомник и рассказать о его особенностях.</span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="nurceryData.description" (change)="profileService.dataChangesSaved = false"
             [class.invalid-form-field-value]="invalidFields.includes('desc')" placeholder="Описание"></textarea>
     </div>
@@ -64,36 +64,39 @@
     <hr>
 
     <div class="about-nurcery-profile-image">
-        <div *ngIf="!nurceryData.profilePhoto" class="image-block empty-profile-image" id="profile-image-block"
-            [class.invalid-form-field-value]="invalidFields.includes('profilePhoto')" (click)="previewNurceryPhoto()">
+        <div *ngIf="!nurceryData.profilePhoto" class="image-block empty-profile-image" id="profile-image-block" [class.invalid-form-field-value]="invalidFields.includes('profilePhoto')"
+            (click)="previewNurceryPhoto()">
             <img src="./assets/img/thin-plus.png" alt="Добавить изображение" />
         </div>
 
-        <div *ngIf="nurceryData.profilePhoto" class="image-block active-profile-image" id="profile-image-block"
-            (click)="previewNurceryPhoto()">
+        <div *ngIf="nurceryData.profilePhoto" class="image-block active-profile-image" id="profile-image-block" (click)="previewNurceryPhoto()">
             <img src="/img/{{nurceryData.profilePhoto.preview}}.jpg" alt="Изображение профиля" />
         </div>
 
         <div class="profile-image-text-block">
-            <label for="image-block">Фото вашего профиля заводчика</label><br>
-            <span class="block-description">Рекомендуемое разрешение - 256 на 256 пикселей</span>
+            <label for="image-block">Фото вашего профиля заводчика</label>
+            <br>
+            <span class="block-description">Используйте логотип питомника или загрузите собственное фото. Допустимый формат изображения - jpg, jpeg, png,
+                gif</span>
         </div>
     </div>
 
     <div class="breeder-profile-subpage-form-group nurcery-gallery-block">
-        <label for="nurcery-gallery">Фото в основную галерею (минимум 4)</label><br>
-        <span class="block-description">Фотографии будут отображаться в галерее на вашей странице заводчика</span>
+        <label for="nurcery-gallery">Фото в основную галерею (минимум 4)</label>
+        <br>
+        <span class="block-description">Покажите в этих фотографиях, как устроена жизнь вашего питомника. Допустимый формат изображений - jpg, jpeg, png, gif.</span>
 
-        <div *ngIf="nurceryData.gallery.length == 0" class="gallery-initial-block"
-            [class.invalid-form-field-value]="invalidFields.includes('gallery')" (click)="previewGalleryPhoto(-1)">
-            <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" /><br>
+        <div *ngIf="nurceryData.gallery.length == 0" class="gallery-initial-block" [class.invalid-form-field-value]="invalidFields.includes('gallery')"
+            (click)="previewGalleryPhoto(-1)">
+            <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
+            <br>
             <span>Нажмите для загрузки фотографий</span>
         </div>
 
         <div *ngIf="nurceryData.gallery.length > 0" class="gallery-uploaded-photos-block">
             <div *ngFor="let photo of nurceryData.gallery;let i = index" class="active-galley-photo-block">
-                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
-                    (click)="deleteGalleryImage(i)" />
+                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку" (click)="deleteGalleryImage(i)"
+                />
                 <img src="/img/{{photo.preview}}.jpg" alt="Изображение в галерее" (click)="previewGalleryPhoto(i)" />
             </div>
             <div class="empty-galley-photo-block" (click)="previewGalleryPhoto(-1)">
@@ -105,7 +108,7 @@
             <span>Выбрать</span>
         </div>
     </div>
-    
+
     <!--<hr>
 
     <div class="breeder-profile-subpage-form-left">
@@ -131,10 +134,9 @@
 
         <span class="block-description">Формат ссылки: facebook.com/мойпрофиль</span>
     </div>-->
-    
+
     <div class="lower-btn">
-        <span *ngIf="invalidFields.length > 0" class="invalid-field-message"
-            style="display: block; margin-bottom: 1em;">
+        <span *ngIf="invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
             Пожалуйста, заполните пропущенные поля
         </span>
         <br *ngIf="invalidFields.length > 0" />
