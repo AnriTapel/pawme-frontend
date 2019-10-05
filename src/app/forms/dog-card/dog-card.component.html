@@ -2,18 +2,20 @@
     <div class="dog-cart-container" (click)="$event.stopPropagation()">
         <img src="./assets/img/close-button-white.svg" alt="Закрыть" (click)="closeCard()" />
         <div class="dog-gallery">
-            <img *ngIf="dog.gallery.length > 1" class="previous-img" src="./assets/img/arrow-left.svg" alt="Предыдущая" 
-                (click)="gallery.previousSlide()"/>
+            <div *ngIf="dog.gallery.length > 1" class="previous-btn-block" (click)="gallery.previousSlide()">
+                <img *ngIf="dog.gallery.length > 1" class="previous-img" src="./assets/img/arrow-left.svg" alt="Предыдущая" />
+            </div>
             <mdb-carousel #gallery [isControls]="false" class="carousel slide carousel-fade custom-carousel" [animation]="'fade'">
                 <mdb-carousel-item *ngFor="let photo of dog.gallery">
-                    <div class="view w-100">
+                    <div class="view w-100 custom-view">
                         <img class="d-block w-100" src="/img/{{photo.main}}.jpg" alt="Собака">
                         <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
                     </div>
                 </mdb-carousel-item>
             </mdb-carousel>
-            <img *ngIf="dog.gallery.length > 1" class="next-img" src="./assets/img/arrow-right.svg" alt="Следующая"
-                (click)="gallery.nextSlide()"/>
+            <div *ngIf="dog.gallery.length > 1" class="next-btn-block" (click)="gallery.nextSlide()">
+                <img class="next-img" src="./assets/img/arrow-right.svg" alt="Следующая" />
+            </div>
         </div>
 
         <div *ngIf="!isPuppy" class="parent-info-block">

@@ -1,8 +1,9 @@
 <h4>Галерея</h4>
 
 <div class="gallery-container">
-    <img *ngIf="params.gallery.length > 1" class="previous-img" src="./assets/img/arrow-left.svg" alt="Предыдущая"
-        (click)="gallery.previousSlide()"/>
+    <div *ngIf="params.gallery.length > 1" class="previous-btn-block" (click)="gallery.previousSlide()">
+        <img class="previous-img" src="./assets/img/arrow-left.svg" alt="Предыдущая" />
+    </div>
     <mdb-carousel [isControls]="false" class="carousel slide custom-carousel" [interval]="0" [activeSlideIndex]="2">
         <mdb-carousel-item *ngFor="let photo of params.gallery">
             <div class="img-container">
@@ -10,6 +11,7 @@
             </div>
         </mdb-carousel-item>
     </mdb-carousel>
-    <img *ngIf="params.gallery.length > 1" class="next-img" src="./assets/img/arrow-right.svg" alt="Следующая"
-        (click)="gallery.nextSlide()"/>
+    <div *ngIf="params.gallery.length > 1" class="next-btn-block" (click)="gallery.nextSlide()">
+        <img  class="next-img" src="./assets/img/arrow-right.svg" alt="Следующая" />
+    </div>
 </div>

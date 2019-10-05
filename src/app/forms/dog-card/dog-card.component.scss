@@ -19,7 +19,7 @@ p{
         top: 1em;
         right: 1em;
         width: 16px;
-        z-index: 10;
+        z-index: 1000;
     }
 }
 
@@ -27,6 +27,30 @@ p{
     width: 100%;
     background-color: #fff;
     position: relative;
+    //display: flex;
+
+    .custom-view{
+        height: 350px;
+        display: flex;
+    }
+
+    .previous-btn-block,
+    .next-btn-block{
+        position: absolute;
+        top: 0;
+        width: calc(20px + 1em);
+        height: 100%;
+        //padding: calc(50% - 10px) 0;
+        z-index: 999;
+    }
+
+    .previous-btn-block{
+        left: 0;
+    }
+
+    .next-btn-block{
+        right: 0;
+    }
 
     .previous-img,
     .next-img{
@@ -186,6 +210,14 @@ p{
         .puppy-parents-block{
             width: 100%;
             margin-top: 2em;
+        }
+    }
+
+    .custom-carousel{
+        img{
+            height: unset !important;
+            max-width: 100%;
+            max-height: 100%;
         }
     }
 

@@ -13,6 +13,23 @@
     }
 }
 
+.previous-btn-block,
+.next-btn-block{
+    position: absolute;
+    width: calc(20px + 1em);
+    height: 100%;
+    padding: calc(50% - 10px) 0;
+    z-index: 999;
+}
+
+.previous-btn-block{
+    left: 0;
+}
+
+.next-btn-block{
+    right: 0;
+}
+
 .previous-img,
 .next-img{
     width: 20px;

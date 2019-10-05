@@ -18,13 +18,37 @@ p {
   top: 1em;
   right: 1em;
   width: 16px;
-  z-index: 10;
+  z-index: 1000;
 }
 
 .dog-gallery {
   width: 100%;
   background-color: #fff;
   position: relative;
+}
+
+.dog-gallery .custom-view {
+  height: 350px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dog-gallery .previous-btn-block,
+.dog-gallery .next-btn-block {
+  position: absolute;
+  top: 0;
+  width: calc(20px + 1em);
+  height: 100%;
+  z-index: 999;
+}
+
+.dog-gallery .previous-btn-block {
+  left: 0;
+}
+
+.dog-gallery .next-btn-block {
+  right: 0;
 }
 
 .dog-gallery .previous-img,
@@ -178,6 +202,11 @@ p {
   .puppy-meta-parents-block .puppy-parents-block {
     width: 100%;
     margin-top: 2em;
+  }
+  .custom-carousel img {
+    height: unset !important;
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 /*# sourceMappingURL=dog-card.component.css.map */
