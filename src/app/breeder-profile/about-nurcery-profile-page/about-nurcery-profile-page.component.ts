@@ -53,7 +53,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.isAdditionalBreed = this.nurceryData.extraBreed ? true : false;
     this.curMainBreed = this.nurceryData.mainBreed ? this.nurceryData.mainBreed.name : null;
     this.curExtraBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
-    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => this.saveChanges(forPreview));
   }
 
   ngOnDestroy(): void {
@@ -102,6 +102,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   deleteExtraBreed(): void{
     this.nurceryData.extraBreed = null;
     this.isAdditionalBreed = false;
+    this.curExtraBreed = null;
+    this.profileService.dataChangesSaved = false;
   }
 
   deleteGalleryImage(index: number): void {
@@ -109,7 +111,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.profileService.dataChangesSaved = false;
   }
 
-  saveChanges() {
+  saveChanges(forPreview: boolean) {
     if (!this.validateInputFields())
       return;
 
@@ -126,6 +128,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         this.profileService.dataChangesSaved = true;
         scroll(0, 0);
         this.profileService.updateProfileFullness();
+        if (forPreview)
+          window.open('/breeder/' + this.appService.userData.id, '_blank');
       },
         () => {
           this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);

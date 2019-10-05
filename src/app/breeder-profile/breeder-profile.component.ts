@@ -19,8 +19,15 @@ export class BreederProfileComponent implements OnInit {
   ngOnInit() {
   }
 
-  showPreview() {
-    this.router.navigateByUrl('/preview/' + this.appService.userData.id);
+  showMyPage(): void{
+    if (this.profileService.dataChangesSaved && this.profileService.parentTestsChangesSaved)
+      window.open('/breeder/' + this.appService.userData.id, '_blank')
+    else
+      this.profileService.showMyPage();
   }
+
+  /*showPreview() {
+    this.router.navigateByUrl('/preview/' + this.appService.userData.id);
+  }*/
 
 }

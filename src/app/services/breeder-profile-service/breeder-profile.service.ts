@@ -57,7 +57,7 @@ export class BreederProfileService {
       };
 
       let onError = () => {
-        this.eventService.raiseEvent('save-changes-after-dialog', null);
+        this.eventService.raiseEvent('save-changes-after-dialog', false );
         this.isMobileMenuVisible = false;
       };
 
@@ -73,6 +73,22 @@ export class BreederProfileService {
 
   getCurProfilePage(): any {
     return this.curProfilePage;
+  }
+
+  showMyPage(): void {
+    let onSuccess = () => {
+      this.dataChangesSaved = true;
+      this.parentTestsChangesSaved = true;
+      window.open('/breeder/' + this.appService.userData.id, '_blank');
+    };
+
+    let onError = () => {
+      this.eventService.raiseEvent('save-changes-after-dialog', true );
+    };
+
+    this.alertService.showDialog("Вы не сохранили изменения", "warning-title",
+      ["Все несохраненные изменения будут утеряны. Перейти на вашу страницу?"],
+      "Перейти без сохранения", "custom-btn btn-transparent", "Сохранить изменения", "custom-btn btn-purple", onSuccess, onError);
   }
 
   removeUnderlineForBlock(): any {

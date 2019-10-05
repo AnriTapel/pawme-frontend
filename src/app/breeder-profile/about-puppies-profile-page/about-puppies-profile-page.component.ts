@@ -32,7 +32,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       insuranceCoverage: null,
       gifts: null
     };
-    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => this.saveChanges(forPreview));
   }
 
   ngOnDestroy(): void{
@@ -56,7 +56,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     return this.puppiesData.puppyTests.filter(it => it.id == test.id).length > 0;
   }
 
-  saveChanges() {
+  saveChanges(forPreview: boolean) {
     if (!this.validateInputFields())
       return;
 
@@ -68,6 +68,8 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
         this.profileService.dataChangesSaved = true;
         scroll(0, 0);
         this.profileService.updateProfileFullness();
+        if (forPreview)
+          window.open('/breeder/' + this.appService.userData.id, '_blank');
       },
       () => {
         this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);

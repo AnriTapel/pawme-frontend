@@ -76,7 +76,20 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       parentTests: [],
       parentDraft: null
     };
-    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => {
+      if (forPreview) {
+        if (!this.profileService.dataChangesSaved){
+          if (this.currentParentData && this.currentParentData.id)
+            this.addParent(forPreview)
+          else {
+            this.saveDraft();
+            window.open('/breeder/' + this.appService.userData.id, '_blank');
+          }
+        } else if (!this.profileService.parentTestsChangesSaved)
+          this.saveChanges(forPreview);
+      } else
+        this.saveChanges(forPreview);
+    });
   }
 
   ngOnDestroy(): void{
@@ -137,7 +150,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.profileService.dataChangesSaved = false;
   }
 
-  addParent() {
+  addParent(forPreview: boolean) {
     if (!this.validateAddingFields())
       return;
     this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
@@ -157,6 +170,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         scroll(0, 0);
+        if (forPreview)
+          window.open('/breeder/' + this.appService.userData.id, '_blank');
       });
     }, () => {
       this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
@@ -192,7 +207,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     );
   }
 
-  saveChanges() {
+  saveChanges(forPreview: boolean) {
     if (!this.validateGeneralFields())
       return;
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
@@ -205,6 +220,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.notificationService.setVisibility(true);
       scroll(0, 0);
       this.profileService.updateProfileFullness();
+      if (forPreview)
+          window.open('/breeder/' + this.appService.userData.id, '_blank');
     }, () => {
       this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);

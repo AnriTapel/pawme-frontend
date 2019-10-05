@@ -4,7 +4,7 @@
         <h3>О щенках</h3>
     </div>
     <div class="upper-btn">
-        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
+        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
     </div>
     <div class="breeder-profile-subpage-form-left">
         <label for="puppies-age">Возраст продажи щенков</label>
@@ -124,6 +124,6 @@
             Пожалуйста, заполните пропущенные поля
         </span>
         <br *ngIf="invalidFields.length > 0" />
-        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
+        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
     </div>
 </div>

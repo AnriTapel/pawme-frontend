@@ -72,7 +72,16 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.fathers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "MALE");
       this.mothers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
     }
-    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => {
+      if (forPreview){
+        if (!this.currentPuppyData.id){
+          this.saveDraft();
+          window.open('/breeder/' + this.appService.userData.id, '_blank');
+        } else 
+          this.addPuppy();
+      } else
+        this.saveChanges(forPreview)
+    });
     
     this.addNewParentEvent = this.eventService.subscribe('save-puppy-draft-before-parents-page', () => {
       this.preSaveOperation();
@@ -196,12 +205,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.preSaveOperation();
     if (!this.currentPuppyData.id)
       this.puppiesData.push(this.currentPuppyData);
-    this.saveChanges();
+    this.saveChanges(false);
   }
 
   deletePuppy(index: number): void {
     this.puppiesData.splice(index, 1);
-    this.saveChanges();
+    this.saveChanges(false);
   }
 
   saveDraft() {
@@ -224,7 +233,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
     );
   }
 
-  saveChanges() {
+  saveChanges(forPreview: boolean) {
     this.breederService.setPuppiesUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(() => {
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe(res => {
         this.profileService.dataChangesSaved = true;
@@ -237,6 +246,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
         this.appService.userData.puppyDraft = null;
         this.birthdayModel = { day: null, month: null, year: null };
         scroll(0, 0);
+        if (forPreview)
+          window.open('/breeder/' + this.appService.userData.id, '_blank');
       });
     },
       () => {

@@ -100,7 +100,7 @@
             Пожалуйста, заполните пропущенные поля
         </span>
         <br *ngIf="invalidGeneralFields.length > 0" />
-        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges()" />
+        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
     </div>
 
 </div>
@@ -192,6 +192,6 @@
             Пожалуйста, заполните пропущенные поля
         </span>
         <br *ngIf="invalidAddingFields.length > 0" />
-        <input type="button" class="custom-btn btn-purple" value="Добавить родителя" (click)="addParent()" />
+        <input type="button" class="custom-btn btn-purple" value="Добавить родителя" (click)="addParent(false)" />
     </div>
 </div>

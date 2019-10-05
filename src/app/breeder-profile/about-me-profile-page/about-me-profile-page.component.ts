@@ -36,7 +36,7 @@ export class AboutMeProfilePageComponent implements OnInit {
     if (this.breederData.clubs) {
       this.currentClubs = this.breederData.clubs.split(";");
     }
-    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', () => this.saveChanges());
+    this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => this.saveChanges(forPreview));
   }
 
   ngOnDestroy(): void {
@@ -129,7 +129,7 @@ export class AboutMeProfilePageComponent implements OnInit {
     return isValid;
   }
 
-  saveChanges() {
+  saveChanges(forPreview: boolean) {
     if (!this.validateInputFields())
       return;
 
@@ -142,6 +142,8 @@ export class AboutMeProfilePageComponent implements OnInit {
         scroll(0, 0);
         this.profileService.updateProfileFullness();
         this.profileService.dataChangesSaved = true;
+        if (forPreview)
+          window.open('/breeder/' + this.appService.userData.id, '_blank');
       },
       () => {
         this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);

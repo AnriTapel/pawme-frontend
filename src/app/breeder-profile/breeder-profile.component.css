@@ -86,7 +86,8 @@ hr {
 }
 
 .profile-menu-container-desktop > input {
-  margin-top: 1em;
+  width: 87%;
+  margin: 1em auto 0;
 }
 
 .profile-menu-container-mobile {
