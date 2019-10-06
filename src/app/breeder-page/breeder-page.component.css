@@ -1097,4 +1097,81 @@ span, p, div {
     display: block;
   }
 }
+
+.dog-list-block {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1/3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: unset;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .dog-list-block {
+    -ms-flex-wrap: nowrap !important;
+        flex-wrap: nowrap !important;
+    overflow-x: auto;
+  }
+}
+
+.avail-dog-item {
+  width: 210px;
+  min-width: 210px;
+  margin: 0 .5em .5em 0;
+}
+
+.avail-dog-item .entity-image-block {
+  width: 100%;
+  height: 180px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.avail-dog-item .entity-image-block img {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.avail-dog-item .entity-info-block {
+  padding: .5em 0;
+  min-height: 5em;
+  position: relative;
+}
+
+.avail-dog-item .entity-info-block > div:nth-child(1) {
+  width: calc(100% - 20px);
+  display: inline-block;
+}
+
+.avail-dog-item .entity-info-block span:nth-child(1) {
+  display: block;
+  font-size: 16px;
+}
+
+.avail-dog-item .entity-info-block span:nth-child(2) {
+  display: inline-block;
+  font-size: 14px;
+  font-family: 'Intro-Book' !important;
+  opacity: 0.5;
+}
+
+.avail-dog-item .entity-info-block img {
+  position: absolute;
+  top: 12px;
+}
+
+.avail-dog-item .delete-dog-entity-button {
+  display: inline;
+  border-radius: 25px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-family: 'Intro-Book';
+  cursor: pointer;
+}
 /*# sourceMappingURL=breeder-page.component.css.map */

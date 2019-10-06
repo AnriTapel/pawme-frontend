@@ -6,19 +6,16 @@
     </div>
 
     <div *ngIf="subpageStatus().generalInfo" class="slider-content">
-        <img *ngIf="getScrollLeftValue() > 0" class="scroll-left-button" alt="Стрелка влево"
-            src="./assets/img/arrow-left.svg" (click)="scrollLeft()" />
+        <img *ngIf="getScrollLeftValue() > 0" class="scroll-left-button" alt="Стрелка влево" src="./assets/img/arrow-left.svg" (click)="scrollLeft()"
+        />
         <div class="slider d-flex align-items-center">
             <ng-container *ngFor="let loop of galleryLoopArray">
-                <div *ngFor="let photo of appService.userData.generalInfo.gallery;let i = index"
-                    class="slider-item d-flex align-items-center">
-                    <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image"
-                        (click)="showImageGalley(i, appService.userData.generalInfo.gallery)">
+                <div *ngFor="let photo of appService.userData.generalInfo.gallery;let i = index" class="slider-item d-flex align-items-center">
+                    <img src="/img/{{photo.preview}}.jpg" alt="Фото из слайдера" class="image slider-image" (click)="showImageGalley(i, appService.userData.generalInfo.gallery)">
                 </div>
             </ng-container>
         </div>
-        <img src="./assets/img/arrow-right.svg" class="scroll-right-button" alt="Стрелка вправо"
-            (click)="scrollRight()" />
+        <img src="./assets/img/arrow-right.svg" class="scroll-right-button" alt="Стрелка вправо" (click)="scrollRight()" />
     </div>
 
     <div class="main-content align-items-center flex-column">
@@ -36,28 +33,21 @@
                             <i class="icon icon-location"></i>
                             <span>{{subpageStatus().generalInfo ? appService.userData.generalInfo.city : ''}}</span>
                         </div>
-                        <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.site"
-                            class="link d-flex align-items-center">
+                        <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.site" class="link d-flex align-items-center">
                             <i class="icon icon-link" (click)="openPageByUrl(appService.userData.generalInfo.site)"></i>
                             <span>{{appService.userData.generalInfo.site}}</span>
                         </div>
                         <div class="social-networks d-flex">
-                            <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.instagram"
-                                class="instagram">
-                                <i class="instagram-icon d-flex align-items-center justify-content-center" 
-                                    (click)="openInstagramPage(appService.userData.generalInfo.instagram)"></i>
+                            <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.instagram" class="instagram">
+                                <i class="instagram-icon d-flex align-items-center justify-content-center" (click)="openInstagramPage(appService.userData.generalInfo.instagram)"></i>
                             </div>
-                            <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.facebook"
-                                class="facebook">
-                                <i class="facebook-icon d-flex align-items-center justify-content-center"
-                                    (click)="openPageByUrl(appService.userData.generalInfo.facebook)"></i>
+                            <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.facebook" class="facebook">
+                                <i class="facebook-icon d-flex align-items-center justify-content-center" (click)="openPageByUrl(appService.userData.generalInfo.facebook)"></i>
                             </div>
                         </div>
                     </div>
                     <div class="right-side">
-                        <img *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.profilePhoto"
-                            style="border-radius: 50%"
-                            src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg"
+                        <img *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.profilePhoto" style="border-radius: 50%" src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg"
                             alt="Фото питомника">
                     </div>
                 </div>
@@ -66,12 +56,11 @@
                     <p class="subtitle">О питомнике</p>
                     <p>{{subpageStatus().generalInfo ? appService.userData.generalInfo.description : ''}}</p>
                 </div>
-                <button type="button" class="custom-btn btn-purple" style="width: 100%"
-                    (click)="showBreederMessagePopup()">НАПИСАТЬ ЗАВОДЧИКУ</button>
+                <button type="button" class="custom-btn btn-purple" style="width: 100%" (click)="showBreederMessagePopup()">НАПИСАТЬ ЗАВОДЧИКУ</button>
             </aside>
             <app-share-buttons class="share-buttons-desktop"></app-share-buttons>
         </div>
-        
+
         <div class="about-puppies">
             <section class="section d-flex flex-column">
                 <h2>О ЩЕНКАХ</h2>
@@ -79,15 +68,15 @@
                 <div class="top-info d-flex">
                     <div class="age-of-sale">
                         <span class="bold">Возраст продажи: </span>
-                        <span>от {{subpageStatus().puppiesInfo && appService.userData.puppiesInfo.age}}
-                            {{subpageStatus().puppiesInfo && (!appService.userData.puppiesInfo.age || appService.userData.puppiesInfo.age > 1)
-                            ? 'недель' : 'недели'}}</span>
+                        <span>от {{subpageStatus().puppiesInfo && appService.userData.puppiesInfo.age}} {{subpageStatus().puppiesInfo
+                            && (!appService.userData.puppiesInfo.age || appService.userData.puppiesInfo.age > 1) ? 'недель'
+                            : 'недели'}}</span>
                     </div>
                     <div class="price">
                         <span class="bold">Стоимость: </span>
-                        <span>{{subpageStatus().puppiesInfo ? appService.userData.puppiesInfo.priceFrom : '' }}-
-                            {{subpageStatus().puppiesInfo ? appService.userData.puppiesInfo.priceTo : ''}}
-                            Р</span>
+                        <span>{{subpageStatus().puppiesInfo ? appService.userData.puppiesInfo.priceFrom : '' }}- {{subpageStatus().puppiesInfo
+                            ? appService.userData.puppiesInfo.priceTo : ''}} Р
+                        </span>
                     </div>
                 </div>
 
@@ -96,10 +85,8 @@
                 <div class="about-puppies-title pawme-title">
                     <span class="d-flex align-items-center">
                         Обязательный комплект Petman
-                        <i class="icon question-icon d-flex align-items-center justify-content-center ml-6"
-                            [triggers]="appService.getTooltipTrigger()" tooltipClass="custom-tooltip"
-                            [placement]="getTooltipPlacement()"
-                            ngbTooltip="Любой щенок ответственного заводчика проходит процедуру официальной регистрации и получает комплект необходимых документов"></i>
+                        <i class="icon question-icon d-flex align-items-center justify-content-center ml-6" [triggers]="appService.getTooltipTrigger()"
+                            tooltipClass="custom-tooltip" [placement]="getTooltipPlacement()" ngbTooltip="Любой щенок ответственного заводчика проходит процедуру официальной регистрации и получает комплект необходимых документов"></i>
                     </span>
                 </div>
 
@@ -118,53 +105,43 @@
                 </div>
 
                 <div class="medical-label-list d-flex align-items-center flex-wrap">
-                    <div *ngIf="getPuppyMedicalStatus(1)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(1)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/injection.svg" alt="Комплексная прививка" />
                         <span class="text">Комплексная прививка</span>
                     </div>
-                    <div *ngIf="getPuppyMedicalStatus(2)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(2)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/injection.svg" alt="Прививка от бешенства" />
                         <span class="text">Прививка от бешенства</span>
                     </div>
-                    <div *ngIf="getPuppyMedicalStatus(3)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(3)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/flea.svg" alt="Обработка от глистов" />
                         <span class="text">Обработка от глистов</span>
                     </div>
-                    <div *ngIf="getPuppyMedicalStatus(4)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(4)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/collar.svg" alt="Стерилизация/Кастрация" />
                         <span class="text">Стерилизация/Кастрация</span>
                     </div>
-                    <div *ngIf="getPuppyMedicalStatus(5)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(5)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/analysis.svg" alt="Анализ крови" />
                         <span class="text">Анализ крови</span>
                     </div>
-                    <div *ngIf="getPuppyMedicalStatus(6)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(6)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/analysis.svg" alt="Анализ мочи" />
                         <span class="text">Анализ мочи</span>
                     </div>
-                    <div *ngIf="getPuppyMedicalStatus(7)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(7)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/analysis.svg" alt="Анализ кала" />
                         <span class="text">Анализ кала</span>
                     </div>
-                    <div *ngIf="getPuppyMedicalStatus(8)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(8)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/vision.svg" alt="Проверка у офтальмолога" />
                         <span class="text">Проверка у офтальмолога</span>
                     </div>
-                    <div *ngIf="getPuppyMedicalStatus(9)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(9)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/pet.svg" alt="Проверка у кардиолога" />
                         <span class="text">Проверка у кардиолога</span>
                     </div>
-                    <div *ngIf="getPuppyMedicalStatus(10)"
-                        class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                    <div *ngIf="getPuppyMedicalStatus(10)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                         <img src="./assets/img/breeder-page/joint.svg" alt="Ортопедические исследования" />
                         <span class="text">Ортопедические исследования</span>
                     </div>
@@ -174,11 +151,9 @@
 
                 <div class="additional-info-list d-flex flex-row flex-wrap">
                     <div class="additional-info-item d-flex flex-column mb-32">
-                        <div class="title d-flex align-items-center justify-content-between"
-                            [ngClass]="{'mb-16' : collapse.contract}" (click)="showInfo('contract')">
+                        <div class="title d-flex align-items-center justify-content-between" [ngClass]="{'mb-16' : collapse.contract}" (click)="showInfo('contract')">
                             <div class="d-flex">
-                                <i
-                                    class="icon icon-combined-shape d-flex align-items-center justify-content-center"></i>
+                                <i class="icon icon-combined-shape d-flex align-items-center justify-content-center"></i>
                                 Договор Petman
                             </div>
 
@@ -187,10 +162,9 @@
                             </div>
                         </div>
                         <div class="description" [ngClass]="{'collapse' : collapse.contract}">
-                            Значимость этих проблем настолько очевидна,
-                            что консультация с широким активом способствует подготовки и реализации новых предложений.
-                            С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                            занимаемых участниками в отношении поставленных задач.
+                            При покупке щенка вам будет предложен обязательный договор купли-продажи, который подразумевает определенную ответственность
+                            с обеих сторон. В нем указан порядок расчетов, условия передачи и возврата щенков. Подписывая
+                            договор, вы защищаете себя от возможных рисков и официально фиксируете сделку.
                         </div>
                         <div class="contract-link" [ngClass]="{'collapse' : collapse.contract}">
                             <a href="https://petman.co/contract.pdf" target="_blank">Посмотреть договор</a>
@@ -198,8 +172,7 @@
                         <div class="line"></div>
                     </div>
                     <div class="additional-info-item d-flex flex-column mb-32">
-                        <div class="title d-flex align-items-center justify-content-between"
-                            [ngClass]="{'mb-16' : collapse.warranty}" (click)="showInfo('warranty')">
+                        <div class="title d-flex align-items-center justify-content-between" [ngClass]="{'mb-16' : collapse.warranty}" (click)="showInfo('warranty')">
                             <div class="d-flex">
                                 <i class="icon icon-heart d-flex align-items-center justify-content-center"></i>
                                 Гарантии по здоровью
@@ -210,19 +183,16 @@
                             </div>
                         </div>
                         <div class="description" [ngClass]="{'collapse' : collapse.warranty}">
-                            Значимость этих проблем настолько очевидна,
-                            что консультация с широким активом способствует подготовки и реализации новых предложений.
-                            С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                            занимаемых участниками в отношении поставленных задач.
+                            Гарантия прописана в договоре Petman. Заводчик обязан предоставить вам здорового щенка без заболеваний на момент покупки.
+                            В случае нарушения вы будете вправе вернуть щенка обратно в течение 30 дней и получить за него
+                            полную стоимость.
                         </div>
                         <div class="line"></div>
                     </div>
                     <div class="additional-info-item d-flex flex-column">
-                        <div class="title d-flex align-items-center justify-content-between"
-                            [ngClass]="{'mb-16' : collapse.buyPuppy}" (click)="showInfo('buyPuppy')">
+                        <div class="title d-flex align-items-center justify-content-between" [ngClass]="{'mb-16' : collapse.buyPuppy}" (click)="showInfo('buyPuppy')">
                             <div class="d-flex">
-                                <i
-                                    class="icon icon-certificate-shape d-flex align-items-center justify-content-center"></i>
+                                <i class="icon icon-certificate-shape d-flex align-items-center justify-content-center"></i>
                                 Как приобрести щенка
                             </div>
 
@@ -231,17 +201,13 @@
                             </div>
                         </div>
                         <div class="description" [ngClass]="{'collapse' : collapse.buyPuppy}">
-                            Значимость этих проблем настолько очевидна,
-                            что консультация с широким активом способствует подготовки и реализации новых предложений.
-                            С другой стороны укрепление и развитие структуры требуют от нас анализа позиций,
-                            занимаемых участниками в отношении поставленных задач.
+                            Для покупки щенка воспользуйтесь кнопкой «Написать заводчику». В сообщении вы можете указать, какие конкретно щенки вас интересуют.
+                            После отправки, заводчик свяжется с вами для дальнейших действий.
                         </div>
                         <div class="line"></div>
                     </div>
-                    <div *ngIf="subpageStatus().puppiesInfo && appService.userData.puppiesInfo.gifts"
-                        class="additional-info-item d-flex flex-column">
-                        <div class="title d-flex align-items-center justify-content-between"
-                            [ngClass]="{'mb-16' : collapse.gifts}" (click)="showInfo('gifts')">
+                    <div *ngIf="subpageStatus().puppiesInfo && appService.userData.puppiesInfo.gifts" class="additional-info-item d-flex flex-column">
+                        <div class="title d-flex align-items-center justify-content-between" [ngClass]="{'mb-16' : collapse.gifts}" (click)="showInfo('gifts')">
                             <div class="d-flex">
                                 <i class="icon icon-gift d-flex align-items-center justify-content-center"></i>
                                 Подарки
@@ -258,16 +224,14 @@
 
                 <div *ngIf="subpageStatus().puppies" class="line line-desktop"></div>
 
-                <div *ngIf="subpageStatus().puppies"
-                    class="about-puppies-title about-puppies-with-btn d-flex align-items-center justify-content-between">
+                <div *ngIf="subpageStatus().puppies" class="about-puppies-title about-puppies-with-btn d-flex align-items-center justify-content-between">
                     <span class="available-puppies-title">Доступные щенки</span>
-                    <button type="button" class="custom-btn btn-purple puppies-block-message-btn-desktop" (click)="showBreederMessagePopup()">НАПИСАТЬ
-                        ЗАВОДЧИКУ</button>
+                    <button type="button" class="custom-btn btn-purple puppies-block-message-btn-desktop" (click)="showBreederMessagePopup()">НАПИСАТЬ ЗАВОДЧИКУ
+                    </button>
                 </div>
 
-                <div *ngIf="subpageStatus().puppies" class="dog-entity-list-block">
-                    <div *ngFor="let puppy of appService.userData.puppies;let i = index;" class="avail-dog-entity-item"
-                        (click)="showPuppyCard(i)">
+                <div *ngIf="subpageStatus().puppies" class="dog-list-block">
+                    <div *ngFor="let puppy of appService.userData.puppies;let i = index;" class="avail-dog-item" (click)="showPuppyCard(i)">
 
                         <div class="entity-image-block">
                             <img src='/img/{{puppy.gallery[0].preview}}.jpg' alt="Изображение щенка" />
@@ -278,14 +242,13 @@
                                 <span>{{puppy.nickname}}</span>
                                 <span>{{puppy.breed.name}}</span>
                             </div>
-                            <img src="./assets/img/sex_{{puppy.gender == 'MALE' ? 'male' : 'female'}}.png"
-                                alt="Пол щенка" />
+                            <img src="./assets/img/sex_{{puppy.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол щенка" />
 
                         </div>
                     </div>
                 </div>
-                <button type="button" class="custom-btn btn-purple puppies-block-message-btn-mobile" (click)="showBreederMessagePopup()">НАПИСАТЬ
-                        ЗАВОДЧИКУ</button>
+                <button type="button" class="custom-btn btn-purple puppies-block-message-btn-mobile" (click)="showBreederMessagePopup()">НАПИСАТЬ ЗАВОДЧИКУ
+                </button>
             </section>
         </div>
 
@@ -316,9 +279,8 @@
                     </div>
                     <div class="right-side">
                         <div class="image-block mb-12">
-                            <img *ngIf="subpageStatus().about && appService.userData.about.photo"
-                                src="/img/{{appService.userData.about.photo.preview}}.jpg" class="image"
-                                alt="Фото заводчика">
+                            <img *ngIf="subpageStatus().about && appService.userData.about.photo" src="/img/{{appService.userData.about.photo.preview}}.jpg"
+                                class="image" alt="Фото заводчика">
                         </div>
 
                         <div class="info-block">
@@ -339,15 +301,13 @@
 
                 <div class="line"></div>
 
-                <div *ngIf="subpageStatus().about && appService.userData.about.certificates.length > 0"
-                    class="awards-and-certificates">
+                <div *ngIf="subpageStatus().about && appService.userData.about.certificates.length > 0" class="awards-and-certificates">
                     <div class="title">
                         <span>Награды & Сертификаты</span>
                     </div>
 
                     <div class="certificates-list d-flex flex-wrap">
-                        <div *ngFor="let cert of appService.userData.about.certificates; let i = index"
-                            class="certificate-item d-flex align-items-center justify-content-center">
+                        <div *ngFor="let cert of appService.userData.about.certificates; let i = index" class="certificate-item d-flex align-items-center justify-content-center">
                             <img src="/img/{{cert.preview}}.jpg" (click)="showImageGalley(i, appService.userData.about.certificates)" alt="Сертификат заводчика">
                         </div>
                     </div>
@@ -361,9 +321,8 @@
                     <h2>О РОДИТЕЛЯХ</h2>
                 </div>
 
-                <div *ngIf="subpageStatus().parentsInfo" class="dog-entity-list-block">
-                    <div *ngFor="let parent of appService.userData.parentsInfo.parents;let i = index;"
-                        class="avail-dog-entity-item" (click)="showParentCard(i)">
+                <div *ngIf="subpageStatus().parentsInfo" class="dog-list-block">
+                    <div *ngFor="let parent of appService.userData.parentsInfo.parents;let i = index;" class="avail-dog-item" (click)="showParentCard(i)">
 
                         <div class="entity-image-block">
                             <img src='/img/{{parent.gallery[0].preview}}.jpg' alt="Изображение щенка" />
@@ -374,8 +333,7 @@
                                 <span>{{parent.nickname}}</span>
                                 <span>{{parent.breed.name}}</span>
                             </div>
-                            <img src="./assets/img/sex_{{parent.gender == 'MALE' ? 'male' : 'female'}}.png"
-                                alt="Пол щенка" />
+                            <img src="./assets/img/sex_{{parent.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол щенка" />
 
                         </div>
                     </div>

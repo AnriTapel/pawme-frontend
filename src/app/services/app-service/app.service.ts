@@ -23,7 +23,7 @@ export class AppService {
   breeds: any;
   puppyTests: Array<PuppyTest>;
 
-  isOnboardingVisible: boolean = true;
+  isOnboardingVisible: boolean = false;
 
   constructor(private http: HttpClient, private breederService: BreederControllerService, private injector: Injector,
     private notificationServie: NotificationBarService) {
@@ -65,6 +65,7 @@ export class AppService {
       router.navigateByUrl('/breeder-profile');
       this.notificationServie.setContext('Ваша почта успешно подтверждена', true);
       this.notificationServie.setVisibility(true);
+      this.isOnboardingVisible = true;
     } else if (window.location.href.indexOf('/email-fail') != -1) {
       router.navigateByUrl('/breeder-landing');
       this.notificationServie.setContext('Ошибка подтверждения почты', false);
