@@ -116,6 +116,9 @@
         <label for="gifts">Подарки к купленному щенку (необязательно)</label>
         <br>
         <span class="block-description">Многие заводчики дарят новым хозяевам игрушку с запахом однопометников или небольшой мешочек корма.</span>
+        <span class="textarea-length-counter" [style.color]="profileService.getTextareaLimit(puppiesData.gifts, 512) > 0 ? '#46b0ad' : '#eb0000'">
+            {{profileService.getTextareaLimit(puppiesData.gifts, 512)}}
+        </span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts" (change)="profileService.dataChangesSaved = false"></textarea>
     </div>
 

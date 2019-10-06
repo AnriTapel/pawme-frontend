@@ -270,6 +270,12 @@ input[type=number]::-webkit-outer-spin-button {
   margin-top: 16px;
 }
 
+.breeder-profile-subpage-container .textarea-length-counter {
+  font-size: 12px;
+  font-family: 'Intro-Book' !important;
+  float: right;
+}
+
 .breeder-profile-subpage-container textarea {
   height: auto;
 }

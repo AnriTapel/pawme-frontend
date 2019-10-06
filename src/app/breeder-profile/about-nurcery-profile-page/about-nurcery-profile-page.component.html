@@ -57,6 +57,9 @@
         <br>
         <span class="block-description">Это одна из первых вещей, которую прочитают потенциальные покупатели на вашей странице. Постарайтесь кратко (в 2-3
             предложения) описать ваш питомник и рассказать о его особенностях.</span>
+        <span class="textarea-length-counter" [style.color]="profileService.getTextareaLimit(nurceryData.description, 512) > 0 ? '#46b0ad' : '#eb0000'">
+            {{profileService.getTextareaLimit(nurceryData.description, 512)}}
+        </span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="nurceryData.description" (change)="profileService.dataChangesSaved = false"
             [class.invalid-form-field-value]="invalidFields.includes('desc')" placeholder="Описание"></textarea>
     </div>
