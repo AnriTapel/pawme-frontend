@@ -1,10 +1,14 @@
-<app-notification-bar></app-notification-bar>
-<app-header *ngIf="showGeneralHeader()"></app-header>
-<router-outlet></router-outlet>
-<app-footer *ngIf="showGeneralFooter()"></app-footer>
-<app-popup-template *ngIf="popupService.getShowStatus()" [ngSwitch]="popupService.getCurrentForm()">
-    <app-image-cropper *ngSwitchCase="'image-cropper'" [params]="popupService.getPopupParams()"></app-image-cropper>
-    <app-breeder-message *ngSwitchCase="'breeder-message'"></app-breeder-message>
-    <app-image-gallery *ngSwitchCase="'image-gallery'" [params]="popupService.getPopupParams()"></app-image-gallery>
-</app-popup-template>
-<app-alert></app-alert>
+<div id="general-wrapper">
+    <app-notification-bar></app-notification-bar>
+    <app-header *ngIf="showGeneralHeader()"></app-header>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+    <app-footer *ngIf="showGeneralFooter()"></app-footer>
+    <app-popup-template *ngIf="popupService.getShowStatus()" [ngSwitch]="popupService.getCurrentForm()">
+        <app-image-cropper *ngSwitchCase="'image-cropper'" [params]="popupService.getPopupParams()"></app-image-cropper>
+        <app-breeder-message *ngSwitchCase="'breeder-message'"></app-breeder-message>
+        <app-image-gallery *ngSwitchCase="'image-gallery'" [params]="popupService.getPopupParams()"></app-image-gallery>
+    </app-popup-template>
+    <app-alert></app-alert>
+</div>

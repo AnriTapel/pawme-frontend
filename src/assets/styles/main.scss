@@ -26,15 +26,29 @@ $profile-image-block-size: 150px;
     src: url(../fonts/Intro-Book.otf);
 }
 
-body{
-    width: 100%;
+html, body {
     height: 100%;
+    margin: 0 !important;
+    padding: 0;
+    overflow-y: auto;
+}
+
+body{
     font-family: 'Intro-Regular' !important;
     background-color: #f8f9fb !important;
     -webkit-font-smoothing: antialiased;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
-    margin: 0 !important;
+}
+
+#general-wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    main{
+        flex: 1;
+    }
 }
 
 h1, h2, h3, h4, h5{

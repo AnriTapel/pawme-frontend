@@ -110,19 +110,12 @@ export class AppService {
   }
 
   disableBodyScrolling(target?): void {
-    if (target){
-      target.ontouchmove = (e) => {
-        e.stopPropagation();
-      };
-    }
     document.body.style.overflowY = "hidden";
     document.body.style.paddingRight = "15px";
   }
 
   enableBodyScrolling(): void {
-    document.body.ontouchmove = (e) => {return true};
-    document.getElementsByTagName("body")[0].style.overflowY = "scroll";
-    document.getElementsByTagName("body")[0].style.paddingRight = "0";
+    document.body.removeAttribute('style');
   }
 
   toggleDropdownTextInput(id: string, event: any): void {
