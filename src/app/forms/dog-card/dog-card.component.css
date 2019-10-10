@@ -13,12 +13,20 @@ p {
   background-color: #fff;
 }
 
-.dog-cart-container > img {
+.dog-cart-container .close-btn-block {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
   position: absolute;
-  top: 1em;
-  right: 1em;
-  width: 16px;
+  top: 10px;
+  right: 10px;
   z-index: 1000;
+}
+
+.dog-cart-container .close-btn-block > img {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
 }
 
 .dog-gallery {
@@ -38,7 +46,7 @@ p {
 .dog-gallery .next-btn-block {
   position: absolute;
   top: 0;
-  width: calc(20px + 1em);
+  width: calc(50px + 1em);
   height: 100%;
   z-index: 999;
 }

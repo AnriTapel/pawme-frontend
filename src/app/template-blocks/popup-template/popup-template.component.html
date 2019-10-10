@@ -1,7 +1,6 @@
 <div *ngIf="popupService.getShowStatus()" class="overlay-block" (click)="closePopup()">
     <div (click)="$event.stopPropagation()" class="popup-block">
-        <img src="./assets/img/close-button-black.svg" (click)="popupService.setShowStatus(false)" />
-
+        <div (click)="popupService.setShowStatus(false)"><img src="./assets/img/close-button-black.svg" alt="Закрыть"/></div>
         <ng-content></ng-content>
 
     </div>

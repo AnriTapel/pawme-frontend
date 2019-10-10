@@ -237,6 +237,7 @@ input[type=number]::-webkit-outer-spin-button {
   top: 25%;
   height: 50%;
   right: .5em;
+  cursor: pointer;
 }
 
 .custom-form-control-border {
@@ -416,6 +417,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 2em;
   text-align: center;
   margin-top: 16px;
+  cursor: pointer;
 }
 
 .gallery-initial-block > input {
@@ -498,6 +500,7 @@ input[type=number]::-webkit-outer-spin-button {
       -ms-flex-pack: center;
           justify-content: center;
   position: relative;
+  cursor: pointer;
 }
 
 .gallery-uploaded-photos-block .empty-galley-photo-block img {
@@ -552,6 +555,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 4px;
   margin-bottom: .5em;
   margin-right: .5em;
+  cursor: pointer;
 }
 
 .add-dog-entity-item div {

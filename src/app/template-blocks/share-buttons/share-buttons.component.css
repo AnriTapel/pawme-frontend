@@ -1,6 +1,7 @@
 .container {
   margin: 1em auto 0;
   padding: 0;
+  text-align: center;
 }
 
 #share-buttons {
@@ -42,6 +43,10 @@
 @media screen and (max-width: 769px) {
   .container {
     margin: .5em auto 1.5em;
+  }
+  .container span {
+    display: block;
+    margin-bottom: 1.5em !important;
   }
   button {
     width: 35px !important;

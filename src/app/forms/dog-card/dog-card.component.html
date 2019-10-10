@@ -1,6 +1,8 @@
 <div class="overlay-block" (click)="closeCard()">
     <div class="dog-cart-container" (click)="$event.stopPropagation()">
-        <img src="./assets/img/close-button-white.svg" alt="Закрыть" (click)="closeCard()" />
+        <div class="close-btn-block" (click)="closeCard()">
+            <img src="./assets/img/close-button-white.svg" alt="Закрыть" />
+        </div>
         <div class="dog-gallery">
             <div *ngIf="dog.gallery.length > 1" class="previous-btn-block" (click)="gallery.previousSlide()">
                 <img *ngIf="dog.gallery.length > 1" class="previous-img" src="./assets/img/arrow-left.svg" alt="Предыдущая" />

@@ -30,6 +30,7 @@ hr{
         .faq-item{
             padding: 2.5em 0 1.5em;
             position: relative;
+            cursor: pointer;
 
             &:before{
                 content : "";
@@ -79,7 +80,7 @@ hr{
     padding-top: .5em;
 
     span{
-        font-size: 14px;
+        font-size: 16px;
         line-height: 19px;
         font-family: 'Intro-Book';
         opacity: .6;
@@ -121,7 +122,7 @@ hr{
         padding-top: 0 !important;
 
         span{
-            font-size: 13px;
+            font-size: 16px;
         }
     }
 

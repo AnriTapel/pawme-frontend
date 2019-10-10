@@ -32,6 +32,7 @@ hr {
 .page-container .faq-block .faq-item {
   padding: 2.5em 0 1.5em;
   position: relative;
+  cursor: pointer;
 }
 
 .page-container .faq-block .faq-item:before {
@@ -87,7 +88,7 @@ hr {
 }
 
 .answer-block span {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 19px;
   font-family: 'Intro-Book';
   opacity: .6;
@@ -118,7 +119,7 @@ hr {
     padding-top: 0 !important;
   }
   .answer-block span {
-    font-size: 13px;
+    font-size: 16px;
   }
 }
 /*# sourceMappingURL=faq.component.css.map */

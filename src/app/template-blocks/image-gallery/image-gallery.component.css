@@ -18,9 +18,8 @@
 .previous-btn-block,
 .next-btn-block {
   position: absolute;
-  width: calc(20px + 1em);
+  width: calc(50px + 1em);
   height: 100%;
-  padding: calc(50% - 10px) 0;
   z-index: 999;
 }
 
