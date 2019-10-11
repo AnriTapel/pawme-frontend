@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
   errorText: string = null;
 
   constructor(private popupService: PopupTemplateService, private appService: AppService,
-    private breederService: BreederControllerService, private router: Router) { }
+    private breederService: BreederControllerService, private router: Router) { scroll(0,0) }
 
   ngOnInit() {
   }

@@ -26,8 +26,6 @@
 html, body {
   height: 100%;
   margin: 0 !important;
-  padding: 0;
-  overflow-y: auto;
 }
 
 body {
@@ -38,7 +36,8 @@ body {
   overflow-x: hidden;
 }
 
-#general-wrapper {
+.main-container {
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -46,13 +45,10 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  min-height: 100%;
 }
 
-#general-wrapper main {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+app-footer {
+  margin-top: auto;
 }
 
 h1, h2, h3, h4, h5 {
