@@ -24,6 +24,37 @@ export class DogCardComponent implements OnInit {
   ngOnInit() {
   }
 
+  getPuppyAge(): string{
+    var bthDate, curDate, ageYears, ageMonths, ageDays, ageText;
+    bthDate = new Date(this.dog.birthDate);
+    curDate = new Date();
+    if (bthDate > curDate) 
+      return;
+    ageYears = curDate.getFullYear() - bthDate.getFullYear();
+    ageMonths = curDate.getMonth() - bthDate.getMonth();
+    ageDays = curDate.getDate() - bthDate.getDate(); 
+    if (ageDays < 0)
+      ageMonths = ageMonths - 1;
+    if (ageMonths < 0) {
+      ageYears = ageYears - 1;
+      ageMonths = ageMonths + 12;
+    }
+    ageMonths += 12 * ageYears;
+    ageText = "";
+    
+    if (ageMonths > 0) {
+      ageText = ageMonths + " месяц";
+      if (ageMonths > 1 && ageMonths < 5)
+        ageText = ageText + "а";
+      if (ageMonths > 4 && !(ageMonths > 20 && ageMonths % 10 == 1))
+        ageText = ageText + "ев";
+    } else {
+      ageText = "< 1 месяца";
+    }
+
+    return ageText;
+  }
+
   showBreederMessagePopup(): void{
     this.popupService.setPopupParams(null);
     this.popupService.setCurrentForm('breeder-message');
