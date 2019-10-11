@@ -106,7 +106,7 @@
         <div *ngIf="breederData.certificates.length > 0" class="gallery-uploaded-photos-block">
             <div *ngFor="let cert of breederData.certificates;let i = index" class="active-galley-photo-block">
                 <img src="/img/{{cert.main}}.jpg" alt="Сертификат заводчика" class="certificate-image" />
-                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить сертификат" (click)="deleteCertificate(i)"
+                <img class="close-button" src="./assets/img/close-button-black.svg" alt="Удалить сертификат" (click)="deleteCertificate(i)"
                 />
             </div>
             <div class="empty-galley-photo-block">
