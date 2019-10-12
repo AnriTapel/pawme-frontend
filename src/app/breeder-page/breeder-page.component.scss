@@ -94,7 +94,7 @@ span, p, div {
 
     @media (max-width: $screen-sm - 1px) {
         width: calc(100% - 32px);
-        margin: 0 auto 20px;
+        margin: 0 auto 40px;
         background-color: #f8f9fb;
         border-radius: 4px;
         border: 1px solid #cbd8f6;
@@ -252,6 +252,11 @@ span, p, div {
 
     .location, .link {
         margin-bottom: 8px;
+
+        span{
+            font-family: 'Intro-Book' !important;
+            margin-top: 1px;
+        }
     }
 
     .link{
@@ -321,17 +326,9 @@ span, p, div {
             color: #0e0b4d;
         }
 
-        p:nth-child(1){
-            font-family: 'Intro-Bold' !important;
-        }
-
         p:nth-child(2){
             font-family: 'Intro-Book' !important;
         }
-    }
-
-    .left-side{
-        padding-left: .75em;
     }
 }
 

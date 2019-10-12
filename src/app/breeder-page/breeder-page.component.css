@@ -98,7 +98,7 @@ span, p, div {
 @media (max-width: 768px) {
   .sidebar-block {
     width: calc(100% - 32px);
-    margin: 0 auto 20px;
+    margin: 0 auto 40px;
     background-color: #f8f9fb;
     border-radius: 4px;
     border: 1px solid #cbd8f6;
@@ -316,6 +316,11 @@ span, p, div {
   margin-bottom: 8px;
 }
 
+.aside .location span, .aside .link span {
+  font-family: 'Intro-Book' !important;
+  margin-top: 1px;
+}
+
 .aside .link {
   cursor: pointer;
 }
@@ -408,16 +413,8 @@ span, p, div {
   color: #0e0b4d;
 }
 
-.aside .description p:nth-child(1) {
-  font-family: 'Intro-Bold' !important;
-}
-
 .aside .description p:nth-child(2) {
   font-family: 'Intro-Book' !important;
-}
-
-.aside .left-side {
-  padding-left: .75em;
 }
 
 .section {
