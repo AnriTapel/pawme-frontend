@@ -43,99 +43,32 @@
   text-align: center;
 }
 
-.what-is-avail-block section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+.what-is-avail-block .grid-block {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template: auto / 1fr 1fr;
+  grid-gap: 5em 3em;
+  max-width: 1280px;
+  margin: 5em auto 2em;
 }
 
-.what-is-avail-block section h3, .what-is-avail-block section h4 {
+.what-is-avail-block .grid-block h3, .what-is-avail-block .grid-block h4 {
   margin-bottom: 1em;
 }
 
-.what-is-avail-block section button {
+.what-is-avail-block .grid-block h4 {
+  display: none;
+}
+
+.what-is-avail-block .grid-block button {
   margin-top: 1.5em;
 }
 
-.what-is-avail-block section img {
+.what-is-avail-block .grid-block img {
   width: 100%;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
   max-width: 620px;
-}
-
-.what-is-avail-block .breeder-page-block {
-  margin: 4em auto 5.5em;
-}
-
-.what-is-avail-block .breeder-page-block div:nth-child(1) {
-  width: 50%;
-}
-
-.what-is-avail-block .breeder-page-block div:nth-child(1) h4 {
-  display: none;
-}
-
-.what-is-avail-block .breeder-page-block div:nth-child(1) img {
-  float: right;
-}
-
-.what-is-avail-block .breeder-page-block div:nth-child(2) {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-item-align: center;
-      align-self: center;
-  width: 50%;
-  padding-left: 5%;
-}
-
-.what-is-avail-block .breeder-page-block div:nth-child(2) p {
-  max-width: 620px;
-  font-size: 20px;
-  line-height: 26px;
-}
-
-.what-is-avail-block .breeder-profile-block {
-  margin-bottom: 2em;
-}
-
-.what-is-avail-block .breeder-profile-block > div:nth-child(1) {
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-item-align: center;
-      align-self: center;
-  width: 50%;
-  padding-left: 5%;
-}
-
-.what-is-avail-block .breeder-profile-block > div:nth-child(1) div {
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-  max-width: 620px;
-}
-
-.what-is-avail-block .breeder-profile-block > div:nth-child(1) p {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-.what-is-avail-block .breeder-profile-block div:nth-child(2) {
-  width: 50%;
-}
-
-.what-is-avail-block .breeder-profile-block div:nth-child(2) h4 {
-  display: none;
 }
 
 .what-is-avail-block .mobile-sign-up-button {
@@ -275,62 +208,50 @@
   .breeder-landing-title button {
     margin-top: 2em;
   }
-  .what-is-avail-block section h4 {
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 1.5em;
-  }
-  .what-is-avail-block section img, .what-is-avail-block section > div {
-    width: 100%;
-  }
-  .what-is-avail-block section p {
-    font-size: 14px !important;
-    line-height: 19px !important;
-    text-align: center;
-  }
-  .what-is-avail-block .breeder-page-block {
+  .what-is-avail-block .grid-block {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    margin: 2em auto 3em;
+    margin: 3em auto 1em;
   }
-  .what-is-avail-block .breeder-page-block div:nth-child(1) {
+  .what-is-avail-block .grid-block .breeder-page-text,
+  .what-is-avail-block .grid-block .breeder-profile-text {
+    margin-top: 1.5em;
+  }
+  .what-is-avail-block .grid-block .breeder-profile-text {
+    -webkit-box-ordinal-group: 5;
+        -ms-flex-order: 4;
+            order: 4;
+  }
+  .what-is-avail-block .grid-block .breeder-profile-img-block {
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+    margin-top: 2em;
+  }
+  .what-is-avail-block .grid-block h3 {
+    display: none;
+  }
+  .what-is-avail-block .grid-block h4 {
+    font-size: 18px;
+    text-align: center;
     margin-bottom: 1.5em;
-    width: 100%;
-  }
-  .what-is-avail-block .breeder-page-block div:nth-child(1) h4 {
     display: block;
   }
-  .what-is-avail-block .breeder-page-block div:nth-child(2) {
-    width: 100%;
-    padding-left: 0;
-  }
-  .what-is-avail-block .breeder-page-block div:nth-child(2) h3 {
+  .what-is-avail-block .grid-block button {
     display: none;
   }
-  .what-is-avail-block .breeder-profile-block {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: reverse;
-        -ms-flex-direction: column-reverse;
-            flex-direction: column-reverse;
-  }
-  .what-is-avail-block .breeder-profile-block div:nth-child(1) {
-    width: 100%;
-    padding-left: 0;
-  }
-  .what-is-avail-block .breeder-profile-block div:nth-child(1) h3 {
-    display: none;
-  }
-  .what-is-avail-block .breeder-profile-block div:nth-child(2) {
-    margin-bottom: 1.5em;
+  .what-is-avail-block .grid-block img, .what-is-avail-block .grid-block > div {
     width: 100%;
   }
-  .what-is-avail-block .breeder-profile-block div:nth-child(2) h4 {
-    display: block;
-  }
-  .what-is-avail-block .breeder-profile-block button {
-    display: none;
+  .what-is-avail-block .grid-block p {
+    font-size: 14px !important;
+    line-height: 19px !important;
+    text-align: center;
   }
   .what-is-avail-block .mobile-sign-up-button {
     display: block;
