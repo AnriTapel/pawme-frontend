@@ -310,12 +310,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.curFatherNickname || this.curFatherNickname == "") {
+    if (!this.curFatherNickname || this.curFatherNickname == "" || this.fathers.filter(it => it.nickname == this.curFatherNickname).length == 0) {
       this.invalidFields.push('dad');
       isValid = false;
     }
 
-    if (!this.curMotherNickname || this.curMotherNickname == "") {
+    if (!this.curMotherNickname || this.curMotherNickname == "" || this.mothers.filter(it => it.nickname == this.curMotherNickname).length == 0) {
       this.invalidFields.push('mom');
       isValid = false;
     }
