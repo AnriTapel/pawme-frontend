@@ -97,7 +97,7 @@
 
     <div class="lower-btn">
         <span *ngIf="invalidGeneralFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
-            Пожалуйста, заполните пропущенные поля
+            Пожалуйста, исправьте выделенные поля
         </span>
         <br *ngIf="invalidGeneralFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
@@ -192,7 +192,7 @@
 
     <div class="lower-btn">
         <span *ngIf="invalidAddingFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
-            Пожалуйста, заполните пропущенные поля
+            Пожалуйста, исправьте выделенные поля
         </span>
         <br *ngIf="invalidAddingFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Добавить родителя" (click)="addParent(false)" />

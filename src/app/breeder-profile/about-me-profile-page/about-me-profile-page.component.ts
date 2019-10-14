@@ -92,6 +92,8 @@ export class AboutMeProfilePageComponent implements OnInit {
   }
 
   addClub(): void {
+    if (!this.currentClub || this.currentClub == "")
+      return;
     this.currentClubs.push(this.currentClub);
     this.currentClub = null;
     this.profileService.dataChangesSaved = false;
@@ -106,17 +108,17 @@ export class AboutMeProfilePageComponent implements OnInit {
     let isValid = true;
     this.invalidFields = [];
 
-    if (!this.breederData.about || this.breederData.about == "") {
+    if (!this.breederData.about || this.breederData.about == "" || this.breederData.about.length > 2048) {
       this.invalidFields.push('about');
       isValid = false;
     }
 
-    if (!this.breederData.outstandingInfo || this.breederData.outstandingInfo == "") {
+    if (!this.breederData.outstandingInfo || this.breederData.outstandingInfo == "" || this.breederData.outstandingInfo.length > 2048) {
       this.invalidFields.push('outstanding');
       isValid = false;
     }
 
-    if (!this.breederData.howItStarted || this.breederData.howItStarted == "") {
+    if (!this.breederData.howItStarted || this.breederData.howItStarted == "" || this.breederData.howItStarted.length > 2048) {
       this.invalidFields.push('howItStarted');
       isValid = false;
     }

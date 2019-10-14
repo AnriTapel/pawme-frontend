@@ -97,6 +97,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   addMedical(): void {
+    if ((!this.currentBodyPart || this.currentBodyPart == "") || (!this.currentMedicalTest || this.currentMedicalTest == ""))
+      return;
     let curMedical: ParentTest = {
       category: this.currentBodyPart,
       name: this.currentMedicalTest
@@ -122,6 +124,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
     this.currentBreed = this.currentParentData.breed ? this.currentParentData.breed.name : null;
     this.isMainPage = false;
+    scroll(0,0);
   }
 
   previewParentImage(index: number): void {
@@ -244,12 +247,12 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   validateAddingFields(): boolean {
     let isValid = true;
     this.invalidAddingFields = [];
-    if (!this.currentParentData.nickname || this.currentParentData.nickname == "") {
+    if (!this.currentParentData.nickname || this.currentParentData.nickname == "" || this.currentParentData.nickname.length > 32) {
       this.invalidAddingFields.push('name');
       isValid = false;
     }
 
-    if (!this.currentBreed || this.currentBreed == "") {
+    if (!this.currentBreed || this.currentBreed == "" || this.appService.breeds.filter(it => it.name == this.currentBreed).length == 0) {
       this.invalidAddingFields.push('breed');
       isValid = false;
     }
@@ -259,7 +262,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentParentData.info || this.currentParentData.info == "") {
+    if (!this.currentParentData.info || this.currentParentData.info == "" || this.currentParentData.info.length > 512) {
       this.invalidAddingFields.push('info');
       isValid = false;
     }

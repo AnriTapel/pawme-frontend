@@ -82,19 +82,25 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     let isValid = true;
     this.invalidFields = [];
 
-    if (!this.puppiesData.age) {
+    if (!this.puppiesData.age || this.puppiesData.age > 32) {
       this.invalidFields.push('age');
       isValid = false;
     }
 
-    if (!this.puppiesData.priceFrom) {
+    if (this.puppiesData.priceFrom && this.puppiesData.priceTo && this.puppiesData.priceFrom > this.puppiesData.priceTo) {
       this.invalidFields.push('priceFrom');
-      isValid = false;
-    }
-
-    if (!this.puppiesData.priceTo) {
       this.invalidFields.push('priceTo');
       isValid = false;
+    } else {
+      if (!this.puppiesData.priceFrom || this.puppiesData.priceFrom > 500000) {
+        this.invalidFields.push('priceFrom');
+        isValid = false;
+      }
+
+      if (!this.puppiesData.priceTo || this.puppiesData.priceTo > 500000) {
+        this.invalidFields.push('priceTo');
+        isValid = false;
+      }
     }
 
     if (!this.puppiesData.petmanSet) {
@@ -111,6 +117,12 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       this.invalidFields.push('contract');
       isValid = false;
     }
+
+    if (this.puppiesData.gifts && this.puppiesData.gifts != "" && this.puppiesData.gifts.length > 512) {
+      this.invalidFields.push('gifts');
+      isValid = false;
+    } else
+      this.puppiesData.gifts = null;
 
     return isValid;
   }

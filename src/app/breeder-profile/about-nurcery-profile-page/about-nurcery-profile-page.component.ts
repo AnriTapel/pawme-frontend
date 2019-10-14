@@ -143,17 +143,28 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     let isValid = true;
     this.invalidFields = [];
 
-    if (!this.curMainBreed || this.curMainBreed == "") {
+    if (this.nurceryData.name && this.nurceryData.name.length > 64) {
+      this.invalidFields.push('name');
+      isValid = false;
+    }
+
+
+    if (!this.curMainBreed || this.curMainBreed == "" || this.appService.breeds.filter(it => it.name == this.curMainBreed).length == 0) {
       this.invalidFields.push('mainBreed');
       isValid = false;
     }
 
-    if (!this.nurceryData.city || this.nurceryData.city == "") {
+    if (this.curExtraBreed && this.curExtraBreed != "" && this.appService.breeds.filter(it => it.name == this.curExtraBreed).length == 0) {
+      this.invalidFields.push('extraBreed');
+      isValid = false;
+    }
+
+    if (!this.nurceryData.city || this.nurceryData.city == "" || this.nurceryData.city.length > 64) {
       this.invalidFields.push('city');
       isValid = false;
     }
 
-    if (!this.nurceryData.description) {
+    if (!this.nurceryData.description || this.nurceryData.description == "" || this.nurceryData.description.length > 512) {
       this.invalidFields.push('desc');
       isValid = false;
     }

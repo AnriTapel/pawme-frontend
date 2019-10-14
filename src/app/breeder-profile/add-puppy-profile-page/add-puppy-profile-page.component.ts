@@ -126,6 +126,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.curMotherNickname = this.currentPuppyData.mother ? this.currentPuppyData.mother.nickname : null;
     this.curBreed = this.currentPuppyData.breed ? this.currentPuppyData.breed.name : null;
     this.isMainPage = false;
+    scroll(0,0);
   }
 
   onDadInputClick(event: any): void {
@@ -289,12 +290,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
   validateInputFields(): boolean {
     let isValid = true;
     this.invalidFields = [];
-    if (!this.currentPuppyData.nickname || this.currentPuppyData.nickname == "") {
+    if (!this.currentPuppyData.nickname || this.currentPuppyData.nickname == "" || this.currentPuppyData.nickname.length > 32) {
       this.invalidFields.push('name');
       isValid = false;
     }
 
-    if (!this.curBreed || this.curBreed == "") {
+    if (!this.curBreed || this.curBreed == "" || this.appService.breeds.filter(it => it.name == this.curBreed).length == 0) {
       this.invalidFields.push('breed');
       isValid = false;
     }
@@ -304,7 +305,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentPuppyData.earmark || this.currentPuppyData.earmark == "") {
+    if (!this.currentPuppyData.earmark || this.currentPuppyData.earmark == "" || this.currentPuppyData.earmark.length > 64) {
       this.invalidFields.push('stigma');
       isValid = false;
     }
@@ -324,12 +325,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentPuppyData.about || this.currentPuppyData.about == "") {
+    if (!this.currentPuppyData.about || this.currentPuppyData.about == "" || this.currentPuppyData.about.length > 512) {
       this.invalidFields.push('info');
       isValid = false;
     }
 
-    if (!this.currentPuppyData.price) {
+    if (!this.currentPuppyData.price || this.currentPuppyData.price > 500000) {
       this.invalidFields.push('price');
       isValid = false;
     }

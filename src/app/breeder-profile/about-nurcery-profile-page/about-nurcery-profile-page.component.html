@@ -9,7 +9,7 @@
     <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-name">Название питомника (необязательно)</label>
         <input class="form-control custom-form-control-border" type="text" name="nurcery-name" [(ngModel)]="nurceryData.name" (change)="profileService.dataChangesSaved = false"
-            placeholder="Название питомника" />
+        [class.invalid-form-field-value]="invalidFields.includes('name')" placeholder="Название питомника" />
     </div>
 
     <div class="breeder-profile-subpage-form-right">
@@ -44,7 +44,7 @@
         <img src="./assets/img/close-button-black.svg" alt="Удалить дополнительную породу" (click)="deleteExtraBreed()" />
         <div class="dropdown-text-input">
             <input type="text" class="form-control custom-form-control-border" name="nurcery-additional-breed" [(ngModel)]="curExtraBreed"
-                [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
+                [class.invalid-form-field-value]="invalidFields.includes('extraBreed')" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
                 (focus)="addBreedFocus$.next($event.target.value)" (click)="addBreedClick$.next($event.target.value)" id="extra-breed"
                 (change)="profileService.dataChangesSaved = false" #addBreedInstance="ngbTypeahead" placeholder="Выбрать">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('extra-breed', $event)"
@@ -140,7 +140,7 @@
 
     <div class="lower-btn">
         <span *ngIf="invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
-            Пожалуйста, заполните пропущенные поля
+            Пожалуйста, исправьте выделенные поля
         </span>
         <br *ngIf="invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />

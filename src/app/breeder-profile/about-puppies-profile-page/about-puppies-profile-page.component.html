@@ -119,12 +119,13 @@
         <span class="textarea-length-counter" [style.color]="profileService.getTextareaLimit(puppiesData.gifts, 512) > 0 ? '#46b0ad' : '#eb0000'">
             {{profileService.getTextareaLimit(puppiesData.gifts, 512)}}
         </span>
-        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts" (change)="profileService.dataChangesSaved = false"></textarea>
+        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts" 
+            [class.invalid-form-field-value]="invalidFields.includes('gifts')"(change)="profileService.dataChangesSaved = false"></textarea>
     </div>
 
     <div class="lower-btn">
         <span *ngIf="invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
-            Пожалуйста, заполните пропущенные поля
+            Пожалуйста, исправьте выделенные поля
         </span>
         <br *ngIf="invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
