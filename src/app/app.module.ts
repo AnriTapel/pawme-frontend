@@ -45,6 +45,7 @@ import { ContactUsComponent } from './secondary-page/contact-us/contact-us.compo
 import { FaqComponent } from './secondary-page/faq/faq.component';
 import { ShareButtonsComponent } from './template-blocks/share-buttons/share-buttons.component';
 import { OnboardingComponent } from './forms/onboarding/onboarding.component';
+import { PageNotFoundComponent } from './secondary-page/page-not-found/page-not-found.component';
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -83,7 +84,8 @@ export function initApp(appSerivce: AppService){
     ContactUsComponent,
     FaqComponent,
     ShareButtonsComponent,
-    OnboardingComponent
+    OnboardingComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
