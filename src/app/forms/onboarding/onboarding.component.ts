@@ -39,7 +39,7 @@ export class OnboardingComponent implements OnInit {
   }
 
   openDemoPage(): void{
-    window.open('https://petman.co/breeder/604', '_blank');
+    window.open('https://petman.co/breeder/406', '_blank');
     this.close();
   }
 
