@@ -251,8 +251,11 @@ export class AddPuppyProfilePageComponent implements OnInit {
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       });
     },
-      () => {
-        this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+      (err) => {
+        if (err.status == 423)
+          this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+        else
+          this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
         if (!this.currentPuppyData.id)
           this.puppiesData.pop();

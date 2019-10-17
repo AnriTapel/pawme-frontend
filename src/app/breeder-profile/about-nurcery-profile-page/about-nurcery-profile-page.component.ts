@@ -99,7 +99,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     });
   }
 
-  deleteExtraBreed(): void{
+  deleteExtraBreed(): void {
     this.nurceryData.extraBreed = null;
     this.isAdditionalBreed = false;
     this.curExtraBreed = null;
@@ -122,6 +122,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
+        if (!this.appService.userData.generalInfo)
+          ym(55779592, 'reachGoal', 'ShelterSave');
         this.appService.userData.generalInfo = this.nurceryData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
@@ -131,8 +133,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         if (forPreview)
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       },
-        () => {
-          this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+        (err) => {
+          if (err.status == 423)
+            this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+          else
+            this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
           this.notificationService.setVisibility(true);
           scroll(0, 0);
         }

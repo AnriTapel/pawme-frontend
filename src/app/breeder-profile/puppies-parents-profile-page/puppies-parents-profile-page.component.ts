@@ -78,7 +78,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     };
     this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => {
       if (forPreview) {
-        if (!this.profileService.dataChangesSaved){
+        if (!this.profileService.dataChangesSaved) {
           if (this.currentParentData && this.currentParentData.id)
             this.addParent(forPreview)
           else {
@@ -92,7 +92,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     this.saveChagesEvent.unsubscribe();
   }
 
@@ -115,16 +115,16 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   showCurrentParentPage(index: number): void {
-    if (index == -1){
+    if (index == -1) {
       this.currentParentData = this.parentsData.parentDraft ? this.parentsData.parentDraft
         : JSON.parse(JSON.stringify(this.DEFAULT_PARENT_DATA));
-      this.currentParentData.id = null;  
+      this.currentParentData.id = null;
     } else
       this.currentParentData = this.parentsData.parents[index];
 
     this.currentBreed = this.currentParentData.breed ? this.currentParentData.breed.name : null;
     this.isMainPage = false;
-    scroll(0,0);
+    scroll(0, 0);
   }
 
   previewParentImage(index: number): void {
@@ -158,11 +158,13 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       return;
     this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
 
-    if (!this.currentParentData.id){
+    if (!this.currentParentData.id) {
       this.parentsData.parents.push(this.currentParentData);
       this.parentsData.parentDraft = null;
     }
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
+      if (!this.appService.userData.parentsInfo)
+        ym(55779592, 'reachGoal', 'ParentsSave');
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {
         this.profileService.dataChangesSaved = true;
         this.appService.userData = res;
@@ -214,6 +216,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     if (!this.validateGeneralFields())
       return;
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
+      if (!this.appService.userData.parentsInfo)
+        ym(55779592, 'reachGoal', 'ParentsSave');
       this.profileService.dataChangesSaved = true;
       this.profileService.parentTestsChangesSaved = true;
       this.appService.userData.parentsInfo = this.parentsData;
@@ -224,9 +228,12 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       scroll(0, 0);
       this.profileService.updateProfileFullness();
       if (forPreview)
-          window.open('/breeder/' + this.appService.userData.id, '_blank');
-    }, () => {
-      this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+        window.open('/breeder/' + this.appService.userData.id, '_blank');
+    }, (err) => {
+      if (err.status == 423)
+        this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+      else
+        this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);
       scroll(0, 0);
     }

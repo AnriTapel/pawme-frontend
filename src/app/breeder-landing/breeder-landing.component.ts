@@ -109,4 +109,9 @@ export class BreederLandingComponent implements OnInit {
     //  'block' : 'none';
   }
 
+  freeSignUpClicked(): void{
+    ym(55779592, 'reachGoal', 'FreeReg');
+    this.router.navigateByUrl('/sign-up');
+  }
+
 }

@@ -138,6 +138,8 @@ export class AboutMeProfilePageComponent implements OnInit {
     this.breederData.clubs = this.currentClubs.join(";");
     this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
       () => {
+        if (!this.appService.userData.about)
+          ym(55779592, 'reachGoal', 'SelfSave');
         this.appService.userData.about = this.breederData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
@@ -147,8 +149,11 @@ export class AboutMeProfilePageComponent implements OnInit {
         if (forPreview)
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       },
-      () => {
-        this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+      (err) => {
+        if (err.status == 423)
+          this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+        else
+          this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
         scroll(0, 0);
       }

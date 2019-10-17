@@ -35,11 +35,11 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => this.saveChanges(forPreview));
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     this.saveChagesEvent.unsubscribe();
   }
 
-  getTooltipPlacement(): string{
+  getTooltipPlacement(): string {
     return window.innerWidth < 770 ? 'bottom-left' : 'bottom';
   }
 
@@ -62,6 +62,8 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
     this.breederService.setPuppiesInfoUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(
       () => {
+        if (!this.appService.userData.puppiesInfo)
+          ym(55779592, 'reachGoal', 'PuppySave');
         this.appService.userData.puppiesInfo = this.puppiesData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
@@ -71,8 +73,11 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
         if (forPreview)
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       },
-      () => {
-        this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
+      (err) => {
+        if (err.status == 423)
+          this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+        else
+          this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
         scroll(0, 0);
       });
