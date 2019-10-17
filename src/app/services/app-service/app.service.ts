@@ -75,6 +75,7 @@ export class AppService {
       this.notificationServie.setContext('Ваша почта успешно подтверждена', true);
       this.notificationServie.setVisibility(true);
       this.isOnboardingVisible = true;
+      //@ts-ignore
       ym(55779592, 'reachGoal', 'MailConfirmed');
     } else if (window.location.href.indexOf('/email-fail') != -1) {
       router.navigateByUrl('/breeder-landing');

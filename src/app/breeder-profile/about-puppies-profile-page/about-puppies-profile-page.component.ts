@@ -62,8 +62,10 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
     this.breederService.setPuppiesInfoUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(
       () => {
-        if (!this.appService.userData.puppiesInfo)
+        if (!this.appService.userData.puppiesInfo) {
+          //@ts-ignore
           ym(55779592, 'reachGoal', 'PuppySave');
+        }
         this.appService.userData.puppiesInfo = this.puppiesData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);

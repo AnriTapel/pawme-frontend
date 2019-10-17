@@ -163,8 +163,10 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.parentsData.parentDraft = null;
     }
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
-      if (!this.appService.userData.parentsInfo)
+      if (!this.appService.userData.parentsInfo) {
+        //@ts-ignore
         ym(55779592, 'reachGoal', 'ParentsSave');
+      }
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {
         this.profileService.dataChangesSaved = true;
         this.appService.userData = res;
@@ -216,8 +218,10 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     if (!this.validateGeneralFields())
       return;
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
-      if (!this.appService.userData.parentsInfo)
+      if (!this.appService.userData.parentsInfo) {
+        //@ts-ignore
         ym(55779592, 'reachGoal', 'ParentsSave');
+      }
       this.profileService.dataChangesSaved = true;
       this.profileService.parentTestsChangesSaved = true;
       this.appService.userData.parentsInfo = this.parentsData;

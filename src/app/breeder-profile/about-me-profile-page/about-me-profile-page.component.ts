@@ -138,8 +138,10 @@ export class AboutMeProfilePageComponent implements OnInit {
     this.breederData.clubs = this.currentClubs.join(";");
     this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
       () => {
-        if (!this.appService.userData.about)
+        if (!this.appService.userData.about) {
+          //@ts-ignore
           ym(55779592, 'reachGoal', 'SelfSave');
+        }
         this.appService.userData.about = this.breederData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);

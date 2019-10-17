@@ -41,6 +41,7 @@ export class SignUpComponent implements OnInit {
     this.breederData.email = this.breederData.email.toLowerCase();
     this.breederService.registerUsingPOST(this.breederData).subscribe(
     res => {
+      //@ts-ignore
       ym(55779592, 'reachGoal', 'Registration');
       this.router.navigate(['/confirm-email', this.breederData.email]);
     },error => {
