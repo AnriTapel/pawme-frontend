@@ -13,8 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit {
 
-  private nonProfileHeaderRoutes = ['/breeder-landing', '/'];
-  private nonProfileHeaderPathnames = [];
+  private nonProfileHeaderPathnames = ['/breeder-landing', '/?'];
 
   constructor(public appService: AppService, public popupService: PopupTemplateService, private http: HttpClient,
     private notificationService: NotificationBarService, private router: Router) { }
@@ -36,11 +35,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isNonProfileHeader(): boolean{
-    let isNonProfile = this.nonProfileHeaderRoutes.includes(this.router.url);
-    if (!isNonProfile){
-      isNonProfile = this.nonProfileHeaderPathnames.filter(it => this.router.url.indexOf(it) != -1).length != 0;
-    }
-    return isNonProfile;
+      return this.nonProfileHeaderPathnames.filter(it => this.router.url.indexOf(it) == 0).length != 0 || this.router.url == '/';
   }
 
   openMyPage(): void{

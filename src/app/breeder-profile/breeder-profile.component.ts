@@ -11,15 +11,20 @@ import { Router } from '@angular/router';
 export class BreederProfileComponent implements OnInit {
 
   constructor(public appService: AppService, public profileService: BreederProfileService, private router: Router) {
-    if (this.appService.meData.type != 'BREEDER')
+    if (appService.meData.type == 'ANONYMOUS') {
       router.navigateByUrl('/login');
+      return;
+    } else if (appService.meData.type == 'BREEDER' && appService.userData.status == 'UNCONFIRMED') {
+      router.navigateByUrl('/confirm-email/unconfirmed');
+      return;
+    } 
     this.profileService.updateProfileFullness();
   }
 
   ngOnInit() {
   }
 
-  showMyPage(): void{
+  showMyPage(): void {
     if (this.profileService.dataChangesSaved && this.profileService.parentTestsChangesSaved)
       window.open('/breeder/' + this.appService.userData.id, '_blank')
     else

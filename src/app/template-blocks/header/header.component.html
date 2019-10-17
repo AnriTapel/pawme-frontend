@@ -4,7 +4,7 @@
             <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
         </a>
 
-        <div *ngIf="appService.meData.type != 'ANONYMOUS'" class="my-2 my-lg-0">
+        <div *ngIf="appService.meData.type == 'BREEDER'" class="my-2 my-lg-0">
             <div class="menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <a *ngIf="!appService.userData.generalInfo || !appService.userData.generalInfo.profilePhoto">ЛК</a>
                 <img *ngIf="appService.userData.generalInfo && appService.userData.generalInfo.profilePhoto"
@@ -24,7 +24,7 @@
                         height="15px" alt="Выйти" style="margin-right: 9px;" />Выйти</a>
             </div>
         </div>
-        <div *ngIf="appService.meData.type == 'ANONYMOUS'" class="my-2 my-lg-0">
+        <div *ngIf="appService.meData.type == 'ANONYMOUS' || appService.meData.type == 'BLOCKED'" class="my-2 my-lg-0">
             <input type="button" class="custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
         </div>
     </nav>

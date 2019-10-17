@@ -31,7 +31,7 @@ export class AppService {
 
   initApplication() {
     return new Promise<void>((resolve, reject) => {
-      this.breederService.meUsingGET().subscribe(res => {
+      this.breederService.meUsingGET().subscribe((res) => {
         this.meData = res;
         this.http.get('/api/dict').subscribe(dict => {
           this.breeds = dict['breeds'];
@@ -55,6 +55,15 @@ export class AppService {
           else
             resolve();
         });
+      }, (err) => {
+        if (err.status == 423) {
+          this.meData = {type: 'BLOCKED'};
+          let router = this.injector.get(Router);
+          router.navigateByUrl('/breeder-landing');
+          this.notificationServie.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+          this.notificationServie.setVisibility(true);
+          resolve();
+        }
       });
     });
   }

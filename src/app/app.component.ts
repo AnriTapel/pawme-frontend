@@ -25,7 +25,7 @@ export class AppComponent {
   readonly classes = this.theme.addStyleSheet(STYLES);
   // Routes of pages with custom header
   private noGeneralHeaderRoutes = ['/breeder-landing', '/admin-panel', '/'];
-  private noGeneralHeaderPathnames = [];
+  private noGeneralHeaderPathnames = ['/breeder-landing', '/?'];
   // Routes of pages with custom footer
   private noGeneralFooterRoutes = ['/admin-panel'];
   private noGeneralFooterPathnames = [];
@@ -37,7 +37,7 @@ export class AppComponent {
     if (this.noGeneralHeaderRoutes.includes(this.router.url))
       return false;
     else
-      return this.noGeneralHeaderPathnames.filter(it => this.router.url.indexOf(it) != -1).length == 0;
+      return this.noGeneralHeaderPathnames.filter(it => this.router.url.indexOf(it) == 0).length == 0 || this.router.url == '/';
   }
 
   showGeneralFooter(): boolean{

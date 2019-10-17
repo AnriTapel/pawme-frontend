@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AdminControllerService } from '../api/api';
 import { AppService } from '../services/app-service/app.service';
 import { HttpClient } from '@angular/common/http';
+import { NotificationBarService } from '../services/nofitication-service/notification-bar.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -15,7 +16,8 @@ export class AdminPanelComponent implements OnInit {
   breeders: any[] = [];
   messages: any[] = [];
 
-  constructor(private router: Router, private adminService: AdminControllerService, private appService: AppService, private http: HttpClient) {
+  constructor(private router: Router, private adminService: AdminControllerService, private appService: AppService,
+    private http: HttpClient, private notificationService: NotificationBarService) {
   }
 
   ngOnInit() {
@@ -43,7 +45,13 @@ export class AdminPanelComponent implements OnInit {
   }
 
   changeBreederStatus(id: number, event: any): void {
-    
+    this.adminService.updateStatusUsingPUT(id, event.target.value).subscribe(() => {
+      this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = res);
+    },(err) => {
+      this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
+      this.notificationService.setVisibility(true);
+      this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = res);
+    })
   }
 
   tableToExcel = (function () {

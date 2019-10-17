@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PopupTemplateService } from '../services/popup-service/popup-template.service';
+import { AppService } from '../services/app-service/app.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-breeder-landing',
@@ -8,7 +10,10 @@ import { PopupTemplateService } from '../services/popup-service/popup-template.s
 })
 export class BreederLandingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appService: AppService, private router: Router) {
+    if (appService.meData && appService.meData.type == "BREEDER" && appService.userData.status == "ACTIVE")
+      router.navigateByUrl('/breeder-profile');
+  }
 
   ngOnInit(): void {
   }

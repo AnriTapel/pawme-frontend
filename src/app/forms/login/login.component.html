@@ -1,7 +1,7 @@
 <h3>ВХОД</h3>
 
 <div *ngIf="loginError" class="form-error-message-block">
-    <span class="invalid-field-message">Неверный логин или пароль</span>
+    <span class="invalid-field-message">{{errorText}}</span>
 </div>
 
 <form (ngSubmit)="loginBreeder()">
