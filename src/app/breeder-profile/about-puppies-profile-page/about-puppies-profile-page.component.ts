@@ -89,7 +89,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     let isValid = true;
     this.invalidFields = [];
 
-    if (!this.puppiesData.age || this.puppiesData.age > 32) {
+    if (!this.puppiesData.age || this.puppiesData.age > 32 || this.puppiesData.age < 1) {
       this.invalidFields.push('age');
       isValid = false;
     }
@@ -99,12 +99,12 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       this.invalidFields.push('priceTo');
       isValid = false;
     } else {
-      if (!this.puppiesData.priceFrom || this.puppiesData.priceFrom > 500000) {
+      if (!this.puppiesData.priceFrom || this.puppiesData.priceFrom > 500000 || this.puppiesData.priceFrom < 1) {
         this.invalidFields.push('priceFrom');
         isValid = false;
       }
 
-      if (!this.puppiesData.priceTo || this.puppiesData.priceTo > 500000) {
+      if (!this.puppiesData.priceTo || this.puppiesData.priceTo > 500000 || this.puppiesData.priceTo < 1) {
         this.invalidFields.push('priceTo');
         isValid = false;
       }

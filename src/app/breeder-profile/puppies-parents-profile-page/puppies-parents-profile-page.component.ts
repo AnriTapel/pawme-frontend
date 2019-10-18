@@ -97,8 +97,14 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   addMedical(): void {
-    if ((!this.currentBodyPart || this.currentBodyPart == "") || (!this.currentMedicalTest || this.currentMedicalTest == ""))
+    this.invalidGeneralFields = [];
+    if (!this.currentBodyPart || this.currentBodyPart == "")
+      this.invalidGeneralFields.push('bodyParts');
+    if (!this.currentMedicalTest || this.currentMedicalTest == "")
+      this.invalidGeneralFields.push('tests');
+    if (this.invalidGeneralFields.length != 0)
       return;
+
     let curMedical: ParentTest = {
       category: this.currentBodyPart,
       name: this.currentMedicalTest

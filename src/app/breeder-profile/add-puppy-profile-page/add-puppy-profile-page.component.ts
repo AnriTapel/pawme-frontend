@@ -303,7 +303,10 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.birthdayModel.day || !this.birthdayModel.month || !this.birthdayModel.year) {
+    if ((!this.birthdayModel.day || !this.birthdayModel.month || !this.birthdayModel.year) || 
+        (new Date().getTime() < new Date(this.birthdayModel.month + '-' + this.birthdayModel.day + '-' + this.birthdayModel.year).getTime()) || 
+        (this.birthdayModel.day > 31 || this.birthdayModel.month > 12 || this.birthdayModel.year > new Date().getFullYear()) || 
+        (this.birthdayModel.day < 1 || this.birthdayModel.month < 1 || this.birthdayModel.year < 1)) {
       this.invalidFields.push('birthday');
       isValid = false;
     }
@@ -333,7 +336,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentPuppyData.price || this.currentPuppyData.price > 500000) {
+    if (!this.currentPuppyData.price || this.currentPuppyData.price > 500000 || this.currentPuppyData.price < 1) {
       this.invalidFields.push('price');
       isValid = false;
     }

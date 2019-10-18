@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DogCardService } from 'src/app/services/dog-card-service/dog-card.service';
 import { CarouselComponent } from 'angular-bootstrap-md';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
+import { AppService } from 'src/app/services/app-service/app.service';
 
 @Component({
   selector: 'app-dog-card',
@@ -16,7 +17,7 @@ export class DogCardComponent implements OnInit {
   @ViewChild(CarouselComponent, {static: true})
   gallery: CarouselComponent
 
-  constructor(public dogCardService: DogCardService, private popupService: PopupTemplateService) {
+  constructor(private appService: AppService, public dogCardService: DogCardService, private popupService: PopupTemplateService) {
     this.dog = dogCardService.getDog();
     this.isPuppy = dogCardService.getIsPuppy();
   }
@@ -53,6 +54,16 @@ export class DogCardComponent implements OnInit {
     }
 
     return ageText;
+  }
+
+  getAvailSaleDate(): string {
+    let months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    if (!this.appService.userData.puppiesInfo || !this.appService.userData.puppiesInfo.age)
+      return '16 августа';
+    let birthDate = new Date(this.dog.birthDate);
+    let minAgeForSale = this.appService.userData.puppiesInfo.age * 7;
+    let saleAvailDate = new Date(birthDate.setDate(birthDate.getDate() + minAgeForSale));
+    return saleAvailDate.getDate() + ' ' + months[saleAvailDate.getMonth()] + ' ' + saleAvailDate.getFullYear();
   }
 
   showBreederMessagePopup(): void{

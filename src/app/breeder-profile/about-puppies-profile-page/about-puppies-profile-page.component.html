@@ -9,7 +9,7 @@
     <div class="breeder-profile-subpage-form-left">
         <label for="puppies-age">Возраст продажи щенков</label>
         <div class="input-group mb-3">
-            <input type="number" name="puppies-age" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.age" placeholder="от"
+            <input type="number" min="0" name="puppies-age" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.age" placeholder="от"
                 (change)="profileService.dataChangesSaved = false" aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="invalidFields.includes('age')">
             <div class="input-group-append">
                 <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('age')"
@@ -21,9 +21,9 @@
     <div class="breeder-profile-subpage-form-right">
         <label for="puppies-price">Стоимость щенков в рублях</label>
         <div class="input-group">
-            <input type="number" class="form-control custom-form-control-border" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
+            <input type="number" min="0" class="form-control custom-form-control-border" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
                 (change)="profileService.dataChangesSaved = false" placeholder="от" [class.invalid-form-field-value]="invalidFields.includes('priceFrom')">
-            <input type="number" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до" (change)="profileService.dataChangesSaved = false"
+            <input type="number" min="0" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до" (change)="profileService.dataChangesSaved = false"
                 [class.invalid-form-field-value]="invalidFields.includes('priceTo')">
         </div>
     </div>
@@ -96,7 +96,7 @@
     <div class="breeder-profile-subpage-form-left">
         <label for="guarantee-period">На сколько месяцев вы готовы дать гарантию по здоровью щенка?</label>
         <div class="input-group mb-3">
-            <input type="number" name="guarantee-period" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceTerm"
+            <input type="number" min="0" name="guarantee-period" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceTerm"
                 placeholder="12" aria-label="12" aria-describedby="basic-addon2" (change)="profileService.dataChangesSaved = false"
                 [class.invalid-form-field-value]="invalidFields.includes('term')">
             <div class="input-group-append">

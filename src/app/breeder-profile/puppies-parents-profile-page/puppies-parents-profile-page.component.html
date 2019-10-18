@@ -62,7 +62,7 @@
                 <input type="text" class="form-control custom-form-control-border" [(ngModel)]="currentBodyPart" (input)="currentMedicalTest = ''"
                     [ngbTypeahead]="appService.fieldAutocomplete(testsCategories, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
                     id="body-part" (focus)="bodyPartFocus$.next($event.target.value)" (click)="bodyPartClick$.next($event.target.value)"
-                    #bodyPartInstance="ngbTypeahead" [class.invalid-form-field-value]="invalidGeneralFields.includes('tests')"
+                    #bodyPartInstance="ngbTypeahead" [class.invalid-form-field-value]="invalidGeneralFields.includes('bodyParts')"
                     placeholder="Часть тела">
                 <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('body-part', $event)"
                 />
@@ -75,7 +75,8 @@
                     <input *ngIf="currentBodyPart == cat" type="text" class="form-control custom-form-control-border" [(ngModel)]="currentMedicalTest"
                         [ngbTypeahead]="appService.fieldAutocomplete(parentTests[cat], medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
                         (focus)="medicalTestFocus$.next($event.target.value)" (click)="medicalTestClick$.next($event.target.value)"
-                        id="parent-test" #medicalTestInstance="ngbTypeahead" placeholder="Название теста">
+                        [class.invalid-form-field-value]="invalidGeneralFields.includes('tests')" id="parent-test" #medicalTestInstance="ngbTypeahead" 
+                        placeholder="Название теста">
                     <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('parent-test', $event)"
                     />
                 </ng-container>
