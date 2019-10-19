@@ -178,8 +178,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
       width: 210, height: 180, isRect: true,
       imageUrl: index > -1 ? "/img/" + this.currentPuppyData.gallery[index].main + ".jpg" : null
     });
-    this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
+    this.popupService.setShowStatus(true);
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadPetImage(body).subscribe((imageData: any) => {
@@ -191,6 +191,10 @@ export class AddPuppyProfilePageComponent implements OnInit {
           this.currentPuppyData.gallery[index] = imageData;
       });
       croppedHandler.unsubscribe();
+    });
+    let cropperClosedHandler = this.eventService.subscribe('image-cropper-closed', () => {
+      croppedHandler.unsubscribe();
+      cropperClosedHandler.unsubscribe();
     });
   }
 

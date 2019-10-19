@@ -35,6 +35,7 @@ export class ImageCropperComponent implements AfterViewInit {
   classes = this.theme.addStyleSheet(styles);
   inputFile: any;
   myConfig: ImgCropperConfig;
+  uploadError: boolean = false;
 
   constructor(@Inject(LyTheme2) private theme: LyTheme2, public eventService: EventService) { }
 
@@ -48,10 +49,10 @@ export class ImageCropperComponent implements AfterViewInit {
         this.cropping.setImageUrl(this.params.imageUrl);
         let base64Handler = this.eventService.subscribe('image-base64-loaded', (base64) => {
           fetch(base64)
-          .then(res => res.blob())
-          .then(blob => {
-            this.inputFile = new File([blob], "main_image.jpg");
-          });
+            .then(res => res.blob())
+            .then(blob => {
+              this.inputFile = new File([blob], "main_image.jpg");
+            });
           base64Handler.unsubscribe();
         });
         this.getBase64ByImageUrl();
@@ -59,11 +60,29 @@ export class ImageCropperComponent implements AfterViewInit {
       else if (window.innerWidth < 770)
         document.getElementById('image-input').click();
     }, 250);
-}
+  }
+
+  ngOnDestroy(): void{
+    this.eventService.raiseEvent('image-cropper-closed', null);
+  }
 
   inputFileSelected(event: any) {
-    this.inputFile = <File>event.target.files[0];
-    this.cropping.selectInputEvent(event);
+    this.uploadError  = false;
+    var reader = new FileReader();
+    let self = this;
+    reader.onload = function (e) {
+      let img = new Image();
+      img.onload = () => {
+        self.inputFile = <File>event.target.files[0];
+        self.cropping.selectInputEvent(event);
+      }
+      img.onerror = () => {
+        self.uploadError = true;
+      }
+      //@ts-ignore
+      img.src = e.target.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
   }
 
   getBase64ByImageUrl() {

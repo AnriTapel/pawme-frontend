@@ -8,6 +8,13 @@ p{
 
 ly-cropping{
     margin: 1em auto !important;
+
+    p{
+        position: absolute;
+        top: 1.5em;
+        color: #eb0000;
+        padding: 0 1em 1.5em;
+    }
 }
 
 .image-cropper-control-panel{

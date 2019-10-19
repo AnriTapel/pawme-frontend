@@ -3,7 +3,8 @@
 <input #_fileInput type="file" id="image-input" (change)="inputFileSelected($event)" accept="image/*" hidden>
 
 <ly-cropping #cropping [ngClass]="classes.cropping" (change)="inputFileSelected($event)" [class.rounded-cropp-area]="!params.isRect"
-        [config]="myConfig" (cropped)="onCropped($event)">
+[config]="myConfig" (cropped)="onCropped($event)">
+        <p *ngIf="uploadError">Загружаемая фотография повреждена или не соответствует формату</p>
         <span><a class="upload-btn">Загрузите</a> или перетащите изображение</span>
 </ly-cropping>
 

@@ -65,8 +65,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       width: 200, height: 200, isRect: false,
       imageUrl: this.nurceryData.profilePhoto ? "/img/" + this.nurceryData.profilePhoto.main + ".jpg" : null
     });
-    this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
+    this.popupService.setShowStatus(true);
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadAvatarImage(body).subscribe((imageData: any) => {
@@ -76,6 +76,10 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       });
       croppedHandler.unsubscribe();
     });
+    let cropperClosedHandler = this.eventService.subscribe('image-cropper-closed', () => {
+      croppedHandler.unsubscribe();
+      cropperClosedHandler.unsubscribe();
+    });
   }
 
   previewGalleryPhoto(index: number): void {
@@ -83,8 +87,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       width: 360, height: 360, isRect: true,
       imageUrl: index > -1 ? "/img/" + this.nurceryData.gallery[index].main + ".jpg" : null
     });
-    this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
+    this.popupService.setShowStatus(true);
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadNurceryGalleryImage(body).subscribe((imageData: any) => {
@@ -96,6 +100,10 @@ export class AboutNurceryProfilePageComponent implements OnInit {
           this.nurceryData.gallery[index] = imageData;
       });
       croppedHandler.unsubscribe();
+    });
+    let cropperClosedHandler = this.eventService.subscribe('image-cropper-closed', () => {
+      croppedHandler.unsubscribe();
+      cropperClosedHandler.unsubscribe();
     });
   }
 

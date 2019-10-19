@@ -48,8 +48,8 @@ export class AboutMeProfilePageComponent implements OnInit {
       width: 270, height: 200, isRect: true,
       imageUrl: this.breederData.photo ? "/img/" + this.breederData.photo.main + ".jpg" : null
     });
-    this.popupService.setShowStatus(true);
     this.popupService.setCurrentForm('image-cropper');
+    this.popupService.setShowStatus(true);
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
@@ -58,6 +58,10 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.profileService.dataChangesSaved = false;
       });
       croppedHandler.unsubscribe();
+    });
+    let cropperClosedHandler = this.eventService.subscribe('image-cropper-closed', () => {
+      croppedHandler.unsubscribe();
+      cropperClosedHandler.unsubscribe();
     });
   }
 
