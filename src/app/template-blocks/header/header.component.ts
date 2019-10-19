@@ -38,12 +38,21 @@ export class HeaderComponent implements OnInit {
       return this.nonProfileHeaderPathnames.filter(it => this.router.url.indexOf(it) == 0).length != 0 || this.router.url == '/';
   }
 
+  getMenuType(): MenuType{
+    if (this.appService.meData.type == 'ANONYMOUS' || this.appService.meData.type == 'BLOCKED')
+      return MenuType.LOGIN;
+    if (this.appService.userData && this.appService.userData.id != this.appService.meData.id)
+      return MenuType.LOGIN;
+    else
+      return MenuType.MENU
+  }
+
   openMyPage(): void{
     window.open('/breeder/' + this.appService.meData.id, '_blank');
   }
+}
 
-  showLoginPopup(){
-    this.popupService.setCurrentForm('login');
-    this.popupService.setShowStatus(true);
-  }
+export enum MenuType {
+  'LOGIN',
+  'MENU'
 }

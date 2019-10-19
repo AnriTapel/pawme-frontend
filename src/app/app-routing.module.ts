@@ -30,6 +30,7 @@ const routes: Routes = [
   {path: 'preview/:id', component: BreederPageComponent, pathMatch: 'full'},
   {path: 'admin-panel', component: AdminPanelComponent},
   {path: 'confirm-email/:mail', component: MailPageComponent},
+  {path: '404', component: PageNotFoundComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 

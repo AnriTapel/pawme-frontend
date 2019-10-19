@@ -18,8 +18,17 @@ export class LoginComponent {
 
   constructor(private appService: AppService, private router: Router, private http: HttpClient, private adminService: AdminControllerService,
     private breederService: BreederControllerService, private notificationService: NotificationBarService) {
-    if (this.appService.meData.type == "BREEDER")
-      this.router.navigateByUrl('/breeder-profile');
+    if (this.appService.meData.type == "BREEDER"){
+      if (this.appService.userData.id == this.appService.meData.id)
+        this.router.navigateByUrl('/breeder-profile');
+      else
+        this.breederService.getBreederUsingGET(this.appService.meData.id).subscribe(
+          (res) => {
+            this.appService.userData = res;
+            this.router.navigateByUrl('/breeder-profile');
+          }
+        )
+    } 
   }
 
   loginBreeder(): void {

@@ -48,9 +48,12 @@ export class BreederPageComponent implements OnInit {
             this.isPreviewMode = false;
 
         this.breederService.getBreederUsingGET(parseInt(this.route.snapshot.paramMap.get('id')))
-            .subscribe(res => {
+            .subscribe((res) => {
                 this.appService.userData = res;
                 this.getParentsTestsList();
+            }, (err) => {
+                if (err.status == 404)
+                    this.router.navigateByUrl('/404');
             });
     }
 
