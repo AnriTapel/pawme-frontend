@@ -5,6 +5,7 @@ import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
 import { EventService } from 'src/app/services/event-service/events.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-about-puppies-profile-page',
@@ -18,7 +19,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   saveChagesEvent: any;
 
   constructor(public appService: AppService, private breederService: BreederControllerService, private eventService: EventService,
-    private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
+    private notificationService: NotificationBarService, public profileService: BreederProfileService, private router: Router) { }
 
   ngOnInit() {
     this.puppiesData = this.appService.userData.puppiesInfo ? <PuppiesInfo>this.appService.userData.puppiesInfo : {
@@ -78,6 +79,8 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       (err) => {
         if (err.status == 423)
           this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+        else if (err.status == 403)
+          this.router.navigateByUrl('/login');
         else
           this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);

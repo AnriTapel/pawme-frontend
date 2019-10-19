@@ -8,6 +8,7 @@ import { ParentsInfo, ParentTest, Parent } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { BreederProfileService } from 'src/app/services/breeder-profile-service/breeder-profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-puppies-parents-profile-page',
@@ -66,7 +67,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   medicalTestClick$ = new Subject<string>();
   parentBreedClick$ = new Subject<string>();
 
-  constructor(public appService: AppService, private popupService: PopupTemplateService,
+  constructor(public appService: AppService, private popupService: PopupTemplateService, private router: Router,
     private eventService: EventService, private breederService: BreederControllerService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
@@ -190,7 +191,9 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         if (forPreview)
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       });
-    }, () => {
+    }, (err) => {
+      if (err.status == 403)
+        this.router.navigateByUrl('/login');
       this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);
       scroll(0, 0);
@@ -216,7 +219,9 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.notificationService.setVisibility(true);
       scroll(0, 0);
       this.profileService.updateProfileFullness();
-    }, () => {
+    }, (err) => {
+      if (err.status == 403)
+        this.router.navigateByUrl('/login');
       this.notificationService.setContext('Черновик не были сохранены, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);
       scroll(0, 0);
@@ -246,6 +251,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     }, (err) => {
       if (err.status == 423)
         this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+      if (err.status == 403)
+        this.router.navigateByUrl('/login');
       else
         this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);

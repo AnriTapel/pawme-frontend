@@ -6,6 +6,7 @@ import { BreederAbout } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-about-me-profile-page',
@@ -21,7 +22,7 @@ export class AboutMeProfilePageComponent implements OnInit {
   invalidFields: Array<string> = [];
   saveChagesEvent: any;
 
-  constructor(private popupService: PopupTemplateService, private appService: AppService, private eventService: EventService,
+  constructor(private popupService: PopupTemplateService, private appService: AppService, private eventService: EventService, private router: Router,
     private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {
@@ -158,6 +159,8 @@ export class AboutMeProfilePageComponent implements OnInit {
       (err) => {
         if (err.status == 423)
           this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+        else if (err.status == 403)
+          this.router.navigateByUrl('/login');
         else
           this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);

@@ -9,6 +9,7 @@ import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { BreederProfileService } from 'src/app/services/breeder-profile-service/breeder-profile.service';
 import { AlertService } from '../../services/alert-service/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-puppy-profile-page',
@@ -64,7 +65,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   constructor(public appService: AppService, private popupService: PopupTemplateService, private notificationService: NotificationBarService,
     private eventService: EventService, public profileService: BreederProfileService, public breederService: BreederControllerService,
-    private alertService: AlertService) { }
+    private alertService: AlertService, private router: Router) { }
 
   ngOnInit() {
     this.puppiesData = this.appService.userData.puppies;
@@ -230,7 +231,9 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.notificationService.setVisibility(true);
       scroll(0, 0);
     },
-      () => {
+      (err) => {
+        if (err.status == 403)
+          this.router.navigateByUrl('/login');
         this.notificationService.setContext('Черновик не были сохранены, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
         scroll(0, 0);
@@ -258,6 +261,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
       (err) => {
         if (err.status == 423)
           this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+        else if (err.status == 403)
+          this.router.navigateByUrl('/login');
         else
           this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
