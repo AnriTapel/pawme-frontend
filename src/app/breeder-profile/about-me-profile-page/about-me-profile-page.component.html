@@ -97,7 +97,7 @@
             их сюда.</span>
 
         <div *ngIf="breederData.certificates.length == 0" class="gallery-initial-block">
-            <input type="file" accept="image/*" (change)="uploadCertificates($event)" multiple />
+            <input type="file" accept="image/jpeg,image/png,image/jpg" (change)="uploadCertificates($event)" multiple />
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>Нажмите для загрузки фотографий</span>
@@ -110,13 +110,13 @@
                 />
             </div>
             <div class="empty-galley-photo-block">
-                <input type="file" id="certificate-input" accept="image/*" (change)="uploadCertificates($event)" multiple />
+                <input type="file" id="certificate-input" accept="image/jpeg,image/png,image/jpg" (change)="uploadCertificates($event)" multiple />
                 <img src="./assets/img/photo-camera.svg" alt="Камера" />
             </div>
         </div>
 
         <div *ngIf="breederData.certificates.length == 0" class="gallery-upload-button custom-btn btn-transparent">
-            <input type="file" accept="image/*" (change)="uploadCertificates($event)" multiple />
+            <input type="file" accept="image/jpeg,image/png,image/jpg" (change)="uploadCertificates($event)" multiple />
             <span>Выбрать</span>
         </div>
     </div>

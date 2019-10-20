@@ -15,6 +15,7 @@ export class LoginComponent {
   credentials = { username: '', password: '' };
   loginError: boolean = false;
   errorText: string = null;
+  invalidFields: string[] = [];
 
   constructor(private appService: AppService, private router: Router, private http: HttpClient, private adminService: AdminControllerService,
     private breederService: BreederControllerService, private notificationService: NotificationBarService) {
@@ -31,7 +32,17 @@ export class LoginComponent {
     } 
   }
 
+  ngOnInit() {
+    document.body.style.overflowY = 'scroll';
+  }
+
+  ngOnDestroy() {
+    document.body.removeAttribute('style');
+  }
+
   loginBreeder(): void {
+    if (!this.validateFields())
+      return;
     this.loginError = false;
     if (!this.appService.validateEmailInput(this.credentials.username))
       this.loginError = true;
@@ -70,5 +81,22 @@ export class LoginComponent {
         this.loginError = true;
       }
     });
+  }
+
+  private validateFields(): boolean {
+    let isValid = true;
+    this.invalidFields = [];
+
+    if (!this.credentials.username || this.credentials.username == '') {
+      this.invalidFields.push('username');
+      isValid = false;
+    }
+
+    if (!this.credentials.password || this.credentials.password == '') {
+      this.invalidFields.push('password');
+      isValid = false;
+    }
+
+    return isValid;
   }
 }

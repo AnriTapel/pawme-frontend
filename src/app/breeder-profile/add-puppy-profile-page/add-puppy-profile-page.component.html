@@ -48,7 +48,7 @@
     </div>
 
     <div class="page-header adding-entity-page-header">
-        <h3>Добавить щенка</h3>
+        <h3>{{currentPuppyData.id ? 'Изменить' : 'Добавить'}} щенка</h3>
     </div>
 
     <div class="upper-btn add-entity-page-upper-btn-mobile">
@@ -190,7 +190,7 @@
             Пожалуйста, исправьте выделенные поля
         </span>
         <br *ngIf="invalidFields.length > 0" />
-        <input type="button" class="custom-btn btn-purple" value="Добавить щенка" (click)="addPuppy()" />
+        <input type="button" class="custom-btn btn-purple" value="{{currentPuppyData.id ? 'Сохранить' : 'Добавить'}} щенка" (click)="addPuppy()" />
     </div>
 
 </div>

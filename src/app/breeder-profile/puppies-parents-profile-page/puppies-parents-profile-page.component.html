@@ -118,7 +118,7 @@
     </div>
 
     <div class="page-header adding-entity-page-header">
-        <h3>Добавить родителя</h3>
+        <h3>{{currentParentData.id ? 'Изменить' : 'Добавить'}} родителя</h3>
     </div>
 
     <div class="upper-btn add-entity-page-upper-btn-mobile">
@@ -196,6 +196,6 @@
             Пожалуйста, исправьте выделенные поля
         </span>
         <br *ngIf="invalidAddingFields.length > 0" />
-        <input type="button" class="custom-btn btn-purple" value="Добавить родителя" (click)="addParent(false)" />
+        <input type="button" class="custom-btn btn-purple" value="{{currentParentData.id ? 'Сохранить' : 'Добавить'}} родителя" (click)="addParent(false)" />
     </div>
 </div>

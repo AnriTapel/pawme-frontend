@@ -303,6 +303,7 @@ span, p, div {
   font-size: 23px;
   color: #0e0b4d;
   margin-bottom: .5em;
+  word-break: break-word;
 }
 
 @media (max-width: 768px) {
@@ -414,6 +415,7 @@ span, p, div {
 }
 
 .aside .description p:nth-child(2) {
+  word-break: break-word;
   font-family: 'Intro-Book' !important;
 }
 

@@ -17,6 +17,11 @@ export class RemindPasswordComponent implements OnInit {
   constructor(private appService: AppService, private breederService: BreederControllerService) { }
 
   ngOnInit() {
+    document.body.style.overflowY = 'scroll';
+  }
+
+  ngOnDestroy() {
+    document.body.removeAttribute('style');
   }
 
   resetPassword(){

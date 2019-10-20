@@ -1,6 +1,6 @@
 <h4>Выбор миниатюры</h4>
 
-<input #_fileInput type="file" id="image-input" (change)="inputFileSelected($event)" accept="image/*" hidden>
+<input #_fileInput type="file" id="image-input" (change)="inputFileSelected($event)" accept="image/jpeg,image/png,image/jpg" hidden>
 
 <ly-cropping #cropping [ngClass]="classes.cropping" (change)="inputFileSelected($event)" [class.rounded-cropp-area]="!params.isRect"
 [config]="myConfig" (cropped)="onCropped($event)">
@@ -19,7 +19,7 @@
 <div *ngIf="cropping.isLoaded" class="buttons-block">
     <button (click)="changeInputImage()" class="custom-btn btn-transparent">
         Заменить фото
-        <input #_fileInput id="change-image-input" type="file" (change)="inputFileSelected($event)" accept="image/*" hidden>
+        <input #_fileInput id="change-image-input" type="file" (change)="inputFileSelected($event)" accept="image/jpeg,image/png,image/jpg" hidden>
     </button>
     <button (click)="crop()" class="custom-btn btn-purple">Сохранить</button>
 </div>

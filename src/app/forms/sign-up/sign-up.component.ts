@@ -25,60 +25,65 @@ export class SignUpComponent implements OnInit {
   errorText: string = null;
 
   constructor(private popupService: PopupTemplateService, private appService: AppService,
-    private breederService: BreederControllerService, private router: Router) { scroll(0,0) }
+    private breederService: BreederControllerService, private router: Router) { scroll(0, 0) }
 
   ngOnInit() {
+    document.body.style.overflowY = 'scroll';
   }
 
-  switchToLoginForm(){
+  ngOnDestroy() {
+    document.body.removeAttribute('style');
+  }
+
+  switchToLoginForm() {
     this.popupService.setCurrentForm("login");
   }
 
-  signUpNewBreeder(){
+  signUpNewBreeder() {
     if (!this.validateFields())
       return;
     this.errorText = null;
     this.breederData.email = this.breederData.email.toLowerCase();
     this.breederService.registerUsingPOST(this.breederData).subscribe(
-    res => {
-      //@ts-ignore
-      ym(55779592, 'reachGoal', 'Registration');
-      this.router.navigate(['/confirm-email', this.breederData.email]);
-    },error => {
-      if (error.status == 409)
-        this.errorText = "Этот email уже зарегистрирован";
-      else
-        this.errorText = "Произошла ошибка, попробуйте еще раз"
-    });
+      res => {
+        //@ts-ignore
+        ym(55779592, 'reachGoal', 'Registration');
+        this.router.navigate(['/confirm-email', this.breederData.email]);
+      }, error => {
+        if (error.status == 409)
+          this.errorText = "Этот email уже зарегистрирован";
+        else
+          this.errorText = "Произошла ошибка, попробуйте еще раз"
+      });
   }
 
-  validateFields(): boolean{
+  validateFields(): boolean {
     this.invalidFields = [];
     let isValid = true;
-    if (!this.breederData.name || this.breederData.name == "" || this.breederData.name.length < 2 || this.breederData.name.length > 30){
+    if (!this.breederData.name || this.breederData.name == "" || this.breederData.name.length < 2 || this.breederData.name.length > 30) {
       isValid = false;
       this.invalidFields.push("name");
     }
 
     if (!this.breederData.surname || this.breederData.surname == ""
-        || this.breederData.surname.length < 2 || this.breederData.surname.length > 30){
+      || this.breederData.surname.length < 2 || this.breederData.surname.length > 30) {
       isValid = false;
       this.invalidFields.push("lastname");
     }
 
     if (!this.breederData.email || this.breederData.email == ""
-        || !this.appService.validateEmailInput(this.breederData.email)){
+      || !this.appService.validateEmailInput(this.breederData.email)) {
       isValid = false;
       this.invalidFields.push("email");
     }
 
     if (!this.breederData.password || this.breederData.password == ""
-        || this.breederData.password.length < 2 || this.breederData.password.length > 30){
+      || this.breederData.password.length < 2 || this.breederData.password.length > 30) {
       isValid = false;
       this.invalidFields.push("password");
     }
 
-    if (!this.newBreederAcception){
+    if (!this.newBreederAcception) {
       isValid = false;
       this.invalidFields.push("acception");
     }

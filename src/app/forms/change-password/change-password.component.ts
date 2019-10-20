@@ -22,6 +22,11 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.body.style.overflowY = 'scroll';
+  }
+
+  ngOnDestroy() {
+    document.body.removeAttribute('style');
   }
 
   changePassword(): void{
