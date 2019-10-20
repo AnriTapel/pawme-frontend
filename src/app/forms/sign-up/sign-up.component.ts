@@ -55,12 +55,13 @@ export class SignUpComponent implements OnInit {
   validateFields(): boolean{
     this.invalidFields = [];
     let isValid = true;
-    if (!this.breederData.name || this.breederData.name == ""){
+    if (!this.breederData.name || this.breederData.name == "" || this.breederData.name.length < 2 || this.breederData.name.length > 30){
       isValid = false;
       this.invalidFields.push("name");
     }
 
-    if (!this.breederData.surname || this.breederData.surname == ""){
+    if (!this.breederData.surname || this.breederData.surname == ""
+        || this.breederData.surname.length < 2 || this.breederData.surname.length > 30){
       isValid = false;
       this.invalidFields.push("lastname");
     }
@@ -71,7 +72,8 @@ export class SignUpComponent implements OnInit {
       this.invalidFields.push("email");
     }
 
-    if (!this.breederData.password || this.breederData.password == ""){
+    if (!this.breederData.password || this.breederData.password == ""
+        || this.breederData.password.length < 2 || this.breederData.password.length > 30){
       isValid = false;
       this.invalidFields.push("password");
     }

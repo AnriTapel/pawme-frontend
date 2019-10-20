@@ -120,6 +120,12 @@ export class AppService {
     }
   }
 
+  getTextareaLimit(field: string, limit: number): number{
+    if (!field)
+      return limit;
+    return limit - field.length;
+  }
+
   disableBodyScrolling(target?): void {
     document.body.style.overflowY = "hidden";
     document.body.style.paddingRight = "15px";

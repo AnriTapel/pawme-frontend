@@ -170,6 +170,12 @@ input[type=number]::-webkit-outer-spin-button {
     border-top-color: #cbd8f6;
 }
 
+.textarea-length-counter{
+    font-size: 12px;
+    font-family: 'Intro-Book' !important;
+    float: right;
+}
+
 .overlay-block{
     width: 100%;
     height: 100%;
@@ -284,12 +290,6 @@ input[type=number]::-webkit-outer-spin-button {
     input[type=number],
     button, textarea{
         margin-top: 16px;
-    }
-
-    .textarea-length-counter{
-        font-size: 12px;
-        font-family: 'Intro-Book' !important;
-        float: right;
     }
 
     textarea{

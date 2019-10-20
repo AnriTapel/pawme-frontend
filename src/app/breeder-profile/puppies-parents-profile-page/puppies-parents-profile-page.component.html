@@ -159,8 +159,8 @@
         <label for="parent-info">Расскажите об этом родителе</label>
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
-        <span class="textarea-length-counter" [style.color]="profileService.getTextareaLimit(currentParentData.info, 512) > 0 ? '#46b0ad' : '#eb0000'">
-            {{profileService.getTextareaLimit(currentParentData.info, 512)}}
+        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(currentParentData.info, 512) > 0 ? '#46b0ad' : '#eb0000'">
+            {{appService.getTextareaLimit(currentParentData.info, 512)}}
         </span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="currentParentData.info" (change)="profileService.dataChangesSaved = false"
             [class.invalid-form-field-value]="invalidAddingFields.includes('info')"></textarea>

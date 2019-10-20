@@ -13,8 +13,8 @@
         <span class="block-description">Чтобы вам было проще, мы подготовили ряд наводящих вопросов. Какая ваша роль в питомнике и помогает ли вам семья?
             Что вам нравится в вашей породе и какие у вас профессиональные цели?
         </span>
-        <span class="textarea-length-counter" [style.color]="profileService.getTextareaLimit(breederData.about, 2048) > 0 ? '#46b0ad' : '#eb0000'">
-            {{profileService.getTextareaLimit(breederData.about, 2048)}}
+        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(breederData.about, 2048) > 0 ? '#46b0ad' : '#eb0000'">
+            {{appService.getTextareaLimit(breederData.about, 2048)}}
         </span>
         <textarea rows="3" [(ngModel)]="breederData.about" placeholder="Введите текст" name="about-me" class="form-control custom-form-control-border"
             (change)="this.profileService.dataChangesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('about')"></textarea>
@@ -26,8 +26,8 @@
         <span class="block-description">Почему вы начали заниматься разведением собак? Какие события этому предшествовали? Почему была выбрана именно эта
             порода?
         </span>
-        <span class="textarea-length-counter" [style.color]="profileService.getTextareaLimit(breederData.howItStarted, 2048) > 0 ? '#46b0ad' : '#eb0000'">
-            {{profileService.getTextareaLimit(breederData.howItStarted, 2048)}}
+        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(breederData.howItStarted, 2048) > 0 ? '#46b0ad' : '#eb0000'">
+            {{appService.getTextareaLimit(breederData.howItStarted, 2048)}}
         </span>
         <textarea rows="3" [(ngModel)]="breederData.howItStarted" class="form-control custom-form-control-border" placeholder="Введите текст"
             (change)="this.profileService.dataChangesSaved = false" name="howItStarted" [class.invalid-form-field-value]="invalidFields.includes('howItStarted')"></textarea>
@@ -38,8 +38,8 @@
         <br>
         <span class="block-description">Возможно, вы используете какие-то определенные методы при работе с щенками? Уделяете особое внимание определенным
             вещам?</span>
-        <span class="textarea-length-counter" [style.color]="profileService.getTextareaLimit(breederData.outstandingInfo, 2048) > 0 ? '#46b0ad' : '#eb0000'">
-            {{profileService.getTextareaLimit(breederData.outstandingInfo, 2048)}}
+        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(breederData.outstandingInfo, 2048) > 0 ? '#46b0ad' : '#eb0000'">
+            {{appService.getTextareaLimit(breederData.outstandingInfo, 2048)}}
         </span>
         <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border" placeholder="Введите текст"
             (change)="this.profileService.dataChangesSaved = false" name="features" [class.invalid-form-field-value]="invalidFields.includes('outstanding')"></textarea>

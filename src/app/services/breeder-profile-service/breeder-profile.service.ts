@@ -46,12 +46,6 @@ export class BreederProfileService {
     return male.length > 0 && female.length > 0;
   }
 
-  getTextareaLimit(field: string, limit: number): number{
-    if (!field)
-      return limit;
-    return limit - field.length;
-  }
-
   setCurProfilePage(page: any): void {
     if (!this.dataChangesSaved || !this.parentTestsChangesSaved) {
       let onSuccess = () => {

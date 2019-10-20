@@ -48,7 +48,7 @@ export class BreederMessageComponent implements OnInit {
   validateFields(): boolean{
     this.invalidFields = [];
     let isValid = true;
-    if (!this.breederMessage.name || this.breederMessage.name == ""){
+    if (!this.breederMessage.name || this.breederMessage.name == "" || this.breederMessage.name.length > 64){
       isValid = false;
       this.invalidFields.push("name");
     }
@@ -59,13 +59,13 @@ export class BreederMessageComponent implements OnInit {
       this.invalidFields.push("email");
     }
 
-    if (!this.breederMessage.phone || this.breederMessage.phone == ""
-        || !this.appService.validatePhoneInput(this.breederMessage.phone)){
+    if (!this.breederMessage.phone || this.breederMessage.phone == "" || this.breederMessage.phone.length < 8
+        || !this.appService.validatePhoneInput(this.breederMessage.phone) || this.breederMessage.phone.length > 16){
       isValid = false;
       this.invalidFields.push("phone");
     }
 
-    if (!this.breederMessage.message || this.breederMessage.message == ""){
+    if (!this.breederMessage.message || this.breederMessage.message == "" || this.breederMessage.message.length > 2048){
       isValid = false;
       this.invalidFields.push("message");
     }
