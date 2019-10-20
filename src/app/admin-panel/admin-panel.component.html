@@ -38,12 +38,13 @@
                         <td>{{breeder.surname}}</td>
                         <td>{{breeder.email}}</td>
                         <td (click)="openBreederPage(breeder.id)" style="cursor: pointer;color: #0094c5;">https://petman.co/breeder/{{breeder.id}}</td>
-                        <td style="text-align: center;">&#9675; &#9675; &#9675;</td>
+                        <td style="text-align: center;">{{displayBreederProfileFill(breeder.profileFill)}}</td>
                         <td style="text-align: right;">
                             <select (change)="changeBreederStatus(breeder.id, $event)">
                                 <option [selected]="breeder.status == 'ACTIVE'" value="ACTIVE">Активен</option>
-                                <option [selected]="breeder.status == 'BLOCKED'" value="BLOCKED">Заблокирован</option>
                                 <option [selected]="breeder.status == 'UNCONFIRMED'" value="UNCONFIRMED">Неподтвержден</option>
+                                <option [selected]="breeder.status == 'BLOCKED'" value="BLOCKED">Заблокирован</option>
+                                <option [selected]="breeder.status == 'HIDDEN'" value="HIDDEN">Скрыт</option>
                                 <option [selected]="breeder.status == 'DELETED'" value="DELETED">Удален</option>
                             </select>
                         </td>

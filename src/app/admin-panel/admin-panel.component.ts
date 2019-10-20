@@ -34,6 +34,14 @@ export class AdminPanelComponent implements OnInit {
       });
   }
 
+  displayBreederProfileFill(profileFill: number): string {
+    let str = "";
+    for (let i = 0; i < profileFill; i++)
+      str += '○ ';
+
+    return str.substr(0, str.length - 1);
+  }
+
   switchSection(section: string): void {
     if (section == this.activeSection)
       return;
