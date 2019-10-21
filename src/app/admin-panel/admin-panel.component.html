@@ -18,7 +18,7 @@
         <div *ngIf="activeSection == 'breeders'">
             <div class="section-top-bar">
                 <span>Заводчиков на платформе: {{breeders.length}}</span>
-                <a (click)="tableToExcel('breeders-table', 'Petman breeders')">Скачать список</a>
+                <a (click)="tableToExcel('breeders-table', 'Petman breeders', breeders)">Скачать список</a>
             </div>
 
             <div class="data-container">
@@ -28,6 +28,7 @@
                         <th>Имя</th>
                         <th>Фамилия</th>
                         <th>Email</th>
+                        <th>Дата создания</th>
                         <th>Ссылка</th>
                         <th>Профиль</th>
                         <th>Статус</th>
@@ -37,6 +38,7 @@
                         <td>{{breeder.name}}</td>
                         <td>{{breeder.surname}}</td>
                         <td>{{breeder.email}}</td>
+                        <td>{{getCreateDateAsString(breeder.createDate)}}</td>
                         <td (click)="openBreederPage(breeder.id)" style="cursor: pointer;color: #0094c5;">https://petman.co/breeder/{{breeder.id}}</td>
                         <td style="text-align: center;">{{displayBreederProfileFill(breeder.profileFill)}}</td>
                         <td style="text-align: right;">
@@ -56,7 +58,7 @@
         <div *ngIf="activeSection == 'customers'">
             <div class="section-top-bar">
                 <span>Отправлено сообщений: {{messages.length}}</span>
-                <a (click)="tableToExcel('messages-table', 'Petman messages')">Скачать список</a>
+                <a (click)="tableToExcel('messages-table', 'Petman messages', null)">Скачать список</a>
             </div>
 
             <div class="data-container">
@@ -66,12 +68,16 @@
                         <th>Email</th>
                         <th>Телефон</th>
                         <th>Cообщение</th>
+                        <th>Страница заводчика</th>
                     </tr>
                     <tr *ngFor="let message of messages">
                         <td>{{message.name}}</td>
                         <td>{{message.email}}</td>
                         <td>{{message.phone}}</td>
                         <td>{{message.message}}</td>
+                        <td (click)='openBreederPage(message.breeder.id)' style="cursor: pointer;color: #0094c5;">
+                            https://petman.co/breeder/{{message.breeder.id}}
+                        </td>
                     </tr>
                 </table>
             </div>

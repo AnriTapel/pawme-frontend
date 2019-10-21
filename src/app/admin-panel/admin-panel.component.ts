@@ -21,7 +21,15 @@ export class AdminPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = res);
+    this.adminService.listBreedersUsingGET().subscribe(res => {
+      for (let breeder of res){
+        breeder.createDate = new Date(breeder.createDate);
+      }
+      let sortRes = res.sort((a,b) => {
+        return b.createDate.getTime() - a.createDate.getTime();
+      })
+      this.breeders = sortRes;
+    });
     this.adminService.listMessagesUsingGET().subscribe(res => this.messages = res);
   }
 
@@ -32,6 +40,10 @@ export class AdminPanelComponent implements OnInit {
         this.appService.userData = null;
         this.router.navigateByUrl('/breeder-landing');
       });
+  }
+
+  getCreateDateAsString(date: Date): string {
+    return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
   }
 
   displayBreederProfileFill(profileFill: number): string {
@@ -76,12 +88,12 @@ export class AdminPanelComponent implements OnInit {
         link.click();
       }
 
-    return (table, fileName) => {
+    return (table, fileName, data?) => {
       if (!table.nodeType)
         table = document.getElementById(table).cloneNode(true);
-      if (table.getAttribute('id') == 'breeders-table'){
+      if (data){
         for (let i = 1; i < table.childElementCount; i++){
-          let value = table.children[i].lastElementChild.firstElementChild.selectedOptions[0].value;
+          let value = data.filter(it => it.id == parseInt(table.children[i].firstElementChild.innerText))[0].status;
           table.children[i].lastElementChild.innerHTML = null;
           table.children[i].lastElementChild.innerText = value;
         }

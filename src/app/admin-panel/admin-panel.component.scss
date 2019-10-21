@@ -88,6 +88,11 @@ section{
             tr{
                 height: 3em;
             }
+
+            td{
+                min-width: 120px;
+                padding: 0 10px;
+            }
         }
     }
 }

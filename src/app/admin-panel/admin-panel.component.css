@@ -102,4 +102,9 @@ section .data-container table tr:nth-child(even) {
 section .data-container table tr {
   height: 3em;
 }
+
+section .data-container table td {
+  min-width: 120px;
+  padding: 0 10px;
+}
 /*# sourceMappingURL=admin-panel.component.css.map */
