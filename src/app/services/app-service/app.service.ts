@@ -47,6 +47,8 @@ export class AppService {
 
           if (this.meData.type == 'BREEDER')
             this.breederService.getBreederUsingGET(this.meData.id).subscribe(res => {
+              window.intercomSettings.name = res.name;
+              window.intercomSettings.id = res.id;
               this.userData = res;
               if (window.location.href.indexOf('/email') != -1)
                 this.resolveEmailConfirm();

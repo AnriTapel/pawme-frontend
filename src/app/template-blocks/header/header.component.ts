@@ -21,11 +21,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  logout(): void{
+  logout(): void {
     this.http.get('/api/logout').subscribe(
-      data =>  {
+      data => {
         this.appService.meData = { type: 'ANONYMOUS' };
         this.appService.userData = null;
+        window.intercomSettings.name = null;
+        window.intercomSettings.id = null;
         this.router.navigateByUrl('/breeder-landing');
       }, error => {
         this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
@@ -34,11 +36,11 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  isNonProfileHeader(): boolean{
-      return this.nonProfileHeaderPathnames.filter(it => this.router.url.indexOf(it) == 0).length != 0 || this.router.url == '/';
+  isNonProfileHeader(): boolean {
+    return this.nonProfileHeaderPathnames.filter(it => this.router.url.indexOf(it) == 0).length != 0 || this.router.url == '/';
   }
 
-  getMenuType(): MenuType{
+  getMenuType(): MenuType {
     if (this.appService.meData.type == 'ANONYMOUS' || this.appService.meData.type == 'BLOCKED')
       return MenuType.LOGIN;
     if (this.appService.userData && this.appService.userData.id != this.appService.meData.id)
@@ -47,7 +49,7 @@ export class HeaderComponent implements OnInit {
       return MenuType.MENU
   }
 
-  openMyPage(): void{
+  openMyPage(): void {
     window.open('/breeder/' + this.appService.meData.id, '_blank');
   }
 }

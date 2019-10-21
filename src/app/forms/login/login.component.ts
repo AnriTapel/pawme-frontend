@@ -68,6 +68,8 @@ export class LoginComponent {
       this.appService.meData = me;
       if (me.type == 'BREEDER')
         this.breederService.getBreederUsingGET(me.id).subscribe(res => {
+          window.intercomSettings.name = res.name;
+          window.intercomSettings.id = res.id;
           this.appService.userData = res;
           this.router.navigateByUrl('/breeder-profile');
         });
