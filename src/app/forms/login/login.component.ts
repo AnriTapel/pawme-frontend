@@ -68,7 +68,9 @@ export class LoginComponent {
       this.appService.meData = me;
       if (me.type == 'BREEDER')
         this.breederService.getBreederUsingGET(me.id).subscribe(res => {
+          //@ts-ignore
           window.intercomSettings.name = res.name;
+          //@ts-ignore
           window.intercomSettings.id = res.id;
           this.appService.userData = res;
           this.router.navigateByUrl('/breeder-profile');

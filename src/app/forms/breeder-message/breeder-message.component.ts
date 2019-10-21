@@ -24,7 +24,7 @@ export class BreederMessageComponent implements OnInit {
     breeder: null
   }
 
-  constructor(private appService: AppService, private breederService: BreederControllerService,
+  constructor(public appService: AppService, private breederService: BreederControllerService,
     public popupService: PopupTemplateService, private notificationService: NotificationBarService) { }
 
   ngOnInit() {

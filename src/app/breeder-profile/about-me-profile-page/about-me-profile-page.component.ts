@@ -22,7 +22,7 @@ export class AboutMeProfilePageComponent implements OnInit {
   invalidFields: Array<string> = [];
   saveChagesEvent: any;
 
-  constructor(private popupService: PopupTemplateService, private appService: AppService, private eventService: EventService, private router: Router,
+  constructor(private popupService: PopupTemplateService, public appService: AppService, private eventService: EventService, private router: Router,
     private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   ngOnInit() {

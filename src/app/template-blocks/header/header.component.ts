@@ -26,7 +26,9 @@ export class HeaderComponent implements OnInit {
       data => {
         this.appService.meData = { type: 'ANONYMOUS' };
         this.appService.userData = null;
+        //@ts-ignore
         window.intercomSettings.name = null;
+        //@ts-ignore
         window.intercomSettings.id = null;
         this.router.navigateByUrl('/breeder-landing');
       }, error => {
