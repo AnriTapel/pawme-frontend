@@ -68,9 +68,7 @@
                 <div class="top-info d-flex">
                     <div class="age-of-sale">
                         <span>Возраст продажи: </span>
-                        <span>от {{subpageStatus().puppiesInfo && appService.userData.puppiesInfo.age ? appService.userData.puppiesInfo.age : 1}} {{subpageStatus().puppiesInfo
-                            && (!appService.userData.puppiesInfo.age || appService.userData.puppiesInfo.age > 1) ? 'недель'
-                            : 'недели'}}</span>
+                        <span>от {{getPuppySaleAge()}}</span>
                     </div>
                     <div class="price">
                         <span>Стоимость: </span>

@@ -90,6 +90,16 @@ export class BreederPageComponent implements OnInit {
         return name;
     }
 
+    getPuppySaleAge(): string {
+        if (!this.subpageStatus().puppiesInfo || !this.appService.userData.puppiesInfo.age)
+            return '1 недели';
+        
+        if (this.appService.userData.puppiesInfo.age % 10 == 1 && this.appService.userData.puppiesInfo.age != 11)
+            return this.appService.userData.puppiesInfo.age + ' недели';
+        else
+            return this.appService.userData.puppiesInfo.age + ' недель';
+    }
+
     getParentsTestsList(): void {
         if (!this.appService.userData.parentsInfo)
             return;

@@ -109,7 +109,7 @@ export class AppService {
       // For mother & fathers
       else if (searchArray[0] && searchArray[0].nickname)
         values = searchArray.map(it => { return it.nickname });
-      const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+      const debouncedText$ = text$.pipe(debounceTime(100), distinctUntilChanged());
       const clicksWithClosedPopup$ = click$.pipe(filter(() => instance.isPopupOpen()));
       const inputFocus$ = focus$;
 
