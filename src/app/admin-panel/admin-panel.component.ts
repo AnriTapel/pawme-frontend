@@ -21,15 +21,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.adminService.listBreedersUsingGET().subscribe(res => {
-      for (let breeder of res){
-        breeder.createDate = new Date(breeder.createDate);
-      }
-      let sortRes = res.sort((a,b) => {
-        return b.createDate.getTime() - a.createDate.getTime();
-      })
-      this.breeders = sortRes;
-    });
+    this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
     this.adminService.listMessagesUsingGET().subscribe(res => this.messages = res);
   }
 
@@ -40,6 +32,16 @@ export class AdminPanelComponent implements OnInit {
         this.appService.userData = null;
         this.router.navigateByUrl('/breeder-landing');
       });
+  }
+
+  initBreedersOperations(res: any): any{
+    for (let breeder of res){
+      breeder.createDate = new Date(breeder.createDate);
+    }
+    let sortRes = res.sort((a,b) => {
+      return b.createDate.getTime() - a.createDate.getTime();
+    })
+    return sortRes.filter(it => it.status != 'DELETED');
   }
 
   getCreateDateAsString(date: Date): string {
@@ -66,11 +68,11 @@ export class AdminPanelComponent implements OnInit {
 
   changeBreederStatus(id: number, event: any): void {
     this.adminService.updateStatusUsingPUT(id, event.target.value).subscribe(() => {
-      this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = res);
+      this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
     },(err) => {
       this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);
-      this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = res);
+      this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
     })
   }
 
