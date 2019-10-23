@@ -44,9 +44,10 @@ export class LoginComponent {
     if (!this.validateFields())
       return;
     this.loginError = false;
-    if (!this.appService.validateEmailInput(this.credentials.username))
+    if (!this.appService.validateEmailInput(this.credentials.username)) {
+      this.errorText = 'Пожалуйста, введите действующий Email';
       this.loginError = true;
-    else {
+    } else {
       let body = new FormData();
       this.credentials.username = this.credentials.username.toLowerCase();
       body.append('username', this.credentials.username);

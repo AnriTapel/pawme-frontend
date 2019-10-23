@@ -31,21 +31,27 @@ export class AppService {
 
   initApplication() {
     return new Promise<void>((resolve, reject) => {
+      let router = this.injector.get(Router);
       this.breederService.meUsingGET().subscribe((res) => {
         this.meData = res;
+
         this.http.get('/api/dict').subscribe(dict => {
           this.breeds = dict['breeds'];
           this.puppyTests = dict['puppyTests'];
 
-          if (window.location.href.indexOf('/pass-link-fail') != -1) {
-            let router = this.injector.get(Router);
+          if (this.meData.type == 'ADMIN') {
+            router.navigateByUrl('/admin-panel');
+            resolve();
+          }
+
+          else if (window.location.href.indexOf('/pass-link-fail') != -1) {
             router.navigateByUrl('/remind-password');
             this.notificationServie.setContext('Ссылка для смены пароля устарела. Сделайте повторный запрос.', false);
             this.notificationServie.setVisibility(true);
             resolve();
           }
 
-          if (this.meData.type == 'BREEDER')
+          else if (this.meData.type == 'BREEDER')
             this.breederService.getBreederUsingGET(this.meData.id).subscribe(res => {
               //@ts-ignore
               window.intercomSettings.name = res.name;
@@ -62,7 +68,6 @@ export class AppService {
       }, (err) => {
         if (err.status == 423) {
           this.meData = {type: 'BLOCKED'};
-          let router = this.injector.get(Router);
           router.navigateByUrl('/breeder-landing');
           this.notificationServie.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
           this.notificationServie.setVisibility(true);
