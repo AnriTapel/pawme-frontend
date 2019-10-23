@@ -17,7 +17,8 @@ export class ShareButtonsComponent implements AfterViewInit {
         let buttons = socialBlocks[k].children[0].children[1];
         for (let i = 0; i < buttons.childElementCount; i++) {
           buttons.children[i].setAttribute('data-url', 'https://petman.co' + window.location.pathname);
-          if (buttons.children[i].getAttribute('data-sharer') == 'vk')
+          if (buttons.children[i].getAttribute('data-sharer') == 'vk' && this.appService.userData.generalInfo
+              && this.appService.userData.generalInfo.profilePhoto)
             buttons.children[i].setAttribute('data-image', 'https://petman.co/img/' +
               this.appService.userData.generalInfo.profilePhoto.main + '.jpg');
         }

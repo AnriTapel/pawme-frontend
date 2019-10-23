@@ -40,8 +40,12 @@ export class AppService {
           this.puppyTests = dict['puppyTests'];
 
           if (this.meData.type == 'ADMIN') {
-            router.navigateByUrl('/admin-panel');
-            resolve();
+            if (/\/breeder\/[0-9]*$/.test(window.location.href))
+              resolve();
+            else {
+              router.navigateByUrl('/admin-panel');
+              resolve();
+            }
           }
 
           else if (window.location.href.indexOf('/pass-link-fail') != -1) {
@@ -62,7 +66,7 @@ export class AppService {
                 this.resolveEmailConfirm();
               resolve();
             }, (err) => {
-              this.meData = {type: 'ANONYMOUS'};
+              this.meData = { type: 'ANONYMOUS' };
               router.navigateByUrl('/login');
               resolve();
             });
@@ -71,7 +75,7 @@ export class AppService {
         });
       }, (err) => {
         if (err.status == 423) {
-          this.meData = {type: 'BLOCKED'};
+          this.meData = { type: 'BLOCKED' };
           router.navigateByUrl('/breeder-landing');
           this.notificationServie.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
           this.notificationServie.setVisibility(true);
@@ -133,7 +137,7 @@ export class AppService {
     }
   }
 
-  getTextareaLimit(field: string, limit: number): number{
+  getTextareaLimit(field: string, limit: number): number {
     if (!field)
       return limit;
     return limit - field.length;

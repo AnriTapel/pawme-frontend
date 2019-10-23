@@ -6,14 +6,14 @@
 
         <div *ngIf="getMenuType() == 1" class="my-2 my-lg-0">
             <div class="menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <a *ngIf="!appService.userData.generalInfo || !appService.userData.generalInfo.profilePhoto">ЛК</a>
-                <img *ngIf="appService.userData.generalInfo && appService.userData.generalInfo.profilePhoto"
+                <a *ngIf="!appService.userData || !appService.userData.generalInfo || !appService.userData.generalInfo.profilePhoto">ЛК</a>
+                <img *ngIf="appService.userData && appService.userData.generalInfo && appService.userData.generalInfo.profilePhoto"
                     src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg"/>
             </div>
             <div class="dropdown-menu custom-header-dropdown-menu">
                 <a class="dropdown-item" style="color: #4dbebb;" [routerLink]="['/breeder-profile']"><img src="./assets/img/menu-user.png"
-                        alt="Личный кабинет" width="13px" height="15px" style="margin-right: 10px;" />{{appService.userData.profileFill > 4 
-                            ? 'Личный кабинет' : 'Заполнить анкету'}}</a>
+                        alt="Личный кабинет" width="13px" height="15px" style="margin-right: 10px;" />
+                    {{appService.userData && appService.userData.profileFill > 4 ? 'Личный кабинет' : 'Заполнить анкету'}}</a>
                 <a class="dropdown-item" (click)="openMyPage()"><img src="./assets/img/menu-eye.png" alt="Моя страница"
                         width="16px" height="12px" style="margin-right: 8px;" />Моя
                     страница</a>
