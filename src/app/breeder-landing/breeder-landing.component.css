@@ -147,8 +147,6 @@
 }
 
 .coming-soon .requirements-desktop {
-  -webkit-transition: all .2s linear;
-  transition: all .2s linear;
   display: block;
   float: left;
   width: 33%;
@@ -156,15 +154,6 @@
 
 .coming-soon .requirements-mobile {
   display: none;
-}
-
-.coming-soon .hidden {
-  display: none !important;
-  opacity: 0;
-}
-
-.coming-soon .visuallyhidden {
-  opacity: 0;
 }
 
 .coming-soon li {
@@ -313,8 +302,6 @@
     display: none !important;
   }
   .coming-soon .requirements-mobile {
-    -webkit-transition: all .2s linear;
-    transition: all .2s linear;
     display: block;
   }
   .coming-soon .requirements-mobile li {

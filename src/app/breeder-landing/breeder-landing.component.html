@@ -74,10 +74,10 @@
             <p></p>
             <p>Покупатели, которые ищут именно вас</p>
             <p>Будущие хозяева приходят к нам, потому что не доверяют "стандартным" торговым площадкам. Благодаря
-                <a (click)="toogleRequirements()">высоким требованиям</a> Petman к заводчикам, вас не будут сравнивать с
+                <a (click)="requirements = !requirements">высоким требованиям</a> Petman к заводчикам, вас не будут сравнивать с
                 обычными объявлениями по продаже
                 питомцев.</p>
-            <div id="requirements-mobile" class="requirements-mobile hidden">
+            <div *ngIf="requirements" class="requirements-mobile">
                 <p>Каждый заводчик Petman предоставляет:</p>
                 <ul>
                     <li>Комплект документов на щенка</li>
@@ -103,7 +103,7 @@
                 покупателей и создаст возможности для новых партнерств.
             </p>
         </section>
-        <div id="requirements-desktop" class="requirements-desktop hidden">
+        <div *ngIf="requirements" class="requirements-desktop">
             <p>Каждый заводчик Petman предоставляет:</p>
             <ul>
                 <li>Комплект документов на щенка</li>

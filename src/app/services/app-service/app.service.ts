@@ -94,6 +94,8 @@ export class AppService {
       this.isOnboardingVisible = true;
       //@ts-ignore
       ym(55779592, 'reachGoal', 'MailConfirmed');
+      //@ts-ignore
+      fbq('track', 'CompleteRegistration');
     } else if (window.location.href.indexOf('/email-fail') != -1) {
       router.navigateByUrl('/breeder-landing');
       this.notificationServie.setContext('Ошибка подтверждения почты', false);

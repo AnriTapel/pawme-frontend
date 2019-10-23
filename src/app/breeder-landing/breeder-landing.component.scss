@@ -136,7 +136,6 @@ $block-padding: 8vw;
     }
 
     .requirements-desktop {
-        transition: all .2s linear;
         display: block;
         float: left;
         width: 33%;
@@ -144,15 +143,6 @@ $block-padding: 8vw;
 
     .requirements-mobile{
         display: none;
-    }
-    
-    .hidden {
-        display: none !important;
-        opacity: 0;
-    }
-
-    .visuallyhidden {
-        opacity: 0;
     }
 
     li{
@@ -324,7 +314,6 @@ $block-padding: 8vw;
         }
 
         .requirements-mobile {
-            transition: all .2s linear;
             display: block;
             
             li{

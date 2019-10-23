@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class BreederLandingComponent implements OnInit {
 
+  requirements: boolean = false;
+
   constructor(private appService: AppService, private router: Router) {
     if (appService.meData && appService.meData.type == "BREEDER" && appService.userData.status == "ACTIVE")
       router.navigateByUrl('/breeder-profile');
@@ -77,37 +79,6 @@ export class BreederLandingComponent implements OnInit {
   secondSliderTitleClicked(index: number): void {
     this.secondSlider.selectSlide(index);
   }*/
-
-  toogleRequirements(): void {
-    //@ts-ignore
-    var boxMobile = $('#requirements-mobile');
-    if (boxMobile.hasClass('hidden')) {
-      boxMobile.removeClass('hidden');
-      setTimeout(function () {
-        boxMobile.removeClass('visuallyhidden');
-      }, 5);
-    } else {
-      boxMobile.addClass('visuallyhidden');
-      boxMobile.one('transitionend', function (e) {
-        boxMobile.addClass('hidden');
-      });
-    }
-    //@ts-ignore
-    var boxDesktop = $('#requirements-desktop');
-    if (boxDesktop.hasClass('hidden')) {
-      boxDesktop.removeClass('hidden');
-      setTimeout(function () {
-        boxDesktop.removeClass('visuallyhidden');
-      }, 5);
-    } else {
-      boxDesktop.addClass('visuallyhidden');
-      boxDesktop.one('transitionend', function (e) {
-        boxDesktop.addClass('hidden');
-      });
-    }
-    //document.getElementById('requirements').style.display = document.getElementById('requirements').style.display == 'none' ?
-    //  'block' : 'none';
-  }
 
   freeSignUpClicked(): void{
     //@ts-ignore
