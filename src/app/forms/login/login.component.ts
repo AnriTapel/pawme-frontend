@@ -45,7 +45,7 @@ export class LoginComponent {
       return;
     this.loginError = false;
     if (!this.appService.validateEmailInput(this.credentials.username)) {
-      this.errorText = 'Пожалуйста, введите действующий Email';
+      this.errorText = 'Пожалуйста, введите действительный E-mail';
       this.loginError = true;
     } else {
       let body = new FormData();

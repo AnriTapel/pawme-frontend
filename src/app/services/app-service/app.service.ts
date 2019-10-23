@@ -61,6 +61,10 @@ export class AppService {
               if (window.location.href.indexOf('/email') != -1)
                 this.resolveEmailConfirm();
               resolve();
+            }, (err) => {
+              this.meData = {type: 'ANONYMOUS'};
+              router.navigateByUrl('/login');
+              resolve();
             });
           else
             resolve();
