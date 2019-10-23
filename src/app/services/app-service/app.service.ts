@@ -60,7 +60,7 @@ export class AppService {
               //@ts-ignore
               window.intercomSettings.name = res.name;
               //@ts-ignore
-              window.intercomSettings.id = res.id;
+              window.intercomSettings.user_id = res.id;
               this.userData = res;
               if (window.location.href.indexOf('/email') != -1)
                 this.resolveEmailConfirm();

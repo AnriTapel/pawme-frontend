@@ -29,7 +29,7 @@ export class HeaderComponent implements OnInit {
         //@ts-ignore
         window.intercomSettings.name = null;
         //@ts-ignore
-        window.intercomSettings.id = null;
+        window.intercomSettings.user_id = null;
         this.router.navigateByUrl('/breeder-landing');
       }, error => {
         this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
