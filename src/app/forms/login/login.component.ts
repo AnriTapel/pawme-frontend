@@ -73,6 +73,8 @@ export class LoginComponent {
           window.intercomSettings.name = res.name;
           //@ts-ignore
           window.intercomSettings.user_id = res.id;
+          //@ts-ignore
+          window.intercomSettings['breeder_page_url'] = 'https://petman.co/breeder/' + res.id;
           this.appService.userData = res;
           this.router.navigateByUrl('/breeder-profile');
         });

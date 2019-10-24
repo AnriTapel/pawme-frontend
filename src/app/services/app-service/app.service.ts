@@ -61,6 +61,8 @@ export class AppService {
               window.intercomSettings.name = res.name;
               //@ts-ignore
               window.intercomSettings.user_id = res.id;
+              //@ts-ignore
+              window.intercomSettings['breeder_page_url'] = 'https://petman.co/breeder/' + res.id;
               this.userData = res;
               if (window.location.href.indexOf('/email') != -1)
                 this.resolveEmailConfirm();
@@ -96,6 +98,8 @@ export class AppService {
       ym(55779592, 'reachGoal', 'MailConfirmed');
       //@ts-ignore
       fbq('track', 'CompleteRegistration');
+      //@ts-ignore
+      Intercom('trackEvent', 'MailConfirmed');
     } else if (window.location.href.indexOf('/email-fail') != -1) {
       router.navigateByUrl('/breeder-landing');
       this.notificationServie.setContext('Ошибка подтверждения почты', false);
