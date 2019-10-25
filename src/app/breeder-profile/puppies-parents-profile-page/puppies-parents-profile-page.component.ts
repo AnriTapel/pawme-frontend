@@ -178,7 +178,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         //@ts-ignore
         ym(55779592, 'reachGoal', 'ParentsSave');
         //@ts-ignore
-        Intercom('trakcEvent', 'ParentsSave');
+        Intercom('trackEvent', 'ParentsSave');
       }
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {
         this.profileService.dataChangesSaved = true;
@@ -239,7 +239,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         //@ts-ignore
         ym(55779592, 'reachGoal', 'ParentsSave');
         //@ts-ignore
-        Intercom('trakcEvent', 'ParentsSave');
+        Intercom('trackEvent', 'ParentsSave');
       }
       this.profileService.dataChangesSaved = true;
       this.profileService.parentTestsChangesSaved = true;

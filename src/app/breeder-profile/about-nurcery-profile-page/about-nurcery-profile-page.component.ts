@@ -136,7 +136,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
           //@ts-ignore
           ym(55779592, 'reachGoal', 'ShelterSave');
           //@ts-ignore
-          Intercom('trakcEvent', 'ShelterSave');
+          Intercom('trackEvent', 'ShelterSave');
         }
         this.appService.userData.generalInfo = this.nurceryData;
         this.notificationService.setContext('Изменения успешно сохранены', true);

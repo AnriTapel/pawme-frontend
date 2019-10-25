@@ -67,7 +67,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
           //@ts-ignore
           ym(55779592, 'reachGoal', 'PuppySave');
           //@ts-ignore
-          Intercom('trakcEvent', 'PuppySave');
+          Intercom('trackEvent', 'PuppySave');
         }
         this.appService.userData.puppiesInfo = this.puppiesData;
         this.notificationService.setContext('Изменения успешно сохранены', true);

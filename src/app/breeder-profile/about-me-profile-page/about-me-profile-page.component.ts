@@ -147,7 +147,7 @@ export class AboutMeProfilePageComponent implements OnInit {
           //@ts-ignore
           ym(55779592, 'reachGoal', 'SelfSave');
           //@ts-ignore
-          Intercom('trakcEvent', 'SelfSave');
+          Intercom('trackEvent', 'SelfSave');
         }
         this.appService.userData.about = this.breederData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
