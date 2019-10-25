@@ -13,8 +13,6 @@ import { AboutUsComponent } from './secondary-page/about-us/about-us.component';
 import { ContactUsComponent } from './secondary-page/contact-us/contact-us.component';
 import { FaqComponent } from './secondary-page/faq/faq.component';
 import { PageNotFoundComponent } from './secondary-page/page-not-found/page-not-found.component';
-import { TechBreakComponent } from './secondary-page/tech-break/tech-break.component';
-
 
 const routes: Routes = [
   {path: '', component: BreederLandingComponent},
@@ -32,7 +30,6 @@ const routes: Routes = [
   {path: 'admin-panel', component: AdminPanelComponent},
   {path: 'confirm-email/:mail', component: MailPageComponent},
   {path: '404', component: PageNotFoundComponent},
-  {path: 'tech-break', component: TechBreakComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 
