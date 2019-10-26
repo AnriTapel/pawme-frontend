@@ -307,6 +307,17 @@ input[type=number]::-webkit-outer-spin-button {
         align-self: end;
     }
 
+    .page-header-with-desc{
+        grid-column: 1/3;
+
+        p{ 
+            font-family: 'Intro-Regular' !important;
+            width: 88%;
+            margin: 1.5em 0 0;
+            font-size: 14px;
+        }
+    } 
+
     .adding-entity-page-header{
         grid-column: 1/3;
     }
@@ -617,7 +628,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 .invalid-form-field-value,
 .invalid-form-checkbox{
-    border: 1px solid #eb0000 !important;
+    border: 3px solid #eb0000 !important;
+
+    @media (max-width: 769px) {
+        border: 2px solid #eb0000 !important;
+    }
 }
 
 .form-error-message-block{
@@ -806,9 +821,15 @@ ngb-datepicker{
 
         .upper-btn,
         .lower-btn{
-            text-align: center;
             grid-column-start: 1;
             padding-bottom: unset;
+        }
+
+        .page-header-with-desc{
+            p{
+                width: 100%;
+                margin: 2em 0 0;
+            }
         }
 
         .add-entity-page-upper-btn-desktop{

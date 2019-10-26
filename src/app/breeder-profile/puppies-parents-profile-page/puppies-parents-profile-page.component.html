@@ -1,7 +1,8 @@
 <div *ngIf="isMainPage" class="breeder-profile-subpage-container">
 
-    <div class="page-header">
+    <div class="page-header page-header-with-desc">
         <h3>Родители щенков</h3>
+        <p>Добавьте минимум одну пару родителей (отец и мать), чтобы вы могли добавлять их щенков.</p>
     </div>
 
     <div class="dog-entity-list-block">
@@ -98,7 +99,7 @@
 
     <div class="lower-btn">
         <span *ngIf="invalidGeneralFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
-            Пожалуйста, исправьте выделенные поля
+            Пожалуйста, заполните поля, выделенные красным
         </span>
         <br *ngIf="invalidGeneralFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
@@ -193,7 +194,7 @@
 
     <div class="lower-btn">
         <span *ngIf="invalidAddingFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
-            Пожалуйста, исправьте выделенные поля
+            Пожалуйста, заполните поля, выделенные красным
         </span>
         <br *ngIf="invalidAddingFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="{{currentParentData.id ? 'Сохранить' : 'Добавить'}} родителя" (click)="addParent(false)" />

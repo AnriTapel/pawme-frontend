@@ -16,6 +16,7 @@ export class BreederProfileService {
     { tag: 'add-puppy', name: 'Добавить щенков' }
   ];
 
+  invalidFields: string[] = [];
   private curProfilePage: any = this.profileSubpages[0];
   isMobileMenuVisible: boolean = false;
 
@@ -38,6 +39,11 @@ export class BreederProfileService {
     this.appService.userData.profileFill = index;
   }
 
+  inputValueChanged(name: string): void {
+    this.invalidFields = this.invalidFields.filter(it => it != name);
+    this.dataChangesSaved = false;
+  }
+
   isParentsInfoFilled(): boolean {
     if (!this.appService.userData.parentsInfo)
       return false;
@@ -49,6 +55,7 @@ export class BreederProfileService {
   setCurProfilePage(page: any): void {
     if (!this.dataChangesSaved || !this.parentTestsChangesSaved) {
       let onSuccess = () => {
+        this.invalidFields = [];
         this.dataChangesSaved = true;
         this.parentTestsChangesSaved = true;
         this.curProfilePage = page;
