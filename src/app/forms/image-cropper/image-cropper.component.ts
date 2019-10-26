@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, ViewChild, Inject, Input } from '@angular/core';
-import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
 import { LyResizingCroppingImages, ImgCropperConfig } from '@alyle/ui/resizing-cropping-images';
 import { LyTheme2 } from '@alyle/ui';
 import { EventService } from 'src/app/services/event-service/events.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 const styles = (theme) => ({
   '@global': {
@@ -36,6 +36,7 @@ export class ImageCropperComponent implements AfterViewInit {
   inputFile: any;
   myConfig: ImgCropperConfig;
   uploadError: boolean = false;
+  isLoading: boolean = false;
 
   constructor(@Inject(LyTheme2) private theme: LyTheme2, public eventService: EventService) { }
 
@@ -104,6 +105,7 @@ export class ImageCropperComponent implements AfterViewInit {
   }
 
   crop() {
+    this.isLoading = true;
     this.img.crop();
   }
   onCropped(e) {

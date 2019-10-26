@@ -1,11 +1,12 @@
 <h4>Выбор миниатюры</h4>
 
-<input #_fileInput type="file" id="image-input" (change)="inputFileSelected($event)" accept=".jpg, .jpeg, .png, .gif" hidden>
+<input #_fileInput type="file" id="image-input" (change)="inputFileSelected($event)" accept=".jpg, .jpeg, .png, .gif"
+    hidden>
 
-<ly-cropping #cropping [ngClass]="classes.cropping" (change)="inputFileSelected($event)" [class.rounded-cropp-area]="!params.isRect"
-[config]="myConfig" (cropped)="onCropped($event)">
-        <p *ngIf="uploadError">Загружаемая фотография повреждена или не соответствует формату</p>
-        <span><a class="upload-btn">Загрузите</a> или перетащите изображение</span>
+<ly-cropping #cropping [ngClass]="classes.cropping" (change)="inputFileSelected($event)"
+    [class.rounded-cropp-area]="!params.isRect" [config]="myConfig" (cropped)="onCropped($event)">
+    <p *ngIf="uploadError">Загружаемая фотография повреждена или не соответствует формату</p>
+    <span><a class="upload-btn">Загрузите</a> или перетащите изображение</span>
 </ly-cropping>
 
 <p>Двигайте фото и меняйте его масштаб</p>
@@ -17,9 +18,12 @@
 </div>
 
 <div *ngIf="cropping.isLoaded" class="buttons-block">
-    <button (click)="changeInputImage()" class="custom-btn btn-transparent">
+    <button (click)="changeInputImage()" class="custom-btn btn-transparent" [disabled]="isLoading">
         Заменить фото
-        <input #_fileInput id="change-image-input" type="file" (change)="inputFileSelected($event)" accept=".jpg, .jpeg, .png, .gif" hidden>
+        <input #_fileInput id="change-image-input" type="file" (change)="inputFileSelected($event)"
+            accept=".jpg, .jpeg, .png, .gif" hidden>
     </button>
-    <button (click)="crop()" class="custom-btn btn-purple">Сохранить</button>
+    <button (click)="crop()" class="custom-btn btn-purple" [disabled]="isLoading">{{!isLoading ? 'Сохранить' : ''}}
+        <div *ngIf="isLoading" class="loader"></div>
+    </button>
 </div>
