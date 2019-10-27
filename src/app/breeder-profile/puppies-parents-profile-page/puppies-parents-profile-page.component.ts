@@ -75,16 +75,9 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       parentDraft: null
     };
     this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => {
-      if (forPreview) {
-        if (!this.profileService.dataChangesSaved) {
-          if (this.currentParentData && this.currentParentData.id)
-            this.addParent(forPreview)
-          else {
-            this.saveDraft();
-            window.open('/breeder/' + this.appService.userData.id, '_blank');
-          }
-        }
-      } else
+      if (this.currentParentData && !this.currentParentData.id)
+        this.saveDraft();
+      else
         this.saveChanges(forPreview);
     });
   }

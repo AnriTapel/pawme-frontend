@@ -73,14 +73,11 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.mothers = this.appService.userData.parentsInfo.parents.filter(it => it.gender == "FEMALE");
     }
     this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => {
-      if (forPreview){
-        if (!this.currentPuppyData.id){
-          this.saveDraft();
-          window.open('/breeder/' + this.appService.userData.id, '_blank');
-        } else 
-          this.addPuppy();
-      } else
-        this.saveChanges(forPreview)
+      this.preSaveOperation();
+      if (this.currentPuppyData && !this.currentPuppyData.id)
+        this.saveDraft();
+      else
+        this.saveChanges(forPreview);
     });
     
     this.addNewParentEvent = this.eventService.subscribe('save-puppy-draft-before-parents-page', () => {
