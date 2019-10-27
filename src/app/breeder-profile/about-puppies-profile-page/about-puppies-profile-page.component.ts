@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
 export class AboutPuppiesProfilePageComponent implements OnInit {
 
   puppiesData: PuppiesInfo;
-  invalidFields: Array<string> = [];
   saveChagesEvent: any;
 
   constructor(public appService: AppService, private breederService: BreederControllerService, private eventService: EventService,
@@ -45,6 +44,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   }
 
   puppyTestClicked(test: PuppyTest): void {
+    this.profileService.inputValueChanged('tests');
     let testIndex = this.puppiesData.puppyTests.map(it => { return it.id }).indexOf(test.id);
     if (testIndex > -1)
       this.puppiesData.puppyTests.splice(testIndex, 1);
@@ -92,46 +92,46 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
   validateInputFields(): boolean {
     let isValid = true;
-    this.invalidFields = [];
+    this.profileService.invalidFields = [];
 
     if (!this.puppiesData.age || this.puppiesData.age > 32 || this.puppiesData.age < 1) {
-      this.invalidFields.push('age');
+      this.profileService.invalidFields.push('age');
       isValid = false;
     }
 
     if (this.puppiesData.priceFrom && this.puppiesData.priceTo && this.puppiesData.priceFrom > this.puppiesData.priceTo) {
-      this.invalidFields.push('priceFrom');
-      this.invalidFields.push('priceTo');
+      this.profileService.invalidFields.push('priceFrom');
+      this.profileService.invalidFields.push('priceTo');
       isValid = false;
     } else {
       if (!this.puppiesData.priceFrom || this.puppiesData.priceFrom > 500000 || this.puppiesData.priceFrom < 1) {
-        this.invalidFields.push('priceFrom');
+        this.profileService.invalidFields.push('priceFrom');
         isValid = false;
       }
 
       if (!this.puppiesData.priceTo || this.puppiesData.priceTo > 500000 || this.puppiesData.priceTo < 1) {
-        this.invalidFields.push('priceTo');
+        this.profileService.invalidFields.push('priceTo');
         isValid = false;
       }
     }
 
     if (!this.puppiesData.petmanSet) {
-      this.invalidFields.push('set');
+      this.profileService.invalidFields.push('set');
       isValid = false;
     }
 
     if (this.puppiesData.puppyTests.length == 0) {
-      this.invalidFields.push('tests');
+      this.profileService.invalidFields.push('tests');
       isValid = false;
     }
 
     if (!this.puppiesData.petmanContract) {
-      this.invalidFields.push('contract');
+      this.profileService.invalidFields.push('contract');
       isValid = false;
     }
 
     if (this.puppiesData.gifts && this.puppiesData.gifts != "" && this.puppiesData.gifts.length > 512) {
-      this.invalidFields.push('gifts');
+      this.profileService.invalidFields.push('gifts');
       isValid = false;
     } else
       this.puppiesData.gifts = null;

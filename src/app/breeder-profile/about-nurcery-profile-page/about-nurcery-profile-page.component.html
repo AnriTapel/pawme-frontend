@@ -8,17 +8,17 @@
     </div>
     <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-name">Название питомника (необязательно)</label>
-        <input class="form-control custom-form-control-border" type="text" name="nurcery-name" [(ngModel)]="nurceryData.name" (change)="profileService.dataChangesSaved = false"
-        [class.invalid-form-field-value]="invalidFields.includes('name')" placeholder="Название питомника" />
+        <input class="form-control custom-form-control-border" type="text" name="nurcery-name" [(ngModel)]="nurceryData.name" (change)="profileService.inputValueChanged('name')"
+        [class.invalid-form-field-value]="profileService.invalidFields.includes('name')" placeholder="Название питомника" />
     </div>
 
     <div class="breeder-profile-subpage-form-right">
         <label for="nurcery-location">Город / населенный пункт</label>
         <div class="dropdown-text-input">
             <input *ngIf="appService.cities" type="text" class="form-control custom-form-control-border" name="nurcery-location" [(ngModel)]="nurceryData.city"
-                [class.invalid-form-field-value]="invalidFields.includes('city')" id="city" [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"
-                (focus)="cityFocus$.next($event.target.value)" (click)="cityClick$.next($event.target.value)" #cityInstance="ngbTypeahead"
-                (change)="profileService.dataChangesSaved = false" placeholder="Выбрать">
+                [class.invalid-form-field-value]="profileService.invalidFields.includes('city')" id="city" [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"
+                (focus)="cityFocus$.next($event.target.value)" (click)="onCityClick($event)" #cityInstance="ngbTypeahead"
+                (change)="profileService.inputValueChanged('city')" placeholder="Выбрать">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('city', $event)" />
         </div>
     </div>
@@ -27,8 +27,8 @@
         <label for="nurcery-main-breed">Основная порода</label>
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="nurcery-main-breed" [(ngModel)]="curMainBreed"
-                [class.invalid-form-field-value]="invalidFields.includes('mainBreed')" id="main-breed" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
-                (focus)="mainBreedFocus$.next($event.target.value)" (click)="mainBreedClick$.next($event.target.value)" (change)="profileService.dataChangesSaved = false"
+                [class.invalid-form-field-value]="profileService.invalidFields.includes('mainBreed')" id="main-breed" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
+                (focus)="mainBreedFocus$.next($event.target.value)" (click)="onMainBreedClick($event)" (change)="profileService.inputValueChanged('mainBreed')"
                 #mainBreedInstance="ngbTypeahead" placeholder="Выбрать">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('main-breed', $event)"
             />
@@ -44,9 +44,9 @@
         <img src="./assets/img/close-button-black.svg" alt="Удалить дополнительную породу" (click)="deleteExtraBreed()" />
         <div class="dropdown-text-input">
             <input type="text" class="form-control custom-form-control-border" name="nurcery-additional-breed" [(ngModel)]="curExtraBreed"
-                [class.invalid-form-field-value]="invalidFields.includes('extraBreed')" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
-                (focus)="addBreedFocus$.next($event.target.value)" (click)="addBreedClick$.next($event.target.value)" id="extra-breed"
-                (change)="profileService.dataChangesSaved = false" #addBreedInstance="ngbTypeahead" placeholder="Выбрать">
+                [class.invalid-form-field-value]="profileService.invalidFields.includes('extraBreed')" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
+                (focus)="addBreedFocus$.next($event.target.value)" (click)="onExtraBreedClick($event)" id="extra-breed"
+                (change)="profileService.inputValueChanged('extraBreed')" #addBreedInstance="ngbTypeahead" placeholder="Выбрать">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('extra-breed', $event)"
             />
         </div>
@@ -60,14 +60,14 @@
         <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(nurceryData.description, 512) > 0 ? '#46b0ad' : '#eb0000'">
             {{appService.getTextareaLimit(nurceryData.description, 512)}}
         </span>
-        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="nurceryData.description" (change)="profileService.dataChangesSaved = false"
-            [class.invalid-form-field-value]="invalidFields.includes('desc')" placeholder="Описание"></textarea>
+        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="nurceryData.description" (change)="profileService.inputValueChanged('desc')"
+            [class.invalid-form-field-value]="profileService.invalidFields.includes('desc')" placeholder="Описание"></textarea>
     </div>
 
     <hr>
 
     <div class="about-nurcery-profile-image">
-        <div *ngIf="!nurceryData.profilePhoto" class="image-block empty-profile-image" id="profile-image-block" [class.invalid-form-field-value]="invalidFields.includes('profilePhoto')"
+        <div *ngIf="!nurceryData.profilePhoto" class="image-block empty-profile-image" id="profile-image-block" [class.invalid-form-field-value]="profileService.invalidFields.includes('profilePhoto')"
             (click)="previewNurceryPhoto()">
             <img src="./assets/img/thin-plus.png" alt="Добавить изображение" />
         </div>
@@ -89,7 +89,7 @@
         <br>
         <span class="block-description">Покажите в этих фотографиях, как устроена жизнь вашего питомника. Допустимый формат изображений - jpg, jpeg, png, gif.</span>
 
-        <div *ngIf="nurceryData.gallery.length == 0" class="gallery-initial-block" [class.invalid-form-field-value]="invalidFields.includes('gallery')"
+        <div *ngIf="nurceryData.gallery.length == 0" class="gallery-initial-block" [class.invalid-form-field-value]="profileService.invalidFields.includes('gallery')"
             (click)="previewGalleryPhoto(-1)">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
@@ -139,10 +139,10 @@
     </div>-->
 
     <div class="lower-btn">
-        <span *ngIf="invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
+        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
             Пожалуйста, заполните поля, выделенные красным
         </span>
-        <br *ngIf="invalidFields.length > 0" />
+        <br *ngIf="profileService.invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
     </div>
 </div>

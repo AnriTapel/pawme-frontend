@@ -25,7 +25,7 @@ export class BreederProfileComponent implements OnInit {
   }
 
   showMyPage(): void {
-    if (this.profileService.dataChangesSaved && this.profileService.parentTestsChangesSaved)
+    if (this.profileService.dataChangesSaved)
       window.open('/breeder/' + this.appService.userData.id, '_blank')
     else
       this.profileService.showMyPage();

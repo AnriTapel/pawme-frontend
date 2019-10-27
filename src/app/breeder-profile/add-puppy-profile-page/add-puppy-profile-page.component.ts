@@ -44,7 +44,6 @@ export class AddPuppyProfilePageComponent implements OnInit {
   addNewParentEvent: any;
 
   birthdayModel: NgbDateStruct = { day: null, month: null, year: null };
-  invalidFields: any[] = [];
 
   // What page to show - parents page or add/edit current parent
   isMainPage: boolean = true;
@@ -132,11 +131,13 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   onDadInputClick(event: any): void {
     this.dadDogFocus$.next(event.target.value);
+    this.profileService.inputValueChanged('dad');
     this.isDadEmptyButton = this.fathers.length == 0;
   }
 
   onMomInputClick(event: any): void {
     this.momDogFocus$.next(event.target.value);
+    this.profileService.inputValueChanged('mom');
     this.isMomEmptyButton = this.mothers.length == 0;
   }
 
@@ -152,7 +153,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   updateSelectedDate(): void {
     this.birthdayModel = { year: this.birthdayModel.year, month: this.birthdayModel.month, day: this.birthdayModel.day };
-    this.profileService.dataChangesSaved = false;
+    this.profileService.inputValueChanged('birthday');
   }
 
   switchToParentsSubpage(): void {
@@ -184,8 +185,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadPetImage(body).subscribe((imageData: any) => {
+        this.profileService.inputValueChanged('photos');
         this.popupService.setShowStatus(false);
-        this.profileService.dataChangesSaved = false;
         if (index == -1)
           this.currentPuppyData.gallery.push(imageData);
         else
@@ -301,14 +302,14 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
   validateInputFields(): boolean {
     let isValid = true;
-    this.invalidFields = [];
+    this.profileService.invalidFields = [];
     if (!this.currentPuppyData.nickname || this.currentPuppyData.nickname == "" || this.currentPuppyData.nickname.length > 32) {
-      this.invalidFields.push('name');
+      this.profileService.invalidFields.push('name');
       isValid = false;
     }
 
     if (!this.curBreed || this.curBreed == "" || this.appService.breeds.filter(it => it.name == this.curBreed).length == 0) {
-      this.invalidFields.push('breed');
+      this.profileService.invalidFields.push('breed');
       isValid = false;
     }
 
@@ -316,37 +317,37 @@ export class AddPuppyProfilePageComponent implements OnInit {
         (new Date().getTime() < new Date(this.birthdayModel.month + '-' + this.birthdayModel.day + '-' + this.birthdayModel.year).getTime()) || 
         (this.birthdayModel.day > 31 || this.birthdayModel.month > 12 || this.birthdayModel.year > new Date().getFullYear()) || 
         (this.birthdayModel.day < 1 || this.birthdayModel.month < 1 || this.birthdayModel.year < 1)) {
-      this.invalidFields.push('birthday');
+      this.profileService.invalidFields.push('birthday');
       isValid = false;
     }
 
     if (!this.currentPuppyData.earmark || this.currentPuppyData.earmark == "" || this.currentPuppyData.earmark.length > 64) {
-      this.invalidFields.push('stigma');
+      this.profileService.invalidFields.push('stigma');
       isValid = false;
     }
 
     if (!this.curFatherNickname || this.curFatherNickname == "" || this.fathers.filter(it => it.nickname == this.curFatherNickname).length == 0) {
-      this.invalidFields.push('dad');
+      this.profileService.invalidFields.push('dad');
       isValid = false;
     }
 
     if (!this.curMotherNickname || this.curMotherNickname == "" || this.mothers.filter(it => it.nickname == this.curMotherNickname).length == 0) {
-      this.invalidFields.push('mom');
+      this.profileService.invalidFields.push('mom');
       isValid = false;
     }
 
     if (this.currentPuppyData.gallery.length == 0) {
-      this.invalidFields.push('photos');
+      this.profileService.invalidFields.push('photos');
       isValid = false;
     }
 
     if (!this.currentPuppyData.about || this.currentPuppyData.about == "" || this.currentPuppyData.about.length > 512) {
-      this.invalidFields.push('info');
+      this.profileService.invalidFields.push('info');
       isValid = false;
     }
 
     if (!this.currentPuppyData.price || this.currentPuppyData.price > 500000 || this.currentPuppyData.price < 1) {
-      this.invalidFields.push('price');
+      this.profileService.invalidFields.push('price');
       isValid = false;
     }
     return isValid;

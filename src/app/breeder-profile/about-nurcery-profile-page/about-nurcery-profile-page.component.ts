@@ -22,7 +22,6 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   curMainBreed: string;
   curExtraBreed: string;
   isAdditionalBreed: boolean = false;
-  invalidFields: string[] = [];
   saveChagesEvent: any;
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
@@ -61,6 +60,20 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   ngOnDestroy(): void {
     this.saveChagesEvent.unsubscribe();
   }
+  onCityClick(event: any) {
+    this.profileService.inputValueChanged('city');
+    this.cityClick$.next(event.target.value);
+  }
+
+  onMainBreedClick(event: any) {
+    this.profileService.inputValueChanged('mainBreed');
+    this.mainBreedClick$.next(event.target.value);
+  }
+
+  onExtraBreedClick(event: any) {
+    this.profileService.inputValueChanged('extraBreed');
+    this.addBreedClick$.next(event.target.value);
+  }
 
   previewNurceryPhoto(): void {
     this.popupService.setPopupParams({
@@ -72,9 +85,9 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadAvatarImage(body).subscribe((imageData: any) => {
+        this.profileService.inputValueChanged('profilePhoto');
         this.popupService.setShowStatus(false);
         this.nurceryData.profilePhoto = imageData;
-        this.profileService.dataChangesSaved = false;
       });
       croppedHandler.unsubscribe();
     });
@@ -94,8 +107,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadNurceryGalleryImage(body).subscribe((imageData: any) => {
+        this.profileService.inputValueChanged('gallery');
         this.popupService.setShowStatus(false);
-        this.profileService.dataChangesSaved = false;
         if (index == -1)
           this.nurceryData.gallery.push(imageData);
         else
@@ -162,47 +175,47 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
   validateInputFields(): boolean {
     let isValid = true;
-    this.invalidFields = [];
+    this.profileService.invalidFields = [];
 
     if (this.nurceryData.name && this.nurceryData.name.length > 64) {
-      this.invalidFields.push('name');
+      this.profileService.invalidFields.push('name');
       isValid = false;
     }
 
 
     if (!this.curMainBreed || this.appService.breeds.filter(it => it.name == this.curMainBreed).length == 0) {
-      this.invalidFields.push('mainBreed');
+      this.profileService.invalidFields.push('mainBreed');
       isValid = false;
     }
 
     if (this.curExtraBreed && this.appService.breeds.filter(it => it.name == this.curExtraBreed).length == 0) {
-      this.invalidFields.push('extraBreed');
+      this.profileService.invalidFields.push('extraBreed');
       isValid = false;
     }
 
     if (this.curMainBreed && this.curExtraBreed && this.curMainBreed == this.curExtraBreed) {
-      this.invalidFields.push('mainBreed');
-      this.invalidFields.push('extraBreed');
+      this.profileService.invalidFields.push('mainBreed');
+      this.profileService.invalidFields.push('extraBreed');
       isValid = false;
     }
 
     if (!this.nurceryData.city || this.nurceryData.city == "" || this.nurceryData.city.length > 64) {
-      this.invalidFields.push('city');
+      this.profileService.invalidFields.push('city');
       isValid = false;
     }
 
     if (!this.nurceryData.description || this.nurceryData.description == "" || this.nurceryData.description.length > 512) {
-      this.invalidFields.push('desc');
+      this.profileService.invalidFields.push('desc');
       isValid = false;
     }
 
     if (!this.nurceryData.profilePhoto) {
-      this.invalidFields.push('profilePhoto');
+      this.profileService.invalidFields.push('profilePhoto');
       isValid = false;
     }
 
     if (this.nurceryData.gallery.length == 0) {
-      this.invalidFields.push('gallery');
+      this.profileService.invalidFields.push('gallery');
       isValid = false;
     }
     return isValid;

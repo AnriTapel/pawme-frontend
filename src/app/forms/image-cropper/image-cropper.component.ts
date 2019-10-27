@@ -2,7 +2,6 @@ import { Component, AfterViewInit, ViewChild, Inject, Input } from '@angular/cor
 import { LyResizingCroppingImages, ImgCropperConfig } from '@alyle/ui/resizing-cropping-images';
 import { LyTheme2 } from '@alyle/ui';
 import { EventService } from 'src/app/services/event-service/events.service';
-import { LoaderService } from 'src/app/services/loader/loader.service';
 
 const styles = (theme) => ({
   '@global': {

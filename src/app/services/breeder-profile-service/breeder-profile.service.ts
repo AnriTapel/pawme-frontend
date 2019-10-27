@@ -21,7 +21,6 @@ export class BreederProfileService {
   isMobileMenuVisible: boolean = false;
 
   dataChangesSaved: boolean = true;
-  parentTestsChangesSaved: boolean = true;
 
   constructor(private appService: AppService, private alertService: AlertService, private eventService: EventService) { }
 
@@ -53,11 +52,10 @@ export class BreederProfileService {
   }
 
   setCurProfilePage(page: any): void {
-    if (!this.dataChangesSaved || !this.parentTestsChangesSaved) {
+    if (!this.dataChangesSaved) {
       let onSuccess = () => {
         this.invalidFields = [];
         this.dataChangesSaved = true;
-        this.parentTestsChangesSaved = true;
         this.curProfilePage = page;
         this.isMobileMenuVisible = false;
         scroll(0, 0);
@@ -72,6 +70,7 @@ export class BreederProfileService {
         ["Все несохраненные изменения будут утеряны. Перейти в другой раздел?"],
         "Перейти без сохранения", "custom-btn btn-transparent", "Сохранить изменения", "custom-btn btn-purple", onSuccess, onError);
     } else {
+      this.invalidFields = [];
       this.curProfilePage = page;
       this.isMobileMenuVisible = false;
       scroll(0, 0);
@@ -85,7 +84,6 @@ export class BreederProfileService {
   showMyPage(): void {
     let onSuccess = () => {
       this.dataChangesSaved = true;
-      this.parentTestsChangesSaved = true;
       window.open('/breeder/' + this.appService.userData.id, '_blank');
     };
 

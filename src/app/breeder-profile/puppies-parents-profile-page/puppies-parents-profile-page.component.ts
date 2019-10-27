@@ -33,9 +33,6 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   currentBreed: string;
   saveChagesEvent: any;
 
-  invalidAddingFields: any[] = [];
-  invalidGeneralFields: any[] = [];
-
   parentTests: Object = {
     "Бедра": ["Тест на дисплазию тазобедренного сустава (по стандартам РКФ)"],
     "Локти": ["Тест на дисплазию локтевых суставов (по стандартам РКФ)"],
@@ -86,8 +83,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
             this.saveDraft();
             window.open('/breeder/' + this.appService.userData.id, '_blank');
           }
-        } else if (!this.profileService.parentTestsChangesSaved)
-          this.saveChanges(forPreview);
+        }
       } else
         this.saveChanges(forPreview);
     });
@@ -98,12 +94,12 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   addMedical(): void {
-    this.invalidGeneralFields = [];
+    this.profileService.invalidFields = [];
     if (!this.currentBodyPart || this.currentBodyPart == "")
-      this.invalidGeneralFields.push('bodyParts');
+      this.profileService.invalidFields.push('bodyParts');
     if (!this.currentMedicalTest || this.currentMedicalTest == "")
-      this.invalidGeneralFields.push('tests');
-    if (this.invalidGeneralFields.length != 0)
+      this.profileService.invalidFields.push('tests');
+    if (this.profileService.invalidFields.includes('tests') || this.profileService.invalidFields.includes('bodyParts'))
       return;
 
     let curMedical: ParentTest = {
@@ -113,12 +109,22 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     this.parentsData.parentTests.push(curMedical);
     this.currentBodyPart = null;
     this.currentMedicalTest = null;
-    this.profileService.parentTestsChangesSaved = false;
+    this.saveChanges(false);
+  }
+
+  onBodyPartClick(event: any) {
+    this.profileService.inputValueChanged('bodyParts');
+    this.bodyPartClick$.next(event.target.value);
+  }
+
+  onTestsClick(event: any) {
+    this.profileService.inputValueChanged('tests');
+    this.medicalTestClick$.next(event.target.value);
   }
 
   deleteMedical(index: number): void {
     this.parentsData.parentTests.splice(index, 1);
-    this.profileService.parentTestsChangesSaved = false;
+    this.saveChanges(false);
   }
 
   showCurrentParentPage(index: number): void {
@@ -134,6 +140,11 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     scroll(0, 0);
   }
 
+  backToMainPage(): void {
+    this.currentParentData = null;
+    this.isMainPage = true;
+  }
+
   previewParentImage(index: number): void {
     this.popupService.setPopupParams({
       width: 210, height: 180, isRect: true,
@@ -144,7 +155,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadPetImage(body).subscribe((imageData: any) => {
-        this.profileService.dataChangesSaved = false;
+        this.profileService.inputValueChanged('photos');
         this.popupService.setShowStatus(false);
         if (index == -1)
           this.currentParentData.gallery.push(imageData);
@@ -165,7 +176,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   addParent(forPreview: boolean) {
-    if (!this.validateAddingFields())
+    if (!this.validateFields())
       return;
     this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
 
@@ -173,39 +184,12 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.parentsData.parents.push(this.currentParentData);
       this.parentsData.parentDraft = null;
     }
-    this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
-      if (!this.appService.userData.parentsInfo) {
-        //@ts-ignore
-        ym(55779592, 'reachGoal', 'ParentsSave');
-        //@ts-ignore
-        Intercom('trackEvent', 'ParentsSave');
-      }
-      this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {
-        this.profileService.dataChangesSaved = true;
-        this.appService.userData = res;
-        this.parentsData = res.parentsInfo;
-        this.currentParentData = null;
-        this.currentBreed = null;
-        this.isMainPage = true;
-        this.notificationService.setContext('Изменения успешно сохранены', true);
-        this.notificationService.setVisibility(true);
-        scroll(0, 0);
-        if (forPreview)
-          window.open('/breeder/' + this.appService.userData.id, '_blank');
-      });
-    }, (err) => {
-      if (err.status == 403)
-        this.router.navigateByUrl('/login');
-      this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
-      this.notificationService.setVisibility(true);
-      scroll(0, 0);
-    }
-    );
+    this.saveChanges(forPreview);
   }
 
   deleteParent(index: number): void {
     this.parentsData.parents.splice(index, 1);
-    this.profileService.dataChangesSaved = false;
+    this.saveChanges(false);
   }
 
   saveDraft() {
@@ -232,26 +216,29 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   saveChanges(forPreview: boolean) {
-    if (!this.validateGeneralFields())
+    if (!this.validateFields())
       return;
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
-      if (!this.appService.userData.parentsInfo) {
+      if (this.appService.userData.parentsInfo && this.appService.userData.parentsInfo.parents.length == 2) {
         //@ts-ignore
         ym(55779592, 'reachGoal', 'ParentsSave');
         //@ts-ignore
         Intercom('trackEvent', 'ParentsSave');
       }
-      this.profileService.dataChangesSaved = true;
-      this.profileService.parentTestsChangesSaved = true;
-      this.appService.userData.parentsInfo = this.parentsData;
-      this.currentParentData = null;
-      this.isMainPage = true;
-      this.notificationService.setContext('Изменения успешно сохранены', true);
-      this.notificationService.setVisibility(true);
-      scroll(0, 0);
-      this.profileService.updateProfileFullness();
-      if (forPreview)
-        window.open('/breeder/' + this.appService.userData.id, '_blank');
+      this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {
+        this.profileService.dataChangesSaved = true;
+        this.appService.userData = res;
+        this.parentsData = res.parentsInfo;
+        this.currentParentData = null;
+        this.currentBreed = null;
+        this.isMainPage = true;
+        this.profileService.updateProfileFullness();
+        this.notificationService.setContext('Изменения успешно сохранены', true);
+        this.notificationService.setVisibility(true);
+        scroll(0, 0);
+        if (forPreview)
+          window.open('/breeder/' + this.appService.userData.id, '_blank');
+      });
     }, (err) => {
       if (err.status == 423)
         this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
@@ -261,41 +248,32 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
       this.notificationService.setVisibility(true);
       scroll(0, 0);
-    }
-    );
+    });
   }
 
-  validateGeneralFields(): boolean {
-    let isValid = true;
-    this.invalidGeneralFields = [];
-    if (this.parentsData.parents.length < 2) {
-      this.invalidGeneralFields.push('parents');
-      isValid = false;
-    }
+  validateFields(): boolean {
+    if (!this.currentParentData)
+      return true;
 
-    return isValid;
-  }
-
-  validateAddingFields(): boolean {
     let isValid = true;
-    this.invalidAddingFields = [];
+    this.profileService.invalidFields = [];
     if (!this.currentParentData.nickname || this.currentParentData.nickname == "" || this.currentParentData.nickname.length > 32) {
-      this.invalidAddingFields.push('name');
+      this.profileService.invalidFields.push('name');
       isValid = false;
     }
 
     if (!this.currentBreed || this.currentBreed == "" || this.appService.breeds.filter(it => it.name == this.currentBreed).length == 0) {
-      this.invalidAddingFields.push('breed');
+      this.profileService.invalidFields.push('breed');
       isValid = false;
     }
 
     if (this.currentParentData.gallery.length == 0) {
-      this.invalidAddingFields.push('photos');
+      this.profileService.invalidFields.push('photos');
       isValid = false;
     }
 
     if (!this.currentParentData.info || this.currentParentData.info == "" || this.currentParentData.info.length > 512) {
-      this.invalidAddingFields.push('info');
+      this.profileService.invalidFields.push('info');
       isValid = false;
     }
 

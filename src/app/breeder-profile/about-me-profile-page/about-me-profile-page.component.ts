@@ -19,7 +19,6 @@ export class AboutMeProfilePageComponent implements OnInit {
   currentClub: string = null;
   currentClubs: Array<string> = [];
 
-  invalidFields: Array<string> = [];
   saveChagesEvent: any;
 
   constructor(private popupService: PopupTemplateService, public appService: AppService, private eventService: EventService, private router: Router,
@@ -54,9 +53,9 @@ export class AboutMeProfilePageComponent implements OnInit {
     let croppedHandler = this.eventService.subscribe('image-cropped', (data) => {
       let body = this.appService.getImageDataForUpload(data);
       this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
+        this.profileService.inputValueChanged('photo');
         this.popupService.setShowStatus(false);
         this.breederData.photo = imageData;
-        this.profileService.dataChangesSaved = false;
       });
       croppedHandler.unsubscribe();
     });
@@ -111,25 +110,25 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   validateInputFields(): boolean {
     let isValid = true;
-    this.invalidFields = [];
-
+    this.profileService.invalidFields = [];
+    
     if (!this.breederData.about || this.breederData.about == "" || this.breederData.about.length > 2048) {
-      this.invalidFields.push('about');
+      this.profileService.invalidFields.push('about');
       isValid = false;
     }
 
     if (!this.breederData.outstandingInfo || this.breederData.outstandingInfo == "" || this.breederData.outstandingInfo.length > 2048) {
-      this.invalidFields.push('outstanding');
+      this.profileService.invalidFields.push('outstanding');
       isValid = false;
     }
 
     if (!this.breederData.howItStarted || this.breederData.howItStarted == "" || this.breederData.howItStarted.length > 2048) {
-      this.invalidFields.push('howItStarted');
+      this.profileService.invalidFields.push('howItStarted');
       isValid = false;
     }
 
     if (!this.breederData.photo) {
-      this.invalidFields.push('photo');
+      this.profileService.invalidFields.push('photo');
       isValid = false;
     }
 

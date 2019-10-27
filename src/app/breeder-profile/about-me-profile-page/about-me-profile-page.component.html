@@ -17,7 +17,7 @@
             {{appService.getTextareaLimit(breederData.about, 2048)}}
         </span>
         <textarea rows="3" [(ngModel)]="breederData.about" placeholder="Введите текст" name="about-me" class="form-control custom-form-control-border"
-            (change)="this.profileService.dataChangesSaved = false" [class.invalid-form-field-value]="invalidFields.includes('about')"></textarea>
+            (change)="profileService.inputValueChanged('about')" [class.invalid-form-field-value]="profileService.invalidFields.includes('about')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -30,7 +30,7 @@
             {{appService.getTextareaLimit(breederData.howItStarted, 2048)}}
         </span>
         <textarea rows="3" [(ngModel)]="breederData.howItStarted" class="form-control custom-form-control-border" placeholder="Введите текст"
-            (change)="this.profileService.dataChangesSaved = false" name="howItStarted" [class.invalid-form-field-value]="invalidFields.includes('howItStarted')"></textarea>
+            (change)="profileService.inputValueChanged('howItStarted')" name="howItStarted" [class.invalid-form-field-value]="profileService.invalidFields.includes('howItStarted')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -42,7 +42,7 @@
             {{appService.getTextareaLimit(breederData.outstandingInfo, 2048)}}
         </span>
         <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border" placeholder="Введите текст"
-            (change)="this.profileService.dataChangesSaved = false" name="features" [class.invalid-form-field-value]="invalidFields.includes('outstanding')"></textarea>
+            (change)="profileService.inputValueChanged('outstanding')" name="features" [class.invalid-form-field-value]="profileService.invalidFields.includes('outstanding')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -50,7 +50,7 @@
         <br>
         <span class="block-description">Заводчик с личным фото вызывает больше доверия у покупателей. Обычно используют фото с питомцами.</span>
 
-        <div *ngIf="!breederData.photo" class="gallery-initial-block" [class.invalid-form-field-value]="invalidFields.includes('photo')"
+        <div *ngIf="!breederData.photo" class="gallery-initial-block" [class.invalid-form-field-value]="profileService.invalidFields.includes('photo')"
             (click)="previewPersonalImage()">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
@@ -80,7 +80,7 @@
             </div>
         </div>
         <input type="text" class="form-control custom-form-control-border" name="clubs" [(ngModel)]="currentClub" [disabled]="currentClubs.length > 9"
-            [class.invalid-form-field-value]="invalidFields.includes('clubs')" (keyup.enter)="addClub()" />
+            (keyup.enter)="addClub()" />
     </div>
 
     <div class="breeder-profile-subpage-form-right" style="align-self: end;">
@@ -122,10 +122,10 @@
     </div>
 
     <div class="lower-btn">
-        <span *ngIf="invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
+        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
                 Пожалуйста, заполните поля, выделенные красным
         </span>
-        <br *ngIf="invalidFields.length > 0" />
+        <br *ngIf="profileService.invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
     </div>
 </div>

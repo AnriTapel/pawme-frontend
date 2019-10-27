@@ -10,9 +10,9 @@
         <label for="puppies-age">Возраст продажи щенков</label>
         <div class="input-group mb-3">
             <input type="number" min="0" name="puppies-age" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.age" placeholder="от"
-                (change)="profileService.dataChangesSaved = false" aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="invalidFields.includes('age')">
+                (change)="profileService.inputValueChanged('age')" aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="profileService.invalidFields.includes('age')">
             <div class="input-group-append">
-                <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('age')"
+                <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="profileService.invalidFields.includes('age')"
                     id="basic-addon2">недель</span>
             </div>
         </div>
@@ -22,9 +22,9 @@
         <label for="puppies-price">Стоимость щенков в рублях</label>
         <div class="input-group">
             <input type="number" min="0" class="form-control custom-form-control-border" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
-                (change)="profileService.dataChangesSaved = false" placeholder="от" [class.invalid-form-field-value]="invalidFields.includes('priceFrom')">
-            <input type="number" min="0" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до" (change)="profileService.dataChangesSaved = false"
-                [class.invalid-form-field-value]="invalidFields.includes('priceTo')">
+                (change)="profileService.inputValueChanged('priceFrom')" placeholder="от" [class.invalid-form-field-value]="profileService.invalidFields.includes('priceFrom')">
+            <input type="number" min="0" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до" (change)="profileService.inputValueChanged('priceFrom')"
+                [class.invalid-form-field-value]="profileService.invalidFields.includes('priceTo')">
         </div>
     </div>
 
@@ -36,7 +36,7 @@
             </strong> и
             <strong>клеймо</strong>.</p>
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet" [class.invalid-form-field-value]="invalidFields.includes('set')">
+            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet" [class.invalid-form-field-value]="profileService.invalidFields.includes('set')">
                 <img *ngIf="puppiesData.petmanSet" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю наличие такого комплекта</label>
@@ -53,7 +53,7 @@
             <div class="breeder-profile-subpage-form-left">
                 <ng-container *ngFor="let test of appService.puppyTests">
                     <div *ngIf="test.id % 2 == 1" class="custom-checkbox">
-                        <div (click)="puppyTestClicked(test)" [class.invalid-form-checkbox]="invalidFields.includes('tests')">
+                        <div (click)="puppyTestClicked(test)" [class.invalid-form-checkbox]="profileService.invalidFields.includes('tests')">
                             <img *ngIf="getTestStatus(test)" src="./assets/img/check-mark.png" />
                         </div>
                         <label>{{test.name}}</label>
@@ -63,7 +63,7 @@
             <div class="breeder-profile-subpage-form-right">
                 <ng-container *ngFor="let test of appService.puppyTests">
                     <div *ngIf="test.id % 2 == 0" class="custom-checkbox">
-                        <div (click)="puppyTestClicked(test)" [class.invalid-form-checkbox]="invalidFields.includes('tests')">
+                        <div (click)="puppyTestClicked(test)" [class.invalid-form-checkbox]="profileService.invalidFields.includes('tests')">
                             <img *ngIf="getTestStatus(test)" src="./assets/img/check-mark.png" />
                         </div>
                         <label>{{test.name}}</label>
@@ -84,7 +84,7 @@
 
 
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract" [class.invalid-form-field-value]="invalidFields.includes('contract')">
+            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract" [class.invalid-form-field-value]="profileService.invalidFields.includes('contract')">
                 <img *ngIf="puppiesData.petmanContract" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю готовность использовать договор</label>
@@ -98,9 +98,9 @@
         <div class="input-group mb-3">
             <input type="number" min="0" name="guarantee-period" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceTerm"
                 placeholder="12" aria-label="12" aria-describedby="basic-addon2" (change)="profileService.dataChangesSaved = false"
-                [class.invalid-form-field-value]="invalidFields.includes('term')">
+                [class.invalid-form-field-value]="profileService.invalidFields.includes('term')">
             <div class="input-group-append">
-                <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="invalidFields.includes('term')"
+                <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="profileService.invalidFields.includes('term')"
                     id="basic-addon2">месяцев</span>
             </div>
         </div>
@@ -120,14 +120,14 @@
             {{appService.getTextareaLimit(puppiesData.gifts, 512)}}
         </span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts" 
-            [class.invalid-form-field-value]="invalidFields.includes('gifts')"(change)="profileService.dataChangesSaved = false"></textarea>
+            [class.invalid-form-field-value]="profileService.invalidFields.includes('gifts')"(change)="profileService.inputValueChanged('gifts')"></textarea>
     </div>
 
     <div class="lower-btn">
-        <span *ngIf="invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
+        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
             Пожалуйста, заполните поля, выделенные красным
         </span>
-        <br *ngIf="invalidFields.length > 0" />
+        <br *ngIf="profileService.invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
     </div>
 </div>
