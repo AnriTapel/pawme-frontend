@@ -17,8 +17,11 @@ export class BreederProfileComponent implements OnInit {
     } else if (appService.meData.type == 'BREEDER' && appService.userData.status == 'UNCONFIRMED') {
       router.navigateByUrl('/confirm-email/unconfirmed');
       return;
-    } 
+    }
+     
     this.profileService.updateProfileFullness();
+    if (this.appService.userData.profileFill < 2)
+      this.appService.isOnboardingVisible = true;
   }
 
   ngOnInit() {

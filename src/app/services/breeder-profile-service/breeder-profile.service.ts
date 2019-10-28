@@ -25,6 +25,7 @@ export class BreederProfileService {
   constructor(private appService: AppService, private alertService: AlertService, private eventService: EventService) { }
 
   updateProfileFullness() {
+    let initialIndex = this.appService.userData.profileFill;
     let index = 1;
     if (this.appService.userData.generalInfo)
       index++;
@@ -36,6 +37,16 @@ export class BreederProfileService {
       index++;
 
     this.appService.userData.profileFill = index;
+
+    if (initialIndex == 4 && index == 5) {
+      //@ts-ignore
+      ym(55779592, 'reachGoal', 'CompletedProfile');
+      //@ts-ignore
+      fbq('track', 'StartTrial', { value: 1, currency: 'RUB' });
+      //@ts-ignore
+      Intercom('trackEvent', 'CompletedProfile');
+    }
+
   }
 
   inputValueChanged(name: string): void {
