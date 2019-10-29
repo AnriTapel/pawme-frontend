@@ -112,7 +112,7 @@
     <div class="lower-btn">
         <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
             style="display: block; margin-bottom: 1em;">
-            Пожалуйста, заполните поля, выделенные красным
+            Пожалуйста, заполните или исправьте поля, выделенные красным
         </span>
     </div>
 
@@ -210,8 +210,8 @@
             </div>
         </div>
 
-        <div *ngIf="currentParentData.gallery.length == 0" (click)="previewParentImage(-1)"
-            class="gallery-upload-button custom-btn btn-transparent">
+        <div *ngIf="currentParentData.gallery.length == 0" class="gallery-upload-button custom-btn btn-transparent"
+            (click)="previewParentImage(-1)" [class.invalid-form-field-value]="profileService.invalidFields.includes('photos')">
             <span>Выбрать</span>
         </div>
     </div>
@@ -219,7 +219,7 @@
     <div class="lower-btn">
         <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
             style="display: block; margin-bottom: 1em;">
-            Пожалуйста, заполните поля, выделенные красным
+            Пожалуйста, заполните или исправьте поля, выделенные красным
         </span>
         <br *ngIf="profileService.invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple"

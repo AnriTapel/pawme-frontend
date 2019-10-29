@@ -107,7 +107,8 @@
             </div>
         </div>
 
-        <div class="gallery-upload-button custom-btn btn-transparent" (click)="previewGalleryPhoto(-1)">
+        <div *ngIf="nurceryData.gallery.length == 0" class="gallery-upload-button custom-btn btn-transparent" 
+                [class.invalid-form-field-value]="profileService.invalidFields.includes('gallery')" (click)="previewGalleryPhoto(-1)">
             <span>Выбрать</span>
         </div>
     </div>
@@ -140,7 +141,7 @@
 
     <div class="lower-btn">
         <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
-            Пожалуйста, заполните поля, выделенные красным
+            Пожалуйста, заполните или исправьте поля, выделенные красным
         </span>
         <br *ngIf="profileService.invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
