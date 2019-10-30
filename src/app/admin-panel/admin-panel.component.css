@@ -107,4 +107,29 @@ section .data-container table td {
   min-width: 120px;
   padding: 0 10px;
 }
+
+section .add-breed-block {
+  width: 100%;
+  padding: 25px 15px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+section .add-breed-block .new-breed-block {
+  width: 35%;
+  max-width: 350px;
+}
+
+section .add-breed-block > input {
+  float: right;
+  margin: 20px 15px 0;
+}
 /*# sourceMappingURL=admin-panel.component.css.map */

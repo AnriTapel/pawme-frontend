@@ -216,6 +216,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         //@ts-ignore
         ym(55779592, 'reachGoal', 'ParentsSave');
         //@ts-ignore
+        gtag('event', 'ParentsSave');
+        //@ts-ignore
         Intercom('trackEvent', 'ParentsSave');
       }
       this.breederService.getBreederUsingGET(this.appService.userData.id).subscribe((res) => {

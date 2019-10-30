@@ -13,6 +13,9 @@
         <div (click)="switchSection('customers')">
             <span [class.active]="activeSection == 'customers'">Покупатели</span>
         </div>
+        <div (click)="switchSection('add-breeds')">
+            <span [class.active]="activeSection == 'add-breeds'">Добавить породу</span>
+        </div>
     </aside>
     <section>
         <div *ngIf="activeSection == 'breeders'">
@@ -27,6 +30,8 @@
                         <th>id</th>
                         <th>Имя</th>
                         <th>Фамилия</th>
+                        <!--<th>Город</th>
+                        <th>Породы</th>-->
                         <th>Email</th>
                         <th>Дата создания</th>
                         <th>Ссылка</th>
@@ -37,14 +42,18 @@
                         <td style="text-align: center;">{{breeder.id}}</td>
                         <td>{{breeder.name}}</td>
                         <td>{{breeder.surname}}</td>
+                        <!--<td>{{getBreederCity(breeder.generalInfo)}}</td>
+                        <td>{{getBreederBreeds(breeder.generalInfo)}}</td>-->
                         <td>{{breeder.email}}</td>
                         <td>{{getCreateDateAsString(breeder.createDate)}}</td>
-                        <td (click)="openBreederPage(breeder.id)" style="cursor: pointer;color: #0094c5;">https://petman.co/breeder/{{breeder.id}}</td>
+                        <td (click)="openBreederPage(breeder.id)" style="cursor: pointer;color: #0094c5;">
+                            https://petman.co/breeder/{{breeder.id}}</td>
                         <td style="text-align: center;">{{displayBreederProfileFill(breeder.profileFill)}}</td>
                         <td style="text-align: right;">
                             <select (change)="changeBreederStatus(breeder.id, $event)">
                                 <option [selected]="breeder.status == 'ACTIVE'" value="ACTIVE">Активен</option>
-                                <option [selected]="breeder.status == 'UNCONFIRMED'" value="UNCONFIRMED">Неподтвержден</option>
+                                <option [selected]="breeder.status == 'UNCONFIRMED'" value="UNCONFIRMED">Неподтвержден
+                                </option>
                                 <option [selected]="breeder.status == 'BLOCKED'" value="BLOCKED">Заблокирован</option>
                                 <option [selected]="breeder.status == 'HIDDEN'" value="HIDDEN">Скрыт</option>
                                 <option [selected]="breeder.status == 'DELETED'" value="DELETED">Удален</option>
@@ -81,6 +90,21 @@
                     </tr>
                 </table>
             </div>
+        </div>
+
+        <div *ngIf="activeSection == 'add-breeds'">
+            <div class="add-breed-block">
+                <div class="new-breed-block">
+                    <label>Именительный падеж</label>
+                    <input type="text" class="form-control custom-form-control-border" [(ngModel)]="newBreed.name">
+                </div>
+
+                <div class="new-breed-block">
+                    <label>Родительный падеж</label>
+                    <input type="text" class="form-control custom-form-control-border" [(ngModel)]="newBreed.forPage">
+                </div>
+            </div>
+            <input type="button" class="custom-btn btn-purple" style="float: right; margin: 20px 15px 0;" value="Добавить" (click)="addBreed" />
         </div>
     </section>
 </main>

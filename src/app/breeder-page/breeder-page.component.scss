@@ -769,7 +769,8 @@ span, p, div {
             cursor: pointer;
 
             &:not(:last-child) {
-                margin-right: 30px;
+                margin-right: 20px;
+                margin-bottom: 20px;
             }
 
             img {
@@ -788,6 +789,9 @@ span, p, div {
             .certificates-list {
                 width: 100%;
                 overflow-x: scroll;
+            }
+            .certificate-item{
+                margin-bottom: 0 !important;
             }
             .certificates-list.flex-wrap {
                 flex-wrap: nowrap!important;

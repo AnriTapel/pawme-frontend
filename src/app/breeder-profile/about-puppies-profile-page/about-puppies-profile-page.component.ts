@@ -67,6 +67,8 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
           //@ts-ignore
           ym(55779592, 'reachGoal', 'PuppySave');
           //@ts-ignore
+          gtag('event', 'PuppySave');
+          //@ts-ignore
           Intercom('trackEvent', 'PuppySave');
         }
         this.appService.userData.puppiesInfo = this.puppiesData;

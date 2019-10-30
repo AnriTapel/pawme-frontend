@@ -97,6 +97,8 @@ export class AppService {
       //@ts-ignore
       ym(55779592, 'reachGoal', 'MailConfirmed');
       //@ts-ignore
+      gtag('event', 'MailConfirmed');
+      //@ts-ignore
       fbq('track', 'CompleteRegistration');
       //@ts-ignore
       Intercom('trackEvent', 'MailConfirmed');

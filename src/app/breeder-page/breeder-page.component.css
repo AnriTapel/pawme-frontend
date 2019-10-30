@@ -931,7 +931,8 @@ span, p, div {
 }
 
 .section .awards-and-certificates .certificate-item:not(:last-child) {
-  margin-right: 30px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .section .awards-and-certificates .certificate-item img {
@@ -949,6 +950,9 @@ span, p, div {
   .section .awards-and-certificates .certificates-list {
     width: 100%;
     overflow-x: scroll;
+  }
+  .section .awards-and-certificates .certificate-item {
+    margin-bottom: 0 !important;
   }
   .section .awards-and-certificates .certificates-list.flex-wrap {
     -ms-flex-wrap: nowrap !important;

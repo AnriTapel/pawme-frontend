@@ -15,6 +15,7 @@ export class AdminPanelComponent implements OnInit {
   activeSection: string = 'breeders';
   breeders: any[] = [];
   messages: any[] = [];
+  newBreed = { name: null, forPage: null };
 
   constructor(private router: Router, private adminService: AdminControllerService, private appService: AppService,
     private http: HttpClient, private notificationService: NotificationBarService) {
@@ -42,6 +43,27 @@ export class AdminPanelComponent implements OnInit {
       return b.createDate.getTime() - a.createDate.getTime();
     })
     return sortRes.filter(it => it.status != 'DELETED');
+  }
+
+  getBreederCity(info: any): string {
+    if (!info)
+      return '-';
+    else
+      return info.city || '-';
+  }
+
+  getBreederBreeds(info: any): string {
+    if (!info)
+      return '-'
+    else {
+      let breeds = '';
+      if (info.mainBreed)
+        breeds += info.mainBreed.name;
+      if (info.extraBreed)
+        breeds += ', ' + info.extraBreed.name;
+
+      return breeds !== '' ? breeds : '-';
+    }
   }
 
   getCreateDateAsString(date: Date): string {

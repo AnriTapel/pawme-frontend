@@ -42,6 +42,8 @@ export class BreederProfileService {
       //@ts-ignore
       ym(55779592, 'reachGoal', 'CompletedProfile');
       //@ts-ignore
+      gtag('event', 'CompletedProfile');
+      //@ts-ignore
       fbq('track', 'StartTrial', { value: 1, currency: 'RUB' });
       //@ts-ignore
       Intercom('trackEvent', 'CompletedProfile');

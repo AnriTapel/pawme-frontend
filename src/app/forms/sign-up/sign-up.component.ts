@@ -48,6 +48,8 @@ export class SignUpComponent implements OnInit {
       res => {
         //@ts-ignore
         ym(55779592, 'reachGoal', 'Registration');
+        //@ts-ignore
+        gtag('event', 'Registration');
         this.router.navigate(['/confirm-email', this.breederData.email]);
       }, error => {
         if (error.status == 409)

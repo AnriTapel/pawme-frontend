@@ -146,6 +146,8 @@ export class AboutMeProfilePageComponent implements OnInit {
           //@ts-ignore
           ym(55779592, 'reachGoal', 'SelfSave');
           //@ts-ignore
+          gtag('event', 'SelfSave');
+          //@ts-ignore
           Intercom('trackEvent', 'SelfSave');
         }
         this.appService.userData.about = this.breederData;

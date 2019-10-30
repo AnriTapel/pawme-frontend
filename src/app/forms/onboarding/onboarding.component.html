@@ -1,6 +1,9 @@
-<div class="overlay-block">
-    <div class="onboarding-container">
+<div class="overlay-block" (click)="close()">
+    <div class="onboarding-container" (click)="$event.stopPropagation()">
         <img [src]="data[index].img" [alt]="data[index].title"/>
+        <div class="close-btn" (click)="close()">
+            <img src="./assets/img/close-button-white.svg" alt="Закрыть"/>
+        </div>
 
         <div class="main-block">
             <p class="slide-counter">{{index + 1}} из {{data.length}}</p>
@@ -8,10 +11,10 @@
             <p class="desc">{{data[index].desc}}</p>
 
             <div class="buttons-block">
-                <input *ngIf="index < 6" type="button" class="custom-btn btn-transparent" value="Пропустить тур" (click)="close()"/>
-                <input *ngIf="index < 6" type="button" class="custom-btn btn-purple" value="Далее" (click)="next()"/>
-                <input *ngIf="index == 6" type="button" class="custom-btn btn-purple finish-btn" value="Открыть пример и закончить тур"
-                    (click)="openDemoPage()"/>
+                <input *ngIf="index < 5" type="button" class="custom-btn btn-transparent" value="Пропустить тур" (click)="close()"/>
+                <input *ngIf="index < 5" type="button" class="custom-btn btn-purple" value="Далее" (click)="next()"/>
+                <input *ngIf="index == 5" type="button" class="custom-btn btn-purple finish-btn" value="Закончить тур"
+                    (click)="close()"/>
             </div>
         </div>
     </div>
