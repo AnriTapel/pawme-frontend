@@ -25,6 +25,8 @@
 
     <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-main-breed">Основная порода</label>
+        <span class="block-description">Не нашли свою породу? Временно укажите самую похожую и напишите нам в чат на сайте или на 
+            почту help@petman.co</span>
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="nurcery-main-breed" [(ngModel)]="curMainBreed"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('mainBreed')" id="main-breed" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
@@ -42,6 +44,8 @@
     <div *ngIf="isAdditionalBreed" class="breeder-profile-subpage-form-right extra-breed-block">
         <label for="nurcery-additional-breed">Дополнительная порода</label>
         <img src="./assets/img/close-button-black.svg" alt="Удалить дополнительную породу" (click)="deleteExtraBreed()" />
+        <span class="block-description">Не нашли свою породу? Временно укажите самую похожую и напишите нам в чат на сайте или на 
+                почту help@petman.co</span>
         <div class="dropdown-text-input">
             <input type="text" class="form-control custom-form-control-border" name="nurcery-additional-breed" [(ngModel)]="curExtraBreed"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('extraBreed')" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
