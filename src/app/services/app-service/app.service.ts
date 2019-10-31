@@ -72,6 +72,12 @@ export class AppService {
               router.navigateByUrl('/login');
               resolve();
             });
+
+          else if (this.meData.type == 'ANONYMOUS') {
+            if (window.location.href.indexOf('/email') != -1)
+              this.resolveEmailConfirm();
+            resolve();
+          }
           else
             resolve();
         });
@@ -138,7 +144,7 @@ export class AppService {
       const clicksWithClosedPopup$ = click$.pipe(filter(() => instance.isPopupOpen()));
       const inputFocus$ = focus$;
       // Add current text for cities
-      if (typeof(searchArray[0]) == 'string')
+      if (typeof (searchArray[0]) == 'string')
         text$.subscribe(res => {
           values = JSON.parse(JSON.stringify(searchArray));
           if (res !== '') values.push(res);
