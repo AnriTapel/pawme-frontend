@@ -78,6 +78,10 @@ export class AdminPanelComponent implements OnInit {
     return str.substr(0, str.length - 1);
   }
 
+  addBreed(): void {
+    
+  }
+
   switchSection(section: string): void {
     if (section == this.activeSection)
       return;
