@@ -96,7 +96,10 @@ export class AppService {
   resolveEmailConfirm(): void {
     let router = this.injector.get(Router);
     if (window.location.href.indexOf('/email-success') != -1) {
-      router.navigateByUrl('/breeder-profile');
+      if (this.meData.type == 'BREEDER')
+        router.navigateByUrl('/breeder-profile');
+      else
+        router.navigateByUrl('/login');
       this.notificationServie.setContext('Ваша почта успешно подтверждена', true);
       this.notificationServie.setVisibility(true);
       this.isOnboardingVisible = true;
