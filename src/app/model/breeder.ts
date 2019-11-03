@@ -23,6 +23,7 @@ export interface Breeder {
     id?: number;
     name: string;
     parentsInfo?: ParentsInfo;
+    phone?: string;
     profileFill?: number;
     puppies?: Array<Puppy>;
     puppiesInfo?: PuppiesInfo;

@@ -60,7 +60,7 @@ export class BreederMessageComponent implements OnInit {
     }
 
     if (!this.breederMessage.phone || this.breederMessage.phone == "" || this.breederMessage.phone.length < 8
-        || !this.appService.validatePhoneInput(this.breederMessage.phone) || this.breederMessage.phone.length > 16){
+        || this.breederMessage.phone.length != 18){
       isValid = false;
       this.invalidFields.push("phone");
     }

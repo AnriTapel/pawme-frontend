@@ -18,6 +18,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { Breed } from '../model/breed';
 import { BreederForAdmin } from '../model/breederForAdmin';
 import { MessageToBreeder } from '../model/messageToBreeder';
 
@@ -56,6 +57,53 @@ export class AdminControllerService {
         return false;
     }
 
+
+    /**
+     * addBreed
+     * 
+     * @param breed breed
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public addBreedUsingPUT(breed: Breed, observe?: 'body', reportProgress?: boolean): Observable<Breed>;
+    public addBreedUsingPUT(breed: Breed, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Breed>>;
+    public addBreedUsingPUT(breed: Breed, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Breed>>;
+    public addBreedUsingPUT(breed: Breed, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (breed === null || breed === undefined) {
+            throw new Error('Required parameter breed was null or undefined when calling addBreedUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<Breed>(`${this.basePath}/api/admin/breed`,
+            breed,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
 
     /**
      * listBreeders

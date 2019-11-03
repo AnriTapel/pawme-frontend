@@ -15,7 +15,7 @@ export class AdminPanelComponent implements OnInit {
   activeSection: string = 'breeders';
   breeders: any[] = [];
   messages: any[] = [];
-  newBreed = { name: null, forPage: null };
+  newBreed = { name: null, nameGen: null };
 
   constructor(private router: Router, private adminService: AdminControllerService, private appService: AppService,
     private http: HttpClient, private notificationService: NotificationBarService) {
@@ -45,22 +45,15 @@ export class AdminPanelComponent implements OnInit {
     return sortRes.filter(it => it.status != 'DELETED');
   }
 
-  getBreederCity(info: any): string {
-    if (!info)
-      return '-';
-    else
-      return info.city || '-';
-  }
-
-  getBreederBreeds(info: any): string {
-    if (!info)
+  getBreederBreeds(breeder: any): string {
+    if (!breeder)
       return '-'
     else {
       let breeds = '';
-      if (info.mainBreed)
-        breeds += info.mainBreed.name;
-      if (info.extraBreed)
-        breeds += ', ' + info.extraBreed.name;
+      if (breeder.mainBreed)
+        breeds += breeder.mainBreed;
+      if (breeder.extraBreed)
+        breeds += ', ' + breeder.extraBreed;
 
       return breeds !== '' ? breeds : '-';
     }
@@ -76,6 +69,19 @@ export class AdminPanelComponent implements OnInit {
       str += '○ ';
 
     return str.substr(0, str.length - 1);
+  }
+
+  addBreed(): void {
+    this.adminService.addBreedUsingPUT(this.newBreed).subscribe(
+      res => {
+        this.notificationService.setContext("Порода успешно добавлена", true);
+        this.notificationService.setVisibility(true);
+        this.newBreed = {name: null, nameGen: null};
+      }, err => {
+        this.notificationService.setContext("Не удалось добавить породу", false);
+        this.notificationService.setVisibility(true);
+      }
+    )
   }
 
   switchSection(section: string): void {

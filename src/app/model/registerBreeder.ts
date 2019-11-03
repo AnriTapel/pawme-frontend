@@ -15,5 +15,6 @@ export interface RegisterBreeder {
     email: string;
     name: string;
     password: string;
+    phone?: string;
     surname: string;
 }

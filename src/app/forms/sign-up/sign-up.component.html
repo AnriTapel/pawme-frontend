@@ -8,40 +8,54 @@
     <div class="form-group popup-form-group">
         <label for="name">Имя</label>
         <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="breederData.name"
-            [class.invalid-form-field-value]="invalidFields.includes('name')"/>
+            [class.invalid-form-field-value]="invalidFields.includes('name')" />
         <span *ngIf="invalidFields.includes('name')" class="invalid-field-message">Пожалуйста, введите Ваше имя</span>
     </div>
     <div class="form-group popup-form-group">
         <label for="lastname">Фамилия</label>
-        <input type="text" class="form-control custom-form-control-border" name="lastname" [(ngModel)]="breederData.surname"
-            [class.invalid-form-field-value]="invalidFields.includes('lastname')"/>
-        <span *ngIf="invalidFields.includes('lastname')" class="invalid-field-message">Пожалуйста, введите Вашу фамилию</span>
+        <input type="text" class="form-control custom-form-control-border" name="lastname"
+            [(ngModel)]="breederData.surname" [class.invalid-form-field-value]="invalidFields.includes('lastname')" />
+        <span *ngIf="invalidFields.includes('lastname')" class="invalid-field-message">Пожалуйста, введите Вашу
+            фамилию</span>
+    </div>
+    <div class="form-group popup-form-group">
+        <label for="phone">Ваш телефон</label>
+        <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
+            [(ngModel)]="breederData.phone" (input)="appService.setPhoneMask($event)"
+            (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
+            [class.invalid-form-field-value]="invalidFields.includes('phone')" />
+        <span *ngIf="invalidFields.includes('phone')" class="invalid-field-message">Пожалуйста, введите действительный
+            телефон</span>
     </div>
     <div class="form-group popup-form-group">
         <label for="email">Ваш Email</label>
         <input type="email" class="form-control custom-form-control-border" name="email" [(ngModel)]="breederData.email"
-            [class.invalid-form-field-value]="invalidFields.includes('email')"/>
-        <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный E-mail</span>
+            [class.invalid-form-field-value]="invalidFields.includes('email')" />
+        <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
+            E-mail</span>
     </div>
     <div class="form-group popup-form-group">
         <label for="password">Пароль</label>
-        <input type="password" class="form-control custom-form-control-border" name="password" [(ngModel)]="breederData.password"
-            [class.invalid-form-field-value]="invalidFields.includes('password')"/>
-        <span *ngIf="invalidFields.includes('password')" class="invalid-field-message">Пожалуйста, введите Ваш пароль</span>
+        <input type="password" class="form-control custom-form-control-border" name="password"
+            [(ngModel)]="breederData.password" [class.invalid-form-field-value]="invalidFields.includes('password')" />
+        <span *ngIf="invalidFields.includes('password')" class="invalid-field-message">Пожалуйста, введите Ваш
+            пароль</span>
     </div>
 
     <div class="custom-checkbox popup-form-check">
-        <div (click)="newBreederAcception = !newBreederAcception" [class.invalid-form-checkbox]="invalidFields.includes('acception')">
+        <div (click)="newBreederAcception = !newBreederAcception"
+            [class.invalid-form-checkbox]="invalidFields.includes('acception')">
             <img *ngIf="newBreederAcception" src="./assets/img/check-mark.png" />
         </div>
-        <label class="form-check-label">Согласен с условиями <a href="https://petman.co/agreement.pdf" target="_blank">Пользовательского
+        <label class="form-check-label">Согласен с условиями <a href="https://petman.co/agreement.pdf"
+                target="_blank">Пользовательского
                 соглашения</a>
             и <a href="https://petman.co/policy.pdf" target="_blank">Политикой конфиденциальности</a></label>
     </div>
 
-    <input type="button" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" (click)="signUpNewBreeder()"
-        value="Зарегистрироваться" />
-        
+    <input type="button" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;"
+        (click)="signUpNewBreeder()" value="Зарегистрироваться" />
+
     <div class="form-group popup-form-group" style="text-align: center;">
         <span>Уже есть аккаунт? <a [routerLink]="['/login']">Войти</a></span>
     </div>

@@ -13,10 +13,11 @@ import { Router } from '@angular/router';
 export class SignUpComponent implements OnInit {
 
   breederData: RegisterBreeder = {
-    name: "",
-    surname: "",
-    email: "",
-    password: ""
+    name: null,
+    surname: null,
+    phone: null,
+    email: null,
+    password: null
   }
 
   newBreederAcception: boolean = true;
@@ -71,6 +72,12 @@ export class SignUpComponent implements OnInit {
       || this.breederData.surname.length < 2 || this.breederData.surname.length > 30) {
       isValid = false;
       this.invalidFields.push("lastname");
+    }
+
+    if (!this.breederData.phone || this.breederData.phone == ""
+      || this.breederData.phone.length != 18) {
+      isValid = false;
+      this.invalidFields.push("phone");
     }
 
     if (!this.breederData.email || this.breederData.email == ""

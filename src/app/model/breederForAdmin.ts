@@ -12,10 +12,15 @@
 
 
 export interface BreederForAdmin { 
+    city?: string;
     createDate?: Date;
     email?: string;
+    extraBreed?: string;
     id?: number;
+    mainBreed?: string;
     name?: string;
+    phone?: string;
+    profileFill?: number;
     status?: BreederForAdmin.StatusEnum;
     surname?: string;
 }

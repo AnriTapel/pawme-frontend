@@ -63,6 +63,8 @@ export class AppService {
               window.intercomSettings.user_id = res.id;
               //@ts-ignore
               window.intercomSettings['breeder_page_url'] = 'https://petman.co/breeder/' + res.id;
+              //@ts-ignore
+              window.intercomSettings.email = this.meData.email;
               this.userData = res;
               if (window.location.href.indexOf('/email') != -1)
                 this.resolveEmailConfirm();
@@ -147,7 +149,7 @@ export class AppService {
       if (typeof (searchArray[0]) == 'string')
         text$.subscribe(res => {
           values = JSON.parse(JSON.stringify(searchArray));
-          if (res !== '') values.push(res);
+          if (res !== '' && values.filter(it => it == res).length == 0) values.push(res);
         });
 
       return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
@@ -185,10 +187,34 @@ export class AppService {
     return re.test(email);
   }
 
-  validatePhoneInput(phone: string): boolean {
-    let re = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
-    return re.test(phone);
+  setCursorPosition(pos, elem) {
+    elem.focus();
+    if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);
+    else if (elem.createTextRange) {
+      var range = elem.createTextRange();
+      range.collapse(true);
+      range.moveEnd("character", pos);
+      range.moveStart("character", pos);
+      range.select();
+    }
   }
+
+  setPhoneMask(event) {
+    var matrix = "+7 (___) ___ ____",
+      i = 0,
+      def = matrix.replace(/\D/g, ""),
+      val = event.srcElement.value.replace(/\D/g, "");
+    if (def.length >= val.length)
+      val = def;
+    event.srcElement.value = matrix.replace(/./g, function (a) {
+      return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a
+    });
+    if (event.type == "blur") {
+      if (event.srcElement.value.length == 2)
+        event.srcElement.value = ""
+    } else 
+      this.setCursorPosition(event.srcElement.value.length, event.srcElement);
+  };
 
   getImageDataForUpload(data: any): FormData {
     const body = new FormData();
