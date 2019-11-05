@@ -17,22 +17,24 @@ $block-padding: 8vw;
     margin: 3vw $block-padding auto;
     width: 585px;
 
-    h1{
-        font-size: 32px;
-        line-height: 45px;
-        font-family: 'Intro-Bold';
-        color: #fff;
+    .title-text {
+        h1{
+            font-size: 32px;
+            line-height: 45px;
+            font-family: 'Intro-Bold';
+            color: #fff;
+        }
+
+        p{
+            margin: 20px 0 32px;
+            color: #fff;
+            font-size: 16px;
+            font-family: 'Intro-Book';
+            width: 80%;
+        }
     }
 
-    &>p{
-        margin: 20px 0 32px;
-        color: #fff;
-        font-size: 16px;
-        font-family: 'Intro-Book';
-        width: 80%;
-    }
-
-    div{
+    .email-input-block{
         width: 415px;
         background-color: #fff;
         border-radius: 10px;
@@ -218,18 +220,21 @@ $block-padding: 8vw;
         padding: 1em;
         margin: 2em 0 0;
         text-align: center;
+        justify-content: space-around;
         
-        h1{
-            font-size: 28px;
-            line-height: 28px;
+        .title-text{
+            h1{
+                font-size: 28px;
+                line-height: 28px;
+            }
+
+            p{
+                width: 100%;
+                margin: 15px 0;
+            }
         }
 
-        &>p{
-            width: 100%;
-            margin: 15px 0;
-        }
-
-        div{
+        .email-input-block{
             width: 100%;
         }
     }

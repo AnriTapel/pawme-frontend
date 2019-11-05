@@ -25,14 +25,14 @@
   width: 585px;
 }
 
-.breeder-landing-title h1 {
+.breeder-landing-title .title-text h1 {
   font-size: 32px;
   line-height: 45px;
   font-family: 'Intro-Bold';
   color: #fff;
 }
 
-.breeder-landing-title > p {
+.breeder-landing-title .title-text p {
   margin: 20px 0 32px;
   color: #fff;
   font-size: 16px;
@@ -40,7 +40,7 @@
   width: 80%;
 }
 
-.breeder-landing-title div {
+.breeder-landing-title .email-input-block {
   width: 415px;
   background-color: #fff;
   border-radius: 10px;
@@ -53,7 +53,7 @@
   background-size: auto;
 }
 
-.breeder-landing-title div p {
+.breeder-landing-title .email-input-block p {
   font-family: 'Intro-Regular';
   font-size: 18px;
   text-align: center;
@@ -61,12 +61,12 @@
   margin-bottom: 10px;
 }
 
-.breeder-landing-title div button {
+.breeder-landing-title .email-input-block button {
   margin: 15px 0;
   width: 100%;
 }
 
-.breeder-landing-title div span {
+.breeder-landing-title .email-input-block span {
   font-family: 'Intro-Book';
   font-size: 14px;
   opacity: .5;
@@ -226,16 +226,18 @@
     padding: 1em;
     margin: 2em 0 0;
     text-align: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
   }
-  .breeder-landing-title h1 {
+  .breeder-landing-title .title-text h1 {
     font-size: 28px;
     line-height: 28px;
   }
-  .breeder-landing-title > p {
+  .breeder-landing-title .title-text p {
     width: 100%;
     margin: 15px 0;
   }
-  .breeder-landing-title div {
+  .breeder-landing-title .email-input-block {
     width: 100%;
   }
   .what-is-avail-block .grid-block {

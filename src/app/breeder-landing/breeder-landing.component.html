@@ -1,10 +1,11 @@
 <div class="breeder-landing-top-block">
     <app-header class='header-for-landing'></app-header>
     <div class="breeder-landing-title">
-        <h1>Платформа для профессиональных заводчиков</h1>
-        <p>Получите современные инструменты для работы с клиентами и увеличьте вашу эффективность. Бесплатно.</p>
-
-        <div>
+        <div class="title-text">
+            <h1>Платформа для профессиональных заводчиков</h1>
+            <p>Получите современные инструменты для работы с клиентами и увеличьте вашу эффективность. Бесплатно.</p>
+        </div>
+        <div class="email-input-block">
             <p>Создайте свою страницу прямо сейчас</p>
             <input type="text" class="form-control custom-form-control-border" [(ngModel)]="newBreederEmail" 
                 placeholder="Ваш e-mail" [class.invalid-form-field-value]="emailError"/>
