@@ -59,8 +59,8 @@ export class BreederMessageComponent implements OnInit {
       this.invalidFields.push("email");
     }
 
-    if (!this.breederMessage.phone || this.breederMessage.phone == "" || this.breederMessage.phone.length < 8
-        || this.breederMessage.phone.length != 18){
+    if (!this.breederMessage.phone || this.breederMessage.phone == ""
+        || this.breederMessage.phone.length != 17){
       isValid = false;
       this.invalidFields.push("phone");
     }
