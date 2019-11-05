@@ -33,3 +33,12 @@ header{
         height: 100%;
     }
 }
+
+.white-login-btn{
+    border: 1px solid white;
+    color: #fff !important;
+
+    &:hover{
+        color: #645fc9 !important;
+    }
+}

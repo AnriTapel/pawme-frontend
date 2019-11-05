@@ -35,4 +35,13 @@ header {
   border-radius: 50%;
   height: 100%;
 }
+
+.white-login-btn {
+  border: 1px solid white;
+  color: #fff !important;
+}
+
+.white-login-btn:hover {
+  color: #645fc9 !important;
+}
 /*# sourceMappingURL=header.component.css.map */

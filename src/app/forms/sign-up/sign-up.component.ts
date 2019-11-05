@@ -25,11 +25,12 @@ export class SignUpComponent implements OnInit {
   invalidFields: any[] = [];
   errorText: string = null;
 
-  constructor(private popupService: PopupTemplateService, private appService: AppService,
+  constructor(private popupService: PopupTemplateService, public appService: AppService,
     private breederService: BreederControllerService, private router: Router) { scroll(0, 0) }
 
   ngOnInit() {
     document.body.style.overflowY = 'scroll';
+    this.breederData.email = this.appService.meData['newBreederEmail'];
   }
 
   ngOnDestroy() {

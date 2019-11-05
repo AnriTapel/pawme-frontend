@@ -1,7 +1,7 @@
 <header [ngClass]="{'header-for-profile': !isNonProfileHeader()}">
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand">
-            <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
+            <img src="{{isNonProfileHeader() ? './assets/img/logo-footer.png': './assets/img/logo.png'}}" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
         </a>
 
         <div *ngIf="getMenuType() == 1" class="my-2 my-lg-0">
@@ -25,7 +25,8 @@
             </div>
         </div>
         <div *ngIf="getMenuType() == 0" class="my-2 my-lg-0">
-            <input type="button" class="custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
+            <input type="button" class="custom-btn btn-transparent" [class.white-login-btn]="isNonProfileHeader()"
+                value="Войти" [routerLink]="['/login']" />
         </div>
     </nav>
 </header>

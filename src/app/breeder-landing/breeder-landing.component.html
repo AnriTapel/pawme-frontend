@@ -1,9 +1,16 @@
 <div class="breeder-landing-top-block">
     <app-header class='header-for-landing'></app-header>
     <div class="breeder-landing-title">
-        <h1>Платформа для профессиональных заводчиков, которым нужны удобные инструменты</h1>
+        <h1>Платформа для профессиональных заводчиков</h1>
+        <p>Получите современные инструменты для работы с клиентами и увеличьте вашу эффективность. Бесплатно.</p>
 
-        <button class="custom-btn btn-purple" (click)="freeSignUpClicked()">БЕСПЛАТНАЯ РЕГИСТРАЦИЯ</button>
+        <div>
+            <p>Создайте свою страницу прямо сейчас</p>
+            <input type="text" class="form-control custom-form-control-border" [(ngModel)]="newBreederEmail" 
+                placeholder="Ваш e-mail" [class.invalid-form-field-value]="emailError"/>
+            <button class="custom-btn btn-purple" (click)="freeSignUpClicked()">Получить страницу</button>
+            <span>Регистрация займёт не более 1 минуты</span>
+        </div>
     </div>
 </div>
 

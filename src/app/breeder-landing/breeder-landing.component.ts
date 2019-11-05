@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class BreederLandingComponent implements OnInit {
 
   requirements: boolean = false;
+  emailError: boolean = false;
+  newBreederEmail: string = null;
 
   constructor(private appService: AppService, private router: Router) {
     if (appService.meData && appService.meData.type == "BREEDER" && appService.userData.status == "ACTIVE")
@@ -84,7 +86,8 @@ export class BreederLandingComponent implements OnInit {
     //@ts-ignore
     ym(55779592, 'reachGoal', 'FreeReg');
     //@ts-ignore
-    gtag('event', 'FreeReg')
+    gtag('event', 'FreeReg');
+    this.appService.meData['newBreederEmail'] = this.newBreederEmail;
     this.router.navigateByUrl('/sign-up');
   }
 

@@ -15,16 +15,55 @@ $block-padding: 8vw;
     display: flex;
     flex-direction: column;
     margin: 3vw $block-padding auto;
-    width: 43em;
+    width: 585px;
 
     h1{
-        font-size: 38px;
+        font-size: 32px;
         line-height: 45px;
         font-family: 'Intro-Bold';
+        color: #fff;
     }
 
-    button{
-        margin-top: 50px;
+    &>p{
+        margin: 20px 0 32px;
+        color: #fff;
+        font-size: 16px;
+        font-family: 'Intro-Book';
+        width: 80%;
+    }
+
+    div{
+        width: 415px;
+        background-color: #fff;
+        border-radius: 10px;
+        border: solid 1px #cbd8f6;
+        padding: 24px 32px;
+        text-align: center;
+        background-image: url('../../assets/img/landing-header-paw.png');
+        background-position: bottom right;
+        background-repeat: no-repeat;
+        background-size: auto;
+
+        p{
+            font-family: 'Intro-Regular';
+            font-size: 18px;
+            text-align: center;
+            line-height: 25px;
+            margin-bottom: 10px;
+        }
+
+        button{
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        span{
+            font-family: 'Intro-Book';
+            font-size: 14px;
+            opacity: .5;
+            display: block;
+            margin: 0 auto;
+        }
     }
 }
 
@@ -174,19 +213,24 @@ $block-padding: 8vw;
     }
 
     .breeder-landing-title{
-        padding: 1em;
-        align-items: center;
         width: 100%;
+        height: 100%;
+        padding: 1em;
+        margin: 2em 0 0;
         text-align: center;
-        margin: 4em 0 0;
-
+        
         h1{
             font-size: 28px;
             line-height: 28px;
         }
 
-        button{
-            margin-top: 2em;
+        &>p{
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        div{
+            width: 100%;
         }
     }
 
@@ -322,4 +366,36 @@ $block-padding: 8vw;
         }
     }
 
+}
+
+@media screen and (max-width: 321px) {
+
+    .breeder-landing-title{
+        margin: 1em 0 0;
+        
+        h1{
+            font-size: 24px;
+            line-height: 24px;
+        }
+
+        &>p{
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        &>div{
+            p {
+                font-size: 14px;
+                line-height: 18px;
+            }
+
+            span {
+                font-size: 12px;
+                line-height: 16px;
+            }
+        }
+    }
+
+
+    
 }
