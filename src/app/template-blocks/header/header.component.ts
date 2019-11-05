@@ -32,6 +32,8 @@ export class HeaderComponent implements OnInit {
         window.intercomSettings.user_id = null;
         //@ts-ignore
         window.intercomSettings['breeder_page_url'] = null;
+        //@ts-ignore
+        window.intercomSettings.email = null;
         this.router.navigateByUrl('/breeder-landing');
       }, error => {
         this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
