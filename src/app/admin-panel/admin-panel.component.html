@@ -31,7 +31,8 @@
                         <th>Имя</th>
                         <th>Фамилия</th>
                         <th>Город</th>
-                        <th>Породы</th>
+                        <th>Осн. порода</th>
+                        <th>Доп. порода</th>
                         <th>Телефон</th>
                         <th>Email</th>
                         <th>Дата создания</th>
@@ -44,7 +45,8 @@
                         <td>{{breeder.name}}</td>
                         <td>{{breeder.surname}}</td>
                         <td>{{breeder.city || '-'}}</td>
-                        <td>{{getBreederBreeds(breeder)}}</td>
+                        <td>{{breeder.mainBreed || '-'}}</td>
+                        <td>{{breeder.extraBreed || '-'}}</td>
                         <td>{{breeder.phone || '-'}}</td>
                         <td>{{breeder.email}}</td>
                         <td>{{getCreateDateAsString(breeder.createDate)}}</td>

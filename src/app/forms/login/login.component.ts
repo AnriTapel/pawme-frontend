@@ -92,6 +92,10 @@ export class LoginComponent {
     });
   }
 
+  fieldEdited(field: string): void {
+    this.invalidFields = this.invalidFields.filter(it => it != field);
+  }
+
   private validateFields(): boolean {
     let isValid = true;
     this.invalidFields = [];

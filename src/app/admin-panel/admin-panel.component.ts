@@ -45,20 +45,6 @@ export class AdminPanelComponent implements OnInit {
     return sortRes.filter(it => it.status != 'DELETED');
   }
 
-  getBreederBreeds(breeder: any): string {
-    if (!breeder)
-      return '-'
-    else {
-      let breeds = '';
-      if (breeder.mainBreed)
-        breeds += breeder.mainBreed;
-      if (breeder.extraBreed)
-        breeds += ', ' + breeder.extraBreed;
-
-      return breeds !== '' ? breeds : '-';
-    }
-  }
-
   getCreateDateAsString(date: Date): string {
     return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
   }

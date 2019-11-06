@@ -8,12 +8,12 @@
     <div class="form-group popup-form-group">
         <label for="name">Имя</label>
         <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="breederData.name"
-            [class.invalid-form-field-value]="invalidFields.includes('name')" />
+            [class.invalid-form-field-value]="invalidFields.includes('name')" (change)="fieldEdited('name')"/>
         <span *ngIf="invalidFields.includes('name')" class="invalid-field-message">Пожалуйста, введите Ваше имя</span>
     </div>
     <div class="form-group popup-form-group">
         <label for="lastname">Фамилия</label>
-        <input type="text" class="form-control custom-form-control-border" name="lastname"
+        <input type="text" class="form-control custom-form-control-border" name="lastname" (change)="fieldEdited('lastname')"
             [(ngModel)]="breederData.surname" [class.invalid-form-field-value]="invalidFields.includes('lastname')" />
         <span *ngIf="invalidFields.includes('lastname')" class="invalid-field-message">Пожалуйста, введите Вашу
             фамилию</span>
@@ -21,7 +21,7 @@
     <div class="form-group popup-form-group">
         <label for="phone">Ваш телефон</label>
         <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
-            [(ngModel)]="breederData.phone" (input)="appService.setPhoneMask($event)"
+            [(ngModel)]="breederData.phone" (input)="appService.setPhoneMask($event)" (change)="fieldEdited('phone')"
             (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
             [class.invalid-form-field-value]="invalidFields.includes('phone')" />
         <span *ngIf="invalidFields.includes('phone')" class="invalid-field-message">Пожалуйста, введите действительный
@@ -30,13 +30,13 @@
     <div class="form-group popup-form-group">
         <label for="email">Ваш Email</label>
         <input type="email" class="form-control custom-form-control-border" name="email" [(ngModel)]="breederData.email"
-            [class.invalid-form-field-value]="invalidFields.includes('email')" />
+            [class.invalid-form-field-value]="invalidFields.includes('email')" (change)="fieldEdited('email')"/>
         <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
             E-mail</span>
     </div>
     <div class="form-group popup-form-group">
         <label for="password">Пароль</label>
-        <input type="password" class="form-control custom-form-control-border" name="password"
+        <input type="password" class="form-control custom-form-control-border" name="password" (change)="fieldEdited('password')"
             [(ngModel)]="breederData.password" [class.invalid-form-field-value]="invalidFields.includes('password')" />
         <span *ngIf="invalidFields.includes('password')" class="invalid-field-message">Пожалуйста, введите Ваш
             пароль</span>

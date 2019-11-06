@@ -61,6 +61,10 @@ export class SignUpComponent implements OnInit {
       });
   }
 
+  fieldEdited(field: string): void {
+    this.invalidFields = this.invalidFields.filter(it => it != field);
+  }
+
   validateFields(): boolean {
     this.invalidFields = [];
     let isValid = true;
