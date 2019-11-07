@@ -55,6 +55,7 @@
 
 .img-container img {
   max-width: 85%;
+  max-height: 70vh;
   display: block;
   margin: auto;
 }
@@ -71,6 +72,7 @@
   }
   .img-container img {
     max-width: 100%;
+    max-height: 80vh;
   }
 }
 /*# sourceMappingURL=image-gallery.component.css.map */

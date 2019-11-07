@@ -36,7 +36,7 @@ export class AppService {
         this.meData = res;
 
         this.http.get('/api/dict').subscribe(dict => {
-          this.breeds = dict['breeds'];
+          this.breeds = dict['breeds'].sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
           this.puppyTests = dict['puppyTests'];
 
           if (this.meData.type == 'ADMIN') {

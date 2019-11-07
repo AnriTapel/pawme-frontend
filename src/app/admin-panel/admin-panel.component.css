@@ -23,7 +23,7 @@ main {
   display: -ms-flexbox;
   display: flex;
   height: 80vh;
-  width: 1240px;
+  width: 90%;
   margin: 2em auto;
   border: 1px solid #645fc9;
   border-radius: 4px;
