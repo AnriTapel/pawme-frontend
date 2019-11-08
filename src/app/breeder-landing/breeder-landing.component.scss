@@ -95,9 +95,15 @@ $block-padding: 8vw;
             margin-top: 1.5em;
         }
 
-        img{
-            width: 100%;
-            max-width: 620px;
+        .img-block{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            img{
+                width: 100%;
+                max-width: 620px;
+            }
         }
     }
 
@@ -158,9 +164,13 @@ $block-padding: 8vw;
     background-repeat: no-repeat;
     background-size: contain;
 
-    .dog-head-img{
-        float: right;
-        width: 325px;
+    &>p {
+        margin-top: 2em;
+        
+        .dog-head-img{
+            float: right;
+            width: 325px;
+        }
     }
 
     section{

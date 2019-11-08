@@ -105,7 +105,20 @@
   margin-top: 1.5em;
 }
 
-.what-is-avail-block .grid-block img {
+.what-is-avail-block .grid-block .img-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.what-is-avail-block .grid-block .img-block img {
   width: 100%;
   max-width: 620px;
 }
@@ -167,7 +180,11 @@
   background-size: contain;
 }
 
-.coming-soon .dog-head-img {
+.coming-soon > p {
+  margin-top: 2em;
+}
+
+.coming-soon > p .dog-head-img {
   float: right;
   width: 325px;
 }
