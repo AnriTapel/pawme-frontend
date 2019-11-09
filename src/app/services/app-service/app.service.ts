@@ -31,68 +31,74 @@ export class AppService {
 
   initApplication() {
     return new Promise<void>((resolve, reject) => {
-      let router = this.injector.get(Router);
       this.breederService.meUsingGET().subscribe((res) => {
         this.meData = res;
 
         this.http.get('/api/dict').subscribe(dict => {
-          this.breeds = dict['breeds'].sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+          this.breeds = dict['breeds'].sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
           this.puppyTests = dict['puppyTests'];
 
           if (this.meData.type == 'ADMIN') {
-            if (/\/breeder\/[0-9]*$/.test(window.location.href))
-              resolve();
-            else {
-              router.navigateByUrl('/admin-panel');
-              resolve();
-            }
-          }
-
-          else if (window.location.href.indexOf('/pass-link-fail') != -1) {
-            router.navigateByUrl('/remind-password');
-            this.notificationServie.setContext('Ссылка для смены пароля устарела. Сделайте повторный запрос.', false);
-            this.notificationServie.setVisibility(true);
+            this.resolveAdminInit();
             resolve();
-          }
-
-          else if (this.meData.type == 'BREEDER')
+          } else if (window.location.href.indexOf('/pass-link-fail') != -1) {
+            this.resolvePasswordChange();
+            resolve();
+          } else if (this.meData.type == 'BREEDER')
             this.breederService.getBreederUsingGET(this.meData.id).subscribe(res => {
-              //@ts-ignore
-              window.intercomSettings.name = res.name;
-              //@ts-ignore
-              window.intercomSettings.user_id = res.id;
-              //@ts-ignore
-              window.intercomSettings['breeder_page_url'] = 'https://petman.co/breeder/' + res.id;
-              //@ts-ignore
-              window.intercomSettings.email = this.meData.email;
-              this.userData = res;
-              if (window.location.href.indexOf('/email') != -1)
-                this.resolveEmailConfirm();
+              this.resolveBreederInit(res, true);
               resolve();
             }, (err) => {
-              this.meData = { type: 'ANONYMOUS' };
-              router.navigateByUrl('/login');
+              this.resolveBreederInit(err, false);
               resolve();
             });
-
           else if (this.meData.type == 'ANONYMOUS') {
             if (window.location.href.indexOf('/email') != -1)
               this.resolveEmailConfirm();
             resolve();
-          }
-          else
+          } else
             resolve();
         });
       }, (err) => {
-        if (err.status == 423) {
-          this.meData = { type: 'BLOCKED' };
-          router.navigateByUrl('/breeder-landing');
-          this.notificationServie.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
-          this.notificationServie.setVisibility(true);
-          resolve();
-        }
+        this.appInitError(err);
+        resolve();
       });
     });
+  }
+
+  resolveAdminInit(): void {
+    let router = this.injector.get(Router);
+    if (/\/breeder\/[0-9]*$/.test(window.location.href))
+      return;
+    else
+      router.navigateByUrl('/admin-panel');
+  }
+
+  resolveBreederInit(data: any, success: boolean): void {
+    if (success) {
+      //@ts-ignore
+      window.intercomSettings.name = data.name;
+      //@ts-ignore
+      window.intercomSettings.user_id = data.id;
+      //@ts-ignore
+      window.intercomSettings['breeder_page_url'] = 'https://petman.co/breeder/' + data.id;
+      //@ts-ignore
+      window.intercomSettings.email = this.meData.email;
+      this.userData = data;
+      if (window.location.href.indexOf('/email') != -1)
+        this.resolveEmailConfirm();
+    } else {
+      let router = this.injector.get(Router);
+      this.meData = { type: 'ANONYMOUS' };
+      router.navigateByUrl('/login');
+    }
+  }
+
+  resolvePasswordChange(): void {
+    let router = this.injector.get(Router);
+    router.navigateByUrl('/remind-password');
+    this.notificationServie.setContext('Ссылка для смены пароля устарела. Сделайте повторный запрос.', false);
+    this.notificationServie.setVisibility(true);
   }
 
   resolveEmailConfirm(): void {
@@ -116,6 +122,16 @@ export class AppService {
     } else if (window.location.href.indexOf('/email-fail') != -1) {
       router.navigateByUrl('/breeder-landing');
       this.notificationServie.setContext('Ошибка подтверждения почты', false);
+      this.notificationServie.setVisibility(true);
+    }
+  }
+
+  appInitError(err: any): void {
+    if (err.status == 423) {
+      let router = this.injector.get(Router);
+      this.meData = { type: 'BLOCKED' };
+      router.navigateByUrl('/breeder-landing');
+      this.notificationServie.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
       this.notificationServie.setVisibility(true);
     }
   }
@@ -215,7 +231,7 @@ export class AppService {
     if (event.type == "blur") {
       if (event.srcElement.value.length == 2)
         event.srcElement.value = ""
-    } else 
+    } else
       this.setCursorPosition(event.srcElement.value.length, event.srcElement);
   };
 
