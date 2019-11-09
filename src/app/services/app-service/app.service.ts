@@ -39,7 +39,10 @@ export class AppService {
           this.breeds = dict['breeds'].sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
           this.puppyTests = dict['puppyTests'];
 
-          if (this.meData.type == 'ADMIN') {
+          if (window.location.href.indexOf('/breeder-guide.pdf') != -1 && window.location.href.indexOf('/docs/breeder-guide.pdf') == -1) {
+            window.location.href = "/docs/breeder-guide.pdf";
+            resolve();
+          } else if (this.meData.type == 'ADMIN') {
             if (/\/breeder\/[0-9]*$/.test(window.location.href))
               resolve();
             else {
