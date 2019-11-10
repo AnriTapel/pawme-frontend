@@ -938,6 +938,13 @@ span, p, div {
     }
 }
 
+.edit-profile-btn {
+    position: fixed;
+    bottom: 30px;
+    left: calc(50% - 120px);
+    z-index: 999;
+}
+
 .share-buttons-desktop{
     @media (max-width: $screen-lg - 1px){
         display: none;

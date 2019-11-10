@@ -35,11 +35,11 @@ export class AdminPanelComponent implements OnInit {
       });
   }
 
-  initBreedersOperations(res: any): any{
-    for (let breeder of res){
+  initBreedersOperations(res: any): any {
+    for (let breeder of res) {
       breeder.createDate = new Date(breeder.createDate);
     }
-    let sortRes = res.sort((a,b) => {
+    let sortRes = res.sort((a, b) => {
       return b.createDate.getTime() - a.createDate.getTime();
     })
     return sortRes.filter(it => it.status != 'DELETED');
@@ -62,7 +62,7 @@ export class AdminPanelComponent implements OnInit {
       res => {
         this.notificationService.setContext("Порода успешно добавлена", true);
         this.notificationService.setVisibility(true);
-        this.newBreed = {name: null, nameGen: null};
+        this.newBreed = { name: null, nameGen: null };
       }, err => {
         this.notificationService.setContext("Не удалось добавить породу", false);
         this.notificationService.setVisibility(true);
@@ -77,17 +77,26 @@ export class AdminPanelComponent implements OnInit {
   }
 
   openBreederPage(id: number): void {
-    window.open('https://petman.co/breeder/' + id, '_blank');
+    window.open(window.location.origin + "/breeder/" + id, '_blank');
   }
 
   changeBreederStatus(id: number, event: any): void {
-    this.adminService.updateStatusUsingPUT(id, event.target.value).subscribe(() => {
-      this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
-    },(err) => {
-      this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
-      this.notificationService.setVisibility(true);
-      this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
-    })
+    if (event.target.value == "PERMANENT_DELETE")
+      this.adminService.deleteBreederUsingDELETE(id).subscribe(() => {
+        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
+      }, (err) => {
+        this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
+        this.notificationService.setVisibility(true);
+        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
+      })
+    else
+      this.adminService.updateStatusUsingPUT(id, event.target.value).subscribe(() => {
+        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
+      }, (err) => {
+        this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
+        this.notificationService.setVisibility(true);
+        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
+      })
   }
 
   tableToExcel = (function () {
@@ -107,8 +116,8 @@ export class AdminPanelComponent implements OnInit {
     return (table, fileName, data?) => {
       if (!table.nodeType)
         table = document.getElementById(table).cloneNode(true);
-      if (data){
-        for (let i = 1; i < table.childElementCount; i++){
+      if (data) {
+        for (let i = 1; i < table.childElementCount; i++) {
           let value = data.filter(it => it.id == parseInt(table.children[i].firstElementChild.innerText))[0].status;
           table.children[i].lastElementChild.innerHTML = null;
           table.children[i].lastElementChild.innerText = value;

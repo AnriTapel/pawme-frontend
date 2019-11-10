@@ -1113,6 +1113,13 @@ span, p, div {
   }
 }
 
+.edit-profile-btn {
+  position: fixed;
+  bottom: 30px;
+  left: calc(50% - 120px);
+  z-index: 999;
+}
+
 @media (max-width: 1201px) {
   .share-buttons-desktop {
     display: none;

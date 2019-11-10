@@ -5,6 +5,10 @@
         <span>Вернуться в личный кабинет</span>
     </div>
 
+    <button *ngIf="appService.meData.type == 'ADMIN'" class="custom-btn btn-purple edit-profile-btn" [routerLink]="['/breeder-profile']">
+        Редактировать профиль
+    </button>
+
     <div *ngIf="subpageStatus().generalInfo" class="slider-content">
         <img *ngIf="getScrollLeftValue() > 0" class="scroll-left-button" alt="Стрелка влево" src="./assets/img/arrow-left.svg" (click)="scrollLeft()"
         />
