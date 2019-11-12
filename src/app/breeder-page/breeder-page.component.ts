@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../services/app-service/app.service';
 import { BreederControllerService } from '../api/api';
 import { DogCardService } from '../services/dog-card-service/dog-card.service';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-breeder-page',
@@ -36,7 +37,7 @@ export class BreederPageComponent implements OnInit {
     availParentsTests = [];
 
     constructor(private popupService: PopupTemplateService, private router: Router, private route: ActivatedRoute, public appService: AppService,
-        private breederService: BreederControllerService, public dogCardService: DogCardService) {
+        private breederService: BreederControllerService, public dogCardService: DogCardService, private meta: Meta) {
 
         if (this.router.url.indexOf("/preview/") != -1) {
             this.isPreviewMode = true;
@@ -51,6 +52,7 @@ export class BreederPageComponent implements OnInit {
             .subscribe((res) => {
                 this.appService.userData = res;
                 this.getParentsTestsList();
+                this.setMetaTags(res);
             }, (err) => {
                 if (err.status == 404)
                     this.router.navigateByUrl('/404');
@@ -69,6 +71,32 @@ export class BreederPageComponent implements OnInit {
             puppies: this.appService.userData.puppies.length > 0
         }
         return status;
+    }
+
+    setMetaTags(res: any): void {
+        this.meta.addTags([
+            {name: 'og:type', content: 'website'},
+            {name: 'og:url', content: window.location.origin + "/breeder/" + res.id},
+            {name: 'title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
+            {name: 'og:title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
+            {name: 'twitter:title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
+            {name: 'og:description', content: 'Узнай больше о питомнике '+ this.getNurceryName() +'. Фото щенков и родителей, медицина и другое.'},
+            {name: 'twitter:description', content: 'Узнай больше о питомнике '+ this.getNurceryName() +'. Фото щенков и родителей, медицина и другое.'},
+            {name: 'og:site_name', content: 'Petman'},
+            {name: 'twitter:card', content: 'summary'},
+            {name: 'fb:app_id', content: '1431712030301605'}
+        ]);
+
+        if (res.generalInfo.gallery.length > 0) {
+            this.meta.addTags([
+                {name: 'og:image', content: '/img/' + res.generalInfo.gallery[0].preview + '.jpg'},
+                {name: 'twitter:image', content: '/img/' + res.generalInfo.gallery[0].preview + '.jpg'}
+            ]);
+            let vkImgTag = document.createElement('link');
+            vkImgTag.setAttribute('rel', 'image_src');
+            vkImgTag.setAttribute('href', '/img/' + res.generalInfo.gallery[0].preview + '.jpg');
+            document.head.appendChild(vkImgTag);
+        }
     }
 
     getNurceryName(): string {
