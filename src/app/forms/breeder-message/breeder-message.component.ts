@@ -37,6 +37,10 @@ export class BreederMessageComponent implements OnInit {
     this.breederMessage.email = this.breederMessage.email.toLowerCase();
     this.breederService.sendMessageToBreederUsingPOST(this.appService.userData.id, this.breederMessage).subscribe(
       () => {
+        //@ts-ignore
+        fbq('track', 'InitiateCheckout');
+        //@ts-ignore
+        ym(55779592, 'reachGoal', 'InitiateCheckout');
         this.popupService.setShowStatus(false);
         this.notificationService.setContext('Письмо заводчику успешно отправлено', true);
         this.notificationService.setVisibility(true);

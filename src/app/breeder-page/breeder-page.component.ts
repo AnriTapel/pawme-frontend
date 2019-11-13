@@ -83,20 +83,14 @@ export class BreederPageComponent implements OnInit {
             {name: 'og:description', content: 'Узнай больше о питомнике '+ this.getNurceryName() +'. Фото щенков и родителей, медицина и другое.'},
             {name: 'twitter:description', content: 'Узнай больше о питомнике '+ this.getNurceryName() +'. Фото щенков и родителей, медицина и другое.'},
             {name: 'og:site_name', content: 'Petman'},
-            {name: 'twitter:card', content: 'summary'},
-            {name: 'fb:app_id', content: '1431712030301605'}
+            {name: 'twitter:card', content: 'summary_large_image'}
         ]);
 
-        if (res.generalInfo.gallery.length > 0) {
+        if (res.generalInfo.gallery.length > 0)
             this.meta.addTags([
-                {name: 'og:image', content: '/img/' + res.generalInfo.gallery[0].preview + '.jpg'},
-                {name: 'twitter:image', content: '/img/' + res.generalInfo.gallery[0].preview + '.jpg'}
+                { name: 'og:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' },
+                { name: 'twitter:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' }
             ]);
-            let vkImgTag = document.createElement('link');
-            vkImgTag.setAttribute('rel', 'image_src');
-            vkImgTag.setAttribute('href', '/img/' + res.generalInfo.gallery[0].preview + '.jpg');
-            document.head.appendChild(vkImgTag);
-        }
     }
 
     getNurceryName(): string {
