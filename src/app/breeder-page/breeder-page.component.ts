@@ -75,20 +75,20 @@ export class BreederPageComponent implements OnInit {
 
     setMetaTags(res: any): void {
         this.meta.addTags([
-            {name: 'og:type', content: 'website'},
-            {name: 'og:url', content: window.location.origin + "/breeder/" + res.id},
-            {name: 'title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
-            {name: 'og:title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
+            {property: 'og:type', content: 'website'},
+            {property: 'og:url', content: window.location.origin + "/breeder/" + res.id},
+            {property: 'title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
+            {property: 'og:title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
             {name: 'twitter:title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
-            {name: 'og:description', content: 'Узнай больше о питомнике '+ this.getNurceryName() +'. Фото щенков и родителей, медицина и другое.'},
+            {property: 'og:description', content: 'Узнай больше о питомнике '+ this.getNurceryName() +'. Фото щенков и родителей, медицина и другое.'},
             {name: 'twitter:description', content: 'Узнай больше о питомнике '+ this.getNurceryName() +'. Фото щенков и родителей, медицина и другое.'},
-            {name: 'og:site_name', content: 'Petman'},
+            {property: 'og:site_name', content: 'Petman'},
             {name: 'twitter:card', content: 'summary_large_image'}
         ]);
 
         if (res.generalInfo.gallery.length > 0)
             this.meta.addTags([
-                { name: 'og:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' },
+                { property: 'og:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' },
                 { name: 'twitter:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' }
             ]);
     }
