@@ -30,7 +30,7 @@ export class BreederMessageComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendMessage(): void{
+  sendMessage(): void {
     if (!this.validateFields())
       return;
 
@@ -49,32 +49,37 @@ export class BreederMessageComponent implements OnInit {
     )
   }
 
-  validateFields(): boolean{
+  validateFields(): boolean {
     this.invalidFields = [];
     let isValid = true;
-    if (!this.breederMessage.name || this.breederMessage.name == "" || this.breederMessage.name.length > 64){
+    if (!this.breederMessage.name || this.breederMessage.name == "" || this.breederMessage.name.length > 64) {
       isValid = false;
       this.invalidFields.push("name");
     }
 
     if (!this.breederMessage.email || this.breederMessage.email == ""
-        || !this.appService.validateEmailInput(this.breederMessage.email)){
+      || !this.appService.validateEmailInput(this.breederMessage.email)) {
       isValid = false;
       this.invalidFields.push("email");
     }
 
     if (!this.breederMessage.phone || this.breederMessage.phone == ""
-        || this.breederMessage.phone.length != 17){
-      isValid = false;
-      this.invalidFields.push("phone");
+      || this.breederMessage.phone.length != 17) {
+
+      if (this.breederMessage.phone.length == 18)
+        this.breederMessage.phone = this.breederMessage.phone.substr(0, 17);
+      else {
+        isValid = false;
+        this.invalidFields.push("phone");
+      }
     }
 
-    if (!this.breederMessage.message || this.breederMessage.message == "" || this.breederMessage.message.length > 2048){
+    if (!this.breederMessage.message || this.breederMessage.message == "" || this.breederMessage.message.length > 2048) {
       isValid = false;
       this.invalidFields.push("message");
     }
 
-    if (!this.acception){
+    if (!this.acception) {
       isValid = false;
       this.invalidFields.push("acception");
     }

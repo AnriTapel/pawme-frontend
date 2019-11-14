@@ -81,8 +81,13 @@ export class SignUpComponent implements OnInit {
 
     if (!this.breederData.phone || this.breederData.phone == ""
       || this.breederData.phone.length != 17) {
-      isValid = false;
-      this.invalidFields.push("phone");
+
+      if (this.breederData.phone.length == 18)
+        this.breederData.phone = this.breederData.phone.substr(0, 17);
+      else {
+        isValid = false;
+        this.invalidFields.push("phone");
+      }
     }
 
     if (!this.breederData.email || this.breederData.email == ""
