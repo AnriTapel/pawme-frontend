@@ -147,8 +147,8 @@
         <br>
         <span class="block-description">Расскажите любую информацию о щенке, которую считаете важной. Например, вы можете описать характер, привычки и уровень
             социализации.</span>
-        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(currentPuppyData.about, 512) > 0 ? '#46b0ad' : '#eb0000'">
-            {{appService.getTextareaLimit(currentPuppyData.about, 512)}}
+        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(currentPuppyData.about, 1024) > 0 ? '#46b0ad' : '#eb0000'">
+            {{appService.getTextareaLimit(currentPuppyData.about, 1024)}}
         </span>
         <textarea rows="3" class="form-control custom-form-control-border" (change)="profileService.inputValueChanged('info')" [class.invalid-form-field-value]="profileService.invalidFields.includes('info')"
             [(ngModel)]="currentPuppyData.about"></textarea>

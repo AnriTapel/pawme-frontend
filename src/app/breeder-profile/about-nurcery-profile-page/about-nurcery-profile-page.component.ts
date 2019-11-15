@@ -179,7 +179,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     let isValid = true;
     this.profileService.invalidFields = [];
 
-    if (this.nurceryData.name && this.nurceryData.name.length > 64) {
+    if (this.nurceryData.name && this.nurceryData.name.length > 128) {
       this.profileService.invalidFields.push('name');
       isValid = false;
     }
@@ -201,12 +201,12 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.nurceryData.city || this.nurceryData.city == "" || this.nurceryData.city.length > 64) {
+    if (!this.nurceryData.city || this.nurceryData.city == "" || this.nurceryData.city.length > 128) {
       this.profileService.invalidFields.push('city');
       isValid = false;
     }
 
-    if (!this.nurceryData.description || this.nurceryData.description == "" || this.nurceryData.description.length > 512) {
+    if (!this.nurceryData.description || this.nurceryData.description == "" || this.nurceryData.description.length > 600) {
       this.profileService.invalidFields.push('desc');
       isValid = false;
     }

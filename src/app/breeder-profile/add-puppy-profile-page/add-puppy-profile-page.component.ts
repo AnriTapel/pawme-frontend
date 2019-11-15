@@ -300,7 +300,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   validateInputFields(): boolean {
     let isValid = true;
     this.profileService.invalidFields = [];
-    if (!this.currentPuppyData.nickname || this.currentPuppyData.nickname == "" || this.currentPuppyData.nickname.length > 32) {
+    if (!this.currentPuppyData.nickname || this.currentPuppyData.nickname == "" || this.currentPuppyData.nickname.length > 40) {
       this.profileService.invalidFields.push('name');
       isValid = false;
     }
@@ -338,7 +338,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentPuppyData.about || this.currentPuppyData.about == "" || this.currentPuppyData.about.length > 512) {
+    if (!this.currentPuppyData.about || this.currentPuppyData.about == "" || this.currentPuppyData.about.length > 1024) {
       this.profileService.invalidFields.push('info');
       isValid = false;
     }

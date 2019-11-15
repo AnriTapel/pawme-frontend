@@ -96,7 +96,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     let isValid = true;
     this.profileService.invalidFields = [];
 
-    if (!this.puppiesData.age || this.puppiesData.age > 32 || this.puppiesData.age < 1) {
+    if (!this.puppiesData.age || this.puppiesData.age > 50 || this.puppiesData.age < 1) {
       this.profileService.invalidFields.push('age');
       isValid = false;
     }

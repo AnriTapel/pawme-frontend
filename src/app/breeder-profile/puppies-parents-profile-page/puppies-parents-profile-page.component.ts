@@ -252,7 +252,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
     let isValid = true;
     this.profileService.invalidFields = [];
-    if (!this.currentParentData.nickname || this.currentParentData.nickname == "" || this.currentParentData.nickname.length > 32) {
+    if (!this.currentParentData.nickname || this.currentParentData.nickname == "" || this.currentParentData.nickname.length > 40) {
       this.profileService.invalidFields.push('name');
       isValid = false;
     }
@@ -267,7 +267,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentParentData.info || this.currentParentData.info == "" || this.currentParentData.info.length > 512) {
+    if (!this.currentParentData.info || this.currentParentData.info == "" || this.currentParentData.info.length > 1024) {
       this.profileService.invalidFields.push('info');
       isValid = false;
     }
