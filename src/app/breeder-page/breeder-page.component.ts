@@ -75,20 +75,27 @@ export class BreederPageComponent implements OnInit {
 
     setMetaTags(res: any): void {
         this.meta.addTags([
-            {property: 'og:type', content: 'website'},
-            {property: 'og:url', content: window.location.origin + "/breeder/" + res.id},
-            {property: 'title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
-            {property: 'og:title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
-            {name: 'twitter:title', content: this.getNurceryName() + " - " + this.getNameByBreeds()},
-            {property: 'og:description', content: 'Узнай больше о питомнике '+ this.getNurceryName() +'. Фото щенков и родителей, медицина и другое.'},
-            {name: 'twitter:description', content: 'Узнай больше о питомнике '+ this.getNurceryName() +'. Фото щенков и родителей, медицина и другое.'},
-            {property: 'og:site_name', content: 'Petman'},
-            {name: 'twitter:card', content: 'summary_large_image'}
+            { property: 'og:type', content: 'website' },
+            { name: 'og:type', content: 'website' },
+            { property: 'og:url', content: window.location.origin + "/breeder/" + res.id },
+            { name: 'og:url', content: window.location.origin + "/breeder/" + res.id },
+            { property: 'title', content: this.getNurceryName() + " - " + this.getNameByBreeds() },
+            { name: 'title', content: this.getNurceryName() + " - " + this.getNameByBreeds() },
+            { property: 'og:title', content: this.getNurceryName() + " - " + this.getNameByBreeds() },
+            { name: 'og:title', content: this.getNurceryName() + " - " + this.getNameByBreeds() },
+            { name: 'twitter:title', content: this.getNurceryName() + " - " + this.getNameByBreeds() },
+            { property: 'og:description', content: 'Узнай больше о питомнике ' + this.getNurceryName() + '. Фото щенков и родителей, медицина и другое.' },
+            { name: 'og:description', content: 'Узнай больше о питомнике ' + this.getNurceryName() + '. Фото щенков и родителей, медицина и другое.' },
+            { name: 'twitter:description', content: 'Узнай больше о питомнике ' + this.getNurceryName() + '. Фото щенков и родителей, медицина и другое.' },
+            { property: 'og:site_name', content: 'Petman' },
+            { name: 'og:site_name', content: 'Petman' },
+            { name: 'twitter:card', content: 'summary_large_image' }
         ]);
 
         if (res.generalInfo.gallery.length > 0)
             this.meta.addTags([
                 { property: 'og:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' },
+                { name: 'og:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' },
                 { name: 'twitter:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' }
             ]);
     }
@@ -115,7 +122,7 @@ export class BreederPageComponent implements OnInit {
     getPuppySaleAge(): string {
         if (!this.subpageStatus().puppiesInfo || !this.appService.userData.puppiesInfo.age)
             return '1 недели';
-        
+
         if (this.appService.userData.puppiesInfo.age % 10 == 1 && this.appService.userData.puppiesInfo.age != 11)
             return this.appService.userData.puppiesInfo.age + ' недели';
         else
