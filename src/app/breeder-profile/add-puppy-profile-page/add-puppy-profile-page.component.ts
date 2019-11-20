@@ -188,6 +188,12 @@ export class AddPuppyProfilePageComponent implements OnInit {
           this.currentPuppyData.gallery.push(imageData);
         else
           this.currentPuppyData.gallery[index] = imageData;
+      }, (err) => {
+        if (err.status == 415) {
+          this.popupService.setShowStatus(false);
+          this.notificationService.setContext('Не удалось сконвертировать фотографию. Выберите другую.', false);
+          this.notificationService.setVisibility(true);
+        }
       });
       croppedHandler.unsubscribe();
     });

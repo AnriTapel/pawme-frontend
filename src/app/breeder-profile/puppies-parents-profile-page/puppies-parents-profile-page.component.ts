@@ -154,6 +154,12 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
           this.currentParentData.gallery.push(imageData);
         else
           this.currentParentData.gallery[index] = imageData;
+      }, (err) => {
+        if (err.status == 415) {
+          this.popupService.setShowStatus(false);
+          this.notificationService.setContext('Не удалось сконвертировать фотографию. Выберите другую.', false);
+          this.notificationService.setVisibility(true);
+        }
       });
       croppedHandler.unsubscribe();
     });

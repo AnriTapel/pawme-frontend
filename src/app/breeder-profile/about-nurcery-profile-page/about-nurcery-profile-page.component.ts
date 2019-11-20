@@ -88,6 +88,12 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         this.profileService.inputValueChanged('profilePhoto');
         this.popupService.setShowStatus(false);
         this.nurceryData.profilePhoto = imageData;
+      }, (err) => {
+        if (err.status == 415) {
+          this.popupService.setShowStatus(false);
+          this.notificationService.setContext('Не удалось сконвертировать фотографию. Выберите другую.', false);
+          this.notificationService.setVisibility(true);
+        }
       });
       croppedHandler.unsubscribe();
     });
@@ -113,6 +119,12 @@ export class AboutNurceryProfilePageComponent implements OnInit {
           this.nurceryData.gallery.push(imageData);
         else
           this.nurceryData.gallery[index] = imageData;
+      }, (err) => {
+        if (err.status == 415) {
+          this.popupService.setShowStatus(false);
+          this.notificationService.setContext('Не удалось сконвертировать фотографию. Выберите другую.', false);
+          this.notificationService.setVisibility(true);
+        }
       });
       croppedHandler.unsubscribe();
     });

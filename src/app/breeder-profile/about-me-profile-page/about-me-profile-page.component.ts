@@ -56,6 +56,12 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.profileService.inputValueChanged('photo');
         this.popupService.setShowStatus(false);
         this.breederData.photo = imageData;
+      }, (err) => {
+        if (err.status == 415) {
+          this.popupService.setShowStatus(false);
+          this.notificationService.setContext('Не удалось сконвертировать фотографию. Выберите другую.', false);
+          this.notificationService.setVisibility(true);
+        }
       });
       croppedHandler.unsubscribe();
     });

@@ -184,17 +184,6 @@
                 <p>Список админов</p>
 
                 <div class="data-container">
-                    <div *ngIf="adminToUpdate">
-                        <div *ngFor="let role of roles" style="display: inline-block;">
-                            <label>
-                                <input type="checkbox" [(ngModel)]="role.status"
-                                    [ngModelOptions]="{standalone: true}">{{role.name}}
-                            </label>
-                        </div>
-
-                        <input type="button" 
-                    </div>
-
 
                     <table id="admins-table">
                         <tr>
