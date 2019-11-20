@@ -41,7 +41,7 @@ export class AdminPanelComponent implements OnInit {
 
   invalidFields: string[] = [];
 
-  constructor(private router: Router, private adminService: AdminControllerService, private appService: AppService,
+  constructor(private router: Router, private adminService: AdminControllerService, public appService: AppService,
     private http: HttpClient, private notificationService: NotificationBarService) {
   }
 

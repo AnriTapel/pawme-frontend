@@ -150,8 +150,7 @@
                     <label>Телефон</label>
                     <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
                         [(ngModel)]="newAdmin.phone" (input)="appService.setPhoneMask($event)"
-                        (change)="fieldEdited('phone')" (focus)="appService.setPhoneMask($event)"
-                        (blur)="appService.setPhoneMask($event)"
+                        (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
                         [class.invalid-form-field-value]="invalidFields.includes('phone')">
                 </div>
 
@@ -184,7 +183,6 @@
                 <p>Список админов</p>
 
                 <div class="data-container">
-
                     <table id="admins-table">
                         <tr>
                             <th>Имя</th>
@@ -198,7 +196,7 @@
                             <td>{{admin.surname}}</td>
                             <td>{{admin.phone || '-'}}</td>
                             <td>{{getCreateDateAsString(admin.createDate)}}</td>
-                            <td (click)="getAdminToEdit(admin)">{{admin.roles.join(', ') || '-'}}</td>
+                            <td>{{admin.roles.join(', ') || '-'}}</td>
                         </tr>
                     </table>
                 </div>
