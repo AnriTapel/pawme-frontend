@@ -4,6 +4,7 @@ import { AdminControllerService } from '../api/api';
 import { AppService } from '../services/app-service/app.service';
 import { HttpClient } from '@angular/common/http';
 import { NotificationBarService } from '../services/nofitication-service/notification-bar.service';
+import { AdminInfo, BreederForAdmin, MessageToBreeder, Admin } from '../model/models';
 
 @Component({
   selector: 'app-admin-panel',
@@ -13,17 +14,39 @@ import { NotificationBarService } from '../services/nofitication-service/notific
 export class AdminPanelComponent implements OnInit {
 
   activeSection: string = 'breeders';
-  breeders: any[] = [];
-  messages: any[] = [];
+  breeders: BreederForAdmin[] = null;
+  messages: MessageToBreeder[] = null;
+  admins: Admin[] = null;
+
+  ADMIN_INFO_OBJECT : AdminInfo = {
+    name: null,
+    surname: null,
+    email: null,
+    password: null,
+    phone: null,
+    roles: []
+  } 
+  
+  newAdmin: AdminInfo;
   newBreed = { name: null, nameGen: null };
+
+  roles: any[] = [
+    { status: false, value: "ADD_ADMIN", name: "Добавление админов" },
+    { status: false, value: "PROFILE_EDIT", name: "Редактирование профилей" },
+    { status: false, value: "VIEW_EMAIL", name: "Отображение поля Email" },
+    { status: false, value: "DOWNLOAD_DB", name: "Выгрузка базы заводчиков" },
+    { status: false, value: "CHANGE_STATUS", name: "Изменение статусов" },
+    { status: false, value: "VIEW_MESSAGES", name: "Просмотр сообщений" }
+  ];
+
+  invalidFields: string[] = [];
 
   constructor(private router: Router, private adminService: AdminControllerService, private appService: AppService,
     private http: HttpClient, private notificationService: NotificationBarService) {
   }
 
   ngOnInit() {
-    this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
-    this.adminService.listMessagesUsingGET().subscribe(res => this.messages = res);
+    this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initEntityOperations(res));
   }
 
   logout(): void {
@@ -35,7 +58,7 @@ export class AdminPanelComponent implements OnInit {
       });
   }
 
-  initBreedersOperations(res: any): any {
+  initEntityOperations(res: any): any {
     for (let breeder of res) {
       breeder.createDate = new Date(breeder.createDate);
     }
@@ -59,11 +82,11 @@ export class AdminPanelComponent implements OnInit {
 
   addBreed(): void {
     this.adminService.addBreedUsingPUT(this.newBreed).subscribe(
-      res => {
+      () => {
         this.notificationService.setContext("Порода успешно добавлена", true);
         this.notificationService.setVisibility(true);
         this.newBreed = { name: null, nameGen: null };
-      }, err => {
+      }, () => {
         this.notificationService.setContext("Не удалось добавить породу", false);
         this.notificationService.setVisibility(true);
       }
@@ -74,6 +97,17 @@ export class AdminPanelComponent implements OnInit {
     if (section == this.activeSection)
       return;
     this.activeSection = section;
+
+    this.initBlockData();
+  }
+
+  private initBlockData(): void {
+    if (this.activeSection == 'customers' && !this.messages)
+      this.adminService.listMessagesUsingGET().subscribe(res => this.messages = res);
+    else if (this.activeSection == 'add-admins')
+      this.newAdmin = JSON.parse(JSON.stringify(this.ADMIN_INFO_OBJECT));
+    else if (this.activeSection == 'admin-list' && !this.admins)
+      this.adminService.listAdminsUsingGET().subscribe(res => this.admins = this.initEntityOperations(res));
   }
 
   openBreederPage(id: number): void {
@@ -83,20 +117,77 @@ export class AdminPanelComponent implements OnInit {
   changeBreederStatus(id: number, event: any): void {
     if (event.target.value == "PERMANENT_DELETE")
       this.adminService.deleteBreederUsingDELETE(id).subscribe(() => {
-        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
-      }, (err) => {
+        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initEntityOperations(res));
+      }, () => {
         this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
-        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
+        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initEntityOperations(res));
       })
     else
       this.adminService.updateStatusUsingPUT(id, event.target.value).subscribe(() => {
-        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
-      }, (err) => {
+        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initEntityOperations(res));
+      }, () => {
         this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
         this.notificationService.setVisibility(true);
-        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initBreedersOperations(res));
-      })
+        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initEntityOperations(res));
+      });
+  }
+
+  createNewAdmin(): void {
+    if (!this.validateNewAdmin())
+      return;
+    this.newAdmin.roles = this.roles.map(it => {
+      if (it.status) return it.value
+    });
+
+    this.adminService.createAdminUsingPOST(this.newAdmin).subscribe(
+      () => {
+        this.adminService.listBreedersUsingGET().subscribe(res => this.admins = this.initEntityOperations(res));
+        this.newAdmin = JSON.parse(JSON.stringify(this.ADMIN_INFO_OBJECT));
+      }, () => {
+        this.notificationService.setContext('Произошла ошибка, попробуйте еще раз', false);
+        this.notificationService.setVisibility(true);
+      }
+    )
+  }
+
+  private validateNewAdmin() {
+    this.invalidFields = [];
+    let isValid = true;
+    if (!this.newAdmin.name || this.newAdmin.name == "" || this.newAdmin.name.length < 2 || this.newAdmin.name.length > 30) {
+      isValid = false;
+      this.invalidFields.push("name");
+    }
+
+    if (!this.newAdmin.surname || this.newAdmin.surname == ""
+      || this.newAdmin.surname.length < 2 || this.newAdmin.surname.length > 30) {
+      isValid = false;
+      this.invalidFields.push("lastname");
+    }
+
+    if (!this.newAdmin.phone || this.newAdmin.phone == ""
+      || this.newAdmin.phone.length != 17) {
+
+      if (this.newAdmin.phone.length == 18)
+        this.newAdmin.phone = this.newAdmin.phone.substr(0, 17);
+      else {
+        isValid = false;
+        this.invalidFields.push("phone");
+      }
+    }
+
+    if (!this.newAdmin.email || this.newAdmin.email == ""
+      || !this.appService.validateEmailInput(this.newAdmin.email)) {
+      isValid = false;
+      this.invalidFields.push("email");
+    }
+
+    if (!this.newAdmin.password || this.newAdmin.password == ""
+      || this.newAdmin.password.length < 2 || this.newAdmin.password.length > 30) {
+      isValid = false;
+      this.invalidFields.push("password");
+    }
+    return isValid;
   }
 
   tableToExcel = (function () {

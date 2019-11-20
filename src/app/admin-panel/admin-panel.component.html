@@ -16,12 +16,20 @@
         <div (click)="switchSection('add-breeds')">
             <span [class.active]="activeSection == 'add-breeds'">Добавить породу</span>
         </div>
+        <div (click)="switchSection('add-admins')">
+            <span [class.active]="activeSection == 'add-admins'">Добавить админа</span>
+        </div>
+        <div (click)="switchSection('admin-list')">
+            <span [class.active]="activeSection == 'admin-list'">Список админов</span>
+        </div>
     </aside>
     <section>
-        <div *ngIf="activeSection == 'breeders'">
+        <!-- Заводчики -->
+        <div *ngIf="activeSection == 'breeders' && breeders">
             <div class="section-top-bar">
                 <span>Заводчиков на платформе: {{breeders.length}}</span>
-                <a (click)="tableToExcel('breeders-table', 'Petman breeders', breeders)">Скачать список</a>
+                <a *ngIf="appService.meData.roles.includes('DOWNLOAD_DB')"
+                    (click)="tableToExcel('breeders-table', 'Petman breeders', breeders)">Скачать список</a>
             </div>
 
             <div class="data-container">
@@ -34,7 +42,7 @@
                         <th>Осн. порода</th>
                         <th>Доп. порода</th>
                         <th>Телефон</th>
-                        <th>Email</th>
+                        <th *ngIf="appService.meData.roles.includes('VIEW_EMAIL')">Email</th>
                         <th>Дата создания</th>
                         <th>Ссылка</th>
                         <th>Профиль</th>
@@ -54,13 +62,15 @@
                             https://petman.co/breeder/{{breeder.id}}</td>
                         <td style="text-align: center;">{{displayBreederProfileFill(breeder.profileFill)}}</td>
                         <td style="text-align: right;">
-                            <select (change)="changeBreederStatus(breeder.id, $event)">
+                            <select (change)="changeBreederStatus(breeder.id, $event)"
+                                [disabled]="!appService.meData.roles.includes('CHANGE_STATUS')">
                                 <option [selected]="breeder.status == 'ACTIVE'" value="ACTIVE">Активен</option>
                                 <option [selected]="breeder.status == 'UNCONFIRMED'" value="UNCONFIRMED">Неподтвержден
                                 </option>
                                 <option [selected]="breeder.status == 'BLOCKED'" value="BLOCKED">Заблокирован</option>
                                 <option [selected]="breeder.status == 'HIDDEN'" value="HIDDEN">Скрыт</option>
-                                <option [selected]="breeder.status == 'PERMANENT_DELETE'" value="PERMANENT_DELETE">Удалить навсегда</option>
+                                <option [selected]="breeder.status == 'PERMANENT_DELETE'" value="PERMANENT_DELETE">
+                                    Удалить навсегда</option>
                             </select>
                         </td>
                     </tr>
@@ -68,7 +78,8 @@
             </div>
         </div>
 
-        <div *ngIf="activeSection == 'customers'">
+        <!-- Сообщения -->
+        <div *ngIf="activeSection == 'customers' && appService.meData.roles.includes('VIEW_MESSAGES') && messages">
             <div class="section-top-bar">
                 <span>Отправлено сообщений: {{messages.length}}</span>
                 <a (click)="tableToExcel('messages-table', 'Petman messages', null)">Скачать список</a>
@@ -96,19 +107,113 @@
             </div>
         </div>
 
-        <div *ngIf="activeSection == 'add-breeds'">
-            <div class="add-breed-block">
-                <div class="new-breed-block">
+        <!-- Новые породы -->
+        <div *ngIf="activeSection == 'add-breeds' && appService.meData.roles.includes('ADD_BREED')">
+            <div class="add-new-entity-block">
+                <div class="new-entity-block">
                     <label>Именительный падеж</label>
                     <input type="text" class="form-control custom-form-control-border" [(ngModel)]="newBreed.name">
                 </div>
 
-                <div class="new-breed-block">
+                <div class="new-entity-block">
                     <label>Родительный падеж</label>
                     <input type="text" class="form-control custom-form-control-border" [(ngModel)]="newBreed.nameGen">
                 </div>
             </div>
-            <input type="button" class="custom-btn btn-purple" style="float: right; margin: 20px 15px 0;" value="Добавить" (click)="addBreed()" />
+            <input type="button" class="custom-btn btn-purple" style="float: right; margin: 20px 15px 0;"
+                value="Добавить" (click)="addBreed()" />
+        </div>
+
+        <!-- Добавить админа -->
+        <div *ngIf="activeSection == 'add-admins' && appService.meData.roles.includes('ADD_ADMIN')">
+            <div class="add-new-entity-block">
+                <div class="new-entity-block">
+                    <label>Имя</label>
+                    <input type="text" class="form-control custom-form-control-border"
+                        [class.invalid-form-checkbox]="invalidFields.includes('name')" [(ngModel)]="newAdmin.name">
+                </div>
+
+                <div class="new-entity-block">
+                    <label>Фамилия</label>
+                    <input type="text" class="form-control custom-form-control-border"
+                        [class.invalid-form-checkbox]="invalidFields.includes('surname')"
+                        [(ngModel)]="newAdmin.surname">
+                </div>
+
+                <div class="new-entity-block">
+                    <label>Почта</label>
+                    <input type="text" class="form-control custom-form-control-border"
+                        [class.invalid-form-checkbox]="invalidFields.includes('email')" [(ngModel)]="newAdmin.email">
+                </div>
+
+                <div class="new-entity-block">
+                    <label>Телефон</label>
+                    <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
+                        [(ngModel)]="newAdmin.phone" (input)="appService.setPhoneMask($event)"
+                        (change)="fieldEdited('phone')" (focus)="appService.setPhoneMask($event)"
+                        (blur)="appService.setPhoneMask($event)"
+                        [class.invalid-form-field-value]="invalidFields.includes('phone')">
+                </div>
+
+                <div class="new-entity-block">
+                    <label>Пароль</label>
+                    <input type="text" class="form-control custom-form-control-border"
+                        [class.invalid-form-checkbox]="invalidFields.includes('password')"
+                        [(ngModel)]="newAdmin.password">
+                </div>
+
+                <div class="new-entity-block">
+                    <label>Роли</label>
+
+                    <div *ngFor="let role of roles">
+                        <label>
+                            <input type="checkbox" [(ngModel)]="role.status"
+                                [ngModelOptions]="{standalone: true}">{{role.name}}
+                        </label>
+                    </div>
+
+                </div>
+
+                <input type="button" class="custom-btn btn-purple" value="Создать админа" (click)="createNewAdmin()" />
+            </div>
+        </div>
+
+        <!-- Список админов -->
+        <div *ngIf="activeSection == 'admin-list' && appService.meData.roles.includes('ADD_ADMIN')">
+            <div *ngIf="admins" class="admins-list">
+                <p>Список админов</p>
+
+                <div class="data-container">
+                    <div *ngIf="adminToUpdate">
+                        <div *ngFor="let role of roles" style="display: inline-block;">
+                            <label>
+                                <input type="checkbox" [(ngModel)]="role.status"
+                                    [ngModelOptions]="{standalone: true}">{{role.name}}
+                            </label>
+                        </div>
+
+                        <input type="button" 
+                    </div>
+
+
+                    <table id="admins-table">
+                        <tr>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Телефон</th>
+                            <th>Дата создания</th>
+                            <th>Роли</th>
+                        </tr>
+                        <tr *ngFor="let admin of admins">
+                            <td>{{admin.name}}</td>
+                            <td>{{admin.surname}}</td>
+                            <td>{{admin.phone || '-'}}</td>
+                            <td>{{getCreateDateAsString(admin.createDate)}}</td>
+                            <td (click)="getAdminToEdit(admin)">{{admin.roles.join(', ') || '-'}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </section>
 </main>

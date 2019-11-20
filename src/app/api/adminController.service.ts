@@ -18,6 +18,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
+import { Admin } from '../model/admin';
+import { AdminInfo } from '../model/adminInfo';
 import { Breed } from '../model/breed';
 import { BreederForAdmin } from '../model/breederForAdmin';
 import { MessageToBreeder } from '../model/messageToBreeder';
@@ -106,6 +108,53 @@ export class AdminControllerService {
     }
 
     /**
+     * createAdmin
+     * 
+     * @param info info
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createAdminUsingPOST(info: AdminInfo, observe?: 'body', reportProgress?: boolean): Observable<number>;
+    public createAdminUsingPOST(info: AdminInfo, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<number>>;
+    public createAdminUsingPOST(info: AdminInfo, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<number>>;
+    public createAdminUsingPOST(info: AdminInfo, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (info === null || info === undefined) {
+            throw new Error('Required parameter info was null or undefined when calling createAdminUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<number>(`${this.basePath}/api/admin/admin`,
+            info,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * deleteBreeder
      * 
      * @param id id
@@ -137,6 +186,42 @@ export class AdminControllerService {
         ];
 
         return this.httpClient.delete<any>(`${this.basePath}/api/admin/breeder/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * listAdmins
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listAdminsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<Admin>>;
+    public listAdminsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Admin>>>;
+    public listAdminsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Admin>>>;
+    public listAdminsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<Admin>>(`${this.basePath}/api/admin/admins`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,6 +294,58 @@ export class AdminControllerService {
         ];
 
         return this.httpClient.get<Array<MessageToBreeder>>(`${this.basePath}/api/admin/messages`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * updateAdmin
+     * 
+     * @param id id
+     * @param info info
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateAdminUsingPUT(id: number, info: AdminInfo, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public updateAdminUsingPUT(id: number, info: AdminInfo, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public updateAdminUsingPUT(id: number, info: AdminInfo, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public updateAdminUsingPUT(id: number, info: AdminInfo, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling updateAdminUsingPUT.');
+        }
+
+        if (info === null || info === undefined) {
+            throw new Error('Required parameter info was null or undefined when calling updateAdminUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<any>(`${this.basePath}/api/admin/admin/${encodeURIComponent(String(id))}`,
+            info,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

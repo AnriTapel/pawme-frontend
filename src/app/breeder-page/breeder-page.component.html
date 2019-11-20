@@ -5,7 +5,8 @@
         <span>Вернуться в личный кабинет</span>
     </div>
 
-    <button *ngIf="appService.meData.type == 'ADMIN'" class="custom-btn btn-purple edit-profile-btn" [routerLink]="['/breeder-profile']">
+    <button *ngIf="appService.meData.type == 'ADMIN' && appService.meData.roles.includes('PROFILE_EDIT')"
+            class="custom-btn btn-purple edit-profile-btn" [routerLink]="['/breeder-profile']">
         Редактировать профиль
     </button>
 

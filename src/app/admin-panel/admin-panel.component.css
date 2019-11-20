@@ -108,27 +108,24 @@ section .data-container table td {
   padding: 0 10px;
 }
 
-section .add-breed-block {
+section .add-new-entity-block {
   width: 100%;
   padding: 25px 15px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template: auto / 1fr 1fr;
 }
 
-section .add-breed-block .new-breed-block {
-  width: 35%;
-  max-width: 350px;
+section .add-new-entity-block .new-entity-block {
+  width: 100%;
+  max-width: 400px;
 }
 
-section .add-breed-block > input {
+section .add-new-entity-block > input {
+  -ms-grid-column: 2;
+      grid-column-start: 2;
   float: right;
   margin: 20px 15px 0;
 }
