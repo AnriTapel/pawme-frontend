@@ -21,9 +21,9 @@
     <div class="form-group popup-form-group">
         <span><a [routerLink]="['/remind-password']">Забыл пароль</a></span>
     </div>
-
-    <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 30px;">Войти</button>
-
+    <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 30px;" [disabled]="isLoading">{{!isLoading ? 'Войти' : ''}}
+        <div *ngIf="isLoading" class="loader"></div>
+    </button>
     <div class="form-group popup-form-group" style="text-align: center;">
         <span>Нет аккаунта? <a [routerLink]="['/sign-up']">Создать</a></span>
     </div>

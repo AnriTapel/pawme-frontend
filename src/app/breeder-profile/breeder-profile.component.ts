@@ -33,7 +33,9 @@ export class BreederProfileComponent implements OnInit {
     else
       this.profileService.showMyPage();
   }
-
+  openExample(): void{
+    window.open('https://petman.co/breeder/8258', '_blank');
+  }
   /*showPreview() {
     this.router.navigateByUrl('/preview/' + this.appService.userData.id);
   }*/

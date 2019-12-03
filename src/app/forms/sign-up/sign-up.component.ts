@@ -24,6 +24,7 @@ export class SignUpComponent implements OnInit {
 
   invalidFields: any[] = [];
   errorText: string = null;
+  isLoading: boolean = false;
 
   constructor(private popupService: PopupTemplateService, public appService: AppService,
     private breederService: BreederControllerService, private router: Router) { scroll(0, 0) }
@@ -42,9 +43,11 @@ export class SignUpComponent implements OnInit {
   }
 
   signUpNewBreeder() {
+    console.log('this.breederData', this.breederData);
     if (!this.validateFields())
       return;
     this.errorText = null;
+    this.isLoading = true;
     this.breederData.email = this.breederData.email.toLowerCase();
     this.breederService.registerUsingPOST(this.breederData).subscribe(
       res => {
@@ -52,8 +55,11 @@ export class SignUpComponent implements OnInit {
         ym(55779592, 'reachGoal', 'Registration');
         //@ts-ignore
         gtag('event', 'Registration');
+       
         this.router.navigate(['/confirm-email', this.breederData.email]);
+        window.scrollTo(0, 0);
       }, error => {
+        this.isLoading = false;
         if (error.status == 409)
           this.errorText = "Этот email уже зарегистрирован";
         else
@@ -81,7 +87,6 @@ export class SignUpComponent implements OnInit {
 
     if (!this.breederData.phone || this.breederData.phone == ""
       || this.breederData.phone.length != 17) {
-
       if (this.breederData.phone.length == 18)
         this.breederData.phone = this.breederData.phone.substr(0, 17);
       else {

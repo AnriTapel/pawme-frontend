@@ -167,6 +167,7 @@ hr {
   display: none;
 }
 
+
 @media screen and (max-width: 769px) {
   hr {
     width: 90%;

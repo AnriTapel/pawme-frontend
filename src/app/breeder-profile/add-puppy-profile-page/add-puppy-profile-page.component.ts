@@ -349,7 +349,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.currentPuppyData.price || this.currentPuppyData.price > 500000 || this.currentPuppyData.price < 1) {
+    if (this.currentPuppyData.price && this.currentPuppyData.price > 500000 && this.currentPuppyData.price || this.currentPuppyData.price < 1 && this.currentPuppyData.price || this.currentPuppyData.price  == 0) {
       this.profileService.invalidFields.push('price');
       isValid = false;
     }

@@ -155,7 +155,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-left">
-        <label for="puppy-price">Стоимость щенка в рублях</label>
+        <label for="puppy-price">Стоимость щенка в рублях (необязательно)</label>
         <input type="number" min="0" name="puppy-price" class="form-control custom-form-control-border" (change)="profileService.inputValueChanged('price')"
             [class.invalid-form-field-value]="profileService.invalidFields.includes('price')" [(ngModel)]="currentPuppyData.price" placeholder="₽"/>
     </div>

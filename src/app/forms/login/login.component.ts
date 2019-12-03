@@ -16,6 +16,7 @@ export class LoginComponent {
   loginError: boolean = false;
   errorText: string = null;
   invalidFields: string[] = [];
+  isLoading: boolean = false;
 
   constructor(private appService: AppService, private router: Router, private http: HttpClient, private adminService: AdminControllerService,
     private breederService: BreederControllerService, private notificationService: NotificationBarService) {
@@ -41,12 +42,16 @@ export class LoginComponent {
   }
 
   loginBreeder(): void {
+    
     if (!this.validateFields())
       return;
     this.loginError = false;
+    this.isLoading = true;
+   
     if (!this.appService.validateEmailInput(this.credentials.username)) {
       this.errorText = 'Пожалуйста, введите действительный E-mail';
       this.loginError = true;
+      this.isLoading = false;
     } else {
       let body = new FormData();
       this.credentials.username = this.credentials.username.toLowerCase();
@@ -58,6 +63,7 @@ export class LoginComponent {
         error => {
           this.errorText = "Неверный логин или пароль";
           this.loginError = true;
+          this.isLoading = false;
         }
       );
     }

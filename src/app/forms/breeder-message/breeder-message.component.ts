@@ -15,6 +15,7 @@ export class BreederMessageComponent implements OnInit {
   invalidFields: Array<string> = [];
   acception: boolean = true;
   isError: boolean = false;
+  isLoading: boolean = false;
 
   breederMessage: MessageToBreeder = {
     name: null,
@@ -33,7 +34,7 @@ export class BreederMessageComponent implements OnInit {
   sendMessage(): void {
     if (!this.validateFields())
       return;
-
+    this.isLoading = true;
     this.breederMessage.email = this.breederMessage.email.toLowerCase();
     this.breederService.sendMessageToBreederUsingPOST(this.appService.userData.id, this.breederMessage).subscribe(
       () => {

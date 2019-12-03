@@ -220,7 +220,7 @@ export class AppService {
         event.srcElement.value = ""
     } else 
       this.setCursorPosition(event.srcElement.value.length, event.srcElement);
-  };
+  };z
 
   getImageDataForUpload(data: any): FormData {
     const body = new FormData();

@@ -22,7 +22,7 @@
         <label for="phone">Ваш телефон</label>
         <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
             [(ngModel)]="breederData.phone" (input)="appService.setPhoneMask($event)" (change)="fieldEdited('phone')"
-            (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
+             (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
             [class.invalid-form-field-value]="invalidFields.includes('phone')" />
         <span *ngIf="invalidFields.includes('phone')" class="invalid-field-message">Пожалуйста, введите действительный
             телефон</span>
@@ -53,8 +53,12 @@
             и <a href="/docs/policy.pdf" target="_blank">Политикой конфиденциальности</a></label>
     </div>
 
-    <input type="button" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;"
-        (click)="signUpNewBreeder()" value="Зарегистрироваться" />
+
+    <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" 
+    (click)="signUpNewBreeder()" [disabled]="isLoading">{{!isLoading ? 'Зарегистрироваться' : ''}}
+        <div *ngIf="isLoading" class="loader"></div>
+    </button>
+
 
     <div class="form-group popup-form-group" style="text-align: center;">
         <span>Уже есть аккаунт? <a [routerLink]="['/login']">Войти</a></span>

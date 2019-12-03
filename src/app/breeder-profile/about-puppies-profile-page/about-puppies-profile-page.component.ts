@@ -135,9 +135,10 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     if (this.puppiesData.gifts && this.puppiesData.gifts != "" && this.puppiesData.gifts.length > 512) {
       this.profileService.invalidFields.push('gifts');
       isValid = false;
-    } else
-      this.puppiesData.gifts = null;
-
+    } else if (this.puppiesData.gifts == "") {
+       this.puppiesData.gifts = null;
+    }
+    
     return isValid;
   }
 }
