@@ -67,7 +67,7 @@ export class BreederMessageComponent implements OnInit {
     if (!this.breederMessage.phone || this.breederMessage.phone == ""
       || this.breederMessage.phone.length != 17) {
 
-      if (this.breederMessage.phone.length == 18)
+      if (this.breederMessage.phone.length == 18 )
         this.breederMessage.phone = this.breederMessage.phone.substr(0, 17);
       else {
         isValid = false;

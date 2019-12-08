@@ -43,7 +43,6 @@ export class SignUpComponent implements OnInit {
   }
 
   signUpNewBreeder() {
-    console.log('this.breederData', this.breederData);
     if (!this.validateFields())
       return;
     this.errorText = null;
@@ -87,7 +86,7 @@ export class SignUpComponent implements OnInit {
 
     if (!this.breederData.phone || this.breederData.phone == ""
       || this.breederData.phone.length != 17) {
-      if (this.breederData.phone.length == 18)
+      if (this.breederData.phone.length == 18 )
         this.breederData.phone = this.breederData.phone.substr(0, 17);
       else {
         isValid = false;

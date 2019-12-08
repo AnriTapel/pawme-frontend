@@ -206,21 +206,26 @@ export class AppService {
   }
 
   setPhoneMask(event) {
-    var matrix = "+7 (___) ___ ____",
-      i = 0,
-      def = matrix.replace(/\D/g, ""),
-      val = event.srcElement.value.replace(/\D/g, "");
-    if (def.length >= val.length)
-      val = def;
-    event.srcElement.value = matrix.replace(/./g, function (a) {
-      return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a
-    });
-    if (event.type == "blur") {
-      if (event.srcElement.value.length == 2)
-        event.srcElement.value = ""
-    } else 
-      this.setCursorPosition(event.srcElement.value.length, event.srcElement);
-  };z
+    if( event.srcElement.value == '') {
+      event.srcElement.value = "+7";
+      //this.setCursorPosition(event.srcElement.value.length, event.srcElement);
+    }
+    
+  //   var matrix = "+7 (___) ___ ____",
+  //     i = 0,
+  //     def = matrix.replace(/\D/g, ""),
+  //     val = event.srcElement.value.replace(/\D/g, "");
+  //   if (def.length >= val.length)
+  //     val = def;
+  //   event.srcElement.value = matrix.replace(/./g, function (a) {
+  //     return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? "" : a
+  //   });
+  //   if (event.type == "blur") {
+  //     if (event.srcElement.value.length == 2)
+  //       event.srcElement.value = ""
+  //   } else 
+  //     this.setCursorPosition(event.srcElement.value.length, event.srcElement);
+   };
 
   getImageDataForUpload(data: any): FormData {
     const body = new FormData();

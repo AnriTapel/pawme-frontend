@@ -46,6 +46,10 @@ import { FaqComponent } from './secondary-page/faq/faq.component';
 import { ShareButtonsComponent } from './template-blocks/share-buttons/share-buttons.component';
 import { OnboardingComponent } from './forms/onboarding/onboarding.component';
 import { PageNotFoundComponent } from './secondary-page/page-not-found/page-not-found.component';
+import { SearchPageComponent } from './forms/search-page/search-page.component';
+import {IMaskModule} from 'angular-imask';
+
+
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -85,7 +89,8 @@ export function initApp(appSerivce: AppService){
     FaqComponent,
     ShareButtonsComponent,
     OnboardingComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +102,8 @@ export function initApp(appSerivce: AppService){
     NgbModule,
     BrowserAnimationsModule,
     LyThemeModule.setTheme('minima-light'),
-    LyResizingCroppingImageModule
+    LyResizingCroppingImageModule,
+    IMaskModule,
   ],
   providers: [
     AppService,

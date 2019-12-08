@@ -21,9 +21,9 @@
     <div class="form-group popup-form-group">
         <label for="phone">Ваш телефон</label>
         <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
-            [(ngModel)]="breederData.phone" (input)="appService.setPhoneMask($event)" (change)="fieldEdited('phone')"
-             (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
-            [class.invalid-form-field-value]="invalidFields.includes('phone')" />
+        [imask]="{mask: '+{7} (000) 000 0000'}" [(ngModel)]="breederData.phone" (input)="appService.setPhoneMask($event)" (change)="fieldEdited('phone')"
+         (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
+        [class.invalid-form-field-value]="invalidFields.includes('phone')" />
         <span *ngIf="invalidFields.includes('phone')" class="invalid-field-message">Пожалуйста, введите действительный
             телефон</span>
     </div>
