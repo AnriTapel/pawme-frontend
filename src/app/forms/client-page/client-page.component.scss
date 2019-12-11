@@ -1,0 +1,346 @@
+
+
+:host {
+    background: #ffffff;
+}
+.main {
+    background: #ffffff !important;
+    .header { 
+        display: flex;
+        flex-direction: column;
+        height: 600px;
+        // opacity: 0.5;
+        background-image: url("/assets/img/client-page/header.png");
+        div {
+            margin-top: 155px;
+            opacity: 1;
+            &>p:first-child {
+                font-size: 38px;
+                font-weight: bold;
+                text-align: center;
+                color: #ffffff;
+            }
+            &>p:last-child {
+                font-family: Intro;
+                font-size: 18px;
+                line-height: 1.44;
+                text-align: center;
+                color: #ffffff;
+            }
+        }
+    }
+    .search-block {
+        width: 670px;
+        margin-top: -90px !important;
+        border: solid 1px #cbd8f6;
+        background-color: #ffffff;
+        position: absolute;
+        left: 25%;
+        margin: 0 auto;
+        .search-content {
+            display: flex;
+            flex-wrap: nowrap;
+            padding: 30px 30px 10px;
+            .dropdown-text-input {
+                width: 437px;
+                height: 52px;
+            }
+            .custom-btn  {
+                margin-left: 20px;
+                width: 157px;
+                height: 48px;
+                text-align: center;
+                input {
+                    font-size: 16px;
+                    letter-spacing: 0.18px;
+                    color: #ffffff;
+                    background: none;
+                    border: none;
+                }
+            }
+        }
+        .star {
+            display: flex;
+            flex-wrap: nowrap;
+            font-size: 16px;
+            margin: 0px 0px 30px 30px;
+            font-size: 16px;
+            opacity: 0.8;
+            color: #0e0b4d;
+            &>div:last-child {
+                margin-left: 5px;
+            }
+            a {
+                color: #645fc9;
+                text-decoration: underline;
+            }
+        }
+    }
+  .containers {
+    background: #ffffff;
+    margin-left: 135px;
+    .title {
+        font-size: 28px;
+        color: #645fc9;
+        margin-top: 130px;
+    }
+    .dogs {
+        color: #0e0b4d;
+        margin: 60px 0px 60px;
+        &>p:first-child {
+            font-size: 22px;
+        }
+        .text {
+            font-size: 18px;
+            line-height: 1.44;
+            width: 970px;
+        }
+        &>div {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            &>div:first-child {
+                margin: 0px;
+            }
+            div {
+                margin-left: 30px;
+            }
+            p {
+                font-size: 22px;
+                margin-top: 10px;
+    
+            }
+        }
+    }
+  }
+  .middle-content {
+    background-color: #f8f9fb;
+    padding: 60px 0px 73px 135px;
+    h3 {
+        font-size: 28px;
+        color: #645fc9;
+    }
+    p {
+        font-size: 16px;
+        line-height: 1.38;
+        letter-spacing: normal;
+        color: #0e0b4d;
+    }
+    .middle-content-icons {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 57px;
+        div:first-child {
+            margin: 0px;
+        }
+        div {
+            margin-left: 100px;
+        }
+        h3 {
+            font-size: 22px;
+            line-height: 1.5;
+            color: #0e0b4d;
+            margin-top: 21px;
+        }
+        p {
+            max-width: 298px;
+            margin-top: 16px;
+            font-size: 16px;
+        }
+        a {
+            color: #645fc9;
+            text-decoration: underline;
+            margin-top: 32px;
+            font-size: 16px;
+            letter-spacing: 0.18px;
+        }
+    }
+  }
+  .oval-content {
+      display: flex;
+      justify-content: space-between;
+      background-color: #ffffff;
+      background-image: url("/assets/img/client-page/kruglii_cut.svg"); 
+      background-position: left bottom; 
+      background-repeat: no-repeat; 
+      .right {
+        margin-left: 135px;
+          h3 {
+            width: 510px;
+            font-size: 28px;
+            letter-spacing: normal;
+            color: #645fc9;
+            margin-top: 60px;
+          }
+           h2 {
+            width: 536px;
+            margin-top: 65px;
+            font-size: 22px;
+            color: #0e0b4d;
+           }
+           p {
+            width: 570px;
+            height: 110px;
+            font-size: 16px;
+            line-height: 1.38;
+            color: #0e0b4d;
+            margin-top: 22px;
+           }
+           input {
+               margin-top: 22px;
+               width: 224px;
+               height: 44px;
+               border-radius: 26px;
+               background-color: #645fc9;
+               font-size: 14px;
+               letter-spacing: 0.16px;
+               text-align: center;
+               color: #ffffff;
+               text-transform: uppercase;
+           }
+      }
+      .girl {
+        width: 683px;
+        height: 586px;
+        background-image: url("/assets/img/client-page/two_circles.svg"); 
+        img {
+            margin: 88px 0px 0px 43px;
+        }
+          .slider-button {
+              display: flex;
+              flex-wrap: nowrap;
+               margin: 15px 0 0 203px; 
+            div {
+                width: 28px;
+                height: 28px;
+                .circle{
+                    width: 14px;
+                    height: 14px;
+                    opacity: 0.5;
+                    background-color: #645fc9;
+                    border-radius: 50%;
+                    margin : 7px 0 0 7px;    
+                }
+                &:hover {
+                    background-image: url("/assets/img/client-page/hover_circle.svg");
+                    .circle {
+                        display: none;
+                    }
+                }
+            }
+          }
+      }
+  }
+  .choose-dog {
+      margin: 0 auto;
+      h3 {
+        font-size: 28px;
+        text-align: center;
+        color: #645fc9;
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.38;
+        text-align: center;
+        color: #0e0b4d;
+      }
+  }
+  .choose-dog-pics {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 42px 0 36px 0;
+      &>div:first-child {
+        background-image: url("/assets/img/client-page/back_readyfordog.svg");
+        width: 670px;
+        height: 380px;
+        position: relative;
+        h3 {
+            font-size: 28px;
+            color: #0e0b4d;
+            margin: 27px 0 0 32px;
+        }
+        .dog {
+            margin-left: 200px;
+        }
+        .heart {
+            top: 46px;
+            right: 42px;
+            position: absolute;
+        }
+      }
+      &>div:last-child {
+          margin-left:30px;
+          h3 {
+            width: 212px;
+            font-size: 28px;
+            color: #0e0b4d;
+        }
+          .white-dog {
+            width: 470px;
+            height: 175px;
+            display: flex;
+            justify-content: space-between;
+            padding: 27px 0 0 32px;
+            background-image: url("/assets/img/client-page/back_howtochoose.svg");
+            
+          }
+          .black-dog {
+            width: 470px;
+            height: 175px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            padding: 27px 0 0 32px;
+            background-image: url("/assets/img/client-page/back_howtochoosebreed.svg");
+          }
+      }
+  }
+  .info-button {
+    margin: 0 auto;
+    width: 256px;
+      input {
+        width: 256px;
+        height: 44px;
+        border-radius: 26px;
+        border: solid 1px #645fc9;
+        text-transform: uppercase;
+        font-size: 14px;
+        letter-spacing: 0.16px;
+        text-align: center;
+        color: #645fc9;
+      }
+  }
+  .dogs-bottom {
+    margin-top: 70px;
+    background-color: #edeceb;
+    .content {
+        margin: 0 auto;
+        width: 425px;
+        h3 {
+            font-size: 28px;
+            text-align: center;
+            color: #645fc9;
+            padding-top: 60px;
+        }
+        p {
+            width: 465px;
+            font-size: 16px;
+            line-height: 1.38;
+            text-align: center;
+            color: #0e0b4d;
+        }
+        input {
+            width: 214px;
+            height: 44px;
+            font-size: 14px;
+            margin: 24px 0 0 110px ;
+        }
+    } 
+    img {
+        margin-left: 150px;
+    }
+  }
+}
+
+

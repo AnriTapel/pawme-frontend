@@ -13,7 +13,9 @@ import { AboutUsComponent } from './secondary-page/about-us/about-us.component';
 import { ContactUsComponent } from './secondary-page/contact-us/contact-us.component';
 import { FaqComponent } from './secondary-page/faq/faq.component';
 import { PageNotFoundComponent } from './secondary-page/page-not-found/page-not-found.component';
-import { SearchPageComponent } from './forms/search-page/search-page.component'
+import { SearchPageComponent } from './forms/search-page/search-page.component';
+import { ClientPageComponent } from './forms/client-page/client-page.component'
+
 
 const routes: Routes = [
   {path: '', component: BreederLandingComponent},
@@ -31,6 +33,7 @@ const routes: Routes = [
   {path: 'admin-panel', component: AdminPanelComponent},
   {path: 'confirm-email/:mail', component: MailPageComponent},
   {path: 'search-page', component: SearchPageComponent},
+  {path: 'client-page', component: ClientPageComponent},
   {path: '404', component: PageNotFoundComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

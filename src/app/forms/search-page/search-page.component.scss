@@ -1,6 +1,3 @@
-// header{
-//     background-color: red !important;
-// }
 
 :host {
     background: #ffffff;
@@ -157,9 +154,7 @@
                 height: 52px;
                 border-radius: 25px;
                 font-size: 18px;
-                
                 margin-top: 16px;
-
             }
         } 
         .send-form {
@@ -197,6 +192,16 @@
 @media screen and (max-width: 769px){
     .container {
         margin: 0px;
+        .top-line {
+            width: 328px;
+            height: 1px;
+            opacity: 0.1;
+            background-color: #0e0b4d;
+            margin-top:10px;
+        }
+        h3 {
+            margin-top: 20px;
+        }
     }
     .search-info {
         width: 328px !important;
@@ -239,7 +244,6 @@
             margin-left:10px;
             height: auto !important;
             border: solid 1px #cbd8f6 !important;
-           
             .search-right {
                 margin: 0px !important;
                 .main-serach-sub-right {

@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
   }
 
   isNonProfileHeader(): boolean {
-    return this.nonProfileHeaderPathnames.filter(it => this.router.url.indexOf(it) == 0).length != 0 || this.router.url == '/';
+    return this.nonProfileHeaderPathnames.filter(it => this.router.url.indexOf(it) == 0).length != 0 || this.router.url == '/' || this.router.url == '/client-page';
   }
 
   getMenuType(): MenuType {

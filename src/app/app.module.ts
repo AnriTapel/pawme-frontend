@@ -48,6 +48,7 @@ import { OnboardingComponent } from './forms/onboarding/onboarding.component';
 import { PageNotFoundComponent } from './secondary-page/page-not-found/page-not-found.component';
 import { SearchPageComponent } from './forms/search-page/search-page.component';
 import {IMaskModule} from 'angular-imask';
+import { ClientPageComponent } from './forms/client-page/client-page.component';
 
 
 
@@ -90,7 +91,8 @@ export function initApp(appSerivce: AppService){
     ShareButtonsComponent,
     OnboardingComponent,
     PageNotFoundComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    ClientPageComponent
   ],
   imports: [
     BrowserModule,
