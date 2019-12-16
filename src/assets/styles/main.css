@@ -236,7 +236,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .dropdown-text-input > img {
   position: absolute;
-  top: 25%;
+  top: 18%;
   height: 50%;
   right: .5em;
   cursor: pointer;

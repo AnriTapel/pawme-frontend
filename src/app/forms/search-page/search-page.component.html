@@ -1,8 +1,15 @@
-
-<div class="container">
+<div class="container header">
+    <div class="logo">
+        <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
+    </div>
+    <div class="login">
+        <input type="button" class="custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
+    </div>
+</div>
+<div class="container main">
     <div class="page-header">
         <div class="top-line"></div>
-        <h3>Наши заводчики</h3>
+        <h3>НАШИ ЗАВОДЧИКИ</h3>
     </div>
     <div class="search-input">    
         <div class="dropdown-text-input">
@@ -20,9 +27,12 @@
                 <div class="dog-mobile"></div>
                 <div class="main-serach-sub-right">
                     <div class="serach-sub-right">
-                        <div>
-                            <h3>Сладкие мопсы </h3> 
-                            <div class="location"><i class="icon icon-location"></i>Челябинск</div>
+                        <div class="location-content">
+                            <h3>Сладкие мопсы </h3>
+                            <div class="location-content-sub">
+                                <div class="location"><i class="icon icon-location"></i></div>
+                                <div>Челябинск</div>
+                            </div>
                         </div>
                         <div class="serach-content-girl">
                             <img src="./assets/img/search-page/girl1.png" alt=""/>
@@ -33,7 +43,7 @@
                     </p>
                     <div class="number">
                         <div>2</div> 
-                        <div>доступных щенка </div>
+                        <div>доступных щенка</div>
                     </div>
                 </div>
             </div>
@@ -41,14 +51,14 @@
                 <img src="./assets/img/search-page/dog1.png" alt=""/>
             </div>
         </div>
-        <div>
-            <p>Характеристики породы</p>
+        <div class="dogs-parod">
+            <h3>Характеристики породы</h3>
             <div>
                 <div class="circle"></div>
                 <img src="./assets/img/search-page/energy.svg" alt=""/>
                 <div>Много энергии</div>
             </div>
-            <div class="">
+            <div>
                 <div class="circle"></div>
                 <img src="./assets/img/search-page/high_allergy.svg" alt=""/>
                 <div class="">Сильно линяет</div>
@@ -62,7 +72,7 @@
     </div>
     <div class="search-info">
         <div class="info-right">
-            <p>Не нашли подходящего заводчика на платформе?</p>
+            <h3>Не нашли подходящего заводчика на платформе?</h3>
             <p>Оставьте заявку и наши специалисты постараются найти для вас профессионала</p>
         </div>
         <div class="info-left">
@@ -72,9 +82,9 @@
             <input type="button" class="custom-btn btn-purple" value="Отправить" />
         </div>
     </div>
-    <div class="search-info">
-        <div class="info-right">
-            <p>Спасибо за заявку!</p>
+    <div class="heart-info">
+        <div class="info-right info-bottom">
+            <h3 class="thaks">Спасибо за заявку!</h3>
             <p>Мы уже работаем над вашим запросом</p>
         </div>
         <div class="info-left send-form">
