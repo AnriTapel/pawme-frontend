@@ -7,6 +7,7 @@ import { AdminControllerService } from './api/adminController.service';
 import { BreederControllerService } from './api/breederController.service';
 import { DictionaryControllerService } from './api/dictionaryController.service';
 import { MediaControllerService } from './api/mediaController.service';
+import { SearchControllerService } from './api/searchController.service';
 
 @NgModule({
   imports:      [],
@@ -16,7 +17,8 @@ import { MediaControllerService } from './api/mediaController.service';
     AdminControllerService,
     BreederControllerService,
     DictionaryControllerService,
-    MediaControllerService ]
+    MediaControllerService,
+    SearchControllerService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {

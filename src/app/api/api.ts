@@ -6,4 +6,6 @@ export * from './dictionaryController.service';
 import { DictionaryControllerService } from './dictionaryController.service';
 export * from './mediaController.service';
 import { MediaControllerService } from './mediaController.service';
-export const APIS = [AdminControllerService, BreederControllerService, DictionaryControllerService, MediaControllerService];
+export * from './searchController.service';
+import { SearchControllerService } from './searchController.service';
+export const APIS = [AdminControllerService, BreederControllerService, DictionaryControllerService, MediaControllerService, SearchControllerService];

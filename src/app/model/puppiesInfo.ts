@@ -13,14 +13,14 @@ import { PuppyTest } from './puppyTest';
 
 
 export interface PuppiesInfo { 
-    age: number;
+    age?: number;
     gifts?: string;
     id?: number;
     insuranceCoverage?: string;
     insuranceTerm: number;
     petmanContract: boolean;
     petmanSet: boolean;
-    priceFrom: number;
+    priceFrom?: number;
     priceTo: number;
     puppyTests: Array<PuppyTest>;
 }

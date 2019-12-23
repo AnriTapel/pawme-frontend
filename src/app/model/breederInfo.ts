@@ -17,6 +17,7 @@ export interface BreederInfo {
     city: string;
     description: string;
     extraBreed?: Breed;
+    extraBreed1?: Breed;
     facebook?: string;
     gallery?: Array<Photo>;
     id?: number;

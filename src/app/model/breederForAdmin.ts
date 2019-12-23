@@ -16,6 +16,7 @@ export interface BreederForAdmin {
     createDate?: Date;
     email?: string;
     extraBreed?: string;
+    extraBreed1?: string;
     id?: number;
     mainBreed?: string;
     name?: string;

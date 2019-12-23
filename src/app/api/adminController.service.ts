@@ -31,7 +31,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class AdminControllerService {
 
-    protected basePath = '';
+    protected basePath = ''; 'https://petman.co';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -294,6 +294,54 @@ export class AdminControllerService {
         ];
 
         return this.httpClient.get<Array<MessageToBreeder>>(`${this.basePath}/api/admin/messages`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * setCustomRating
+     * 
+     * @param id id
+     * @param rating rating
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public setCustomRatingUsingPUT(id: number, rating: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public setCustomRatingUsingPUT(id: number, rating: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public setCustomRatingUsingPUT(id: number, rating: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public setCustomRatingUsingPUT(id: number, rating: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling setCustomRatingUsingPUT.');
+        }
+
+        if (rating === null || rating === undefined) {
+            throw new Error('Required parameter rating was null or undefined when calling setCustomRatingUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.put<any>(`${this.basePath}/api/admin/breeder/rating/${encodeURIComponent(String(id))}/${encodeURIComponent(String(rating))}`,
+            null,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

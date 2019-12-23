@@ -22,6 +22,7 @@ import { Breeder } from '../model/breeder';
 import { BreederAbout } from '../model/breederAbout';
 import { BreederInfo } from '../model/breederInfo';
 import { MessageToBreeder } from '../model/messageToBreeder';
+import { NameAndSurname } from '../model/nameAndSurname';
 import { ParentsInfo } from '../model/parentsInfo';
 import { PuppiesInfo } from '../model/puppiesInfo';
 import { Puppy } from '../model/puppy';
@@ -34,7 +35,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class BreederControllerService {
 
-    protected basePath = '';
+    protected basePath = ''; //'https://petman.co';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -813,6 +814,58 @@ export class BreederControllerService {
 
         return this.httpClient.put<any>(`${this.basePath}/api/breeder/questions/${encodeURIComponent(String(id))}`,
             questions,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * updateName
+     * 
+     * @param id id
+     * @param info info
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateNameUsingPUT(id: number, info: NameAndSurname, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public updateNameUsingPUT(id: number, info: NameAndSurname, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public updateNameUsingPUT(id: number, info: NameAndSurname, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public updateNameUsingPUT(id: number, info: NameAndSurname, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling updateNameUsingPUT.');
+        }
+
+        if (info === null || info === undefined) {
+            throw new Error('Required parameter info was null or undefined when calling updateNameUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<any>(`${this.basePath}/api/breeder/name/${encodeURIComponent(String(id))}`,
+            info,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

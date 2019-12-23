@@ -27,7 +27,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class DictionaryControllerService {
 
-    protected basePath = '';
+    protected basePath = ''; //'https://petman.co';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 

@@ -1,24 +1,57 @@
+input[type=checkbox], input[type=checkbox]:checked {
+    display: none !important;
+}
+
+.checkbox-item {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    img {
+        width: 11px;
+        height: 8px;
+        margin-top: 12px;
+        margin-right: 22px;
+        background-image: url("/assets/img/search-page/search-checkbox.png");
+        display: none;
+    }
+}
+.checkbox-item:hover {
+    img {
+
+        display: block;
+    }
+}
+.search-box {
+    img {
+        width: 18px;
+        height: 18px;
+        margin-top: 3px;
+    }
+ 
+}
 
 :host {
     background: #ffffff;
 }
+
 .header { 
     display: flex;
     justify-content: space-between;
     max-width: 1200px;
     margin-top: 25px !important;
     margin: 0 auto;
-    img {
+    .logo img  {
         width: 150px;
         outline: none;
     } 
-    input {
+    .loginInput {
         border: solid 2px #645fc9;
     }
 }
 
 .container {
    max-width: 1200px;
+   //position: absolute;
   
 }
 
@@ -54,6 +87,7 @@
     display: flex;
     flex-wrap: nowrap;
     max-width: 870px;
+    //justify-content: space-between;
     height: 320px;
     border-radius: 4px;
     border: solid 1px #cbd8f6;
@@ -76,6 +110,10 @@
     .p-text {
         margin: 20px 0 0 0;
         opacity: 0.6;
+        height: 95px;
+        //max-width: 447px;
+        width: 447px;
+        overflow: scroll;
     }
 }
 
@@ -109,11 +147,12 @@
 }
 
 .dog {
-    border-bottom-left-radius: 4px;
     width: 370px;
     height: 320px;
+    padding-left: 49px;
     img {
-        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 4px;
         max-width: 370px;
         max-height: 320px;
         margin-top: -1px;
@@ -244,28 +283,97 @@
     display: flex;
     justify-content: center;
     font-size: 14px;
-    color: #7f889a;
-    &> div{
-        margin: 11px;
-        padding-top: 5px !important; 
-    }
-    div:first-child {
-        background: #645fc9;
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;            
-        color: #fff;
-        text-align: center;
-    }
-    div:last-child {
-        padding-top: 0px !important; 
-    }
+    // color: #7f889a !important;
+    // &> div{
+    //    // margin: 11px;
+    //    // padding-top: 5px !important; 
+    // }
+    // div:first-child {
+    //     background: #645fc9;
+    //     border-radius: 50%;
+    //     width: 32px;
+    //     height: 32px;            
+    //     color: #fff;
+    //     text-align: center;
+    // }
+    // div:last-child {
+    //     padding-top: 0px !important; 
+    // }
 }
 
-@media screen and (max-width: 769px){
+.dog-mobile {
+    display: none;
+}
+// table {
+//     background-color: #ffffff;
+//     position: absolute;
+//     z-index: 1;
+//     color: #0e0b4d;
+//     border: 1px solid #cbd8f6;
+//     //border: 1px solid red;
+// }
+.search-meta  {
+    position: absolute;
+    z-index: 3;
+    left:30%;
+   width: 470px;
+   //height: 421px;
+   border-radius: 3px;
+   box-shadow: 0 12px 24px 0 rgba(14, 11, 77, 0.1);
+   border: solid 1px #cbd8f6;
+   background-color: #ffffff;
+   font-family: 'Intro-Book';
+   font-size: 14px;
+   
+}
+input.metaInput {
+    border: none;
+    border-radius: 0; 
+   // border: 1px solid #cbd8f6;
+    //padding: 10px 0 0 20px;
+    padding-left: 20px;
+}
+input.metaInput:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #ffffff !important;
+}
 
+div.metaName {
+        width: 454px;
+        height: 52px;
+       // background-color: #f8f9fb;   ///selected
+        background-color: #ffffff;
+        margin-left:8px;
+        margin-right: 8px;
+   
+        border-top: solid 1px #e3e5ea;
+        padding: 16px 0 0 10px;
+}
+
+
+@media screen and (max-width: 769px) {
+
+    .search-meta  {
+        // position: absolute;
+        // z-index: 1;
+        // left: 5%;
+        // top: 5%;
+        // bottom: 5%;
+        // width: 320px;
+        display: none !important;
+       // margin: 40px;
+      
+    }
     .header {
         margin: 25px;
+        // flex-wrap: wrap !important;
+        // background-color: red;
+        top: 50%;
     }
     .login {
         margin-right: 12px;
@@ -345,14 +453,17 @@
         margin: 0px !important;
         .main-serach-sub-right {
             padding: 20px !important;
+            margin-top: 20px;
         }
         .dog-mobile {
-            background-image: url("/assets/img/search-page/dog1.png");
-            background-repeat: no-repeat;
+            // background-image: url("/assets/img/search-page/dog1.png");
+            // background-repeat: no-repeat;
+            display: block;
             width: 332px;
             height: 284px;
             margin-top: -1px;
-            margin-left: -1px;
+            margin-left: -13px;
+            object-fit: contain;
       
         } 
     }
@@ -383,5 +494,9 @@
                 margin: -5px 0 0 10px !important;
             }
         }
+    }
+
+    .p-text {
+        width: 288px !important;
     }
 }

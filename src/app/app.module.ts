@@ -33,7 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LyThemeModule, LY_THEME } from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
 import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-images'
-import { BreederControllerService, AdminControllerService, DictionaryControllerService, MediaControllerService } from './api/api';
+import { BreederControllerService, AdminControllerService, DictionaryControllerService, MediaControllerService, SearchControllerService } from './api/api';
 import { NotificationBarComponent } from './template-blocks/notification-bar/notification-bar.component';
 import { BreederMessageComponent } from './forms/breeder-message/breeder-message.component';
 import { DogCardComponent } from './forms/dog-card/dog-card.component';
@@ -49,6 +49,15 @@ import { PageNotFoundComponent } from './secondary-page/page-not-found/page-not-
 import { SearchPageComponent } from './forms/search-page/search-page.component';
 import {IMaskModule} from 'angular-imask';
 import { ClientPageComponent } from './forms/client-page/client-page.component';
+
+import { NgSelectModule } from '@ng-select/ng-select';
+ //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CommonModule } from '@angular/common';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+
+
+
 
 
 
@@ -106,6 +115,11 @@ export function initApp(appSerivce: AppService){
     LyThemeModule.setTheme('minima-light'),
     LyResizingCroppingImageModule,
     IMaskModule,
+    NgSelectModule,
+   // NgMultiSelectDropDownModule.forRoot(),
+    CommonModule,
+    NgxPaginationModule,
+    FilterPipeModule
   ],
   providers: [
     AppService,
@@ -113,6 +127,7 @@ export function initApp(appSerivce: AppService){
     EventService,
     AdminControllerService,
     BreederControllerService,
+    SearchControllerService,
     DictionaryControllerService,
     MediaControllerService,
     AlertService,

@@ -180,6 +180,7 @@
     background-image: url(/assets/img/client-page/kruglii_cut.svg), url(/assets/img/client-page/two_circles.svg);
     background-position: left bottom, right bottom;
     background-repeat: no-repeat, no-repeat;
+    background-position: fixed;
     margin-top: 50px;
 
 }
@@ -241,7 +242,7 @@
 .slider-button {
     display: flex;
     flex-wrap: nowrap;
-    margin: 15px 0 0 203px; 
+    margin: 15px 0 0 180px; 
     div {
         width: 28px;
         height: 28px;
@@ -394,21 +395,18 @@
 .bottom-dogs {
     background-image: url("/assets/img/client-page/dogs_vizavodchik.jpg");
     background-repeat: no-repeat;  
-   // width: 1146px;
-    height: 334px;// 501px;
+    background-position: center;
+    background-size: cover; 
+    height: 334px;
     margin-top: 50px;
 }
 
 @media screen and (max-width: 769px) {
      .header { 
-        //background-image: url("/assets/img/client-page/header-mob.jpg");
         background-image: url("/assets/img/client-page/header-mobile.jpg");
-        background-size: cover; //;100% 100%; //contain;
+        background-size: cover; 
         background-position: center;
-       // background-attachment: fixed;
         background-repeat: no-repeat;  
-       
-       // width: 370px !important;
         height: 485px !important;
     }
     .header-title {
@@ -564,7 +562,6 @@
         height: 100px;
         margin-top: 12px;
         margin-left: 0px;
-       // margin: 0 auto !important;
     }
     .girl-img {
         background-image: url("/assets/img/client-page/circle_face_mobile.png"); 
@@ -574,7 +571,7 @@
         margin-left: 30px;
     }
     .slider-button {
-        margin: 15px 0 0 100px; 
+        margin: 15px 0 0 90px; 
     }
     .choose-dog {
         margin: 0 auto;
@@ -686,11 +683,8 @@
     .bottom-dogs {
         background-image: url("/assets/img/client-page/mob_vizavodchik.jpg");
         background-repeat: no-repeat;
-        width: 370px;
-        height: 241px;  
-       // width: 1146px;
-       // height: 501px;
-        margin-top: 0; ///50px;
+        height: 241px; 
+        margin-top: 0; 
     }
 }
 
