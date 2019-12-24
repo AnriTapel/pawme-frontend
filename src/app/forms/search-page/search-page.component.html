@@ -2,7 +2,7 @@
     <div class="logo">
         <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
     </div>
-    <!-- <div class="search-meta">
+    <div *ngIf="state" class="search-meta">
         <div class="dropdown-text-input">
             <input type="text" [(ngModel)]="userFilter"  class="metaInput form-control custom-form-control-border"  
             (keyup)="updateSearch($event.target.value)" placeholder="Поиск">
@@ -13,7 +13,7 @@
                 <div class="metaName">{{name}}</div>
             </div>
         </div>
-    </div> -->
+    </div>
     <div class="login">
         <input type="button" class="loginInput custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
     </div>
@@ -23,7 +23,7 @@
         <div class="top-line"></div>
         <h3>НАШИ ЗАВОДЧИКИ</h3>
     </div>
-    <!-- <div class="search-meta">
+    <!-- <div *ngIf="state" class="search-meta">
         <div class="dropdown-text-input">
             <input type="text" [(ngModel)]="userFilter"  class="metaInput form-control custom-form-control-border"  
             (keyup)="updateSearch($event.target.value)" placeholder="Поиск">
@@ -80,7 +80,7 @@
         </div>
     </div>
     <div *ngIf="getSearchData">
-        <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 2, currentPage: p }"  class="main-content">
+        <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }"  class="main-content">
             <div class="search-content">   
                 <div class="search-right">
                     <div class="dog-mobile">
@@ -100,8 +100,8 @@
                             </div>
                         </div>
                         <p class="p-text">{{data.description}}</p>
-                        <div class="number">
-                            <div>{{data.numPuppies}}</div> 
+                        <div *ngIf="data.numPuppies>0" class="number">
+                            <div >{{data.numPuppies}}</div> 
                             <div>доступных щенка</div>
                         </div>
                     </div>
@@ -130,19 +130,23 @@
             </div>
         </div>
     </div>
-    <div class="search-info">
+    <div  *ngIf="!showBox" class="search-info">
         <div class="info-right">
             <h3>Не нашли подходящего заводчика на платформе?</h3>
             <p>Оставьте заявку и наши специалисты постараются найти для вас профессионала</p>
         </div>
         <div class="info-left">
             <div class="dropdown-text-input">
-                <input  type="text" class="form-control custom-form-control-border" placeholder="Ваш e-mail">
+                <input type="email" placeholder="Ваш e-mail" 
+                class="form-control custom-form-control-border" name="email" [(ngModel)]="sendEmaillData.email" 
+                [class.invalid-form-field-value]="invalidFields.includes('email')" (change)="fieldEdited('email')"/>
+                <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
+                    E-mail</span>
             </div>
-            <input type="button" class="custom-btn btn-purple" value="Отправить" />
+            <input type="button" class="custom-btn btn-purple" value="Отправить" (click)="sendEmail()"  />
         </div>
     </div>
-    <div class="heart-info">
+    <div *ngIf="showBox" class="heart-info">
         <div class="info-right info-bottom">
             <h3 class="thaks">Спасибо за заявку!</h3>
             <p>Мы уже работаем над вашим запросом</p>
@@ -152,7 +156,7 @@
             <div class="heart-chat"><img src="./assets/img/search-page/heart.svg" alt=""/></div>
         </div>
     </div>
-    <div  *ngIf="lenghtSearchData >10"  class="pagenation"> 
+    <div *ngIf="lenghtSearchData >10"  class="pagenation"> 
         <pagination-controls (pageChange)="p = $event" previousLabel=" "nextLabel=" "></pagination-controls>          
     </div>
 </div>

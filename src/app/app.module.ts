@@ -51,7 +51,6 @@ import {IMaskModule} from 'angular-imask';
 import { ClientPageComponent } from './forms/client-page/client-page.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
- //import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CommonModule } from '@angular/common';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FilterPipeModule } from 'ngx-filter-pipe';
@@ -116,7 +115,6 @@ export function initApp(appSerivce: AppService){
     LyResizingCroppingImageModule,
     IMaskModule,
     NgSelectModule,
-   // NgMultiSelectDropDownModule.forRoot(),
     CommonModule,
     NgxPaginationModule,
     FilterPipeModule

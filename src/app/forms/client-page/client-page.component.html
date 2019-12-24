@@ -8,17 +8,37 @@
     </div>
     <div class="search-block">
         <div class="search-content">
-            <div class="dropdown-text-input">
+            <!-- <div class="dropdown-text-input">
                 <input  type="text" class="form-control custom-form-control-border" placeholder="Порода">
                 <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+            </div> -->
+            <div class="dropdown-text-input">
+                <ng-select
+                    [items]="appService.breeds"
+                    [multiple]="false"
+                    bindLabel="name"
+                    clearAllText ="Clear All"
+                    placeholder="Порода"
+                    [selectableGroup]="true"
+                    [selectableGroupAsModel]="true"
+                    [closeOnSelect]="true"
+                    bindValue="id"
+                    [(ngModel)]="breed">
+                    <ng-template  let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="checkbox-item">
+                            <div>{{item.name}}</div>  
+                            <!-- <img src="./assets/img/search-page/search-checkbox.png" alt="" /> -->
+                        </div>
+                    </ng-template>
+                </ng-select>  
             </div>
             <div class="custom-btn btn-purple">
-                <input type="button" value="НАЙТИ!" />
+                <input type="button" value="НАЙТИ!" (click)="getSearchPage()"/>
                 <img src="./assets/img/client-page/shape.svg" alt="" />
             </div>   
         </div>
         <div class="star">
-            <div>Или<a href="">посмотрите</a> топ наших заводчиков</div>
+            <div>Или<a href="/search-page">посмотрите</a> топ наших заводчиков</div>
             <div class=""><img src="./assets/img/client-page/star.svg" alt="" /></div>
         </div>
     </div>
@@ -78,7 +98,7 @@
                     <img src="./assets/img/client-page/groupe.svg" alt="" />
                     <h3 class="">Договор PawMe</h3>
                     <p class="">Мы составили договор, который зафиксирует гарантийные условия и обезопасит вас </p>
-                    <a href="">Посмотреть договор</a>
+                    <a href="/docs/contract.pdf" target="_blank">Посмотреть договор</a>
                 </div>
                 <div>
                     <img src="./assets/img/client-page/oval.svg" alt="" />
@@ -107,7 +127,7 @@
                <div class="girl-img"></div> 
                 <div class="slider-button">
                     <div><div class="circle"></div></div>
-                    <div><div class="circle"></div></div>
+                    <div class="show"><div class="circle"></div></div>
                     <div><div class="circle"></div></div>
                     <div><div class="circle"></div></div>
                     <div><div class="circle"></div></div>

@@ -48,7 +48,10 @@ export class BreederPageComponent implements OnInit {
         } else
             this.isPreviewMode = false;
 
-        this.breederService.getBreederUsingGET(parseInt(this.route.snapshot.paramMap.get('id')))
+       // console.log("this.route.snapshot.paramMap.get('id')", this.route.snapshot.paramMap.get('id'));
+        //console.log("parseInt ----this.route.snapshot.paramMap.get('id')", parseInt(this.route.snapshot.paramMap.get('id')));
+       // this.breederService.getBreederUsingGET(parseInt(this.route.snapshot.paramMap.get('id')))
+        this.breederService.getBreederUsingGET(this.route.snapshot.paramMap.get('id'))
             .subscribe((res) => {
                 this.appService.userData = res;
                 this.getParentsTestsList();

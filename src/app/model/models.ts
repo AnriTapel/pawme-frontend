@@ -17,6 +17,7 @@ export * from './parent';
 export * from './parentDraft';
 export * from './parentTest';
 export * from './parentsInfo';
+export * from './petSelectionRequest';
 export * from './photo';
 export * from './puppiesInfo';
 export * from './puppy';

@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { BreederSearchEntry } from '../model/breederSearchEntry';
+import { PetSelectionRequest } from '../model/petSelectionRequest';
 import { SearchMeta } from '../model/searchMeta';
 import { SearchTerms } from '../model/searchTerms';
 
@@ -29,7 +30,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class SearchControllerService {
 
-    protected basePath = ''; //'https://petman.co';
+    protected basePath = '';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -132,6 +133,53 @@ export class SearchControllerService {
         ];
 
         return this.httpClient.get<SearchMeta>(`${this.basePath}/api/search/meta`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * savePetSelectionRequest
+     * 
+     * @param request request
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public savePetSelectionRequestUsingPOST(request: PetSelectionRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public savePetSelectionRequestUsingPOST(request: PetSelectionRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public savePetSelectionRequestUsingPOST(request: PetSelectionRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public savePetSelectionRequestUsingPOST(request: PetSelectionRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling savePetSelectionRequestUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<any>(`${this.basePath}/api/search/request`,
+            request,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

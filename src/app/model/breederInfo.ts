@@ -14,6 +14,7 @@ import { Photo } from './photo';
 
 
 export interface BreederInfo { 
+    alias?: string;
     city: string;
     description: string;
     extraBreed?: Breed;

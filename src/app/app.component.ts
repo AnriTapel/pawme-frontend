@@ -37,7 +37,7 @@ export class AppComponent {
     if (this.noGeneralHeaderRoutes.includes(this.router.url))
       return false;
     else
-      return this.noGeneralHeaderPathnames.filter(it => this.router.url.indexOf(it) == 0).length == 0 || this.router.url == '/';
+      return this.noGeneralHeaderPathnames.filter(it => this.router.url.indexOf(it) == 0).length == 0 || this.router.url == '/' ;
   }
 
   showGeneralFooter(): boolean{

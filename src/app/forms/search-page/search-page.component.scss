@@ -1,7 +1,9 @@
 input[type=checkbox], input[type=checkbox]:checked {
     display: none !important;
 }
-
+app-header {
+    display: none
+} 
 .checkbox-item {
     display: flex;
     flex-wrap: nowrap;
@@ -215,6 +217,7 @@ input[type=checkbox], input[type=checkbox]:checked {
     margin-top: 30px;
     max-width: 870px;
     border-radius: 4px;
+    margin-bottom: 32px;
     background-color: #f7f4f1;
     display: flex;
     flex-wrap: wrap;
@@ -259,6 +262,7 @@ input[type=checkbox], input[type=checkbox]:checked {
 
 .heart-info {
     margin-top: 30px;
+    margin-bottom: 32px;
     max-width: 870px;
     border-radius: 4px;
     background-color: #f7f4f1;
@@ -279,7 +283,7 @@ input[type=checkbox], input[type=checkbox]:checked {
 
 .pagenation {
     max-width: 870px;
-    margin: 32px 0px 46px;
+    margin: 0px 0px 46px;
     display: flex;
     justify-content: center;
     font-size: 14px;
@@ -313,17 +317,17 @@ input[type=checkbox], input[type=checkbox]:checked {
 //     //border: 1px solid red;
 // }
 .search-meta  {
-    position: absolute;
+    position: fixed; //absolute;
     z-index: 3;
     left:30%;
-   width: 470px;
-   //height: 421px;
-   border-radius: 3px;
-   box-shadow: 0 12px 24px 0 rgba(14, 11, 77, 0.1);
-   border: solid 1px #cbd8f6;
-   background-color: #ffffff;
-   font-family: 'Intro-Book';
-   font-size: 14px;
+    width: 470px;
+    //height: 421px;
+    border-radius: 3px;
+    box-shadow: 0 12px 24px 0 rgba(14, 11, 77, 0.1);
+    border: solid 1px #cbd8f6;
+    background-color: #ffffff;
+    font-family: 'Intro-Book';
+    font-size: 14px;
    
 }
 input.metaInput {

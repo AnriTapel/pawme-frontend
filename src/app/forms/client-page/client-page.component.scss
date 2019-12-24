@@ -71,7 +71,7 @@
 .custom-btn  {
     margin-left: 20px;
     width: 157px;
-    height: 48px;
+    height: 44px;
     text-align: center;
     input {
         font-size: 16px;
@@ -81,14 +81,13 @@
         border: none;
     }
 }
-
     .container {
         max-width: 1300px;  
     }
     .title {
         font-size: 28px;
         color: #645fc9;
-        margin-top: 132px;
+        margin-top: 70px;
         margin-left: 30px;
         font-family: "Intro-Regular";
     }
@@ -213,6 +212,7 @@
     }
     input {
         margin-top: 22px;
+        margin-left: 0;
         width: 224px;
         height: 44px;
         border-radius: 26px;
@@ -228,10 +228,6 @@
     width: 683px;
     height: 586px;
     margin-left: 52px;
-   // background-image: url("/assets/img/client-page/two_circles.svg"); 
-    // img {
-    //     margin: 88px 0px 0px 43px;
-    // }
 }
  .girl-img {
      background-image: url("/assets/img/client-page/oval-girl.png"); 
@@ -243,6 +239,12 @@
     display: flex;
     flex-wrap: nowrap;
     margin: 15px 0 0 180px; 
+    .show {
+        background-image: url("/assets/img/client-page/hover_circle.svg");
+        .circle {
+            display: none;
+        }
+    }
     div {
         width: 28px;
         height: 28px;
@@ -254,7 +256,7 @@
             border-radius: 50%;
             margin : 7px 0 0 7px;    
         }
-        &:hover {
+        &:hover, .show {
             background-image: url("/assets/img/client-page/hover_circle.svg");
             .circle {
                 display: none;

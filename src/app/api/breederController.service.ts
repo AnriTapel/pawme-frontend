@@ -35,7 +35,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class BreederControllerService {
 
-    protected basePath = ''; //'https://petman.co';
+    protected basePath = '';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -290,10 +290,10 @@ export class BreederControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getBreederUsingGET(id: number, observe?: 'body', reportProgress?: boolean): Observable<Breeder>;
-    public getBreederUsingGET(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Breeder>>;
-    public getBreederUsingGET(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Breeder>>;
-    public getBreederUsingGET(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getBreederUsingGET(id: string, observe?: 'body', reportProgress?: boolean): Observable<Breeder>;
+    public getBreederUsingGET(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Breeder>>;
+    public getBreederUsingGET(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Breeder>>;
+    public getBreederUsingGET(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getBreederUsingGET.');
