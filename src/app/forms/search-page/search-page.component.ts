@@ -43,7 +43,6 @@ export class SearchPageComponent implements OnInit {
 
   getSearchData: any = null; 
   getMetaSearchData: SearchMeta = null;//BreederSearchEntry = null;
-  //getMetaSearchData: SearchMeta = null;
   lenghtSearchData: number;
   showTableData: boolean = false;
   p: any;
@@ -52,8 +51,6 @@ export class SearchPageComponent implements OnInit {
   invalidFields: any[] = [];
   showBox: boolean = false;
 
-  // scrHeight: any;
-  // scrWidth: any;
   state: boolean;
   breed: string[];
   
@@ -61,9 +58,11 @@ export class SearchPageComponent implements OnInit {
   ngOnInit() {
 
   this.route.queryParamMap.subscribe(params => this.breed = params.getAll('breed'));
-  if (this.breed!== null) {
+  console.log('this.breed', this.breed);
+  if (this.breed.length !== 0) {
     this.searchData.breed = Number(this.breed);
-  }
+  } 
+ 
   this.searchControllerService.getSearchMetaUsingGET()
   .subscribe((res) => {
       this.getMetaSearchData = <SearchMeta>res;
@@ -105,8 +104,6 @@ getScreenSize(event) {
             });
   }
   public updateSearch($event) {
-    //console.log('$event.target.value', $event);
-    //console.log('this.userFilter', this.userFilter);
     if ($event == '') {
       this.showTableData = false;
     } else {

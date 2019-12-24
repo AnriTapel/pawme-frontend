@@ -176,7 +176,9 @@
 
 .oval-background {
     background-color: #ffffff;
-    background-image: url(/assets/img/client-page/kruglii_cut.svg), url(/assets/img/client-page/two_circles.svg);
+    // background-image: url(/assets/img/client-page/kruglii_cut.svg), url(/assets/img/client-page/two_circles.svg);
+    background-image: url(/assets/img/client-page/kruglii_cut.svg), url(/assets/img/client-page/circles.png);
+
     background-position: left bottom, right bottom;
     background-repeat: no-repeat, no-repeat;
     background-position: fixed;
@@ -238,7 +240,7 @@
 .slider-button {
     display: flex;
     flex-wrap: nowrap;
-    margin: 15px 0 0 180px; 
+    margin: 510px 0 0 180px; 
     .show {
         background-image: url("/assets/img/client-page/hover_circle.svg");
         .circle {
@@ -434,7 +436,7 @@
     }
     .custom-btn  {
         width: 296px; 
-        height: 44px;
+        height: 46px;
         margin-left: 0;
         margin-top: 16px;
         input {
