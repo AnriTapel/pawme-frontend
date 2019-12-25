@@ -28,8 +28,9 @@ export class ClientPageComponent implements OnInit {
     this.router.navigate(['/search-page'], options);
   }
   public selectParod(value: string){
-    // this.appService.breeds;
-    // console.log(value);
+    this.appService.breeds;
+     console.log("value", value);
+     console.log("this.appService.breeds", this.appService.breeds);
     this.index = this.appService.breeds.findIndex(obj => obj.name === value);
     console.log('this.inex.id', this.appService.breeds[this.index].id);
     console.log('this.appService.breeds', this.appService.breeds);
