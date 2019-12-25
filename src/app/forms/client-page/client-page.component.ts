@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { SearchTerms } from '../../model/searchTerms';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { Router } from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
@@ -12,35 +11,31 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./client-page.component.scss']
 })
 export class ClientPageComponent implements OnInit {
-  // searchDataFromClientPage: SearchTerms = {
-  //   breed: null,
-  //   cities: null
-  // }
-  searchDataFromClientPage: SearchTerms = {
-    breed: null,
-    cities: null
-  }
+ 
  breed: string = null;
+ index: any ;
 
-  // @Input() searchDataFromClientPage: SearchTerms;
+
   constructor(public appService: AppService, private router: Router, private route: ActivatedRoute) { }
-  // ngAfterViewInit(): void {
-
-  // };
+ 
   ngOnInit() {}
  
   public getSearchPage() {
-    // if (this.searchDataFromClientPage.breed == null) {
-    //   return ;
-    // }
     if (this.breed == null) {
       return ;
     }
-    console.log('cliet page------searchDataFromClientPage', this.breed);
-    // this.route.queryParamMap.subscribe(params => this.breed = params.get('breed'));
     const options = {queryParams: {breed: this.breed}};
     this.router.navigate(['/search-page'], options);
-    //this.router.navigateByUrl('/search-page');
+  }
+  public selectParod(value: string){
+    this.appService.breeds;
+     console.log("value", value);
+     console.log("this.appService.breeds", this.appService.breeds);
+    this.index = this.appService.breeds.findIndex(obj => obj.name === value);
+    console.log('this.inex.id', this.appService.breeds[this.index].id);
+    console.log('this.appService.breeds', this.appService.breeds);
+    const options = {queryParams: {breed: this.appService.breeds[this.index].id}};
+    this.router.navigate(['/search-page'], options);
   }
 
 }

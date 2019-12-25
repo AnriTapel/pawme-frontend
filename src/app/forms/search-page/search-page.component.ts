@@ -49,33 +49,29 @@ export class SearchPageComponent implements OnInit {
 
   getSearchData: any = null;
   getMetaSearchData: SearchMeta = null;//BreederSearchEntry = null;
-  //getMetaSearchData: SearchMeta = null;
   lenghtSearchData: number;
   showTableData: boolean = false;
   p: any;
-  userFilter: any;
-  // dataFilter: any ;
+  userFilter: any ;
   invalidFields: any[] = [];
   showBox: boolean = false;
-
-  // scrHeight: any;
-  // scrWidth: any;
   state: boolean;
   breed: string[];
 
   breedList;
   citiesList;
 
-  ngOnInit() {
 
+  ngOnInit() {
     this.route.queryParamMap.subscribe(params => this.breed = params.getAll('breed'));
-    if (this.breed !== null) {
+    if (this.breed.length !== 0) {
       this.searchData.breed = Number(this.breed);
-    }
+    };
+
     this.searchControllerService.getSearchMetaUsingGET()
       .subscribe((res) => {
         this.getMetaSearchData = <SearchMeta>res;
-        
+
         this.breedList = this.appService.breeds;
         this.breedList.forEach((item) => {
           item.disabled = true;
@@ -105,6 +101,7 @@ export class SearchPageComponent implements OnInit {
         if (err.status == 404)
           console.log('error', err);
       });
+
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
@@ -128,7 +125,6 @@ export class SearchPageComponent implements OnInit {
     //console.log("Scroll Event", window.pageYOffset );
   }
   public changeInput(event) {
-    console.log('this.searchData', this.searchData);
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
@@ -139,8 +135,6 @@ export class SearchPageComponent implements OnInit {
       });
   }
   public updateSearch($event) {
-    //console.log('$event.target.value', $event);
-    //console.log('this.userFilter', this.userFilter);
     if ($event == '') {
       this.showTableData = false;
     } else {
@@ -166,6 +160,10 @@ export class SearchPageComponent implements OnInit {
     if (!this.validateFields())
       return;
     this.sendEmaillData.email = this.sendEmaillData.email.toLowerCase();
+    this.sendEmaillData.breed = this.searchData.breed;
+    if (this.searchData.cities && this.searchData.cities !== null) {
+      this.sendEmaillData.city = this.searchData.cities.join(", ");
+    }
     this.searchControllerService.savePetSelectionRequestUsingPOST(this.sendEmaillData)
       .subscribe((res) => {
         this.showBox = true;

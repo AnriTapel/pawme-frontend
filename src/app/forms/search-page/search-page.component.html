@@ -3,16 +3,42 @@
         <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
     </div>
     <div *ngIf="state" class="search-meta">
-        <div class="dropdown-text-input">
-            <input type="text" [(ngModel)]="userFilter"  class="metaInput form-control custom-form-control-border"  
+        <div class="dropdown-text-input dropdown-style search-icon">
+            <ng-select
+                [items]="breedList"
+                [multiple]="false"
+                bindLabel="name"
+                placeholder="Порода"
+                [selectableGroup]="false"
+                [selectableGroupAsModel]="false"
+                [closeOnSelect]="true"
+                (change)="changeInput($event)"
+                bindValue="id"
+                [virtualScroll]="true"
+                [(ngModel)]="searchData.breed"
+                [clearable]="false"
+                >
+                <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <div class="checkbox-item" [ngClass]="{'disabled': item?.disabled}">
+                        <div [title]="item.name" class="name">{{item.name}}</div>  
+                        <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
+                        <div *ngIf="item.disabled" class="coming-soon">
+                            Уже скоро
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-select>  
+        </div>
+        <!-- <div class="dropdown-text-input">
+            <input type="text" [(ngModel)]="searchData.breed"  class="metaInput form-control custom-form-control-border"  
             (keyup)="updateSearch($event.target.value)" placeholder="Поиск">
             <img src="./assets/img/search-page/search.png" alt="Search" />
         </div>
         <div *ngIf="showTableData" class="all-search-data" >
-            <div  *ngFor="let name of getMetaSearchData.cities | filterBy: userFilter" class="">
+            <div  *ngFor="let name of breedList | filterBy: searchData.breed" class="">
                 <div class="metaName">{{name}}</div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="login">
         <input type="button" class="loginInput custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
@@ -109,11 +135,14 @@
                             <div class="serach-content-girl">
                                 <img src="/img/{{data.avatarPreview}}.jpg" alt="" >
                             </div>
-                        </div>
+                        </div>    
                         <p class="p-text">{{data.description}}</p>
+                        <!-- <div *ngIf="data.numPuppies>0" class="number"> -->
                         <div *ngIf="data.numPuppies>0" class="number">
                             <div >{{data.numPuppies}}</div> 
-                            <div>доступных щенка</div>
+                            <div *ngIf="data.numPuppies==1">доступный щенок</div> 
+                            <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">доступных щенка</div>
+                            <div *ngIf="data.numPuppies>=5">доступных щенков</div>
                         </div>
                     </div>
                 </div>

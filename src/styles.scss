@@ -186,3 +186,27 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.search-icon ng-select .ng-arrow{
+    background-image: url(/assets/img/search-page/search.png) !important;
+    background-size: 100% 100% !important;
+    width: 18px !important;
+    height: 18px !important;
+}
+.search-icon ng-select .ng-select-container{
+    border-radius: 3px;
+    border: none !important;
+    background-color: #ffffff !important;
+    height: 46px !important;
+}
+.search-icon ng-select .ng-dropdown-panel{
+    width: calc(100% + 3px);
+    margin-top: -1px;
+    z-index: 1;
+    background: white;
+}
+.search-icon ng-select.ng-select-opened .ng-dropdown-panel{
+    margin-left: -1px;
+}
+.search-icon > ng-select > ng-dropdown-panel div.ng-option .checkbox-item:first-child{
+    border-top: 1px solid #f9f9f9;
+}

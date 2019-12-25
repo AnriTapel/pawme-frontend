@@ -45,46 +45,62 @@
     <div class="container">
         <h3 class="title">САМЫЕ ПОПУЛЯРНЫЕ ПОРОДЫ</h3>
         <div class="dogs">
-            <h3>Смешные, пока маленькие</h3>
-            <p class="text">После регистрации вы бесплатно получите собственную страницу заводчика с личным кабинетом, которую можно смело использовать в качестве персонального сайта.</p>
+            <h3>Для аллергиков</h3>
+            <p class="text">Эти собаки не заставят вас плакать, а принесут только счастье.</p>
             <div class="dogs-pics">
                 <div>
-                    <img src="./assets/img/client-page/dog1.png" alt="" />
-                    <p>Мопс</p>
+                    <a (click)="selectParod('Цвергшнауцер')">
+                        <img src="./assets/img/client-page/dogs/Цвергшнауцер.jpg" alt="" />
+                    </a>
+                    <p>Цвергшнауцер</p>
                 </div>
                 <div>
-                    <img src="./assets/img/client-page/dog2.png" alt="" />
-                    <p>Сенбернар</p>
+                    <a (click)="selectParod('Йоркширский терьер')">
+                        <img src="./assets/img/client-page/dogs/йоркширский.jpg" alt="" />
+                    </a>
+                    <p>Йоркширский терьер</p>
                 </div>
                 <div>
-                    <img src="./assets/img/client-page/dog3.png" alt="" />
-                    <p>Немецкая овчарка</p>
+                    <a (click)="selectParod('Басенджи')">
+                        <img src="./assets/img/client-page/dogs/басенджи.jpg" alt="" />
+                    </a>
+                    <p>Басенджи</p>
                 </div>
                 <div>
-                    <img src="./assets/img/client-page/dog4.png" alt="" />
-                    <p>Торопыжка</p>
+                    <a (click)="selectParod('Пудель')">
+                        <img src="./assets/img/client-page/dogs/пудель.jpg" alt="" />
+                    </a>
+                    <p>Пудель</p>
                 </div>
             </div>
         </div>
         <div class="dogs">
-            <h3>Дворовые породы</h3>
-            <p class="text">После регистрации вы бесплатно получите собственную страницу заводчика с личным кабинетом, которую можно смело использовать в качестве персонального сайта.</p>
+            <h3>Для квартиры</h3>
+            <p class="text">Отличный вариант для каждого городского жителя</p>
             <div class="dogs-pics">
                 <div>
-                    <img src="./assets/img/client-page/dog1.png" alt="" />
-                    <p>Мопс</p>
+                    <a (click)="selectParod('Французский бульдог')">
+                        <img src="./assets/img/client-page/dogs/фран.jpg" alt="" />
+                    </a>
+                    <p>Французский бульдог</p>
                 </div>
                 <div>
-                    <img src="./assets/img/client-page/dog2.png" alt="" />
-                    <p>Сенбернар</p>
+                    <a (click)="selectParod('Кавалер-кинг-чарльз-спаниель')">
+                        <img src="./assets/img/client-page/dogs/Кавалер.jpg" alt="" />
+                    </a>
+                    <p>Кавалер-кинг-чарльз-спаниель</p>
                 </div>
                 <div>
-                    <img src="./assets/img/client-page/dog3.png" alt="" />
-                    <p>Немецкая овчарка</p>
+                    <a (click)="selectParod('Французский бульдог')">
+                        <img src="./assets/img/client-page/dogs/такса.jpg" alt="" />
+                    </a>
+                    <p>Такса</p>
                 </div>
                 <div>
-                    <img src="./assets/img/client-page/dog4.png" alt="" />
-                    <p>Торопыжка</p>
+                    <a (click)="selectParod('Чихуахуа')">
+                       <img src="./assets/img/client-page/dogs/чихуахуа.jpg" alt="" />
+                    </a>
+                    <p>Чихуахуа</p>
                 </div>
             </div>
         </div>
@@ -124,7 +140,7 @@
                 <input type="button" class="custom-btn btn-purple" value="Посмотреть профиль">
             </div>
             <div class="girl">
-               <div class="girl-img"></div> 
+               <!-- <div class="girl-img"></div>  -->
                 <div class="slider-button">
                     <div><div class="circle"></div></div>
                     <div class="show"><div class="circle"></div></div>
