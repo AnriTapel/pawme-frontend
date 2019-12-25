@@ -58,7 +58,7 @@
     float: right;
 }
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected, .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
-    background-color: #f8f9fb !important;
+    background-color: #f8f9fb;
 }
 .ng-option-marked:hover {
     background-color: #f8f9fb !important;
@@ -149,4 +149,40 @@
 }
 .pagination-next{
     margin-left: 12px !important;
+}
+
+.dropdown-style > ng-select > ng-dropdown-panel div.ng-option{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    background: none !important;
+}
+.dropdown-style > ng-select > ng-dropdown-panel div.ng-option.ng-option-selected{
+    background-color: #f8f9fb00 !important;
+}
+.dropdown-style > ng-select > ng-dropdown-panel div.ng-option .checkbox-item{
+    border-bottom: 1px solid #f9f9f9;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+.dropdown-style > ng-select > ng-dropdown-panel div.ng-option:hover .checkbox-item{
+    background-color: #f8f9fb;
+}
+.dropdown-style > ng-select > ng-dropdown-panel div.ng-option.ng-option-disabled:hover .checkbox-item{
+    background-color: #ffffff00;
+}
+.dropdown-style > ng-select > ng-dropdown-panel div.ng-option .checkbox-item img{
+   margin: 0 !important;
+}
+.dropdown-style > ng-select > ng-dropdown-panel div.ng-option.ng-option-selected .checkbox-item{
+    background-color: #f8f9fb !important;
+}
+.dropdown-style > ng-select > ng-dropdown-panel div.ng-option .checkbox-item .coming-soon{
+    color: #adabb6;
+}
+.dropdown-style > ng-select > ng-dropdown-panel div.ng-option .checkbox-item .name{
+    width: calc(100% - 76px);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

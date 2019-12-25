@@ -1,4 +1,4 @@
-<div class="container header">
+<div class="container header" [ngClass]="{'scrolled': state}">
     <div class="logo">
         <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
     </div>
@@ -37,9 +37,9 @@
     </div> -->
  
     <div class="search-input"> 
-        <div class="dropdown-text-input">
+        <div class="dropdown-text-input dropdown-style">
             <ng-select
-                [items]="appService.breeds"
+                [items]="breedList"
                 [multiple]="false"
                 bindLabel="name"
                 clearAllText ="Clear All"
@@ -49,18 +49,22 @@
                 [closeOnSelect]="true"
                 (change)="changeInput($event)"
                 bindValue="id"
+                [virtualScroll]="true"
                 [(ngModel)]="searchData.breed">
-                <ng-template  let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                    <div class="checkbox-item">
-                        <div>{{item.name}}</div>  
-                        <img src="./assets/img/search-page/search-checkbox.png" alt="" />
+                <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <div class="checkbox-item" [ngClass]="{'disabled': item?.disabled}">
+                        <div [title]="item.name" class="name">{{item.name}}</div>  
+                        <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
+                        <div *ngIf="item.disabled" class="coming-soon">
+                            Уже скоро
+                        </div>
                     </div>
                 </ng-template>
             </ng-select>  
         </div>
-        <div class="dropdown-text-input">
+        <div class="dropdown-text-input dropdown-style">
             <ng-select 
-                [items]="appService.cities"
+                [items]="citiesList"
                 [multiple]="true"
                 (change)="changeInput($event)"
                 bindLabel="name"
@@ -70,10 +74,17 @@
                 [closeOnSelect]="false"
                 bindValue="name"
                 [(ngModel)]="searchData.cities">
+                [virtualScroll]="true"
+                <ng-template ng-multi-label-tmp let-items="items">
+                    Выбрано {{items.length}}
+                </ng-template>
                  <ng-template  let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                     <div class="checkbox-item">
-                        <div>{{item}}</div>  
-                        <img src="./assets/img/search-page/search-checkbox.png" alt="" />
+                        <div [title]="item.name" class="name">{{item.name}}</div>  
+                        <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
+                        <div *ngIf="item.disabled" class="coming-soon">
+                            Уже скоро
+                        </div>
                     </div>
                 </ng-template>
             </ng-select>  
