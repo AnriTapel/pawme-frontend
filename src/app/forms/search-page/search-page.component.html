@@ -98,11 +98,14 @@
                             <div class="serach-content-girl">
                                 <img src="/img/{{data.avatarPreview}}.jpg" alt="" >
                             </div>
-                        </div>
+                        </div>    
                         <p class="p-text">{{data.description}}</p>
+                        <!-- <div *ngIf="data.numPuppies>0" class="number"> -->
                         <div *ngIf="data.numPuppies>0" class="number">
                             <div >{{data.numPuppies}}</div> 
-                            <div>доступный щенок</div>
+                            <div *ngIf="data.numPuppies==1">доступный щенок</div> 
+                            <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">доступных щенка</div>
+                            <div *ngIf="data.numPuppies>=5">доступных щенков</div>
                         </div>
                     </div>
                 </div>

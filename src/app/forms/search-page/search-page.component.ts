@@ -47,29 +47,18 @@ export class SearchPageComponent implements OnInit {
   showTableData: boolean = false;
   p: any;
   userFilter: any ;
-  // dataFilter: any ;
   invalidFields: any[] = [];
   showBox: boolean = false;
-
   state: boolean;
   breed: string[];
+
   
 
   ngOnInit() {
-
-  this.route.queryParamMap.subscribe(params => this.breed = params.getAll('breed'));
-  console.log('this.breed', this.breed);
-  if (this.breed.length !== 0) {
-    this.searchData.breed = Number(this.breed);
-  } 
- 
-  this.searchControllerService.getSearchMetaUsingGET()
-  .subscribe((res) => {
-      this.getMetaSearchData = <SearchMeta>res;
-  }, (err) => {
-      if (err.status == 404)
-      console.log('error', err);
-  });
+    this.route.queryParamMap.subscribe(params => this.breed = params.getAll('breed'));
+    if (this.breed.length !== 0) {
+      this.searchData.breed = Number(this.breed);
+    } 
    this.searchControllerService.findUsingPOST(this.searchData)
             .subscribe((res) => {
               this.lenghtSearchData = res.length;
@@ -93,7 +82,6 @@ getScreenSize(event) {
   //console.log("Scroll Event", window.pageYOffset );
 }
   public changeInput(event) {
-    console.log('this.searchData', this.searchData);
      this.searchControllerService.findUsingPOST(this.searchData)
             .subscribe((res) => {
                 this.lenghtSearchData = res.length;
@@ -129,6 +117,10 @@ getScreenSize(event) {
     if (!this.validateFields())
       return;
     this.sendEmaillData.email = this.sendEmaillData.email.toLowerCase();
+    this.sendEmaillData.breed = this.searchData.breed;
+    if (this.searchData.cities && this.searchData.cities !== null) {
+      this.sendEmaillData.city = this.searchData.cities.join(", "); 
+    }
     this.searchControllerService.savePetSelectionRequestUsingPOST(this.sendEmaillData)
     .subscribe((res) => {
       this.showBox = true;
