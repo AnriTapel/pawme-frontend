@@ -54,6 +54,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule } from '@angular/common';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { ArticlesComponent } from './articles/articles.component';
+import { DetailComponent } from './articles/detail/detail.component';
 
 
 
@@ -100,7 +102,9 @@ export function initApp(appSerivce: AppService){
     OnboardingComponent,
     PageNotFoundComponent,
     SearchPageComponent,
-    ClientPageComponent
+    ClientPageComponent,
+    ArticlesComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,10 @@ import { ContactUsComponent } from './secondary-page/contact-us/contact-us.compo
 import { FaqComponent } from './secondary-page/faq/faq.component';
 import { PageNotFoundComponent } from './secondary-page/page-not-found/page-not-found.component';
 import { SearchPageComponent } from './forms/search-page/search-page.component';
-import { ClientPageComponent } from './forms/client-page/client-page.component'
+import { ClientPageComponent } from './forms/client-page/client-page.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { DetailComponent } from './articles/detail/detail.component'
+
 
 
 const routes: Routes = [
@@ -34,6 +37,8 @@ const routes: Routes = [
   {path: 'confirm-email/:mail', component: MailPageComponent},
   {path: 'search-page', component: SearchPageComponent},
   {path: 'client-page', component: ClientPageComponent},
+  {path: 'articles', component: ArticlesComponent},
+  {path: 'detail/:id', component: DetailComponent},
   {path: '404', component: PageNotFoundComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

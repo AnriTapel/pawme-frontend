@@ -3,9 +3,40 @@
 :host {
     background: #ffffff;
 }
+a:hover {
+    text-decoration: none;
+}
 .main {
     background: #ffffff !important;
     width: 100%;
+}
+
+.checkbox-item {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    img {
+        width: 11px;
+        height: 8px;
+        margin-top: 12px;
+        margin-right: 22px;
+        background-image: url("/assets/img/search-page/search-checkbox.png");
+        display: none;
+    }
+}
+.checkbox-item:hover {
+    img {
+
+        display: block;
+    }
+}
+
+.checkbox-item:hover {
+    img {
+
+        display: block;
+    }
 }
 
 .header { 
@@ -108,6 +139,10 @@
         margin-top: 16px;
         margin-left: 30px;
     }
+    img {
+        width: 270px;
+        height: 220px;
+    }
 }
 
 .dogs-pics {
@@ -121,6 +156,7 @@
         font-size: 22px;
         margin-top: 10px;
         font-family: "Intro-Regular";
+        max-width: 240px;
     }
 }
   
@@ -234,10 +270,10 @@
     margin-left: 52px;
 }
  .girl-img {
-     background-image: url("/assets/img/client-page/oval-girl.png"); 
-     margin: 88px 0px 0px 43px;
-     width: 400px;
-     height: 400px;
+    //  background-image: url("/assets/img/client-page/oval-girl.png"); 
+    //  margin: 88px 0px 0px 43px;
+    //  width: 400px;
+    //  height: 400px;
  }
 .slider-button {
     display: flex;
@@ -301,6 +337,7 @@
         font-size: 28px;
         color: #0e0b4d;
         margin: 27px 0 0 32px;
+        padding-top: 27px;
     }
 
     .heart {
@@ -470,6 +507,11 @@
             margin-top: 12px;
             margin-left: 0px;
         }
+        img {
+            width: 156px;
+            height: 127px;
+        }
+     
     }
     .dogs-pics {
         margin-top: 12px;
