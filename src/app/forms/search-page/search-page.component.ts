@@ -61,7 +61,6 @@ export class SearchPageComponent implements OnInit {
   breedList;
   citiesList;
 
-
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => this.breed = params.getAll('breed'));
     if (this.breed.length !== 0) {
@@ -106,12 +105,13 @@ export class SearchPageComponent implements OnInit {
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
+        console.log(this.getSearchData, 'this.getSearchData');
+        
       }, (err) => {
         if (err.status == 404)
           console.log('error', err)
       });
   }
-
 
   @HostListener('window:scroll', ['$event'])
   getScreenSize(event) {
@@ -128,7 +128,7 @@ export class SearchPageComponent implements OnInit {
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
-        this.getSearchData = <any>res;
+        this.getSearchData = <any>res;    
       }, (err) => {
         if (err.status == 404)
           console.log('error', err)
@@ -173,5 +173,7 @@ export class SearchPageComponent implements OnInit {
       });
 
   }
-
+  scrollTop(){
+    window.scrollTo(0, 200)
+  }
 }

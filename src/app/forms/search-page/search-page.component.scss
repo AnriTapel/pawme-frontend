@@ -107,6 +107,8 @@ app-header {
 .main-content {
     display: flex;
     flex-wrap: wrap;
+    cursor: pointer;
+    outline: none;
 }
 
 .search-content {
@@ -424,6 +426,10 @@ div.metaName {
     padding: 16px 0 0 10px;
 }
 
+.avatar-wrap{
+    border-radius: 100px;
+    overflow: hidden;
+}
 
 @media screen and (max-width: 769px) {
 

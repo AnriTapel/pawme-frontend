@@ -44,7 +44,7 @@
         <input type="button" class="loginInput custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
     </div>
 </div>
-<div class="container main">
+<div class="container main" [ngStyle]="{'padding-top': state ? '73px' : null}">
     <div class="page-header">
         <div class="top-line"></div>
         <h3>НАШИ ЗАВОДЧИКИ</h3>
@@ -99,8 +99,10 @@
                 [selectableGroupAsModel]="false"
                 [closeOnSelect]="false"
                 bindValue="name"
-                [(ngModel)]="searchData.cities">
+                [(ngModel)]="searchData.cities"
                 [virtualScroll]="true"
+                [clearSearchOnAdd]="true"
+                >
                 <ng-template ng-multi-label-tmp let-items="items">
                     Выбрано {{items.length}}
                 </ng-template>
@@ -117,7 +119,7 @@
         </div>
     </div>
     <div *ngIf="getSearchData">
-        <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }"  class="main-content">
+        <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="[ '/breeder/' + data.id ]" class="main-content">
             <div class="search-content">   
                 <div class="search-right">
                     <div class="dog-mobile">
@@ -132,7 +134,7 @@
                                     <div>{{data.city}}</div>
                                 </div>
                             </div>
-                            <div class="serach-content-girl">
+                            <div class="serach-content-girl avatar-wrap">
                                 <img src="/img/{{data.avatarPreview}}.jpg" alt="" >
                             </div>
                         </div>    
@@ -197,6 +199,6 @@
         </div>
     </div>
     <div *ngIf="lenghtSearchData >10"  class="pagenation"> 
-        <pagination-controls (pageChange)="p = $event" previousLabel=" "nextLabel=" "></pagination-controls>          
+        <pagination-controls (pageChange)="p = $event; scrollTop()" previousLabel=" "nextLabel=" "></pagination-controls>          
     </div>
 </div>
