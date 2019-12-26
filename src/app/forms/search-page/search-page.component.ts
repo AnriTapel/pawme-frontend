@@ -5,7 +5,7 @@ import { SearchTerms } from '../../model/searchTerms';
 import { SearchMeta } from '../../model/searchMeta';
 import { PetSelectionRequest } from '../../model/petSelectionRequest';
 import { BreederSearchEntry } from '../../model/breederSearchEntry';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 
 
@@ -26,7 +26,8 @@ export class SearchPageComponent implements OnInit {
     public appService: AppService,
     private searchControllerService: SearchControllerService,
     private route: ActivatedRoute,
-    private breederService: BreederControllerService
+    private breederService: BreederControllerService,
+    private router: Router
   ) { }
 
   searchData: SearchTerms = {
@@ -52,7 +53,7 @@ export class SearchPageComponent implements OnInit {
   lenghtSearchData: number;
   showTableData: boolean = false;
   p: any;
-  userFilter: any ;
+  userFilter: any;
   invalidFields: any[] = [];
   showBox: boolean = false;
   state: boolean;
@@ -62,7 +63,11 @@ export class SearchPageComponent implements OnInit {
   citiesList;
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(params => this.breed = params.getAll('breed'));
+    this.route.queryParamMap.subscribe(params => {
+      this.breed = params.getAll('breed');
+      this.searchData.cities = params.getAll('cities');
+    });
+
     if (this.breed.length !== 0) {
       this.searchData.breed = Number(this.breed);
     };
@@ -105,8 +110,7 @@ export class SearchPageComponent implements OnInit {
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
-        console.log(this.getSearchData, 'this.getSearchData');
-        
+
       }, (err) => {
         if (err.status == 404)
           console.log('error', err)
@@ -128,10 +132,24 @@ export class SearchPageComponent implements OnInit {
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
-        this.getSearchData = <any>res;    
+        this.getSearchData = <any>res;
       }, (err) => {
         if (err.status == 404)
           console.log('error', err)
+      });
+
+    const queryParams = {};
+
+    if (this.searchData.breed)
+      queryParams['breed'] = this.searchData.breed;
+    if (this.searchData.cities)
+      queryParams['cities'] = this.searchData.cities;
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: queryParams
       });
   }
   public updateSearch($event) {
@@ -173,7 +191,7 @@ export class SearchPageComponent implements OnInit {
       });
 
   }
-  scrollTop(){
+  scrollTop() {
     window.scrollTo(0, 200)
   }
 }
