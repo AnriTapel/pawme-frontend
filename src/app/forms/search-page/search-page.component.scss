@@ -556,7 +556,6 @@ div.metaName {
     }
 
     .container {
-        margin: 8px;
 
         .top-line {
             width: 328px;
@@ -575,6 +574,8 @@ div.metaName {
         width: 332px;
         padding: 20px;
         background-image: none;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .heart-info {

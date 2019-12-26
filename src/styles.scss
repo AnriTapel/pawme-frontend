@@ -261,11 +261,17 @@
     .ng-clear-wrapper {
         width: fit-content !important;
         margin: 0;
+        width: 30px !important;
+        margin: 0;
+        text-align: center;
     }
     .ng-clear{
         font-size: 35px !important;
     }
     .ng-clear-wrapper::after {
         display: none;
+    }
+    .ng-select-container{
+        font-size: 16px !important;
     }
 }
