@@ -479,6 +479,12 @@ div.metaName {
 }
 
 @media screen and (max-width: 769px) {
+    .main-content{
+        justify-content: center;
+    }
+    .search-input{
+        justify-content: center;
+    }
     .menu-toggle {
         display: flex;
     }
