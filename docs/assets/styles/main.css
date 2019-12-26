@@ -23,6 +23,10 @@
   src: url(../fonts/Intro-Book.otf);
 }
 
+@font-face {
+  font-family: "Intro-Regular-Italic";
+  src: url(../fonts/Intro-Regular-Italic.otf); }
+
 body {
   font-family: 'Intro-Regular';
   -webkit-box-pack: center;

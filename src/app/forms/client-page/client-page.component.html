@@ -12,7 +12,7 @@
                 <input  type="text" class="form-control custom-form-control-border" placeholder="Порода">
                 <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
             </div> -->
-            <div class="dropdown-text-input">
+            <!-- <div class="dropdown-text-input">
                 <ng-select
                     [items]="appService.breeds"
                     [multiple]="false"
@@ -26,12 +26,36 @@
                     [(ngModel)]="breed">
                     <ng-template  let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                         <div class="checkbox-item">
-                            <div>{{item.name}}</div>  
-                            <!-- <img src="./assets/img/search-page/search-checkbox.png" alt="" /> -->
-                        </div>
+                            <div>{{item.name}}</div>   -->
+                            <!-- <img src="./assets/img/search-page/search-checkbox.png" alt="" />  -->
+                        <!-- </div>
                     </ng-template>
                 </ng-select>  
-            </div>
+            </div>  -->
+            <div class="dropdown-text-input dropdown-style">
+                    <ng-select
+                        [items]="breedList"
+                        [multiple]="false"
+                        bindLabel="name"
+                        clearAllText ="Clear All"
+                        placeholder="Порода"
+                        [selectableGroup]="true"
+                        [selectableGroupAsModel]="false"
+                        [closeOnSelect]="true"
+                        bindValue="id"
+                        [virtualScroll]="true"
+                        [(ngModel)]="breed">
+                        <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                            <div class="checkbox-item" [ngClass]="{'disabled': item?.disabled}">
+                                <div [title]="item.name" class="name">{{item.name}}</div>  
+                                <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
+                                <div *ngIf="item.disabled" class="coming-soon">
+                                    Уже скоро
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ng-select>  
+                </div>
             <div class="custom-btn btn-purple">
                 <input type="button" value="НАЙТИ!" (click)="getSearchPage()"/>
                 <img src="./assets/img/client-page/shape.svg" alt="" />
@@ -46,7 +70,7 @@
         <h3 class="title">САМЫЕ ПОПУЛЯРНЫЕ ПОРОДЫ</h3>
         <div class="dogs">
             <h3>Для аллергиков</h3>
-            <p class="text">Эти собаки не заставят вас плакать, а принесут только счастье.</p>
+            <p class="text">Любая собака производит аллергены, но эти - в минимальных количествах</p>
             <div class="dogs-pics">
                 <div>
                     <a (click)="selectParod('Цвергшнауцер')">
@@ -76,7 +100,7 @@
         </div>
         <div class="dogs">
             <h3>Для квартиры</h3>
-            <p class="text">Отличный вариант для каждого городского жителя</p>
+            <p class="text">Отличный вариант для тех, кто ограничен в пространстве</p>
             <div class="dogs-pics">
                 <div>
                     <a (click)="selectParod('Французский бульдог')">
@@ -140,7 +164,7 @@
                 <input type="button" class="custom-btn btn-purple" value="Посмотреть профиль">
             </div>
             <div class="girl">
-               <!-- <div class="girl-img"></div>  -->
+               <div class="girl-img"></div> 
                 <div class="slider-button">
                     <div><div class="circle"></div></div>
                     <div class="show"><div class="circle"></div></div>
@@ -156,27 +180,33 @@
         <p class="">Узнайте подробнее, как все работает и что нужно ожидать</p>
     </div>
     <div class="choose-dog-pics">
-        <div class="dog-freind">
-            <h3 class="">Готов ли я к собаке?</h3>
-            <div class="dog"></div>
-            <div class="heart">
-                <img src="./assets/img/client-page/heart.png" alt="" />
-            </div>
-        </div>
-        <div class="dog-freind-left">
-            <div class="white-dog">
-                <h3>Как выбрать заводчика?</h3>
-                <div class="white-dog-pic"></div>
+        <a href="detail/1" class="">
+            <div class="dog-freind">
+                <h3 class="">Готов ли я к собаке?</h3>
+                <div class="dog"></div>
+                <div class="heart">
+                    <img src="./assets/img/client-page/heart.png" alt="" />
                 </div>
-            <div class="black-dog">
-                <h3>Как выбрать породу?</h3>
-                <div class="black-dog-pic"></div>
             </div>
+        </a>
+        <div class="dog-freind-left">
+            <a href="detail/10" class="">
+                <div class="white-dog">
+                    <h3>Как выбрать заводчика?</h3>
+                    <div class="white-dog-pic"></div>
+                </div>
+            </a>
+            <a href="detail/18" class="">
+                <div class="black-dog">
+                    <h3>Как подготовиться</h3>
+                    <div class="black-dog-pic"></div>
+                </div>
+            </a>
         </div>
     </div>
     <div class="info-button">
         <div>
-            <input type="button" class="custom-btn btn-transparent" value="Перейти к базе знаний">
+            <input type="button" (click)="openArtical()" class="custom-btn btn-transparent" value="Перейти к базе знаний">
         </div>  
     </div>
     <div class="dogs-bottom">
