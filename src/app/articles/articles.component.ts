@@ -15,8 +15,6 @@ export class ArticlesComponent implements OnInit {
   ngOnInit() {
   }
   public sendDetailPage(id) {
-    console.log('id', id);
-    // const options = {params: id};
     this.router.navigate(['/detail', id]);
 
 

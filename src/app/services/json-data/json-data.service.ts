@@ -11,9 +11,15 @@ export class JsonDataService {
     this.getJSON().subscribe(data => {
         //console.log(data);
     });
+    this.getClientJSON().subscribe(data => {
+      //console.log(data);
+  });
 }
 
-public getJSON(): Observable<any> {
-    return this.http.get("./assets/articales.json");
+  public getJSON(): Observable<any> {
+      return this.http.get("./assets/articales.json");
+  }
+  public getClientJSON(): Observable<any> {
+    return this.http.get("./assets/client.json");
 }
 }

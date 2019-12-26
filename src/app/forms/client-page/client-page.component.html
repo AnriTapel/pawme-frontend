@@ -155,22 +155,24 @@
         </div>
     </div>
     <div class="oval-background">
-        <div class="oval-content container">
+        <div *ngIf="showData" class="oval-content container">
             <div class="oval-right">
                 <h3 class="">ПОЗНАКОМЬТЕСЬ С ЗАВОДЧИКАМИ</h3>
-                <h2 class="">Привет! <br />Я Наташа Ростова из питомника «Сладкие мопсы»</h2>
-                <p class="">Значимость этих проблем настолько очевидна, что консультация с широким активом способствует подготовки и реализации новых предложений. С другой стороны укрепление и развитие 
-                    структуры требуют от нас анализа позиций, занимаемых участниками в отношении поставленных задач. </p>
-                <input type="button" class="custom-btn btn-purple" value="Посмотреть профиль">
+                <h2 class="">Привет! <br />{{showData.subTitle}}</h2>
+                <p class="">{{showData.text}}</p>
+                <a href="{{showData.url}}"><input type="button" class="custom-btn btn-purple" value="Посмотреть профиль"></a>
             </div>
             <div class="girl">
-               <div class="girl-img"></div> 
+               <div class="girl-img">
+                    <img src="{{showData.img}}" alt="" />
+                    <!-- <img src="./assets/img/client-page/oval-girl.png" alt="" /> -->
+               </div> 
                 <div class="slider-button">
-                    <div><div class="circle"></div></div>
-                    <div class="show"><div class="circle"></div></div>
-                    <div><div class="circle"></div></div>
-                    <div><div class="circle"></div></div>
-                    <div><div class="circle"></div></div>
+                <a [ngClass]="{'show': id === '1' }" (click)="showClinet('1')"><div class="mainCircle" ><div class="circle"></div></div></a>
+                <a [ngClass]="{'show': id === '2' }" (click)="showClinet('2')"><div class="mainCircle" ><div class="circle"></div></div></a>
+                <a [ngClass]="{'show': id === '3' }" (click)="showClinet('3')"><div class="mainCircle"><div class="circle"></div></div></a>
+                <a [ngClass]="{'show': id === '4' }" (click)="showClinet('4')"><div class="mainCircle"><div class="circle"></div></div></a>
+                <a [ngClass]="{'show': id === '5' }" (click)="showClinet('5')"><div class="mainCircle"><div class="circle"></div></div></a>
                 </div>
             </div>
         </div>

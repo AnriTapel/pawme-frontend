@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {ActivatedRoute} from '@angular/router';
 import { SearchMeta } from '../../model/searchMeta';
 import { SearchControllerService, BreederControllerService } from 'src/app/api/api';
+import { JsonDataService } from '../../services/json-data/json-data.service';
 
 
 
@@ -19,7 +20,10 @@ export class ClientPageComponent implements OnInit {
  index: any ;
  getMetaSearchData: SearchMeta = null;//BreederSearchEntry = null;
  breedList;
-
+ clientData: any;
+ showData: any;
+ isShow: boolean = false;
+ id: any;
 
 
   constructor(
@@ -27,9 +31,20 @@ export class ClientPageComponent implements OnInit {
     private router: Router, 
     private route: ActivatedRoute,
     private searchControllerService: SearchControllerService,
+    private jsonDataService : JsonDataService 
+    
     ) { }
  
   ngOnInit() {
+
+    this.jsonDataService.getClientJSON().subscribe(data => {
+      this.clientData = data.clients; 
+      this.showData =this.clientData[0];
+      this.id = '1';
+      console.log('this.showData',this.showData);
+     });
+  
+  
     this.searchControllerService.getSearchMetaUsingGET()
     .subscribe((res) => {
       this.getMetaSearchData = <SearchMeta>res;
@@ -43,12 +58,36 @@ export class ClientPageComponent implements OnInit {
           }
         });
       });
-
     }, (err) => {
       if (err.status == 404)
         console.log('error', err);
     });
   }
+
+
+
+
+  public showClinet(id) {
+    console.log("value", id);
+    this.id = id;
+    this.jsonDataService.getClientJSON().subscribe(data => {
+      this.clientData = data.clients; 
+      console.log("this.clientData",this.clientData);
+      for (let i=0; i < this.clientData.length; i++) {
+       if (this.clientData[i].id === id) {
+           this.showData = this.clientData[i];
+           console.log('this.showData',this.showData);
+           //this.isShow = true;
+       }
+     } 
+     });
+
+  }
+
+
+
+
+
  
   public getSearchPage() {
     if (this.breed == null) {

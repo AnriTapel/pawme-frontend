@@ -214,8 +214,8 @@ a:hover {
 
 .oval-background {
     background-color: #ffffff;
-    // background-image: url(/assets/img/client-page/kruglii_cut.svg), url(/assets/img/client-page/two_circles.svg);
-    background-image: url(/assets/img/client-page/kruglii_cut.svg), url(/assets/img/client-page/circles.png);
+    background-image: url(/assets/img/client-page/kruglii_cut.svg), url(/assets/img/client-page/Oval_big.svg);
+   // background-image: url(/assets/img/client-page/kruglii_cut.svg), url(/assets/img/client-page/circles.png);
 
     background-position: left bottom, right bottom;
     background-repeat: no-repeat, no-repeat;
@@ -271,21 +271,22 @@ a:hover {
 }
  .girl-img {
     //  background-image: url("/assets/img/client-page/oval-girl.png"); 
-    //  margin: 88px 0px 0px 43px;
+     margin: 30px 0px 0px 43px;
     //  width: 400px;
     //  height: 400px;
  }
 .slider-button {
     display: flex;
     flex-wrap: nowrap;
-    margin: 510px 0 0 180px; 
+    margin: 15px 0 0 230px; 
+    // background-color: red;
     .show {
         background-image: url("/assets/img/client-page/hover_circle.svg");
         .circle {
             display: none;
         }
     }
-    div {
+    a,.mainCircle div {
         width: 28px;
         height: 28px;
         .circle {
@@ -599,6 +600,7 @@ a:hover {
         height: 110px;
         font-size: 14px;
         margin-top: 14px;
+        overflow-y: auto;
         }
         input {
             margin-top: 40px;
@@ -608,15 +610,15 @@ a:hover {
     }
     .girl {
         width: 328px;
-        height: 100px;
+        height: 200px;
         margin-top: 12px;
         margin-left: 0px;
     }
     .girl-img {
-        background-image: url("/assets/img/client-page/circle_face_mobile.png"); 
+        // background-image: url("/assets/img/client-page/circle_face_mobile.png"); 
         margin: 0px 0px 0px 0px;
-        width: 269px;
-        height: 269px;
+        width: 269px !important;
+        height: 269px !important;
         margin-left: 30px;
     }
     .slider-button {
