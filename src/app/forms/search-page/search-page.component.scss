@@ -7,6 +7,10 @@ app-header {
     display: none;
 }
 
+.outer-conteiner {
+    padding: 0 16px;
+}
+
 .checkbox-item {
     display: flex;
     flex-wrap: nowrap;
@@ -49,6 +53,10 @@ app-header {
     margin-top: 25px !important;
     margin: 0 auto;
 
+    padding: 0;
+    padding-bottom: 23px;
+    border-bottom: 1px solid rgba(14, 11, 77, 0.1);
+
     .logo img {
         width: 150px;
         outline: none;
@@ -57,20 +65,27 @@ app-header {
     .loginInput {
         border: solid 2px #645fc9;
     }
+}
 
+.outer-header {
     &.scrolled {
-        position: fixed;
+        position: fixed !important;
         top: 0;
-        margin: 0 !IMPORTANT;
         width: 100%;
         left: 0;
-        max-width: 100%;
-        height: 80px;
+
         box-shadow: 0 2px 24px 0 rgba(14, 11, 77, 0.1);
         background-color: #ffffff;
-        display: flex;
-        align-items: center;
+
         z-index: 100;
+
+        .header {
+            display: flex;
+            align-items: center;
+            max-width: 100%;
+            height: 80px;
+            margin-bottom: 0 !important;
+        }
     }
 }
 
@@ -81,7 +96,7 @@ app-header {
 }
 
 .main {
-    margin-top: 90px;
+    margin-top: 67px;
 }
 
 .page-header h3 {
@@ -390,7 +405,8 @@ app-header {
         width: 470px;
         box-sizing: border-box;
     }
-    .dropdown-text-input{
+
+    .dropdown-text-input {
         z-index: 1;
     }
 }
@@ -426,12 +442,82 @@ div.metaName {
     padding: 16px 0 0 10px;
 }
 
-.avatar-wrap{
+.avatar-wrap {
     border-radius: 100px;
     overflow: hidden;
 }
 
+.nav-menu {
+    display: flex;
+    align-items: center;
+
+    &--item {
+        cursor: pointer;
+        margin-left: 38px;
+
+        a {
+            color: #0e0b4d !important;
+            background-color: transparent;
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-decoration: none !important;
+        }
+    }
+}
+
+.menu-toggle {
+    display: none;
+    padding: none;
+    outline: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 769px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: calc(100% + 1px);
+        z-index: 1;
+        border-radius: 0 0 4px 4px;
+        box-shadow: 0 8px 10px 0 rgba(14, 11, 77, 0.1);
+        background-color: #ffffff;
+        padding: 0 15px;
+        border-top: 0;
+        width: calc(100% + 32px);
+        left: -16px;
+        display: none;
+
+        &.show {
+            display: block;
+        }
+
+        &--item {
+            cursor: pointer;
+            margin-left: 0;
+            padding: 0;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid rgba(14, 11, 77, 0.1);
+            }
+
+            a {
+                font-size: 14px;
+                width: 100%;
+                display: block;
+                height: 100%;
+                padding: 16px 0;
+            }
+        }
+    }
 
     .search-meta {
         // position: absolute;
@@ -445,11 +531,18 @@ div.metaName {
 
     }
 
+    .outer-header {}
+
     .header {
-        margin: 25px;
+        margin-left: 0 !important;
+        position: relative;
         // flex-wrap: wrap !important;
         // background-color: red;
         top: 50%;
+
+        &.non-border {
+            border-bottom: 1px solid rgba(0, 0, 0, 0);
+        }
     }
 
     .login {

@@ -56,6 +56,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { ArticlesComponent } from './articles/articles.component';
 import { DetailComponent } from './articles/detail/detail.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 
 
@@ -104,7 +105,8 @@ export function initApp(appSerivce: AppService){
     SearchPageComponent,
     ClientPageComponent,
     ArticlesComponent,
-    DetailComponent
+    DetailComponent,
+    ClickOutsideDirective
   ],
   imports: [
     BrowserModule,
@@ -122,6 +124,9 @@ export function initApp(appSerivce: AppService){
     CommonModule,
     NgxPaginationModule,
     FilterPipeModule
+  ],
+  exports: [
+    ClickOutsideDirective
   ],
   providers: [
     AppService,

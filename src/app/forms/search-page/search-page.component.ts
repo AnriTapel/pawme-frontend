@@ -62,6 +62,23 @@ export class SearchPageComponent implements OnInit {
   breedList;
   citiesList;
 
+  menuItems = [
+    {
+      name: 'Топ заводчиков',
+      url: '/search-page'
+    },
+    {
+      name: 'База знаний',
+      url: '/articles'
+    },
+    {
+      name: 'О нас',
+      url: '/about-us'
+    }
+  ];
+
+  showMenu;
+
   ngOnInit() {
     this.route.queryParamMap.subscribe(params => {
       this.breed = params.getAll('breed');
