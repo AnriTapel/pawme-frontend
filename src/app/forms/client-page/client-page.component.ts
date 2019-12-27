@@ -104,5 +104,8 @@ export class ClientPageComponent implements OnInit {
   public openArtical() {
     this.router.navigate(['/articles']);
   }
+  public renderBrender() {
+    this.router.navigate(['/breeder-landing']);
+  }
 
 }

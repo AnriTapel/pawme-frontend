@@ -1,6 +1,11 @@
 <div class="main">
     <div class="header">
-        <app-header class='header-for-landing'></app-header>  
+          <div class="header-logo">
+                <div class="logo">
+                     <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
+                </div>
+          </div>         
+        <!-- <app-header class='header-for-landing'></app-header>   -->
         <div class="header-title">
             <h3>НАЙДИ ЛУЧШЕГО ДРУГА У НАС</h3>
             <p>Мы помогаем будущим хозяевам собак и заводчикам находить друг друга</p>    
@@ -115,7 +120,7 @@
                     <p>Кавалер-кинг-чарльз-спаниель</p>
                 </div>
                 <div>
-                    <a (click)="selectParod('Французский бульдог')">
+                    <a (click)="selectParod('Такса')">
                         <img src="./assets/img/client-page/dogs/такса.jpg" alt="" />
                     </a>
                     <p>Такса</p>
@@ -200,7 +205,7 @@
             </a>
             <a href="detail/18" class="">
                 <div class="black-dog">
-                    <h3>Как подготовиться</h3>
+                    <h3>Как подготовиться?</h3>
                     <div class="black-dog-pic"></div>
                 </div>
             </a>
@@ -215,7 +220,7 @@
         <div class="content">
             <h3>ВЫ ЗАВОДЧИК?</h3>
             <p>Присоединяйтесь к сообществу ответственных заводчиков и продавайте щенков через нашу платформу.</p>
-            <input type="button" class="custom-btn btn-purple" value="УЗНАТЬ ПОДРОБНЕЕ">
+            <input type="button"  (click)="renderBrender()" class="custom-btn btn-purple" value="УЗНАТЬ ПОДРОБНЕЕ">
         </div>
         <div class="bottom-dogs">
         </div>

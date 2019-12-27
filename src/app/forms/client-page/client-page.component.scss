@@ -6,6 +6,7 @@
 a:hover {
     text-decoration: none;
 }
+
 .main {
     background: #ffffff !important;
     width: 100%;
@@ -64,6 +65,15 @@ a:hover {
         line-height: 1.44;
         color: #ffffff;
     }
+}
+.header-logo {
+    display: flex;
+    justify-content: center;
+}
+.logo img {
+    width: 150px;
+    outline: none;
+    margin-top: 30px;
 }
 
 .search-block {
@@ -313,6 +323,7 @@ a:hover {
     font-size: 28px;
     text-align: center;
     color: #645fc9;
+    text-transform: uppercase;
     }
     p {
     font-size: 16px;
@@ -368,7 +379,8 @@ a:hover {
     height: 175px;
     display: flex;
     justify-content: space-between;
-   padding-top: 21px;
+    padding-top: 21px;
+    margin-top: 27px;
     background-image: url("/assets/img/client-page/back_howtochoose.svg");
 }
 .white-dog-pic {
@@ -613,13 +625,13 @@ a:hover {
         height: 200px;
         margin-top: 12px;
         margin-left: 0px;
+        img {
+            width: 330px !important;
+        }
     }
     .girl-img {
-        // background-image: url("/assets/img/client-page/circle_face_mobile.png"); 
         margin: 0px 0px 0px 0px;
-        width: 269px !important;
-        height: 269px !important;
-        margin-left: 30px;
+        margin-left: 0px;
     }
     .slider-button {
         margin: 15px 0 0 90px; 
