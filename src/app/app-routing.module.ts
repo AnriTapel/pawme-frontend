@@ -21,30 +21,35 @@ import { DetailComponent } from './articles/detail/detail.component'
 
 
 const routes: Routes = [
-  {path: '', component: BreederLandingComponent},
-  {path: 'breeder-landing', component: BreederLandingComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'sign-up', component: SignUpComponent},
-  {path: 'about-us', component: AboutUsComponent},
-  {path: 'contact-us', component: ContactUsComponent},
-  {path: 'faq', component: FaqComponent},
-  {path: 'remind-password', component: RemindPasswordComponent},
-  {path: 'changepass/:uuid', component: ChangePasswordComponent, pathMatch: 'full'},
-  {path: 'breeder-profile', component: BreederProfileComponent},
-  {path: 'breeder/:id', component: BreederPageComponent, pathMatch: 'full'},
-  {path: 'preview/:id', component: BreederPageComponent, pathMatch: 'full'},
-  {path: 'admin-panel', component: AdminPanelComponent},
-  {path: 'confirm-email/:mail', component: MailPageComponent},
-  {path: 'search-page', component: SearchPageComponent},
-  {path: 'client-page', component: ClientPageComponent},
-  {path: 'articles', component: ArticlesComponent},
-  {path: 'detail/:id', component: DetailComponent},
-  {path: '404', component: PageNotFoundComponent},
-  {path: '**', component: PageNotFoundComponent}
+  // {path: '', component: BreederLandingComponent},
+  {
+    path: '',
+    redirectTo: 'client-page',
+    pathMatch: 'full'
+  },
+  { path: 'breeder-landing', component: BreederLandingComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'sign-up', component: SignUpComponent },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'faq', component: FaqComponent },
+  { path: 'remind-password', component: RemindPasswordComponent },
+  { path: 'changepass/:uuid', component: ChangePasswordComponent, pathMatch: 'full' },
+  { path: 'breeder-profile', component: BreederProfileComponent },
+  { path: 'breeder/:id', component: BreederPageComponent, pathMatch: 'full' },
+  { path: 'preview/:id', component: BreederPageComponent, pathMatch: 'full' },
+  { path: 'admin-panel', component: AdminPanelComponent },
+  { path: 'confirm-email/:mail', component: MailPageComponent },
+  { path: 'search-page', component: SearchPageComponent },
+  { path: 'client-page', component: ClientPageComponent },
+  { path: 'articles', component: ArticlesComponent },
+  { path: 'detail/:id', component: DetailComponent },
+  { path: '404', component: PageNotFoundComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: "top"})],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: "top" })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
