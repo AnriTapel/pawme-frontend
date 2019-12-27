@@ -1,3 +1,11 @@
+<div class="outer-conteiner outer-header" [ngClass]="{'scrolled': state}">
+    <div class="container header" [ngClass]="{'non-border': state && !showMenu}">
+        <div class="logo">
+            <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
+        </div>
+        <app-menu [showMenu]="showMenu" [state]="state"></app-menu>
+    </div>
+</div>
 <div class="page-wrapper">
     <div class="page-container">
         <img src="./assets/img/contact-us-img.jpg" alt="Связаться с нами" />

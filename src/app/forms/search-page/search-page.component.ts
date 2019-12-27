@@ -152,12 +152,7 @@ export class SearchPageComponent implements OnInit {
   getScreenSize(event) {
 
     const scrollPosition = window.pageYOffset;
-    if (scrollPosition > 400) {
-      this.state = true;
-    } else {
-      this.state = false;
-    }
-    //console.log("Scroll Event", window.pageYOffset );
+
   }
   public changeInput(event) {
     this.searchControllerService.findUsingPOST(this.searchData)

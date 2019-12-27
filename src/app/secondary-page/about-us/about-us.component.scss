@@ -30,6 +30,34 @@ h2{
     }
 }
 
+.outer-conteiner {
+    padding: 0 16px;
+}
+
+
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin-top: 25px !important;
+    margin: 0 auto;
+
+    padding: 0;
+    padding-bottom: 23px;
+    border-bottom: 1px solid rgba(14, 11, 77, 0.1);
+
+    .logo img {
+        width: 150px;
+        outline: none;
+    }
+
+}
+
+
+
+
 @media screen and (max-width: 769px){
     h2{
         margin: 1em 0;
@@ -37,6 +65,32 @@ h2{
 
     .page-wrapper{
         padding: 10% 5%;
+    }
+
+    .header {
+        margin-left: 0 !important;
+        position: relative;
+        // flex-wrap: wrap !important;
+        // background-color: red;
+        top: 50%;
+    
+        &.non-border {
+            border-bottom: 1px solid rgba(0, 0, 0, 0);
+        }
+    }
+    .container {
+
+        .top-line {
+            width: 328px;
+            height: 1px;
+            opacity: 0.1;
+            background-color: #0e0b4d;
+            margin-top: 10px;
+        }
+
+        h3 {
+            margin-top: 20px;
+        }
     }
 
 

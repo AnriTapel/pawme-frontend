@@ -41,7 +41,7 @@
         <!-- <div class="login">
             <input type="button" class="loginInput custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
         </div> -->
-        <div (clickOutside)="showMenu = false" class="d-flex">
+        <!-- <div (clickOutside)="showMenu = false" class="d-flex">
             <div [ngClass]="{'show': showMenu}" class="nav-menu">
                 <div class="nav-menu--item" *ngFor="let item of menuItems"
                     (click)="showMenu = false; searchData.breed = null">
@@ -51,7 +51,9 @@
             <button (click)="showMenu = !showMenu" class="menu-toggle">
                 <img src="assets/img/burger-menu.svg" alt="">
             </button>
-        </div>
+        </div> -->
+        <app-menu [showMenu]="showMenu" [state]="state"></app-menu>
+
     </div>
 </div>
 <div class="container main" [ngStyle]="{'padding-top': state ? '96px' : null}">

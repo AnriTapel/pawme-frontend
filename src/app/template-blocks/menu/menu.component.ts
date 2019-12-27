@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 export class MenuComponent implements OnInit {
+
   menuItems = [
     {
       name: 'Топ заводчиков',
@@ -22,12 +23,19 @@ export class MenuComponent implements OnInit {
       url: '/about-us'
     }
   ];
-  
-  showMenu;
+
+  @Input() showMenu: boolean;
+  @Input() state: boolean;
 
   constructor() { }
 
   ngOnInit() {
+    const scrollPosition = window.pageYOffset;
+    if (scrollPosition > 400) {
+      this.state = true;
+    } else {
+      this.state = false;
+    }
   }
 
 }
