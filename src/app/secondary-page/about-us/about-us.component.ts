@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class AboutUsComponent implements OnInit {
 
   constructor() { scroll(0,0) }
+  showMenu;
+  state:boolean;
 
   ngOnInit() {
   }

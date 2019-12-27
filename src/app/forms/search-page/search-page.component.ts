@@ -66,20 +66,20 @@ export class SearchPageComponent implements OnInit {
 
   selectedBreedChar;
 
-  menuItems = [
-    {
-      name: 'Топ заводчиков',
-      url: '/search-page'
-    },
-    {
-      name: 'База знаний',
-      url: '/articles'
-    },
-    {
-      name: 'Для заводчиков',
-      url: '/breeder-landing'
-    }
-  ];
+  // menuItems = [
+  //   {
+  //     name: 'Топ заводчиков',
+  //     url: '/search-page'
+  //   },
+  //   {
+  //     name: 'База знаний',
+  //     url: '/articles'
+  //   },
+  //   {
+  //     name: 'Для заводчиков',
+  //     url: '/breeder-landing'
+  //   }
+  // ];
 
   showMenu;
 
