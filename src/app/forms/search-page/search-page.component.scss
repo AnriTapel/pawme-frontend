@@ -120,6 +120,9 @@ app-header {
         width: 100%;
         max-width: 420px;
         height: 50px;
+        &:first-child{
+            margin-left: 0;
+        }
     }
 }
 
