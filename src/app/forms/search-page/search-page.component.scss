@@ -108,13 +108,17 @@ app-header {
     flex-wrap: wrap;
     margin-left: -10px;
 
+    width: 100%;
+    margin: auto;
+
     input {
         padding-left: 18px;
     }
 
     &>div {
         margin: 12px;
-        width: 420px;
+        width: 100%;
+        max-width: 420px;
         height: 50px;
     }
 }
@@ -518,6 +522,10 @@ div.metaName {
         justify-content: center;
     }
 
+    .search-input>div {
+        margin: 12px 0;
+    }
+
     .menu-toggle {
         display: flex;
     }
@@ -604,11 +612,13 @@ div.metaName {
     }
 
     .search-info {
-        width: 332px;
         padding: 20px;
         background-image: none;
         margin-left: auto;
         margin-right: auto;
+
+        max-width: 332px;
+        width: 100%;
     }
 
     .heart-info {
@@ -619,13 +629,15 @@ div.metaName {
 
     .info-right {
         h3 {
-            width: 288px;
+            width: 100%;
+            max-width: 288px;
             font-size: 14px;
             margin: 0px;
         }
 
         p:last-child {
-            width: 288px;
+            width: 100%;
+            max-width: 288px;
             font-size: 13px;
             margin-top: 5px;
         }
@@ -633,16 +645,19 @@ div.metaName {
 
     .info-left {
         margin: 12px 0 0 0;
+        width: 100%;
 
         .custom-btn {
-            width: 284px;
+            width: 100%;
+            max-width: 284px;
             height: 44px;
             border-radius: 30px;
             font-size: 14px;
         }
 
         .dropdown-text-input {
-            width: 284px;
+            width: 100%;
+            max-width: 284px;
             height: 40px;
             font-size: 14px;
         }
@@ -657,10 +672,15 @@ div.metaName {
         height: auto !important;
         border: solid 1px #cbd8f6 !important;
 
+        max-width: 332px !important;
+        width: 100% !important;
+
         img {
-            width: 332px !important;
             border-radius: none;
-            margin-left: 12px !important;
+
+            width: 100% !important;
+            max-width: 332px;
+            margin: 0 !important;
         }
 
         .serach-content-girl,
@@ -681,22 +701,27 @@ div.metaName {
             // background-image: url("/assets/img/search-page/dog1.png");
             // background-repeat: no-repeat;
             display: block;
-            width: 332px;
             height: 284px;
             margin-top: -1px;
             margin-left: -13px;
             object-fit: contain;
+
+            width: 100%;
+            max-width: 332px;
+            margin: 0;
 
         }
     }
 
     .dogs-parod {
         margin: 20px 0 0 0;
-        width: 332px !important;
+        width: 100% !important;
         height: 150px;
         padding: 0 0 10px 20px;
         position: relative;
         top: 0;
+        max-width: 420px;
+        left: 0;
 
         .circle {
             width: 8px;
@@ -726,6 +751,6 @@ div.metaName {
     }
 
     .p-text {
-        width: 288px !important;
+        width: 100% !important;
     }
 }
