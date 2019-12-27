@@ -76,8 +76,8 @@ export class SearchPageComponent implements OnInit {
       url: '/articles'
     },
     {
-      name: 'О нас',
-      url: '/about-us'
+      name: 'Для заводчиков',
+      url: '/breeder-landing'
     }
   ];
 
@@ -238,7 +238,7 @@ export class SearchPageComponent implements OnInit {
   getBreedCharacterization(selectedBreed) {
     let haveSuccess = false;
     this.jsonDataService.getBreedCharacterization().subscribe(res => {
-      
+
       let arr: any = res;
       arr.forEach(element => {
         if (element.breed.trim().toLowerCase() === selectedBreed.name.trim().toLowerCase()) {
