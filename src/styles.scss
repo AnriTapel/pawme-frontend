@@ -257,7 +257,41 @@
     border-top: 1px solid #f9f9f9;
 }
 
+app-menu {
+    display: flex;
+}
+
+.bg-white {
+    background: white;
+}
+
 @media screen and (max-width: 769px) {
+    .fixed-header {
+        .nav-menu {
+            top: calc(100% + -1px) !important;
+            width: 100% !important;
+            left: 0 !important;
+
+            &--item:first-child {
+                border-top: 1px solid rgba(14, 11, 77, 0.1);
+            }
+        }
+    }
+
+    .main-header {
+        .navbar {
+            app-menu {
+                .nav-menu {
+                    top: calc(100% + -1px);
+
+                    &--item:first-child {
+                        border-top: 1px solid rgba(14, 11, 77, 0.1);
+                    }
+                }
+            }
+        }
+    }
+
     .ng-clear-wrapper {
         width: fit-content !important;
         margin: 0;
@@ -265,13 +299,16 @@
         margin: 0;
         text-align: center;
     }
-    .ng-clear{
+
+    .ng-clear {
         font-size: 35px !important;
     }
+
     .ng-clear-wrapper::after {
         display: none;
     }
-    .ng-select-container{
+
+    .ng-select-container {
         font-size: 16px !important;
     }
 }

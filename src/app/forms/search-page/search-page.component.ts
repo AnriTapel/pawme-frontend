@@ -66,21 +66,6 @@ export class SearchPageComponent implements OnInit {
 
   selectedBreedChar;
 
-  // menuItems = [
-  //   {
-  //     name: 'Топ заводчиков',
-  //     url: '/search-page'
-  //   },
-  //   {
-  //     name: 'База знаний',
-  //     url: '/articles'
-  //   },
-  //   {
-  //     name: 'Для заводчиков',
-  //     url: '/breeder-landing'
-  //   }
-  // ];
-
   showMenu;
 
   ngOnInit() {
@@ -106,7 +91,7 @@ export class SearchPageComponent implements OnInit {
             }
           });
         });
-  
+
         let replacedBreedList = [];
 
         this.breedList.forEach((item) => {
@@ -119,11 +104,11 @@ export class SearchPageComponent implements OnInit {
             replacedBreedList.push(item);
           }
         });
-        
+
         this.breedList = replacedBreedList;
 
         let replaceCitiesList = [];
-        
+
         this.citiesList = [];
         this.appService.cities.forEach((item, index) => {
           this.citiesList.push(
@@ -182,7 +167,11 @@ export class SearchPageComponent implements OnInit {
   getScreenSize(event) {
 
     const scrollPosition = window.pageYOffset;
-
+    if (scrollPosition > 400) {
+      this.state = true;
+    } else {
+      this.state = false;
+    }
   }
   public changeInput(event) {
     this.searchControllerService.findUsingPOST(this.searchData)

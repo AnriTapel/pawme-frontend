@@ -1,17 +1,25 @@
-header{
-    background-color: #f8f9fb;
+header {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1170px;
+    padding: 0;
+    border-bottom: 1px solid rgba(14, 11, 77, 0.1);
 }
 
-.navbar-brand{
+.navbar {
+    height: 90px;
+}
+
+.navbar-brand {
     cursor: pointer;
 
-    &>img{
+    &>img {
         width: 150px;
         outline: none;
     }
 }
 
-.menu-btn{
+.menu-btn {
     width: 50px;
     height: 50px;
     display: flex;
@@ -19,11 +27,11 @@ header{
     background-image: radial-gradient(circle at 27% 0, #80c3f3, #4a90e2);
     cursor: pointer;
 
-    a{
+    a {
         color: #fff;
         margin: auto;
 
-        &:hover{
+        &:hover {
             color: #fff !important;
         }
     }
@@ -34,11 +42,132 @@ header{
     }
 }
 
-.white-login-btn{
+.white-login-btn {
     border: 1px solid white;
     color: #fff !important;
 
-    &:hover{
+    &:hover {
         color: #645fc9 !important;
+    }
+}
+
+.header-outer-wrap {
+    transition: all .3s;
+}
+
+.fixed-wrap {
+    &.fixed {
+        padding-top: 90px;
+
+        .header-outer-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+    }
+
+    &.scrolling {
+        .header-outer-wrap {
+            background: white;
+            box-shadow: 0 2px 24px 0 rgba(14, 11, 77, 0.1);
+
+            header {
+                border-bottom: none !important;
+            }
+        }
+    }
+}
+
+.custom-btn {
+    width: 157px;
+    min-width: 157px;
+    height: 44px;
+    text-align: center;
+
+    input {
+        font-size: 16px;
+        letter-spacing: 0.18px;
+        color: #ffffff;
+        background: none;
+        border: none;
+    }
+}
+
+.search-meta {
+    width: 100%;
+    max-width: 420px;
+}
+
+.checkbox-item {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    img {
+        width: 11px;
+        height: 8px;
+        margin-top: 12px;
+        margin-right: 22px;
+        background-image: url("/assets/img/search-page/search-checkbox.png");
+        display: none;
+    }
+}
+
+.checkbox-item:hover {
+    img {
+
+        display: block;
+    }
+}
+
+.checkbox-item:hover {
+    img {
+
+        display: block;
+    }
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    app-menu {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .navbar {
+        app-menu {
+            display: block;
+        }
+
+        .search-meta {
+            display: none;
+        }
+
+        .custom-btn {
+            display: none;
+        }
+    }
+
+    .custom-btn {
+        height: 46px;
+        margin-left: 0;
+
+        input {
+            font-size: 14px;
+        }
+    }
+
+    .navbar {
+        height: 90px;
+    }
+
+    .header-outer-wrap {
+        padding: 0 15px;
     }
 }

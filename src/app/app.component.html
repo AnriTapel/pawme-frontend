@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container" [ngClass]="{'bg-white': router.url.slice(0, 7) === '/detail'}">
     <app-notification-bar></app-notification-bar>
     <app-header *ngIf="showGeneralHeader()"></app-header>
     <app-popup-template *ngIf="popupService.getShowStatus()" [ngSwitch]="popupService.getCurrentForm()">

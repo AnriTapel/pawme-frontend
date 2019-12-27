@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -19,8 +19,8 @@ export class MenuComponent implements OnInit {
       url: '/articles'
     },
     {
-      name: 'О нас',
-      url: '/about-us'
+      name: 'Для заводчиков',
+      url: '/breeder-landing'
     }
   ];
 

@@ -1,3 +1,43 @@
+<div class="outer-conteiner outer-header fixed-header" [ngClass]="{'scrolled': state}">
+    <div class="container-header" [ngClass]="{'non-border': state && !showMenu}">
+        <div class="logo">
+            <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
+        </div>
+        
+        <app-menu [showMenu]="showMenu" [state]="state"></app-menu>
+
+        <div *ngIf="state" class="search-meta">
+            <div class="dropdown-text-input dropdown-style">
+                <ng-select
+                    [items]="breedList"
+                    [multiple]="false"
+                    bindLabel="name"
+                    clearAllText ="Clear All"
+                    placeholder="Порода"
+                    [selectableGroup]="true"
+                    [selectableGroupAsModel]="false"
+                    [closeOnSelect]="true"
+                    bindValue="id"
+                    [virtualScroll]="true"
+                    [(ngModel)]="breed">
+                    <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="checkbox-item" [ngClass]="{'disabled': item?.disabled}">
+                            <div [title]="item.name" class="name">{{item.name}}</div>  
+                            <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
+                            <div *ngIf="item.disabled" class="coming-soon">
+                                Уже скоро
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-select>  
+            </div>
+        </div>
+        <div class="custom-btn btn-purple">
+            <input type="button" value="НАЙТИ!" (click)="getSearchPage()"/>
+            <img src="./assets/img/client-page/shape.svg" alt="" />
+        </div>   
+    </div>
+</div>
 <div class="main">
     <div class="header">
           <div class="header-logo">
@@ -148,13 +188,13 @@
                 <div>
                     <img src="./assets/img/client-page/oval.svg" alt="" />
                     <h3 class="">Комплект PetMan</h3>
-                    <p class="">Каждый щенок продается с обязательным коплектом - метрика, ветеринарный паспорт и клеймо</p>
-                    <a href="">Зачем это нужно?</a>
+                    <p class="">Каждый щенок продается с обязательным комплектом - метрика, вет. паспорт и клеймо. Так мы защищаем вас от нелегальных бизнесменов.</p>
+                    <!-- <a href="">Зачем это нужно?</a> -->
                 </div>
                 <div>
                     <img src="./assets/img/client-page/info.svg" alt="" />
                     <h3 class="">Подробная информация</h3>
-                    <p class="">Мы составили договор, который зафиксирует гарантийные условия и обезопасит вас </p>
+                    <p class="">Каждый заводчик заполняет несколько обязательных разделов, включая медицинские тесты/услуги, фотографии и родителей. </p>
                 </div>
             </div>
         </div>

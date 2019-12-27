@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { SearchControllerService, BreederControllerService } from 'src/app/api/api';
+import { SearchMeta } from '../../model/searchMeta';
 
 @Component({
   selector: 'app-header',
@@ -15,12 +17,41 @@ export class HeaderComponent implements OnInit {
 
   private nonProfileHeaderPathnames = ['/breeder-landing', '/?'];
 
+  breed: string = null;
+  state: boolean;
+  showMenu;
+  breedList;
+  getMetaSearchData: SearchMeta = null;//BreederSearchEntry = null;
+
   constructor(public appService: AppService, public popupService: PopupTemplateService, private http: HttpClient,
-    private notificationService: NotificationBarService, private router: Router) { }
+    private notificationService: NotificationBarService, private router: Router, private searchControllerService: SearchControllerService, ) { }
 
   ngOnInit() {
-  }
+    this.searchControllerService.getSearchMetaUsingGET()
+      .subscribe((res) => {
+        this.getMetaSearchData = <SearchMeta>res;
 
+        this.breedList = this.appService.breeds;
+        this.breedList.forEach((item) => {
+          item.disabled = true;
+          this.getMetaSearchData['breeds'].forEach(element => {
+            if (+item.id === +element) {
+              item.disabled = false;
+            }
+          });
+        });
+      }, (err) => {
+        if (err.status == 404)
+          console.log('error', err);
+      });
+  }
+  public getSearchPage() {
+    if (this.breed == null) {
+      return;
+    }
+    const options = { queryParams: { breed: this.breed } };
+    this.router.navigate(['/search-page'], options);
+  }
   logout(): void {
     this.http.get('/api/logout').subscribe(
       data => {
@@ -40,6 +71,17 @@ export class HeaderComponent implements OnInit {
         this.notificationService.setVisibility(true);
       }
     );
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  getScreenSize(event) {
+
+    const scrollPosition = window.pageYOffset;
+    if (scrollPosition > 40) {
+      this.state = true;
+    } else {
+      this.state = false;
+    }
   }
 
   isNonProfileHeader(): boolean {

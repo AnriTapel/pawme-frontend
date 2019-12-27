@@ -114,6 +114,7 @@ a:hover {
 .custom-btn  {
     margin-left: 20px;
     width: 157px;
+    min-width: 157px;
     height: 44px;
     text-align: center;
     input {
@@ -161,6 +162,7 @@ a:hover {
     flex-wrap: wrap;
     div {
         margin-left: 30px;
+        cursor: pointer;
     }
     p {
         font-size: 22px;
@@ -457,7 +459,67 @@ a:hover {
     margin-top: 50px;
 }
 
+.outer-header {
+    display: none;
+    &.scrolled {
+        display: block;
+        position: fixed !important;
+        top: 0;
+        width: 100%;
+        left: 0;
+
+        box-shadow: 0 2px 24px 0 rgba(14, 11, 77, 0.1);
+        background-color: #ffffff;
+
+        z-index: 100;
+    }
+    .container-header{
+        display: flex;
+        align-items: center;
+        min-height: 105px;
+        justify-content: space-between;
+        max-width: 1300px;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        .logo {
+            img{
+                margin: 0;
+            }
+        }
+        app-menu{
+            display: none;
+        }
+        .search-meta{
+            width: 100%;
+            max-width: 420px;
+            margin: 0 10px;
+        }
+        .custom-btn{
+            margin: 0;
+        }
+    }
+}
+
 @media screen and (max-width: 769px) {
+
+    .outer-header {
+        .container-header{
+            min-height: 90px;
+            app-menu{
+                display: block;
+            }
+            .search-meta{
+                display: none;
+            }
+            .custom-btn{
+                display: none;
+            }
+        }
+    }
+
      .header { 
         background-image: url("/assets/img/client-page/header-mobile.jpg");
         background-size: cover; 

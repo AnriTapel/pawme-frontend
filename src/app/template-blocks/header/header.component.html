@@ -1,32 +1,71 @@
-<header [ngClass]="{'header-for-profile': !isNonProfileHeader()}">
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand">
-            <img src="{{isNonProfileHeader() ? './assets/img/logo-footer.png': './assets/img/logo.png'}}" alt="PawMe логотип" [routerLink]="['/breeder-landing']">
-        </a>
+<div class="fixed-wrap fixed main-header" [ngClass]="{'scrolling': state}">
+    <div class="header-outer-wrap">
+        <header [ngClass]="{'header-for-profile': !isNonProfileHeader()}">
+            <nav class="navbar navbar-light">
+                <a class="navbar-brand">
+                    <img src="{{isNonProfileHeader() ? './assets/img/logo-footer.png': './assets/img/logo.png'}}"
+                        alt="PawMe логотип" [routerLink]="['/breeder-landing']">
+                </a>
+                <div class="search-meta">
+                    <div class="dropdown-text-input dropdown-style">
+                        <ng-select
+                            [items]="breedList"
+                            [multiple]="false"
+                            bindLabel="name"
+                            clearAllText ="Clear All"
+                            placeholder="Порода"
+                            [selectableGroup]="true"
+                            [selectableGroupAsModel]="false"
+                            [closeOnSelect]="true"
+                            bindValue="id"
+                            [virtualScroll]="true"
+                            [(ngModel)]="breed">
+                            <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                                <div class="checkbox-item" [ngClass]="{'disabled': item?.disabled}">
+                                    <div [title]="item.name" class="name">{{item.name}}</div>  
+                                    <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
+                                    <div *ngIf="item.disabled" class="coming-soon">
+                                        Уже скоро
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ng-select>  
+                    </div>
+                </div>
+                <div class="custom-btn btn-purple">
+                    <input type="button" value="НАЙТИ!" (click)="getSearchPage()"/>
+                    <img src="./assets/img/client-page/shape.svg" alt="" />
+                </div> 
+                
 
-        <div *ngIf="getMenuType() == 1" class="my-2 my-lg-0">
-            <div class="menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <a *ngIf="!appService.userData || !appService.userData.generalInfo || !appService.userData.generalInfo.profilePhoto">ЛК</a>
-                <img *ngIf="appService.userData && appService.userData.generalInfo && appService.userData.generalInfo.profilePhoto"
-                    src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg"/>
-            </div>
-            <div class="dropdown-menu custom-header-dropdown-menu">
-                <a class="dropdown-item" style="color: #4dbebb;" [routerLink]="['/breeder-profile']"><img src="./assets/img/menu-user.png"
-                        alt="Личный кабинет" width="13px" height="15px" style="margin-right: 10px;" />
-                    {{appService.userData && appService.userData.profileFill > 4 ? 'Личный кабинет' : 'Заполнить анкету'}}</a>
-                <a class="dropdown-item" (click)="openMyPage()"><img src="./assets/img/menu-eye.png" alt="Моя страница"
-                        width="16px" height="12px" style="margin-right: 8px;" />Моя
-                    страница</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" [routerLink]="['/faq']"><img src="./assets/img/menu-help.png" alt="Помощь" width="16px"
-                        height="16px" style="margin-right: 8px;" />Помощь</a>
-                <a class="dropdown-item" (click)="logout()"><img src="./assets/img/menu-log-out.png" width="15px"
-                        height="15px" alt="Выйти" style="margin-right: 9px;" />Выйти</a>
-            </div>
-        </div>
-        <div *ngIf="getMenuType() == 0" class="my-2 my-lg-0">
-            <input type="button" class="custom-btn btn-transparent" [class.white-login-btn]="isNonProfileHeader()"
-                value="Войти" [routerLink]="['/login']" />
-        </div>
-    </nav>
-</header>
+                    <app-menu [showMenu]="showMenu" [state]="state"></app-menu>
+
+
+                <!-- <div *ngIf="getMenuType() == 1" class="my-2 my-lg-0">
+                    <div class="menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a *ngIf="!appService.userData || !appService.userData.generalInfo || !appService.userData.generalInfo.profilePhoto">ЛК</a>
+                        <img *ngIf="appService.userData && appService.userData.generalInfo && appService.userData.generalInfo.profilePhoto"
+                            src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg"/>
+                    </div>
+                    <div class="dropdown-menu custom-header-dropdown-menu">
+                        <a class="dropdown-item" style="color: #4dbebb;" [routerLink]="['/breeder-profile']"><img src="./assets/img/menu-user.png"
+                                alt="Личный кабинет" width="13px" height="15px" style="margin-right: 10px;" />
+                            {{appService.userData && appService.userData.profileFill > 4 ? 'Личный кабинет' : 'Заполнить анкету'}}</a>
+                        <a class="dropdown-item" (click)="openMyPage()"><img src="./assets/img/menu-eye.png" alt="Моя страница"
+                                width="16px" height="12px" style="margin-right: 8px;" />Моя
+                            страница</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" [routerLink]="['/faq']"><img src="./assets/img/menu-help.png" alt="Помощь" width="16px"
+                                height="16px" style="margin-right: 8px;" />Помощь</a>
+                        <a class="dropdown-item" (click)="logout()"><img src="./assets/img/menu-log-out.png" width="15px"
+                                height="15px" alt="Выйти" style="margin-right: 9px;" />Выйти</a>
+                    </div>
+                </div>
+                <div *ngIf="getMenuType() == 0" class="my-2 my-lg-0">
+                    <input type="button" class="custom-btn btn-transparent" [class.white-login-btn]="isNonProfileHeader()"
+                        value="Войти" [routerLink]="['/login']" />
+                </div> -->
+            </nav>
+        </header>
+    </div>
+</div>
