@@ -1,0 +1,11 @@
+
+<div (clickOutside)="showMenu = false" class="d-flex">
+    <div [ngClass]="{'show': showMenu}" class="nav-menu">
+        <div class="nav-menu--item" *ngFor="let item of menuItems" (click)="showMenu = false; ">
+        <a [routerLink]="[ item.url ]">{{item.name}}</a>
+        </div>
+    </div>
+    <button (click)="showMenu = !showMenu" class="menu-toggle">
+    <img src="assets/img/burger-menu.svg" alt="">
+    </button>
+</div>
