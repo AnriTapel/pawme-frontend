@@ -57,6 +57,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { ArticlesComponent } from './articles/articles.component';
 import { DetailComponent } from './articles/detail/detail.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { MenuComponent } from './template-blocks/menu/menu.component';
+
 
 
 
@@ -106,7 +108,8 @@ export function initApp(appSerivce: AppService){
     ClientPageComponent,
     ArticlesComponent,
     DetailComponent,
-    ClickOutsideDirective
+    ClickOutsideDirective,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
