@@ -5,30 +5,27 @@
         </div>
         <div *ngIf="state" class="search-meta">
             <div class="dropdown-text-input dropdown-style search-icon">
-                <ng-select
-                    [items]="breedList"
-                    [multiple]="false"
-                    bindLabel="name"
-                    placeholder="Порода"
-                    [selectableGroup]="false"
-                    [selectableGroupAsModel]="false"
+                <ng-select [items]="breedList" 
+                    [multiple]="false" 
+                    bindLabel="name" 
+                    clearAllText="Clear All"
+                    placeholder="Порода" 
                     [closeOnSelect]="true"
                     (change)="changeInput($event)"
-                    bindValue="id"
-                    [virtualScroll]="true"
+                    bindValue="id" 
+                    [virtualScroll]="true" 
                     [(ngModel)]="searchData.breed"
-                    [clearable]="false"
-                    >
+                >
                     <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                         <div class="checkbox-item" [ngClass]="{'disabled': item?.disabled}">
-                            <div [title]="item.name" class="name">{{item.name}}</div>  
+                            <div [title]="item.name" class="name">{{item.name}}</div>
                             <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
                             <div *ngIf="item.disabled" class="coming-soon">
                                 Уже скоро
                             </div>
                         </div>
                     </ng-template>
-                </ng-select>  
+                </ng-select>
             </div>
             <!-- <div class="dropdown-text-input">
                 <input type="text" [(ngModel)]="searchData.breed"  class="metaInput form-control custom-form-control-border"  
@@ -46,7 +43,8 @@
         </div> -->
         <div (clickOutside)="showMenu = false" class="d-flex">
             <div [ngClass]="{'show': showMenu}" class="nav-menu">
-                <div class="nav-menu--item" *ngFor="let item of menuItems" (click)="showMenu = false; searchData.breed = null">
+                <div class="nav-menu--item" *ngFor="let item of menuItems"
+                    (click)="showMenu = false; searchData.breed = null">
                     <a [routerLink]="[ item.url ]">{{item.name}}</a>
                 </div>
             </div>
@@ -73,131 +71,134 @@
             </div>
         </div>
     </div> -->
- 
-    <div class="search-input"> 
+
+    <div class="search-input">
         <div class="dropdown-text-input dropdown-style">
-            <ng-select
-                [items]="breedList"
-                [multiple]="false"
-                bindLabel="name"
-                clearAllText ="Clear All"
-                placeholder="Порода"
-                [selectableGroup]="true"
-                [selectableGroupAsModel]="false"
+            <!-- [selectableGroup]="true" 
+            [selectableGroupAsModel]="false"  -->
+            <ng-select 
+                [items]="breedList" 
+                [multiple]="false" 
+                bindLabel="name" 
+                clearAllText="Clear All"
+                placeholder="Порода" 
                 [closeOnSelect]="true"
                 (change)="changeInput($event)"
-                bindValue="id"
-                [virtualScroll]="true"
-                [(ngModel)]="searchData.breed">
+                bindValue="id" 
+                [virtualScroll]="true" 
+                [(ngModel)]="searchData.breed"
+             >
                 <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                     <div class="checkbox-item" [ngClass]="{'disabled': item?.disabled}">
-                        <div [title]="item.name" class="name">{{item.name}}</div>  
+                        <div [title]="item.name" class="name">{{item.name}}</div>
                         <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
                         <div *ngIf="item.disabled" class="coming-soon">
                             Уже скоро
                         </div>
                     </div>
                 </ng-template>
-            </ng-select>  
+            </ng-select>
         </div>
         <div class="dropdown-text-input dropdown-style">
-            <ng-select 
-                [items]="citiesList"
-                [multiple]="true"
-                (change)="changeInput($event)"
-                bindLabel="name"
-                placeholder="Все города"
-                [selectableGroup]="true"
-                [selectableGroupAsModel]="false"
-                [closeOnSelect]="false"
-                bindValue="name"
-                [(ngModel)]="searchData.cities"
-                [virtualScroll]="true"
-                [clearSearchOnAdd]="true"
-                >
+            <ng-select [items]="citiesList" [multiple]="true" (change)="changeInput($event)" bindLabel="name"
+                placeholder="Все города" [selectableGroup]="true" [selectableGroupAsModel]="false"
+                [closeOnSelect]="false" bindValue="name" [(ngModel)]="searchData.cities" [virtualScroll]="true"
+                [clearSearchOnAdd]="true">
                 <ng-template ng-multi-label-tmp let-items="items">
                     Выбрано {{items.length}}
                 </ng-template>
-                 <ng-template  let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                     <div class="checkbox-item">
-                        <div [title]="item.name" class="name">{{item.name}}</div>  
+                        <div [title]="item.name" class="name">{{item.name}}</div>
                         <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
                         <div *ngIf="item.disabled" class="coming-soon">
                             Уже скоро
                         </div>
                     </div>
                 </ng-template>
-            </ng-select>  
+            </ng-select>
         </div>
     </div>
-    <div *ngIf="getSearchData">
-        <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }" class="main-content">
-            <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]">   
-                <div class="search-right">
-                    <div class="dog-mobile">
-                        <img src="/img/{{data.photoPreview}}.jpg" alt="" >
-                    </div>
-                    <div class="main-serach-sub-right">
-                        <div class="serach-sub-right">
-                            <div class="location-content">
-                                <h3>{{data.name}}</h3>
-                                <div class="location-content-sub">
-                                    <div class="location"><i class="icon icon-location"></i></div>
-                                    <div>{{data.city}}</div>
+    <div *ngIf="getSearchData" class="search-content-wrap">
+        <div>
+            <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+                class="main-content">
+                <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]">
+                    <div class="search-right">
+                        <div class="dog-mobile">
+                            <img src="/img/{{data.photoPreview}}.jpg" alt="">
+                        </div>
+                        <div class="main-serach-sub-right">
+                            <div class="serach-sub-right">
+                                <div class="location-content">
+                                    <h3>{{data.name}}</h3>
+                                    <div class="location-content-sub">
+                                        <div class="location"><i class="icon icon-location"></i></div>
+                                        <div>{{data.city}}</div>
+                                    </div>
+                                </div>
+                                <div class="serach-content-girl avatar-wrap">
+                                    <img src="/img/{{data.avatarPreview}}.jpg" alt="">
                                 </div>
                             </div>
-                            <div class="serach-content-girl avatar-wrap">
-                                <img src="/img/{{data.avatarPreview}}.jpg" alt="" >
+                            <p class="p-text">{{data.description}}</p>
+                            <!-- <div *ngIf="data.numPuppies>0" class="number"> -->
+                            <div *ngIf="data.numPuppies>0" class="number">
+                                <div>{{data.numPuppies}}</div>
+                                <div *ngIf="data.numPuppies==1">доступный щенок</div>
+                                <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">доступных
+                                    щенка</div>
+                                <div *ngIf="data.numPuppies>=5">доступных щенков</div>
                             </div>
-                        </div>    
-                        <p class="p-text">{{data.description}}</p>
-                        <!-- <div *ngIf="data.numPuppies>0" class="number"> -->
-                        <div *ngIf="data.numPuppies>0" class="number">
-                            <div >{{data.numPuppies}}</div> 
-                            <div *ngIf="data.numPuppies==1">доступный щенок</div> 
-                            <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">доступных щенка</div>
-                            <div *ngIf="data.numPuppies>=5">доступных щенков</div>
                         </div>
                     </div>
-                </div>
-                <div class="dog">
-                    <img src="/img/{{data.photoPreview}}.jpg" alt="" >
-                </div>
-            </div>
-            <div class="dogs-parod">
-                <h3>Характеристики породы</h3>
-                <div>
-                    <div class="circle"></div>
-                    <img src="./assets/img/search-page/energy.svg" alt=""/>
-                    <div>Много энергии</div>
-                </div>
-                <div>
-                    <div class="circle"></div>
-                    <img src="./assets/img/search-page/high_allergy.svg" alt=""/>
-                    <div class="">Сильно линяет</div>
-                </div>            
-                <div>
-                    <div class="circle"></div>
-                    <img src="./assets/img/search-page/allergy_low.svg" alt=""/>
-                    <div>Высокая аллергенность</div>
+                    <div class="dog">
+                        <img src="/img/{{data.photoPreview}}.jpg" alt="">
+                    </div>
                 </div>
             </div>
         </div>
+        <div *ngIf="selectedBreedChar" class="dogs-parod">
+            <h3>Характеристики породы</h3>
+            <div>
+                <div class="circle"></div>
+                <img src="./assets/img/search-page/energy.svg" alt="" />
+                <div *ngIf="selectedBreedChar.activity === 'Высокая'">Очень активная</div>
+                <div *ngIf="selectedBreedChar.activity === 'Средняя'">Низкая активность</div>
+                <div *ngIf="selectedBreedChar.activity === 'Низкая'">Много энергии</div>
+            </div>
+            <div>
+                <div class="circle"></div>
+                <img src="./assets/img/search-page/high_allergy.svg" alt="" />
+                <div *ngIf="selectedBreedChar.lynch === 'Высокая'" class="">Сильно линяет</div>
+                <div *ngIf="selectedBreedChar.lynch === 'Средняя'" class="">Умеренно линяет</div>
+                <div *ngIf="selectedBreedChar.lynch === 'Низкая'" class="">Почти не линяет</div>
+            </div>
+            <div>
+                <div class="circle"></div>
+                <img *ngIf="selectedBreedChar.allergens === 'Да'" src="./assets/img/search-page/high_allergy.svg" alt="" />
+                <img *ngIf="selectedBreedChar.allergens === 'Нет'" src="./assets/img/search-page/allergy_low.svg" alt="" />
+                <div *ngIf="selectedBreedChar.allergens === 'Да'" class="">Высокая аллергенность</div>
+                <div *ngIf="selectedBreedChar.allergens === 'Нет'" class="">Гипоаллергенная</div>
+            </div>
+        </div>
     </div>
-    <div  *ngIf="!showBox" class="search-info">
+    <div *ngIf="!showBox" class="search-info">
         <div class="info-right">
             <h3>Не нашли подходящего заводчика на платформе?</h3>
             <p>Оставьте заявку и наши специалисты постараются найти для вас профессионала</p>
         </div>
         <div class="info-left">
             <div class="dropdown-text-input">
-                <input type="email" placeholder="Ваш e-mail" 
-                class="form-control custom-form-control-border" name="email" [(ngModel)]="sendEmaillData.email" 
-                [class.invalid-form-field-value]="invalidFields.includes('email')" (change)="fieldEdited('email')"/>
-                <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
+                <input type="email" placeholder="Ваш e-mail" class="form-control custom-form-control-border"
+                    name="email" [(ngModel)]="sendEmaillData.email"
+                    [class.invalid-form-field-value]="invalidFields.includes('email')"
+                    (change)="fieldEdited('email')" />
+                <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите
+                    действительный
                     E-mail</span>
             </div>
-            <input type="button" class="custom-btn btn-purple" value="Отправить" (click)="sendEmail()"  />
+            <input type="button" class="custom-btn btn-purple" value="Отправить" (click)="sendEmail()" />
         </div>
     </div>
     <div *ngIf="showBox" class="heart-info">
@@ -206,11 +207,12 @@
             <p>Мы уже работаем над вашим запросом</p>
         </div>
         <div class="info-left send-form">
-            <img src="./assets/img/search-page/mail.svg" alt=""/>
-            <div class="heart-chat"><img src="./assets/img/search-page/heart.svg" alt=""/></div>
+            <img src="./assets/img/search-page/mail.svg" alt="" />
+            <div class="heart-chat"><img src="./assets/img/search-page/heart.svg" alt="" /></div>
         </div>
     </div>
-    <div *ngIf="lenghtSearchData >10"  class="pagenation"> 
-        <pagination-controls (pageChange)="p = $event; scrollTop()" previousLabel=" "nextLabel=" "></pagination-controls>          
+    <div *ngIf="lenghtSearchData >10" class="pagenation">
+        <pagination-controls (pageChange)="p = $event; scrollTop()" previousLabel=" " nextLabel=" ">
+        </pagination-controls>
     </div>
 </div>

@@ -6,6 +6,7 @@ import { SearchMeta } from '../../model/searchMeta';
 import { PetSelectionRequest } from '../../model/petSelectionRequest';
 import { BreederSearchEntry } from '../../model/breederSearchEntry';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { JsonDataService } from 'src/app/services/json-data/json-data.service';
 
 
 
@@ -27,7 +28,8 @@ export class SearchPageComponent implements OnInit {
     private searchControllerService: SearchControllerService,
     private route: ActivatedRoute,
     private breederService: BreederControllerService,
-    private router: Router
+    private router: Router,
+    private jsonDataService: JsonDataService
   ) { }
 
   searchData: SearchTerms = {
@@ -61,6 +63,8 @@ export class SearchPageComponent implements OnInit {
 
   breedList;
   citiesList;
+
+  selectedBreedChar;
 
   menuItems = [
     {
@@ -118,6 +122,16 @@ export class SearchPageComponent implements OnInit {
           });
         });
 
+        if (this.searchData.breed) {
+          this.breedList.forEach(element => {
+            if (element.id === this.searchData.breed) {
+              this.getBreedCharacterization(element);
+            }
+          });
+        } else {
+          this.selectedBreedChar = null;
+        }
+
       }, (err) => {
         if (err.status == 404)
           console.log('error', err);
@@ -168,6 +182,16 @@ export class SearchPageComponent implements OnInit {
         relativeTo: this.route,
         queryParams: queryParams
       });
+
+    if (this.searchData.breed) {
+      this.breedList.forEach(element => {
+        if (element.id === this.searchData.breed) {
+          this.getBreedCharacterization(element);
+        }
+      });
+    } else {
+      this.selectedBreedChar = null;
+    }
   }
   public updateSearch($event) {
     if ($event == '') {
@@ -210,5 +234,24 @@ export class SearchPageComponent implements OnInit {
   }
   scrollTop() {
     window.scrollTo(0, 200)
+  }
+  getBreedCharacterization(selectedBreed) {
+    let haveSuccess = false;
+    this.jsonDataService.getBreedCharacterization().subscribe(res => {
+      
+      let arr: any = res;
+      arr.forEach(element => {
+        if (element.breed.trim().toLowerCase() === selectedBreed.name.trim().toLowerCase()) {
+          this.selectedBreedChar = element;
+          haveSuccess = true;
+        }
+      });
+
+      if (!haveSuccess)
+        this.selectedBreedChar = null;
+
+      console.log(this.selectedBreedChar);
+
+    });
   }
 }
