@@ -106,7 +106,24 @@ export class SearchPageComponent implements OnInit {
             }
           });
         });
+  
+        let replacedBreedList = [];
 
+        this.breedList.forEach((item) => {
+          if (!item.disabled) {
+            replacedBreedList.push(item);
+          }
+        });
+        this.breedList.forEach((item) => {
+          if (item.disabled) {
+            replacedBreedList.push(item);
+          }
+        });
+        
+        this.breedList = replacedBreedList;
+
+        let replaceCitiesList = [];
+        
         this.citiesList = [];
         this.appService.cities.forEach((item, index) => {
           this.citiesList.push(
@@ -121,6 +138,19 @@ export class SearchPageComponent implements OnInit {
             }
           });
         });
+
+        this.citiesList.forEach((item) => {
+          if (!item.disabled) {
+            replaceCitiesList.push(item);
+          }
+        });
+        this.citiesList.forEach((item) => {
+          if (item.disabled) {
+            replaceCitiesList.push(item);
+          }
+        });
+
+        this.citiesList = replaceCitiesList;
 
         if (this.searchData.breed) {
           this.breedList.forEach(element => {

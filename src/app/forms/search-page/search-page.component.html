@@ -160,7 +160,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="selectedBreedChar" class="dogs-parod">
+        <div *ngIf="selectedBreedChar && getSearchData.length" class="dogs-parod">
             <h3>Характеристики породы</h3>
             <div>
                 <div class="circle"></div>
@@ -171,7 +171,7 @@
             </div>
             <div>
                 <div class="circle"></div>
-                <img src="./assets/img/search-page/high_allergy.svg" alt="" />
+                <img src="./assets/img/search-page/linka.svg" alt="" />
                 <div *ngIf="selectedBreedChar.lynch === 'Высокая'" class="">Сильно линяет</div>
                 <div *ngIf="selectedBreedChar.lynch === 'Средняя'" class="">Умеренно линяет</div>
                 <div *ngIf="selectedBreedChar.lynch === 'Низкая'" class="">Почти не линяет</div>
