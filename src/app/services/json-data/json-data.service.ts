@@ -16,8 +16,11 @@ export class JsonDataService {
     });
   }
 
+  // public getJSON(): Observable<any> {
+  //   return this.http.get("./assets/articales.json");
+  // }
   public getJSON(): Observable<any> {
-    return this.http.get("./assets/articales.json");
+    return this.http.get("./assets/articales.v2.json");
   }
   
   public getClientJSON(): Observable<any> {

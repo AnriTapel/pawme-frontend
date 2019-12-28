@@ -43,7 +43,7 @@ const routes: Routes = [
   { path: 'search-page', component: SearchPageComponent },
   { path: 'client-page', component: ClientPageComponent },
   { path: 'articles', component: ArticlesComponent },
-  { path: 'detail/:id', component: DetailComponent },
+  { path: 'article/:id', component: DetailComponent },
   { path: '404', component: PageNotFoundComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

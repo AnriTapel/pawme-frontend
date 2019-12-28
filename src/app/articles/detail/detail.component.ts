@@ -33,9 +33,11 @@ export class DetailComponent implements OnInit, OnDestroy {
     });
     this.jsonDataService.getJSON().subscribe(data => {
       this.articalsData = data.articales;
+      console.log(data);
       for (let i = 0; i < this.articalsData.length; i++) {
         if (this.articalsData[i].id === this.id) {
           this.showData = this.articalsData[i];
+          console.log(this.showData);
         }
       }
     });
