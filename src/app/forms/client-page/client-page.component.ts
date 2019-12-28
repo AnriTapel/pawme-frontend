@@ -72,6 +72,22 @@ export class ClientPageComponent implements OnInit {
             }
           });
         });
+        
+        let replacedBreedList = [];
+
+        this.breedList.forEach((item) => {
+          if (!item.disabled) {
+            replacedBreedList.push(item);
+          }
+        });
+        this.breedList.forEach((item) => {
+          if (item.disabled) {
+            replacedBreedList.push(item);
+          }
+        });
+
+        this.breedList = replacedBreedList;
+
       }, (err) => {
         if (err.status == 404)
           console.log('error', err);

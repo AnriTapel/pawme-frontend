@@ -489,9 +489,9 @@ a:hover {
                 margin: 0;
             }
         }
-        app-menu{
-            display: none;
-        }
+        // app-menu{
+        //     display: none;
+        // }
         .search-meta{
             width: 100%;
             max-width: 420px;
@@ -508,9 +508,9 @@ a:hover {
     .outer-header {
         .container-header{
             min-height: 90px;
-            app-menu{
-                display: block;
-            }
+            // app-menu{
+            //     display: block;
+            // }
             .search-meta{
                 display: none;
             }

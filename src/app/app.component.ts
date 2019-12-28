@@ -3,6 +3,7 @@ import { PopupTemplateService } from './services/popup-service/popup-template.se
 import { LyTheme2, ThemeVariables } from '@alyle/ui';
 import { AppService } from './services/app-service/app.service';
 import { Router } from '@angular/router';
+import { SharedService } from './services/shared-services/shared.service';
 
 const STYLES = (theme: ThemeVariables) => ({
   '@global': {
@@ -29,9 +30,20 @@ export class AppComponent {
   // Routes of pages with custom footer
   private noGeneralFooterRoutes = ['/admin-panel'];
   private noGeneralFooterPathnames = [];
+  
+  headerType;
 
-  constructor(private theme: LyTheme2, private appService: AppService, public popupService: PopupTemplateService,
-    private router: Router) {}
+  constructor(
+    private theme: LyTheme2, 
+    private appService: AppService, 
+    public popupService: PopupTemplateService,
+    private router: Router,
+    private sharedService: SharedService
+    ) {
+      this.sharedService.headerType.subscribe( type => {
+          this.headerType = type
+      })
+    }
 
   showGeneralHeader(): boolean{
     if (this.noGeneralHeaderRoutes.includes(this.router.url))
