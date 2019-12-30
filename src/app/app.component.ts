@@ -33,6 +33,7 @@ export class AppComponent {
   
   headerType;
 
+<<<<<<< HEAD
   constructor(
     private theme: LyTheme2, 
     private appService: AppService, 
@@ -44,6 +45,10 @@ export class AppComponent {
           this.headerType = type
       })
     }
+=======
+  constructor(private theme: LyTheme2, private appService: AppService, public popupService: PopupTemplateService,
+    public router: Router) {}
+>>>>>>> newChang
 
   showGeneralHeader(): boolean{
     if (this.noGeneralHeaderRoutes.includes(this.router.url))
