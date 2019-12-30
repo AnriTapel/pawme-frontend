@@ -6,6 +6,7 @@
   padding: 0 15px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: 'Intro-Book' !important;
 }
 
 
@@ -73,7 +74,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .block-base__subtitle {
   font-size: 28px;
-  padding: 69px 0 24px;
+  padding: 40px 0 24px;
 }
 
 .block-base p {
@@ -256,7 +257,8 @@ a.title_link:hover:before {
 
 .block-detail .title_3 {
   color: #0e0b4d;
-  padding: 42px 0 22px;
+  padding: 0px 0 22px;
+  font-family: "Intro-Regular";
 }
 
 .block-detail__subtitle {
@@ -452,6 +454,14 @@ a.title_link:hover:before {
   .block-base:after {
     bottom: -44px;
   }
+  .paragraph {
+    font-size: 14px !important;
+  
+  }
+  .title{
+    font-size: 20px !important;
+
+  }
 }
 
 @media (max-width: 413px) {
@@ -470,7 +480,7 @@ a.title_link:hover:before {
 
   .block-base__subtitle {
     font-size: 18px;
-    padding: 42px 0 16px;
+    padding: 20px 0 16px;
   }
 
   .container {
@@ -547,11 +557,13 @@ a.title_link:hover:before {
   }
 
   .block-detail .title_3 {
-    padding: 38px 0 16px;
+    padding: 0px 0 16px;
+    font-size: 18px;
+    font-family: "Intro-Regular";
   }
 
   .block-detail__subtitle {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .social__right {
@@ -573,7 +585,7 @@ a.title_link:hover:before {
   }
 
   .block-detail-text p {
-    font-size: 13px;
+    font-size: 14px;
     margin: 0px 0 18px 0;
   }
 
@@ -581,6 +593,16 @@ a.title_link:hover:before {
     font-size: 18px;
     padding: 6px 0 24px;
   }
+
+  .paragraph {
+    font-size: 14px !important;
+  
+  }
+  .title{
+    font-size: 20px !important;
+
+  }
+
 }
 
 .paragraph {
