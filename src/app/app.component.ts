@@ -31,7 +31,7 @@ export class AppComponent {
   private noGeneralFooterPathnames = [];
 
   constructor(private theme: LyTheme2, private appService: AppService, public popupService: PopupTemplateService,
-    private router: Router) {}
+    public router: Router) {}
 
   showGeneralHeader(): boolean{
     if (this.noGeneralHeaderRoutes.includes(this.router.url))
