@@ -114,11 +114,6 @@ export class ClientPageComponent implements OnInit {
 
   }
 
-
-
-
-
-
   public getSearchPage() {
     if (this.breed == null) {
       return;

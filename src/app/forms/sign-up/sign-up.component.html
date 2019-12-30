@@ -47,10 +47,10 @@
             [class.invalid-form-checkbox]="invalidFields.includes('acception')">
             <img *ngIf="newBreederAcception" src="./assets/img/check-mark.png" />
         </div>
-        <label class="form-check-label">Согласен с условиями <a href="/docs/agreement.pdf"
+        <label class="form-check-label">Согласен с условиями <a [routerLink]="['/docs/agreement.pdf']"
                 target="_blank">Пользовательского
                 соглашения</a>
-            и <a href="/docs/policy.pdf" target="_blank">Политикой конфиденциальности</a></label>
+            и <a [routerLink]="['/docs/policy.pdf']" target="_blank">Политикой конфиденциальности</a></label>
     </div>
 
 

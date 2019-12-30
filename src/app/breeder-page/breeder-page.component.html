@@ -170,7 +170,7 @@
                             договор, вы защищаете себя от возможных рисков и официально фиксируете сделку.
                         </div>
                         <div class="contract-link" [ngClass]="{'collapse' : collapse.contract}">
-                            <a href="/docs/contract.pdf" target="_blank">Посмотреть договор</a>
+                            <a [routerLink]="['/docs/contract.pdf']" target="_blank">Посмотреть договор</a>
                         </div>
                         <div class="line"></div>
                     </div>
