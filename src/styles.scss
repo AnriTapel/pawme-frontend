@@ -6,8 +6,8 @@
 }
 
 .ng-option-tmp {
-    display: flex !important;
-    flex-wrap: nowrap;
+    // display: flex !important;
+    // flex-wrap: nowrap;
 }
 
 .ng-select-container {
@@ -302,6 +302,7 @@ app-menu {
 
     .ng-clear {
         font-size: 35px !important;
+        position: relative;
     }
 
     .ng-clear-wrapper::after {

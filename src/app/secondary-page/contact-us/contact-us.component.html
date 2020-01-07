@@ -1,7 +1,7 @@
 <div class="outer-conteiner outer-header" [ngClass]="{'scrolled': state}">
     <div class="container header" [ngClass]="{'non-border': state && !showMenu}">
         <div class="logo">
-            <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/client-page']">>
+            <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/client-page']">
         </div>
         <app-menu [showMenu]="showMenu" [state]="state"></app-menu>
     </div>

@@ -1,7 +1,7 @@
 <div class="outer-conteiner outer-header" [ngClass]="{'scrolled': state}">
     <div class="container header" [ngClass]="{'non-border': state && !showMenu}">
         <div class="logo">
-            <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/client-page']">>
+            <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/client-page']">
         </div>
         <div *ngIf="state" class="search-meta">
             <div class="dropdown-text-input dropdown-style search-icon">
@@ -102,10 +102,19 @@
             </ng-select>
         </div>
         <div class="dropdown-text-input dropdown-style">
-            <ng-select [items]="citiesList" [multiple]="true" (change)="changeInput($event)" bindLabel="name"
-                placeholder="Все города" [selectableGroup]="true" [selectableGroupAsModel]="false"
-                [closeOnSelect]="false" bindValue="name" [(ngModel)]="searchData.cities" [virtualScroll]="true"
-                [clearSearchOnAdd]="true">
+            <ng-select 
+            [items]="citiesList" 
+            [multiple]="true" 
+            (change)="changeInput($event)" 
+            bindLabel="name"
+            placeholder="Все города" 
+            [selectableGroup]="true" 
+            [selectableGroupAsModel]="false"
+            [closeOnSelect]="true" 
+            bindValue="name" 
+            [(ngModel)]="searchData.cities" 
+            [virtualScroll]="true"
+            [clearSearchOnAdd]="true">
                 <ng-template ng-multi-label-tmp let-items="items">
                     Выбрано {{items.length}}
                 </ng-template>
