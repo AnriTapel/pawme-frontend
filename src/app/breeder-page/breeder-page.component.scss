@@ -1028,3 +1028,33 @@ span, p, div {
     }
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin-top: 25px !important;
+    margin: 0 auto;
+
+    padding: 0;
+    padding-bottom: 23px;
+    border-bottom: 1px solid rgba(14, 11, 77, 0.1);
+
+    margin-bottom: 51px;
+
+    .logo img {
+        width: 150px;
+        outline: none;
+    }
+
+}
+@media screen and (max-width: 769px){
+    .outer-header{
+        padding: 0 16px;
+    }
+    .header {
+        position: relative;
+        &.non-border {
+            border-bottom: 1px solid rgba(0, 0, 0, 0);
+        }
+    }
+}

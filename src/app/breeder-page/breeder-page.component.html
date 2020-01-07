@@ -1,3 +1,11 @@
+<div class="outer-header">
+    <div class="container header" [ngClass]="{'non-border': !showMenu}">
+        <div class="logo">
+            <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/client-page']">
+        </div>
+        <app-menu [showMenu]="showMenu"></app-menu>
+    </div>
+</div>
 <ng-container *ngIf="appService.userData">
 
     <div *ngIf="isPreviewMode" class="back-to-profile-bar" (click)="backToProfile()">

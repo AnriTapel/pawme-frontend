@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PopupTemplateService } from '../services/popup-service/popup-template.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../services/app-service/app.service';
 import { BreederControllerService } from '../api/api';
 import { DogCardService } from '../services/dog-card-service/dog-card.service';
 import { Meta } from '@angular/platform-browser';
+import { SharedService } from '../services/shared-services/shared.service';
 
 @Component({
     selector: 'app-breeder-page',
     templateUrl: './breeder-page.component.html',
     styleUrls: ['./breeder-page.component.scss']
 })
-export class BreederPageComponent implements OnInit {
+export class BreederPageComponent implements OnInit, OnDestroy {
 
     galleryLoopArray = Array(100).fill(1);
     isPreviewMode: boolean;
@@ -22,6 +23,8 @@ export class BreederPageComponent implements OnInit {
         gifts: false
 
     };
+
+    showMenu;
 
     parentsTests = [
         { name: 'Бедра', img: './assets/img/breeder-page/hip.svg', desc: 'Исследование уменьшает шанс передачи дисплазии бедер. Заболевание больше свойственно крупным породам собак, является причиной потенциальных болей и проблем в работе тазобедренного сустава' },
@@ -36,8 +39,17 @@ export class BreederPageComponent implements OnInit {
     ]
     availParentsTests = [];
 
-    constructor(private popupService: PopupTemplateService, private router: Router, private route: ActivatedRoute, public appService: AppService,
-        private breederService: BreederControllerService, public dogCardService: DogCardService, private meta: Meta) {
+    constructor(
+        private popupService: PopupTemplateService,
+        private router: Router,
+        private route: ActivatedRoute,
+        public appService: AppService,
+        private breederService: BreederControllerService,
+        public dogCardService: DogCardService,
+        private meta: Meta,
+        private sharedService: SharedService
+    ) {
+        this.sharedService.headerType.emit('hidden')
 
         if (this.router.url.indexOf("/preview/") != -1) {
             this.isPreviewMode = true;
@@ -48,9 +60,9 @@ export class BreederPageComponent implements OnInit {
         } else
             this.isPreviewMode = false;
 
-       // console.log("this.route.snapshot.paramMap.get('id')", this.route.snapshot.paramMap.get('id'));
+        // console.log("this.route.snapshot.paramMap.get('id')", this.route.snapshot.paramMap.get('id'));
         //console.log("parseInt ----this.route.snapshot.paramMap.get('id')", parseInt(this.route.snapshot.paramMap.get('id')));
-       // this.breederService.getBreederUsingGET(parseInt(this.route.snapshot.paramMap.get('id')))
+        // this.breederService.getBreederUsingGET(parseInt(this.route.snapshot.paramMap.get('id')))
         this.breederService.getBreederUsingGET(this.route.snapshot.paramMap.get('id'))
             .subscribe((res) => {
                 this.appService.userData = res;
@@ -61,6 +73,11 @@ export class BreederPageComponent implements OnInit {
                     this.router.navigateByUrl('/404');
             });
     }
+
+    ngOnDestroy(): void {
+        this.sharedService.headerType.emit('1')
+    }
+
 
     ngOnInit() {
     }

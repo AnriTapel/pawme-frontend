@@ -1,6 +1,6 @@
 <div class="main-container" [ngClass]="{'bg-white': router.url.slice(0, 7) === '/detail'}">
     <app-notification-bar></app-notification-bar>
-    <app-header *ngIf="showGeneralHeader() && headerType !== '2'"></app-header>
+    <app-header *ngIf="showGeneralHeader() && headerType !== '2' && headerType !== 'hidden'"></app-header>
     <app-header2 *ngIf="showGeneralHeader() && headerType === '2'"></app-header2>
     <app-popup-template *ngIf="popupService.getShowStatus()" [ngSwitch]="popupService.getCurrentForm()">
         <app-image-cropper *ngSwitchCase="'image-cropper'" [params]="popupService.getPopupParams()"></app-image-cropper>
