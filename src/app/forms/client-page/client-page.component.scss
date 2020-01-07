@@ -282,16 +282,12 @@ a:hover {
     margin-left: 52px;
 }
  .girl-img {
-    //  background-image: url("/assets/img/client-page/oval-girl.png"); 
      margin: 30px 0px 0px 43px;
-    //  width: 400px;
-    //  height: 400px;
  }
 .slider-button {
     display: flex;
     flex-wrap: nowrap;
     margin: 15px 0 0 230px; 
-    // background-color: red;
     .show {
         background-image: url("/assets/img/client-page/hover_circle.svg");
         .circle {
@@ -489,9 +485,6 @@ a:hover {
                 margin: 0;
             }
         }
-        // app-menu{
-        //     display: none;
-        // }
         .search-meta{
             width: 100%;
             max-width: 420px;
@@ -501,16 +494,24 @@ a:hover {
             margin: 0;
         }
     }
+   
+}
+.show-client-mobile {
+    display: none !important;
 }
 
 @media screen and (max-width: 769px) {
+    .show-client-mobile {
+        display: block !important;
+        margin-top:200px !important;
+    }
+    .show-client-desktop {
+        display: none;
+    }
 
     .outer-header {
         .container-header{
             min-height: 90px;
-            // app-menu{
-            //     display: block;
-            // }
             .search-meta{
                 display: none;
             }
@@ -700,7 +701,7 @@ a:hover {
     }
     .choose-dog {
         margin: 0 auto;
-        margin-top: 250px;
+        margin-top: 70px;
         width: 328px;
         h3 {
             font-size: 20px;

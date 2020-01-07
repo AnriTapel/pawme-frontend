@@ -175,7 +175,7 @@
                 <h3 class="">ПОЗНАКОМЬТЕСЬ С ЗАВОДЧИКАМИ</h3>
                 <h2 class="">Привет! <br />{{showData.subTitle}}</h2>
                 <p class="">{{showData.text}}</p>
-                <a href="{{showData.url}}"><input type="button" class="custom-btn btn-purple" value="Посмотреть профиль"></a>
+                <a  class="show-client-desktop" href="{{showData.url}}"><input type="button" class="custom-btn btn-purple" value="Посмотреть профиль"></a>
             </div>
             <div class="girl">
                <div class="girl-img">
@@ -189,6 +189,8 @@
                 <a [ngClass]="{'show': id === '5' }" (click)="showClinet('5')"><div class="mainCircle"><div class="circle"></div></div></a>
                 </div>
             </div>
+            <a class="show-client-mobile" href="{{showData.url}}"><input type="button" class="custom-btn btn-purple" value="Посмотреть профиль"></a>
+
         </div>
     </div>
     <div class="choose-dog">
