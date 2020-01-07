@@ -264,7 +264,7 @@ export class SearchPageComponent implements OnInit {
       if (!haveSuccess)
         this.selectedBreedChar = null;
 
-      console.log(this.selectedBreedChar);
+      //console.log(this.selectedBreedChar);
 
     });
   }

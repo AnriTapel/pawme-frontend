@@ -295,14 +295,15 @@ app-menu {
     .ng-clear-wrapper {
         width: fit-content !important;
         margin: 0;
-        width: 30px !important;
-        margin: 0;
+        width: 60px !important;
+        //  margin-left: 270px;
         text-align: center;
+         position: relative !important;
     }
 
     .ng-clear {
         font-size: 35px !important;
-        position: relative;
+        position: absolute !important;
     }
 
     .ng-clear-wrapper::after {
