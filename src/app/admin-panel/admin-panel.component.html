@@ -47,6 +47,7 @@
                         <th>Ссылка</th>
                         <th>Профиль</th>
                         <th>Статус</th>
+                        <th>Рейтинг</th> 
                     </tr>
                     <tr *ngFor="let breeder of breeders">
                         <td style="text-align: center;">{{breeder.id}}</td>
@@ -71,6 +72,21 @@
                                 <option [selected]="breeder.status == 'HIDDEN'" value="HIDDEN">Скрыт</option>
                                 <option [selected]="breeder.status == 'PERMANENT_DELETE'" value="PERMANENT_DELETE">
                                     Удалить навсегда</option>
+                            </select>
+                        </td>
+                        <td style="text-align: right;">
+                            <select (change)="changeBreederRating(breeder.id, $event)">
+                                <option  [selected]="breeder.customRating == '0'" value="0">0</option>
+                                <option  [selected]="breeder.customRating == 1" value="1">1</option>
+                                <option  [selected]="breeder.customRating == 2" value="2">2</option>
+                                <option  [selected]="breeder.customRating == 3" value="3">3</option>
+                                <option  [selected]="breeder.customRating == 4" value="4">4</option>
+                                <option  [selected]="breeder.customRating == 5" value="5">5</option>
+                                <option  [selected]="breeder.customRating == 6" value="6">6</option>
+                                <option  [selected]="breeder.customRating == 7" value="7">7</option>
+                                <option  [selected]="breeder.customRating == 8" value="8">8</option>
+                                <option  [selected]="breeder.customRating == 9" value="9">9</option>
+                                <option  [selected]="breeder.customRating == 10" value="10">10</option>
                             </select>
                         </td>
                     </tr>

@@ -133,6 +133,12 @@ export class AdminPanelComponent implements OnInit {
       });
   }
 
+  changeBreederRating(id: number, event: any) {
+      this.adminService.setCustomRatingUsingPUT(id, event.target.value).subscribe((res => {
+        this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initEntityOperations(res));
+      }));
+  }
+
   createNewAdmin(): void {
     if (!this.validateNewAdmin())
       return;
