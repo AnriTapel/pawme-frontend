@@ -11,6 +11,9 @@ $screen-sm: 769px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto;
+    // overscroll-behavior: auto;
+    overscroll-behavior: contain;
+
 }
 
 span, p, div {
