@@ -51,6 +51,7 @@ export class SearchPageComponent implements OnInit {
   };
 
   getSearchData: any = null;
+
   getMetaSearchData: SearchMeta = null;//BreederSearchEntry = null;
   lenghtSearchData: number;
   showTableData: boolean = false;
@@ -68,11 +69,12 @@ export class SearchPageComponent implements OnInit {
 
   showMenu;
 
+
   ngOnInit() {
+    
     this.route.queryParamMap.subscribe(params => {
       this.breed = params.getAll('breed');
       this.searchData.cities = params.getAll('cities');
-      console.log('this.searchData',this.searchData);
     });
 
     if (this.breed.length !== 0) {
@@ -148,21 +150,21 @@ export class SearchPageComponent implements OnInit {
           this.selectedBreedChar = null;
         }
 
-      }, (err) => {
-        if (err.status == 404)
-          console.log('error', err);
       });
 
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
-        console.log('this.getSearchData', this.getSearchData );
-
-      }, (err) => {
-        if (err.status == 404)
-          console.log('error', err)
-      });
+        for (let key in this.getSearchData) {
+          this.appService.breeds.forEach(val => {
+            if (this.getSearchData[key].breed0 === val.id) {
+              this.getSearchData[key].breed = val.name;
+            } 
+          });
+        }
+  });
+      
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -180,6 +182,15 @@ export class SearchPageComponent implements OnInit {
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
+        if (this.searchData.breed == null) {
+          for (let key in this.getSearchData) {
+            this.appService.breeds.forEach(val => {
+              if (this.getSearchData[key].breed0 === val.id) {
+                this.getSearchData[key].breed = val.name;
+              } 
+            });
+          }
+        }
       }, (err) => {
         if (err.status == 404)
           console.log('error', err)
@@ -265,8 +276,6 @@ export class SearchPageComponent implements OnInit {
 
       if (!haveSuccess)
         this.selectedBreedChar = null;
-
-      //console.log(this.selectedBreedChar);
 
     });
   }

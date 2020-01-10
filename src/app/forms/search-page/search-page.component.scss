@@ -11,6 +11,18 @@ app-header {
     padding: 0 16px;
 }
 
+.breed {
+    font-size: 12px !important;
+    font-family: "Intro-Regular" !important;
+    color: #0e0b4d;
+    margin-top: 20px !important;
+    margin-left: 0 !important;
+}
+// .breed-h3 {
+//     // margin: 0 !important;
+// }
+
+
 .checkbox-item {
     display: flex;
     flex-wrap: nowrap;
@@ -385,18 +397,10 @@ app-header {
     display: none;
 }
 
-// table {
-//     background-color: #ffffff;
-//     position: absolute;
-//     z-index: 1;
-//     color: #0e0b4d;
-//     border: 1px solid #cbd8f6;
-//     //border: 1px solid red;
-// }
+
 .search-meta {
     z-index: 3;
     width: 470px;
-    //height: 421px;
     border-radius: 3px;
     border: solid 1px #cbd8f6;
     background-color: #ffffff;
@@ -428,8 +432,6 @@ app-header {
 input.metaInput {
     border: none;
     border-radius: 0;
-    // border: 1px solid #cbd8f6;
-    //padding: 10px 0 0 20px;
     padding-left: 20px;
 }
 
@@ -447,7 +449,6 @@ input.metaInput:focus {
 div.metaName {
     width: calc(100% - 8px);
     height: 52px;
-    // background-color: #f8f9fb;   ///selected
     background-color: #ffffff;
     margin-left: 8px;
     margin-right: 8px;
@@ -532,7 +533,9 @@ div.metaName {
     .menu-toggle {
         display: flex;
     }
-
+    .breed-h3 {
+        margin-top: 5px !important;
+    }
     .nav-menu {
         position: absolute;
         top: calc(100% + 1px);
@@ -570,26 +573,13 @@ div.metaName {
     }
 
     .search-meta {
-        // position: absolute;
-        // z-index: 1;
-        // left: 5%;
-        // top: 5%;
-        // bottom: 5%;
-        // width: 320px;
         display: none !important;
-        // margin: 40px;
-
     }
-
-    // .outer-header {}
 
     .header {
         margin-left: 0 !important;
         position: relative;
-        // flex-wrap: wrap !important;
-        // background-color: red;
         top: 50%;
-
         &.non-border {
             border-bottom: 1px solid rgba(0, 0, 0, 0);
         }
@@ -701,14 +691,11 @@ div.metaName {
         }
 
         .dog-mobile {
-            // background-image: url("/assets/img/search-page/dog1.png");
-            // background-repeat: no-repeat;
             display: block;
             height: 284px;
             margin-top: -1px;
             margin-left: -13px;
             object-fit: contain;
-
             width: 100%;
             max-width: 332px;
             margin: 0;
