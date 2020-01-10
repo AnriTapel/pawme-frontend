@@ -16,7 +16,8 @@ import { PageNotFoundComponent } from './secondary-page/page-not-found/page-not-
 import { SearchPageComponent } from './forms/search-page/search-page.component';
 import { ClientPageComponent } from './forms/client-page/client-page.component';
 import { ArticlesComponent } from './articles/articles.component';
-import { DetailComponent } from './articles/detail/detail.component'
+import { DetailComponent } from './articles/detail/detail.component';
+import { VersionComponent } from './forms/version/version.component';
 
 
 
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'client-page', component: ClientPageComponent },
   { path: 'articles', component: ArticlesComponent },
   { path: 'article/:id', component: DetailComponent },
+  { path: 'version', component: VersionComponent },
   { path: '404', component: PageNotFoundComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

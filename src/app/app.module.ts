@@ -59,6 +59,7 @@ import { DetailComponent } from './articles/detail/detail.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { MenuComponent } from './template-blocks/menu/menu.component';
 import { Header2Component } from './template-blocks/header2/header2.component';
+import { VersionComponent } from './forms/version/version.component';
 
 
 
@@ -111,7 +112,8 @@ export function initApp(appSerivce: AppService){
     DetailComponent,
     ClickOutsideDirective,
     MenuComponent,
-    Header2Component
+    Header2Component,
+    VersionComponent
   ],
   imports: [
     BrowserModule,
