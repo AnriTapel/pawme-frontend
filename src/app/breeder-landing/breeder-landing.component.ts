@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PopupTemplateService } from '../services/popup-service/popup-template.service';
 import { AppService } from '../services/app-service/app.service';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-breeder-landing',
@@ -9,17 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./breeder-landing.component.scss']
 })
 export class BreederLandingComponent implements OnInit {
+  title = 'Petman - платформа для ответственных заводчиков';
 
   requirements: boolean = false;
   emailError: boolean = false;
   newBreederEmail: string = null;
 
-  constructor(private appService: AppService, private router: Router) {
+  constructor(private titleService: Title, private appService: AppService, private router: Router) {
     if (appService.meData && appService.meData.type == "BREEDER" && appService.userData.status == "ACTIVE")
       router.navigateByUrl('/breeder-profile');
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
   }
 
   /*firstSliderData: any[];

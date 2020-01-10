@@ -3,14 +3,17 @@ import { AppService } from '../services/app-service/app.service';
 import { BreederProfileService } from '../services/breeder-profile-service/breeder-profile.service';
 import { Router } from '@angular/router';
 
+import { Title } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-breeder-profile',
   templateUrl: './breeder-profile.component.html',
   styleUrls: ['./breeder-profile.component.scss']
 })
 export class BreederProfileComponent implements OnInit {
+  title = 'Petman - платформа для ответственных заводчиков';
 
-  constructor(public appService: AppService, public profileService: BreederProfileService, private router: Router) {
+  constructor(private titleService: Title, public appService: AppService, public profileService: BreederProfileService, private router: Router) {
     if (appService.meData.type == 'ANONYMOUS') {
       router.navigateByUrl('/login');
       return;
@@ -18,6 +21,7 @@ export class BreederProfileComponent implements OnInit {
       router.navigateByUrl('/confirm-email/unconfirmed');
       return;
     }
+ 
      
     this.profileService.updateProfileFullness();
     if (this.appService.userData.profileFill < 2)
@@ -25,8 +29,9 @@ export class BreederProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle(this.title);
   }
-
+ 
   showMyPage(): void {
     if (this.profileService.dataChangesSaved)
       window.open('/breeder/' + this.appService.userData.id, '_blank')
