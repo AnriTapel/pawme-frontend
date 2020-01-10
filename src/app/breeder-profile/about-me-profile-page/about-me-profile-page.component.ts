@@ -6,6 +6,7 @@ import { BreederAbout } from 'src/app/model/models';
 import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
+import { Breeder } from 'src/app/model/models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 export class AboutMeProfilePageComponent implements OnInit {
 
   breederData: BreederAbout;
+  breederInfo: Breeder;
   currentClub: string = null;
   currentClubs: Array<string> = [];
 
@@ -32,7 +34,14 @@ export class AboutMeProfilePageComponent implements OnInit {
       photo: null,
       clubs: null,
       certificates: []
-    }
+    };
+    
+    this.breederInfo = this.appService.userData ? <Breeder>this.appService.userData : {
+      id: null,
+      name: null,
+      surname: null
+    };
+  
     if (this.breederData.clubs) {
       this.currentClubs = this.breederData.clubs.split(";");
     }
@@ -117,6 +126,15 @@ export class AboutMeProfilePageComponent implements OnInit {
   validateInputFields(): boolean {
     let isValid = true;
     this.profileService.invalidFields = [];
+    if (!this.breederInfo.name || this.breederInfo.name == "" || this.breederInfo.name.length < 2 || this.breederInfo.name.length > 30) {
+      isValid = false;
+      this.profileService.invalidFields.push("name");
+    }
+    if (!this.breederInfo.surname || this.breederInfo.surname == ""
+      || this.breederInfo.surname.length < 2 || this.breederInfo.surname.length > 30) {
+      isValid = false;
+      this.profileService.invalidFields.push("lastname");
+    }
     
     if (!this.breederData.about || this.breederData.about == "" || this.breederData.about.length > 2048) {
       this.profileService.invalidFields.push('about');
@@ -146,6 +164,12 @@ export class AboutMeProfilePageComponent implements OnInit {
       return;
 
     this.breederData.clubs = this.currentClubs.join(";");
+
+    this.breederService.updateNameUsingPUT(this.breederInfo.id, this.breederInfo)
+    .subscribe((res) => {
+     console.log('res',res);
+    });
+
     this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
       () => {
         if (!this.appService.userData.about) {

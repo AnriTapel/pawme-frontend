@@ -6,10 +6,19 @@
     <div class="upper-btn">
         <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
     </div>
-
+    <div class="breeder-profile-subpage-form-left">
+        <label for="name">Имя</label>
+        <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="breederInfo.name"
+            [class.invalid-form-field-value]="profileService.invalidFields.includes('name')" />
+        <span *ngIf="profileService.invalidFields.includes('name')" class="invalid-field-message">Пожалуйста, введите Ваше имя</span>
+    </div>
+    <div class="breeder-profile-subpage-form-right">
+        <label for="lastname">Фамилия</label>
+        <input type="text" class="form-control custom-form-control-border"  name="lastname" 
+            [(ngModel)]="breederInfo.surname" [class.invalid-form-field-value]="profileService.invalidFields.includes('lastname')" />
+        <span *ngIf="profileService.invalidFields.includes('lastname')" class="invalid-field-message">Пожалуйста, введите Вашу фамилию</span>
+    </div>
     <div class="about-me-form-group">
-        <label for="about-me">Кратко расскажите о себе</label>
-        <br>
         <span class="block-description">Чтобы вам было проще, мы подготовили ряд наводящих вопросов. Какая ваша роль в питомнике и помогает ли вам семья?
             Что вам нравится в вашей породе и какие у вас профессиональные цели?
         </span>

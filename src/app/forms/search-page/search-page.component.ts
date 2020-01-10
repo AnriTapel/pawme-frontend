@@ -72,6 +72,7 @@ export class SearchPageComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       this.breed = params.getAll('breed');
       this.searchData.cities = params.getAll('cities');
+      console.log('this.searchData',this.searchData);
     });
 
     if (this.breed.length !== 0) {
@@ -156,6 +157,7 @@ export class SearchPageComponent implements OnInit {
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
+        console.log('this.getSearchData', this.getSearchData );
 
       }, (err) => {
         if (err.status == 404)

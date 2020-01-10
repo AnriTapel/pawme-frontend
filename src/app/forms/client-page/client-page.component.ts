@@ -55,7 +55,6 @@ export class ClientPageComponent implements OnInit {
       this.clientData = data.clients;
       this.showData = this.clientData[0];
       this.id = '1';
-      console.log('this.showData', this.showData);
     });
 
 
@@ -106,8 +105,6 @@ export class ClientPageComponent implements OnInit {
       for (let i = 0; i < this.clientData.length; i++) {
         if (this.clientData[i].id === id) {
           this.showData = this.clientData[i];
-          console.log('this.showData', this.showData);
-          //this.isShow = true;
         }
       }
     });
