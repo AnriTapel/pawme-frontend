@@ -150,15 +150,14 @@ export class SearchPageComponent implements OnInit {
         }
 
       });
-
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
-        if (this.getSearchData.breed == null) {
+        if (this.searchData.breed == null) {
           for (let key in this.getSearchData) {
             this.appService.breeds.forEach(val => {
-              if (this.getSearchData[key].breed0 === val.id) {
+              if (this.getSearchData[key].breed0 == val.id) {
                 this.getSearchData[key].breed = val.name;
               } 
             });
@@ -184,10 +183,10 @@ export class SearchPageComponent implements OnInit {
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
-        if (this.searchData.breed == null) {
+        if (this.searchData.breed === null) {
           for (let key in this.getSearchData) {
             this.appService.breeds.forEach(val => {
-              if (this.getSearchData[key].breed0 === val.id) {
+              if (this.getSearchData[key].breed0 == val.id) {
                 this.getSearchData[key].breed = val.name;
               } 
             });
