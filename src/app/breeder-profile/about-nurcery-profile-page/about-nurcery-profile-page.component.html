@@ -15,7 +15,7 @@
     <div class="breeder-profile-subpage-form-right">
         <label for="nurcery-location">Город / населенный пункт</label>
         <div class="dropdown-text-input">
-            <input *ngIf="appService.cities" type="text" class="form-control custom-form-control-border" name="nurcery-location" [(ngModel)]="nurceryData.city"
+            <input *ngIf="appService.cities" type="text" readonly class="city-disabled form-control custom-form-control-border" name="nurcery-location" [(ngModel)]="nurceryData.city"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('city')" id="city" [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"
                 (focus)="cityFocus$.next($event.target.value)" (click)="onCityClick($event)" #cityInstance="ngbTypeahead"
                 (change)="profileService.inputValueChanged('city')" placeholder="Выбрать">

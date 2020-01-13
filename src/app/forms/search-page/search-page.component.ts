@@ -84,7 +84,6 @@ export class SearchPageComponent implements OnInit {
     this.searchControllerService.getSearchMetaUsingGET()
       .subscribe((res) => {
         this.getMetaSearchData = <SearchMeta>res;
-
         this.breedList = this.appService.breeds;
         this.breedList.forEach((item) => {
           item.disabled = true;
@@ -156,7 +155,7 @@ export class SearchPageComponent implements OnInit {
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
-        if (this.getSearchData.breed === null) {
+        if (this.getSearchData.breed == null) {
           for (let key in this.getSearchData) {
             this.appService.breeds.forEach(val => {
               if (this.getSearchData[key].breed0 === val.id) {
@@ -185,7 +184,7 @@ export class SearchPageComponent implements OnInit {
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
-        if (this.searchData.breed === null) {
+        if (this.searchData.breed == null) {
           for (let key in this.getSearchData) {
             this.appService.breeds.forEach(val => {
               if (this.getSearchData[key].breed0 === val.id) {

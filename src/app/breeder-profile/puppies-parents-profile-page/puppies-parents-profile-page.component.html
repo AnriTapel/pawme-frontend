@@ -140,14 +140,20 @@
     <div class="breeder-profile-subpage-form-left add-puppy-page-name-block">
         <div class="dog-name-block">
             <label for="parent-name">Кличка родителя</label>
+            <br>
+            <span class="textarea-length-counter"
+            [style.color]="appService.getTextareaLimit(currentParentData.nickname, 600) > 0 ? '#46b0ad' : '#eb0000'">
+            {{appService.getTextareaLimit(currentParentData.nickname, 600)}}
+        </span>
             <input type="text" class="form-control custom-form-control-border" name="parent-name"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('name')"
                 [(ngModel)]="currentParentData.nickname" (change)="profileService.inputValueChanged('name')"
-                placeholder="Кличка" />
+                placeholder="Кличка"/>
         </div>
 
         <div class="dog-sex-block">
             <label for="parent-sex">Пол</label>
+            <br>
             <button class="form-control custom-form-control-border"
                 (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
                 <img height="17px" src="./assets/img/sex_{{currentParentData.gender == 'MALE' ? 'male' : 'female'}}.png"
@@ -158,7 +164,7 @@
 
     <div class="breeder-profile-subpage-form-right">
         <label for="parent-breed">Порода</label>
-
+        <br>
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border"
                 name="parent-breed" [(ngModel)]="currentBreed"
