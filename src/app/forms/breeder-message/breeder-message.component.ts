@@ -21,7 +21,7 @@ export class BreederMessageComponent implements OnInit {
     name: null,
     phone: null,
     email: null,
-    message: null,
+    message: "Здравствуйте! Понравилась ваша страница, хотелось бы задать несколько вопросов. Жду вашего звонка!",
     breeder: null
   }
 
