@@ -142,8 +142,8 @@
             <label for="parent-name">Кличка родителя</label>
             <br>
             <span class="textarea-length-counter"
-            [style.color]="appService.getTextareaLimit(currentParentData.nickname, 600) > 0 ? '#46b0ad' : '#eb0000'">
-            {{appService.getTextareaLimit(currentParentData.nickname, 600)}}
+            [style.color]="appService.getTextareaLimit(currentParentData.nickname, 40) > 0 ? '#46b0ad' : '#eb0000'">
+            {{appService.getTextareaLimit(currentParentData.nickname, 40)}}
         </span>
             <input type="text" class="form-control custom-form-control-border" name="parent-name"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('name')"
