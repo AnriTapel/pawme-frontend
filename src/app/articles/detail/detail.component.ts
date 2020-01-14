@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { JsonDataService } from '../../services/json-data/json-data.service';
 import { SharedService } from 'src/app/services/shared-services/shared.service';
+import { Meta } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-detail',
@@ -14,12 +16,14 @@ export class DetailComponent implements OnInit, OnDestroy {
   id: any;
   jsonId: any;
   showData: any;
+  img: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private http: HttpClient,
     private jsonDataService: JsonDataService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private meta: Meta
   ) {
     this.sharedService.headerType.emit('2')
   }
@@ -35,11 +39,32 @@ export class DetailComponent implements OnInit, OnDestroy {
       for (let i = 0; i < this.articalsData.length; i++) {
         if (this.articalsData[i].id === this.id) {
           this.showData = this.articalsData[i];
+        
         }
       }
+      this.img = this.showData.img.split(".");
+      this.meta.addTags([
+        { property: 'og:type', content: 'website' },
+        { name: 'og:type', content: 'website' },
+        { property: 'og:url', content: window.location.origin + "/article/" + this.id},
+        { name: 'og:url', content: window.location.origin + "/article/" + this.id},
+        { property: 'title', content: this.showData.title1},
+        { name: 'title', content: this.showData.title1},
+        { property: 'og:title', content: this.showData.title1},
+        { name: 'og:title', content: this.showData.title1 },
+        { name: 'twitter:title', content: this.showData.title1},
+        { property: 'og:description', content: this.showData.subTitle },
+        { name: 'og:description', content: this.showData.subTitle },
+        { name: 'twitter:description', content: this.showData.subTitle },
+        { property: 'og:site_name', content: 'Petman' },
+        { name: 'og:site_name', content: 'Petman' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { property: 'og:image', content: window.location.origin + this.img[1] + '.jpg'},
+        { name: 'og:image', content: window.location.origin + this.img[1] + '.jpg'},
+        { name: 'twitter:image', content: window.location.origin + this.img[1] + '.jpg'}
+    ]);
     });
 
   }
-
-
+  
 }
