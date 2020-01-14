@@ -26,6 +26,7 @@
             line-height: normal;
             letter-spacing: normal;
             text-decoration: none !important;
+            font-family: Intro-Book;
         }
     }
 }
@@ -40,7 +41,7 @@
 }
 .nav-menu {
     position: absolute;
-    top: calc(100% + 1px);
+    top: calc(100% + 0px);
     z-index: 1;
     border-radius: 0 0 4px 4px;
     box-shadow: 0 8px 10px 0 rgba(14, 11, 77, 0.1);

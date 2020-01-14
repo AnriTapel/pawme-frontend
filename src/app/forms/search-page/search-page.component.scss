@@ -97,6 +97,9 @@ app-header {
             max-width: 100%;
             height: 80px;
             margin-bottom: 0 !important;
+            margin-top: 10px !important;
+            padding-bottom: 10px;
+            border-bottom: none;
         }
     }
 }
@@ -107,6 +110,9 @@ app-header {
 
 .main {
     margin-top: 67px;
+    &.extra-pading{
+        padding-top: 96px;
+    }
 }
 
 .page-header h3 {
@@ -518,7 +524,11 @@ div.metaName {
     .main-content {
         justify-content: center;
     }
-
+    .main {
+        &.extra-pading{
+            padding-top: 75px;
+        }
+    }
     .search-input {
         justify-content: center;
     }
@@ -577,6 +587,7 @@ div.metaName {
         margin-left: 0 !important;
         position: relative;
         top: 50%;
+        height: 65px !important;
         &.non-border {
             border-bottom: 1px solid rgba(0, 0, 0, 0);
         }
