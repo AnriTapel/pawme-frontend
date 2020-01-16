@@ -204,7 +204,6 @@ export class SearchPageComponent implements OnInit {
             });
           }
         }
-    
       }, (err) => {
         if (err.status == 404)
           console.log('error', err)
