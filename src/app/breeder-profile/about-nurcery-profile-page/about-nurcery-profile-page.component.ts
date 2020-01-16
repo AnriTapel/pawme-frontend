@@ -9,7 +9,7 @@ import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
 import { Router } from '@angular/router';
-import { timingSafeEqual } from 'crypto';
+// import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-about-nurcery-profile-page',
