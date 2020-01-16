@@ -158,18 +158,17 @@ export class SearchPageComponent implements OnInit {
           for (let key in this.getSearchData) {
             this.appService.breeds.forEach(val => {
               if (this.getSearchData[key].breed0 == val.id) {
-                this.getSearchData[key].breed0 = val.name;
-              } 
+                this.getSearchData[key].breedValue0 = val.name;
+              }  
               if (this.getSearchData[key].breed1 == val.id) {
-                this.getSearchData[key].breed1 = val.name;
-              } 
+                this.getSearchData[key].breedValue1 = val.name;
+              }
               if (this.getSearchData[key].breed2 == val.id) {
-                this.getSearchData[key].breed2 = val.name;
-              } 
+                this.getSearchData[key].breedValue2 = val.name;
+              }  
             });
           }
-        }
-    
+        } 
   });
       
   }
@@ -193,17 +192,17 @@ export class SearchPageComponent implements OnInit {
           for (let key in this.getSearchData) {
             this.appService.breeds.forEach(val => {
               if (this.getSearchData[key].breed0 == val.id) {
-                this.getSearchData[key].breed0 = val.name;
-              } 
+                this.getSearchData[key].breedValue0 = val.name;
+              }  
               if (this.getSearchData[key].breed1 == val.id) {
-                this.getSearchData[key].breed1 = val.name;
-              } 
+                this.getSearchData[key].breedValue1 = val.name;
+              }
               if (this.getSearchData[key].breed2 == val.id) {
-                this.getSearchData[key].breed2 = val.name;
-              } 
+                this.getSearchData[key].breedValue2 = val.name;
+              }  
             });
           }
-        }
+        } 
       }, (err) => {
         if (err.status == 404)
           console.log('error', err)
