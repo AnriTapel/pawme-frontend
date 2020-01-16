@@ -155,10 +155,17 @@ export class SearchPageComponent implements OnInit {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
         if (this.searchData.breed == null) {
+          console.log('this.getSearchData', this.getSearchData);
           for (let key in this.getSearchData) {
             this.appService.breeds.forEach(val => {
               if (this.getSearchData[key].breed0 == val.id) {
-                this.getSearchData[key].breed = val.name;
+                this.getSearchData[key].breed0 = val.name;
+              } 
+              if (this.getSearchData[key].breed1 == val.id) {
+                this.getSearchData[key].breed1 = val.name;
+              } 
+              if (this.getSearchData[key].breed2 == val.id) {
+                this.getSearchData[key].breed2 = val.name;
               } 
             });
           }

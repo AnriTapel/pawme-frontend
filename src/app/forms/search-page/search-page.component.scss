@@ -15,9 +15,14 @@ app-header {
     font-size: 12px !important;
     font-family: "Intro-Regular" !important;
     color: #0e0b4d;
-    margin-top: 20px !important;
+    margin-top: 5px !important;
     margin-left: 0 !important;
+    margin-bottom: 5px;
     text-transform: uppercase;
+    opacity: 0.5;
+}
+.breed1, .breed2 {
+    margin-top: 0 !important;
 }
 
 .checkbox-item {
@@ -158,24 +163,23 @@ app-header {
     border-radius: 4px;
     border: solid 1px #cbd8f6;
     background-color: #ffffff;
-
     h3 {
         font-size: 22px;
         color: #0e0b4d;
         margin-top: 14px;
     }
 
-    p {
-        font-size: 14px;
-        line-height: 1.36;
-        color: #0e0b4d;
-        margin: 5px;
-    }
+    // p {
+    //     font-size: 14px;
+    //     line-height: 1.36;
+    //     color: #0e0b4d;
+    //     // margin: 5px;
+    // }
 
-    p:first-child {
-        opacity: 0.5;
-        font-size: 12px;
-    }
+    // p:first-child {
+    //     opacity: 0.5;
+    //     font-size: 12px;
+    // }
 
     .p-text {
         margin: 20px 0 0 0;
@@ -183,11 +187,12 @@ app-header {
         height: 95px;
         //max-width: 447px;
         width: 447px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 5;
-        -webkit-box-orient: vertical;
+        overflow-y: scroll;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 5;
+        // -webkit-box-orient: vertical;
     }
 }
 
@@ -201,7 +206,7 @@ app-header {
 }
 
 .number {
-    margin-top: 28px;
+    margin-top: 8px;
     font-size: 16px;
     display: flex;
     flex-wrap: nowrap;
