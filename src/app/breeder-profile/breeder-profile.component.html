@@ -1,9 +1,13 @@
 <ng-template #progessBarTooltip>
     <p>Чтобы получить статус "Заводчик Petman", заполните эти разделы:</p>
-    <p><img *ngIf="appService.userData.generalInfo" src="./assets/img/check-mark.png" width="14px" style="margin: 0 5px 5px 0"/>О питомнике</p>
-    <p><img *ngIf="appService.userData.puppiesInfo" src="./assets/img/check-mark.png" width="14px" style="margin: 0 5px 5px 0"/>О щенках</p>
-    <p><img *ngIf="profileService.isParentsInfoFilled()" src="./assets/img/check-mark.png" width="14px" style="margin: 0 5px 5px 0"/>Родители щенков</p>
-    <p><img *ngIf="appService.userData.about" src="./assets/img/check-mark.png" width="14px" style="margin: 0 5px 5px 0"/>О себе</p>
+    <p><img *ngIf="appService.userData.generalInfo" src="./assets/img/check-mark.png" width="14px"
+            style="margin: 0 5px 5px 0" />О питомнике</p>
+    <p><img *ngIf="appService.userData.puppiesInfo" src="./assets/img/check-mark.png" width="14px"
+            style="margin: 0 5px 5px 0" />О щенках</p>
+    <p><img *ngIf="profileService.isParentsInfoFilled()" src="./assets/img/check-mark.png" width="14px"
+            style="margin: 0 5px 5px 0" />Родители щенков</p>
+    <p><img *ngIf="appService.userData.about" src="./assets/img/check-mark.png" width="14px"
+            style="margin: 0 5px 5px 0" />О себе</p>
 </ng-template>
 
 <hr>
@@ -14,8 +18,8 @@
         <div class="progress-bar-base">
         </div>
 
-        <div class="progress-bar-sections" placement="bottom" tooltipClass="custom-tooltip" [triggers]="appService.getTooltipTrigger()"
-                [ngbTooltip]="progessBarTooltip">
+        <div class="progress-bar-sections" placement="bottom" tooltipClass="custom-tooltip"
+            [triggers]="appService.getTooltipTrigger()" [ngbTooltip]="progessBarTooltip">
             <div></div>
             <div></div>
             <div></div>
@@ -25,14 +29,14 @@
             </div>
         </div>
 
-        <div class="progress-line" [style.width.%]="appService.userData.profileFill * 20" [class.partial-progress-line]="appService.userData.profileFill != 5">
+        <div class="progress-line" [style.width.%]="progress * 20" [class.partial-progress-line]="progress != 5">
         </div>
-
     </div>
-
     <div class="profile-menu-container-desktop">
         <div class="profile-menu-desktop">
-            <div *ngFor="let subpage of profileService.profileSubpages" (click)="profileService.setCurProfilePage(subpage)" [class.active-page]="profileService.getCurProfilePage().tag == subpage.tag"
+            <div *ngFor="let subpage of profileService.profileSubpages"
+                (click)="profileService.setCurProfilePage(subpage)"
+                [class.active-page]="profileService.getCurProfilePage().tag == subpage.tag"
                 [class.hidden-underline]="profileService.removeUnderlineForBlock().tag == subpage.tag">
                 {{subpage.name}}
             </div>
@@ -44,31 +48,34 @@
                 <img src="./assets/img/dog.png" alt="" />
                 <img src="./assets/img/pen.png" alt="" />
             </div>
-           <p class="first-p">Пример отличной страницы</p>
-           <p class="last-p">
+            <p class="first-p">Пример отличной страницы</p>
+            <p class="last-p">
                 Нужно вдохновение? Посмотрите на профессиональную страницу другого заводчика.
-           </p>
-           <input type="button" class="custom-btn btn-purple" value="Посмотреть пример" (click)="openExample()" />
+            </p>
+            <input type="button" class="custom-btn btn-purple" value="Посмотреть пример" (click)="openExample()" />
         </div>
     </div>
 
     <div class="profile-menu-container-mobile">
         <div class="profile-menu-mobile">
-            <div class="mobile-dropdown-menu-item" [class.invisible-menu]="!profileService.isMobileMenuVisible" (click)="profileService.isMobileMenuVisible = !profileService.isMobileMenuVisible">
+            <div class="mobile-dropdown-menu-item" [class.invisible-menu]="!profileService.isMobileMenuVisible"
+                (click)="profileService.isMobileMenuVisible = !profileService.isMobileMenuVisible">
                 {{profileService.getCurProfilePage().name}}
                 <img *ngIf="!profileService.isMobileMenuVisible" src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
                 <img *ngIf="profileService.isMobileMenuVisible" src="./assets/img/arrow-up.svg" alt="Стрелка вверх" />
             </div>
             <ng-container *ngIf="profileService.isMobileMenuVisible">
                 <ng-container *ngFor="let subpage of profileService.profileSubpages">
-                    <div *ngIf="subpage.tag != profileService.getCurProfilePage().tag" class="mobile-dropdown-menu-item" (click)="profileService.setCurProfilePage(subpage)">{{subpage.name}}
+                    <div *ngIf="subpage.tag != profileService.getCurProfilePage().tag" class="mobile-dropdown-menu-item"
+                        (click)="profileService.setCurProfilePage(subpage)">{{subpage.name}}
                     </div>
                 </ng-container>
             </ng-container>
         </div>
     </div>
 
-    <div class="profile-page" [style.opacity]="profileService.isMobileMenuVisible ? 0.5 : 1" [ngSwitch]="profileService.getCurProfilePage().tag">
+    <div class="profile-page" [style.opacity]="profileService.isMobileMenuVisible ? 0.5 : 1"
+        [ngSwitch]="profileService.getCurProfilePage().tag">
         <app-about-nurcery-profile-page *ngSwitchCase="'about-nurcery'"></app-about-nurcery-profile-page>
         <app-about-puppies-profile-page *ngSwitchCase="'about-puppies'"></app-about-puppies-profile-page>
         <app-puppies-parents-profile-page *ngSwitchCase="'puppies-parents'"></app-puppies-parents-profile-page>

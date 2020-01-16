@@ -12,6 +12,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class BreederProfileComponent implements OnInit {
   title = 'Petman - платформа для ответственных заводчиков';
+  progress;
 
   constructor(private titleService: Title, public appService: AppService, public profileService: BreederProfileService, private router: Router) {
     if (appService.meData.type == 'ANONYMOUS') {
@@ -22,7 +23,8 @@ export class BreederProfileComponent implements OnInit {
       return;
     }
  
-     
+    console.log(this.appService.userData.profileFill);
+    
     this.profileService.updateProfileFullness();
     if (this.appService.userData.profileFill < 2)
       this.appService.isOnboardingVisible = true;
@@ -30,6 +32,7 @@ export class BreederProfileComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
+    this.progress = this.appService.userData.profileFill;
   }
  
   showMyPage(): void {
