@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SearchMeta } from '../../model/searchMeta';
 import { SearchControllerService, BreederControllerService } from 'src/app/api/api';
 import { JsonDataService } from '../../services/json-data/json-data.service';
+import { Meta } from '@angular/platform-browser';
 
 
 
@@ -34,7 +35,8 @@ export class ClientPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private searchControllerService: SearchControllerService,
-    private jsonDataService: JsonDataService
+    private jsonDataService: JsonDataService,
+    private meta: Meta
 
   ) { }
 
@@ -56,6 +58,27 @@ export class ClientPageComponent implements OnInit {
       this.showData = this.clientData[0];
       this.id = '1';
     });
+
+    this.meta.addTags([
+      { property: 'og:type', content: 'website' },
+      { name: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://petman.co/client-page'},
+      { name: 'og:url', content: 'https://petman.co/client-page'},
+      { property: 'title', content: 'Найди лучшего друга у нас'},
+      { name: 'title', content: 'Найди лучшего друга у нас'},
+      { property: 'og:title', content: 'Найди лучшего друга у нас'},
+      { name: 'og:title', content: 'Найди лучшего друга у нас' },
+      { name: 'twitter:title', content: 'Найди лучшего друга у нас'},
+      { property: 'og:description', content: 'Мы помогаем будущим хозяевам собак и заводчикам находить друг друга'},
+      { name: 'og:description', content: 'Мы помогаем будущим хозяевам собак и заводчикам находить друг друга'},
+      { name: 'twitter:description', content: 'Мы помогаем будущим хозяевам собак и заводчикам находить друг друга'},
+      { property: 'og:site_name', content: 'Petman' },
+      { name: 'og:site_name', content: 'Petman' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { property: 'og:image', content: 'https://petman.co/assets/img/client-page/header-mobile.jpg'},
+      { name: 'og:image', content: 'https://petman.co/assets/img/client-page/header-mobile.jpg'},
+      { name: 'twitter:image', content: 'https://petman.co/assets/img/client-page/header-mobile.jpg'}
+  ]);
 
 
     this.searchControllerService.getSearchMetaUsingGET()
@@ -92,8 +115,6 @@ export class ClientPageComponent implements OnInit {
           console.log('error', err);
       });
   }
-
-
 
 
   public showClinet(id) {
