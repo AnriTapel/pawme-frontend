@@ -520,6 +520,9 @@ div.metaName {
 }
 
 @media screen and (max-width: 769px) {
+    .breed {
+        margin-top: 15px !important;
+    }
     .search-content-wrap {
         flex-flow: column-reverse;
         align-items: center;
