@@ -156,7 +156,7 @@ export class AppService {
       if (typeof (searchArray[0]) == 'string')
         text$.subscribe(res => {
           values = JSON.parse(JSON.stringify(searchArray));
-          if (res !== '' && values.filter(it => it == res).length == 0) values.push(res);
+          if (res !== '' && values.filter(it => it == res).length !== 0) values.push(res);
         });
 
       return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(

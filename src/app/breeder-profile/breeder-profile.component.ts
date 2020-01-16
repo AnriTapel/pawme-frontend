@@ -22,8 +22,6 @@ export class BreederProfileComponent implements OnInit {
       router.navigateByUrl('/confirm-email/unconfirmed');
       return;
     }
- 
-    console.log(this.appService.userData.profileFill);
     
     this.profileService.updateProfileFullness();
     if (this.appService.userData.profileFill < 2)

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
+// import { Subject } from 'rxjs';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
@@ -9,6 +9,9 @@ import { BreederControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
 import { Router } from '@angular/router';
+
+import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {Observable, Subject, merge} from 'rxjs';
 
 
 @Component({
@@ -24,6 +27,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   curExtraBreed: string;
   isAdditionalBreed: boolean = false;
   saveChagesEvent: any;
+  otherElement: boolean;
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
   @ViewChild('mainBreedInstance', { static: true }) mainBreedInstance: NgbTypeahead;
@@ -40,6 +44,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+
     this.nurceryData = this.appService.userData.generalInfo ? <BreederInfo>this.appService.userData.generalInfo : {
       name: null,
       city: null,
@@ -55,8 +60,10 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.isAdditionalBreed = this.nurceryData.extraBreed ? true : false;
     this.curMainBreed = this.nurceryData.mainBreed ? this.nurceryData.mainBreed.name : null;
     this.curExtraBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
+    this.nurceryData.city = this.nurceryData.city ? this.nurceryData.city : null;
     this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => this.saveChanges(forPreview));
   }
+ 
 
   ngOnDestroy(): void {
     this.saveChagesEvent.unsubscribe();
