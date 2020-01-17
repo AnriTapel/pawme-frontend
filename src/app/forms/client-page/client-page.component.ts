@@ -134,14 +134,49 @@ export class ClientPageComponent implements OnInit {
 
   public getSearchPage() {
      //@ts-ignore
-     ym(55779592, 'reachGoal', 'FreeReg');
+     ym(55779592, 'reachGoal', 'FindLanding');
      //@ts-ignore
-     gtag('event', 'FreeReg');
+     gtag('event', 'FindLanding');
+    //@ts-ignore
+    Intercom('trackEvent', 'ParentsSave');
     if (this.breed == null) {
       return;
     }
     const options = { queryParams: { breed: this.breed } };
     this.router.navigate(['/search-page'], options);
+  }
+
+  public yandexInfo() {
+    //@ts-ignore
+    ym(55779592, 'reachGoal', 'LookTopLanding');
+    //@ts-ignore
+    gtag('event', 'LookTopLanding');
+    //@ts-ignore
+    Intercom('trackEvent', 'LookTopLanding');
+  }
+  public readyForDog() {
+    //@ts-ignore
+    ym(55779592, 'reachGoal', 'ReadyForDog');
+    //@ts-ignore
+    gtag('event', 'ReadyForDog');
+    //@ts-ignore
+    Intercom('trackEvent', 'ReadyForDog');
+  }
+  public howToChoose() {
+    //@ts-ignore
+    ym(55779592, 'reachGoal', 'HowToChoose');
+    //@ts-ignore
+    gtag('event', 'HowToChoose');
+    //@ts-ignore
+    Intercom('trackEvent', 'HowToChoose');
+  }
+  public howToPrepare() {
+    //@ts-ignore
+    ym(55779592, 'reachGoal', 'HowToPrepare');
+    //@ts-ignore
+    gtag('event', 'HowToPrepare');
+    //@ts-ignore
+    Intercom('trackEvent', 'HowToPrepare');
   }
   public selectParod(value: string) {
     this.index = this.appService.breeds.findIndex(obj => obj.name === value);
