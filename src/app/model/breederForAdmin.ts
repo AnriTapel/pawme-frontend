@@ -14,6 +14,7 @@
 export interface BreederForAdmin { 
     city?: string;
     createDate?: Date;
+    customRating?: number;
     email?: string;
     extraBreed?: string;
     extraBreed1?: string;

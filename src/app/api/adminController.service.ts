@@ -23,6 +23,7 @@ import { AdminInfo } from '../model/adminInfo';
 import { Breed } from '../model/breed';
 import { BreederForAdmin } from '../model/breederForAdmin';
 import { MessageToBreeder } from '../model/messageToBreeder';
+import { PetSelectionRequest } from '../model/petSelectionRequest';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -294,6 +295,42 @@ export class AdminControllerService {
         ];
 
         return this.httpClient.get<Array<MessageToBreeder>>(`${this.basePath}/api/admin/messages`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * listRequests
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listRequestsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<PetSelectionRequest>>;
+    public listRequestsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<PetSelectionRequest>>>;
+    public listRequestsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<PetSelectionRequest>>>;
+    public listRequestsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<PetSelectionRequest>>(`${this.basePath}/api/admin/petrequests`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

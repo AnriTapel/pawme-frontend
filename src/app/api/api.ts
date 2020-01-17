@@ -1,11 +1,15 @@
+export * from './aboutController.service';
+import { AboutControllerService } from './aboutController.service';
 export * from './adminController.service';
 import { AdminControllerService } from './adminController.service';
 export * from './breederController.service';
 import { BreederControllerService } from './breederController.service';
+export * from './customerController.service';
+import { CustomerControllerService } from './customerController.service';
 export * from './dictionaryController.service';
 import { DictionaryControllerService } from './dictionaryController.service';
 export * from './mediaController.service';
 import { MediaControllerService } from './mediaController.service';
 export * from './searchController.service';
 import { SearchControllerService } from './searchController.service';
-export const APIS = [AdminControllerService, BreederControllerService, DictionaryControllerService, MediaControllerService, SearchControllerService];
+export const APIS = [AboutControllerService, AdminControllerService, BreederControllerService, CustomerControllerService, DictionaryControllerService, MediaControllerService, SearchControllerService];

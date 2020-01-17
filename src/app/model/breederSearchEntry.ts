@@ -13,6 +13,9 @@
 
 export interface BreederSearchEntry { 
     avatarPreview?: string;
+    breed0?: number;
+    breed1?: number;
+    breed2?: number;
     city?: string;
     description?: string;
     id?: number;

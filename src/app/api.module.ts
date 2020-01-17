@@ -3,8 +3,10 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
+import { AboutControllerService } from './api/aboutController.service';
 import { AdminControllerService } from './api/adminController.service';
 import { BreederControllerService } from './api/breederController.service';
+import { CustomerControllerService } from './api/customerController.service';
 import { DictionaryControllerService } from './api/dictionaryController.service';
 import { MediaControllerService } from './api/mediaController.service';
 import { SearchControllerService } from './api/searchController.service';
@@ -14,8 +16,10 @@ import { SearchControllerService } from './api/searchController.service';
   declarations: [],
   exports:      [],
   providers: [
+    AboutControllerService,
     AdminControllerService,
     BreederControllerService,
+    CustomerControllerService,
     DictionaryControllerService,
     MediaControllerService,
     SearchControllerService ]

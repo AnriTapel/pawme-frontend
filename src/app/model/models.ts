@@ -23,5 +23,6 @@ export * from './puppiesInfo';
 export * from './puppy';
 export * from './puppyTest';
 export * from './registerBreeder';
+export * from './registerCustomer';
 export * from './searchMeta';
 export * from './searchTerms';

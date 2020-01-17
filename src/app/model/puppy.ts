@@ -19,11 +19,11 @@ export interface Puppy {
     birthDate: string;
     breed: Breed;
     earmark: string;
-    father: Parent;
+    father?: Parent;
     gallery?: Array<Photo>;
     gender: Puppy.GenderEnum;
     id?: number;
-    mother: Parent;
+    mother?: Parent;
     nickname: string;
     price: number;
 }

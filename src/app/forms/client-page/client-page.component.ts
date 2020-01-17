@@ -133,6 +133,10 @@ export class ClientPageComponent implements OnInit {
   }
 
   public getSearchPage() {
+     //@ts-ignore
+     ym(55779592, 'reachGoal', 'FreeReg');
+     //@ts-ignore
+     gtag('event', 'FreeReg');
     if (this.breed == null) {
       return;
     }
