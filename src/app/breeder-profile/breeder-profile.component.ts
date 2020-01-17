@@ -22,7 +22,7 @@ export class BreederProfileComponent implements OnInit {
       router.navigateByUrl('/confirm-email/unconfirmed');
       return;
     }
-    
+
     this.profileService.updateProfileFullness();
     if (this.appService.userData.profileFill < 2)
       this.appService.isOnboardingVisible = true;
@@ -31,15 +31,18 @@ export class BreederProfileComponent implements OnInit {
   ngOnInit() {
     this.titleService.setTitle(this.title);
     this.progress = this.appService.userData.profileFill;
+    this.profileService.detectChangeProfileFullness.subscribe(res => {
+      this.progress = this.appService.userData.profileFill;
+    })
   }
- 
+
   showMyPage(): void {
     if (this.profileService.dataChangesSaved)
       window.open('/breeder/' + this.appService.userData.id, '_blank')
     else
       this.profileService.showMyPage();
   }
-  openExample(): void{
+  openExample(): void {
     window.open('https://petman.co/breeder/8258', '_blank');
   }
   /*showPreview() {

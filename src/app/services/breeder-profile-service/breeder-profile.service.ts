@@ -1,12 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AppService } from '../app-service/app.service';
 import { AlertService } from 'src/app/services/alert-service/alert.service';
 import { EventService } from '../event-service/events.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BreederProfileService {
+
+  detectChangeProfileFullness = new EventEmitter;
 
   profileSubpages: any[] = [
     { tag: 'about-nurcery', name: 'О питомнике' },
@@ -49,6 +52,7 @@ export class BreederProfileService {
       Intercom('trackEvent', 'CompletedProfile');
     }
 
+    this.detectChangeProfileFullness.emit(index)
   }
 
   inputValueChanged(name: string): void {
@@ -75,7 +79,7 @@ export class BreederProfileService {
       };
 
       let onError = () => {
-        this.eventService.raiseEvent('save-changes-after-dialog', false );
+        this.eventService.raiseEvent('save-changes-after-dialog', false);
         this.isMobileMenuVisible = false;
       };
 
@@ -101,7 +105,7 @@ export class BreederProfileService {
     };
 
     let onError = () => {
-      this.eventService.raiseEvent('save-changes-after-dialog', true );
+      this.eventService.raiseEvent('save-changes-after-dialog', true);
     };
 
     this.alertService.showDialog("Вы не сохранили изменения", "warning-title",
