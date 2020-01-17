@@ -1050,6 +1050,25 @@ span, p, div {
     }
 
 }
+
+.no-dogs {
+    text-align: center;
+    .dogs-info {
+        font-family: "Intro-Regular" !important;
+        text-align: left !important;;
+        font-size: 20px !important;
+    }
+    p {
+        font-size: 16px;
+        color: #0e0b4d;
+        margin-top: 16px;
+        font-family: "Intro-Book" !important;
+    }
+    button {
+        margin-top: 24px;
+    }
+}
+
 @media screen and (max-width: 769px){
     .outer-header{
         padding: 0 16px;
@@ -1060,12 +1079,7 @@ span, p, div {
             border-bottom: 1px solid rgba(0, 0, 0, 0);
         }
     }
-}
-.no-dogs {
-    text-align: center;
-    p {
-        font-size: 16px;
-        color: #0e0b4d;
-        margin-top: 16px;
+    .no-dogs button {
+        display: none;
     }
 }

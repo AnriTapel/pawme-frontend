@@ -30,6 +30,18 @@ export class DetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sharedService.headerType.emit('1')
   }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      let socialBlocks = document.getElementsByClassName('share-buttons');
+      for (let k = 0; k < socialBlocks.length; k++) {
+        let buttons = socialBlocks[k].children[0].children[1];
+        for (let i = 0; i < buttons.childElementCount; i++)
+          buttons.children[i].setAttribute('data-url', window.location.href);
+      }
+      window.Sharer.init();
+    }, 500)
+  }
+  
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       this.id = params.id;

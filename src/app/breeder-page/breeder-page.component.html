@@ -262,12 +262,19 @@
                         </div>
                     </div>
                 </div>
+                <div *ngIf="!subpageStatus().puppies" class="line">
+                </div>
                 <div *ngIf="!subpageStatus().puppies" class="no-dogs">
+                    <p class="dogs-info">
+                        Доступные щенки
+                    </p>
                     <img src="./assets/img/combined-shape.svg" alt="" />
-                  <p>
-                    В данный момент у меня нет доступных щенков. 
-                   <br>Свяжитесь, чтобы узнать о будущих пометах.
-                  </p>
+                    <p>
+                        В данный момент у меня нет доступных щенков. 
+                    <br>Свяжитесь, чтобы узнать о будущих пометах.
+                    </p>
+                    <button type="button" class="custom-btn btn-purple" (click)="showBreederMessagePopup()">НАПИСАТЬ ЗАВОДЧИКУ
+                    </button>
                 </div>
                 <button type="button" class="custom-btn btn-purple puppies-block-message-btn-mobile" (click)="showBreederMessagePopup()">НАПИСАТЬ ЗАВОДЧИКУ
                 </button>
