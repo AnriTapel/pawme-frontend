@@ -14,6 +14,7 @@ import { Breeder } from './breeder';
 
 export interface MessageToBreeder { 
     breeder?: Breeder;
+    createDate?: Date;
     email: string;
     id?: number;
     message: string;

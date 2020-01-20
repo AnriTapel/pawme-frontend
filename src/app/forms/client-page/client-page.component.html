@@ -198,7 +198,7 @@
         <p class="">Узнайте подробнее, как все работает и что нужно ожидать</p>
     </div>
     <div class="choose-dog-pics">
-        <a click="readyForDog()" [routerLink]="['/article/1']" class="">
+        <a (click)="readyForDog()" [routerLink]="['/article/1']" class="">
             
             <div class="dog-freind">
                 <h3 class="">Готов ли я к собаке?</h3>
@@ -208,14 +208,14 @@
                 </div>
             </div>
         </a>
-        <div click="howToChoose()" class="dog-freind-left">
+        <div (click)="howToChoose()" class="dog-freind-left">
             <a [routerLink]="['/article/10']" class="">
                 <div class="white-dog">
                     <h3>Как выбрать заводчика?</h3>
                     <div class="white-dog-pic"></div>
                 </div>
             </a>
-            <a click="howToPrepare()" [routerLink]="['/article/18']" class="">
+            <a (click)="howToPrepare()" [routerLink]="['/article/18']" class="">
                 <div class="black-dog">
                     <h3>Как подготовиться?</h3>
                     <div class="black-dog-pic"></div>

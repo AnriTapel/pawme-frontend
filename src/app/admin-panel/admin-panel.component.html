@@ -108,6 +108,7 @@
                         <th>Email</th>
                         <th>Телефон</th>
                         <th>Cообщение</th>
+                        <th>Время сообщение</th>
                         <th>Страница заводчика</th>
                     </tr>
                     <tr *ngFor="let message of messages">
@@ -115,6 +116,7 @@
                         <td>{{message.email}}</td>
                         <td>{{message.phone}}</td>
                         <td>{{message.message}}</td>
+                        <td>{{message.createDate | date: "short" }}</td> 
                         <td (click)='openBreederPage(message.breeder.id)' style="cursor: pointer;color: #0094c5;">
                             https://petman.co/breeder/{{message.breeder.id}}
                         </td>
