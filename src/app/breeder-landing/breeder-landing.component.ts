@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./breeder-landing.component.scss']
 })
 export class BreederLandingComponent implements OnInit {
-  title = 'Petman - платформа для ответственных заводчиков';
+  title = 'Petman - найди себе верного друга';
 
   requirements: boolean = false;
   emailError: boolean = false;

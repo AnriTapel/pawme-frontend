@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./breeder-profile.component.scss']
 })
 export class BreederProfileComponent implements OnInit {
-  title = 'Petman - платформа для ответственных заводчиков';
+  title = 'Petman - найди себе верного друга';
   progress;
 
   constructor(private titleService: Title, public appService: AppService, public profileService: BreederProfileService, private router: Router) {

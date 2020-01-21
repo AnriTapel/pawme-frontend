@@ -142,10 +142,13 @@
                         <div class="main-serach-sub-right">
                             <div class="serach-sub-right">
                                 <div class="location-content">
-                                    <p class="breed">{{data.breedValue0}}</p>
-                                    <p class="breed breed1">{{data.breedValue1}}</p>
-                                    <p class="breed breed2">{{data.breedValue2}}</p>
-                                    <h3 class=breed-h3>{{data.name}}</h3>
+                                    <div class="breeds">
+                                        <div *ngIf="data.breedValue0" class="breed">{{data.breedValue0}}</div>
+                                        <div *ngIf="data.breedValue1" class="breed1">{{data.breedValue1}}</div>
+                                        <div *ngIf="data.breedValue2" class="breed2">{{data.breedValue2}}</div>
+                                        <h3 class=breed-h3>{{data.name}}</h3>
+                                    </div>
+                                    
                                     <div class="location-content-sub">
                                         <div class="location"><i class="icon icon-location"></i></div>
                                         <div>{{data.city}}</div>

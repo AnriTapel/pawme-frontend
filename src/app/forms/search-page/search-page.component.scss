@@ -15,14 +15,17 @@ app-header {
     font-size: 12px !important;
     font-family: "Intro-Regular" !important;
     color: #0e0b4d;
-    margin-top: 5px !important;
+    margin-top: 0 !important;
     margin-left: 0 !important;
-    margin-bottom: 5px;
+    //margin-bottom: 5px;
     text-transform: uppercase;
     opacity: 0.5;
 }
 .breed1, .breed2 {
     margin-top: 0 !important;
+    color: #0e0b4d;
+    font-family: "Intro-Regular" !important;
+    opacity: 0.5;
 }
 
 .checkbox-item {
@@ -166,23 +169,23 @@ app-header {
     h3 {
         font-size: 22px;
         color: #0e0b4d;
-        margin-top: 14px;
+       // margin-top: 18px;
     }
 
-    // p {
-    //     font-size: 14px;
-    //     line-height: 1.36;
-    //     color: #0e0b4d;
-    //     // margin: 5px;
-    // }
+    p {
+        font-size: 14px;
+        line-height: 1.36;
+        color: #0e0b4d;
+        // margin: 5px;
+    }
 
-    // p:first-child {
-    //     opacity: 0.5;
-    //     font-size: 12px;
-    // }
+    p:first-child {
+        opacity: 0.5;
+        font-size: 12px;
+    }
 
     .p-text {
-        margin: 20px 0 0 0;
+        margin: 37px 0 0 0;
         opacity: 0.6;
         height: 95px;
         //max-width: 447px;
@@ -195,18 +198,21 @@ app-header {
         // -webkit-box-orient: vertical;
     }
 }
+.breeds {
+    margin-top: 18px;
+}
 
 .search-right {
-    margin: 18px 26px 0 26px;
-
-    .serach-sub-right {
-        display: flex;
-        justify-content: space-between;
-    }
+    margin: 20px 26px 0 26px;
+}
+.serach-sub-right {
+    display: flex;
+    justify-content: space-between;
+    height: 90px;
 }
 
 .number {
-    margin-top: 8px;
+   // margin-top: 29px;
     font-size: 16px;
     display: flex;
     flex-wrap: nowrap;
@@ -285,7 +291,7 @@ app-header {
 
     h3 {
         font-size: 16px;
-        font-family: Intro-Regular;
+        font-family: "Intro-Regular";
 
     }
 
@@ -758,5 +764,9 @@ div.metaName {
 
     .p-text {
         width: 100% !important;
+    }
+    .serach-sub-right {
+       
+        height: 130px;
     }
 }
