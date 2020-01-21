@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminControllerService } from '../api/api';
 import { AppService } from '../services/app-service/app.service';
 import { HttpClient } from '@angular/common/http';
 import { NotificationBarService } from '../services/nofitication-service/notification-bar.service';
-import { AdminInfo, BreederForAdmin, MessageToBreeder, Admin } from '../model/models';
+import { AdminInfo, BreederForAdmin, MessageToBreeder, Admin, Breed } from '../model/models';
 
 @Component({
   selector: 'app-admin-panel',
@@ -29,6 +29,7 @@ export class AdminPanelComponent implements OnInit {
   
   newAdmin: AdminInfo;
   newBreed = { name: null, nameGen: null };
+  changeBreed= { name: null, nameGen: null, id: null };
 
   roles: any[] = [
     { status: false, value: "ADD_ADMIN", name: "Добавление админов" },
@@ -40,6 +41,9 @@ export class AdminPanelComponent implements OnInit {
   ];
 
   invalidFields: string[] = [];
+  breeds: Breed = null;
+  enableEdit = false;
+  enableEditIndex = null;
 
   constructor(private router: Router, private adminService: AdminControllerService, public appService: AppService,
     private http: HttpClient, private notificationService: NotificationBarService) {
@@ -47,6 +51,7 @@ export class AdminPanelComponent implements OnInit {
 
   ngOnInit() {
     this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initEntityOperations(res));
+    this.breeds = this.appService.breeds;
   }
 
   logout(): void {
@@ -81,14 +86,45 @@ export class AdminPanelComponent implements OnInit {
   }
 
   addBreed(): void {
-    this.adminService.addBreedUsingPUT(this.newBreed).subscribe(
+    this.adminService.addBreedUsingPOST(this.newBreed).subscribe(
       () => {
         this.notificationService.setContext("Порода успешно добавлена", true);
         this.notificationService.setVisibility(true);
         this.newBreed = { name: null, nameGen: null };
+        location.reload();
       }, () => {
         this.notificationService.setContext("Не удалось добавить породу", false);
         this.notificationService.setVisibility(true);
+      }
+    )
+  }
+
+  editBreed(event, i) {
+    this.enableEdit = true;
+    this.enableEditIndex = i;
+   
+  }
+  saveBreed(breed:Breed) {
+      if (breed.name != null && breed.nameGen!= null && breed.id != null) {
+        this.adminService.editBreedUsingPUT(breed, breed.id).subscribe(
+          (res) => {
+            this.notificationService.setContext("Порода успешно обновлена", true);
+            this.notificationService.setVisibility(true);
+            location.reload();
+          }
+        )
+      } else {
+        this.notificationService.setContext("Порода не обновлена", false);
+        this.notificationService.setVisibility(true);
+      }
+  }
+
+  deleteBreed(id: number) {
+    this.adminService.deleteBreedUsingDELETE(id).subscribe(
+      () => {
+        this.notificationService.setContext("Порода успешно удалена", true);
+        this.notificationService.setVisibility(true);
+        location.reload();
       }
     )
   }

@@ -18,6 +18,7 @@ import { ClientPageComponent } from './forms/client-page/client-page.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { DetailComponent } from './articles/detail/detail.component';
 import { VersionComponent } from './forms/version/version.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'client-page', component: ClientPageComponent },
   { path: 'articles', component: ArticlesComponent },
   { path: 'article/:id', component: DetailComponent },
+  { path: 'chat', component: ChatComponent },
   { path: 'version', component: VersionComponent },
   { path: '404', component: PageNotFoundComponent },
   { path: '**', component: PageNotFoundComponent },

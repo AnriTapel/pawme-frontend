@@ -60,6 +60,7 @@ import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { MenuComponent } from './template-blocks/menu/menu.component';
 import { Header2Component } from './template-blocks/header2/header2.component';
 import { VersionComponent } from './forms/version/version.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -70,6 +71,7 @@ import { VersionComponent } from './forms/version/version.component';
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
     return appSerivce.initApplication();
+    
   }
 }
 
@@ -113,7 +115,8 @@ export function initApp(appSerivce: AppService){
     ClickOutsideDirective,
     MenuComponent,
     Header2Component,
-    VersionComponent
+    VersionComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

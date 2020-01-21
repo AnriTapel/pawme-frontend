@@ -14,7 +14,7 @@
             <span [class.active]="activeSection == 'customers'">Покупатели</span>
         </div>
         <div (click)="switchSection('add-breeds')">
-            <span [class.active]="activeSection == 'add-breeds'">Добавить породу</span>
+            <span [class.active]="activeSection == 'add-breeds'">Породы</span>
         </div>
         <div (click)="switchSection('add-admins')">
             <span [class.active]="activeSection == 'add-admins'">Добавить админа</span>
@@ -140,6 +140,36 @@
             </div>
             <input type="button" class="custom-btn btn-purple" style="float: right; margin: 20px 15px 0;"
                 value="Добавить" (click)="addBreed()" />
+
+                <div class="data-container breeds">
+                    <table id="breed-table">
+                        <tr>
+                            <th>Name</th>
+                            <th>NameGen</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+
+                        </tr>
+                        <tr  class="text-input" *ngFor="let breed of breeds; index as i;">
+                            <td>
+                                <input type="text" class="" name="name" [(ngModel)]="breed.name" />
+                            </td>
+                            <td>
+                                <input type="text" class="" name="nameGen" [(ngModel)]="breed.nameGen" />
+                            </td>
+                             <td class="table-action">
+                                <button *ngIf="enableEdit"  (click)="enableEdit=false" class="btn page-secondary-action-btn table-action" ng-click="cancel()">Cancel</button>
+                                <button *ngIf="enableEdit" id="saveBtn" class="btn page-primary-action-btn table-action" (click)="saveBreed(breed)" type="submit">Save</button>
+                                <a class="table-action" *ngIf="!enableEdit" (click)="editBreed($event, i)">
+                                    Edit
+                                </a>
+                            </td>
+                               <td (click)='deleteBreed(breed.id)' class="table-action">
+                                Delete
+                             </td>   
+                        </tr>
+                    </table>
+                </div>
         </div>
 
         <!-- Добавить админа -->

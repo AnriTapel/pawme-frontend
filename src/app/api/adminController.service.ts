@@ -68,13 +68,13 @@ export class AdminControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addBreedUsingPUT(breed: Breed, observe?: 'body', reportProgress?: boolean): Observable<Breed>;
-    public addBreedUsingPUT(breed: Breed, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Breed>>;
-    public addBreedUsingPUT(breed: Breed, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Breed>>;
-    public addBreedUsingPUT(breed: Breed, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addBreedUsingPOST(breed: Breed, observe?: 'body', reportProgress?: boolean): Observable<Breed>;
+    public addBreedUsingPOST(breed: Breed, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Breed>>;
+    public addBreedUsingPOST(breed: Breed, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Breed>>;
+    public addBreedUsingPOST(breed: Breed, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (breed === null || breed === undefined) {
-            throw new Error('Required parameter breed was null or undefined when calling addBreedUsingPUT.');
+            throw new Error('Required parameter breed was null or undefined when calling addBreedUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -97,7 +97,7 @@ export class AdminControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.put<Breed>(`${this.basePath}/api/admin/breed`,
+        return this.httpClient.post<Breed>(`${this.basePath}/api/admin/breed`,
             breed,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -156,6 +156,47 @@ export class AdminControllerService {
     }
 
     /**
+     * deleteBreed
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteBreedUsingDELETE(id: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteBreedUsingDELETE(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteBreedUsingDELETE(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteBreedUsingDELETE(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling deleteBreedUsingDELETE.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.delete<any>(`${this.basePath}/api/admin/breed/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * deleteBreeder
      * 
      * @param id id
@@ -187,6 +228,58 @@ export class AdminControllerService {
         ];
 
         return this.httpClient.delete<any>(`${this.basePath}/api/admin/breeder/${encodeURIComponent(String(id))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * editBreed
+     * 
+     * @param breed breed
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public editBreedUsingPUT(breed: Breed, id: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public editBreedUsingPUT(breed: Breed, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public editBreedUsingPUT(breed: Breed, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public editBreedUsingPUT(breed: Breed, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (breed === null || breed === undefined) {
+            throw new Error('Required parameter breed was null or undefined when calling editBreedUsingPUT.');
+        }
+
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling editBreedUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<any>(`${this.basePath}/api/admin/breed/${encodeURIComponent(String(id))}`,
+            breed,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
