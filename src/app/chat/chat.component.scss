@@ -72,10 +72,10 @@
 .center-text {
   text-align: center;
   p {
-    
     font-size: 14px !important;
     color: #0e0b4d;
     width: 870px;
+    margin-top: 16px;
   }
 
 }
@@ -83,4 +83,9 @@
   height: 1px;
   width: 200px;
   background: #cbd8f6;
+  margin: 0 auto;
+  margin-top: 16px;
+}
+img {
+  margin-top: 32px;
 }
