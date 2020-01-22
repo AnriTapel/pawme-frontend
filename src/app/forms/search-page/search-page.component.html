@@ -27,57 +27,19 @@
                     </ng-template>
                 </ng-select>
             </div>
-            <!-- <div class="dropdown-text-input">
-                <input type="text" [(ngModel)]="searchData.breed"  class="metaInput form-control custom-form-control-border"  
-                (keyup)="updateSearch($event.target.value)" placeholder="Поиск">
-                <img src="./assets/img/search-page/search.png" alt="Search" />
-            </div>
-            <div *ngIf="showTableData" class="all-search-data" >
-                <div  *ngFor="let name of breedList | filterBy: searchData.breed" class="">
-                    <div class="metaName">{{name}}</div>
-                </div>
-            </div> -->
+  
         </div>
-        <!-- <div class="login">
-            <input type="button" class="loginInput custom-btn btn-transparent" value="Войти" [routerLink]="['/login']" />
-        </div> -->
-        <!-- <div (clickOutside)="showMenu = false" class="d-flex">
-            <div [ngClass]="{'show': showMenu}" class="nav-menu">
-                <div class="nav-menu--item" *ngFor="let item of menuItems"
-                    (click)="showMenu = false; searchData.breed = null">
-                    <a [routerLink]="[ item.url ]">{{item.name}}</a>
-                </div>
-            </div>
-            <button (click)="showMenu = !showMenu" class="menu-toggle">
-                <img src="assets/img/burger-menu.svg" alt="">
-            </button>
-        </div> -->
         <app-menu [showMenu]="showMenu" [state]="state"></app-menu>
 
     </div>
 </div>
 <div class="container main" [ngClass]="{'extra-pading': state}">
     <div class="page-header">
-        <!-- <div class="top-line"></div> -->
         <h3>НАШИ ЗАВОДЧИКИ</h3>
     </div>
-    <!-- <div *ngIf="state" class="search-meta">
-        <div class="dropdown-text-input">
-            <input type="text" [(ngModel)]="userFilter"  class="metaInput form-control custom-form-control-border"  
-            (keyup)="updateSearch($event.target.value)" placeholder="Поиск">
-            <img src="./assets/img/search-page/search.png" alt="Search" />
-        </div>
-        <div *ngIf="showTableData" class="all-search-data" >
-            <div  *ngFor="let name of getMetaSearchData.cities | filterBy: userFilter" class="">
-                <div class="metaName">{{name}}</div>
-            </div>
-        </div>
-    </div> -->
 
     <div class="search-input">
         <div class="dropdown-text-input dropdown-style">
-            <!-- [selectableGroup]="true" 
-            [selectableGroupAsModel]="false"  -->
             <ng-select 
                 [items]="breedList" 
                 [multiple]="false" 
@@ -142,7 +104,7 @@
                         <div class="main-serach-sub-right">
                             <div class="serach-sub-right">
                                 <div class="location-content">
-                                    <div class="breeds">
+                                    <div [className]="data.breedValue0? 'breed-class' : 'breeds'">
                                         <div *ngIf="data.breedValue0" class="breed">{{data.breedValue0}}</div>
                                         <div *ngIf="data.breedValue1" class="breed breedI">И</div>
                                         <div *ngIf="data.breedValue1" class="breed">{{data.breedValue1}}</div>
