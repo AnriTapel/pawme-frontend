@@ -10,6 +10,11 @@ app-header {
 .outer-conteiner {
     padding: 0 16px;
 }
+.breeds {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
 
 .breed {
     font-size: 12px !important;
@@ -21,14 +26,13 @@ app-header {
     text-transform: uppercase;
     opacity: 0.5;
 }
-// .breed1, .breed2 {
-//     margin-top: 0 !important;
-//     color: #0e0b4d;
-//     font-family: "Intro-Regular" !important;
-//     opacity: 0.5;
-//     text-transform: uppercase;
-//     font-size: 12px !important;
+// .breed1 {
+//   //margin-left: 5px !important;
 // }
+.breedI {
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+  }
 
 .checkbox-item {
     display: flex;
@@ -528,9 +532,9 @@ div.metaName {
 }
 
 @media screen and (max-width: 769px) {
-    .breed {
-        margin-top: 15px !important;
-    }
+    // .breed {
+    //    // margin-top: 15px !important;
+    // }
     .search-content-wrap {
         flex-flow: column-reverse;
         align-items: center;
@@ -771,4 +775,11 @@ div.metaName {
        
         height: 130px;
     }
+    // .breed1 {
+    //     margin-left: 0 !important;
+    //   }
+      .breedI {
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+      }
 }
