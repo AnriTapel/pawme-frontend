@@ -1,3 +1,10 @@
+.desktop-version {
+  display: block;
+}
+button:focus {
+  outline:0;
+}
+
 .container {
     width: 100%;
     max-width: 1200px;
@@ -16,6 +23,10 @@
   .text-block {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      h3 {
+        font-size: 28px;
+      }
   }
   .chat-content {
     display: flex;
@@ -29,6 +40,7 @@
     border-radius: 4px;
     border: solid 1px #cbd8f6;
     background-color: #ffffff;
+    overflow-y: scroll;
 }
 .buttons {
     display: flex;
@@ -59,7 +71,6 @@
   opacity: 0.9;
   font-family: "Intro-Regular";
   font-size: 18px;
-
 }
 .unread {
     width: 300px;
@@ -125,7 +136,7 @@
     border-radius: 30px;
     border-bottom-right-radius: 0;
     font-size: 14px;
-    text-align: center;
+   // text-align: center;
     background: #eff3fc;
     color: #0e0b4d;
     font-family: "Intro-Book";
@@ -143,13 +154,12 @@
   align-items: center;
   align-items: flex-end;
   padding-right: 32px;
-  
   .text {
     width: 538px;
     border-radius: 30px;
     border-bottom-right-radius: 0;
     font-size: 14px;
-    text-align: center;
+    //text-align: center;
     background: #c9ebea;
     color: #0e0b4d;
     font-family: "Intro-Book";
@@ -158,7 +168,6 @@
   div {
     margin-left: 16px;
   }
-
 }
 
 .bottom-chat {
@@ -176,7 +185,7 @@
     font-family: "Intro-Book";
     margin-left: 16px;
     font-size: 14px;
-    text-align: center;
+    //text-align: center;
     color: #0e0b4d;
     padding: 15px;
     margin-top: 8px;
@@ -188,13 +197,14 @@
   display: flex;
   justify-content: space-between;
   padding: 14px;
-  width: 870px;
+  // width: 870px;
   height: 70px;
   border-top: solid 1px #cbd8f6;
   background-color: #ffffff;
   font-size: 14px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+
   input {
     border: none;
     background: none;
@@ -204,6 +214,10 @@
     width: 100%;
   }
 }
+.send {
+  display:none;
+}
+
 .custom-btn {
   padding: 10px 40px;
 }
@@ -216,12 +230,14 @@ textarea:focus, input:focus{
   text-align: right;
   margin-right: 109px;
   margin-top: 2px;
+  opacity: 0.5;
 }
 
 .time-right-chat {
   font-size: 14px;
   margin-left: 107px;
   margin-top: 2px;
+  opacity: 0.5;
 }
 
 .chat-info {
@@ -233,6 +249,7 @@ textarea:focus, input:focus{
    padding-right: 23px;
    &:hover {
     background: #e0def3; 
+    cursor: pointer;
    }
 }
 
@@ -250,7 +267,142 @@ textarea:focus, input:focus{
 
 .message {
   font-size: 16px;
-  font-family: "Intro-Book";
   color: #0d074e;
   margin-top: -12px;
+}
+.mobile-user-name {
+  display: none;
+}
+
+@media screen and (max-width: 769px) {
+  .block-detail {
+    background: #f8f9fb;
+  }
+  .desktop-version {
+    display: none;
+  }
+  .left {
+    width: 100%;
+    background: #ffffff;
+  }
+  .text-block {
+    flex-direction: column;
+    h3 {
+      font-size: 20px;
+    }
+  }
+
+  .all {
+    width: 0;
+    height: 0;
+    border: none;
+    background-color: #f8f9fb;
+    color: #0e0b4d;
+    font-size: 16px;
+    margin-left: -4px;
+  }
+  .unread {
+    width: 210px;
+    height: 0;
+    background-color: #f8f9fb;
+    border: none;
+    color: #0e0b4d;
+    font-size: 16px;
+    justify-content: center;
+    .unread-text {
+      opacity: 0.5;
+    }
+    .count-mob {
+      font-size: 11.3px;
+      width: 13px;
+      height: 13px;
+      margin-top: 5px !important;
+    }
+}
+.chat-info {
+  // height: 85px;
+  background-color: #ffffff;
+  padding-left: 20px;
+}
+  .name-info {
+    font-size: 14px;
+  }
+  .message {
+    font-size: 13px;
+  }
+  .right{
+    width: 100%;
+    margin-left: 0;
+    border-radius: 10px;
+  }
+  .center-text { 
+    display: none;
+  }
+  .main-chat {
+    display: none;
+  }
+  .main-time {
+    display: none;
+  }
+  .time-left-chat {
+    font-size: 12px;
+    margin-right: 32px;
+  }
+  .time-right-chat {
+    font-size: 12px;
+    margin-left: 32px;
+  }
+  .left-chat {
+    padding-right: 14px;
+    padding-left: 14px;
+    .text {
+      font-size: 13px;
+    }
+    img {
+      display: none;
+    }
+  }
+  .right-chat {
+    padding-left: 14px;
+    padding-right: 14px;
+    margin-top: 12px;
+    .text {
+      font-size: 13px;
+    }
+    img {
+      display: none;
+    }
+  }
+  .write-message {
+    height: 39px;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    input {
+      font-size: 13px;
+    }
+    button {
+      display: none;
+    }
+  }
+  .send {
+    display: block;
+    margin-top: -8px;
+    margin-right: 10px;
+  }
+  .mobile-user-name {
+    display: block;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 40px;
+    border-bottom: solid 1px #cbd8f6;
+    margin-top: 20px;
+    padding-left: 20px;
+    .user-name {
+      font-family: "Intro-Regular";
+      font-size: 14px;
+      color: #0e0b4d;
+      margin-left: 8px;
+    }
+  }
 }

@@ -1,6 +1,6 @@
 <div class="wrapper">
     <main>
-        <div  class="block-detail">
+        <div class="block-detail">
             <div class="container">
                <div class="text-block">
                    <h3 class="">Сообщения</h3>
@@ -8,12 +8,13 @@
                         <button class="all">Все</button>
                         <button class="unread">
                             <div class="unread-text">Непрочитанные</div>
-                            <div class="count">2</div>
+                            <div class="count count-mob">2</div>
                         </button>
                    </div>
                </div>
-               <div class="chat-content">
-                   <div class="left">
+                <div class="chat-content">
+                   <!-- <div class="left decktop-version"> -->
+                    <div class="left desktop-version">
                        <div class="chat-info">
                         <div class="name">
                             <p class="name-info">Иван Гончаров</p>
@@ -29,7 +30,8 @@
                             <p class="message">Добрый день, как у вас…</p>
                            </div>
                    </div>
-                   <div class="right">
+                   <!-- <div class="right desktop-version"> -->
+                    <div class="right">
                        <div class="right-chat-content">
                             <div class="center-text">
                                 <img src="./assets/img/chat-lapa.svg" alt="">
@@ -51,7 +53,11 @@
                                     <img src="./assets/img/girl1.png" alt="">
                                 </div> 
                             </div>
-                            <p class="time-left-chat">22:22</p>
+                            <p class="main-time time-left-chat">22:22</p>
+                            <div class="mobile-user-name">
+                                <div class="back"><img src="./assets/img/chat-lapa.svg" alt=""></div>
+                                <div class="user-name">Иван Гончаров</div>
+                            </div>
                             <div class="right-chat">
                                 <div class="">
                                     <img src="./assets/img/girl2.png" alt="">
@@ -73,11 +79,13 @@
                        <div class="write-message">
                            <input type="text" placeholder="Напишите сообщение…">
                            <button class="custom-btn btn-purple">Отправить</button>
+                           <div class="send">
+                              <img src="./assets/img/send.svg" alt="">
+                           </div>
                         </div>
                    </div>
                </div>
             </div>
         </div>
-       
     </main>
 </div>
