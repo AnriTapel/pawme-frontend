@@ -10,8 +10,8 @@ import { NotificationBarService } from 'src/app/services/nofitication-service/no
 import { BreederProfileService } from '../../services/breeder-profile-service/breeder-profile.service';
 import { Router } from '@angular/router';
 
-import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
-import {Observable, Subject, merge} from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { Observable, Subject, merge } from 'rxjs';
 
 
 @Component({
@@ -63,7 +63,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.nurceryData.city = this.nurceryData.city ? this.nurceryData.city : null;
     this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => this.saveChanges(forPreview));
   }
- 
+
 
   ngOnDestroy(): void {
     this.saveChagesEvent.unsubscribe();
@@ -177,8 +177,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.profileService.dataChangesSaved = true;
-        scroll(0, 0);
+
         this.profileService.updateProfileFullness();
+        setTimeout(() => {
+          scroll(0, 0);
+        }, 500);
         if (forPreview)
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       },
@@ -190,7 +193,9 @@ export class AboutNurceryProfilePageComponent implements OnInit {
           else
             this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
           this.notificationService.setVisibility(true);
-          scroll(0, 0);
+          setTimeout(() => {
+            scroll(0, 0);
+          }, 500);
         }
       );
   }
