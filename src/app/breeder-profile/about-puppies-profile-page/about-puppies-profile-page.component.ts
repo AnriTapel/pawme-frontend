@@ -16,6 +16,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
   puppiesData: PuppiesInfo;
   saveChagesEvent: any;
+  isLoading: boolean = false;
 
   constructor(public appService: AppService, private breederService: BreederControllerService, private eventService: EventService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService, private router: Router) { }
@@ -60,7 +61,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   saveChanges(forPreview: boolean) {
     if (!this.validateInputFields())
       return;
-
+    this.isLoading= true;
     this.breederService.setPuppiesInfoUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(
       () => {
         if (!this.appService.userData.puppiesInfo) {
@@ -75,6 +76,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.profileService.dataChangesSaved = true;
+        this.isLoading= false;
         scroll(0, 0);
         this.profileService.updateProfileFullness();
         if (forPreview)

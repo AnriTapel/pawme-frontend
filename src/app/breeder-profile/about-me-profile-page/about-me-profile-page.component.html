@@ -4,7 +4,9 @@
         <h3>О себе</h3>
     </div>
     <div class="upper-btn">
-        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
+        <button type="submit" class="custom-btn btn-purple" (click)="saveChanges(false)" [disabled]="isLoading">{{!isLoading ? 'Сохранить изменения' : ''}}
+            <div *ngIf="isLoading" class="loader"></div>
+        </button>
     </div>
     <div class="breeder-profile-subpage-form-left">
         <label for="name">Имя</label>
@@ -136,6 +138,8 @@
                 Пожалуйста, заполните или исправьте поля, выделенные красным
         </span>
         <br *ngIf="profileService.invalidFields.length > 0" />
-        <input type="button" class="custom-btn btn-purple" value="Сохранить изменения" (click)="saveChanges(false)" />
+        <button type="submit" class="custom-btn btn-purple" (click)="saveChanges(false)" [disabled]="isLoading">{{!isLoading ? 'Сохранить изменения' : ''}}
+            <div *ngIf="isLoading" class="loader"></div>
+        </button>
     </div>
 </div>

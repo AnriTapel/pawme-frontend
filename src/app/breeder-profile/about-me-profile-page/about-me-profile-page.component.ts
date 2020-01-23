@@ -20,6 +20,7 @@ export class AboutMeProfilePageComponent implements OnInit {
   breederInfo: Breeder;
   currentClub: string = null;
   currentClubs: Array<string> = [];
+  isLoading: boolean = false;
 
   saveChagesEvent: any;
 
@@ -164,6 +165,7 @@ export class AboutMeProfilePageComponent implements OnInit {
       return;
 
     this.breederData.clubs = this.currentClubs.join(";");
+    this.isLoading = true;
 
     this.breederService.updateNameUsingPUT(this.breederInfo.id, this.breederInfo)
     .subscribe((res) => {
@@ -183,6 +185,7 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.appService.userData.about = this.breederData;
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
+        this.isLoading = false;
         scroll(0, 0);
         this.profileService.updateProfileFullness();
         this.profileService.dataChangesSaved = true;

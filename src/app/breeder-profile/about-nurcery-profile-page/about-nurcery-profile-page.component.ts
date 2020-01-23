@@ -28,6 +28,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   isAdditionalBreed: boolean = false;
   saveChagesEvent: any;
   otherElement: boolean;
+  isLoading: boolean = false;
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
   @ViewChild('mainBreedInstance', { static: true }) mainBreedInstance: NgbTypeahead;
@@ -157,7 +158,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   saveChanges(forPreview: boolean) {
     if (!this.validateInputFields())
       return;
-
+    this.isLoading = true;
     this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
     if (!this.nurceryData.name)
       this.nurceryData.name = this.appService.userData.name + " " + this.appService.userData.surname;
@@ -177,6 +178,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.profileService.dataChangesSaved = true;
+        this.isLoading = false;
 
         this.profileService.updateProfileFullness();
         setTimeout(() => {
