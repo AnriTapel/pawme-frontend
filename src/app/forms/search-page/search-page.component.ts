@@ -282,7 +282,6 @@ export class SearchPageComponent implements OnInit {
       arr.forEach(element => {
         if (element.breed.trim().toLowerCase() === selectedBreed.name.trim().toLowerCase()) {
           this.selectedBreedChar = element;
-          console.log(' this.selectedBreedChar',  this.selectedBreedChar);
           haveSuccess = true;
         }
       });
