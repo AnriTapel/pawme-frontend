@@ -2,74 +2,140 @@
   background: #ffffff;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .main {
   background: #ffffff !important;
+  width: 100%;
 }
 
-.main .header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 600px;
-  background-image: url("/assets/img/client-page/header.png");
-}
-
-.main .header div {
-  margin-top: 155px;
-  opacity: 1;
-}
-
-.main .header div > p:first-child {
-  font-size: 38px;
-  font-weight: bold;
-  text-align: center;
-  color: #ffffff;
-}
-
-.main .header div > p:last-child {
-  font-family: Intro;
-  font-size: 18px;
-  line-height: 1.44;
-  text-align: center;
-  color: #ffffff;
-}
-
-.main .search-block {
-  width: 670px;
-  margin-top: -90px !important;
-  border: solid 1px #cbd8f6;
-  background-color: #ffffff;
-  position: absolute;
-  left: 25%;
-  margin: 0 auto;
-}
-
-.main .search-block .search-content {
+.checkbox-item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  padding: 30px 30px 10px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.main .search-block .search-content .dropdown-text-input {
+.checkbox-item img {
+  width: 11px;
+  height: 8px;
+  margin-top: 12px;
+  margin-right: 22px;
+  background-image: url("/assets/img/search-page/search-checkbox.png");
+  display: none;
+}
+
+.checkbox-item:hover img {
+  display: block;
+}
+
+.checkbox-item:hover img {
+  display: block;
+}
+
+.header {
+  height: 600px;
+  background-image: url("/assets/img/client-page/header.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.header-title {
+  margin-top: 155px !important;
+  opacity: 1;
+  margin: 0 auto;
+  max-width: 636px;
+  text-align: center;
+}
+
+.header-title h3 {
+  font-size: 38px;
+  font-family: Intro-Bold;
+  color: #ffffff;
+}
+
+.header-title p {
+  font-size: 18px;
+  font-family: Intro-Book;
+  line-height: 1.44;
+  color: #ffffff;
+}
+
+.header-logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.logo img {
+  width: 150px;
+  outline: none;
+  margin-top: 30px;
+}
+
+.search-block {
+  max-width: 680px;
+  margin-top: -90px !important;
+  border: solid 1px #cbd8f6;
+  background-color: #ffffff;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.search-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.search-content .dropdown-text-input {
   width: 437px;
   height: 52px;
 }
 
-.main .search-block .search-content .custom-btn {
+.star {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  margin-top: 12px;
+  font-size: 15px;
+  opacity: 0.8;
+  color: #0e0b4d;
+}
+
+.star > div:last-child {
+  margin-left: 4px;
+}
+
+.star a {
+  color: #645fc9;
+  text-decoration: underline;
+  margin-left: 2px;
+}
+
+.custom-btn {
   margin-left: 20px;
   width: 157px;
-  height: 48px;
+  min-width: 157px;
+  height: 44px;
   text-align: center;
 }
 
-.main .search-block .search-content .custom-btn input {
+.custom-btn input {
   font-size: 16px;
   letter-spacing: 0.18px;
   color: #ffffff;
@@ -77,56 +143,43 @@
   border: none;
 }
 
-.main .search-block .star {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  font-size: 16px;
-  margin: 0px 0px 30px 30px;
-  font-size: 16px;
-  opacity: 0.8;
-  color: #0e0b4d;
+.container {
+  max-width: 1300px;
 }
 
-.main .search-block .star > div:last-child {
-  margin-left: 5px;
-}
-
-.main .search-block .star a {
-  color: #645fc9;
-  text-decoration: underline;
-}
-
-.main .containers {
-  background: #ffffff;
-  margin-left: 135px;
-}
-
-.main .containers .title {
+.title {
   font-size: 28px;
   color: #645fc9;
-  margin-top: 130px;
+  margin-top: 70px;
+  margin-left: 30px;
+  font-family: "Intro-Regular";
 }
 
-.main .containers .dogs {
+.dogs {
   color: #0e0b4d;
-  margin: 60px 0px 60px;
+  margin-top: 60px;
 }
 
-.main .containers .dogs > p:first-child {
+.dogs h3 {
   font-size: 22px;
+  margin-left: 30px;
 }
 
-.main .containers .dogs .text {
+.dogs .text {
   font-size: 18px;
   line-height: 1.44;
-  width: 970px;
+  max-width: 970px;
+  margin-top: 16px;
+  margin-left: 30px;
 }
 
-.main .containers .dogs > div {
-  margin-top: 30px;
+.dogs img {
+  width: 270px;
+  height: 220px;
+}
+
+.dogs-pics {
+  margin-top: 32px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -134,67 +187,73 @@
       flex-wrap: wrap;
 }
 
-.main .containers .dogs > div > div:first-child {
-  margin: 0px;
-}
-
-.main .containers .dogs > div div {
+.dogs-pics div {
   margin-left: 30px;
+  cursor: pointer;
 }
 
-.main .containers .dogs > div p {
+.dogs-pics p {
   font-size: 22px;
   margin-top: 10px;
+  font-family: "Intro-Regular";
+  max-width: 240px;
 }
 
-.main .middle-content {
-  background-color: #f8f9fb;
-  padding: 60px 0px 73px 135px;
+.middle-content {
+  background-color: #f8f9fb !important;
+  padding-bottom: 73px;
 }
 
-.main .middle-content h3 {
+.middle-content h3 {
   font-size: 28px;
   color: #645fc9;
+  margin-left: 30px;
+  padding-top: 60px;
 }
 
-.main .middle-content p {
+.middle-content p {
   font-size: 16px;
   line-height: 1.38;
   letter-spacing: normal;
   color: #0e0b4d;
+  margin-left: 30px;
 }
 
-.main .middle-content .middle-content-icons {
+.middle-content-icons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin-top: 57px;
+  margin-left: 30px;
 }
 
-.main .middle-content .middle-content-icons div:first-child {
+.middle-content-icons div:first-child {
   margin: 0px;
 }
 
-.main .middle-content .middle-content-icons div {
+.middle-content-icons div {
   margin-left: 100px;
 }
 
-.main .middle-content .middle-content-icons h3 {
+.middle-content-icons h3 {
   font-size: 22px;
   line-height: 1.5;
   color: #0e0b4d;
+  margin-left: 0px;
   margin-top: 21px;
+  padding-top: 0;
 }
 
-.main .middle-content .middle-content-icons p {
+.middle-content-icons p {
   max-width: 298px;
   margin-top: 16px;
+  margin-left: 0px;
   font-size: 16px;
 }
 
-.main .middle-content .middle-content-icons a {
+.middle-content-icons a {
   color: #645fc9;
   text-decoration: underline;
   margin-top: 32px;
@@ -202,39 +261,44 @@
   letter-spacing: 0.18px;
 }
 
-.main .oval-content {
+.oval-background {
+  background-color: #ffffff;
+  background-image: url(/assets/img/client-page/kruglii_cut.svg), url(/assets/img/client-page/Oval_big.svg);
+  background-position: left bottom, right bottom;
+  background-repeat: no-repeat, no-repeat;
+  background-position: fixed;
+  margin-top: 50px;
+}
+
+.oval-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  background-color: #ffffff;
-  background-image: url("/assets/img/client-page/kruglii_cut.svg");
-  background-position: left bottom;
-  background-repeat: no-repeat;
 }
 
-.main .oval-content .right {
-  margin-left: 135px;
+.oval-right {
+  margin-left: 30px;
 }
 
-.main .oval-content .right h3 {
+.oval-right h3 {
   width: 510px;
   font-size: 28px;
   letter-spacing: normal;
   color: #645fc9;
-  margin-top: 60px;
+  margin-top: 90px;
 }
 
-.main .oval-content .right h2 {
+.oval-right h2 {
   width: 536px;
   margin-top: 65px;
   font-size: 22px;
   color: #0e0b4d;
 }
 
-.main .oval-content .right p {
+.oval-right p {
   width: 570px;
   height: 110px;
   font-size: 16px;
@@ -243,8 +307,9 @@
   margin-top: 22px;
 }
 
-.main .oval-content .right input {
+.oval-right input {
   margin-top: 22px;
+  margin-left: 0;
   width: 224px;
   height: 44px;
   border-radius: 26px;
@@ -256,31 +321,39 @@
   text-transform: uppercase;
 }
 
-.main .oval-content .girl {
+.girl {
   width: 683px;
   height: 586px;
-  background-image: url("/assets/img/client-page/two_circles.svg");
+  margin-left: 52px;
 }
 
-.main .oval-content .girl img {
-  margin: 88px 0px 0px 43px;
+.girl-img {
+  margin: 30px 0px 0px 43px;
 }
 
-.main .oval-content .girl .slider-button {
+.slider-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  margin: 15px 0 0 203px;
+  margin: 15px 0 0 230px;
 }
 
-.main .oval-content .girl .slider-button div {
+.slider-button .show {
+  background-image: url("/assets/img/client-page/hover_circle.svg");
+}
+
+.slider-button .show .circle {
+  display: none;
+}
+
+.slider-button a, .slider-button .mainCircle div {
   width: 28px;
   height: 28px;
 }
 
-.main .oval-content .girl .slider-button div .circle {
+.slider-button a .circle, .slider-button .mainCircle div .circle {
   width: 14px;
   height: 14px;
   opacity: 0.5;
@@ -289,32 +362,34 @@
   margin: 7px 0 0 7px;
 }
 
-.main .oval-content .girl .slider-button div:hover {
+.slider-button a:hover, .slider-button a .show, .slider-button .mainCircle div:hover, .slider-button .mainCircle div .show {
   background-image: url("/assets/img/client-page/hover_circle.svg");
 }
 
-.main .oval-content .girl .slider-button div:hover .circle {
+.slider-button a:hover .circle, .slider-button a .show .circle, .slider-button .mainCircle div:hover .circle, .slider-button .mainCircle div .show .circle {
   display: none;
 }
 
-.main .choose-dog {
+.choose-dog {
   margin: 0 auto;
+  margin-top: 70px;
 }
 
-.main .choose-dog h3 {
+.choose-dog h3 {
   font-size: 28px;
   text-align: center;
   color: #645fc9;
+  text-transform: uppercase;
 }
 
-.main .choose-dog p {
+.choose-dog p {
   font-size: 16px;
   line-height: 1.38;
   text-align: center;
   color: #0e0b4d;
 }
 
-.main .choose-dog-pics {
+.choose-dog-pics {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -326,40 +401,46 @@
   margin: 42px 0 36px 0;
 }
 
-.main .choose-dog-pics > div:first-child {
+.dog-freind {
   background-image: url("/assets/img/client-page/back_readyfordog.svg");
   width: 670px;
   height: 380px;
   position: relative;
 }
 
-.main .choose-dog-pics > div:first-child h3 {
+.dog-freind h3 {
   font-size: 28px;
   color: #0e0b4d;
   margin: 27px 0 0 32px;
+  padding-top: 27px;
 }
 
-.main .choose-dog-pics > div:first-child .dog {
-  margin-left: 200px;
-}
-
-.main .choose-dog-pics > div:first-child .heart {
+.dog-freind .heart {
   top: 46px;
   right: 42px;
   position: absolute;
 }
 
-.main .choose-dog-pics > div:last-child {
+.dog {
+  margin-left: 200px;
+  background-image: url("/assets/img/client-page/bitmap.png");
+  width: 456px;
+  height: 320px;
+}
+
+.dog-freind-left {
   margin-left: 30px;
 }
 
-.main .choose-dog-pics > div:last-child h3 {
+.dog-freind-left h3 {
   width: 212px;
   font-size: 28px;
   color: #0e0b4d;
+  padding-top: 27px;
+  padding-left: 32px;
 }
 
-.main .choose-dog-pics > div:last-child .white-dog {
+.white-dog {
   width: 470px;
   height: 175px;
   display: -webkit-box;
@@ -368,11 +449,18 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 27px 0 0 32px;
+  padding-top: 21px;
+  margin-top: 27px;
   background-image: url("/assets/img/client-page/back_howtochoose.svg");
 }
 
-.main .choose-dog-pics > div:last-child .black-dog {
+.white-dog-pic {
+  background-image: url("/assets/img/client-page/white-dog.png");
+  width: 212px;
+  height: 154px;
+}
+
+.black-dog {
   width: 470px;
   height: 175px;
   margin-top: 30px;
@@ -382,16 +470,21 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 27px 0 0 32px;
   background-image: url("/assets/img/client-page/back_howtochoosebreed.svg");
 }
 
-.main .info-button {
+.black-dog-pic {
+  background-image: url("/assets/img/client-page/black-dog.png");
+  width: 156px;
+  height: 175px;
+}
+
+.info-button {
   margin: 0 auto;
   width: 256px;
 }
 
-.main .info-button input {
+.info-button input {
   width: 256px;
   height: 44px;
   border-radius: 26px;
@@ -403,39 +496,416 @@
   color: #645fc9;
 }
 
-.main .dogs-bottom {
+.dogs-bottom {
   margin-top: 70px;
   background-color: #edeceb;
 }
 
-.main .dogs-bottom .content {
+.dogs-bottom img {
+  margin-left: 150px;
+}
+
+.content {
   margin: 0 auto;
   width: 425px;
 }
 
-.main .dogs-bottom .content h3 {
+.content h3 {
   font-size: 28px;
   text-align: center;
   color: #645fc9;
   padding-top: 60px;
 }
 
-.main .dogs-bottom .content p {
+.content p {
   width: 465px;
   font-size: 16px;
   line-height: 1.38;
   text-align: center;
   color: #0e0b4d;
+  margin-top: 22px;
 }
 
-.main .dogs-bottom .content input {
+.content input {
   width: 214px;
   height: 44px;
   font-size: 14px;
-  margin: 24px 0 0 110px;
+  margin: 15px 0 0 110px;
 }
 
-.main .dogs-bottom img {
-  margin-left: 150px;
+.bottom-dogs {
+  background-image: url("/assets/img/client-page/dogs_vizavodchik.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 334px;
+  margin-top: 50px;
+}
+
+.outer-header {
+  display: none;
+}
+
+.outer-header.scrolled {
+  display: block;
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  left: 0;
+  -webkit-box-shadow: 0 2px 24px 0 rgba(14, 11, 77, 0.1);
+          box-shadow: 0 2px 24px 0 rgba(14, 11, 77, 0.1);
+  background-color: #ffffff;
+  z-index: 100;
+}
+
+.outer-header .container-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 90px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 1300px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.outer-header .container-header .logo img {
+  margin: 0;
+}
+
+.outer-header .container-header .search-meta {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 10px;
+}
+
+.outer-header .container-header .custom-btn {
+  margin: 0;
+}
+
+.show-client-mobile {
+  display: none !important;
+}
+
+@media screen and (max-width: 769px) {
+  .show-client-mobile {
+    display: block !important;
+    margin-top: 200px !important;
+    text-align: center;
+    margin-left: 15px;
+  }
+  .show-client-desktop {
+    display: none;
+  }
+  .outer-header .container-header {
+    min-height: 90px;
+  }
+  .outer-header .container-header .search-meta {
+    display: none;
+  }
+  .outer-header .container-header .custom-btn {
+    display: none;
+  }
+  .header {
+    background-image: url("/assets/img/client-page/header-mobile.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 485px !important;
+  }
+  .header-title {
+    margin-top: 100px !important;
+  }
+  .header-title h3 {
+    font-size: 26px;
+  }
+  .header-title p {
+    font-size: 15px;
+  }
+  .search-block {
+    width: 328px;
+    margin-top: -155px !important;
+    padding: 22px 16px 16px 16px;
+  }
+  .search-content .dropdown-text-input {
+    width: 296px;
+    height: 40px;
+  }
+  .custom-btn {
+    width: 296px;
+    height: 46px;
+    margin-left: 0;
+    margin-top: 16px;
+  }
+  .custom-btn input {
+    font-size: 14px;
+  }
+  .star {
+    font-size: 14px;
+  }
+  .title {
+    font-size: 20px;
+    margin-top: 61px;
+    margin-left: 0px;
+  }
+  .container {
+    width: 328px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .dogs {
+    margin-top: 28px;
+  }
+  .dogs h3 {
+    font-size: 18px;
+    margin-left: 0px;
+  }
+  .dogs .text {
+    font-size: 14px;
+    margin-top: 12px;
+    margin-left: 0px;
+  }
+  .dogs img {
+    width: 156px;
+    height: 127px;
+  }
+  .dogs-pics {
+    margin-top: 12px;
+  }
+  .dogs-pics div {
+    margin-left: 16px;
+  }
+  .dogs-pics div:nth-child(1), .dogs-pics div:nth-child(3) {
+    margin-left: 0;
+  }
+  .dogs-pics img {
+    width: 156px;
+    height: 127px;
+  }
+  .dogs-pics p {
+    font-size: 13px;
+    margin-top: 10px;
+    max-width: 150px;
+  }
+  .middle-content {
+    padding-bottom: 50px;
+    margin: 0 auto;
+  }
+  .middle-content h3 {
+    font-size: 20px;
+    margin-left: 0px;
+  }
+  .middle-content p {
+    font-size: 14px;
+    margin-left: 0px;
+    width: 328px !important;
+  }
+  .middle-content-icons {
+    margin-top: 32px;
+    margin-left: 0px;
+  }
+  .middle-content-icons div:first-child {
+    margin: 0px;
+  }
+  .middle-content-icons div {
+    margin-left: 0px;
+    width: 328px;
+  }
+  .middle-content-icons div img {
+    margin-top: 32px;
+  }
+  .middle-content-icons h3 {
+    font-size: 18px;
+    margin-left: 0px;
+    margin-top: 16px;
+  }
+  .middle-content-icons p {
+    max-width: 328px;
+    margin-top: 14px;
+    margin-left: 0px;
+    font-size: 14px;
+  }
+  .middle-content-icons a {
+    margin-top: 22px;
+    font-size: 16px;
+  }
+  .oval-background {
+    background-image: none;
+    margin-top: 0;
+  }
+  .oval-content {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .oval-right {
+    margin-left: 0px;
+    margin-bottom: 16px;
+  }
+  .oval-right h3 {
+    width: 205px;
+    font-size: 20px;
+    margin-top: 40px;
+  }
+  .oval-right h2 {
+    width: 328px;
+    margin-top: 24px;
+    font-size: 18px;
+  }
+  .oval-right p {
+    width: 328px;
+    height: 110px;
+    font-size: 14px;
+    margin-top: 14px;
+    overflow-y: auto;
+  }
+  .oval-right input {
+    margin-top: 40px;
+    width: 328px;
+    height: 44px;
+  }
+  .girl {
+    width: 328px;
+    height: 200px;
+    margin-top: 12px;
+    margin-left: 0px;
+  }
+  .girl img {
+    width: 330px !important;
+  }
+  .girl-img {
+    margin: 0px 0px 0px 0px;
+    margin-left: 0px;
+  }
+  .slider-button {
+    margin: 15px 0 0 90px;
+  }
+  .choose-dog {
+    margin: 0 auto;
+    margin-top: 70px;
+    width: 328px;
+  }
+  .choose-dog h3 {
+    font-size: 20px;
+  }
+  .choose-dog p {
+    font-size: 14px;
+  }
+  .choose-dog-pics {
+    margin: 42px 0 36px 0;
+  }
+  .dog-freind {
+    background-image: url("/assets/img/client-page/mobile_back_readyfordog.svg");
+    width: 328px;
+    height: 256px;
+  }
+  .dog-freind h3 {
+    font-size: 22px;
+    margin: 22px 0 0 22px;
+  }
+  .dog-freind .heart {
+    top: 50px;
+    right: 30px;
+  }
+  .dog-freind .heart img {
+    width: 66px;
+    height: 65px;
+  }
+  .dog {
+    margin-left: 20px;
+    background-image: url("/assets/img/client-page/bitmap-mobile.png");
+    width: 256px;
+    height: 188px;
+    margin-top: 15px;
+  }
+  .dog-freind-left {
+    margin-left: 0;
+  }
+  .dog-freind-left h3 {
+    width: 185px;
+    font-size: 22px;
+    padding-top: 22px;
+    padding-left: 22px;
+  }
+  .white-dog {
+    width: 328px;
+    height: 175px;
+    margin-top: 30px;
+    padding-top: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    background-image: url("/assets/img/client-page/mobile_back_howtochose.svg");
+  }
+  .white-dog-pic {
+    background-image: url("/assets/img/client-page/mobile-white-dog.png");
+    width: 158px;
+    height: 130px;
+    background-repeat: no-repeat;
+    margin-top: 60px;
+  }
+  .black-dog {
+    width: 328px;
+    height: 175px;
+    margin-top: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    background-image: url("/assets/img/client-page/mob_back_howtochoosebreed.svg");
+  }
+  .black-dog-pic {
+    background-image: url("/assets/img/client-page/mobile-black-dog.png");
+    background-repeat: no-repeat;
+    width: 189px;
+    height: 129px;
+    margin-top: 46px;
+    margin-left: 17px;
+  }
+  .content {
+    margin: 0 auto;
+    width: 328px;
+  }
+  .content h3 {
+    font-size: 20px;
+    padding-top: 40px;
+  }
+  .content p {
+    width: 328px;
+    font-size: 14px;
+  }
+  .content input {
+    width: 214px;
+    height: 44px;
+    font-size: 14px;
+    margin: 29px 0 0 60px;
+  }
+  .dogs-bottom {
+    margin-top: 40px;
+    background-color: #edeceb;
+  }
+  .dogs-bottom img {
+    margin-left: 0;
+    width: 360px;
+    height: 241px;
+  }
+  .bottom-dogs {
+    background-image: url("/assets/img/client-page/mob_vizavodchik.jpg");
+    background-repeat: no-repeat;
+    height: 241px;
+    margin-top: 0;
+  }
 }
 /*# sourceMappingURL=client-page.component.css.map */
