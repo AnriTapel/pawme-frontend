@@ -129,4 +129,19 @@ section .add-new-entity-block > input {
   float: right;
   margin: 20px 15px 0;
 }
+
+.breeds {
+  height: 338px !important;
+  margin-top: 90px !important;
+}
+
+.text-input input {
+  border: none !important;
+  background: none !important;
+}
+
+.table-action {
+  cursor: pointer;
+  color: #0094c5;
+}
 /*# sourceMappingURL=admin-panel.component.css.map */
