@@ -22,6 +22,9 @@
         <div (click)="switchSection('admin-list')">
             <span [class.active]="activeSection == 'admin-list'">Список админов</span>
         </div>
+        <div (click)="switchSection('select-dogs')">
+            <span [class.active]="activeSection == 'select-dogs'">Заявки на подбор собаки</span>
+        </div>
     </aside>
     <section>
         <!-- Заводчики -->
@@ -148,14 +151,13 @@
                             <th>NameGen</th>
                             <th>Edit</th>
                             <th>Delete</th>
-
                         </tr>
-                        <tr  class="text-input" *ngFor="let breed of breeds; index as i;">
+                        <tr class="text-input" *ngFor="let breed of breeds; index as i;">
                             <td>
-                                <input type="text" class="" name="name" [(ngModel)]="breed.name" />
+                                <input type="text" name="name" [(ngModel)]="breed.name" />
                             </td>
                             <td>
-                                <input type="text" class="" name="nameGen" [(ngModel)]="breed.nameGen" />
+                                <input type="text" name="nameGen" [(ngModel)]="breed.nameGen" />
                             </td>
                              <td class="table-action">
                                 <button *ngIf="enableEdit"  (click)="enableEdit=false" class="btn page-secondary-action-btn table-action" ng-click="cancel()">Cancel</button>
@@ -208,7 +210,6 @@
                         [class.invalid-form-checkbox]="invalidFields.includes('password')"
                         [(ngModel)]="newAdmin.password">
                 </div>
-
                 <div class="new-entity-block">
                     <label>Роли</label>
 
@@ -218,9 +219,7 @@
                                 [ngModelOptions]="{standalone: true}">{{role.name}}
                         </label>
                     </div>
-
                 </div>
-
                 <input type="button" class="custom-btn btn-purple" value="Создать админа" (click)="createNewAdmin()" />
             </div>
         </div>
@@ -229,7 +228,6 @@
         <div *ngIf="activeSection == 'admin-list' && appService.meData.roles.includes('ADD_ADMIN')">
             <div *ngIf="admins" class="admins-list">
                 <p>Список админов</p>
-
                 <div class="data-container">
                     <table id="admins-table">
                         <tr>
@@ -248,6 +246,31 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+        </div>
+
+         <!-- Заявки на подбор собаки -->
+         <div *ngIf="activeSection == 'select-dogs' && dogs">
+            <div class="section-top-bar">
+                <span>Заявки: {{dogs.length}}</span>
+            </div>
+            <div class="data-container">
+                <table id="dogs-table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Create Date</th>
+                        <th>City</th>
+                        <th>Breed</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr *ngFor="let dog of dogs">
+                        <td style="text-align: center;">{{dog.id}}</td>
+                        <td style="text-align: center;">{{dog.createDate | date: "short" }}</td>
+                        <td>{{dog.city}}</td>
+                        <td>{{dog.breed}}</td>
+                        <td>{{dog.email}}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </section>

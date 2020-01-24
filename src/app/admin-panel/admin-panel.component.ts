@@ -17,6 +17,7 @@ export class AdminPanelComponent implements OnInit {
   breeders: BreederForAdmin[] = null;
   messages: MessageToBreeder[] = null;
   admins: Admin[] = null;
+  dogs : any = null; 
 
   ADMIN_INFO_OBJECT : AdminInfo = {
     name: null,
@@ -42,6 +43,7 @@ export class AdminPanelComponent implements OnInit {
 
   invalidFields: string[] = [];
   breeds: Breed = null;
+  breedsById: any;
   enableEdit = false;
   enableEditIndex = null;
 
@@ -52,6 +54,7 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit() {
     this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initEntityOperations(res));
     this.breeds = this.appService.breeds;
+    this.breedsById = this.appService.breedsById;
   }
 
   logout(): void {
@@ -144,6 +147,18 @@ export class AdminPanelComponent implements OnInit {
       this.newAdmin = JSON.parse(JSON.stringify(this.ADMIN_INFO_OBJECT));
     else if (this.activeSection == 'admin-list' && !this.admins)
       this.adminService.listAdminsUsingGET().subscribe(res => this.admins = this.initEntityOperations(res));
+    else if (this.activeSection == 'select-dogs') {
+        this.adminService.listRequestsUsingGET().subscribe(
+          (res) => {
+            this.dogs = res;
+            for (let key in this.dogs) {
+              if (this.dogs[key].breed !== null) {
+              this.dogs[key].breed = this.breedsById[key];
+              }
+            }
+        });
+    }
+
   }
 
   openBreederPage(id: number): void {
