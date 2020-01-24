@@ -255,8 +255,15 @@ export class SearchPageComponent implements OnInit {
     return isValid;
   }
   public sendEmail() {
+     //@ts-ignore
+     ym(55779592, 'reachGoal', 'MatchRequest');
+     //@ts-ignore
+     gtag('event', 'MatchRequest');
+    //@ts-ignore
+    Intercom('trackEvent', 'MatchRequest');
     if (!this.validateFields())
       return;
+    
     this.sendEmaillData.email = this.sendEmaillData.email.toLowerCase();
     this.sendEmaillData.breed = this.searchData.breed;
     if (this.searchData.cities && this.searchData.cities !== null) {
