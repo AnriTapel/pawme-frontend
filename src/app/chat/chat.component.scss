@@ -5,12 +5,20 @@ button:focus {
   outline:0;
 }
 
+hr{
+  width: 80%;
+  max-width: 1210px;
+  margin: -15px auto 0;
+  background-color: #f8f9fb;
+}
+
 .container {
     width: 100%;
     max-width: 1200px;
     min-width: 320px;
     margin: 0 auto;
     padding: 0 15px;
+    margin-bottom: 100px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     font-family: 'Intro-Book' !important;
@@ -19,6 +27,7 @@ button:focus {
   .block-detail {
     padding: 50px 0 12px;
     background: #FFFFFF;
+    background-color: #f8f9fb;
   }
   .text-block {
       display: flex;
@@ -34,7 +43,6 @@ button:focus {
   }
 
   .left {
-    // width: 270px;
     width: 30%;
     height: 541px;
     border-radius: 4px;
@@ -47,23 +55,21 @@ button:focus {
     flex-wrap: nowrap;
 }
 .right {
-    // width: 870px;
-    width: 90%;
-    //height: 541px;
-    border-radius: 4px;
-    border: solid 1px #cbd8f6;
-    background-color: #ffffff;
-    margin-left: 30px;
+  width: 90%;
+  border-radius: 4px;
+  border: solid 1px #cbd8f6;
+  background-color: #ffffff;
+  margin-left: 30px;
 }
 .right-chat-content {
-  height: 471px;
+  height: 469px;
   overflow-y: scroll;
 }
 .all {
   width: 100px;
   height: 50px;
   border-radius: 25px;
-  border: solid 1px #cbd8f6;
+  border: solid 1px #645fc9;
   background-color: #645fc9;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -136,7 +142,6 @@ button:focus {
     border-radius: 30px;
     border-bottom-right-radius: 0;
     font-size: 14px;
-   // text-align: center;
     background: #eff3fc;
     color: #0e0b4d;
     font-family: "Intro-Book";
@@ -159,7 +164,6 @@ button:focus {
     border-radius: 30px;
     border-bottom-right-radius: 0;
     font-size: 14px;
-    //text-align: center;
     background: #c9ebea;
     color: #0e0b4d;
     font-family: "Intro-Book";
@@ -193,11 +197,9 @@ button:focus {
 
 }
 .write-message {
- // margin-top: 5px;
   display: flex;
   justify-content: space-between;
   padding: 14px;
-  // width: 870px;
   height: 70px;
   border-top: solid 1px #cbd8f6;
   background-color: #ffffff;
@@ -241,7 +243,6 @@ textarea:focus, input:focus{
 }
 
 .chat-info {
-  // height: 85px;
   border-bottom: solid 1px #cbd8f6;
   background-color: #ffffff;
    padding-top: 20px;
@@ -274,10 +275,26 @@ textarea:focus, input:focus{
   display: none;
 }
 
+.mobile-button {
+  display: none;
+}
+
 @media screen and (max-width: 769px) {
+  hr{
+    width: 90%;
+    margin: .5em auto 0;
+  }
+  .left {
+    display: none; //////
+  }
   .block-detail {
     background: #f8f9fb;
   }
+  .mobile-button {
+    display: block;
+    display: flex;
+  }
+
   .desktop-version {
     display: none;
   }
@@ -287,23 +304,23 @@ textarea:focus, input:focus{
   }
   .text-block {
     flex-direction: column;
+    margin-left: 6px;
     h3 {
       font-size: 20px;
     }
   }
 
   .all {
-    width: 0;
-    height: 0;
+    width: 45px;
+    height: 25px;
     border: none;
     background-color: #f8f9fb;
     color: #0e0b4d;
     font-size: 16px;
-    margin-left: -4px;
   }
   .unread {
-    width: 210px;
-    height: 0;
+    width: 185px;
+    height: 25px;
     background-color: #f8f9fb;
     border: none;
     color: #0e0b4d;
@@ -319,21 +336,26 @@ textarea:focus, input:focus{
       margin-top: 5px !important;
     }
 }
-.chat-info {
-  // height: 85px;
-  background-color: #ffffff;
-  padding-left: 20px;
-}
+  .chat-content {
+    margin-top: 15px;
+  }
+  .chat-info {
+    background-color: #ffffff;
+    padding-left: 20px;
+  }
   .name-info {
     font-size: 14px;
   }
   .message {
     font-size: 13px;
   }
-  .right{
+  .right {
     width: 100%;
     margin-left: 0;
     border-radius: 10px;
+  }
+  .desktop-button {
+    display: none;
   }
   .center-text { 
     display: none;
@@ -373,6 +395,7 @@ textarea:focus, input:focus{
       display: none;
     }
   }
+
   .write-message {
     height: 39px;
     border-radius: 10px;
