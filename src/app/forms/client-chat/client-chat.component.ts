@@ -19,11 +19,15 @@ export class ClientChatComponent implements OnInit {
   };
 
   newClientAcception: boolean = true;
+  //invalidFields: any[] = [];
+  isError: boolean = false;
+  isLoading: boolean = false;
 
   constructor(public appService: AppService) { }
 
   ngOnInit() {
   }
+  
   validateFields(): boolean {
     this.invalidFields = [];
     let isValid = true;
@@ -59,6 +63,12 @@ export class ClientChatComponent implements OnInit {
     }
 
     return isValid;
+  }
+  registartion() {
+    console.log('aaaaa');
+  }
+  fieldEdited(field: string): void {
+    this.invalidFields = this.invalidFields.filter(it => it != field);
   }
 
 }

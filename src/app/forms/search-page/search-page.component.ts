@@ -299,8 +299,7 @@ export class SearchPageComponent implements OnInit {
 
     if (this.searchData.cities.length)
       queryParams['cities'] = this.searchData.cities;
-
-    if (this.searchData.breed || this.searchData.cities.length)
+      
       queryParams['currentPage'] = this.p;
 
     this.router.navigate(

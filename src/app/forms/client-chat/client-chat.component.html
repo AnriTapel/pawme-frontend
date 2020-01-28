@@ -37,18 +37,19 @@
                 пароль</span>
         </div>
     <div class="custom-checkbox popup-form-check">
-        <div (click)="acception = !acception" [class.invalid-form-checkbox]="invalidFields.includes('acception')">
-            <img *ngIf="acception" src="./assets/img/check-mark.png" />
+        <div (click)="newClientAcception = !newClientAcception" [class.invalid-form-checkbox]="invalidFields.includes('acception')">
+            <img *ngIf="newClientAcception" src="./assets/img/check-mark.png" />
         </div>
         <label class="form-check-label">Согласен с условиями <a [routerLink]="['/docs/agreement.pdf']"
                 target="_blank">Пользовательского соглашения</a>
             и <a [routerLink]="['/docs/policy.pdf']" target="_blank">Политикой конфиденциальности</a></label>
     </div>
     <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" 
-    (click)="sendMessage()" [disabled]="isLoading">{{!isLoading ? 'Перейти к чату' : ''}}
+    (click)="registartion()" [disabled]="isLoading">{{!isLoading ? 'Перейти к чату' : ''}}
         <div *ngIf="isLoading" class="loader"></div>
     </button>
     <div class="form-group popup-form-group" style="text-align: center;">
+        <!-- <span>Уже есть аккаунт? <a [routerLink]="['/sign-up']">Войти</a></span> -->
         <span>Уже есть аккаунт? <a [routerLink]="['/sign-up']">Войти</a></span>
     </div>
 </form>
