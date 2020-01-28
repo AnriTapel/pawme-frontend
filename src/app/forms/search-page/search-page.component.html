@@ -94,7 +94,7 @@
     </div>
     <div *ngIf="getSearchData" class="search-content-wrap">
         <div>
-            <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index"
+            <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;"
                 class="main-content">
                 <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]">
                     <div class="search-right">
@@ -190,8 +190,8 @@
             <div class="heart-chat"><img src="./assets/img/search-page/heart.svg" alt="" /></div>
         </div>
     </div>
-    <div *ngIf="lenghtSearchData >10" class="pagenation">
-        <pagination-controls (pageChange)="p = $event; scrollTop()" previousLabel=" " nextLabel=" ">
+    <div *ngIf="lenghtSearchData > 10" class="pagenation">
+        <pagination-controls (pageChange)="p = $event; scrollTop(); updateParam();" previousLabel=" " nextLabel=" ">
         </pagination-controls>
     </div>
 </div>

@@ -80,6 +80,7 @@ export class BreederPageComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
+        this.appService.userData = null;
     }
 
     subpageStatus(): any {

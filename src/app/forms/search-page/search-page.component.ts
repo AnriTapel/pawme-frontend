@@ -55,7 +55,7 @@ export class SearchPageComponent implements OnInit {
   getMetaSearchData: SearchMeta = null;//BreederSearchEntry = null;
   lenghtSearchData: number;
   showTableData: boolean = false;
-  p: any;
+  p: any = 1;
   userFilter: any;
   invalidFields: any[] = [];
   showBox: boolean = false;
@@ -69,12 +69,16 @@ export class SearchPageComponent implements OnInit {
 
   showMenu;
 
-
   ngOnInit() {
-    
+
     this.route.queryParamMap.subscribe(params => {
       this.breed = params.getAll('breed');
       this.searchData.cities = params.getAll('cities');
+      if (params.getAll('currentPage').length) {
+        this.p = +params.getAll('currentPage');
+      } else {
+        this.p = 1;
+      }
     });
 
     if (this.breed.length !== 0) {
@@ -159,18 +163,18 @@ export class SearchPageComponent implements OnInit {
             this.appService.breeds.forEach(val => {
               if (this.getSearchData[key].breed0 == val.id) {
                 this.getSearchData[key].breedValue0 = val.name;
-              }  
+              }
               if (this.getSearchData[key].breed1 == val.id) {
                 this.getSearchData[key].breedValue1 = val.name;
               }
               if (this.getSearchData[key].breed2 == val.id) {
                 this.getSearchData[key].breedValue2 = val.name;
-              }  
+              }
             });
           }
-        } 
-  });
-      
+        }
+      });
+
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -193,34 +197,22 @@ export class SearchPageComponent implements OnInit {
             this.appService.breeds.forEach(val => {
               if (this.getSearchData[key].breed0 == val.id) {
                 this.getSearchData[key].breedValue0 = val.name;
-              }  
+              }
               if (this.getSearchData[key].breed1 == val.id) {
                 this.getSearchData[key].breedValue1 = val.name;
               }
               if (this.getSearchData[key].breed2 == val.id) {
                 this.getSearchData[key].breedValue2 = val.name;
-              }  
+              }
             });
           }
-        } 
+        }
       }, (err) => {
         if (err.status == 404)
           console.log('error', err)
       });
 
-    const queryParams = {};
-
-    if (this.searchData.breed)
-      queryParams['breed'] = this.searchData.breed;
-    if (this.searchData.cities)
-      queryParams['cities'] = this.searchData.cities;
-
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: queryParams
-      });
+    this.updateParam();
 
     if (this.searchData.breed) {
       this.breedList.forEach(element => {
@@ -255,15 +247,15 @@ export class SearchPageComponent implements OnInit {
     return isValid;
   }
   public sendEmail() {
-     //@ts-ignore
-     ym(55779592, 'reachGoal', 'MatchRequest');
-     //@ts-ignore
-     gtag('event', 'MatchRequest');
+    //@ts-ignore
+    ym(55779592, 'reachGoal', 'MatchRequest');
+    //@ts-ignore
+    gtag('event', 'MatchRequest');
     //@ts-ignore
     Intercom('trackEvent', 'MatchRequest');
     if (!this.validateFields())
       return;
-    
+
     this.sendEmaillData.email = this.sendEmaillData.email.toLowerCase();
     this.sendEmaillData.breed = this.searchData.breed;
     if (this.searchData.cities && this.searchData.cities !== null) {
@@ -297,5 +289,25 @@ export class SearchPageComponent implements OnInit {
         this.selectedBreedChar = null;
 
     });
+  }
+
+  updateParam() {
+    const queryParams = {};
+
+    if (this.searchData.breed)
+      queryParams['breed'] = this.searchData.breed;
+
+    if (this.searchData.cities.length)
+      queryParams['cities'] = this.searchData.cities;
+
+    if (this.searchData.breed || this.searchData.cities.length)
+      queryParams['currentPage'] = this.p;
+
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: queryParams
+      });
   }
 }
