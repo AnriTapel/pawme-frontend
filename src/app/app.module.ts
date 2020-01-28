@@ -61,6 +61,8 @@ import { MenuComponent } from './template-blocks/menu/menu.component';
 import { Header2Component } from './template-blocks/header2/header2.component';
 import { VersionComponent } from './forms/version/version.component';
 import { ChatComponent } from './chat/chat.component';
+import { ClientRegistrationComponent } from './client-registration/client-registration.component';
+import { ClientChatComponent } from './forms/client-chat/client-chat.component';
 
 
 
@@ -116,7 +118,9 @@ export function initApp(appSerivce: AppService){
     MenuComponent,
     Header2Component,
     VersionComponent,
-    ChatComponent
+    ChatComponent,
+    ClientRegistrationComponent,
+    ClientChatComponent
   ],
   imports: [
     BrowserModule,

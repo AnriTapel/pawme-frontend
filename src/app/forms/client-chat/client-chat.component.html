@@ -1,6 +1,6 @@
 <h3>Написать заводчику</h3>
 
-<p>Напишите свое сообщение заводчику, и он ответит вам на email или позвонит</p>
+<p>Пожалуйста, зарегистрируйтесь или войдите, чтобы начать чат с заводчиком</p>
 
 <div *ngIf="isError" class="form-error-message-block">
     <span class="invalid-field-message">Произошла ошибка при отправке, попробуйте еще раз.</span>
@@ -9,50 +9,46 @@
 <form>
     <div class="form-group popup-form-group">
         <label for="name">Имя</label>
-        <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="breederMessage.name"
+        <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="clientData.name"
             [class.invalid-form-field-value]="invalidFields.includes('name')" />
         <span *ngIf="invalidFields.includes('name')" class="invalid-field-message">Пожалуйста, введите Ваше имя</span>
     </div>
     <div class="form-group popup-form-group">
         <label for="email">Ваш e-mail</label>
         <input type="email" class="form-control custom-form-control-border" name="email"
-            [(ngModel)]="breederMessage.email" [class.invalid-form-field-value]="invalidFields.includes('email')" />
+            [(ngModel)]="clientData.email" [class.invalid-form-field-value]="invalidFields.includes('email')" />
         <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
             E-mail</span>
     </div>
     <div class="form-group popup-form-group">
         <label for="phone">Ваш телефон</label>
         <input type="text" class="form-control custom-form-control-border" name="phone" 
-        [imask]="{mask: '+{7} (000) 000 0000'}" [(ngModel)]="breederMessage.phone"  (input)="appService.setPhoneMask($event)" (focus)="appService.setPhoneMask($event)"
+        [imask]="{mask: '+{7} (000) 000 0000'}" [(ngModel)]="clientData.phone"  (input)="appService.setPhoneMask($event)" (focus)="appService.setPhoneMask($event)"
         (onchange)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"    [class.invalid-form-field-value]="invalidFields.includes('phone')" />
         <span *ngIf="invalidFields.includes('phone')" 
         class="invalid-field-message">Пожалуйста, введите действительный
             телефон</span>
     </div>
     <div class="form-group popup-form-group">
-        <label for="message">Ваше сообщение</label>
-        <span class="textarea-length-counter"
-            [style.color]="appService.getTextareaLimit(breederMessage.message, 2048) > 0 ? '#46b0ad' : '#eb0000'">
-            {{appService.getTextareaLimit(breederMessage.message, 2048)}}
-        </span>
-        <textarea rows="3" class="form-control custom-form-control-border" name="message"
-            [(ngModel)]="breederMessage.message"
-            [class.invalid-form-field-value]="invalidFields.includes('message')"></textarea>
-        <span *ngIf="invalidFields.includes('message')" class="invalid-field-message">Пожалуйста, введите текст
-            сообщения</span>
-    </div>
-
+            <label for="password">Пароль</label>
+            <input type="password" class="form-control custom-form-control-border" name="password" (change)="fieldEdited('password')"
+                [(ngModel)]="clientData.password" [class.invalid-form-field-value]="invalidFields.includes('password')" />
+            <span *ngIf="invalidFields.includes('password')" class="invalid-field-message">Пожалуйста, введите Ваш
+                пароль</span>
+        </div>
     <div class="custom-checkbox popup-form-check">
         <div (click)="acception = !acception" [class.invalid-form-checkbox]="invalidFields.includes('acception')">
             <img *ngIf="acception" src="./assets/img/check-mark.png" />
         </div>
         <label class="form-check-label">Согласен с условиями <a [routerLink]="['/docs/agreement.pdf']"
-                target="_blank">Пользовательского
-                соглашения</a>
+                target="_blank">Пользовательского соглашения</a>
             и <a [routerLink]="['/docs/policy.pdf']" target="_blank">Политикой конфиденциальности</a></label>
     </div>
     <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" 
-    (click)="sendMessage()" [disabled]="isLoading">{{!isLoading ? 'Отправить' : ''}}
+    (click)="sendMessage()" [disabled]="isLoading">{{!isLoading ? 'Перейти к чату' : ''}}
         <div *ngIf="isLoading" class="loader"></div>
     </button>
+    <div class="form-group popup-form-group" style="text-align: center;">
+        <span>Уже есть аккаунт? <a [routerLink]="['/sign-up']">Войти</a></span>
+    </div>
 </form>

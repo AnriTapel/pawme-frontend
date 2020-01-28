@@ -1,14 +1,11 @@
-h3{
-    display: block;
-    width: 100%;
-    text-align: center;
+p {
+    font-size: 14px;
+    width: 50%;
+    margin: 1em auto 0;
+    opacity: 0.5;
 }
 
-form{
-    margin-bottom: 5em;
-}
-
-span{
+span {
     font-size: 14px;
 
     a{
@@ -22,12 +19,13 @@ span{
     }
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 769px){
+
     h3{
-        margin-top: 1em;
+        font-size: 20px;
+    }
+
+    p{
+        width: 80%;
     }
 }
-
-
-  
- 
