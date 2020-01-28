@@ -303,10 +303,11 @@ textarea:focus, input:focus{
     background: #ffffff;
   }
   .text-block {
-    flex-direction: column;
-    margin-left: 6px;
+    flex-direction: row;
+    
     h3 {
       font-size: 20px;
+      margin-left: 12px !important;
     }
   }
 
@@ -397,7 +398,7 @@ textarea:focus, input:focus{
   }
 
   .write-message {
-    height: 39px;
+    height: 42px;
     border-radius: 10px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
