@@ -2,15 +2,13 @@
 
 <p>Пожалуйста, зарегистрируйтесь или войдите, чтобы начать чат с заводчиком</p>
 
-<!-- <div *ngIf="isError" class="form-error-message-block">
-    <span class="invalid-field-message">Произошла ошибка при отправке, попробуйте еще раз.</span>
-</div> -->
 <div *ngIf="errorText" class="form-error-message-block">
     <span class="invalid-field-message">{{errorText}}</span>
 </div>
 
 <form>
-    <div class="form-group popup-form-group">
+    <div *ngIf="isOpen" class="registration">
+        <div class="form-group popup-form-group">
             <label for="name">Имя</label>
             <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="clientData.name"
                 [class.invalid-form-field-value]="invalidFields.includes('name')" (change)="fieldEdited('name')"/>
@@ -23,36 +21,60 @@
             <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
                 E-mail</span>
         </div>
-    <div class="form-group popup-form-group">
-        <label for="phone">Ваш телефон</label>
-        <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
-        [imask]="{mask: '+{7} (000) 000 0000'}" [(ngModel)]="clientData.phone" (input)="appService.setPhoneMask($event)" (change)="fieldEdited('phone')"
-            (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
-        [class.invalid-form-field-value]="invalidFields.includes('phone')" />
-        <span *ngIf="invalidFields.includes('phone')" class="invalid-field-message">Пожалуйста, введите действительный
-            телефон</span>
-    </div>
-    <div class="form-group popup-form-group">
+        <div class="form-group popup-form-group">
+            <label for="phone">Ваш телефон</label>
+            <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
+            [imask]="{mask: '+{7} (000) 000 0000'}" [(ngModel)]="clientData.phone" (input)="appService.setPhoneMask($event)" (change)="fieldEdited('phone')"
+                (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
+            [class.invalid-form-field-value]="invalidFields.includes('phone')" />
+            <span *ngIf="invalidFields.includes('phone')" class="invalid-field-message">Пожалуйста, введите действительный
+                телефон</span>
+        </div>
+        <div class="form-group popup-form-group">
             <label for="password">Пароль</label>
             <input type="password" class="form-control custom-form-control-border" name="password" (change)="fieldEdited('password')"
                 [(ngModel)]="clientData.password" [class.invalid-form-field-value]="invalidFields.includes('password')" />
             <span *ngIf="invalidFields.includes('password')" class="invalid-field-message">Пожалуйста, введите Ваш
                 пароль</span>
         </div>
-    <div class="custom-checkbox popup-form-check">
-        <div (click)="newClientAcception = !newClientAcception" [class.invalid-form-checkbox]="invalidFields.includes('acception')">
-            <img *ngIf="newClientAcception" src="./assets/img/check-mark.png" />
+        <div class="custom-checkbox popup-form-check">
+            <div (click)="newClientAcception = !newClientAcception" [class.invalid-form-checkbox]="invalidFields.includes('acception')">
+                <img *ngIf="newClientAcception" src="./assets/img/check-mark.png" />
+            </div>
+            <label class="form-check-label">Согласен с условиями <a [routerLink]="['/docs/agreement.pdf']"
+                    target="_blank">Пользовательского соглашения</a>
+                и <a [routerLink]="['/docs/policy.pdf']" target="_blank">Политикой конфиденциальности</a></label>
         </div>
-        <label class="form-check-label">Согласен с условиями <a [routerLink]="['/docs/agreement.pdf']"
-                target="_blank">Пользовательского соглашения</a>
-            и <a [routerLink]="['/docs/policy.pdf']" target="_blank">Политикой конфиденциальности</a></label>
+        <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" 
+        (click)="clientRegistartion()" [disabled]="isLoading">{{!isLoading ? 'Перейти к чату' : ''}}
+            <div *ngIf="isLoading" class="loader"></div>
+        </button>
+        <div class="form-group popup-form-group" style="text-align: center;">
+            <span>Уже есть аккаунт? <a (click)="isOpen = !isOpen">Войти</a></span>
+        </div>
     </div>
-    <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" 
-    (click)="clientRegistartion()" [disabled]="isLoading">{{!isLoading ? 'Перейти к чату' : ''}}
-        <div *ngIf="isLoading" class="loader"></div>
-    </button>
-    <div class="form-group popup-form-group" style="text-align: center;">
-        <!-- <span>Уже есть аккаунт? <a [routerLink]="['/sign-up']">Войти</a></span> -->
-        <span>Уже есть аккаунт? <a [routerLink]="['/sign-up']">Войти</a></span>
+
+    <div *ngIf="!isOpen" class="login">
+        <div class="form-group popup-form-group">
+            <label for="email">Ваш Email</label>
+            <input type="email" class="form-control custom-form-control-border" name="email" [(ngModel)]="clientData.email"
+                [class.invalid-form-field-value]="invalidFields.includes('email')" (change)="fieldEdited('email')"/>
+            <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
+                E-mail</span>
+        </div>
+        <div class="form-group popup-form-group">
+            <label for="password">Пароль</label>
+            <input type="password" class="form-control custom-form-control-border" name="password" (change)="fieldEdited('password')"
+                [(ngModel)]="clientData.password" [class.invalid-form-field-value]="invalidFields.includes('password')" />
+            <span *ngIf="invalidFields.includes('password')" class="invalid-field-message">Пожалуйста, введите Ваш
+                пароль</span>
+        </div>
+        <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" 
+        (click)="clientLogin()" [disabled]="isLoading">{{!isLoading ? 'Перейти к чату' : ''}}
+            <div *ngIf="isLoading" class="loader"></div>
+        </button>
+        <div class="form-group popup-form-group" style="text-align: center;">
+            <span>Нет аккаунта? <a (click)="isOpen = !isOpen">Создать</a></span>
+        </div>
     </div>
 </form>

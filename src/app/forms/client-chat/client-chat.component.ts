@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterCustomer } from 'src/app/model/registerCustomer';
 import { AppService } from 'src/app/services/app-service/app.service';
-
- import { CustomerControllerService } from 'src/app/api/api';
+import { CustomerControllerService } from 'src/app/api/api';
+import { Router } from '@angular/router';
+import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
+import { NotificationBarService } from '../../services/nofitication-service/notification-bar.service';
 
 @Component({
   selector: 'app-client-chat',
@@ -19,12 +21,17 @@ export class ClientChatComponent implements OnInit {
     phone: null,
     preferWhatsapp: null
   };
-
   newClientAcception: boolean = true;
   errorText: string = null;
   isLoading: boolean = false;
+  isOpen: boolean = false;
 
-  constructor(public appService: AppService, public customerService: CustomerControllerService) { }
+  constructor(
+    public appService: AppService, 
+    public customerService: CustomerControllerService, 
+    private router: Router,
+    public popupService: PopupTemplateService, 
+    private notificationService: NotificationBarService) { }
 
   ngOnInit() {
   }
@@ -75,12 +82,24 @@ export class ClientChatComponent implements OnInit {
     this.errorText = null;
     this.isLoading = true;
     this.clientData.email = this.clientData.email.toLowerCase();
-    this.clientData.preferWhatsapp = true;
     this.customerService.registerUsingPOST1(this.clientData).subscribe(
       res => {
-        // this.router.navigate(['/confirm-email', this.clientData.email]);
         // window.scrollTo(0, 0);
-        console.log('aaaaa');
+        this.notificationService.setContext('Письмо заводчику успешно отправлено', true);
+        this.notificationService.setVisibility(true);
+        this.isLoading = false;
+        this.popupService.setShowStatus(false);
+        console.log('res', res);
+         //@ts-ignore
+        // window.intercomSettings.name = res.name;
+         //@ts-ignore
+         window.intercomSettings.user_id = res.id;
+         //@ts-ignore
+        // window.intercomSettings['breeder_page_url'] = 'https://dev.petman.co/chat/' + res.id;
+        //this.appService.userData.id = res.id;
+         //this.router.navigate(['/chat']);
+         this.router.navigateByUrl('/chat');
+      
       }, error => {
         this.isLoading = false;
         if (error.status == 409)
@@ -88,6 +107,12 @@ export class ClientChatComponent implements OnInit {
         else
           this.errorText = "Произошла ошибка, попробуйте еще раз"
       });
+  }
+
+  clientLogin() {
+    console.log('login');
+    if (!this.validateFields())
+    return;
   }
 
 }
