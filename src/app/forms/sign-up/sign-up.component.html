@@ -58,8 +58,7 @@
     (click)="signUpNewBreeder()" [disabled]="isLoading">{{!isLoading ? 'Зарегистрироваться' : ''}}
         <div *ngIf="isLoading" class="loader"></div>
     </button>
-
-
+    
     <div class="form-group popup-form-group" style="text-align: center;">
         <span>Уже есть аккаунт? <a [routerLink]="['/login']">Войти</a></span>
     </div>

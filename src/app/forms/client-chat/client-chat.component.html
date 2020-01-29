@@ -2,31 +2,34 @@
 
 <p>Пожалуйста, зарегистрируйтесь или войдите, чтобы начать чат с заводчиком</p>
 
-<div *ngIf="isError" class="form-error-message-block">
+<!-- <div *ngIf="isError" class="form-error-message-block">
     <span class="invalid-field-message">Произошла ошибка при отправке, попробуйте еще раз.</span>
+</div> -->
+<div *ngIf="errorText" class="form-error-message-block">
+    <span class="invalid-field-message">{{errorText}}</span>
 </div>
 
 <form>
     <div class="form-group popup-form-group">
-        <label for="name">Имя</label>
-        <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="clientData.name"
-            [class.invalid-form-field-value]="invalidFields.includes('name')" />
-        <span *ngIf="invalidFields.includes('name')" class="invalid-field-message">Пожалуйста, введите Ваше имя</span>
-    </div>
-    <div class="form-group popup-form-group">
-        <label for="email">Ваш e-mail</label>
-        <input type="email" class="form-control custom-form-control-border" name="email"
-            [(ngModel)]="clientData.email" [class.invalid-form-field-value]="invalidFields.includes('email')" />
-        <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
-            E-mail</span>
-    </div>
+            <label for="name">Имя</label>
+            <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="clientData.name"
+                [class.invalid-form-field-value]="invalidFields.includes('name')" (change)="fieldEdited('name')"/>
+            <span *ngIf="invalidFields.includes('name')" class="invalid-field-message">Пожалуйста, введите Ваше имя</span>
+        </div>
+        <div class="form-group popup-form-group">
+            <label for="email">Ваш Email</label>
+            <input type="email" class="form-control custom-form-control-border" name="email" [(ngModel)]="clientData.email"
+                [class.invalid-form-field-value]="invalidFields.includes('email')" (change)="fieldEdited('email')"/>
+            <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
+                E-mail</span>
+        </div>
     <div class="form-group popup-form-group">
         <label for="phone">Ваш телефон</label>
-        <input type="text" class="form-control custom-form-control-border" name="phone" 
-        [imask]="{mask: '+{7} (000) 000 0000'}" [(ngModel)]="clientData.phone"  (input)="appService.setPhoneMask($event)" (focus)="appService.setPhoneMask($event)"
-        (onchange)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"    [class.invalid-form-field-value]="invalidFields.includes('phone')" />
-        <span *ngIf="invalidFields.includes('phone')" 
-        class="invalid-field-message">Пожалуйста, введите действительный
+        <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
+        [imask]="{mask: '+{7} (000) 000 0000'}" [(ngModel)]="clientData.phone" (input)="appService.setPhoneMask($event)" (change)="fieldEdited('phone')"
+            (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
+        [class.invalid-form-field-value]="invalidFields.includes('phone')" />
+        <span *ngIf="invalidFields.includes('phone')" class="invalid-field-message">Пожалуйста, введите действительный
             телефон</span>
     </div>
     <div class="form-group popup-form-group">
@@ -45,7 +48,7 @@
             и <a [routerLink]="['/docs/policy.pdf']" target="_blank">Политикой конфиденциальности</a></label>
     </div>
     <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" 
-    (click)="registartion()" [disabled]="isLoading">{{!isLoading ? 'Перейти к чату' : ''}}
+    (click)="clientRegistartion()" [disabled]="isLoading">{{!isLoading ? 'Перейти к чату' : ''}}
         <div *ngIf="isLoading" class="loader"></div>
     </button>
     <div class="form-group popup-form-group" style="text-align: center;">

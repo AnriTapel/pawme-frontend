@@ -33,7 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LyThemeModule, LY_THEME } from '@alyle/ui';
 import { MinimaLight } from '@alyle/ui/themes/minima';
 import { LyResizingCroppingImageModule } from '@alyle/ui/resizing-cropping-images'
-import { BreederControllerService, AdminControllerService, DictionaryControllerService, MediaControllerService, SearchControllerService } from './api/api';
+import { BreederControllerService, AdminControllerService, DictionaryControllerService, MediaControllerService, SearchControllerService, CustomerControllerService } from './api/api';
 import { NotificationBarComponent } from './template-blocks/notification-bar/notification-bar.component';
 import { BreederMessageComponent } from './forms/breeder-message/breeder-message.component';
 import { DogCardComponent } from './forms/dog-card/dog-card.component';
@@ -147,6 +147,7 @@ export function initApp(appSerivce: AppService){
     PopupTemplateService,
     EventService,
     AdminControllerService,
+    CustomerControllerService,
     BreederControllerService,
     SearchControllerService,
     DictionaryControllerService,

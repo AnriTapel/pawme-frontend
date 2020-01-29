@@ -73,20 +73,20 @@ export class SignUpComponent implements OnInit {
   validateFields(): boolean {
     this.invalidFields = [];
     let isValid = true;
-    if (!this.breederData.name || this.breederData.name == "" || this.breederData.name.length < 2 || this.breederData.name.length > 30) {
+    if (!this.breederData.name || this.breederData.name == "" || this.breederData.name && this.breederData.name.length < 2 || this.breederData.name && this.breederData.name.length > 30) {
       isValid = false;
       this.invalidFields.push("name");
     }
 
     if (!this.breederData.surname || this.breederData.surname == ""
-      || this.breederData.surname.length < 2 || this.breederData.surname.length > 30) {
+      || this.breederData.surname && this.breederData.surname.length < 2 || this.breederData.surname && this.breederData.surname.length > 30) {
       isValid = false;
       this.invalidFields.push("lastname");
     }
 
     if (!this.breederData.phone || this.breederData.phone == ""
-      || this.breederData.phone.length != 17) {
-      if (this.breederData.phone.length == 18 )
+      || this.breederData.phone && this.breederData.phone.length != 17) {
+      if (this.breederData.phone && this.breederData.phone.length == 18 )
         this.breederData.phone = this.breederData.phone.substr(0, 17);
       else {
         isValid = false;
@@ -101,7 +101,7 @@ export class SignUpComponent implements OnInit {
     }
 
     if (!this.breederData.password || this.breederData.password == ""
-      || this.breederData.password.length < 2 || this.breederData.password.length > 30) {
+      || this.breederData.password && this.breederData.password.length < 2 || this.breederData.password && this.breederData.password.length > 30) {
       isValid = false;
       this.invalidFields.push("password");
     }

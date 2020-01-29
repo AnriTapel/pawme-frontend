@@ -21,9 +21,11 @@
         <span *ngIf="profileService.invalidFields.includes('lastname')" class="invalid-field-message">Пожалуйста, введите Вашу фамилию</span>
     </div>
     <div class="about-me-form-group">
+        <label for="howItStarted">Расскажите о себе</label>
         <span class="block-description">Чтобы вам было проще, мы подготовили ряд наводящих вопросов. Какая ваша роль в питомнике и помогает ли вам семья?
             Что вам нравится в вашей породе и какие у вас профессиональные цели?
         </span>
+    
         <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(breederData.about, 2048) > 0 ? '#46b0ad' : '#eb0000'">
             {{appService.getTextareaLimit(breederData.about, 2048)}}
         </span>
