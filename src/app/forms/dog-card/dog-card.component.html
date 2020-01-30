@@ -54,16 +54,26 @@
                     <div class="puppy-parents-block">
                         <span>Родители:</span><br/>
                         <div>
-                            <img src="/img/{{dog.father.gallery[0].preview}}.jpg" alt="Отец щенка" />
+                            <div *ngIf="dog.father">
+                                <img src="/img/{{dog.father.gallery[0].preview}}.jpg" alt="Отец щенка" />
+                            </div>
+                            <div *ngIf="!dog.father">
+                                <img src="./assets/img/dog_default.svg" alt="Отец щенка" />
+                            </div>
                             <div class="puppy-parent-info">
-                                <span>{{dog.father.nickname}}</span><br/>
+                                <span *ngIf="dog.father">{{dog.father.nickname}}</span><br/>
                                 <span style="opacity: 0.5">(папа)</span>
                             </div>
                         </div>
                         <div>
-                            <img src="/img/{{dog.mother.gallery[0].preview}}.jpg" alt="Мама щенка" />
+                            <div *ngIf="dog.mother">
+                                <img src="/img/{{dog.mother.gallery[0].preview}}.jpg" alt="Мама щенка" />
+                            </div>
+                            <div *ngIf="!dog.mother">
+                                <img src="./assets/img/dog_default.svg" alt="Отец щенка" />
+                            </div>
                             <div class="puppy-parent-info">
-                                <span>{{dog.mother.nickname}}</span><br/>
+                                <span *ngIf="dog.mother">{{dog.mother.nickname}}</span><br/>
                                 <span style="opacity: 0.5">(мама)</span>
                             </div>
                         </div>
