@@ -10,7 +10,7 @@
     </div>
     <div class="breeder-profile-subpage-form-left">
         <label for="nurcery-name">Название питомника (необязательно)</label>
-        <input class="form-control custom-form-control-border" type="text" name="nurcery-name" [(ngModel)]="nurceryData.name" (change)="profileService.inputValueChanged('name')"
+        <input class="form-control custom-form-control-border" type="text" name="nurcery-name" [(ngModel)]="nurceryData.name" (change)="profileService.inputValueChanged('name'); updateToLocalStorage();"
         [class.invalid-form-field-value]="profileService.invalidFields.includes('name')" placeholder="Название питомника" />
     </div>
 
@@ -20,7 +20,7 @@
             <input *ngIf="appService.cities" type="text" class="city-disabled form-control custom-form-control-border" name="nurcery-location" [(ngModel)]="nurceryData.city"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('city')" id="city" [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"
                 (focus)="cityFocus$.next($event.target.value)" (click)="onCityClick($event)" #cityInstance="ngbTypeahead"
-                (change)="profileService.inputValueChanged('city')" placeholder="Выбрать">
+                (change)="profileService.inputValueChanged('city')" placeholder="Выбрать" (ngModelChange)="updateToLocalStorage();">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('city', $event)" />
         </div>
     </div>
@@ -33,7 +33,7 @@
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="nurcery-main-breed" [(ngModel)]="curMainBreed"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('mainBreed')" id="main-breed" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, mainBreedFocus$, mainBreedClick$, mainBreedInstance)"
                 (focus)="mainBreedFocus$.next($event.target.value)" (click)="onMainBreedClick($event)" (change)="profileService.inputValueChanged('mainBreed')"
-                #mainBreedInstance="ngbTypeahead" placeholder="Выбрать">
+                #mainBreedInstance="ngbTypeahead" placeholder="Выбрать" (ngModelChange)="updateToLocalStorage();">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('main-breed', $event)"
             />
         </div>
@@ -52,7 +52,7 @@
             <input type="text" class="form-control custom-form-control-border" name="nurcery-additional-breed" [(ngModel)]="curExtraBreed"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('extraBreed')" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, addBreedFocus$, addBreedClick$, addBreedInstance)"
                 (focus)="addBreedFocus$.next($event.target.value)" (click)="onExtraBreedClick($event)" id="extra-breed"
-                (change)="profileService.inputValueChanged('extraBreed')" #addBreedInstance="ngbTypeahead" placeholder="Выбрать">
+                (change)="profileService.inputValueChanged('extraBreed');" #addBreedInstance="ngbTypeahead" placeholder="Выбрать" (ngModelChange)="updateToLocalStorage();">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('extra-breed', $event)"
             />
         </div>
@@ -66,7 +66,7 @@
         <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(nurceryData.description, 600) > 0 ? '#46b0ad' : '#eb0000'">
             {{appService.getTextareaLimit(nurceryData.description, 600)}}
         </span>
-        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="nurceryData.description" (change)="profileService.inputValueChanged('desc')"
+        <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="nurceryData.description" (change)="profileService.inputValueChanged('desc'); updateToLocalStorage();"
             [class.invalid-form-field-value]="profileService.invalidFields.includes('desc')" placeholder="Описание"></textarea>
     </div>
 

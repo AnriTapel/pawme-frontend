@@ -20,9 +20,22 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
 
   constructor(public appService: AppService, private breederService: BreederControllerService, private eventService: EventService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService, private router: Router) { }
+    updateToLocalStorage() {
+      let obj: any = this.puppiesData
+      localStorage.setItem('IVAboutPuppies', JSON.stringify(obj))
+      console.log('update');
+    }
+
 
   ngOnInit() {
-    this.puppiesData = this.appService.userData.puppiesInfo ? <PuppiesInfo>this.appService.userData.puppiesInfo : {
+    let intervediateData = JSON.parse(localStorage.getItem('IVAboutPuppies'));
+
+    console.log(intervediateData);
+
+    if (this.appService.userData.puppiesInfo) {
+      this.puppiesData = <PuppiesInfo>this.appService.userData.puppiesInfo;
+    } else {
+      this.puppiesData = {
       age: null,
       priceFrom: null,
       priceTo: null,
@@ -33,6 +46,15 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       insuranceCoverage: null,
       gifts: null
     };
+      if (intervediateData) {
+        for (const key in intervediateData) {
+          if (intervediateData[key]) {
+            this.puppiesData[key] = intervediateData[key];
+          }
+        }
+      }
+    }
+
     this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => this.saveChanges(forPreview));
   }
 
@@ -52,6 +74,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     else
       this.puppiesData.puppyTests.push(test);
     this.profileService.dataChangesSaved = false;
+    this.updateToLocalStorage();
   }
 
   getTestStatus(test: PuppyTest): boolean {

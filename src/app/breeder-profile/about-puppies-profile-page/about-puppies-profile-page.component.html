@@ -12,7 +12,7 @@
         <label for="puppies-age">Возраст продажи щенков</label>
         <div class="input-group mb-3">
             <input type="number" min="0" name="puppies-age" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.age" placeholder="от"
-                (change)="profileService.inputValueChanged('age')" aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="profileService.invalidFields.includes('age')">
+                (change)="profileService.inputValueChanged('age'); updateToLocalStorage();" aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="profileService.invalidFields.includes('age')">
             <div class="input-group-append">
                 <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="profileService.invalidFields.includes('age')"
                     id="basic-addon2">недель</span>
@@ -24,8 +24,8 @@
         <label for="puppies-price">Стоимость щенков в рублях</label>
         <div class="input-group">
             <input type="number" min="0" class="form-control custom-form-control-border" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
-                (change)="profileService.inputValueChanged('priceFrom')" placeholder="от" [class.invalid-form-field-value]="profileService.invalidFields.includes('priceFrom')">
-            <input type="number" min="0" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до" (change)="profileService.inputValueChanged('priceFrom')"
+                (change)="profileService.inputValueChanged('priceFrom'); updateToLocalStorage();" placeholder="от" [class.invalid-form-field-value]="profileService.invalidFields.includes('priceFrom')">
+            <input type="number" min="0" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до" (change)="profileService.inputValueChanged('priceFrom'); updateToLocalStorage();"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('priceTo')">
         </div>
     </div>
@@ -38,7 +38,7 @@
             </strong> и
             <strong>клеймо</strong>.</p>
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet" [class.invalid-form-field-value]="profileService.invalidFields.includes('set')">
+            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet; updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('set')">
                 <img *ngIf="puppiesData.petmanSet" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю наличие такого комплекта</label>
@@ -86,7 +86,7 @@
 
 
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract" [class.invalid-form-field-value]="profileService.invalidFields.includes('contract')">
+            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract; updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('contract')">
                 <img *ngIf="puppiesData.petmanContract" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю готовность использовать договор</label>
@@ -122,7 +122,7 @@
             {{appService.getTextareaLimit(puppiesData.gifts, 512)}}
         </span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts" 
-            [class.invalid-form-field-value]="profileService.invalidFields.includes('gifts')"(change)="profileService.inputValueChanged('gifts')"></textarea>
+            [class.invalid-form-field-value]="profileService.invalidFields.includes('gifts')"(change)="profileService.inputValueChanged('gifts'); updateToLocalStorage();"></textarea>
     </div>
 
     <div class="lower-btn">

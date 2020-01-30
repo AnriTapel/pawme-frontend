@@ -44,9 +44,30 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     private eventService: EventService, private breederService: BreederControllerService, public profileService: BreederProfileService,
     private router: Router) { }
 
+  updateToLocalStorage() {
+    let obj: any = this.nurceryData
+    if (this.curMainBreed) {
+      this.appService.breeds.filter((item) => {
+        if (item.name.toLowerCase() === this.curMainBreed.toLowerCase()) {
+          obj['mainBreed'] = item;
+        }
+      });
+    }
+    if (this.curExtraBreed) {
+      this.appService.breeds.filter((item) => {
+        if (item.name.toLowerCase() === this.curExtraBreed.toLowerCase()) {
+          obj['extraBreed'] = item;
+        }
+      });
+    }
+    localStorage.setItem('IVAboutNurcery', JSON.stringify(obj))
+  }
+
   ngOnInit() {
 
-    this.nurceryData = this.appService.userData.generalInfo ? <BreederInfo>this.appService.userData.generalInfo : {
+    let intervediateData = JSON.parse(localStorage.getItem('IVAboutNurcery'));
+
+    this.nurceryData = {
       name: null,
       city: null,
       mainBreed: null,
@@ -58,6 +79,19 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       site: null,
       facebook: null
     };
+
+    if (this.appService.userData.generalInfo) {
+      this.nurceryData = <BreederInfo>this.appService.userData.generalInfo;
+    } else {
+      if (intervediateData) {
+        for (const key in intervediateData) {
+          if (intervediateData[key]) {
+            this.nurceryData[key] = intervediateData[key];
+          }
+        }
+      }
+    }
+
     this.isAdditionalBreed = this.nurceryData.extraBreed ? true : false;
     this.curMainBreed = this.nurceryData.mainBreed ? this.nurceryData.mainBreed.name : null;
     this.curExtraBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
@@ -97,6 +131,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         this.profileService.inputValueChanged('profilePhoto');
         this.popupService.setShowStatus(false);
         this.nurceryData.profilePhoto = imageData;
+        this.updateToLocalStorage();
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
@@ -128,6 +163,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
           this.nurceryData.gallery.push(imageData);
         else
           this.nurceryData.gallery[index] = imageData;
+        this.updateToLocalStorage();
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
