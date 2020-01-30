@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
 import { NotificationBarService } from '../../services/nofitication-service/notification-bar.service';
 
+
+
 @Component({
   selector: 'app-client-chat',
   templateUrl: './client-chat.component.html',

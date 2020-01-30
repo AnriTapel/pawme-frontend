@@ -19,6 +19,7 @@ export class DogCardComponent implements OnInit {
 
   constructor(private appService: AppService, public dogCardService: DogCardService, private popupService: PopupTemplateService) {
     this.dog = dogCardService.getDog();
+    console.log(' this.dog', this.dog)
     if (this.dog.price == null) {
       this.dog.price = "уточняйте у заводчика"
     }
