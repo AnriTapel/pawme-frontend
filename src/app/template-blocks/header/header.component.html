@@ -24,6 +24,17 @@
                         height="15px" alt="Выйти" style="margin-right: 9px;" />Выйти</a>
             </div>
         </div>
+        <div *ngIf="getMenuType() == 2" class="my-2 my-lg-0">
+                <div class="menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a *ngIf="!appService.userData || !appService.userData.generalInfo || !appService.userData.generalInfo.profilePhoto">ЛК</a>
+                    <img *ngIf="appService.userData && appService.userData.generalInfo && appService.userData.generalInfo.profilePhoto"
+                        src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg"/>
+                </div>
+                <div class="dropdown-menu custom-header-dropdown-menu">
+                    <a class="dropdown-item" (click)="logout()"><img src="./assets/img/menu-log-out.png" width="15px"
+                        height="15px" alt="Выйти" style="margin-right: 9px;" />Выйти</a>
+                </div>
+            </div>
         <div *ngIf="getMenuType() == 0" class="my-2 my-lg-0">
             <input type="button" class="custom-btn btn-transparent" [class.white-login-btn]="isNonProfileHeader()"
                 value="Войти" [routerLink]="['/login']" />
