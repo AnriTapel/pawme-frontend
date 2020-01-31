@@ -63,6 +63,7 @@ import { VersionComponent } from './forms/version/version.component';
 import { ChatComponent } from './chat/chat.component';
 import { ClientRegistrationComponent } from './client-registration/client-registration.component';
 import { ClientChatComponent } from './forms/client-chat/client-chat.component';
+import { ChatService } from './services/chat-service/chat.service';
 
 
 
@@ -153,6 +154,7 @@ export function initApp(appSerivce: AppService){
     DictionaryControllerService,
     MediaControllerService,
     AlertService,
+    ChatService,
     { provide: APP_INITIALIZER, useFactory: initApp, deps: [AppService], multi: true },
     { provide: LY_THEME, useClass: MinimaLight, multi: true }
     
