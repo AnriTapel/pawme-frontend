@@ -18,8 +18,14 @@ export class LoginComponent {
   invalidFields: string[] = [];
   isLoading: boolean = false;
 
-  constructor(private appService: AppService, private router: Router, private http: HttpClient, private adminService: AdminControllerService,
-    private breederService: BreederControllerService, private notificationService: NotificationBarService) {
+  constructor(
+    private appService: AppService, 
+    private router: Router,
+    private http: HttpClient,
+    private adminService: AdminControllerService,
+    private breederService: BreederControllerService,
+    private notificationService: NotificationBarService
+    ) {
     if (this.appService.meData.type == "BREEDER"){
       if (this.appService.userData.id == this.appService.meData.id)
         this.router.navigateByUrl('/breeder-profile');
@@ -85,7 +91,12 @@ export class LoginComponent {
           window.intercomSettings.email = me.email;
           this.appService.userData = res;
           this.router.navigateByUrl('/breeder-profile');
-        });
+      });
+      else if (me.type == 'CUSTOMER') {
+        //@ts-ignore
+        window.intercomSettings.user_id = me.id;
+        this.router.navigateByUrl('/chat');
+      }
       else if (me.type == 'ADMIN')
         this.router.navigateByUrl('/admin-panel');
       else

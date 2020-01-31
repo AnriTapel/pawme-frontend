@@ -57,17 +57,15 @@
     <div *ngIf="!isOpen" class="login">
         <div class="form-group popup-form-group">
             <label for="email">Ваш Email</label>
-            <input type="email" class="form-control custom-form-control-border" name="email" [(ngModel)]="clientData.email"
-                [class.invalid-form-field-value]="invalidFields.includes('email')" (change)="fieldEdited('email')"/>
-            <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите действительный
-                E-mail</span>
+            <input type="email" class="form-control custom-form-control-border" id="username" name="username" (change)="fieldEdited('username')"
+                [(ngModel)]="credentials.username" [class.invalid-form-field-value]="invalidFields.includes('username')"/>
+            <span *ngIf="invalidFields.includes('username')" class="invalid-field-message">Пожалуйста, введите Ваш email</span>
         </div>
         <div class="form-group popup-form-group">
             <label for="password">Пароль</label>
-            <input type="password" class="form-control custom-form-control-border" name="password" (change)="fieldEdited('password')"
-                [(ngModel)]="clientData.password" [class.invalid-form-field-value]="invalidFields.includes('password')" />
-            <span *ngIf="invalidFields.includes('password')" class="invalid-field-message">Пожалуйста, введите Ваш
-                пароль</span>
+            <input type="password" class="form-control custom-form-control-border" id="password" name="password" (change)="fieldEdited('password')"
+                [(ngModel)]="credentials.password" [class.invalid-form-field-value]="invalidFields.includes('password')"/>
+            <span *ngIf="invalidFields.includes('password')" class="invalid-field-message">Пожалуйста, введите Ваш пароль</span>
         </div>
         <button type="submit" class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" 
         (click)="clientLogin()" [disabled]="isLoading">{{!isLoading ? 'Перейти к чату' : ''}}

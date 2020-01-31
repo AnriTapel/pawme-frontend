@@ -51,6 +51,8 @@ export class HeaderComponent implements OnInit {
       return MenuType.LOGIN;
     if (this.appService.userData && this.appService.userData.id != this.appService.meData.id)
       return MenuType.LOGIN;
+    if (this.appService.meData.type == 'CUSTOMER')
+      return MenuType.CUSTOMER;
     else
       return MenuType.MENU
   }
@@ -62,5 +64,6 @@ export class HeaderComponent implements OnInit {
 
 export enum MenuType {
   'LOGIN',
-  'MENU'
+  'MENU',
+  'CUSTOMER'
 }
