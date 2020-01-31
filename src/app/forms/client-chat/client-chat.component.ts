@@ -5,6 +5,9 @@ import { CustomerControllerService } from 'src/app/api/api';
 import { Router } from '@angular/router';
 import { PopupTemplateService } from 'src/app/services/popup-service/popup-template.service';
 import { NotificationBarService } from '../../services/nofitication-service/notification-bar.service';
+import { BreederControllerService } from 'src/app/api/api';
+import { HttpClient } from '@angular/common/http';
+
 
 
 
@@ -28,16 +31,97 @@ export class ClientChatComponent implements OnInit {
   isLoading: boolean = false;
   isOpen: boolean = false;
 
+  credentials = { username: '', password: '' };
+  loginError: boolean = false;
+  
   constructor(
     public appService: AppService, 
     public customerService: CustomerControllerService, 
     private router: Router,
     public popupService: PopupTemplateService, 
-    private notificationService: NotificationBarService) { }
+    private notificationService: NotificationBarService,
+    private breederService: BreederControllerService,
+    private http: HttpClient) { }
 
   ngOnInit() {
+
   }
   
+  fieldEdited(field: string): void {
+    this.invalidFields = this.invalidFields.filter(it => it != field);
+  }
+
+  clientRegistartion() {
+    if (!this.validateFields())
+      return;
+    this.errorText = null;
+    this.isLoading = true;
+    this.clientData.email = this.clientData.email.toLowerCase();
+    this.customerService.registerUsingPOST1(this.clientData).subscribe(
+      res => {
+        this.notificationService.setContext('Вы успешно зарегистрировались', true);
+        this.notificationService.setVisibility(true);
+        this.isLoading = false;
+        this.popupService.setShowStatus(false);
+        this.checkUserType();
+        this.router.navigateByUrl('/chat');
+
+      }, error => {
+        this.isLoading = false;
+        if (error.status == 409)
+          this.errorText = "Этот email уже зарегистрирован";
+        else
+          this.errorText = "Произошла ошибка, попробуйте еще раз"
+      });
+  }
+
+  private checkUserType() {
+    this.breederService.meUsingGET().subscribe((me) => {
+      this.appService.meData = me;
+    });
+  }
+  clientLogin() {
+    if (!this.validateFieldsLogin())
+      return;
+    this.isLoading = true;
+   
+    if (!this.appService.validateEmailInput(this.credentials.username)) {
+      this.errorText = 'Пожалуйста, введите действительный E-mail';
+      this.loginError = true;
+      this.isLoading = false;
+    } else {
+      let body = new FormData();
+      this.credentials.username = this.credentials.username.toLowerCase();
+      body.append('username', this.credentials.username);
+      body.append('password', this.credentials.password);
+
+      this.http.post('/api/login', body, { responseType: 'text' }).subscribe(
+        data => this.onLoginSuccess(),
+        error => {
+          this.errorText = "Неверный логин или пароль";
+          this.loginError = true;
+          this.isLoading = false;
+        }
+      );
+    }
+    
+  }
+  private onLoginSuccess(): void {
+    this.breederService.meUsingGET().subscribe((me) => {
+      this.appService.meData = me;
+      if (me.type == 'CUSTOMER') {
+        this.isLoading = false;
+        this.popupService.setShowStatus(false);
+        this.router.navigateByUrl('/chat');
+      }
+    }, (err) => {
+      if (err.status == 423) {
+        this.errorText = 'К сожалению, ваш аккаунт заблокирован. Help@petman.co';
+        this.loginError = true;
+      }
+    });
+  }
+
   validateFields(): boolean {
     let isValid = true;
     if (!this.clientData.name || this.clientData.name == "" || this.clientData.name && this.clientData.name.length < 2 || this.clientData.name && this.clientData.name.length > 30) {
@@ -74,47 +158,21 @@ export class ClientChatComponent implements OnInit {
     return isValid;
   }
 
-  fieldEdited(field: string): void {
-    this.invalidFields = this.invalidFields.filter(it => it != field);
-  }
+  private validateFieldsLogin(): boolean {
+    let isValid = true;
+    this.invalidFields = [];
 
-  clientRegistartion() {
-    if (!this.validateFields())
-      return;
-    this.errorText = null;
-    this.isLoading = true;
-    this.clientData.email = this.clientData.email.toLowerCase();
-    this.customerService.registerUsingPOST1(this.clientData).subscribe(
-      res => {
-        // window.scrollTo(0, 0);
-        this.notificationService.setContext('Письмо заводчику успешно отправлено', true);
-        this.notificationService.setVisibility(true);
-        this.isLoading = false;
-        this.popupService.setShowStatus(false);
-        console.log('res', res);
-         //@ts-ignore
-        // window.intercomSettings.name = res.name;
-         //@ts-ignore
-         window.intercomSettings.user_id = res.id;
-         //@ts-ignore
-        // window.intercomSettings['breeder_page_url'] = 'https://dev.petman.co/chat/' + res.id;
-        //this.appService.userData.id = res.id;
-         //this.router.navigate(['/chat']);
-         this.router.navigateByUrl('/chat');
-      
-      }, error => {
-        this.isLoading = false;
-        if (error.status == 409)
-          this.errorText = "Этот email уже зарегистрирован";
-        else
-          this.errorText = "Произошла ошибка, попробуйте еще раз"
-      });
-  }
+    if (!this.credentials.username || this.credentials.username == '') {
+      this.invalidFields.push('username');
+      isValid = false;
+    }
 
-  clientLogin() {
-    console.log('login');
-    if (!this.validateFields())
-    return;
+    if (!this.credentials.password || this.credentials.password == '') {
+      this.invalidFields.push('password');
+      isValid = false;
+    }
+
+    return isValid;
   }
 
 }
