@@ -66,6 +66,23 @@ export class AddPuppyProfilePageComponent implements OnInit {
     private eventService: EventService, public profileService: BreederProfileService, public breederService: BreederControllerService,
     private alertService: AlertService, private router: Router) { }
 
+  updateToLocalStorage() {
+    let obj: any = this.currentPuppyData;
+    if (this.birthdayModel.day && this.birthdayModel.month && this.birthdayModel.year)
+      obj.birthDate = this.getDateAsString();
+    else
+      obj.birthDate = null;
+    // Recovering father & mother objects by nickname
+    if (this.curFatherNickname && this.curFatherNickname != "")
+      obj.father = this.fathers.filter(it => it.nickname == this.curFatherNickname)[0];
+    if (this.curMotherNickname && this.curMotherNickname != "")
+      obj.mother = this.mothers.filter(it => it.nickname == this.curMotherNickname)[0];
+    // Recovering breed
+    if (this.curBreed && this.curBreed != "")
+      obj.breed = this.appService.breeds.filter(it => it.name == this.curBreed)[0] || { name: this.curBreed };
+    localStorage.setItem('IVPuppy', JSON.stringify(obj));
+  }
+
   ngOnInit() {
     this.puppiesData = this.appService.userData.puppies;
     if (this.appService.userData.parentsInfo) {
@@ -79,7 +96,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       else
         this.saveChanges(forPreview);
     });
-    
+
     this.addNewParentEvent = this.eventService.subscribe('save-puppy-draft-before-parents-page', () => {
       this.preSaveOperation();
       this.breederService.setPuppyDraftUsingPUT(this.appService.userData.id, this.currentPuppyData).subscribe(() => {
@@ -101,7 +118,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     this.saveChagesEvent.unsubscribe();
     this.addNewParentEvent.unsubscribe();
   }
@@ -111,6 +128,17 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.currentPuppyData = this.appService.userData.puppyDraft ? this.appService.userData.puppyDraft
         : JSON.parse(JSON.stringify(this.DEFAULT_PUPPY_DATA));
       this.currentPuppyData.id = null;
+
+      let intervediateData = JSON.parse(localStorage.getItem('IVPuppy'));
+
+      if (intervediateData) {
+        for (const key in intervediateData) {
+          if (intervediateData[key]) {
+            this.currentPuppyData[key] = intervediateData[key];
+          }
+        }
+      }
+
     } else
       this.currentPuppyData = this.puppiesData[index];
 
@@ -123,7 +151,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
     this.curMotherNickname = this.currentPuppyData.mother ? this.currentPuppyData.mother.nickname : null;
     this.curBreed = this.currentPuppyData.breed ? this.currentPuppyData.breed.name : null;
     this.isMainPage = false;
-    scroll(0,0);
+    scroll(0, 0);
   }
 
   onDadInputClick(event: any): void {
@@ -168,7 +196,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.alertService.showDialog("Вы не сохранили изменения", "warning-title",
         ["Все несохраненные изменения будут утеряны. Перейти в другой раздел?"],
         "Перейти без сохранения", "custom-btn btn-transparent", "Сохранить изменения", "custom-btn btn-purple", onSuccess, onError);
-    } else 
+    } else
       this.profileService.setCurProfilePage(this.profileService.profileSubpages[2]);
   }
 
@@ -188,6 +216,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
           this.currentPuppyData.gallery.push(imageData);
         else
           this.currentPuppyData.gallery[index] = imageData;
+        this.updateToLocalStorage();
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
@@ -216,6 +245,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
     if (!this.currentPuppyData.id)
       this.puppiesData.push(this.currentPuppyData);
     this.saveChanges(false);
+
+    localStorage.setItem('IVPuppy', null);
   }
 
   deletePuppy(index: number): void {
@@ -316,10 +347,10 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if ((!this.birthdayModel.day || !this.birthdayModel.month || !this.birthdayModel.year) || 
-        (new Date().getTime() < new Date(this.birthdayModel.month + '-' + this.birthdayModel.day + '-' + this.birthdayModel.year).getTime()) || 
-        (this.birthdayModel.day > 31 || this.birthdayModel.month > 12 || this.birthdayModel.year > new Date().getFullYear()) || 
-        (this.birthdayModel.day < 1 || this.birthdayModel.month < 1 || this.birthdayModel.year < 1)) {
+    if ((!this.birthdayModel.day || !this.birthdayModel.month || !this.birthdayModel.year) ||
+      (new Date().getTime() < new Date(this.birthdayModel.month + '-' + this.birthdayModel.day + '-' + this.birthdayModel.year).getTime()) ||
+      (this.birthdayModel.day > 31 || this.birthdayModel.month > 12 || this.birthdayModel.year > new Date().getFullYear()) ||
+      (this.birthdayModel.day < 1 || this.birthdayModel.month < 1 || this.birthdayModel.year < 1)) {
       this.profileService.invalidFields.push('birthday');
       isValid = false;
     }
@@ -333,7 +364,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
     //   this.profileService.invalidFields.push('dad');
     //   isValid = false;
     // }
-    
+
     // if (!this.curMotherNickname || this.mothers.filter(it => it.nickname == this.curMotherNickname).length == 0) {
     //   this.profileService.invalidFields.push('mom');
     //   isValid = false;
@@ -349,7 +380,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (this.currentPuppyData.price && this.currentPuppyData.price > 500000 && this.currentPuppyData.price || this.currentPuppyData.price < 1 && this.currentPuppyData.price || this.currentPuppyData.price  == 0) {
+    if (this.currentPuppyData.price && this.currentPuppyData.price > 500000 && this.currentPuppyData.price || this.currentPuppyData.price < 1 && this.currentPuppyData.price || this.currentPuppyData.price == 0) {
       this.profileService.invalidFields.push('price');
       isValid = false;
     }

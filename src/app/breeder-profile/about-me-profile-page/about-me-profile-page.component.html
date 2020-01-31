@@ -30,7 +30,7 @@
             {{appService.getTextareaLimit(breederData.about, 2048)}}
         </span>
         <textarea rows="3" [(ngModel)]="breederData.about" placeholder="Введите текст" name="about-me" class="form-control custom-form-control-border"
-            (change)="profileService.inputValueChanged('about')" [class.invalid-form-field-value]="profileService.invalidFields.includes('about')"></textarea>
+            (change)="profileService.inputValueChanged('about'); updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('about')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -43,7 +43,7 @@
             {{appService.getTextareaLimit(breederData.howItStarted, 2048)}}
         </span>
         <textarea rows="3" [(ngModel)]="breederData.howItStarted" class="form-control custom-form-control-border" placeholder="Введите текст"
-            (change)="profileService.inputValueChanged('howItStarted')" name="howItStarted" [class.invalid-form-field-value]="profileService.invalidFields.includes('howItStarted')"></textarea>
+            (change)="profileService.inputValueChanged('howItStarted'); updateToLocalStorage();" name="howItStarted" [class.invalid-form-field-value]="profileService.invalidFields.includes('howItStarted')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -55,7 +55,7 @@
             {{appService.getTextareaLimit(breederData.outstandingInfo, 2048)}}
         </span>
         <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border" placeholder="Введите текст"
-            (change)="profileService.inputValueChanged('outstanding')" name="features" [class.invalid-form-field-value]="profileService.invalidFields.includes('outstanding')"></textarea>
+            (change)="profileService.inputValueChanged('outstanding'); updateToLocalStorage();" name="features" [class.invalid-form-field-value]="profileService.invalidFields.includes('outstanding')"></textarea>
     </div>
 
     <div class="about-me-form-group">
@@ -88,17 +88,17 @@
         <label for="clubs">В каких клубах заводчиков вы состоите? (необязательно)</label>
         <br>
         <div class="btn-label-list">
-            <div *ngFor="let club of currentClubs;let i = index" class="btn-label" (click)="deleteClub(i)">
+            <div *ngFor="let club of currentClubs;let i = index" class="btn-label" (click)="deleteClub(i); updateToLocalStorage();">
                 <div class="btn-label-text">{{club}}</div>
                 <div>&nbsp;&nbsp;X</div>
             </div>
         </div>
         <input type="text" class="form-control custom-form-control-border" name="clubs" [(ngModel)]="currentClub" [disabled]="currentClubs.length > 9"
-            (keyup.enter)="addClub()" />
+            (keyup.enter)="addClub(); updateToLocalStorage();" />
     </div>
 
     <div class="breeder-profile-subpage-form-right" style="align-self: end;">
-        <input type="button" class="custom-btn btn-transparent" style="margin: unset;width:220px;" value="+ Добавить клуб" (click)="addClub()"
+        <input type="button" class="custom-btn btn-transparent" style="margin: unset;width:220px;" value="+ Добавить клуб" (click)="addClub(); updateToLocalStorage();"
         />
     </div>
 
@@ -120,7 +120,7 @@
         <div *ngIf="breederData.certificates.length > 0" class="gallery-uploaded-photos-block">
             <div *ngFor="let cert of breederData.certificates;let i = index" class="active-galley-photo-block">
                 <img src="/img/{{cert.main}}.jpg" alt="Сертификат заводчика" class="certificate-image" />
-                <img class="close-button" src="./assets/img/close-button-black.svg" alt="Удалить сертификат" (click)="deleteCertificate(i)"
+                <img class="close-button" src="./assets/img/close-button-black.svg" alt="Удалить сертификат" (click)="deleteCertificate(i); updateToLocalStorage();"
                 />
             </div>
             <div class="empty-galley-photo-block">

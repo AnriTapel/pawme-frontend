@@ -70,7 +70,7 @@
                     (input)="currentMedicalTest = ''"
                     [ngbTypeahead]="appService.fieldAutocomplete(testsCategories, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
                     id="body-part" (focus)="bodyPartFocus$.next($event.target.value)" (click)="onBodyPartClick($event)"
-                    (change)="profileService.inputValueChanged('bodyParts')" #bodyPartInstance="ngbTypeahead"
+                    (change)="profileService.inputValueChanged('bodyParts'); updateToLocalStorage();" #bodyPartInstance="ngbTypeahead"
                     [class.invalid-form-field-value]="profileService.invalidFields.includes('bodyParts')"
                     placeholder="Часть тела">
                 <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
@@ -85,7 +85,7 @@
                         [(ngModel)]="currentMedicalTest"
                         [ngbTypeahead]="appService.fieldAutocomplete(parentTests[cat], medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
                         (focus)="medicalTestFocus$.next($event.target.value)" (click)="onTestsClick($event)"
-                        (change)="profileService.inputValueChanged('tests')"
+                        (change)="profileService.inputValueChanged('tests'); updateToLocalStorage();"
                         [class.invalid-form-field-value]="profileService.invalidFields.includes('tests')"
                         id="parent-test" #medicalTestInstance="ngbTypeahead" placeholder="Название теста">
                     <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
@@ -96,7 +96,7 @@
                     class="form-control custom-form-control-border" id="parent-test" [(ngModel)]="currentMedicalTest"
                     [ngbTypeahead]="appService.fieldAutocomplete([], medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
                     (focus)="medicalTestFocus$.next($event.target.value)" (click)="onTestsClick($event)"
-                    (change)="profileService.inputValueChanged('tests')" #medicalTestInstance="ngbTypeahead"
+                    (change)="profileService.inputValueChanged('tests'); updateToLocalStorage();" #medicalTestInstance="ngbTypeahead"
                     [class.invalid-form-field-value]="profileService.invalidFields.includes('tests')"
                     placeholder="Название теста">
                 <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
@@ -147,7 +147,7 @@
         </span>
             <input type="text" class="form-control custom-form-control-border" name="parent-name"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('name')"
-                [(ngModel)]="currentParentData.nickname" (change)="profileService.inputValueChanged('name')"
+                [(ngModel)]="currentParentData.nickname" (change)="profileService.inputValueChanged('name'); updateToLocalStorage();"
                 placeholder="Кличка"/>
         </div>
 
@@ -155,7 +155,7 @@
             <label for="parent-sex">Пол</label>
             <br>
             <button class="form-control custom-form-control-border"
-                (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'">
+                (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'; updateToLocalStorage()">
                 <img height="17px" src="./assets/img/sex_{{currentParentData.gender == 'MALE' ? 'male' : 'female'}}.png"
                     alt="Пол родителя" />
             </button>
@@ -172,7 +172,8 @@
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
                 (focus)="parentBreedFocus$.next($event.target.value)"
                 (click)="parentBreedClick$.next($event.target.value)"
-                (change)="profileService.inputValueChanged('breed')" #parentBreedInstance="ngbTypeahead"
+                (change)="profileService.inputValueChanged('breed')" 
+                (ngModelChange)="updateToLocalStorage()" #parentBreedInstance="ngbTypeahead"
                 placeholder="Выбрать" aria-describedby="basic-addon2">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                 (click)="appService.toggleDropdownTextInput('breed', $event)" />
@@ -189,7 +190,7 @@
             {{appService.getTextareaLimit(currentParentData.info, 1024)}}
         </span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="currentParentData.info"
-            (change)="profileService.inputValueChanged('info')"
+            (change)="profileService.inputValueChanged('info'); updateToLocalStorage();"
             [class.invalid-form-field-value]="profileService.invalidFields.includes('info')"></textarea>
     </div>
 

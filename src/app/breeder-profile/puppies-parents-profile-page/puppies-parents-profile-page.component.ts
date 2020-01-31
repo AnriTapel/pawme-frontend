@@ -68,7 +68,20 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     private eventService: EventService, private breederService: BreederControllerService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
+  updateToLocalStorage() {
+    let obj: any = this.currentParentData;
+    if (this.currentBreed) {
+      this.appService.breeds.filter((item) => {
+        if (item.name.toLowerCase() === this.currentBreed.toLowerCase()) {
+          obj['breed'] = item;
+        }
+      });
+    }
+    localStorage.setItem('IVParent', JSON.stringify(obj))
+  }
+
   ngOnInit() {
+
     this.parentsData = this.appService.userData.parentsInfo ? <ParentsInfo>this.appService.userData.parentsInfo : {
       parents: [],
       parentTests: [],
@@ -125,6 +138,16 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.currentParentData = this.parentsData.parentDraft ? this.parentsData.parentDraft
         : JSON.parse(JSON.stringify(this.DEFAULT_PARENT_DATA));
       this.currentParentData.id = null;
+
+      let intervediateData = JSON.parse(localStorage.getItem('IVParent'));
+
+      if (intervediateData) {
+        for (const key in intervediateData) {
+          if (intervediateData[key]) {
+            this.currentParentData[key] = intervediateData[key];
+          }
+        }
+      }
     } else
       this.currentParentData = this.parentsData.parents[index];
 
@@ -154,6 +177,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
           this.currentParentData.gallery.push(imageData);
         else
           this.currentParentData.gallery[index] = imageData;
+        this.updateToLocalStorage();
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
@@ -184,6 +208,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.parentsData.parentDraft = null;
     }
     this.saveChanges(forPreview);
+
+    localStorage.setItem('IVParent', null)
   }
 
   deleteParent(index: number): void {

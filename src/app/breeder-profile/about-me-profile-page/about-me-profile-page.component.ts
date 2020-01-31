@@ -27,22 +27,42 @@ export class AboutMeProfilePageComponent implements OnInit {
   constructor(private popupService: PopupTemplateService, public appService: AppService, private eventService: EventService, private router: Router,
     private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
+  updateToLocalStorage() {
+    let obj: any = this.breederData;
+    obj['clubs'] = this.currentClubs.join(";")
+    localStorage.setItem('IVBreederData', JSON.stringify(obj));
+  }
+
   ngOnInit() {
-    this.breederData = this.appService.userData.about ? <BreederAbout>this.appService.userData.about : {
-      about: null,
-      howItStarted: null,
-      outstandingInfo: null,
-      photo: null,
-      clubs: null,
-      certificates: []
-    };
-    
+
+    let IVBreederData = JSON.parse(localStorage.getItem('IVBreederData'));
+
+    if (this.appService.userData.about) {
+      this.breederData = <BreederAbout>this.appService.userData.about;
+    } else {
+      this.breederData = {
+        about: null,
+        howItStarted: null,
+        outstandingInfo: null,
+        photo: null,
+        clubs: null,
+        certificates: []
+      };
+      if (IVBreederData) {
+        for (const key in IVBreederData) {
+          if (IVBreederData[key]) {
+            this.breederData[key] = IVBreederData[key];
+          }
+        }
+      }
+    }
+
     this.breederInfo = this.appService.userData ? <Breeder>this.appService.userData : {
       id: null,
       name: null,
       surname: null
     };
-  
+
     if (this.breederData.clubs) {
       this.currentClubs = this.breederData.clubs.split(";");
     }
@@ -66,6 +86,7 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.profileService.inputValueChanged('photo');
         this.popupService.setShowStatus(false);
         this.breederData.photo = imageData;
+        this.updateToLocalStorage();
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
@@ -98,6 +119,7 @@ export class AboutMeProfilePageComponent implements OnInit {
           this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
             this.breederData.certificates.push(imageData);
             this.profileService.dataChangesSaved = false;
+            this.updateToLocalStorage();
           });
         }
         img.src = e.target.result;
@@ -136,7 +158,7 @@ export class AboutMeProfilePageComponent implements OnInit {
       isValid = false;
       this.profileService.invalidFields.push("lastname");
     }
-    
+
     if (!this.breederData.about || this.breederData.about == "" || this.breederData.about.length > 2048) {
       this.profileService.invalidFields.push('about');
       isValid = false;
@@ -168,9 +190,9 @@ export class AboutMeProfilePageComponent implements OnInit {
     this.isLoading = true;
 
     this.breederService.updateNameUsingPUT(this.breederInfo.id, this.breederInfo)
-    .subscribe((res) => {
-     console.log('res',res);
-    });
+      .subscribe((res) => {
+        console.log('res', res);
+      });
 
     this.breederService.setAboutUsingPUT(this.breederData, this.appService.userData.id).subscribe(
       () => {
