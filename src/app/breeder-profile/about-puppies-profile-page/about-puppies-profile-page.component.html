@@ -20,7 +20,7 @@
 
 
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract; updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('contract')">
+            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract; updateLocalData();" [class.invalid-form-field-value]="profileService.invalidFields.includes('contract')">
                 <img *ngIf="puppiesData.petmanContract" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю готовность использовать договор</label>
@@ -34,7 +34,7 @@
             </strong> и
             <strong>клеймо</strong>.</p>
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet; updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('set')">
+            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet; updateLocalData();" [class.invalid-form-field-value]="profileService.invalidFields.includes('set')">
                 <img *ngIf="puppiesData.petmanSet" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю наличие такого комплекта</label>

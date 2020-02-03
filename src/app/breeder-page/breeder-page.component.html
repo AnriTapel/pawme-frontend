@@ -116,50 +116,12 @@
                 </div>
 
                 <div class="medical-label-list d-flex align-items-center flex-wrap">
-                    <div *ngIf="getPuppyMedicalStatus(1)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/injection.svg" alt="this.newPuppyTests[1]" />
-                        <span class="text">{{this.newPuppyTests[1]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(2)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/injection.svg" alt="this.newPuppyTests[2]" />
-                        <span class="text">{{this.newPuppyTests[2]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(3)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/flea.svg" alt="this.newPuppyTests[3]" />
-                        <span class="text">{{this.newPuppyTests[3]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(4)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/collar.svg" alt="this.newPuppyTests[4]" />
-                        <span class="text">{{this.newPuppyTests[4]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(5)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/analysis.svg" alt="this.newPuppyTests[5]" />
-                        <span class="text">{{this.newPuppyTests[5]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(6)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/analysis.svg" alt="this.newPuppyTests[6]" />
-                        <span class="text">{{this.newPuppyTests[6]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(7)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/analysis.svg" alt="this.newPuppyTests[7]" />
-                        <span class="text">{{this.newPuppyTests[7]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(8)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/vision.svg" alt="this.newPuppyTests[8]" />
-                        <span class="text">{{this.newPuppyTests[8]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(9)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/pet.svg" alt="this.newPuppyTests[9]" />
-                        <span class="text">{{this.newPuppyTests[9]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(10)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/joint.svg" alt="this.newPuppyTests[10]" />
-                        <span class="text">{{this.newPuppyTests[10]}}</span>
-                    </div>
-                    <div *ngIf="getPuppyMedicalStatus(11)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/chip_icon.svg" alt="this.newPuppyTests[11]" />
-                        <span class="text">{{this.newPuppyTests[11]}}</span>
-                    </div>
+                    <ng-container *ngFor="let test of appService.userData.puppiesInfo.puppyTests; let i = index;">
+                        <div *ngIf="getPuppyMedicalStatus(test.id)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
+                            <img src="./assets/img/breeder-page/{{test.id}}.svg" alt="newPuppyTests[i]" />
+                            <span class="text">{{test.name}}</span>
+                        </div>
+                    </ng-container>
                 </div>
 
                 <div class="line"></div>
