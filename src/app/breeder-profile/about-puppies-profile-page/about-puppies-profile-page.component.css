@@ -128,4 +128,8 @@ input[type=checkbox] {
     white-space: nowrap;
   }
 }
+
+.custom-btn {
+  min-width: 230px;
+}
 /*# sourceMappingURL=about-puppies-profile-page.component.css.map */

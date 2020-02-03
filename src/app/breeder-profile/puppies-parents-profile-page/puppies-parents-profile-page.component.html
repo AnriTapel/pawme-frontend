@@ -1,7 +1,7 @@
 <div *ngIf="isMainPage" class="breeder-profile-subpage-container">
 
     <div class="page-header page-header-with-desc">
-        <h3>Родители щенков</h3>
+        <h3>Наши собаки</h3>
         <p>Добавьте минимум одного родителя (суку или кобеля), чтобы вы могли добавлять своих щенков.</p>
     </div>
 
@@ -47,7 +47,7 @@
     <hr>
 
     <div class="parents-medicals-block">
-        <label>Медицинские тесты на родителях (необязательно)</label>
+        <label>Медицинские тесты на родителях</label>
         <br>
         <span class="block-description">Все медицинские тесты разбиты по категориям. Если ваш тест не подходит ни к
             одной
@@ -163,7 +163,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-right">
-        <label for="parent-breed">Порода</label>
+        <label for="parent-breed">Порода</label><span class="red-star">*</span>
         <br>
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border"
@@ -182,7 +182,7 @@
     </div>
 
     <div class="add-parent-page-info-block">
-        <label for="parent-info">Расскажите об этом родителе</label>
+        <label for="parent-info">Расскажите об этом родителе</label><span class="red-star">*</span>
         <br>
         <span class="block-description">Опишите достижения, отличительные особенности</span>
         <span class="textarea-length-counter"
@@ -195,7 +195,7 @@
     </div>
 
     <div class="add-parent-page-photos-block">
-        <label>Загрузите фотографии</label>
+        <label>Загрузите фотографии</label><span class="red-star">*</span>
 
         <div *ngIf="currentParentData.gallery.length == 0" class="gallery-initial-block"
             (click)="previewParentImage(-1)"

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAC;EACF,MAAM,EAAE,MAAM;EACd,KAAK,EAAE,KAAK;CACf",
+    "sources": [
+        "client-registration.component.scss"
+    ],
+    "names": [],
+    "file": "client-registration.component.css"
+}

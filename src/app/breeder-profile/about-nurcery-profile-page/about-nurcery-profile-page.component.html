@@ -9,13 +9,13 @@
         </button>
     </div>
     <div class="breeder-profile-subpage-form-left">
-        <label for="nurcery-name">Название питомника (необязательно)</label>
+        <label for="nurcery-name">Название питомника</label><span class="red-star">*</span>
         <input class="form-control custom-form-control-border" type="text" name="nurcery-name" [(ngModel)]="nurceryData.name" (change)="profileService.inputValueChanged('name'); updateToLocalStorage();"
         [class.invalid-form-field-value]="profileService.invalidFields.includes('name')" placeholder="Название питомника" />
     </div>
 
     <div class="breeder-profile-subpage-form-right">
-        <label for="nurcery-location">Город / населенный пункт</label>
+        <label for="nurcery-location">Город / населенный пункт</label><span class="red-star">*</span>
         <div class="dropdown-text-input">
             <input *ngIf="appService.cities" type="text" class="city-disabled form-control custom-form-control-border" name="nurcery-location" [(ngModel)]="nurceryData.city"
                 [class.invalid-form-field-value]="profileService.invalidFields.includes('city')" id="city" [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"
@@ -26,7 +26,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-left">
-        <label for="nurcery-main-breed">Основная порода</label>
+        <label for="nurcery-main-breed">Основная порода</label><span class="red-star">*</span>
         <span class="block-description">Не нашли свою породу? Временно укажите самую похожую и напишите нам в чат на сайте или на 
             почту help@petman.co</span>
         <div class="dropdown-text-input">
@@ -59,7 +59,7 @@
     </div>
 
     <div class="about-your-nurcery-block">
-        <label for="about-your-nurcery">О вашем питомнике</label>
+        <label for="about-your-nurcery">О вашем питомнике</label><span class="red-star">*</span>
         <br>
         <span class="block-description">Это одна из первых вещей, которую прочитают потенциальные покупатели на вашей странице. Постарайтесь кратко (в 2-3
             предложения) описать ваш питомник и рассказать о его особенностях.</span>
@@ -91,7 +91,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-group nurcery-gallery-block">
-        <label for="nurcery-gallery">Фото в основную галерею (минимум 4)</label>
+        <label for="nurcery-gallery">Фото в основную галерею (минимум 4)</label><span class="red-star">*</span>
         <br>
         <span class="block-description">Покажите в этих фотографиях, как устроена жизнь вашего питомника. Допустимый формат изображений - jpg, jpeg, png, gif.</span>
 

@@ -9,19 +9,19 @@
         </button>
     </div>
     <div class="breeder-profile-subpage-form-left">
-        <label for="name">Имя</label>
+        <label for="name">Имя</label><span class="red-star">*</span>
         <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="breederInfo.name"
             [class.invalid-form-field-value]="profileService.invalidFields.includes('name')" />
         <span *ngIf="profileService.invalidFields.includes('name')" class="invalid-field-message">Пожалуйста, введите Ваше имя</span>
     </div>
     <div class="breeder-profile-subpage-form-right">
-        <label for="lastname">Фамилия</label>
+        <label for="lastname">Фамилия</label><span class="red-star">*</span>
         <input type="text" class="form-control custom-form-control-border"  name="lastname" 
             [(ngModel)]="breederInfo.surname" [class.invalid-form-field-value]="profileService.invalidFields.includes('lastname')" />
         <span *ngIf="profileService.invalidFields.includes('lastname')" class="invalid-field-message">Пожалуйста, введите Вашу фамилию</span>
     </div>
     <div class="about-me-form-group">
-        <label for="howItStarted">Расскажите о себе</label>
+        <label for="howItStarted">Расскажите о себе</label><span class="red-star">*</span>
         <span class="block-description">Чтобы вам было проще, мы подготовили ряд наводящих вопросов. Какая ваша роль в питомнике и помогает ли вам семья?
             Что вам нравится в вашей породе и какие у вас профессиональные цели?
         </span>
@@ -59,7 +59,7 @@
     </div>
 
     <div class="about-me-form-group">
-        <label>Ваше личное или семейное фото </label>
+        <label>Ваше личное или семейное фото </label><span class="red-star">*</span>
         <br>
         <span class="block-description">Заводчик с личным фото вызывает больше доверия у покупателей. Обычно используют фото с питомцами.</span>
 
@@ -85,7 +85,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-left">
-        <label for="clubs">В каких клубах заводчиков вы состоите? (необязательно)</label>
+        <label for="clubs">В каких клубах заводчиков вы состоите?</label>
         <br>
         <div class="btn-label-list">
             <div *ngFor="let club of currentClubs;let i = index" class="btn-label" (click)="deleteClub(i); updateToLocalStorage();">
@@ -104,7 +104,7 @@
 
 
     <div class="about-me-form-group">
-        <label>Награды и сертификаты (необязательно)</label>
+        <label>Награды и сертификаты</label>
         <br>
         <span class="block-description">Вы наверняка участвовали в выставках или других мероприятиях, после которых у вас остались награды и сертификаты.
             Для покупателей важно их увидеть, поэтому мы просим вас отсканировать/сфотографировать бумажные грамоты и загрузить

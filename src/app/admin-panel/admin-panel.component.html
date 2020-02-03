@@ -132,12 +132,12 @@
         <div *ngIf="activeSection == 'add-breeds' && appService.meData.roles.includes('ADD_BREED')">
             <div class="add-new-entity-block">
                 <div class="new-entity-block">
-                    <label>Именительный падеж</label>
+                    <label>Именительный падеж</label><span class="red-star">*</span>
                     <input type="text" class="form-control custom-form-control-border" [(ngModel)]="newBreed.name">
                 </div>
 
                 <div class="new-entity-block">
-                    <label>Родительный падеж</label>
+                    <label>Родительный падеж</label><span class="red-star">*</span>
                     <input type="text" class="form-control custom-form-control-border" [(ngModel)]="newBreed.nameGen">
                 </div>
             </div>
@@ -178,26 +178,26 @@
         <div *ngIf="activeSection == 'add-admins' && appService.meData.roles.includes('ADD_ADMIN')">
             <div class="add-new-entity-block">
                 <div class="new-entity-block">
-                    <label>Имя</label>
+                    <label>Имя</label><span class="red-star">*</span>
                     <input type="text" class="form-control custom-form-control-border"
                         [class.invalid-form-checkbox]="invalidFields.includes('name')" [(ngModel)]="newAdmin.name">
                 </div>
 
                 <div class="new-entity-block">
-                    <label>Фамилия</label>
+                    <label>Фамилия</label><span class="red-star">*</span>
                     <input type="text" class="form-control custom-form-control-border"
                         [class.invalid-form-checkbox]="invalidFields.includes('surname')"
                         [(ngModel)]="newAdmin.surname">
                 </div>
 
                 <div class="new-entity-block">
-                    <label>Почта</label>
+                    <label>Почта</label><span class="red-star">*</span>
                     <input type="text" class="form-control custom-form-control-border"
                         [class.invalid-form-checkbox]="invalidFields.includes('email')" [(ngModel)]="newAdmin.email">
                 </div>
 
                 <div class="new-entity-block">
-                    <label>Телефон</label>
+                    <label>Телефон</label><span class="red-star">*</span>
                     <input type="text" class="form-control custom-form-control-border" name="phone" id="phone"
                         [(ngModel)]="newAdmin.phone" (input)="appService.setPhoneMask($event)"
                         (focus)="appService.setPhoneMask($event)" (blur)="appService.setPhoneMask($event)"
@@ -205,7 +205,7 @@
                 </div>
 
                 <div class="new-entity-block">
-                    <label>Пароль</label>
+                    <label>Пароль</label><span class="red-star">*</span>
                     <input type="text" class="form-control custom-form-control-border"
                         [class.invalid-form-checkbox]="invalidFields.includes('password')"
                         [(ngModel)]="newAdmin.password">

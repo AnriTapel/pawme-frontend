@@ -1,11 +1,11 @@
 <ng-template #progessBarTooltip>
     <p>Чтобы получить статус "Заводчик Petman", заполните эти разделы:</p>
+    <p><img *ngIf="appService.userData.puppiesInfo" src="./assets/img/check-mark.png" width="14px"
+        style="margin: 0 5px 5px 0" />Правила продажи</p>
     <p><img *ngIf="appService.userData.generalInfo" src="./assets/img/check-mark.png" width="14px"
             style="margin: 0 5px 5px 0" />О питомнике</p>
-    <p><img *ngIf="appService.userData.puppiesInfo" src="./assets/img/check-mark.png" width="14px"
-            style="margin: 0 5px 5px 0" />О щенках</p>
     <p><img *ngIf="profileService.isParentsInfoFilled()" src="./assets/img/check-mark.png" width="14px"
-            style="margin: 0 5px 5px 0" />Родители щенков</p>
+            style="margin: 0 5px 5px 0" />Наши собаки</p>
     <p><img *ngIf="appService.userData.about" src="./assets/img/check-mark.png" width="14px"
             style="margin: 0 5px 5px 0" />О себе</p>
 </ng-template>
