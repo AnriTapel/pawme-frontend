@@ -4,66 +4,112 @@
         <h3>О себе</h3>
     </div>
     <div class="upper-btn">
-        <button type="submit" class="custom-btn btn-purple" (click)="saveChanges(false)" [disabled]="isLoading">{{!isLoading ? 'Сохранить изменения' : ''}}
+        <button type="submit" class="custom-btn btn-purple" (click)="saveChanges(false)"
+            [disabled]="isLoading">{{!isLoading ? 'Сохранить изменения' : ''}}
             <div *ngIf="isLoading" class="loader"></div>
         </button>
     </div>
     <div class="breeder-profile-subpage-form-left">
         <label for="name">Имя</label>
         <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="breederInfo.name"
-            [class.invalid-form-field-value]="profileService.invalidFields.includes('name')" />
-        <span *ngIf="profileService.invalidFields.includes('name')" class="invalid-field-message">Пожалуйста, введите Ваше имя</span>
+            (ngModelChange)="updateLocalData(); focusCheck('name')"
+            [class.invalid-form-field-value]="isFocused['name'] && errors && errors.includes('name') || (customeValidator && errors && errors.includes('name'))" />
+        <span
+            *ngIf="isFocused['name'] && errors && errors.includes('name') || (customeValidator && errors && errors.includes('name'))"
+            class="invalid-field-message">Пожалуйста, введите Ваше имя</span>
     </div>
     <div class="breeder-profile-subpage-form-right">
         <label for="lastname">Фамилия</label>
-        <input type="text" class="form-control custom-form-control-border"  name="lastname" 
-            [(ngModel)]="breederInfo.surname" [class.invalid-form-field-value]="profileService.invalidFields.includes('lastname')" />
-        <span *ngIf="profileService.invalidFields.includes('lastname')" class="invalid-field-message">Пожалуйста, введите Вашу фамилию</span>
+        <input type="text" class="form-control custom-form-control-border" name="lastname"
+            [(ngModel)]="breederInfo.surname" (ngModelChange)="updateLocalData(); focusCheck('lastname')"
+            [class.invalid-form-field-value]="isFocused['lastname'] && errors && errors.includes('lastname') || (customeValidator && errors && errors.includes('lastname'))" />
+        <span
+            *ngIf="isFocused['lastname'] && errors && errors.includes('lastname') || (customeValidator && errors && errors.includes('lastname'))"
+            class="invalid-field-message">Пожалуйста, введите Вашу фамилию</span>
     </div>
     <div class="about-me-form-group">
         <label for="howItStarted">Расскажите о себе</label>
-        <span class="block-description">Чтобы вам было проще, мы подготовили ряд наводящих вопросов. Какая ваша роль в питомнике и помогает ли вам семья?
+        <span class="block-description">Чтобы вам было проще, мы подготовили ряд наводящих вопросов. Какая ваша роль в
+            питомнике и помогает ли вам семья?
             Что вам нравится в вашей породе и какие у вас профессиональные цели?
         </span>
-    
-        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(breederData.about, 2048) > 0 ? '#46b0ad' : '#eb0000'">
+
+        <span class="textarea-length-counter"
+            [style.color]="appService.getTextareaLimit(breederData.about, 2048) > 0 ? '#46b0ad' : '#eb0000'">
             {{appService.getTextareaLimit(breederData.about, 2048)}}
         </span>
-        <textarea rows="3" [(ngModel)]="breederData.about" placeholder="Введите текст" name="about-me" class="form-control custom-form-control-border"
-            (change)="profileService.inputValueChanged('about'); updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('about')"></textarea>
+        <textarea rows="3" [(ngModel)]="breederData.about" placeholder="Введите текст" name="about-me"
+            class="form-control custom-form-control-border"
+            (change)="profileService.inputValueChanged('about'); updateLocalData(); focusCheck('about')"
+            [class.invalid-form-field-value]="isFocused['about'] && errors && errors.includes('about') || (customeValidator && errors && errors.includes('about'))">
+        </textarea>
+        <div *ngIf="isFocused['about'] && errors && errors.includes('about') || (customeValidator && errors && errors.includes('about'))"
+            class="error-field-message">
+            Это поле обязательно к заполнению
+        </div>
     </div>
 
     <div class="about-me-form-group">
         <label for="howItStarted">С чего все началось?</label>
         <br>
-        <span class="block-description">Почему вы начали заниматься разведением собак? Какие события этому предшествовали? Почему была выбрана именно эта
+        <span class="block-description">Почему вы начали заниматься разведением собак? Какие события этому
+            предшествовали? Почему была выбрана именно эта
             порода?
         </span>
-        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(breederData.howItStarted, 2048) > 0 ? '#46b0ad' : '#eb0000'">
+        <span class="textarea-length-counter"
+            [style.color]="appService.getTextareaLimit(breederData.howItStarted, 2048) > 0 ? '#46b0ad' : '#eb0000'">
             {{appService.getTextareaLimit(breederData.howItStarted, 2048)}}
         </span>
-        <textarea rows="3" [(ngModel)]="breederData.howItStarted" class="form-control custom-form-control-border" placeholder="Введите текст"
-            (change)="profileService.inputValueChanged('howItStarted'); updateToLocalStorage();" name="howItStarted" [class.invalid-form-field-value]="profileService.invalidFields.includes('howItStarted')"></textarea>
+        <textarea rows="3" [(ngModel)]="breederData.howItStarted" class="form-control custom-form-control-border"
+            placeholder="Введите текст"
+            (change)="profileService.inputValueChanged('howItStarted'); updateLocalData(); focusCheck('howItStarted')"
+            name="howItStarted"
+            [class.invalid-form-field-value]="isFocused['howItStarted'] && errors && errors.includes('howItStarted') || (customeValidator && errors && errors.includes('howItStarted'))">
+        </textarea>
+        <div *ngIf="isFocused['howItStarted'] && errors && errors.includes('howItStarted') || (customeValidator && errors && errors.includes('howItStarted'))"
+            class="error-field-message">
+            Это поле обязательно к заполнению
+        </div>
+        <div *ngIf="appService.getTextareaLimit(breederData.howItStarted, 2048) < 0"
+            class="error-field-message">
+            Превышено количество символов
+        </div>
     </div>
 
     <div class="about-me-form-group">
         <label for="features">Что выделяет ваш питомник?</label>
         <br>
-        <span class="block-description">Возможно, вы используете какие-то определенные методы при работе с щенками? Уделяете особое внимание определенным
+        <span class="block-description">Возможно, вы используете какие-то определенные методы при работе с щенками?
+            Уделяете особое внимание определенным
             вещам?</span>
-        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(breederData.outstandingInfo, 2048) > 0 ? '#46b0ad' : '#eb0000'">
+        <span class="textarea-length-counter"
+            [style.color]="appService.getTextareaLimit(breederData.outstandingInfo, 2048) > 0 ? '#46b0ad' : '#eb0000'">
             {{appService.getTextareaLimit(breederData.outstandingInfo, 2048)}}
         </span>
-        <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border" placeholder="Введите текст"
-            (change)="profileService.inputValueChanged('outstanding'); updateToLocalStorage();" name="features" [class.invalid-form-field-value]="profileService.invalidFields.includes('outstanding')"></textarea>
+        <textarea rows="3" [(ngModel)]="breederData.outstandingInfo" class="form-control custom-form-control-border"
+            placeholder="Введите текст"
+            (change)="profileService.inputValueChanged('outstanding'); updateLocalData(); focusCheck('outstanding')"
+            name="features"
+            [class.invalid-form-field-value]="isFocused['outstanding'] && errors && errors.includes('outstanding') || (customeValidator && errors && errors.includes('outstanding'))">
+        </textarea>
+        <div *ngIf="isFocused['outstanding'] && errors && errors.includes('outstanding') || (customeValidator && errors && errors.includes('outstanding'))"
+            class="error-field-message">
+            Это поле обязательно к заполнению
+        </div>
+        <div *ngIf="appService.getTextareaLimit(breederData.outstandingInfo, 2048) < 0"
+            class="error-field-message">
+            Превышено количество символов
+        </div>
     </div>
 
     <div class="about-me-form-group">
         <label>Ваше личное или семейное фото </label>
         <br>
-        <span class="block-description">Заводчик с личным фото вызывает больше доверия у покупателей. Обычно используют фото с питомцами.</span>
+        <span class="block-description">Заводчик с личным фото вызывает больше доверия у покупателей. Обычно используют
+            фото с питомцами.</span>
 
-        <div *ngIf="!breederData.photo" class="gallery-initial-block" [class.invalid-form-field-value]="profileService.invalidFields.includes('photo')"
+        <div *ngIf="!breederData.photo" class="gallery-initial-block"
+            [class.invalid-form-field-value]="isFocused['photo'] && errors && errors.includes('photo') || (customeValidator && errors && errors.includes('photo'))"
             (click)="previewPersonalImage()">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
@@ -72,14 +118,16 @@
 
         <div *ngIf="breederData.photo" class="gallery-uploaded-photos-block">
             <div class="active-galley-photo-block">
-                <img src="/img/{{breederData.photo.preview}}.jpg" class="personal-image" alt="Фото заводчика" (click)="previewPersonalImage()">
-                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку" (click)="deletePersonalImage()"
-                />
+                <img src="/img/{{breederData.photo.preview}}.jpg" class="personal-image" alt="Фото заводчика"
+                    (click)="previewPersonalImage()">
+                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
+                    (click)="deletePersonalImage()" />
             </div>
         </div>
 
-        <div *ngIf="!breederData.photo" [class.invalid-form-field-value]="profileService.invalidFields.includes('photo')" 
-                (click)="previewPersonalImage()" class="gallery-upload-button custom-btn btn-transparent">
+        <div *ngIf="!breederData.photo"
+            [class.invalid-form-field-value]="isFocused['photo'] && errors && errors.includes('photo') || (customeValidator && errors && errors.includes('photo'))"
+            (click)="previewPersonalImage()" class="gallery-upload-button custom-btn btn-transparent">
             <span>Выбрать</span>
         </div>
     </div>
@@ -88,26 +136,29 @@
         <label for="clubs">В каких клубах заводчиков вы состоите? (необязательно)</label>
         <br>
         <div class="btn-label-list">
-            <div *ngFor="let club of currentClubs;let i = index" class="btn-label" (click)="deleteClub(i); updateToLocalStorage();">
+            <div *ngFor="let club of currentClubs;let i = index;" class="btn-label"
+                (click)="deleteClub(i); updateLocalData();">
                 <div class="btn-label-text">{{club}}</div>
                 <div>&nbsp;&nbsp;X</div>
             </div>
         </div>
-        <input type="text" class="form-control custom-form-control-border" name="clubs" [(ngModel)]="currentClub" [disabled]="currentClubs.length > 9"
-            (keyup.enter)="addClub(); updateToLocalStorage();" />
+        <input type="text" class="form-control custom-form-control-border" name="clubs" [(ngModel)]="currentClub"
+            [disabled]="currentClubs.length > 9" (keyup.enter)="addClub(); updateLocalData(); " />
     </div>
 
     <div class="breeder-profile-subpage-form-right" style="align-self: end;">
-        <input type="button" class="custom-btn btn-transparent" style="margin: unset;width:220px;" value="+ Добавить клуб" (click)="addClub(); updateToLocalStorage();"
-        />
+        <input type="button" class="custom-btn btn-transparent" style="margin: unset;width:220px;"
+            value="+ Добавить клуб" (click)="addClub(); updateLocalData();" />
     </div>
 
 
     <div class="about-me-form-group">
         <label>Награды и сертификаты (необязательно)</label>
         <br>
-        <span class="block-description">Вы наверняка участвовали в выставках или других мероприятиях, после которых у вас остались награды и сертификаты.
-            Для покупателей важно их увидеть, поэтому мы просим вас отсканировать/сфотографировать бумажные грамоты и загрузить
+        <span class="block-description">Вы наверняка участвовали в выставках или других мероприятиях, после которых у
+            вас остались награды и сертификаты.
+            Для покупателей важно их увидеть, поэтому мы просим вас отсканировать/сфотографировать бумажные грамоты и
+            загрузить
             их сюда.</span>
 
         <div *ngIf="breederData.certificates.length == 0" class="gallery-initial-block">
@@ -118,13 +169,14 @@
         </div>
 
         <div *ngIf="breederData.certificates.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let cert of breederData.certificates;let i = index" class="active-galley-photo-block">
+            <div *ngFor="let cert of breederData.certificates;let i = index;" class="active-galley-photo-block">
                 <img src="/img/{{cert.main}}.jpg" alt="Сертификат заводчика" class="certificate-image" />
-                <img class="close-button" src="./assets/img/close-button-black.svg" alt="Удалить сертификат" (click)="deleteCertificate(i); updateToLocalStorage();"
-                />
+                <img class="close-button" src="./assets/img/close-button-black.svg" alt="Удалить сертификат"
+                    (click)="deleteCertificate(i); updateLocalData();" />
             </div>
             <div class="empty-galley-photo-block">
-                <input type="file" id="certificate-input" accept=".jpg, .jpeg, .png, .gif" (change)="uploadCertificates($event)" multiple />
+                <input type="file" id="certificate-input" accept=".jpg, .jpeg, .png, .gif"
+                    (change)="uploadCertificates($event)" multiple />
                 <img src="./assets/img/photo-camera.svg" alt="Камера" />
             </div>
         </div>
@@ -136,11 +188,13 @@
     </div>
 
     <div class="lower-btn">
-        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
-                Пожалуйста, заполните или исправьте поля, выделенные красным
+        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
+            style="display: block; margin-bottom: 1em;">
+            Пожалуйста, заполните или исправьте поля, выделенные красным
         </span>
         <br *ngIf="profileService.invalidFields.length > 0" />
-        <button type="submit" class="custom-btn btn-purple" (click)="saveChanges(false)" [disabled]="isLoading">{{!isLoading ? 'Сохранить изменения' : ''}}
+        <button type="submit" class="custom-btn btn-purple" (click)="saveChanges(false)"
+            [disabled]="isLoading">{{!isLoading ? 'Сохранить изменения' : ''}}
             <div *ngIf="isLoading" class="loader"></div>
         </button>
     </div>

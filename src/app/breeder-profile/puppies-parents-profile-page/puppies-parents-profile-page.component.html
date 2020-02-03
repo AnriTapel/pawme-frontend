@@ -57,7 +57,7 @@
         </span>
 
         <div class="btn-label-list">
-            <div *ngFor="let test of parentsData.parentTests;let i = index" class="btn-label"
+            <div *ngFor="let test of parentsData.parentTests;let i = index;" class="btn-label"
                 (click)="deleteMedical(i)">
                 <div class="btn-label-text">{{test.name}}</div>
                 <div>&nbsp;&nbsp;X</div>
@@ -70,11 +70,15 @@
                     (input)="currentMedicalTest = ''"
                     [ngbTypeahead]="appService.fieldAutocomplete(testsCategories, bodyPartFocus$, bodyPartClick$, bodyPartInstance)"
                     id="body-part" (focus)="bodyPartFocus$.next($event.target.value)" (click)="onBodyPartClick($event)"
-                    (change)="profileService.inputValueChanged('bodyParts'); updateToLocalStorage();" #bodyPartInstance="ngbTypeahead"
+                    (change)="profileService.inputValueChanged('bodyParts');" #bodyPartInstance="ngbTypeahead"
                     [class.invalid-form-field-value]="profileService.invalidFields.includes('bodyParts')"
-                    placeholder="Часть тела">
+                    placeholder="Часть тела" (ngModelChange)="updateLocalData(); profileService.inputValueChanged('bodyParts');">
                 <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                     (click)="appService.toggleDropdownTextInput('body-part', $event)" />
+            </div>
+            <div *ngIf="profileService.invalidFields.includes('bodyParts')" class="error-field-message"
+                style="position: absolute;">
+                Выберите один из предложенных вариантов
             </div>
         </div>
 
@@ -85,9 +89,10 @@
                         [(ngModel)]="currentMedicalTest"
                         [ngbTypeahead]="appService.fieldAutocomplete(parentTests[cat], medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
                         (focus)="medicalTestFocus$.next($event.target.value)" (click)="onTestsClick($event)"
-                        (change)="profileService.inputValueChanged('tests'); updateToLocalStorage();"
+                        (change)="profileService.inputValueChanged('tests');"
                         [class.invalid-form-field-value]="profileService.invalidFields.includes('tests')"
-                        id="parent-test" #medicalTestInstance="ngbTypeahead" placeholder="Название теста">
+                        id="parent-test" #medicalTestInstance="ngbTypeahead" placeholder="Название теста"
+                        (ngModelChange)="updateLocalData();">
                     <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                         (click)="appService.toggleDropdownTextInput('parent-test', $event)" />
                 </ng-container>
@@ -96,10 +101,14 @@
                     class="form-control custom-form-control-border" id="parent-test" [(ngModel)]="currentMedicalTest"
                     [ngbTypeahead]="appService.fieldAutocomplete([], medicalTestFocus$, medicalTestClick$, medicalTestInstance)"
                     (focus)="medicalTestFocus$.next($event.target.value)" (click)="onTestsClick($event)"
-                    (change)="profileService.inputValueChanged('tests'); updateToLocalStorage();" #medicalTestInstance="ngbTypeahead"
+                    (change)="profileService.inputValueChanged('tests');" #medicalTestInstance="ngbTypeahead"
                     [class.invalid-form-field-value]="profileService.invalidFields.includes('tests')"
-                    placeholder="Название теста">
+                    placeholder="Название теста" (ngModelChange)="updateLocalData(); profileService.inputValueChanged('tests');">
                 <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" />
+            </div>
+            <div *ngIf="profileService.invalidFields.includes('tests')" class="error-field-message"
+                style="position: absolute;">
+                Это поле обязательно к заполнению
             </div>
         </div>
 
@@ -142,20 +151,23 @@
             <label for="parent-name">Кличка родителя</label>
             <br>
             <span class="textarea-length-counter"
-            [style.color]="appService.getTextareaLimit(currentParentData.nickname, 40) > 0 ? '#46b0ad' : '#eb0000'">
-            {{appService.getTextareaLimit(currentParentData.nickname, 40)}}
-        </span>
+                [style.color]="appService.getTextareaLimit(currentParentData.nickname, 40) > 0 ? '#46b0ad' : '#eb0000'">
+                {{appService.getTextareaLimit(currentParentData.nickname, 40)}}
+            </span>
             <input type="text" class="form-control custom-form-control-border" name="parent-name"
-                [class.invalid-form-field-value]="profileService.invalidFields.includes('name')"
-                [(ngModel)]="currentParentData.nickname" (change)="profileService.inputValueChanged('name'); updateToLocalStorage();"
-                placeholder="Кличка"/>
+                [class.invalid-form-field-value]="isFocused['name'] && errors && errors.includes('name') || (customeValidator && errors && errors.includes('name'))"
+                [(ngModel)]="currentParentData.nickname"
+                (change)="profileService.inputValueChanged('name'); updateLocalData(); focusCheck('name')" placeholder="Кличка" />
+            <div *ngIf="isFocused['name'] && errors && errors.includes('name') || (customeValidator && errors && errors.includes('name'))" class="error-field-message">
+                Это поле обязательно к заполнению
+            </div>
         </div>
 
         <div class="dog-sex-block">
             <label for="parent-sex">Пол</label>
             <br>
             <button class="form-control custom-form-control-border"
-                (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'; updateToLocalStorage()">
+                (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'; updateLocalData()">
                 <img height="17px" src="./assets/img/sex_{{currentParentData.gender == 'MALE' ? 'male' : 'female'}}.png"
                     alt="Пол родителя" />
             </button>
@@ -168,15 +180,17 @@
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border"
                 name="parent-breed" [(ngModel)]="currentBreed"
-                [class.invalid-form-field-value]="profileService.invalidFields.includes('breed')" id="breed"
+                [class.invalid-form-field-value]="isFocused['breed'] && errors && errors.includes('breed') || (customeValidator && errors && errors.includes('breed'))" id="breed"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, parentBreedFocus$, parentBreedClick$, parentBreedInstance)"
                 (focus)="parentBreedFocus$.next($event.target.value)"
                 (click)="parentBreedClick$.next($event.target.value)"
-                (change)="profileService.inputValueChanged('breed')" 
-                (ngModelChange)="updateToLocalStorage()" #parentBreedInstance="ngbTypeahead"
-                placeholder="Выбрать" aria-describedby="basic-addon2">
+                (change)="profileService.inputValueChanged('breed')" (ngModelChange)="updateLocalData(); focusCheck('breed')"
+                #parentBreedInstance="ngbTypeahead" placeholder="Выбрать" aria-describedby="basic-addon2">
             <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
                 (click)="appService.toggleDropdownTextInput('breed', $event)" />
+        </div>
+        <div *ngIf="isFocused['breed'] && errors && errors.includes('breed') || (customeValidator && errors && errors.includes('breed'))" class="error-field-message">
+            Выберите один из предложенных вариантов
         </div>
 
     </div>
@@ -190,8 +204,15 @@
             {{appService.getTextareaLimit(currentParentData.info, 1024)}}
         </span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="currentParentData.info"
-            (change)="profileService.inputValueChanged('info'); updateToLocalStorage();"
-            [class.invalid-form-field-value]="profileService.invalidFields.includes('info')"></textarea>
+            (change)="profileService.inputValueChanged('info'); updateLocalData(); focusCheck('info')"
+            [class.invalid-form-field-value]="isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))">
+        </textarea>
+        <div *ngIf="isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))" class="error-field-message">
+            Это поле обязательно к заполнению
+        </div>
+        <div *ngIf="isFocused['info'] && appService.getTextareaLimit(currentParentData.info, 1024) < 0" class="error-field-message">
+            Превышено количество символов
+        </div>
     </div>
 
     <div class="add-parent-page-photos-block">
@@ -199,14 +220,14 @@
 
         <div *ngIf="currentParentData.gallery.length == 0" class="gallery-initial-block"
             (click)="previewParentImage(-1)"
-            [class.invalid-form-field-value]="profileService.invalidFields.includes('photos')">
+            [class.invalid-form-field-value]="isFocused['photos'] && errors && errors.includes('photos') || (customeValidator && errors && errors.includes('photos'))">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
             <span>Нажмите для загрузки фотографий</span>
         </div>
 
         <div *ngIf="currentParentData.gallery.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of currentParentData.gallery;let i = index" class="active-galley-photo-block">
+            <div *ngFor="let photo of currentParentData.gallery;let i = index;" class="active-galley-photo-block">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
                     (click)="deleteParentImage(i)" />
                 <img src="/img/{{photo.preview}}.jpg" class="pet-image" alt="Изображение в галерее"
@@ -218,7 +239,8 @@
         </div>
 
         <div *ngIf="currentParentData.gallery.length == 0" class="gallery-upload-button custom-btn btn-transparent"
-            (click)="previewParentImage(-1)" [class.invalid-form-field-value]="profileService.invalidFields.includes('photos')">
+            (click)="previewParentImage(-1)"
+            [class.invalid-form-field-value]="isFocused['photos'] && errors && errors.includes('photos') || (customeValidator && errors && errors.includes('photos'))">
             <span>Выбрать</span>
         </div>
     </div>

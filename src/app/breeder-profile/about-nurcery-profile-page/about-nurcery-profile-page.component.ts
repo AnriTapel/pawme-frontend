@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 // import { Subject } from 'rxjs';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { AppService } from 'src/app/services/app-service/app.service';
@@ -29,6 +29,9 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   saveChagesEvent: any;
   otherElement: boolean;
   isLoading: boolean = false;
+  errors;
+  isFocused = {};
+  customeValidator;
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
   @ViewChild('mainBreedInstance', { static: true }) mainBreedInstance: NgbTypeahead;
@@ -44,7 +47,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     private eventService: EventService, private breederService: BreederControllerService, public profileService: BreederProfileService,
     private router: Router) { }
 
-  updateToLocalStorage() {
+  updateLocalData() {
     let obj: any = this.nurceryData
     if (this.curMainBreed) {
       this.appService.breeds.filter((item) => {
@@ -60,7 +63,13 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         }
       });
     }
-    localStorage.setItem('IVAboutNurcery', JSON.stringify(obj))
+    localStorage.setItem('IVAboutNurcery', JSON.stringify(obj));
+
+    this.validateInputFields();
+  }
+
+  focusCheck(elem){
+    this.isFocused[elem] = true;
   }
 
   ngOnInit() {
@@ -131,7 +140,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         this.profileService.inputValueChanged('profilePhoto');
         this.popupService.setShowStatus(false);
         this.nurceryData.profilePhoto = imageData;
-        this.updateToLocalStorage();
+        this.updateLocalData();
+        this.focusCheck('profilePhoto');
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
@@ -163,7 +173,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
           this.nurceryData.gallery.push(imageData);
         else
           this.nurceryData.gallery[index] = imageData;
-        this.updateToLocalStorage();
+        this.updateLocalData();
+        this.focusCheck('gallery');
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
@@ -192,8 +203,12 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   }
 
   saveChanges(forPreview: boolean) {
-    if (!this.validateInputFields())
+    if (!this.validateInputFields()) {
+      this.customeValidator = true;
       return;
+    }
+    this.customeValidator = false;
+    
     this.isLoading = true;
     this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
     if (!this.nurceryData.name)
@@ -264,7 +279,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.nurceryData.city || this.nurceryData.city == "" || this.nurceryData.city.length > 128) {
+    if (!this.nurceryData.city || this.nurceryData.city == "" || this.nurceryData.city.length > 128 || this.appService.cities.filter(it => it == this.nurceryData.city).length == 0) {
       this.profileService.invalidFields.push('city');
       isValid = false;
     }
@@ -283,6 +298,9 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.profileService.invalidFields.push('gallery');
       isValid = false;
     }
+
+    this.errors = this.profileService.invalidFields;
+
     return isValid;
   }
 }

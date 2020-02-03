@@ -24,13 +24,22 @@ export class AboutMeProfilePageComponent implements OnInit {
 
   saveChagesEvent: any;
 
+  errors;
+  isFocused = {};
+  customeValidator;
+
   constructor(private popupService: PopupTemplateService, public appService: AppService, private eventService: EventService, private router: Router,
     private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
-  updateToLocalStorage() {
+  updateLocalData() {
     let obj: any = this.breederData;
     obj['clubs'] = this.currentClubs.join(";")
     localStorage.setItem('IVBreederData', JSON.stringify(obj));
+    this.validateInputFields();
+  }
+
+  focusCheck(elem) {
+    this.isFocused[elem] = true;
   }
 
   ngOnInit() {
@@ -86,7 +95,8 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.profileService.inputValueChanged('photo');
         this.popupService.setShowStatus(false);
         this.breederData.photo = imageData;
-        this.updateToLocalStorage();
+        this.updateLocalData();
+        this.focusCheck('photo');
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
@@ -119,7 +129,7 @@ export class AboutMeProfilePageComponent implements OnInit {
           this.appService.uploadPersonalImage(body).subscribe((imageData: any) => {
             this.breederData.certificates.push(imageData);
             this.profileService.dataChangesSaved = false;
-            this.updateToLocalStorage();
+            this.updateLocalData();
           });
         }
         img.src = e.target.result;
@@ -179,12 +189,17 @@ export class AboutMeProfilePageComponent implements OnInit {
       isValid = false;
     }
 
+    this.errors = this.profileService.invalidFields;
+
     return isValid;
   }
 
   saveChanges(forPreview: boolean) {
-    if (!this.validateInputFields())
+    if (!this.validateInputFields()) {
+      this.customeValidator = true;
       return;
+    }
+    this.customeValidator = false;
 
     this.breederData.clubs = this.currentClubs.join(";");
     this.isLoading = true;

@@ -2,11 +2,13 @@
 
     <div class="page-header page-header-with-desc">
         <h3>Добавить щенков</h3>
-        <p>Перед добавлением щенков укажите их отца и мать в разделе "Родители щенков". В противном случае вы не сможете сохранить щенка.</p>
+        <p>Перед добавлением щенков укажите их отца и мать в разделе "Родители щенков". В противном случае вы не сможете
+            сохранить щенка.</p>
     </div>
 
     <div class="dog-entity-list-block">
-        <div *ngFor="let puppy of puppiesData;let i = index;" class="avail-dog-entity-item" (click)="showCurrentPuppyPage(i)">
+        <div *ngFor="let puppy of puppiesData;let i = index;" class="avail-dog-entity-item"
+            (click)="showCurrentPuppyPage(i)">
 
             <div class="entity-image-block">
                 <img src='/img/{{puppy.gallery[0].preview}}.jpg' alt="Изображение щенка" />
@@ -59,16 +61,23 @@
     <div class="breeder-profile-subpage-form-left add-puppy-page-name-block">
         <div class="dog-name-block">
             <label for="puppy-name">Кличка</label>
-            <input type="text" class="form-control custom-form-control-border" name="puppy-name" [class.invalid-form-field-value]="profileService.invalidFields.includes('name')"
-                [(ngModel)]="currentPuppyData.nickname" (change)="profileService.inputValueChanged('name'); updateToLocalStorage();" placeholder="Кличка"
-            />
+            <input type="text" class="form-control custom-form-control-border" name="puppy-name"
+                [class.invalid-form-field-value]="isFocused['name'] && errors && errors.includes('name') || (customeValidator && errors && errors.includes('name'))"
+                [(ngModel)]="currentPuppyData.nickname"
+                (change)="profileService.inputValueChanged('name'); updateLocalData(); focusCheck('name')"
+                placeholder="Кличка" />
+            <div *ngIf="isFocused['name'] && errors && errors.includes('name') || (customeValidator && errors && errors.includes('name'))"
+                class="error-field-message">
+                Это поле обязательно к заполнению
+            </div>
         </div>
 
         <div class="dog-sex-block">
             <label for="puppy-sex">Пол</label>
-            <button class="form-control custom-form-control-border" (click)="currentPuppyData.gender = currentPuppyData.gender == 'MALE' ? 'FEMALE' : 'MALE'; updateToLocalStorage();">
-                <img height="17px" src="./assets/img/sex_{{currentPuppyData.gender == 'MALE' ? 'male' : 'female'}}.png" alt="Пол родителя"
-                />
+            <button class="form-control custom-form-control-border"
+                (click)="currentPuppyData.gender = currentPuppyData.gender == 'MALE' ? 'FEMALE' : 'MALE'; updateLocalData();">
+                <img height="17px" src="./assets/img/sex_{{currentPuppyData.gender == 'MALE' ? 'male' : 'female'}}.png"
+                    alt="Пол родителя" />
             </button>
         </div>
 
@@ -78,36 +87,64 @@
         <label for="puppy-breed">Порода</label>
 
         <div class="dropdown-text-input">
-            <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border" name="puppy-breed" [(ngModel)]="curBreed"
-                [class.invalid-form-field-value]="profileService.invalidFields.includes('breed')" [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, puppyBreedFocus$, puppyBreedClick$, puppyBreedInstance)"
-                (focus)="puppyBreedFocus$.next($event.target.value)" (click)="puppyBreedClick$.next($event.target.value)" (change)="profileService.inputValueChanged('breed')"
-                #puppyBreedInstance="ngbTypeahead" id="breed" placeholder="Выбрать" aria-describedby="basic-addon2" (ngModelChange)="updateToLocalStorage();">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('breed', $event)" />
+            <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border"
+                name="puppy-breed" [(ngModel)]="curBreed"
+                [class.invalid-form-field-value]="isFocused['breed'] && errors && errors.includes('breed') || (customeValidator && errors && errors.includes('breed'))"
+                [ngbTypeahead]="appService.fieldAutocomplete(appService.breeds, puppyBreedFocus$, puppyBreedClick$, puppyBreedInstance)"
+                (focus)="puppyBreedFocus$.next($event.target.value)"
+                (click)="puppyBreedClick$.next($event.target.value)"
+                (change)="profileService.inputValueChanged('breed')" #puppyBreedInstance="ngbTypeahead" id="breed"
+                placeholder="Выбрать" aria-describedby="basic-addon2"
+                (ngModelChange)="updateLocalData(); focusCheck('breed')">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
+                (click)="appService.toggleDropdownTextInput('breed', $event)" />
+        </div>
+        <div *ngIf="isFocused['breed'] && errors && errors.includes('breed') || (customeValidator && errors && errors.includes('breed'))"
+            class="error-field-message">
+            Выберите один из предложенных вариантов
         </div>
     </div>
 
     <div class="breeder-profile-subpage-form-left">
         <label for="puppy-birthday">Дата рождения</label>
         <div class="input-group">
-            <input type="number" min="0" class="form-control custom-form-control-border" [class.invalid-form-field-value]="profileService.invalidFields.includes('birthday')"
-                [(ngModel)]="birthdayModel.day" (change)="updateSelectedDate(); updateToLocalStorage();" placeholder="День">
-            <input type="number" min="0" class="form-control custom-form-control-border" [class.invalid-form-field-value]="profileService.invalidFields.includes('birthday')"
-                [(ngModel)]="birthdayModel.month" (change)="updateSelectedDate(); updateToLocalStorage();" placeholder="Месяц">
-            <input type="number" min="0" class="form-control custom-form-control-border" [class.invalid-form-field-value]="profileService.invalidFields.includes('birthday')"
-                [(ngModel)]="birthdayModel.year" (change)="updateSelectedDate(); updateToLocalStorage();" placeholder="Год">
-            <input class="form-control custom-form-control-border" style="display: none;" [(ngModel)]="birthdayModel" [minDate]="{year: 2000, month: 1, day: 1}"
-                [maxDate]="getCurrentMaxDate()" ngbDatepicker (change)="profileService.inputValueChanged('birthday');" #datePicker="ngbDatepicker" (ngModelChange)="updateToLocalStorage();">
+            <input type="number" min="0" class="form-control custom-form-control-border"
+                [class.invalid-form-field-value]="((isFocused['birthday1'] && isFocused['birthday2'] && isFocused['birthday3']) || isFocused['birthday']) && errors && errors.includes('birthday') || (customeValidator && errors && errors.includes('birthday'))"
+                [(ngModel)]="birthdayModel.day"
+                (change)="updateSelectedDate(); updateLocalData(); focusCheck('birthday1')" placeholder="День">
+            <input type="number" min="0" class="form-control custom-form-control-border"
+                [class.invalid-form-field-value]="((isFocused['birthday1'] && isFocused['birthday2'] && isFocused['birthday3']) || isFocused['birthday']) && errors && errors.includes('birthday') || (customeValidator && errors && errors.includes('birthday'))"
+                [(ngModel)]="birthdayModel.month"
+                (change)="updateSelectedDate(); updateLocalData(); focusCheck('birthday2')" placeholder="Месяц">
+            <input type="number" min="0" class="form-control custom-form-control-border"
+                [class.invalid-form-field-value]="((isFocused['birthday1'] && isFocused['birthday2'] && isFocused['birthday3']) || isFocused['birthday']) && errors && errors.includes('birthday') || (customeValidator && errors && errors.includes('birthday'))"
+                [(ngModel)]="birthdayModel.year"
+                (change)="updateSelectedDate(); updateLocalData(); focusCheck('birthday3')" placeholder="Год">
+            <input class="form-control custom-form-control-border" style="display: none;" [(ngModel)]="birthdayModel"
+                [minDate]="{year: 2000, month: 1, day: 1}" [maxDate]="getCurrentMaxDate()" ngbDatepicker
+                (change)="profileService.inputValueChanged('birthday');" #datePicker="ngbDatepicker"
+                (ngModelChange)="updateLocalData(); focusCheck('birthday')">
             <div class="custom-input-append" (click)="datePicker.toggle()">
                 <img src="./assets/img/calendar.svg" alt="Календарь" />
             </div>
+        </div>
+        <div *ngIf="((isFocused['birthday1'] && isFocused['birthday2'] && isFocused['birthday3']) || isFocused['birthday']) && errors && errors.includes('birthday') || (customeValidator && errors && errors.includes('birthday'))"
+            class="error-field-message">
+            Эти поля обязательны к заполнению
         </div>
     </div>
 
     <div class="breeder-profile-subpage-form-right">
         <label for="puppy-stigma">Клеймо (видно только вам)</label>
-        <input class="form-control custom-form-control-border" type="text" name="puppy-stigma" [class.invalid-form-field-value]="profileService.invalidFields.includes('stigma')"
-            [(ngModel)]="currentPuppyData.earmark" (change)="profileService.inputValueChanged('stigma'); updateToLocalStorage();" placeholder="Код клейма"
-        />
+        <input class="form-control custom-form-control-border" type="text" name="puppy-stigma"
+            [class.invalid-form-field-value]="isFocused['stigma'] && errors && errors.includes('stigma') || (customeValidator && errors && errors.includes('stigma'))"
+            [(ngModel)]="currentPuppyData.earmark"
+            (change)="profileService.inputValueChanged('stigma'); updateLocalData(); focusCheck('stigma')"
+            placeholder="Код клейма" />
+        <div *ngIf="isFocused['stigma'] && errors && errors.includes('stigma') || (customeValidator && errors && errors.includes('stigma'))"
+            class="error-field-message">
+            Это поле обязательно к заполнению
+        </div>
     </div>
 
 
@@ -115,11 +152,21 @@
         <label for="puppy-dad">Отец</label>
 
         <div class="dropdown-text-input">
-            <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-dad" [(ngModel)]="curFatherNickname"
-                [class.invalid-form-field-value]="profileService.invalidFields.includes('dad')" id="dad" [ngbTypeahead]="appService.fieldAutocomplete(fathers, dadDogFocus$, dadDogClick$, dadDogInstance)"
-                (focus)="dadDogFocus$.next($event.target.value)" (click)="onDadInputClick($event)" (blur)="isDadEmptyButton = false"
-                #dadDogInstance="ngbTypeahead" placeholder="Выбрать" (change)="profileService.inputValueChanged('dad')" aria-describedby="basic-addon2" (ngModelChange)="updateToLocalStorage();">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('dad', $event)" />
+            <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-dad"
+                [(ngModel)]="curFatherNickname"
+                [class.invalid-form-field-value]="isFocused['dad'] && errors && errors.includes('dad') || (customeValidator && errors && errors.includes('dad'))"
+                id="dad"
+                [ngbTypeahead]="appService.fieldAutocomplete(fathers, dadDogFocus$, dadDogClick$, dadDogInstance)"
+                (focus)="dadDogFocus$.next($event.target.value)" (click)="onDadInputClick($event)"
+                (blur)="isDadEmptyButton = false" #dadDogInstance="ngbTypeahead" placeholder="Выбрать"
+                (change)="profileService.inputValueChanged('dad')" aria-describedby="basic-addon2"
+                (ngModelChange)="updateLocalData(); focusCheck('dad')">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
+                (click)="appService.toggleDropdownTextInput('dad', $event)" />
+        </div>
+        <div *ngIf="isFocused['dad'] && errors && errors.includes('dad') || (customeValidator && errors && errors.includes('dad'))"
+            class="error-field-message" style="position: absolute;">
+            Выберите один из предложенных вариантов
         </div>
         <div *ngIf="isDadEmptyButton" class="empty-parent-button-block" (mousedown)="switchToParentsSubpage()">
             <img src="./assets/img/thin-plus.png" alt="Добавить родителя" /> &nbsp;&nbsp;Добавить родителя
@@ -131,11 +178,21 @@
         <label for="puppy-mom">Мать</label>
 
         <div class="dropdown-text-input">
-            <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-mom" [(ngModel)]="curMotherNickname"
-                [class.invalid-form-field-value]="profileService.invalidFields.includes('mom')" id="mom" [ngbTypeahead]="appService.fieldAutocomplete(mothers, momDogFocus$, momDogClick$, momDogInstance)"
-                (focus)="momDogFocus$.next($event.target.value)" (click)="onMomInputClick($event)" (blur)="isMomEmptyButton = false"
-                #momDogInstance="ngbTypeahead" placeholder="Выбрать" (change)="profileService.inputValueChanged('mom')" aria-describedby="basic-addon2" (ngModelChange)="updateToLocalStorage();">
-            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз" (click)="appService.toggleDropdownTextInput('mom', $event)" />
+            <input *ngIf="puppiesData" type="text" class="form-control custom-form-control-border" name="puppy-mom"
+                [(ngModel)]="curMotherNickname"
+                [class.invalid-form-field-value]="isFocused['mom'] && errors && errors.includes('mom') || (customeValidator && errors && errors.includes('mom'))"
+                id="mom"
+                [ngbTypeahead]="appService.fieldAutocomplete(mothers, momDogFocus$, momDogClick$, momDogInstance)"
+                (focus)="momDogFocus$.next($event.target.value)" (click)="onMomInputClick($event)"
+                (blur)="isMomEmptyButton = false" #momDogInstance="ngbTypeahead" placeholder="Выбрать"
+                (change)="profileService.inputValueChanged('mom')" aria-describedby="basic-addon2"
+                (ngModelChange)="updateLocalData(); focusCheck('mom')">
+            <img src="./assets/img/arrow-down.svg" alt="Стрелка вниз"
+                (click)="appService.toggleDropdownTextInput('mom', $event)" />
+        </div>
+        <div *ngIf="isFocused['mom'] && errors && errors.includes('mom') || (customeValidator && errors && errors.includes('mom'))"
+            class="error-field-message" style="position: absolute;">
+            Выберите один из предложенных вариантов
         </div>
         <div *ngIf="isMomEmptyButton" class="empty-parent-button-block" (mousedown)="switchToParentsSubpage()">
             <img src="./assets/img/thin-plus.png" alt="Добавить родителя" /> &nbsp;&nbsp;Добавить родителя
@@ -145,25 +202,43 @@
     <div class="add-puppy-page-info-block">
         <label for="puppy-info">Расскажите об этом щенке</label>
         <br>
-        <span class="block-description">Расскажите любую информацию о щенке, которую считаете важной. Например, вы можете описать характер, привычки и уровень
+        <span class="block-description">Расскажите любую информацию о щенке, которую считаете важной. Например, вы
+            можете описать характер, привычки и уровень
             социализации.</span>
-        <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(currentPuppyData.about, 1024) > 0 ? '#46b0ad' : '#eb0000'">
+        <span class="textarea-length-counter"
+            [style.color]="appService.getTextareaLimit(currentPuppyData.about, 1024) > 0 ? '#46b0ad' : '#eb0000'">
             {{appService.getTextareaLimit(currentPuppyData.about, 1024)}}
         </span>
-        <textarea rows="3" class="form-control custom-form-control-border" (change)="profileService.inputValueChanged('info'); updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('info')"
+        <textarea rows="3" class="form-control custom-form-control-border"
+            (change)="profileService.inputValueChanged('info'); updateLocalData(); focusCheck('info')"
+            [class.invalid-form-field-value]="isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))"
             [(ngModel)]="currentPuppyData.about"></textarea>
+        <div *ngIf="isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))"
+            class="error-field-message">
+            Это поле обязательно к заполнению
+        </div>
+        <div *ngIf="appService.getTextareaLimit(currentPuppyData.about, 1024) < 0" class="error-field-message">
+            Превышено количество символов
+        </div>
     </div>
 
     <div class="breeder-profile-subpage-form-left">
         <label for="puppy-price">Стоимость щенка в рублях (необязательно)</label>
-        <input type="number" min="0" name="puppy-price" class="form-control custom-form-control-border" (change)="profileService.inputValueChanged('price'); updateToLocalStorage();"
-            [class.invalid-form-field-value]="profileService.invalidFields.includes('price')" [(ngModel)]="currentPuppyData.price" placeholder="₽"/>
+        <input type="number" min="0" name="puppy-price" class="form-control custom-form-control-border"
+            (change)="profileService.inputValueChanged('price'); updateLocalData(); focusCheck('price')"
+            [class.invalid-form-field-value]="isFocused['price'] && errors && errors.includes('price') || (customeValidator && errors && errors.includes('price'))"
+            [(ngModel)]="currentPuppyData.price" placeholder="₽" />
+        <div *ngIf="isFocused['price'] && errors && errors.includes('price') || (customeValidator && errors && errors.includes('price'))"
+            class="error-field-message">
+            Превышена допустимая стоимость
+        </div>
     </div>
 
     <div class="add-puppy-page-photos-block">
         <label>Загрузите фотографии</label>
 
-        <div *ngIf="currentPuppyData.gallery.length == 0" class="gallery-initial-block" [class.invalid-form-field-value]="profileService.invalidFields.includes('photos')"
+        <div *ngIf="currentPuppyData.gallery.length == 0" class="gallery-initial-block"
+            [class.invalid-form-field-value]="isFocused['photos'] && errors && errors.includes('photos') || (customeValidator && errors && errors.includes('photos'))"
             (click)="previewPuppyImage(-1)">
             <img src="./assets/img/cloud-computing.png" alt="Облако скачивания" />
             <br>
@@ -172,27 +247,31 @@
 
         <div *ngIf="currentPuppyData.gallery.length > 0" class="gallery-uploaded-photos-block">
             <div *ngFor="let photo of currentPuppyData.gallery;let i = index" class="active-galley-photo-block">
-                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку" (click)="deletePuppyImage(i); updateToLocalStorage()"
-                />
-                <img src="/img/{{photo.preview}}.jpg" class="pet-image" (click)="previewPuppyImage(i)" alt="Изображение в галерее" />
+                <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
+                    (click)="deletePuppyImage(i); updateLocalData()" />
+                <img src="/img/{{photo.preview}}.jpg" class="pet-image" (click)="previewPuppyImage(i)"
+                    alt="Изображение в галерее" />
             </div>
             <div class="empty-galley-photo-block" (click)="previewPuppyImage(-1)">
                 <img src="./assets/img/photo-camera.svg" alt="Камера" />
             </div>
         </div>
 
-        <div *ngIf="currentPuppyData.gallery.length == 0" [class.invalid-form-field-value]="profileService.invalidFields.includes('photos')"
-                (click)="previewPuppyImage(-1)" class="gallery-upload-button custom-btn btn-transparent">
+        <div *ngIf="currentPuppyData.gallery.length == 0"
+            [class.invalid-form-field-value]="isFocused['photos'] && errors && errors.includes('photos') || (customeValidator && errors && errors.includes('photos'))"
+            (click)="previewPuppyImage(-1)" class="gallery-upload-button custom-btn btn-transparent">
             <span>Выбрать</span>
         </div>
     </div>
 
     <div class="lower-btn">
-        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message" style="display: block; margin-bottom: 1em;">
+        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
+            style="display: block; margin-bottom: 1em;">
             Пожалуйста, заполните или исправьте поля, выделенные красным
         </span>
         <br *ngIf="profileService.invalidFields.length > 0" />
-        <input type="button" class="custom-btn btn-purple" value="{{currentPuppyData.id ? 'Сохранить' : 'Добавить'}} щенка" (click)="addPuppy()" />
+        <input type="button" class="custom-btn btn-purple"
+            value="{{currentPuppyData.id ? 'Сохранить' : 'Добавить'}} щенка" (click)="addPuppy()" />
     </div>
 
 </div>

@@ -12,11 +12,14 @@
         <label for="puppies-age">Возраст продажи щенков</label>
         <div class="input-group mb-3">
             <input type="number" min="0" name="puppies-age" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.age" placeholder="от"
-                (change)="profileService.inputValueChanged('age'); updateToLocalStorage();" aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="profileService.invalidFields.includes('age')">
+                (change)="profileService.inputValueChanged('age'); updateLocalData(); focusCheck('age')" aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="isFocused['age'] && errors && errors.includes('age') || (customeValidator && errors && errors.includes('age'))">
             <div class="input-group-append">
-                <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="profileService.invalidFields.includes('age')"
+                <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="isFocused['age'] && errors && errors.includes('age') || (customeValidator && errors && errors.includes('age'))"
                     id="basic-addon2">недель</span>
             </div>
+        </div>
+        <div *ngIf="isFocused['age'] && errors && errors.includes('age') || (customeValidator && errors && errors.includes('age'))" class="error-field-message">
+            Это поле обязательно к заполнению
         </div>
     </div>
 
@@ -24,9 +27,12 @@
         <label for="puppies-price">Стоимость щенков в рублях</label>
         <div class="input-group">
             <input type="number" min="0" class="form-control custom-form-control-border" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
-                (change)="profileService.inputValueChanged('priceFrom'); updateToLocalStorage();" placeholder="от" [class.invalid-form-field-value]="profileService.invalidFields.includes('priceFrom')">
-            <input type="number" min="0" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до" (change)="profileService.inputValueChanged('priceFrom'); updateToLocalStorage();"
-                [class.invalid-form-field-value]="profileService.invalidFields.includes('priceTo')">
+                (change)="profileService.inputValueChanged('priceFrom'); updateLocalData(); focusCheck('priceFrom');" placeholder="от" [class.invalid-form-field-value]="isFocused['priceFrom'] && errors && errors.includes('priceFrom') || (customeValidator && errors && errors.includes('priceFrom'))">
+            <input type="number" min="0" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.priceTo" placeholder="до" (change)="profileService.inputValueChanged('priceFrom'); updateLocalData(); focusCheck('priceTo');"
+                [class.invalid-form-field-value]="isFocused['priceTo'] && errors && errors.includes('priceTo') || (customeValidator && errors && errors.includes('priceTo'))">
+        </div>
+        <div *ngIf="(isFocused['priceFrom'] && errors && errors.includes('priceFrom') || (isFocused['priceTo'] && errors && errors.includes('priceTo')))  || (customeValidator && errors && (errors.includes('priceFrom') || errors.includes('priceTo')))" class="error-field-message">
+            Эти поля обязательны к заполнению
         </div>
     </div>
 
@@ -38,7 +44,7 @@
             </strong> и
             <strong>клеймо</strong>.</p>
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet; updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('set')">
+            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet; updateLocalData(); focusCheck('set');" [class.invalid-form-field-value]="isFocused['set'] && errors && errors.includes('set') || (customeValidator && errors && errors.includes('set'))">
                 <img *ngIf="puppiesData.petmanSet" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю наличие такого комплекта</label>
@@ -55,7 +61,7 @@
             <div class="breeder-profile-subpage-form-left">
                 <ng-container *ngFor="let test of appService.puppyTests">
                     <div *ngIf="test.id % 2 == 1" class="custom-checkbox">
-                        <div (click)="puppyTestClicked(test)" [class.invalid-form-checkbox]="profileService.invalidFields.includes('tests')">
+                        <div (click)="puppyTestClicked(test); focusCheck('tests');" [class.invalid-form-checkbox]="isFocused['tests'] && errors && errors.includes('tests') || (customeValidator && errors && errors.includes('tests'))">
                             <img *ngIf="getTestStatus(test)" src="./assets/img/check-mark.png" />
                         </div>
                         <label>{{test.name}}</label>
@@ -65,7 +71,7 @@
             <div class="breeder-profile-subpage-form-right">
                 <ng-container *ngFor="let test of appService.puppyTests">
                     <div *ngIf="test.id % 2 == 0" class="custom-checkbox">
-                        <div (click)="puppyTestClicked(test)" [class.invalid-form-checkbox]="profileService.invalidFields.includes('tests')">
+                        <div (click)="puppyTestClicked(test); focusCheck('tests');" [class.invalid-form-checkbox]="isFocused['tests'] && errors && errors.includes('tests') || (customeValidator && errors && errors.includes('tests'))">
                             <img *ngIf="getTestStatus(test)" src="./assets/img/check-mark.png" />
                         </div>
                         <label>{{test.name}}</label>
@@ -86,7 +92,7 @@
 
 
         <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract; updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('contract')">
+            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract; updateLocalData(); focusCheck('contract');" [class.invalid-form-field-value]="isFocused['contract'] && errors && errors.includes('contract') || (customeValidator && errors && errors.includes('contract'))">
                 <img *ngIf="puppiesData.petmanContract" src="./assets/img/check-mark.png" />
             </div>
             <label>Подтверждаю готовность использовать договор</label>
@@ -100,9 +106,9 @@
         <div class="input-group mb-3">
             <input type="number" min="0" name="guarantee-period" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceTerm"
                 placeholder="12" aria-label="12" aria-describedby="basic-addon2" (change)="profileService.dataChangesSaved = false"
-                [class.invalid-form-field-value]="profileService.invalidFields.includes('term')">
+                [class.invalid-form-field-value]="isFocused['age'] && errors && errors.includes('term')">
             <div class="input-group-append">
-                <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="profileService.invalidFields.includes('term')"
+                <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="isFocused['age'] && errors && errors.includes('term')"
                     id="basic-addon2">месяцев</span>
             </div>
         </div>
@@ -122,7 +128,7 @@
             {{appService.getTextareaLimit(puppiesData.gifts, 512)}}
         </span>
         <textarea rows="3" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.gifts" 
-            [class.invalid-form-field-value]="profileService.invalidFields.includes('gifts')"(change)="profileService.inputValueChanged('gifts'); updateToLocalStorage();"></textarea>
+            [class.invalid-form-field-value]="isFocused['gifts'] && errors && errors.includes('gifts') || (customeValidator && errors && errors.includes('gifts'))"(change)="profileService.inputValueChanged('gifts'); updateLocalData();"></textarea>
     </div>
 
     <div class="lower-btn">

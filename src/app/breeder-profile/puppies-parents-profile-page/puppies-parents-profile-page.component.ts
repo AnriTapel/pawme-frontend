@@ -63,12 +63,15 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   bodyPartClick$ = new Subject<string>();
   medicalTestClick$ = new Subject<string>();
   parentBreedClick$ = new Subject<string>();
+  errors;
+  isFocused = {};
+  customeValidator;
 
   constructor(public appService: AppService, private popupService: PopupTemplateService, private router: Router,
     private eventService: EventService, private breederService: BreederControllerService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
-  updateToLocalStorage() {
+  updateLocalData() {
     let obj: any = this.currentParentData;
     if (this.currentBreed) {
       this.appService.breeds.filter((item) => {
@@ -77,7 +80,14 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         }
       });
     }
-    localStorage.setItem('IVParent', JSON.stringify(obj))
+    localStorage.setItem('IVParent', JSON.stringify(obj));
+
+    this.validateFields();
+
+  }
+
+  focusCheck(elem) {
+    this.isFocused[elem] = true;
   }
 
   ngOnInit() {
@@ -119,12 +129,12 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   onBodyPartClick(event: any) {
-    this.profileService.inputValueChanged('bodyParts');
+    // this.profileService.inputValueChanged('bodyParts');
     this.bodyPartClick$.next(event.target.value);
   }
 
   onTestsClick(event: any) {
-    this.profileService.inputValueChanged('tests');
+    // this.profileService.inputValueChanged('tests');
     this.medicalTestClick$.next(event.target.value);
   }
 
@@ -139,9 +149,12 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         : JSON.parse(JSON.stringify(this.DEFAULT_PARENT_DATA));
       this.currentParentData.id = null;
 
-      let intervediateData = JSON.parse(localStorage.getItem('IVParent'));
+      let intervediateData;
+      if (localStorage.getItem('IVParent') && localStorage.getItem('IVParent') !== 'undefined'){
+        intervediateData = JSON.parse(localStorage.getItem('IVParent'));
+      }
 
-      if (intervediateData) {
+      if (intervediateData && intervediateData !== 'undefined') {
         for (const key in intervediateData) {
           if (intervediateData[key]) {
             this.currentParentData[key] = intervediateData[key];
@@ -177,7 +190,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
           this.currentParentData.gallery.push(imageData);
         else
           this.currentParentData.gallery[index] = imageData;
-        this.updateToLocalStorage();
+        this.updateLocalData();
+        this.focusCheck('photos');
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
@@ -199,8 +213,12 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   addParent(forPreview: boolean) {
-    if (!this.validateFields())
+    if (!this.validateFields()) {
+      this.customeValidator = true;
       return;
+    }
+    this.customeValidator = false;
+    
     this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
 
     if (!this.currentParentData.id) {
@@ -243,6 +261,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   saveChanges(forPreview: boolean) {
     if (!this.validateFields())
       return;
+      
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
       if (this.appService.userData.parentsInfo && this.appService.userData.parentsInfo.parents.length == 2) {
         //@ts-ignore
@@ -303,6 +322,8 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.profileService.invalidFields.push('info');
       isValid = false;
     }
+
+    this.errors = this.profileService.invalidFields;
 
     return isValid;
   }

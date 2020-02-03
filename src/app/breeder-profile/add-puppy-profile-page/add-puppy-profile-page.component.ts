@@ -62,11 +62,15 @@ export class AddPuppyProfilePageComponent implements OnInit {
   isDadEmptyButton: boolean = false;
   isMomEmptyButton: boolean = false;
 
+  errors;
+  isFocused = {};
+  customeValidator;
+
   constructor(public appService: AppService, private popupService: PopupTemplateService, private notificationService: NotificationBarService,
     private eventService: EventService, public profileService: BreederProfileService, public breederService: BreederControllerService,
     private alertService: AlertService, private router: Router) { }
 
-  updateToLocalStorage() {
+  updateLocalData() {
     let obj: any = this.currentPuppyData;
     if (this.birthdayModel.day && this.birthdayModel.month && this.birthdayModel.year)
       obj.birthDate = this.getDateAsString();
@@ -81,6 +85,13 @@ export class AddPuppyProfilePageComponent implements OnInit {
     if (this.curBreed && this.curBreed != "")
       obj.breed = this.appService.breeds.filter(it => it.name == this.curBreed)[0] || { name: this.curBreed };
     localStorage.setItem('IVPuppy', JSON.stringify(obj));
+
+    this.validateInputFields();
+
+  }
+
+  focusCheck(elem) {
+    this.isFocused[elem] = true;
   }
 
   ngOnInit() {
@@ -216,7 +227,8 @@ export class AddPuppyProfilePageComponent implements OnInit {
           this.currentPuppyData.gallery.push(imageData);
         else
           this.currentPuppyData.gallery[index] = imageData;
-        this.updateToLocalStorage();
+        this.updateLocalData();
+        this.focusCheck('photos');
       }, (err) => {
         if (err.status == 415) {
           this.popupService.setShowStatus(false);
@@ -238,8 +250,11 @@ export class AddPuppyProfilePageComponent implements OnInit {
   }
 
   addPuppy(): void {
-    if (!this.validateInputFields())
+    if (!this.validateInputFields()) {
+      this.customeValidator = true;
       return;
+    }
+    this.customeValidator = false;
 
     this.preSaveOperation();
     if (!this.currentPuppyData.id)
@@ -384,6 +399,9 @@ export class AddPuppyProfilePageComponent implements OnInit {
       this.profileService.invalidFields.push('price');
       isValid = false;
     }
+
+    this.errors = this.profileService.invalidFields;
+
     return isValid;
   }
 

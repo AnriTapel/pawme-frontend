@@ -179,6 +179,11 @@ input[type=number]::-webkit-outer-spin-button {
   font-family: 'Intro-Book' !important;
   float: right;
 }
+.error-field-message {
+  font-size: 12px;
+  font-family: 'Intro-Book' !important;
+  color: #eb0000;
+}
 
 .overlay-block {
   width: 100%;

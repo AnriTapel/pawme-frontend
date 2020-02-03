@@ -17,15 +17,21 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   puppiesData: PuppiesInfo;
   saveChagesEvent: any;
   isLoading: boolean = false;
+  errors;
+  isFocused = {};
+  customeValidator;
 
   constructor(public appService: AppService, private breederService: BreederControllerService, private eventService: EventService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService, private router: Router) { }
-    updateToLocalStorage() {
-      let obj: any = this.puppiesData
-      localStorage.setItem('IVAboutPuppies', JSON.stringify(obj))
-      console.log('update');
-    }
+  updateLocalData() {
+    let obj: any = this.puppiesData
+    localStorage.setItem('IVAboutPuppies', JSON.stringify(obj));
+    this.validateInputFields();
+  }
 
+  focusCheck(elem) {
+    this.isFocused[elem] = true;
+  }
 
   ngOnInit() {
     let intervediateData = JSON.parse(localStorage.getItem('IVAboutPuppies'));
@@ -36,16 +42,16 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       this.puppiesData = <PuppiesInfo>this.appService.userData.puppiesInfo;
     } else {
       this.puppiesData = {
-      age: null,
-      priceFrom: null,
-      priceTo: null,
-      petmanSet: false,
-      puppyTests: [],
-      petmanContract: false,
-      insuranceTerm: null,
-      insuranceCoverage: null,
-      gifts: null
-    };
+        age: null,
+        priceFrom: null,
+        priceTo: null,
+        petmanSet: false,
+        puppyTests: [],
+        petmanContract: false,
+        insuranceTerm: null,
+        insuranceCoverage: null,
+        gifts: null
+      };
       if (intervediateData) {
         for (const key in intervediateData) {
           if (intervediateData[key]) {
@@ -74,7 +80,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     else
       this.puppiesData.puppyTests.push(test);
     this.profileService.dataChangesSaved = false;
-    this.updateToLocalStorage();
+    this.updateLocalData();
   }
 
   getTestStatus(test: PuppyTest): boolean {
@@ -82,9 +88,13 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   }
 
   saveChanges(forPreview: boolean) {
-    if (!this.validateInputFields())
+    if (!this.validateInputFields()) {
+      this.customeValidator = true;
       return;
-    this.isLoading= true;
+    }
+    this.customeValidator = false;
+
+    this.isLoading = true;
     this.breederService.setPuppiesInfoUsingPUT(this.appService.userData.id, this.puppiesData).subscribe(
       () => {
         if (!this.appService.userData.puppiesInfo) {
@@ -99,7 +109,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.profileService.dataChangesSaved = true;
-        this.isLoading= false;
+        this.isLoading = false;
         scroll(0, 0);
         this.profileService.updateProfileFullness();
         if (forPreview)
@@ -161,9 +171,11 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
       this.profileService.invalidFields.push('gifts');
       isValid = false;
     } else if (this.puppiesData.gifts == "") {
-       this.puppiesData.gifts = null;
+      this.puppiesData.gifts = null;
     }
-    
+
+    this.errors = this.profileService.invalidFields;
+
     return isValid;
   }
 }
