@@ -164,12 +164,12 @@ export class AboutMeProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.breederData.outstandingInfo || this.breederData.outstandingInfo == "" || this.breederData.outstandingInfo.length > 2048) {
+    if (this.breederData.outstandingInfo && this.breederData.outstandingInfo.length > 2048) {
       this.profileService.invalidFields.push('outstanding');
       isValid = false;
     }
 
-    if (!this.breederData.howItStarted || this.breederData.howItStarted == "" || this.breederData.howItStarted.length > 2048) {
+    if (this.breederData.howItStarted && this.breederData.howItStarted.length > 2048) {
       this.profileService.invalidFields.push('howItStarted');
       isValid = false;
     }
@@ -185,7 +185,13 @@ export class AboutMeProfilePageComponent implements OnInit {
   saveChanges(forPreview: boolean) {
     if (!this.validateInputFields())
       return;
-
+      if (!this.breederData.outstandingInfo) {
+        this.breederData.outstandingInfo = null;
+      }
+      if (!this.breederData.howItStarted) {
+        this.breederData.howItStarted = null;
+      }
+    console.log('this.breederData', this.breederData); 
     this.breederData.clubs = this.currentClubs.join(";");
     this.isLoading = true;
 
@@ -215,14 +221,17 @@ export class AboutMeProfilePageComponent implements OnInit {
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       },
       (err) => {
-        if (err.status == 423)
-          this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
+        if (err.status == 423) {
+          this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false); 
+          this.isLoading = false;
+        }
         else if (err.status == 403)
           this.router.navigateByUrl('/login');
         else
           this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
-        this.notificationService.setVisibility(true);
-        scroll(0, 0);
+          this.notificationService.setVisibility(true);
+          this.isLoading = false;
+          scroll(0, 0);
       }
     );
   }

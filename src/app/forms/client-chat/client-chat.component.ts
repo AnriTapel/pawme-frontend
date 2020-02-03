@@ -23,8 +23,7 @@ export class ClientChatComponent implements OnInit {
     email: null,
     name: null,
     password: null,
-    phone: null,
-    preferWhatsapp: null
+    phone: null
   };
   newClientAcception: boolean = true;
   errorText: string = null;

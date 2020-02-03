@@ -25,6 +25,7 @@ export class BreederPageComponent implements OnInit, OnDestroy {
     };
 
     showMenu;
+    newPuppyTests = {};
 
     parentsTests = [
         { name: 'Бедра', img: './assets/img/breeder-page/hip.svg', desc: 'Исследование уменьшает шанс передачи дисплазии бедер. Заболевание больше свойственно крупным породам собак, является причиной потенциальных болей и проблем в работе тазобедренного сустава' },
@@ -229,6 +230,9 @@ export class BreederPageComponent implements OnInit, OnDestroy {
     getPuppyMedicalStatus(id: number): boolean {
         if (!this.appService.userData.puppiesInfo)
             return false;
+         for (let test in this.appService.userData.puppiesInfo.puppyTests) {
+            this.newPuppyTests[this.appService.userData.puppiesInfo.puppyTests[test].id] = this.appService.userData.puppiesInfo.puppyTests[test].name
+           }
         return this.appService.userData.puppiesInfo.puppyTests.filter(it => it.id == id).length > 0
     }
 
