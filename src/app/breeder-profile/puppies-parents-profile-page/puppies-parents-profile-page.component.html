@@ -148,7 +148,7 @@
 
     <div class="breeder-profile-subpage-form-left add-puppy-page-name-block">
         <div class="dog-name-block">
-            <label for="parent-name">Кличка родителя</label>
+            <label for="parent-name">Кличка родителя<span class="red-star">*</span></label>
             <br>
             <span class="textarea-length-counter"
                 [style.color]="appService.getTextareaLimit(currentParentData.nickname, 40) > 0 ? '#46b0ad' : '#eb0000'">
@@ -164,7 +164,7 @@
         </div>
 
         <div class="dog-sex-block">
-            <label for="parent-sex">Пол</label>
+            <label for="parent-sex">Пол</label><span class="red-star">*</span>
             <br>
             <button class="form-control custom-form-control-border"
                 (click)="currentParentData.gender = currentParentData.gender == 'MALE' ? 'FEMALE' : 'MALE'; updateLocalData()">

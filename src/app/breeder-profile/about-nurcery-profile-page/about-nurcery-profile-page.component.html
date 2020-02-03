@@ -10,7 +10,7 @@
         </button>
     </div>
     <div class="breeder-profile-subpage-form-left">
-        <label for="nurcery-name">Название питомника</label>
+        <label for="nurcery-name">Название питомника</label><span class="red-star">*</span>
         <input class="form-control custom-form-control-border" type="text" name="nurcery-name"
             [(ngModel)]="nurceryData.name" (change)="profileService.inputValueChanged('name'); updateLocalData();"
             [class.invalid-form-field-value]="isFocused['name'] && errors && errors.includes('name') || (customeValidator && errors && errors.includes('name'))"
