@@ -12,9 +12,9 @@ export class BreederProfileService {
   detectChangeProfileFullness = new EventEmitter;
 
   profileSubpages: any[] = [
+    { tag: 'about-puppies', name: 'Правила продажи' },
     { tag: 'about-nurcery', name: 'О питомнике' },
-    { tag: 'about-puppies', name: 'О щенках' },
-    { tag: 'puppies-parents', name: 'Родители щенков' },
+    { tag: 'puppies-parents', name: 'Наши собаки' },
     { tag: 'about-me', name: 'О себе' },
     { tag: 'add-puppy', name: 'Добавить щенков' }
   ];

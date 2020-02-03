@@ -6,12 +6,20 @@ button:focus {
   outline: 0;
 }
 
+hr {
+  width: 80%;
+  max-width: 1210px;
+  margin: -15px auto 0;
+  background-color: #f8f9fb;
+}
+
 .container {
   width: 100%;
   max-width: 1200px;
   min-width: 320px;
   margin: 0 auto;
   padding: 0 15px;
+  margin-bottom: 100px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: 'Intro-Book' !important;
@@ -20,6 +28,7 @@ button:focus {
 .block-detail {
   padding: 50px 0 12px;
   background: #FFFFFF;
+  background-color: #f8f9fb;
 }
 
 .text-block {
@@ -70,7 +79,7 @@ button:focus {
 }
 
 .right-chat-content {
-  height: 471px;
+  height: 469px;
   overflow-y: scroll;
 }
 
@@ -78,7 +87,7 @@ button:focus {
   width: 100px;
   height: 50px;
   border-radius: 25px;
-  border: solid 1px #cbd8f6;
+  border: solid 1px #645fc9;
   background-color: #645fc9;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -336,9 +345,26 @@ textarea:focus, input:focus {
   display: none;
 }
 
+.mobile-button {
+  display: none;
+}
+
 @media screen and (max-width: 769px) {
+  hr {
+    width: 90%;
+    margin: .5em auto 0;
+  }
+  .left {
+    display: none;
+  }
   .block-detail {
     background: #f8f9fb;
+  }
+  .mobile-button {
+    display: block;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
   }
   .desktop-version {
     display: none;
@@ -348,26 +374,26 @@ textarea:focus, input:focus {
     background: #ffffff;
   }
   .text-block {
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+        -ms-flex-direction: row;
+            flex-direction: row;
   }
   .text-block h3 {
     font-size: 20px;
+    margin-left: 12px !important;
   }
   .all {
-    width: 0;
-    height: 0;
+    width: 45px;
+    height: 25px;
     border: none;
     background-color: #f8f9fb;
     color: #0e0b4d;
     font-size: 16px;
-    margin-left: -4px;
   }
   .unread {
-    width: 210px;
-    height: 0;
+    width: 185px;
+    height: 25px;
     background-color: #f8f9fb;
     border: none;
     color: #0e0b4d;
@@ -385,6 +411,9 @@ textarea:focus, input:focus {
     height: 13px;
     margin-top: 5px !important;
   }
+  .chat-content {
+    margin-top: 15px;
+  }
   .chat-info {
     background-color: #ffffff;
     padding-left: 20px;
@@ -399,6 +428,9 @@ textarea:focus, input:focus {
     width: 100%;
     margin-left: 0;
     border-radius: 10px;
+  }
+  .desktop-button {
+    display: none;
   }
   .center-text {
     display: none;
@@ -439,13 +471,15 @@ textarea:focus, input:focus {
     display: none;
   }
   .write-message {
-    height: 39px;
+    height: 42px;
     border-radius: 10px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
   }
   .write-message input {
     font-size: 13px;
+    height: 38px;
+    margin-top: -12px;
   }
   .write-message button {
     display: none;
@@ -472,6 +506,7 @@ textarea:focus, input:focus {
     font-size: 14px;
     color: #0e0b4d;
     margin-left: 8px;
+    margin-top: 3px;
   }
 }
 /*# sourceMappingURL=chat.component.css.map */

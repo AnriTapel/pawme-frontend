@@ -50,7 +50,7 @@ export class BreederLandingComponent implements OnInit {
     this.firstSliderData = [
       { img: './assets/img/slider-img.png', text: 'Общая информация + фотографии' },
       { img: './assets/img/slider-img.png', text: 'О себе' },
-      { img: './assets/img/slider-img.png', text: 'Родители щенков' },
+      { img: './assets/img/slider-img.png', text: 'Наши собаки' },
       { img: './assets/img/slider-img.png', text: 'Информация о щенках' },
       { img: './assets/img/slider-img.png', text: 'Подключение аккаунта Instagram' }
     ];

@@ -2,7 +2,7 @@
 
     <div class="page-header page-header-with-desc">
         <h3>Добавить щенков</h3>
-        <p>Перед добавлением щенков укажите их отца и мать в разделе "Родители щенков". В противном случае вы не сможете
+        <p>Перед добавлением щенков укажите их отца и мать в разделе "Наши собаки". В противном случае вы не сможете
             сохранить щенка.</p>
     </div>
 
@@ -60,7 +60,7 @@
 
     <div class="breeder-profile-subpage-form-left add-puppy-page-name-block">
         <div class="dog-name-block">
-            <label for="puppy-name">Кличка</label>
+            <label for="puppy-name">Кличка<span class="red-star">*</span></label>
             <input type="text" class="form-control custom-form-control-border" name="puppy-name"
                 [class.invalid-form-field-value]="isFocused['name'] && errors && errors.includes('name') || (customeValidator && errors && errors.includes('name'))"
                 [(ngModel)]="currentPuppyData.nickname"
@@ -73,7 +73,7 @@
         </div>
 
         <div class="dog-sex-block">
-            <label for="puppy-sex">Пол</label>
+            <label for="puppy-sex">Пол</label><span class="red-star">*</span>
             <button class="form-control custom-form-control-border"
                 (click)="currentPuppyData.gender = currentPuppyData.gender == 'MALE' ? 'FEMALE' : 'MALE'; updateLocalData();">
                 <img height="17px" src="./assets/img/sex_{{currentPuppyData.gender == 'MALE' ? 'male' : 'female'}}.png"
@@ -84,8 +84,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-right">
-        <label for="puppy-breed">Порода</label>
-
+        <label for="puppy-breed">Порода</label><span class="red-star">*</span>
         <div class="dropdown-text-input">
             <input *ngIf="appService.breeds" type="text" class="form-control custom-form-control-border"
                 name="puppy-breed" [(ngModel)]="curBreed"
@@ -106,7 +105,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-left">
-        <label for="puppy-birthday">Дата рождения</label>
+        <label for="puppy-birthday">Дата рождения</label><span class="red-star">*</span>
         <div class="input-group">
             <input type="number" min="0" class="form-control custom-form-control-border"
                 [class.invalid-form-field-value]="((isFocused['birthday1'] && isFocused['birthday2'] && isFocused['birthday3']) || isFocused['birthday']) && errors && errors.includes('birthday') || (customeValidator && errors && errors.includes('birthday'))"
@@ -135,7 +134,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-right">
-        <label for="puppy-stigma">Клеймо (видно только вам)</label>
+        <label for="puppy-stigma">Клеймо (видно только вам)</label><span class="red-star">*</span>
         <input class="form-control custom-form-control-border" type="text" name="puppy-stigma"
             [class.invalid-form-field-value]="isFocused['stigma'] && errors && errors.includes('stigma') || (customeValidator && errors && errors.includes('stigma'))"
             [(ngModel)]="currentPuppyData.earmark"
@@ -200,7 +199,7 @@
     </div>
 
     <div class="add-puppy-page-info-block">
-        <label for="puppy-info">Расскажите об этом щенке</label>
+        <label for="puppy-info">Расскажите об этом щенке</label><span class="red-star">*</span>
         <br>
         <span class="block-description">Расскажите любую информацию о щенке, которую считаете важной. Например, вы
             можете описать характер, привычки и уровень
@@ -223,7 +222,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-left">
-        <label for="puppy-price">Стоимость щенка в рублях (необязательно)</label>
+        <label for="puppy-price">Стоимость щенка в рублях</label>
         <input type="number" min="0" name="puppy-price" class="form-control custom-form-control-border"
             (change)="profileService.inputValueChanged('price'); updateLocalData(); focusCheck('price')"
             [class.invalid-form-field-value]="isFocused['price'] && errors && errors.includes('price') || (customeValidator && errors && errors.includes('price'))"
@@ -235,7 +234,7 @@
     </div>
 
     <div class="add-puppy-page-photos-block">
-        <label>Загрузите фотографии</label>
+        <label>Загрузите фотографии</label><span class="red-star">*</span>
 
         <div *ngIf="currentPuppyData.gallery.length == 0" class="gallery-initial-block"
             [class.invalid-form-field-value]="isFocused['photos'] && errors && errors.includes('photos') || (customeValidator && errors && errors.includes('photos'))"

@@ -1,15 +1,47 @@
 <div class="breeder-profile-subpage-container">
 
     <div class="page-header">
-        <h3>О щенках</h3>
+        <h3>Правило продажи</h3>
     </div>
+   
     <div class="upper-btn">
         <button type="submit" class="custom-btn btn-purple" (click)="saveChanges(false)" [disabled]="isLoading">{{!isLoading ? 'Сохранить изменения' : ''}}
             <div *ngIf="isLoading" class="loader"></div>
         </button>
     </div>
+    <div class="contract-block">
+        <span>Обязательный договор Petman c гарантией</span>
+        <br>
+        <span class="block-description">Для защиты покупателей от недобросовестных заводчиков наши юристы составили стандартный договор купли/продажи. В
+            него включена гарантия по здоровью щенка на момент покупки.</span>
+
+        <a [routerLink]="['/docs/contract.pdf']" target="_blank">Посмотреть договор</a>
+        <br>
+
+
+        <div class="custom-checkbox">
+            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract; updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('contract')">
+                <img *ngIf="puppiesData.petmanContract" src="./assets/img/check-mark.png" />
+            </div>
+            <label>Подтверждаю готовность использовать договор</label>
+        </div>
+    </div>
+    <div class="kit-avail-block">
+        <span>Обязательный комплект Petman</span>
+        <br>
+        <p>Мы против мошенников, поэтому у каждого щенка должна быть
+            <strong>метрика (родословная), ветеринарный паспорт
+            </strong> и
+            <strong>клеймо</strong>.</p>
+        <div class="custom-checkbox">
+            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet; updateToLocalStorage();" [class.invalid-form-field-value]="profileService.invalidFields.includes('set')">
+                <img *ngIf="puppiesData.petmanSet" src="./assets/img/check-mark.png" />
+            </div>
+            <label>Подтверждаю наличие такого комплекта</label>
+        </div>
+    </div>
     <div class="breeder-profile-subpage-form-left">
-        <label for="puppies-age">Возраст продажи щенков</label>
+        <label for="puppies-age">Возраст продажи щенков</label><span class="red-star">*</span>
         <div class="input-group mb-3">
             <input type="number" min="0" name="puppies-age" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.age" placeholder="от"
                 (change)="profileService.inputValueChanged('age'); updateLocalData(); focusCheck('age')" aria-label="от" aria-describedby="basic-addon2" [class.invalid-form-field-value]="isFocused['age'] && errors && errors.includes('age') || (customeValidator && errors && errors.includes('age'))">
@@ -24,7 +56,7 @@
     </div>
 
     <div class="breeder-profile-subpage-form-right">
-        <label for="puppies-price">Стоимость щенков в рублях</label>
+        <label for="puppies-price">Стоимость щенков в рублях</label><span class="red-star">*</span>
         <div class="input-group">
             <input type="number" min="0" class="form-control custom-form-control-border" name="puppies-price" [(ngModel)]="puppiesData.priceFrom"
                 (change)="profileService.inputValueChanged('priceFrom'); updateLocalData(); focusCheck('priceFrom');" placeholder="от" [class.invalid-form-field-value]="isFocused['priceFrom'] && errors && errors.includes('priceFrom') || (customeValidator && errors && errors.includes('priceFrom'))">
@@ -121,7 +153,7 @@
     <hr>
 
     <div class="puppies-gifts-block">
-        <label for="gifts">Подарки к купленному щенку (необязательно)</label>
+        <label for="gifts">Подарки к купленному щенку</label>
         <br>
         <span class="block-description">Многие заводчики дарят новым хозяевам игрушку с запахом однопометников или небольшой мешочек корма.</span>
         <span class="textarea-length-counter" [style.color]="appService.getTextareaLimit(puppiesData.gifts, 512) > 0 ? '#46b0ad' : '#eb0000'">

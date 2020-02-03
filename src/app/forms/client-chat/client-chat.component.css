@@ -1,11 +1,8 @@
-h3 {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
-form {
-  margin-bottom: 5em;
+p {
+  font-size: 14px;
+  width: 50%;
+  margin: 1em auto 0;
+  opacity: 0.5;
 }
 
 span {
@@ -21,11 +18,15 @@ span a {
 
 span a:hover {
   color: #014c8c;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 769px) {
   h3 {
-    margin-top: 1em;
+    font-size: 20px;
+  }
+  p {
+    width: 80%;
   }
 }
-/*# sourceMappingURL=login.component.css.map */
+/*# sourceMappingURL=client-chat.component.css.map */
