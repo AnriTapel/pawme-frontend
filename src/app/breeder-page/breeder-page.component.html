@@ -117,48 +117,48 @@
 
                 <div class="medical-label-list d-flex align-items-center flex-wrap">
                     <div *ngIf="getPuppyMedicalStatus(1)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/injection.svg" alt="Комплексная прививка" />
-                        <span class="text">Комплексная прививка</span>
+                        <img src="./assets/img/breeder-page/injection.svg" alt="this.newPuppyTests[1]" />
+                        <span class="text">{{this.newPuppyTests[1]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(2)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/injection.svg" alt="Прививка от бешенства" />
-                        <span class="text">Прививка от бешенства</span>
+                        <img src="./assets/img/breeder-page/injection.svg" alt="this.newPuppyTests[2]" />
+                        <span class="text">{{this.newPuppyTests[2]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(3)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/flea.svg" alt="Обработка от глистов" />
-                        <span class="text">Обработка от глистов</span>
+                        <img src="./assets/img/breeder-page/flea.svg" alt="this.newPuppyTests[3]" />
+                        <span class="text">{{this.newPuppyTests[3]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(4)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/collar.svg" alt="Стерилизация/Кастрация" />
-                        <span class="text">Стерилизация/Кастрация</span>
+                        <img src="./assets/img/breeder-page/collar.svg" alt="this.newPuppyTests[4]" />
+                        <span class="text">{{this.newPuppyTests[4]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(5)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/analysis.svg" alt="Анализ крови" />
-                        <span class="text">Анализ крови</span>
+                        <img src="./assets/img/breeder-page/analysis.svg" alt="this.newPuppyTests[5]" />
+                        <span class="text">{{this.newPuppyTests[5]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(6)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/analysis.svg" alt="Анализ мочи" />
-                        <span class="text">Анализ мочи</span>
+                        <img src="./assets/img/breeder-page/analysis.svg" alt="this.newPuppyTests[6]" />
+                        <span class="text">{{this.newPuppyTests[6]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(7)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/analysis.svg" alt="Анализ кала" />
-                        <span class="text">Анализ кала</span>
+                        <img src="./assets/img/breeder-page/analysis.svg" alt="this.newPuppyTests[7]" />
+                        <span class="text">{{this.newPuppyTests[7]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(8)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/vision.svg" alt="Проверка у офтальмолога" />
-                        <span class="text">Проверка у офтальмолога</span>
+                        <img src="./assets/img/breeder-page/vision.svg" alt="this.newPuppyTests[8]" />
+                        <span class="text">{{this.newPuppyTests[8]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(9)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/pet.svg" alt="Проверка у кардиолога" />
-                        <span class="text">Проверка у кардиолога</span>
+                        <img src="./assets/img/breeder-page/pet.svg" alt="this.newPuppyTests[9]" />
+                        <span class="text">{{this.newPuppyTests[9]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(10)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/joint.svg" alt="Ортопедические исследования" />
-                        <span class="text">Ортопедические исследования</span>
+                        <img src="./assets/img/breeder-page/joint.svg" alt="this.newPuppyTests[10]" />
+                        <span class="text">{{this.newPuppyTests[10]}}</span>
                     </div>
                     <div *ngIf="getPuppyMedicalStatus(11)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
-                        <img src="./assets/img/breeder-page/chip_icon.svg" alt="Электронный чип" />
-                        <span class="text">Электронный чип</span>
+                        <img src="./assets/img/breeder-page/chip_icon.svg" alt="this.newPuppyTests[11]" />
+                        <span class="text">{{this.newPuppyTests[11]}}</span>
                     </div>
                 </div>
 
@@ -294,13 +294,13 @@
                             <p>{{subpageStatus().about ? appService.userData.about.about : ''}}</p>
                         </div>
 
-                        <div class="about-breeder-post">
+                        <div *ngIf="appService.userData.about.howItStarted" class="about-breeder-post">
                             <div class="title">С чего все началось?</div>
 
                             <p>{{subpageStatus().about ? appService.userData.about.howItStarted : ''}}</p>
                         </div>
 
-                        <div class="about-breeder-post">
+                        <div *ngIf="appService.userData.about.outstandingInfo" class="about-breeder-post">
                             <div class="title">Что выделяет ваш питомник?</div>
 
                             <p>{{subpageStatus().about ? appService.userData.about.outstandingInfo : ''}}</p>
