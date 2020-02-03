@@ -16,5 +16,4 @@ export interface RegisterCustomer {
     name: string;
     password: string;
     phone?: string;
-    preferWhatsapp: boolean;
 }

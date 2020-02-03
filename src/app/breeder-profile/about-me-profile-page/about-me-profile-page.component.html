@@ -66,10 +66,10 @@
             name="howItStarted"
             [class.invalid-form-field-value]="isFocused['howItStarted'] && errors && errors.includes('howItStarted') || (customeValidator && errors && errors.includes('howItStarted'))">
         </textarea>
-        <div *ngIf="isFocused['howItStarted'] && errors && errors.includes('howItStarted') || (customeValidator && errors && errors.includes('howItStarted'))"
+        <!-- <div *ngIf="isFocused['howItStarted'] && errors && errors.includes('howItStarted') || (customeValidator && errors && errors.includes('howItStarted'))"
             class="error-field-message">
             Это поле обязательно к заполнению
-        </div>
+        </div> -->
         <div *ngIf="appService.getTextareaLimit(breederData.howItStarted, 2048) < 0"
             class="error-field-message">
             Превышено количество символов
@@ -92,10 +92,10 @@
             name="features"
             [class.invalid-form-field-value]="isFocused['outstanding'] && errors && errors.includes('outstanding') || (customeValidator && errors && errors.includes('outstanding'))">
         </textarea>
-        <div *ngIf="isFocused['outstanding'] && errors && errors.includes('outstanding') || (customeValidator && errors && errors.includes('outstanding'))"
+        <!-- <div *ngIf="isFocused['outstanding'] && errors && errors.includes('outstanding') || (customeValidator && errors && errors.includes('outstanding'))"
             class="error-field-message">
             Это поле обязательно к заполнению
-        </div>
+        </div> -->
         <div *ngIf="appService.getTextareaLimit(breederData.outstandingInfo, 2048) < 0"
             class="error-field-message">
             Превышено количество символов
