@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
@@ -26,6 +26,8 @@ export class MenuComponent implements OnInit {
 
   @Input() showMenu: boolean;
   @Input() state: boolean;
+  @Output('detectChangeTopMenu') detectChangeTopMenu: EventEmitter<any> = new EventEmitter();
+
 
   constructor() { }
 
@@ -36,6 +38,10 @@ export class MenuComponent implements OnInit {
     } else {
       this.state = false;
     }
+  }
+  reloadTopBreeder() {
+    console.log('reloadTopBreeder');
+    this.detectChangeTopMenu.emit(true);
   }
 
 }
