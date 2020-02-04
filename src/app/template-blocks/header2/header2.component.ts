@@ -117,11 +117,6 @@ export class Header2Component implements OnInit {
     window.open('/breeder/' + this.appService.meData.id, '_blank');
   }
 
-  detectChangeTop(event) {
-   //console.log('event', event);
-   console.log("detectChangeTop");
-  }
-
 }
 
 export enum MenuType {

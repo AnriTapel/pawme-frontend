@@ -39,9 +39,8 @@ export class MenuComponent implements OnInit {
       this.state = false;
     }
   }
-  reloadTopBreeder() {
-    console.log('reloadTopBreeder');
-    this.detectChangeTopMenu.emit(true);
+  reloadTopBreeder(item) {
+    this.detectChangeTopMenu.emit(item);
   }
 
 }

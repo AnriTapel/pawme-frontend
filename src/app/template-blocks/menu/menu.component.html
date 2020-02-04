@@ -2,7 +2,7 @@
 <div (clickOutside)="showMenu = false" class="d-flex">
     <div [ngClass]="{'show': showMenu}" class="nav-menu">
         <div class="nav-menu--item" *ngFor="let item of menuItems" (click)="showMenu = false; ">
-        <a (click)="reloadTopBreeder()" [routerLink]="[ item.url ]">{{item.name}}</a>
+        <a (click)="reloadTopBreeder(item)" [routerLink]="[ item.url ]">{{item.name}}</a>
         <!-- <a [routerLink]="[ item.url ]">{{item.name}}</a> -->
         <!-- <a (click)="reloadTopBreeder()">{{item.name}}</a> -->
         </div>

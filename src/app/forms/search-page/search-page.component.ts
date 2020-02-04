@@ -297,7 +297,7 @@ export class SearchPageComponent implements OnInit {
     if (this.searchData.breed)
       queryParams['breed'] = this.searchData.breed;
 
-    if (this.searchData.cities.length)
+    if (this.searchData.cities && this.searchData.cities.length)
       queryParams['cities'] = this.searchData.cities;
       
       queryParams['currentPage'] = this.p;
@@ -308,5 +308,13 @@ export class SearchPageComponent implements OnInit {
         relativeTo: this.route,
         queryParams: queryParams
       });
+  }
+
+  getTopBreeder(ev){
+    if (ev.name === "Топ заводчиков") {
+      this.searchData.breed = null;
+      this.searchData.cities = null;
+      this.changeInput(event);
+    }
   }
 }
