@@ -27,6 +27,7 @@ export class AboutMeProfilePageComponent implements OnInit {
   errors;
   isFocused = {};
   customeValidator;
+  progress: any;
 
   constructor(private popupService: PopupTemplateService, public appService: AppService, private eventService: EventService, private router: Router,
     private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
@@ -234,6 +235,11 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.isLoading = false;
+        this.progress = this.appService.userData.profileFill;
+        if (this.progress == 5) {
+             this.notificationService.setContext('“Поздравляем! Вас теперь видят покупатели!”', true);
+             this.notificationService.setVisibility(true);
+           }
         scroll(0, 0);
         this.profileService.updateProfileFullness();
         this.profileService.dataChangesSaved = true;

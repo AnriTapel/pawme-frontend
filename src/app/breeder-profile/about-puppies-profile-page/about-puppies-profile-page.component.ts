@@ -20,6 +20,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   errors;
   isFocused = {};
   customeValidator;
+  progress: any;
 
   constructor(public appService: AppService, private breederService: BreederControllerService, private eventService: EventService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService, private router: Router) { }
@@ -36,7 +37,6 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   ngOnInit() {
     let intervediateData = JSON.parse(localStorage.getItem('IVAboutPuppies'));
 
-    console.log(intervediateData);
 
     if (this.appService.userData.puppiesInfo) {
       this.puppiesData = <PuppiesInfo>this.appService.userData.puppiesInfo;
@@ -112,6 +112,11 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
         this.isLoading = false;
         scroll(0, 0);
         this.profileService.updateProfileFullness();
+        this.progress = this.appService.userData.profileFill;
+        if (this.progress == 5) {
+          this.notificationService.setContext('Поздравляем! Вас теперь видят покупатели!', true);
+          this.notificationService.setVisibility(true);
+        }
         if (forPreview)
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       },

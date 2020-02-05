@@ -218,6 +218,13 @@ hr{
         margin-left: 45px;
     }
   }
+  .notification {
+      color: #645bcc;
+      font-size: 14px;
+      font-family: "Intro-Regular";
+      margin-bottom: 11px;
+      margin-top: -24px;
+  }
 
 @media screen and (max-width: 769px){
 
@@ -253,5 +260,9 @@ hr{
         margin-top: 1.5em;
         margin-bottom: unset;
         grid-column: 1/2;
+    }
+    .notification {
+        font-size: 11px;
+        margin-bottom: 5px;
     }
 }

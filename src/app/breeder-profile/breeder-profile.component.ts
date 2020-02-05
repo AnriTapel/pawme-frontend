@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../services/app-service/app.service';
 import { BreederProfileService } from '../services/breeder-profile-service/breeder-profile.service';
 import { Router } from '@angular/router';
-
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -14,7 +13,11 @@ export class BreederProfileComponent implements OnInit {
   title = 'Petman - найди себе верного друга';
   progress;
 
-  constructor(private titleService: Title, public appService: AppService, public profileService: BreederProfileService, private router: Router) {
+  constructor(
+    private titleService: Title, 
+    public appService: AppService, 
+    public profileService: BreederProfileService, 
+    private router: Router) {
     if (appService.meData.type == 'ANONYMOUS') {
       router.navigateByUrl('/login');
       return;
@@ -22,7 +25,6 @@ export class BreederProfileComponent implements OnInit {
       router.navigateByUrl('/confirm-email/unconfirmed');
       return;
     }
-
     this.profileService.updateProfileFullness();
     if (this.appService.userData.profileFill < 2)
       this.appService.isOnboardingVisible = true;

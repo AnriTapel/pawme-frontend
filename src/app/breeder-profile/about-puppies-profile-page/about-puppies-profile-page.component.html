@@ -1,5 +1,9 @@
-<div class="breeder-profile-subpage-container">
 
+<div class="breeder-profile-subpage-container">
+    <div class="show-notification">
+        <img  src="./assets/img/breeder-page/attention.svg" />
+        <div class="message">Заполните все обязательные поля, чтобы мы засчитали вам этот раздел</div>
+    </div>
     <div class="page-header">
         <h3>Правило продажи</h3>
     </div>
@@ -9,37 +13,6 @@
             <div *ngIf="isLoading" class="loader"></div>
         </button>
     </div>
-    <!-- <div class="contract-block">
-        <span>Обязательный договор Petman c гарантией</span>
-        <br>
-        <span class="block-description">Для защиты покупателей от недобросовестных заводчиков наши юристы составили стандартный договор купли/продажи. В
-            него включена гарантия по здоровью щенка на момент покупки.</span>
-
-        <a [routerLink]="['/docs/contract.pdf']" target="_blank">Посмотреть договор</a>
-        <br>
-
-
-        <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract; updateLocalData();" [class.invalid-form-field-value]="profileService.invalidFields.includes('contract')">
-                <img *ngIf="puppiesData.petmanContract" src="./assets/img/check-mark.png" />
-            </div>
-            <label>Подтверждаю готовность использовать договор</label>
-        </div>
-    </div> -->
-    <!-- <div class="kit-avail-block">
-        <span>Обязательный комплект Petman</span>
-        <br>
-        <p>Мы против мошенников, поэтому у каждого щенка должна быть
-            <strong>метрика (родословная), ветеринарный паспорт
-            </strong> и
-            <strong>клеймо</strong>.</p>
-        <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanSet = !puppiesData.petmanSet; updateLocalData();" [class.invalid-form-field-value]="profileService.invalidFields.includes('set')">
-                <img *ngIf="puppiesData.petmanSet" src="./assets/img/check-mark.png" />
-            </div>
-            <label>Подтверждаю наличие такого комплекта</label>
-        </div>
-    </div> -->
     <div class="contract-block">
             <span>Обязательный договор Petman c гарантией</span>
             <br>

@@ -265,6 +265,20 @@ app-menu {
     background: white;
 }
 
+.show-notification {
+    display: flex;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-column: 1/3;
+    padding: 5px;
+    .message {
+        margin-left: 15px;
+        font-size: 16px;
+        color: #645fc9;
+        font-family: "Intro-Regular";
+    }
+}
+
 @media screen and (max-width: 769px) {
     .fixed-header {
         .nav-menu {
@@ -296,7 +310,6 @@ app-menu {
         width: fit-content !important;
         margin: 0;
         width: 60px !important;
-        //  margin-left: 270px;
         text-align: center;
          position: relative !important;
     }
@@ -312,6 +325,14 @@ app-menu {
 
     .ng-select-container {
         font-size: 16px !important;
+    }
+
+    .show-notification {
+        padding: 5px;
+        .message {
+            margin-left: 10px;
+            font-size: 12px;
+        }
     }
 }
 
