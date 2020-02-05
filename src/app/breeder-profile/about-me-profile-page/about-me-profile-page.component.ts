@@ -235,13 +235,13 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
         this.isLoading = false;
+        this.profileService.updateProfileFullness();
         this.progress = this.appService.userData.profileFill;
         if (this.progress == 5) {
-             this.notificationService.setContext('“Поздравляем! Вас теперь видят покупатели!”', true);
-             this.notificationService.setVisibility(true);
-           }
-        scroll(0, 0);
-        this.profileService.updateProfileFullness();
+          this.notificationService.setContext('“Поздравляем! Вас теперь видят покупатели!”', true);
+          this.notificationService.setVisibility(true);
+        }
+     scroll(0, 0);
         this.profileService.dataChangesSaved = true;
         if (forPreview)
           window.open('/breeder/' + this.appService.userData.id, '_blank');
