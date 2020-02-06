@@ -252,6 +252,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
   addPuppy(): void {
     if (!this.validateInputFields()) {
       this.customeValidator = true;
+      this.scrollToError();
       return;
     }
     this.customeValidator = false;
@@ -404,5 +405,10 @@ export class AddPuppyProfilePageComponent implements OnInit {
 
     return isValid;
   }
-
+  scrollToError() {
+    setTimeout(() => {
+      if (document.getElementsByClassName('invalid-form-field-value').length)
+        document.getElementsByClassName('invalid-form-field-value')[0].scrollIntoView({ block: "center", behavior: "smooth" })
+    }, 50);
+  }
 }

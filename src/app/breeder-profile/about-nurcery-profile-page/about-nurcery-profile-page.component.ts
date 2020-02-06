@@ -69,7 +69,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.validateInputFields();
   }
 
-  focusCheck(elem){
+  focusCheck(elem) {
     this.isFocused[elem] = true;
   }
 
@@ -206,10 +206,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   saveChanges(forPreview: boolean) {
     if (!this.validateInputFields()) {
       this.customeValidator = true;
+      this.scrollToError();
       return;
     }
     this.customeValidator = false;
-    
+
     this.isLoading = true;
     this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
     if (!this.nurceryData.name)
@@ -235,9 +236,9 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         this.profileService.updateProfileFullness();
         this.progress = this.appService.userData.profileFill;
         if (this.progress == 5) {
-             this.notificationService.setContext('Поздравляем! Вас теперь видят покупатели!', true);
-             this.notificationService.setVisibility(true);
-           }
+          this.notificationService.setContext('Поздравляем! Вас теперь видят покупатели!', true);
+          this.notificationService.setVisibility(true);
+        }
         setTimeout(() => {
           scroll(0, 0);
         }, 500);
@@ -308,5 +309,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     this.errors = this.profileService.invalidFields;
 
     return isValid;
+  }
+  scrollToError() {
+    setTimeout(() => {
+      if (document.getElementsByClassName('invalid-form-field-value').length)
+        document.getElementsByClassName('invalid-form-field-value')[0].scrollIntoView({ block: "center", behavior: "smooth" })
+    }, 50);
   }
 }

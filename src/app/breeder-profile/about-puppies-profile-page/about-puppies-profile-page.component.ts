@@ -90,6 +90,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   saveChanges(forPreview: boolean) {
     if (!this.validateInputFields()) {
       this.customeValidator = true;
+      this.scrollToError();
       return;
     }
     this.customeValidator = false;
@@ -182,5 +183,12 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
     this.errors = this.profileService.invalidFields;
 
     return isValid;
+  }
+
+  scrollToError() {
+    setTimeout(() => {
+      if (document.getElementsByClassName('invalid-form-field-value').length)
+        document.getElementsByClassName('invalid-form-field-value')[0].scrollIntoView({ block: "center", behavior: "smooth" })
+    }, 50);
   }
 }

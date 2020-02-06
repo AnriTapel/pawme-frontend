@@ -151,7 +151,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
       this.currentParentData.id = null;
 
       let intervediateData;
-      if (localStorage.getItem('IVParent') && localStorage.getItem('IVParent') !== 'undefined'){
+      if (localStorage.getItem('IVParent') && localStorage.getItem('IVParent') !== 'undefined') {
         intervediateData = JSON.parse(localStorage.getItem('IVParent'));
       }
 
@@ -216,10 +216,11 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   addParent(forPreview: boolean) {
     if (!this.validateFields()) {
       this.customeValidator = true;
+      this.scrollToError();
       return;
     }
     this.customeValidator = false;
-    
+
     this.currentParentData.breed = this.appService.breeds.filter(it => it.name == this.currentBreed)[0] || { name: this.currentBreed };
 
     if (!this.currentParentData.id) {
@@ -262,7 +263,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   saveChanges(forPreview: boolean) {
     if (!this.validateFields())
       return;
-      
+
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
       if (this.appService.userData.parentsInfo && this.appService.userData.parentsInfo.parents.length == 2) {
         //@ts-ignore
@@ -288,7 +289,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
           this.notificationService.setVisibility(true);
         }
         scroll(0, 0);
-      
+
         if (forPreview)
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       });
@@ -334,5 +335,10 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
 
     return isValid;
   }
-
+  scrollToError() {
+    setTimeout(() => {
+      if (document.getElementsByClassName('invalid-form-field-value').length)
+        document.getElementsByClassName('invalid-form-field-value')[0].scrollIntoView({ block: "center", behavior: "smooth" })
+    }, 50);
+  }
 }

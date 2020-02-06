@@ -39,7 +39,7 @@ export class AboutMeProfilePageComponent implements OnInit {
     this.validateInputFields();
     console.log(this.isFocused);
     console.log(this.errors);
-    
+
   }
 
   focusCheck(elem) {
@@ -202,10 +202,11 @@ export class AboutMeProfilePageComponent implements OnInit {
   saveChanges(forPreview: boolean) {
     if (!this.validateInputFields()) {
       this.customeValidator = true;
+      this.scrollToError();
       return;
     }
     this.customeValidator = false;
-  
+
     if (!this.breederData.outstandingInfo) {
       this.breederData.outstandingInfo = null;
     }
@@ -241,25 +242,30 @@ export class AboutMeProfilePageComponent implements OnInit {
           this.notificationService.setContext('“Поздравляем! Вас теперь видят покупатели!”', true);
           this.notificationService.setVisibility(true);
         }
-     scroll(0, 0);
+        scroll(0, 0);
         this.profileService.dataChangesSaved = true;
         if (forPreview)
           window.open('/breeder/' + this.appService.userData.id, '_blank');
       },
       (err) => {
         if (err.status == 423) {
-          this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false); 
+          this.notificationService.setContext('К сожалению, ваш аккаунт заблокирован. Help@petman.co', false);
           this.isLoading = false;
         }
         else if (err.status == 403)
           this.router.navigateByUrl('/login');
         else
           this.notificationService.setContext('Изменения не были сохранены, попробуйте еще раз', false);
-          this.notificationService.setVisibility(true);
-          this.isLoading = false;
-          scroll(0, 0);
+        this.notificationService.setVisibility(true);
+        this.isLoading = false;
+        scroll(0, 0);
       }
     );
   }
-
+  scrollToError() {
+    setTimeout(() => {
+      if (document.getElementsByClassName('invalid-form-field-value').length)
+        document.getElementsByClassName('invalid-form-field-value')[0].scrollIntoView({ block: "center", behavior: "smooth" })
+    }, 50);
+  }
 }

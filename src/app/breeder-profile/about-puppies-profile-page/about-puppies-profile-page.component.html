@@ -81,7 +81,7 @@
             <div class="breeder-profile-subpage-form-left">
                 <ng-container *ngFor="let test of appService.puppyTests">
                     <div *ngIf="test.id % 2 == 1" class="custom-checkbox">
-                        <div (click)="puppyTestClicked(test); focusCheck('tests');" [class.invalid-form-checkbox]="isFocused['tests'] && errors && errors.includes('tests') || (customeValidator && errors && errors.includes('tests'))">
+                        <div (click)="puppyTestClicked(test); focusCheck('tests');" [class.invalid-form-field-value]="isFocused['tests'] && errors && errors.includes('tests') || (customeValidator && errors && errors.includes('tests'))">
                             <img *ngIf="getTestStatus(test)" src="./assets/img/check-mark.png" />
                         </div>
                         <label>{{test.name}}</label>
@@ -91,7 +91,7 @@
             <div class="breeder-profile-subpage-form-right">
                 <ng-container *ngFor="let test of appService.puppyTests">
                     <div *ngIf="test.id % 2 == 0" class="custom-checkbox">
-                        <div (click)="puppyTestClicked(test); focusCheck('tests');" [class.invalid-form-checkbox]="isFocused['tests'] && errors && errors.includes('tests') || (customeValidator && errors && errors.includes('tests'))">
+                        <div (click)="puppyTestClicked(test); focusCheck('tests');" [class.invalid-form-field-value]="isFocused['tests'] && errors && errors.includes('tests') || (customeValidator && errors && errors.includes('tests'))">
                             <img *ngIf="getTestStatus(test)" src="./assets/img/check-mark.png" />
                         </div>
                         <label>{{test.name}}</label>
