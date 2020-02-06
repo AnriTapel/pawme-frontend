@@ -66,6 +66,10 @@ export class BreederPageComponent implements OnInit, OnDestroy {
         this.breederService.getBreederUsingGET(this.route.snapshot.paramMap.get('id'))
             .subscribe((res) => {
                 this.appService.userData = res;
+                if (this.appService.userData.generalInfo.alias) {
+                    this.router.navigateByUrl('/breeder/'+ this.appService.userData.generalInfo.alias)
+                }
+                
                 this.getParentsTestsList();
                 this.setMetaTags(res);
             }, (err) => {
