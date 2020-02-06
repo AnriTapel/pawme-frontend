@@ -1,0 +1,12 @@
+<h3>Написать заводчику</h3>
+
+<div class="form-container">
+    <p>Введите сообщение для заводчика</p>
+
+    <div>
+        <textarea [(ngModel)]="message" class="form-control custom-form-control-border" rows="3"></textarea>
+    </div>
+    <button class="custom-btn btn-purple popup-form-button" style="margin-top: 20px;" (click)="send()">
+        Отправить
+    </button>
+</div>

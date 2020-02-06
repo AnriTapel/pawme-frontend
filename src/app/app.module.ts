@@ -64,6 +64,8 @@ import { ChatComponent } from './chat/chat.component';
 import { ClientRegistrationComponent } from './client-registration/client-registration.component';
 import { ClientChatComponent } from './forms/client-chat/client-chat.component';
 import { ChatService } from './services/chat-service/chat.service';
+import { FirstMessageComponent } from './forms/first-message/first-message.component';
+import { ChatRoomsPipe } from './pipes/chat-rooms.pipe';
 
 
 
@@ -121,7 +123,9 @@ export function initApp(appSerivce: AppService){
     VersionComponent,
     ChatComponent,
     ClientRegistrationComponent,
-    ClientChatComponent
+    ClientChatComponent,
+    FirstMessageComponent,
+    ChatRoomsPipe
   ],
   imports: [
     BrowserModule,

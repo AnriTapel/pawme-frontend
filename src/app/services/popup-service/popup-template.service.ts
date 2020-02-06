@@ -34,6 +34,7 @@ export class PopupTemplateService {
 
   setPopupParams(params: any): void{
     this.popupParams = params;
+    
   }
 
   getPopupParams(): any{

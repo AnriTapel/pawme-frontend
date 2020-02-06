@@ -3,96 +3,185 @@
     <main>
         <div class="block-detail">
             <div class="container ">
-               <div class="text-block">
-                   <h3 class="">Сообщения</h3>
-                   <div class="buttons desktop-button">
-                        <button class="all">Все</button>
-                        <button class="unread">
+                <div class="text-block">
+                    <h3 class="">Сообщения</h3>
+                    <div *ngIf="rooms && rooms.length" class="buttons desktop-button">
+                        <button (click)="selectedTab = 'all'" [ngClass]="{'active': selectedTab === 'all'}"
+                            class="all tab">Все</button>
+                        <button (click)="selectedTab = 'unread'" [ngClass]="{'active': selectedTab === 'unread'}"
+                            class="unread tab">
                             <div class="unread-text">Непрочитанные</div>
-                            <div class="count count-mob">2</div>
+                            <div *ngIf="allUnreadCount" class="count count-mob">{{allUnreadCount}}</div>
                         </button>
-                   </div>
-               </div>
-               <div class="buttons mobile-button">
-                    <button class="all">Все</button>
-                    <button class="unread">
+                    </div>
+                </div>
+                <div *ngIf="rooms && rooms.length" class="buttons mobile-button">
+                    <button (click)="selectedTab = 'all'" [ngClass]="{'active': selectedTab === 'all'}"
+                        class="all tab">Все</button>
+                    <button (click)="selectedTab = 'unread'" [ngClass]="{'active': selectedTab === 'unread'}"
+                        class="unread tab">
                         <div class="unread-text">Непрочитанные</div>
-                        <div class="count count-mob">2</div>
+                        <div *ngIf="allUnreadCount" class="count count-mob">{{allUnreadCount}}</div>
                     </button>
-               </div>
+                </div>
                 <div class="chat-content">
-                   <!-- <div class="left deckto"> -->
+                    <!-- <div class="left deckto"> -->
                     <div class="left desktop">
-                       <div class="chat-info">
-                        <div class="name">
-                            <p class="name-info">Иван Гончаров</p>
-                            <div class="count">2</div>
-                        </div>
-                        <p class="message">Добрый день, как у вас…</p>
-                       </div>
-                       <div class="chat-info">
+                        <ng-container *ngIf="rooms && rooms.length; else emptyChat">
+                            <div *ngFor="let room of rooms | chatRooms: selectedTab">
+                                <ng-container *ngFor="let item of room.users">
+                                    <div *ngIf="item.id !== meData.id" (click)="selectRoom(room)"
+                                        [ngClass]="{'active': this.selectedRoom === room}" class="chat-info">
+                                        <div class="name">
+                                            <p class="name-info" [title]="item.name">{{item.name}}</p>
+                                            <div *ngIf="room.unreadCount" class="count">
+                                                {{room.unreadCount}}
+                                            </div>
+                                        </div>
+                                        <!-- *ngIf="room.messages"  -->
+                                        <p class="message">{{room?.messages[0].body}}</p>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                        <ng-template #emptyChat>
+                            <div class="empty-chat">
+                                У Вас нет открытых комнат
+                            </div>
+                        </ng-template>
+
+                        <!-- <div class="chat-info">
                             <div class="name">
-                                <p class="name-info">Петя Иванов</p>
-                                <!-- <div class="count"></div> -->
+                                <p class="name-info">Иван Гончаров</p>
+                                <div class="count">2</div>
                             </div>
                             <p class="message">Добрый день, как у вас…</p>
-                           </div>
-                   </div>
-                   <!-- <div class="right desktop-version"> -->
-                    <div class="right">
-                       <div class="right-chat-content">
-                            <div class="center-text">
-                                <img src="./assets/img/chat-lapa.svg" alt="">
-                                <p class="">
-                                    Вы начали чат с “Сладкие мопсы”. Если в процессе у вас возникнут проблемы или понадобится помощь, напишите в чат @petman и мы поможем. 
-                                </p>
-                                <div class="line"></div>
-                            </div>
-                            <div class="main-chat">
-                                <div class="text">
-                                    Привет, все популярные вопросы собраны в моем FAQ. 
-                                    У меня следующие требования к покупателям:
-                                    1. Не бузить
-                                    2. Любить моих собак иначе откушу причинное место
-                                    3. Все собаки попадают в рай, и я тоже
-                                    4. Вы мне деньги – я вам лучшего друга на всю жизнь
-                                </div>
-                                <div class="">
-                                    <img src="./assets/img/girl1.png" alt="">
-                                </div> 
-                            </div>
-                            <p class="main-time time-left-chat">22:22</p>
-                            <div class="mobile-user-name">
-                                <div class="back"><img src="./assets/img/arrow_back.svg" alt=""></div>
-                                <div class="user-name">Иван Гончаров</div>
-                            </div>
-                            <div class="right-chat">
-                                <div class="">
-                                    <img src="./assets/img/girl2.png" alt="">
-                                </div>
-                                <div class="text">У меня к вас вопросу по поводу породы. Скажите, что с ней?</div>
-                            </div>
-                            <p class="time-right-chat">22:22</p>
-                            <div class="left-chat">
-                                <div class="text">
-                                    Привет, все популярные вопросы собраны в моем FAQ. 
-                                    У меня следующие требования к покупателям:
-                                </div>
-                                <div class="">
-                                    <img src="./assets/img/girl1.png" alt="">
-                                </div> 
-                            </div>
-                            <p class="time-left-chat bottom-chat">22:22</p>
-                       </div>
-                       <div class="write-message">
-                           <input type="text" placeholder="Напишите сообщение…">
-                           <button class="custom-btn btn-purple">Отправить</button>
-                           <div class="send">
-                              <img src="./assets/img/send.svg" alt="">
-                           </div>
                         </div>
-                   </div>
-               </div>
+                        <div class="chat-info">
+                            <div class="name">
+                                <p class="name-info">Петя Иванов</p>
+                                <div class="count">1</div>
+                            </div>
+                            <p class="message">Добрый день, как у вас…</p>
+                        </div> -->
+                    </div>
+                    <!-- <div class="right desktop-version"> -->
+                    <div class="right">
+
+                        <ng-container>
+                            <div class="right-chat-content" #chatWrap (scroll)="scrollTop()">
+                                <ng-container *ngIf="rooms && rooms.length;">
+                                    <div class="center-text">
+                                        <img src="./assets/img/chat-lapa.svg" alt="">
+                                        <p class="">
+                                            Вы начали чат с “
+                                            <ng-container *ngFor="let item of selectedRoom.users">
+                                                <ng-container *ngIf="item.id !== meData.id">
+                                                    <span>{{item.name}}</span>
+                                                </ng-container>
+                                            </ng-container>
+                                            ”. Если в процессе у вас возникнут проблемы
+                                            или
+                                            понадобится помощь, напишите в чат @petman и мы поможем.
+                                        </p>
+                                        <div class="line"></div>
+                                    </div>
+                                    <!-- <div class="main-chat">
+                                        <div class="text">
+                                            Привет, все популярные вопросы собраны в моем FAQ.
+                                            У меня следующие требования к покупателям:
+                                            1. Не бузить
+                                            2. Любить моих собак иначе откушу причинное место
+                                            3. Все собаки попадают в рай, и я тоже
+                                            4. Вы мне деньги – я вам лучшего друга на всю жизнь
+                                        </div>
+                                        <div class="">
+                                            <img src="./assets/img/girl1.png" alt="">
+                                        </div>
+                                    </div>
+                                    <p class="main-time time-left-chat">22:22</p> -->
+                                    <div class="mobile-user-name">
+                                        <div class="back"><img src="./assets/img/arrow_back.svg" alt=""></div>
+                                        <span class="user-name" *ngIf="selectedRoom && selectedRoom.users">
+                                            <ng-container *ngFor="let item of selectedRoom.users">
+                                                <ng-container *ngIf="item.id !== meData.id">
+                                                    {{item.name}}
+                                                </ng-container>
+                                            </ng-container>
+                                        </span>
+                                    </div>
+
+                                    <ng-container *ngFor="let message of history?.messages">
+                                        <div
+                                            [ngClass]="{'left-chat': message.senderId === meData.id, 'right-chat': message.senderId !== meData.id}">
+                                            <div class="">
+
+                                                <a *ngIf="listUser[message.senderId] && listUser[message.senderId].avatar"
+                                                    [routerLink]="[ '/breeder/' + message.senderId ]">
+                                                    <img class="icon-img"
+                                                        [src]="'/img/' + listUser[message.senderId].avatar + '.jpg'"
+                                                        alt="">
+                                                </a>
+                                                <div *ngIf="listUser[message.senderId] && !listUser[message.senderId].avatar"
+                                                    class="icon-name">
+                                                    {{listUser[message.senderId].name.slice(0, 2)}}
+                                                </div>
+                                            </div>
+                                            <div class="text">{{message.body}}</div>
+                                        </div>
+                                        <p
+                                            [ngClass]="{'time-left-chat': message.senderId === meData.id, 'time-right-chat': message.senderId !== meData.id}">
+                                            <span *ngIf="message.read" style="display: inline-flex;">
+                                                <img src="assets/img/tick_pet.svg" alt="">
+                                            </span>
+                                            <span style="display: inline-flex;">
+                                                <img src="assets/img/tick_pet.svg" alt="">
+                                            </span>
+                                            {{message.timestamp | date : 'H:mm'}}
+                                        </p>
+                                    </ng-container>
+
+                                    <!-- <ng-container>
+                                        <div class="left-chat">
+                                            <div class="">
+                                                <img src="./assets/img/girl1.png" alt="">
+                                            </div>
+                                            <div class="text">
+                                                Привет, все популярные вопросы собраны в моем FAQ.
+                                                У меня следующие требования к покупателям:
+                                            </div>
+                                        </div>
+                                        <p class="time-left-chat bottom-chat">22:22</p>
+                                    </ng-container> -->
+                                </ng-container>
+                                <ng-container *ngIf="!rooms || !rooms.length;">
+                                    <div class="empty-chat" style="padding-top: 74px; flex-flow: column;">
+                                        <div>
+                                            Вы можете начать переписку с любым из заводчиков
+                                        </div>
+                                        <div>
+                                            <a [routerLink]="[ '/search-page' ]">Топ заводчиков</a>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div *ngIf="rooms && rooms.length;" class="write-message">
+                                <div class="textarea-wrap">
+                                    {{message}}
+                                    <textarea [(ngModel)]="message" (keydown.enter)="sendMessage()" type="text"
+                                        placeholder="Напишите сообщение…"></textarea>
+                                </div>
+                                <!-- <input [(ngModel)]="message" type="text" placeholder="Напишите сообщение…"> -->
+                                <button class="custom-btn btn-purple" (click)="sendMessage()">Отправить</button>
+                                <div class="send">
+                                    <img src="./assets/img/send.svg" alt="">
+                                </div>
+                            </div>
+
+                        </ng-container>
+
+                    </div>
+                </div>
             </div>
         </div>
     </main>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RegisterCustomer } from 'src/app/model/registerCustomer';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { CustomerControllerService } from 'src/app/api/api';
@@ -17,6 +17,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./client-chat.component.scss']
 })
 export class ClientChatComponent implements OnInit {
+  @Input('params') params;
 
   invalidFields: any[] = [];
   clientData: RegisterCustomer = {
@@ -32,12 +33,12 @@ export class ClientChatComponent implements OnInit {
 
   credentials = { username: '', password: '' };
   loginError: boolean = false;
-  
+
   constructor(
-    public appService: AppService, 
-    public customerService: CustomerControllerService, 
+    public appService: AppService,
+    public customerService: CustomerControllerService,
     private router: Router,
-    public popupService: PopupTemplateService, 
+    public popupService: PopupTemplateService,
     private notificationService: NotificationBarService,
     private breederService: BreederControllerService,
     private http: HttpClient) { }
@@ -45,7 +46,7 @@ export class ClientChatComponent implements OnInit {
   ngOnInit() {
 
   }
-  
+
   fieldEdited(field: string): void {
     this.invalidFields = this.invalidFields.filter(it => it != field);
   }
@@ -63,7 +64,10 @@ export class ClientChatComponent implements OnInit {
         this.isLoading = false;
         this.popupService.setShowStatus(false);
         this.checkUserType();
-        this.router.navigateByUrl('/chat');
+
+        this.popupService.setPopupParams(this.params);
+        this.popupService.setCurrentForm('first-message');
+        this.popupService.setShowStatus(true);
 
       }, error => {
         this.isLoading = false;
@@ -83,7 +87,7 @@ export class ClientChatComponent implements OnInit {
     if (!this.validateFieldsLogin())
       return;
     this.isLoading = true;
-   
+
     if (!this.appService.validateEmailInput(this.credentials.username)) {
       this.errorText = 'Пожалуйста, введите действительный E-mail';
       this.loginError = true;
@@ -103,7 +107,7 @@ export class ClientChatComponent implements OnInit {
         }
       );
     }
-    
+
   }
   private onLoginSuccess(): void {
     this.breederService.meUsingGET().subscribe((me) => {
@@ -111,7 +115,10 @@ export class ClientChatComponent implements OnInit {
       if (me.type == 'CUSTOMER') {
         this.isLoading = false;
         this.popupService.setShowStatus(false);
-        this.router.navigateByUrl('/chat');
+
+        this.popupService.setPopupParams(this.params);
+        this.popupService.setCurrentForm('first-message');
+        this.popupService.setShowStatus(true);
       }
     }, (err) => {
       if (err.status == 423) {
@@ -129,7 +136,7 @@ export class ClientChatComponent implements OnInit {
     }
     if (!this.clientData.phone || this.clientData.phone == ""
       || this.clientData.phone && this.clientData.phone.length != 17) {
-      if (this.clientData.phone && this.clientData.phone.length == 18 )
+      if (this.clientData.phone && this.clientData.phone.length == 18)
         this.clientData.phone = this.clientData.phone.substr(0, 17);
       else {
         isValid = false;
@@ -138,9 +145,9 @@ export class ClientChatComponent implements OnInit {
     }
 
     if (!this.clientData.email || this.clientData.email == ""
-    || !this.appService.validateEmailInput(this.clientData.email)) {
-    isValid = false;
-    this.invalidFields.push("email");
+      || !this.appService.validateEmailInput(this.clientData.email)) {
+      isValid = false;
+      this.invalidFields.push("email");
     }
 
     if (!this.clientData.password || this.clientData.password == ""

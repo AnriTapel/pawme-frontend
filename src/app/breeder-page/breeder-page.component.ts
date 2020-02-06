@@ -6,6 +6,8 @@ import { BreederControllerService } from '../api/api';
 import { DogCardService } from '../services/dog-card-service/dog-card.service';
 import { Meta } from '@angular/platform-browser';
 import { SharedService } from '../services/shared-services/shared.service';
+import { NotificationBarService } from '../services/nofitication-service/notification-bar.service';
+import { ChatService } from '../services/chat-service/chat.service';
 
 @Component({
     selector: 'app-breeder-page',
@@ -47,7 +49,10 @@ export class BreederPageComponent implements OnInit, OnDestroy {
         private breederService: BreederControllerService,
         public dogCardService: DogCardService,
         private meta: Meta,
-        private sharedService: SharedService
+        private sharedService: SharedService,
+        private notificationService: NotificationBarService,
+        private chatService: ChatService
+
     ) {
         this.sharedService.headerType.emit('hidden')
 
@@ -210,8 +215,23 @@ export class BreederPageComponent implements OnInit, OnDestroy {
     }
 
     showBreederMessagePopup(): void {
-        this.popupService.setCurrentForm('breeder-message');
-        this.popupService.setShowStatus(true);
+        // this.popupService.setCurrentForm('breeder-message');
+        // this.popupService.setShowStatus(true);
+        let params = { breederId: this.route.snapshot.paramMap.get('id') }
+        if (this.appService.meData.type == 'BREEDER') {
+            this.notificationService.setContext('Пожалуйста, выйдите из аккаунта заводчика', false);
+            this.notificationService.setVisibility(true);
+        }
+        else if (this.appService.meData.type == 'CUSTOMER') {
+            this.popupService.setPopupParams(params);
+            this.popupService.setCurrentForm('first-message');
+            this.popupService.setShowStatus(true);
+
+        } else {
+            this.popupService.setPopupParams(params);
+            this.popupService.setCurrentForm('client-chat');
+            this.popupService.setShowStatus(true);
+        }
     }
 
     showPuppyCard(index: number): void {
@@ -230,7 +250,7 @@ export class BreederPageComponent implements OnInit, OnDestroy {
         if (!this.appService.userData.puppiesInfo)
             return false;
 
-          
+
         return this.appService.userData.puppiesInfo.puppyTests.filter(it => it.id == id).length > 0
     }
 

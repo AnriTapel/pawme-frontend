@@ -12,19 +12,23 @@ export class ChatService {
     return this.http.get('/api/chat/token');
   }
 
-  public createRoom(breederId) {
-    return this.http.post('/api/chat/room/' + breederId, {});
+  public createRoom(breederId: string, message: string) {
+    let obj = {
+      text: message
+    }
+    return this.http.post('/api/chat/room/' + breederId, obj);
   }
 
-  public sendMessage(roomId) {
-    return this.http.post(`/api/chat/${roomId}/message`, {text: ''});
+  public sendMessage(roomId, message) {
+    return this.http.post(`/api/chat/${roomId}/message`, {text: message});
   }
 
   public getRooms() {
     return this.http.get('/api/chat/rooms');
   }
 
-  public getMessages(roomId) {
-    return this.http.get(`/api/chat/${roomId}/history?last=123&count=10`);
+ 
+  public getMessages(roomId, params?) {
+    return this.http.get(`/api/chat/${roomId}/history` + (params ? params : ''));
   }
 }

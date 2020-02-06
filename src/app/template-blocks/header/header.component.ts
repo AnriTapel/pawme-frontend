@@ -60,6 +60,9 @@ export class HeaderComponent implements OnInit {
   openMyPage(): void {
     window.open('/breeder/' + this.appService.meData.id, '_blank');
   }
+  openChat(): void {
+    window.open('/chat/', '_blank');
+  }
 }
 
 export enum MenuType {
