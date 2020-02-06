@@ -101,7 +101,11 @@ export class BreederProfileService {
   showMyPage(): void {
     let onSuccess = () => {
       this.dataChangesSaved = true;
-      window.open('/breeder/' + this.appService.userData.id, '_blank');
+      if (this.appService.userData.generalInfo.alias) {
+        window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
+      } else {
+        window.open('/breeder/' + this.appService.userData.id, '_blank');
+      }
     };
 
     let onError = () => {

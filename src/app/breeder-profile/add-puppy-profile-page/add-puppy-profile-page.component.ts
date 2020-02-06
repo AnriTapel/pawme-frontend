@@ -304,8 +304,13 @@ export class AddPuppyProfilePageComponent implements OnInit {
         this.appService.userData.puppyDraft = null;
         this.birthdayModel = { day: null, month: null, year: null };
         scroll(0, 0);
-        if (forPreview)
-          window.open('/breeder/' + this.appService.userData.id, '_blank');
+        if (forPreview) {
+          if (this.appService.userData.generalInfo.alias) {
+            window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
+          } else {
+            window.open('/breeder/' + this.appService.userData.id, '_blank');
+          } 
+        }
       });
     },
       (err) => {

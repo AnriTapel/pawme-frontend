@@ -116,6 +116,23 @@
         </div>
     </div>
 
+    <div class="about-your-nurcery-url">
+        <label for="nurcery-url-desc">Ваша персональная ссылка (английские буквы)</label>
+        <div class="breeder-url">
+            <div class="url-text">petman.co/breeder/</div>
+            <div class="url-input">
+                <input class="form-control custom-form-control-border" type="text" name="nurcery-url"
+                [(ngModel)]="nurceryData.alias" (change)="profileService.inputValueChanged('url'); updateLocalData(); focusCheck('url');"
+                [class.invalid-form-field-value]="isFocused['url'] && errors && errors.includes('url') || (customeValidator && errors && errors.includes('url'))"
+                placeholder="creatoraccount" />
+                <!-- <div *ngIf="(errors && errors.includes('url') && isFocused['url']) || (customeValidator && errors && errors.includes('url'))"
+                class="error-field-message">
+                Выберите длину больше 3 и меньше 24
+                </div> -->
+            </div>
+        </div>
+    </div>
+
     <hr>
 
     <div class="about-nurcery-profile-image">

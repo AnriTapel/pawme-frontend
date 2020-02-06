@@ -216,6 +216,9 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.nurceryData.name = this.appService.userData.name + " " + this.appService.userData.surname;
     if (this.curExtraBreed && this.curExtraBreed != "")
       this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
+    if (this.nurceryData.alias == "") {
+      this.nurceryData.alias = null;
+    }
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
         if (!this.appService.userData.generalInfo) {
@@ -241,8 +244,14 @@ export class AboutNurceryProfilePageComponent implements OnInit {
         setTimeout(() => {
           scroll(0, 0);
         }, 500);
-        if (forPreview)
-          window.open('/breeder/' + this.appService.userData.id, '_blank');
+        if (forPreview) {
+          if (this.appService.userData.generalInfo.alias) {
+            window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
+          } else {
+            window.open('/breeder/' + this.appService.userData.id, '_blank');
+          } 
+        }
+        
       },
         (err) => {
           if (err.status == 423)
@@ -267,7 +276,6 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.profileService.invalidFields.push('name');
       isValid = false;
     }
-
 
     if (!this.curMainBreed || this.appService.breeds.filter(it => it.name == this.curMainBreed).length == 0) {
       this.profileService.invalidFields.push('mainBreed');
@@ -302,6 +310,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
     if (this.nurceryData.gallery.length == 0) {
       this.profileService.invalidFields.push('gallery');
+      isValid = false;
+    }
+
+    if (this.nurceryData.alias.length < 3 || this.nurceryData.name.length > 24 || this.nurceryData.alias && !this.appService.validateUrlInput(this.nurceryData.alias)) {
+      this.profileService.invalidFields.push('url');
       isValid = false;
     }
 

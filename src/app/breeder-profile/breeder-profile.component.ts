@@ -39,8 +39,16 @@ export class BreederProfileComponent implements OnInit {
   }
 
   showMyPage(): void {
-    if (this.profileService.dataChangesSaved)
-      window.open('/breeder/' + this.appService.userData.id, '_blank')
+   
+    if (this.profileService.dataChangesSaved) {
+      if (this.appService.userData.generalInfo.alias) {
+        window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
+      } else {
+        window.open('/breeder/' + this.appService.userData.id, '_blank');
+      } 
+    
+    }
+     
     else
       this.profileService.showMyPage();
   }
