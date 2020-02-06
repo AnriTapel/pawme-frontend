@@ -244,8 +244,13 @@ export class AboutMeProfilePageComponent implements OnInit {
         }
         scroll(0, 0);
         this.profileService.dataChangesSaved = true;
-        if (forPreview)
-          window.open('/breeder/' + this.appService.userData.id, '_blank');
+        if (forPreview) {
+          if (this.appService.userData.generalInfo.alias) {
+            window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
+          } else {
+            window.open('/breeder/' + this.appService.userData.id, '_blank');
+          } 
+        }
       },
       (err) => {
         if (err.status == 423) {

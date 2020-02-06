@@ -198,6 +198,11 @@ export class AppService {
     return re.test(email);
   }
 
+  validateUrlInput(url: string): boolean {
+    let re = /^[a-z0-9_]*[a-z][a-z0-9_]*$/;
+    return re.test(url);
+  }
+
   setCursorPosition(pos, elem) {
     elem.focus();
     if (elem.setSelectionRange) elem.setSelectionRange(pos, pos);

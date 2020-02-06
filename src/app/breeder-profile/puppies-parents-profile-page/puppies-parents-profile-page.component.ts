@@ -261,8 +261,10 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   }
 
   saveChanges(forPreview: boolean) {
-    if (!this.validateFields())
+    if (!this.validateFields()) {
+      this.scrollToError();
       return;
+    }
 
     this.breederService.setParentsInfoUsingPUT(this.appService.userData.id, this.parentsData).subscribe(() => {
       if (this.appService.userData.parentsInfo && this.appService.userData.parentsInfo.parents.length == 2) {
@@ -289,9 +291,14 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
           this.notificationService.setVisibility(true);
         }
         scroll(0, 0);
-
-        if (forPreview)
-          window.open('/breeder/' + this.appService.userData.id, '_blank');
+      
+        if (forPreview) {
+          if (this.appService.userData.generalInfo.alias) {
+            window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
+          } else {
+            window.open('/breeder/' + this.appService.userData.id, '_blank');
+          } 
+        }
       });
     }, (err) => {
       if (err.status == 423)
