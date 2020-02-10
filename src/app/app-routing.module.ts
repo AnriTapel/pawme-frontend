@@ -20,6 +20,9 @@ import { DetailComponent } from './articles/detail/detail.component';
 import { VersionComponent } from './forms/version/version.component';
 import { ChatComponent } from './chat/chat.component';
 import { ClientRegistrationComponent } from './client-registration/client-registration.component';
+import { SheltersSearchComponent } from './shelters-search/shelters-search.component';
+
+
 
 
 
@@ -51,6 +54,7 @@ const routes: Routes = [
   { path: 'chat/:id', component: ChatComponent },
   { path: 'client-reg', component: ClientRegistrationComponent },
   { path: 'version', component: VersionComponent },
+  { path: 'shelters-search', component: SheltersSearchComponent },
   { path: '404', component: PageNotFoundComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
