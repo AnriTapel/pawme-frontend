@@ -64,6 +64,7 @@ import { ChatComponent } from './chat/chat.component';
 import { ClientRegistrationComponent } from './client-registration/client-registration.component';
 import { ClientChatComponent } from './forms/client-chat/client-chat.component';
 import { ChatService } from './services/chat-service/chat.service';
+import { SheltersSearchComponent } from './shelters-search/shelters-search.component';
 
 
 
@@ -121,7 +122,8 @@ export function initApp(appSerivce: AppService){
     VersionComponent,
     ChatComponent,
     ClientRegistrationComponent,
-    ClientChatComponent
+    ClientChatComponent,
+    SheltersSearchComponent
   ],
   imports: [
     BrowserModule,
