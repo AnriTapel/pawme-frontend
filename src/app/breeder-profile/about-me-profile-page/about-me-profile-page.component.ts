@@ -28,6 +28,7 @@ export class AboutMeProfilePageComponent implements OnInit {
   isFocused = {};
   customeValidator;
   progress: any;
+  isShow: boolean;
 
   constructor(private popupService: PopupTemplateService, public appService: AppService, private eventService: EventService, private router: Router,
     private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
@@ -238,9 +239,10 @@ export class AboutMeProfilePageComponent implements OnInit {
         this.isLoading = false;
         this.profileService.updateProfileFullness();
         this.progress = this.appService.userData.profileFill;
-        if (this.progress == 5) {
+        if (this.progress == 5 && !this.isShow) {
           this.notificationService.setContext('Поздравляем! Вас теперь видят покупатели!', true);
           this.notificationService.setVisibility(true);
+          this.isShow = true;
         }
         scroll(0, 0);
         this.profileService.dataChangesSaved = true;
