@@ -219,23 +219,23 @@ export class BreederPageComponent implements OnInit, OnDestroy {
     }
 
     showBreederMessagePopup(): void {
-        // this.popupService.setCurrentForm('breeder-message');
-        // this.popupService.setShowStatus(true);
-        let params = { breederId: this.route.snapshot.paramMap.get('id') }
-        if (this.appService.meData.type == 'BREEDER') {
-            this.notificationService.setContext('Пожалуйста, выйдите из аккаунта заводчика', false);
-            this.notificationService.setVisibility(true);
-        }
-        else if (this.appService.meData.type == 'CUSTOMER') {
-            this.popupService.setPopupParams(params);
-            this.popupService.setCurrentForm('first-message');
-            this.popupService.setShowStatus(true);
+        this.popupService.setCurrentForm('breeder-message');
+        this.popupService.setShowStatus(true);
+        // let params = { breederId: this.route.snapshot.paramMap.get('id') }
+        // if (this.appService.meData.type == 'BREEDER') {
+        //     this.notificationService.setContext('Пожалуйста, выйдите из аккаунта заводчика', false);
+        //     this.notificationService.setVisibility(true);
+        // }
+        // else if (this.appService.meData.type == 'CUSTOMER') {
+        //     this.popupService.setPopupParams(params);
+        //     this.popupService.setCurrentForm('first-message');
+        //     this.popupService.setShowStatus(true);
 
-        } else {
-            this.popupService.setPopupParams(params);
-            this.popupService.setCurrentForm('client-chat');
-            this.popupService.setShowStatus(true);
-        }
+        // } else {
+        //     this.popupService.setPopupParams(params);
+        //     this.popupService.setCurrentForm('client-chat');
+        //     this.popupService.setShowStatus(true);
+        // }
     }
 
     showPuppyCard(index: number): void {
