@@ -115,7 +115,7 @@
                     <span>Медицина</span>
                 </div>
 
-                <div class="medical-label-list d-flex align-items-center flex-wrap">
+                <div *ngIf="subpageStatus().puppies" class="medical-label-list d-flex align-items-center flex-wrap">
                     <ng-container *ngFor="let test of appService.userData.puppiesInfo.puppyTests; let i = index;">
                         <div *ngIf="getPuppyMedicalStatus(test.id)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                             <img src="./assets/img/breeder-page/{{test.id}}.svg" alt="newPuppyTests[i]" />
@@ -256,13 +256,13 @@
                             <p>{{subpageStatus().about ? appService.userData.about.about : ''}}</p>
                         </div>
 
-                        <div *ngIf="appService.userData.about.howItStarted" class="about-breeder-post">
+                        <div *ngIf="appService.userData.about && appService.userData.about.howItStarted" class="about-breeder-post">
                             <div class="title">С чего все началось?</div>
 
                             <p>{{subpageStatus().about ? appService.userData.about.howItStarted : ''}}</p>
                         </div>
 
-                        <div *ngIf="appService.userData.about.outstandingInfo" class="about-breeder-post">
+                        <div *ngIf="appService.userData.about && appService.userData.about.outstandingInfo" class="about-breeder-post">
                             <div class="title">Что выделяет ваш питомник?</div>
 
                             <p>{{subpageStatus().about ? appService.userData.about.outstandingInfo : ''}}</p>
