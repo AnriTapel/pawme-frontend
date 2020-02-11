@@ -5,7 +5,7 @@
         <div class="message">Заполните все обязательные поля, чтобы мы засчитали вам этот раздел</div>
     </div>
     <div class="page-header">
-        <h3>Правило продажи</h3>
+        <h3>Правила продажи</h3>
     </div>
    
     <div class="upper-btn">
@@ -100,46 +100,7 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="contract-block">
-        <span>Обязательный договор Petman c гарантией</span>
-        <br>
-        <span class="block-description">Для защиты покупателей от недобросовестных заводчиков наши юристы составили стандартный договор купли/продажи. В
-            него включена гарантия по здоровью щенка на момент покупки.</span>
-
-        <a [routerLink]="['/docs/contract.pdf']" target="_blank">Посмотреть договор</a>
-        <br>
-
-
-        <div class="custom-checkbox">
-            <div (click)="puppiesData.petmanContract = !puppiesData.petmanContract; updateLocalData(); focusCheck('contract');" [class.invalid-form-field-value]="isFocused['contract'] && errors && errors.includes('contract') || (customeValidator && errors && errors.includes('contract'))">
-                <img *ngIf="puppiesData.petmanContract" src="./assets/img/check-mark.png" />
-            </div>
-            <label>Подтверждаю готовность использовать договор</label>
-        </div>
-    </div> -->
-
-    <!--<hr>
-
-    <div class="breeder-profile-subpage-form-left">
-        <label for="guarantee-period">На сколько месяцев вы готовы дать гарантию по здоровью щенка?</label>
-        <div class="input-group mb-3">
-            <input type="number" min="0" name="guarantee-period" class="form-control custom-form-control-border" [(ngModel)]="puppiesData.insuranceTerm"
-                placeholder="12" aria-label="12" aria-describedby="basic-addon2" (change)="profileService.dataChangesSaved = false"
-                [class.invalid-form-field-value]="isFocused['age'] && errors && errors.includes('term')">
-            <div class="input-group-append">
-                <span class="input-group-text custom-form-control-border" [class.invalid-form-field-value]="isFocused['age'] && errors && errors.includes('term')"
-                    id="basic-addon2">месяцев</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="why-its-important">
-        <span [placement]="getTooltipPlacement()" tooltipClass="custom-tooltip" [triggers]="appService.getTooltipTrigger()" ngbTooltip="Текст подсказки, которая будет всплывать при наведении!">Почему это важно?</span>
-    </div>-->
-
     <hr>
-
     <div class="puppies-gifts-block">
         <label for="gifts">Подарки к купленному щенку</label>
         <br>

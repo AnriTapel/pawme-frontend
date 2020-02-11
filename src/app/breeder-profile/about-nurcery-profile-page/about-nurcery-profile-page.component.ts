@@ -219,7 +219,10 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
     if (this.nurceryData.alias == "") {
       this.nurceryData.alias = null;
-    }
+    } else {
+      this.nurceryData.alias = this.nurceryData.alias.toLowerCase();
+
+    } 
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
         if (!this.appService.userData.generalInfo) {
@@ -314,7 +317,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (this.nurceryData.alias.length < 3 || this.nurceryData.name.length > 24 || this.nurceryData.alias && !this.appService.validateUrlInput(this.nurceryData.alias)) {
+    if (this.nurceryData.alias && this.nurceryData.alias.length < 3 || this.nurceryData.alias && this.nurceryData.name.length > 24 || this.nurceryData.alias && !this.appService.validateUrlInput(this.nurceryData.alias)) {
       this.profileService.invalidFields.push('url');
       isValid = false;
     }

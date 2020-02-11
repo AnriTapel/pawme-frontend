@@ -124,7 +124,7 @@
                 <input class="form-control custom-form-control-border" type="text" name="nurcery-url"
                 [(ngModel)]="nurceryData.alias" (change)="profileService.inputValueChanged('url'); updateLocalData(); focusCheck('url');"
                 [class.invalid-form-field-value]="isFocused['url'] && errors && errors.includes('url') || (customeValidator && errors && errors.includes('url'))"
-                placeholder="creatoraccount" />
+                placeholder="cute_pugs" />
                 <!-- <div *ngIf="(errors && errors.includes('url') && isFocused['url']) || (customeValidator && errors && errors.includes('url'))"
                 class="error-field-message">
                 Выберите длину больше 3 и меньше 24
@@ -148,7 +148,7 @@
         </div>
 
         <div class="profile-image-text-block">
-            <label for="image-block">Фото вашего профиля заводчика</label>
+            <label for="image-block">Фото вашего профиля заводчика</label><span class="red-star">*</span>
             <br>
             <span class="block-description">Используйте логотип питомника или загрузите собственное фото. Допустимый
                 формат изображения - jpg, jpeg, png,

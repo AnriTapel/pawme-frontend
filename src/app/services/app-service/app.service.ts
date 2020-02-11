@@ -199,7 +199,8 @@ export class AppService {
   }
 
   validateUrlInput(url: string): boolean {
-    let re = /^[a-z0-9_]*[a-z][a-z0-9_]*$/;
+    let re = /^[A-z0-9_]*[a-z][a-z0-9_]*$/;
+    //let re = /^[a-z0-9_]*[a-z][a-z0-9_]*$/;
     return re.test(url);
   }
 

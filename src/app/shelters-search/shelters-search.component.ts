@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shelters-search.component.scss']
 })
 export class SheltersSearchComponent implements OnInit {
-
+  p: any = 1;
   constructor() { }
 
   ngOnInit() {

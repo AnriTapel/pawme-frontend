@@ -24,6 +24,8 @@
                             </div>
                         </div>
                         <div class="dogs-content">
+                        <!-- <div  class="dogs-content" *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;" -->
+
                             <div class="dogs-info">
                                 <div class="desktop-dogs-pic">
                                     <img src="./assets/img/shelters-search/Bitmap.svg" />
@@ -127,72 +129,85 @@
                                     <div class="puppy">Щенок<span class="puppy-age"> (до года)</span> </div>
                                 </div>      
                             </div>
-                                <div class="gender">
-                                    <span class="age-text">Пол</span> 
-                                    <div class="gender-pic">
-                                        <div class="boy active">
-                                            <div class="boy-img">                                                   <img src="./assets/img/shelters-search/Boy.svg" />
-                                            </div>
-                                            <div class="boy-white-img">                                               <img src="./assets/img/shelters-search/white-boy.svg" />
-                                            </div>
-                                            <span class="">Мальчик</span>
+                            <div class="gender">
+                                <span class="age-text">Пол</span> 
+                                <div class="gender-pic">
+                                    <div class="boy active">
+                                        <div class="boy-img">                                                   <img src="./assets/img/shelters-search/Boy.svg" />
                                         </div>
-                                        <div class="girl">
-                                            <img src="./assets/img/shelters-search/girl.svg" />
-                                            <span class="">Девочка</span>
+                                        <div class="boy-white-img">                                               <img src="./assets/img/shelters-search/white-boy.svg" />
                                         </div>
-                                        <div class="any">Любой</div>
+                                        <span class="">Мальчик</span>
+                                    </div>
+                                    <div class="girl">
+                                        <img src="./assets/img/shelters-search/girl.svg" />
+                                        <span class="">Девочка</span>
+                                    </div>
+                                    <div class="any">Любой</div>
+                                </div>
+                            </div>
+                            <div class="dog-size">
+                                <span class="age-text">Размер</span> 
+                                <div class="size-pic">
+                                    <div class="small-dog">
+                                        <div class="size-border">
+                                                <img src="./assets/img/shelters-search/small.svg" />
+                                        </div>
+                                        <div class="size-top">Маленький</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="size-border">
+                                            <img src="./assets/img/shelters-search/middle.svg" />
+                                        </div>
+                                        <div class="size-top">Средний</div>    
+                                    </div>
+                                    <div class="big">
+                                        <div class="size-border">
+                                            <img src="./assets/img/shelters-search/big.svg" />
+                                        </div>
+                                        <div class="size-top">Большой</div>
                                     </div>
                                 </div>
-                                <div class="dog-size">
-                                    <span class="age-text">Размер</span> 
-                                    <div class="size-pic">
-                                        <div class="small-dog">
-                                            <div class="size-border">
-                                                 <img src="./assets/img/shelters-search/small.svg" />
-                                            </div>
-                                            <div class="size-top">Маленький</div>
-                                        </div>
-                                        <div class="middle">
-                                            <div class="size-border">
-                                                <img src="./assets/img/shelters-search/middle.svg" />
-                                            </div>
-                                            <div class="size-top">Средний</div>    
-                                        </div>
-                                        <div class="big">
-                                            <div class="size-border">
-                                                <img src="./assets/img/shelters-search/big.svg" />
-                                            </div>
-                                            <div class="size-top">Большой</div>
-                                        </div>
+                            </div>
+                            <div class="breed">
+                                <!-- <span class="age-text">Порода</span> 
+                                <div class="filter-checkbox">
+                                    <div class="checkbox-oval custom-checkbox  popup-form-check">
+                                        <div> <img src="./assets/img/check-mark.png"/></div>
                                     </div>
-                                </div>
-                                <div class="breed">
-                                    <span class="age-text">Порода</span> 
-                                    <div class="filter-checkbox">
-                                        <div class="checkbox-oval custom-checkbox  popup-form-check">
-                                            <div> <img src="./assets/img/check-mark.png"/></div>
-                                        </div>
-                                        <div class="puppy">Беспородная</div>
+                                    <div class="puppy">Беспородная</div>
+                                </div> -->
+                                <!-- <div class="filter-checkbox">
+                                    <div class="checkbox-oval custom-checkbox popup-form-check">
+                                        <div></div>
                                     </div>
-                                    <div class="filter-checkbox">
-                                        <div class="checkbox-oval custom-checkbox popup-form-check">
-                                            <div></div>
-                                        </div>
-                                        <div class="puppy">Метис/Породистая </div>
-                                    </div>
-                                    <div class="character">
-                                        <span class="age-text">Характер</span>
+                                    <div class="puppy">Метис/Породистая </div>
+                                </div> -->
+                    
+                                <!-- </div> -->
+                                <div class="character">
+                                        <span class="age-text">Порода</span>
                                         <div class="charater-button">
-                                            <button class="actives">Активный</button>
-                                            <button class="calm">Спокойный</button>
+                                            <button class="custom-btn btn-purple actives">Беспородная</button>
+                                            <button class="custom-btn btn-transparent puppy">Метис/Породистая</button>
                                         </div> 
-                                        <button class="clear-filtr">Сбросить фильтры</button>
                                     </div>
+                                <div class="character">
+                                    <span class="age-text">Характер</span>
+                                    <div class="charater-button">
+                                        <button class="custom-btn btn-purple actives">Активный</button>
+                                        <button class="custom-btn btn-transparent calm">Спокойный</button>
+                                    </div> 
+                                    <button class="clear-filtr custom-btn btn-transparent">Сбросить фильтры</button>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- <div class="pagenation">
+                    <pagination-controls (pageChange)="p = $event; scrollTop(); updateParam();" previousLabel=" " nextLabel=" ">
+                    </pagination-controls>
+                </div> -->
             </div>
         </div>
     </main>
