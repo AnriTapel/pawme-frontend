@@ -21,6 +21,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   isFocused = {};
   customeValidator;
   progress: any;
+  isShow: boolean;
 
   constructor(public appService: AppService, private breederService: BreederControllerService, private eventService: EventService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService, private router: Router) { }
@@ -114,9 +115,10 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
         scroll(0, 0);
         this.profileService.updateProfileFullness();
         this.progress = this.appService.userData.profileFill;
-        if (this.progress == 5) {
+        if (this.progress == 5 && !this.isShow) {
           this.notificationService.setContext('Поздравляем! Вас теперь видят покупатели!', true);
           this.notificationService.setVisibility(true);
+          this.isShow = true;
         }
         if (forPreview) {
           if (this.appService.userData.generalInfo.alias) {

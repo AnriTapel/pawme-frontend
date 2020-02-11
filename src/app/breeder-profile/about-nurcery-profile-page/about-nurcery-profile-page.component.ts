@@ -33,6 +33,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   isFocused = {};
   customeValidator;
   progress;
+  isShow: boolean;
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
   @ViewChild('mainBreedInstance', { static: true }) mainBreedInstance: NgbTypeahead;
@@ -241,9 +242,10 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
         this.profileService.updateProfileFullness();
         this.progress = this.appService.userData.profileFill;
-        if (this.progress == 5) {
+        if (this.progress == 5 && !this.isShow) {
           this.notificationService.setContext('Поздравляем! Вас теперь видят покупатели!', true);
           this.notificationService.setVisibility(true);
+          this.isShow = true;
         }
         setTimeout(() => {
           scroll(0, 0);
