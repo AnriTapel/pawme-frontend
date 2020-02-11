@@ -46,9 +46,11 @@
             (change)="profileService.inputValueChanged('about'); updateLocalData(); focusCheck('about')"
             [class.invalid-form-field-value]="isFocused['about'] && errors && errors.includes('about') || (customeValidator && errors && errors.includes('about'))">
         </textarea>
-        <div *ngIf="isFocused['about'] && errors && errors.includes('about') || (customeValidator && errors && errors.includes('about'))"
-            class="error-field-message">
+        <div *ngIf="(isFocused['about'] && errors && errors.includes('about') || (customeValidator && errors && errors.includes('about'))) && !(appService.getTextareaLimit(breederData.about, 2048) < 0)" class="error-field-message">
             Это поле обязательно к заполнению
+        </div>
+        <div *ngIf="appService.getTextareaLimit(breederData.about, 2048) < 0" class="error-field-message">
+            Превышено количество символов
         </div>
     </div>
 
@@ -191,10 +193,10 @@
     </div>
 
     <div class="lower-btn">
-        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
+        <!-- <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
             style="display: block; margin-bottom: 1em;">
             Пожалуйста, заполните или исправьте поля, выделенные красным
-        </span>
+        </span> -->
         <br *ngIf="profileService.invalidFields.length > 0" />
         <button type="submit" class="custom-btn btn-purple" (click)="saveChanges(false)"
             [disabled]="isLoading">{{!isLoading ? 'Сохранить изменения' : ''}}

@@ -207,10 +207,10 @@
             (change)="profileService.inputValueChanged('info'); updateLocalData(); focusCheck('info')"
             [class.invalid-form-field-value]="isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))">
         </textarea>
-        <div *ngIf="isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))" class="error-field-message">
+        <div *ngIf="(isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))) && !(appService.getTextareaLimit(currentParentData.info, 1024) < 0)" class="error-field-message">
             Это поле обязательно к заполнению
         </div>
-        <div *ngIf="isFocused['info'] && appService.getTextareaLimit(currentParentData.info, 1024) < 0" class="error-field-message">
+        <div *ngIf="appService.getTextareaLimit(currentParentData.info, 1024) < 0" class="error-field-message">
             Превышено количество символов
         </div>
     </div>
@@ -246,10 +246,10 @@
     </div>
 
     <div class="lower-btn">
-        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
+        <!-- <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
             style="display: block; margin-bottom: 1em;">
             Пожалуйста, заполните или исправьте поля, выделенные красным
-        </span>
+        </span> -->
         <br *ngIf="profileService.invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple"
             value="{{currentParentData.id ? 'Сохранить' : 'Добавить'}} родителя" (click)="addParent(false)" />

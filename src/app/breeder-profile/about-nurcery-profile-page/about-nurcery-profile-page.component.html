@@ -65,9 +65,6 @@
     <div *ngIf="!isAdditionalBreed" class="breeder-profile-subpage-form-right" style="align-self: end;">
         <input type="button" class="custom-btn btn-transparent" style="margin: unset;" value="+ Добавить еще одну"
             (click)="isAdditionalBreed = true" />
-        <div *ngIf="isFocused['mainBreed'] && errors && errors.includes('mainBreed') || (customeValidator && errors && errors.includes('mainBreed'))"
-            style="height: 18px;">
-        </div>
     </div>
     <div *ngIf="isAdditionalBreed" class="breeder-profile-subpage-form-right extra-breed-block">
         <label for="nurcery-additional-breed">Дополнительная порода</label>
@@ -107,9 +104,9 @@
             (change)="profileService.inputValueChanged('desc'); updateLocalData(); focusCheck('desc');"
             [class.invalid-form-field-value]="isFocused['desc'] && errors && errors.includes('desc') || (customeValidator && errors && errors.includes('desc'))"
             placeholder="Описание"></textarea>
-        <div *ngIf="isFocused['desc'] && errors && errors.includes('desc') || (customeValidator && errors && errors.includes('desc'))"
+        <div *ngIf="(isFocused['desc'] && errors && errors.includes('desc') || (customeValidator && errors && errors.includes('desc'))) && !(appService.getTextareaLimit(nurceryData.description, 600) < 0)"
             class="error-field-message">
-            Выберите один из предложенных вариантов
+            Это поле обязательное к заполнению
         </div>
         <div *ngIf="appService.getTextareaLimit(nurceryData.description, 600) < 0" class="error-field-message">
             Превышено количество символов
@@ -215,10 +212,10 @@
     </div>-->
 
     <div class="lower-btn">
-        <span *ngIf="errors && errors.length > 0" class="invalid-field-message"
+        <!-- <span *ngIf="errors && errors.length > 0" class="invalid-field-message"
             style="display: block; margin-bottom: 1em;">
             Пожалуйста, заполните или исправьте поля, выделенные красным
-        </span>
+        </span> -->
         <br *ngIf="errors && errors.length > 0" />
         <button type="submit" class="custom-btn btn-purple" (click)="saveChanges(false)"
             [disabled]="isLoading">{{!isLoading ? 'Сохранить изменения' : ''}}

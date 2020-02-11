@@ -212,11 +212,11 @@
             (change)="profileService.inputValueChanged('info'); updateLocalData(); focusCheck('info')"
             [class.invalid-form-field-value]="isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))"
             [(ngModel)]="currentPuppyData.about"></textarea>
-        <div *ngIf="isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))"
+        <div *ngIf="(isFocused['info'] && errors && errors.includes('info') || (customeValidator && errors && errors.includes('info'))) && (+appService.getTextareaLimit(currentPuppyData.about, 1024) > 0) "
             class="error-field-message">
             Это поле обязательно к заполнению
         </div>
-        <div *ngIf="appService.getTextareaLimit(currentPuppyData.about, 1024) < 0" class="error-field-message">
+        <div *ngIf="+appService.getTextareaLimit(currentPuppyData.about, 1024) < 0" class="error-field-message">
             Превышено количество символов
         </div>
     </div>
@@ -245,7 +245,7 @@
         </div>
 
         <div *ngIf="currentPuppyData.gallery.length > 0" class="gallery-uploaded-photos-block">
-            <div *ngFor="let photo of currentPuppyData.gallery;let i = index" class="active-galley-photo-block">
+            <div *ngFor="let photo of currentPuppyData.gallery;let i = index;" class="active-galley-photo-block">
                 <img class="close-button" src="./assets/img/close-button-white.svg" alt="Удалить картинку"
                     (click)="deletePuppyImage(i); updateLocalData()" />
                 <img src="/img/{{photo.preview}}.jpg" class="pet-image" (click)="previewPuppyImage(i)"
@@ -264,10 +264,10 @@
     </div>
 
     <div class="lower-btn">
-        <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
+        <!-- <span *ngIf="profileService.invalidFields.length > 0" class="invalid-field-message"
             style="display: block; margin-bottom: 1em;">
             Пожалуйста, заполните или исправьте поля, выделенные красным
-        </span>
+        </span> -->
         <br *ngIf="profileService.invalidFields.length > 0" />
         <input type="button" class="custom-btn btn-purple"
             value="{{currentPuppyData.id ? 'Сохранить' : 'Добавить'}} щенка" (click)="addPuppy()" />
