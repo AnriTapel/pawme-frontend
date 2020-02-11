@@ -71,7 +71,6 @@ export class BreederPageComponent implements OnInit, OnDestroy {
         this.breederService.getBreederUsingGET(this.route.snapshot.paramMap.get('id'))
             .subscribe((res) => {
                 this.appService.userData = res;
-                console.log(' this.appService.userData',  this.appService.userData);
                 if (this.appService.userData.generalInfo.alias) {
                     this.router.navigateByUrl('/breeder/'+ this.appService.userData.generalInfo.alias)
                 }
