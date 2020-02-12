@@ -40,7 +40,7 @@ export class BreederProfileService {
       index++;
 
     this.appService.userData.profileFill = index;
-
+  
     if (initialIndex == 4 && index == 5) {
       //@ts-ignore
       ym(55779592, 'reachGoal', 'CompletedProfile');
