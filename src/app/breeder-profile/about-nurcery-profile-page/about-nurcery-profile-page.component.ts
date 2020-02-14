@@ -35,6 +35,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   progress;
   isShow: boolean;
 
+
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
   @ViewChild('mainBreedInstance', { static: true }) mainBreedInstance: NgbTypeahead;
   @ViewChild('addBreedInstance', { static: true }) addBreedInstance: NgbTypeahead;
@@ -222,10 +223,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
     if (this.nurceryData.alias == "") {
       this.nurceryData.alias = null;
-    } else {
-      this.nurceryData.alias = this.nurceryData.alias.toLowerCase();
-
     }
+    if (this.nurceryData.alias) {
+      this.nurceryData.alias.toLowerCase();
+    } 
+   
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
         if (!this.appService.userData.generalInfo) {
@@ -244,10 +246,11 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
         this.profileService.updateProfileFullness();
         this.progress = this.appService.userData.profileFill;
-        if (this.progress == 5 && !this.isShow) {
+        this.isShow = this.appService.isShow;
+        if (this.progress == 5 && this.isShow) {
           this.notificationService.setContext('Поздравляем! Вас теперь видят покупатели!', true);
           this.notificationService.setVisibility(true);
-          this.isShow = true;
+          this.appService.isShow = false;
         }
         setTimeout(() => {
           scroll(0, 0);

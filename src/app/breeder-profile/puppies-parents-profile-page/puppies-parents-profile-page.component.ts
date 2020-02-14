@@ -34,6 +34,7 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
   saveChagesEvent: any;
   progress: any;
   isShow: boolean;
+  
 
   parentTests: Object = {
     "Бедра": ["Тест на дисплазию тазобедренного сустава (по стандартам РКФ)"],
@@ -284,14 +285,15 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
         this.currentParentData = null;
         this.currentBreed = null;
         this.isMainPage = true;
-        this.profileService.updateProfileFullness();
         this.notificationService.setContext('Изменения успешно сохранены', true);
         this.notificationService.setVisibility(true);
+        this.profileService.updateProfileFullness();
         this.progress = this.appService.userData.profileFill;
-        if (this.progress == 5 && !this.isShow) {
+        this.isShow = this.appService.isShow;
+        if (this.progress == 5 && this.isShow) {
           this.notificationService.setContext('Поздравляем! Вас теперь видят покупатели!', true);
           this.notificationService.setVisibility(true);
-          this.isShow = true;
+          this.appService.isShow = false;
         }
         scroll(0, 0);
 
