@@ -50,24 +50,26 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     private router: Router) { }
 
   updateLocalData() {
-    let obj: any = this.nurceryData
-    if (this.curMainBreed) {
-      this.appService.breeds.filter((item) => {
-        if (item.name.toLowerCase() === this.curMainBreed.toLowerCase()) {
-          obj['mainBreed'] = item;
-        }
-      });
-    }
-    if (this.curExtraBreed) {
-      this.appService.breeds.filter((item) => {
-        if (item.name.toLowerCase() === this.curExtraBreed.toLowerCase()) {
-          obj['extraBreed'] = item;
-        }
-      });
-    }
-    localStorage.setItem('IVAboutNurcery', JSON.stringify(obj));
+    if (this.appService.meData.type === "BREEDER") {
+      let obj: any = this.nurceryData
+      if (this.curMainBreed) {
+        this.appService.breeds.filter((item) => {
+          if (item.name.toLowerCase() === this.curMainBreed.toLowerCase()) {
+            obj['mainBreed'] = item;
+          }
+        });
+      }
+      if (this.curExtraBreed) {
+        this.appService.breeds.filter((item) => {
+          if (item.name.toLowerCase() === this.curExtraBreed.toLowerCase()) {
+            obj['extraBreed'] = item;
+          }
+        });
+      }
+      localStorage.setItem('IVAboutNurcery', JSON.stringify(obj));
 
-    this.validateInputFields();
+      this.validateInputFields();
+    }
   }
 
   focusCheck(elem) {
@@ -223,7 +225,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     } else {
       this.nurceryData.alias = this.nurceryData.alias.toLowerCase();
 
-    } 
+    }
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
         if (!this.appService.userData.generalInfo) {
@@ -255,9 +257,9 @@ export class AboutNurceryProfilePageComponent implements OnInit {
             window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
           } else {
             window.open('/breeder/' + this.appService.userData.id, '_blank');
-          } 
+          }
         }
-        
+
       },
         (err) => {
           if (err.status == 423)

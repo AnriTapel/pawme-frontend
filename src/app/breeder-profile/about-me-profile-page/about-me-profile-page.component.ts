@@ -30,26 +30,31 @@ export class AboutMeProfilePageComponent implements OnInit {
   progress: any;
   isShow: boolean;
 
-  constructor(private popupService: PopupTemplateService, public appService: AppService, private eventService: EventService, private router: Router,
-    private breederService: BreederControllerService, private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
+  constructor(
+    private popupService: PopupTemplateService,
+    public appService: AppService,
+    private eventService: EventService,
+    private router: Router,
+    private breederService: BreederControllerService,
+    private notificationService: NotificationBarService,
+    public profileService: BreederProfileService
+  ) { }
 
   updateLocalData() {
-    let obj: any = this.breederData;
-    obj['clubs'] = this.currentClubs.join(";")
-    localStorage.setItem('IVBreederData', JSON.stringify(obj));
-    this.validateInputFields();
-    console.log(this.isFocused);
-    console.log(this.errors);
-
+    if (this.appService.meData.type === "BREEDER") {
+      let obj: any = this.breederData;
+      obj['clubs'] = this.currentClubs.join(";")
+      localStorage.setItem('IVBreederData', JSON.stringify(obj));
+      this.validateInputFields();
+    }
   }
 
   focusCheck(elem) {
     this.isFocused[elem] = true;
-    console.log(elem);
   }
 
   ngOnInit() {
-
+    
     let IVBreederData = JSON.parse(localStorage.getItem('IVBreederData'));
 
     if (this.appService.userData.about) {
@@ -251,7 +256,7 @@ export class AboutMeProfilePageComponent implements OnInit {
             window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
           } else {
             window.open('/breeder/' + this.appService.userData.id, '_blank');
-          } 
+          }
         }
       },
       (err) => {

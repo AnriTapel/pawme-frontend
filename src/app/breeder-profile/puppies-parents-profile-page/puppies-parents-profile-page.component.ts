@@ -74,18 +74,19 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
     private notificationService: NotificationBarService, public profileService: BreederProfileService) { }
 
   updateLocalData() {
-    let obj: any = this.currentParentData;
-    if (this.currentBreed) {
-      this.appService.breeds.filter((item) => {
-        if (item.name.toLowerCase() === this.currentBreed.toLowerCase()) {
-          obj['breed'] = item;
-        }
-      });
+    if (this.appService.meData.type === "BREEDER") {
+      let obj: any = this.currentParentData;
+      if (this.currentBreed) {
+        this.appService.breeds.filter((item) => {
+          if (item.name.toLowerCase() === this.currentBreed.toLowerCase()) {
+            obj['breed'] = item;
+          }
+        });
+      }
+      localStorage.setItem('IVParent', JSON.stringify(obj));
+
+      this.validateFields();
     }
-    localStorage.setItem('IVParent', JSON.stringify(obj));
-
-    this.validateFields();
-
   }
 
   focusCheck(elem) {
@@ -293,13 +294,13 @@ export class PuppiesParentsProfilePageComponent implements OnInit {
           this.isShow = true;
         }
         scroll(0, 0);
-      
+
         if (forPreview) {
           if (this.appService.userData.generalInfo.alias) {
             window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
           } else {
             window.open('/breeder/' + this.appService.userData.id, '_blank');
-          } 
+          }
         }
       });
     }, (err) => {

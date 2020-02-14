@@ -26,9 +26,11 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
   constructor(public appService: AppService, private breederService: BreederControllerService, private eventService: EventService,
     private notificationService: NotificationBarService, public profileService: BreederProfileService, private router: Router) { }
   updateLocalData() {
-    let obj: any = this.puppiesData
-    localStorage.setItem('IVAboutPuppies', JSON.stringify(obj));
-    this.validateInputFields();
+    if (this.appService.meData.type === "BREEDER") {
+      let obj: any = this.puppiesData
+      localStorage.setItem('IVAboutPuppies', JSON.stringify(obj));
+      this.validateInputFields();
+    }
   }
 
   focusCheck(elem) {
@@ -125,7 +127,7 @@ export class AboutPuppiesProfilePageComponent implements OnInit {
             window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
           } else {
             window.open('/breeder/' + this.appService.userData.id, '_blank');
-          } 
+          }
         }
       },
       (err) => {

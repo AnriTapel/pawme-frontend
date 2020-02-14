@@ -31,6 +31,9 @@ export class BreederProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.appService.meData.type === "ADMIN") {
+      localStorage.clear();
+    }
     this.titleService.setTitle(this.title);
     this.progress = this.appService.userData.profileFill;
     this.profileService.detectChangeProfileFullness.subscribe(res => {

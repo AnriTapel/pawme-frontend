@@ -71,23 +71,24 @@ export class AddPuppyProfilePageComponent implements OnInit {
     private alertService: AlertService, private router: Router) { }
 
   updateLocalData() {
-    let obj: any = this.currentPuppyData;
-    if (this.birthdayModel.day && this.birthdayModel.month && this.birthdayModel.year)
-      obj.birthDate = this.getDateAsString();
-    else
-      obj.birthDate = null;
-    // Recovering father & mother objects by nickname
-    if (this.curFatherNickname && this.curFatherNickname != "")
-      obj.father = this.fathers.filter(it => it.nickname == this.curFatherNickname)[0];
-    if (this.curMotherNickname && this.curMotherNickname != "")
-      obj.mother = this.mothers.filter(it => it.nickname == this.curMotherNickname)[0];
-    // Recovering breed
-    if (this.curBreed && this.curBreed != "")
-      obj.breed = this.appService.breeds.filter(it => it.name == this.curBreed)[0] || { name: this.curBreed };
-    localStorage.setItem('IVPuppy', JSON.stringify(obj));
+    if (this.appService.meData.type === "BREEDER") {
+      let obj: any = this.currentPuppyData;
+      if (this.birthdayModel.day && this.birthdayModel.month && this.birthdayModel.year)
+        obj.birthDate = this.getDateAsString();
+      else
+        obj.birthDate = null;
+      // Recovering father & mother objects by nickname
+      if (this.curFatherNickname && this.curFatherNickname != "")
+        obj.father = this.fathers.filter(it => it.nickname == this.curFatherNickname)[0];
+      if (this.curMotherNickname && this.curMotherNickname != "")
+        obj.mother = this.mothers.filter(it => it.nickname == this.curMotherNickname)[0];
+      // Recovering breed
+      if (this.curBreed && this.curBreed != "")
+        obj.breed = this.appService.breeds.filter(it => it.name == this.curBreed)[0] || { name: this.curBreed };
+      localStorage.setItem('IVPuppy', JSON.stringify(obj));
 
-    this.validateInputFields();
-
+      this.validateInputFields();
+    }
   }
 
   focusCheck(elem) {
@@ -310,7 +311,7 @@ export class AddPuppyProfilePageComponent implements OnInit {
             window.open('/breeder/' + this.appService.userData.generalInfo.alias, '_blank');
           } else {
             window.open('/breeder/' + this.appService.userData.id, '_blank');
-          } 
+          }
         }
       });
     },
