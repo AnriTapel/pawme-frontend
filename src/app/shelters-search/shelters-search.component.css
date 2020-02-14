@@ -1,8 +1,25 @@
-hr {
-  width: 80%;
-  max-width: 1210px;
-  margin: -15px auto 0;
-  background-color: #f8f9fb;
+.outer-conteiner {
+  padding: 0 16px;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 1200px;
+  margin-top: 25px !important;
+  margin: 0 auto;
+  padding: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid rgba(14, 11, 77, 0.1);
+}
+
+.header .logo img {
+  width: 150px;
+  outline: none;
 }
 
 button:focus {
@@ -17,10 +34,9 @@ input:focus, input:active {
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   min-width: 320px;
   margin: 0 auto;
-  padding: 0 15px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: 'Intro-Book' !important;
@@ -353,6 +369,10 @@ h3.our-shelter {
 .breed {
   margin-top: 32px;
   margin-bottom: 32px;
+}
+
+.checkbox-oval div {
+  border-radius: 22px !important;
 }
 
 .character {
