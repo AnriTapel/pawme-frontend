@@ -18,7 +18,7 @@
         Редактировать профиль
     </button>
 
-    <div *ngIf="subpageStatus().generalInfo" class="slider-content">
+    <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.gallery" class="slider-content">
         <img *ngIf="getScrollLeftValue() > 0" class="scroll-left-button" alt="Стрелка влево" src="./assets/img/arrow-left.svg" (click)="scrollLeft()"
         />
         <div class="slider d-flex align-items-center">

@@ -71,7 +71,7 @@ export class BreederPageComponent implements OnInit, OnDestroy {
         this.breederService.getBreederUsingGET(this.route.snapshot.paramMap.get('id'))
             .subscribe((res) => {
                 this.appService.userData = res;
-                if (this.appService.userData.generalInfo.alias) {
+                if (this.appService.userData.generalInfo && this.appService.userData.generalInfo.alias) {
                     this.router.navigateByUrl('/breeder/'+ this.appService.userData.generalInfo.alias)
                 }
                 
@@ -122,7 +122,7 @@ export class BreederPageComponent implements OnInit, OnDestroy {
             { name: 'twitter:card', content: 'summary_large_image' }
         ]);
 
-        if (res.generalInfo.gallery.length > 0)
+        if (res.generalInfo && res.generalInfo.gallery.length > 0)
             this.meta.addTags([
                 { property: 'og:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' },
                 { name: 'og:image', content: window.location.origin + '/img/' + res.generalInfo.gallery[0].preview + '.jpg' },
