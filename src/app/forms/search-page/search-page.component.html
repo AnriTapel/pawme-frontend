@@ -96,10 +96,19 @@
         <div>
             <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;"
                 class="main-content">
-                <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]">
+                    <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]">
                     <div class="search-right">
                         <div class="dog-mobile">
-                            <img src="/img/{{data.photoPreview}}.jpg" alt="">
+                            <mdb-carousel class="carousel slide carousel-fade dog-mobile" [animation]="'fade'">
+                                <div *ngFor="let data of data.photoPreview" class="">
+                                    <mdb-carousel-item>
+                                        <div class="view w-100 ">
+                                        <img class="d-block w-100" src="/img/{{data}}.jpg" alt="First slide">
+                                        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                                        </div>
+                                    </mdb-carousel-item>
+                                </div>
+                            </mdb-carousel>
                         </div>
                         <div class="main-serach-sub-right">
                             <div class="serach-sub-right">
@@ -132,7 +141,16 @@
                         </div>
                     </div>
                     <div class="dog">
-                        <img src="/img/{{data.photoPreview}}.jpg" alt="">
+                        <mdb-carousel class="carousel slide carousel-fade dog" [animation]="'fade'">
+                            <div *ngFor="let data of data.photoPreview" class="">
+                                <mdb-carousel-item>
+                                    <div class="view w-100 ">
+                                    <img class="d-block w-100" src="/img/{{data}}.jpg" alt="First slide">
+                                    <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                                    </div>
+                                </mdb-carousel-item>
+                            </div>
+                        </mdb-carousel>
                     </div>
                 </div>
             </div>
