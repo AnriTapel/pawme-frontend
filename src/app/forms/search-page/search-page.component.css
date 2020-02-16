@@ -725,7 +725,7 @@ div.metaName {
     display: none !important;
   }
   .search-right {
-    margin: -31px 0 0 0 !important;
+    margin: 0 !important;
   }
   .search-right .main-serach-sub-right {
     padding: 20px !important;
