@@ -1,17 +1,13 @@
-<!-- <div class="outer-conteiner outer-header" [ngClass]="{'scrolled': state}">
-        <div class="container header" [ngClass]="{'non-border': state && !showMenu}">
-            <div class="logo">
-                <img src="./assets/img/logo.png" alt="PawMe логотип" [routerLink]="['/client-page']">
-            </div>
-            <app-menu [showMenu]="showMenu" [state]="state"></app-menu> 
-        </div>
-    </div> 
-<hr> -->
+
+<hr> 
 <div class="wrapper">
     <main>
         <div class="block-shelters block-base">
             <div class="container">
-                <h3 class="our-shelter">НАШИ ПРИЮТЫ</h3>
+                <div class="header-bottom">
+                    <h3 class="our-shelter">НАШИ ПРИЮТЫ</h3>
+                    <div class="filter-mobile"><img src="./assets/img/shelters-search/filter.svg" /></div>
+                </div>
                 <div class="content">
                     <div class="content-left">
                         <div class="top-left-content">
@@ -124,7 +120,8 @@
                                 <span class="age-text">Возраст</span> 
                                 <div class="filter">
                                     <img src="./assets/img/shelters-search/0.svg" />
-                                    <img src="./assets/img/shelters-search/Rectangle.svg" />
+                                    <div class="rectangle"></div>
+                                    <!-- <img src="./assets/img/shelters-search/Rectangle.svg" /> -->
                                     <img src="./assets/img/shelters-search/10.svg" />
                                 </div>
                                 <div class="med">

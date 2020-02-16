@@ -1,45 +1,45 @@
-.outer-conteiner {
-    padding: 0 16px;
+// .outer-conteiner {
+//     padding: 0 16px;
+// }
+
+// .header {
+//     display: flex;
+//     justify-content: space-between;
+//     max-width: 1200px;
+//     margin-top: 25px !important;
+//     margin: 0 auto;
+
+//     padding: 0;
+//     padding-bottom: 23px;
+//     border-bottom: 1px solid rgba(14, 11, 77, 0.1);
+
+//     .logo img {
+//         width: 150px;
+//         outline: none;
+//     }
+
+// }
+
+
+
+
+hr {
+    width: 80%;
+    max-width: 1280px;
+    margin: -15px auto 0;
+    background-color: #f8f9fb;
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin-top: 25px !important;
-    margin: 0 auto;
-
-    padding: 0;
-    padding-bottom: 23px;
-    border-bottom: 1px solid rgba(14, 11, 77, 0.1);
-
-    .logo img {
-        width: 150px;
-        outline: none;
-    }
-
-}
-
-
-
-
-// hr {
-//     width: 80%;
-//     max-width: 1280px;
-//     margin: -15px auto 0;
-//     background-color: #f8f9fb;
-//   }
-
-  button:focus {
+button:focus {
     outline:none !important;
-  }
-  
-  input:focus, input:active{
+}
+
+input:focus, input:active{
     outline: none !important;
     box-shadow: none;
-  }
+}
 
-  .container {
+.container {
     width: 100%;
     max-width: 1280px; //1200px;
     min-width: 320px;
@@ -48,7 +48,15 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     font-family: 'Intro-Book' !important;
-  }
+}
+.header-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-mobile {
+    display: none;
+}
 
 .block-shelters {
     padding-top: 42px;
@@ -197,6 +205,13 @@ h3.our-shelter {
     flex-wrap: nowrap;
     margin-top: 13px;
 }
+.rectangle {
+    height: 4px;
+    background: #9D98E6;
+    border-radius: 18px;
+    width: 120px;
+}
+
 .med {
     display: flex;
     justify-content: center;
@@ -381,6 +396,10 @@ h3.our-shelter {
     }
     .container {
         padding: 0 16px;
+    }
+
+    .filter-mobile {
+        display: block;
     }
 
     .block-shelters {

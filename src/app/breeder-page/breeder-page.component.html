@@ -115,7 +115,7 @@
                     <span>Медицина</span>
                 </div>
 
-                <div *ngIf="subpageStatus().puppies" class="medical-label-list d-flex align-items-center flex-wrap">
+                <div *ngIf="subpageStatus().puppies || appService.userData.puppiesInfo.puppyTests" class="medical-label-list d-flex align-items-center flex-wrap">
                     <ng-container *ngFor="let test of appService.userData.puppiesInfo.puppyTests; let i = index;">
                         <div *ngIf="getPuppyMedicalStatus(test.id)" class="medical-label-item d-flex align-items-center align-content-between justify-content-between flex-column">
                             <img src="./assets/img/breeder-page/{{test.id}}.svg" alt="newPuppyTests[i]" />

@@ -1,25 +1,8 @@
-.outer-conteiner {
-  padding: 0 16px;
-}
-
-.header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  max-width: 1200px;
-  margin-top: 25px !important;
-  margin: 0 auto;
-  padding: 0;
-  padding-bottom: 23px;
-  border-bottom: 1px solid rgba(14, 11, 77, 0.1);
-}
-
-.header .logo img {
-  width: 150px;
-  outline: none;
+hr {
+  width: 80%;
+  max-width: 1280px;
+  margin: -15px auto 0;
+  background-color: #f8f9fb;
 }
 
 button:focus {
@@ -40,6 +23,19 @@ input:focus, input:active {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: 'Intro-Book' !important;
+}
+
+.header-bottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.filter-mobile {
+  display: none;
 }
 
 .block-shelters {
@@ -222,6 +218,13 @@ h3.our-shelter {
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
   margin-top: 13px;
+}
+
+.rectangle {
+  height: 4px;
+  background: #9D98E6;
+  border-radius: 18px;
+  width: 120px;
 }
 
 .med {
@@ -440,6 +443,9 @@ h3.our-shelter {
   }
   .container {
     padding: 0 16px;
+  }
+  .filter-mobile {
+    display: block;
   }
   .block-shelters {
     padding-top: 32px;
