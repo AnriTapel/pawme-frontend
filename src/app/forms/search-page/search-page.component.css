@@ -235,17 +235,17 @@ app-header {
   height: 90px;
 }
 
-.number {
+.desktop-puppies {
   margin-top: 16px;
   font-size: 16px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
 }
 
-.number div:first-child {
+.desktop-puppies div:first-child {
   font-size: 18px;
   color: #645fc9;
   border-radius: 50%;
@@ -257,7 +257,7 @@ app-header {
   text-align: center;
 }
 
-.number div:last-child {
+.desktop-puppies div:last-child {
   margin: 3px 9px;
 }
 
@@ -543,6 +543,10 @@ div.metaName {
       flex-wrap: wrap;
 }
 
+.mobile-puppies {
+  display: none;
+}
+
 @media screen and (max-width: 1200px) {
   .search-content-wrap {
     -webkit-box-orient: vertical;
@@ -567,7 +571,7 @@ div.metaName {
     margin-top: 22px;
   }
   .breeds {
-    margin-top: 18px;
+    margin-top: 16px;
   }
   .breed-class {
     margin-top: 16px;
@@ -702,7 +706,7 @@ div.metaName {
     font-size: 14px;
   }
   .send-form {
-    margin-left: 80px;
+    margin-left: 70px;
   }
   .search-content {
     width: 332px !important;
@@ -746,6 +750,9 @@ div.metaName {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
   }
+  .slider-img {
+    position: relative;
+  }
   .dogs-parod {
     margin: 20px 0 0 0;
     width: 100% !important;
@@ -780,27 +787,60 @@ div.metaName {
     margin: -5px 0 0 10px !important;
   }
   .p-text {
+    display: none !important;
     width: 99% !important;
+    height: 0 !important;
     margin: 5px 0 0 0 !important;
   }
   .serach-sub-right {
-    height: 130px;
+    height: 80px;
   }
   .breedI {
     margin-left: 5px !important;
     margin-right: 5px !important;
   }
-  .number {
+  .mobile-puppies {
+    position: absolute;
+    z-index: 11;
+    margin-top: 20px;
+    margin-left: 20px;
     font-size: 14px;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    background: radial-gradient(99.56% 99.56% at -10.96% -50.14%, #9D98E6 0%, #645FC9 100%);
+    border-radius: 50px;
+    width: 91px;
+    height: 40px;
+    color: #FFFFFF;
+    padding: 5px;
   }
-  .number div:first-child {
+  .mobile-puppies div:first-child {
     font-size: 14px;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    background: #645fc9;
+    border: 1px solid #fff;
+    text-align: center;
+    margin-top: 5px;
   }
-  .number div:last-child {
-    margin: 5px 6px;
+  .mobile-puppies div:last-child {
+    margin-left: 5px;
+    margin-top: 5px;
   }
   .location-content-sub {
     font-size: 14px;
+  }
+  .desktop-puppies {
+    display: none !important;
   }
 }
 /*# sourceMappingURL=search-page.component.css.map */

@@ -224,7 +224,9 @@ h3.our-shelter {
   height: 4px;
   background: #9D98E6;
   border-radius: 18px;
-  width: 120px;
+  max-width: 210px;
+  margin-top: 15px;
+  width: 100%;
 }
 
 .med {
@@ -234,6 +236,12 @@ h3.our-shelter {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.med p {
+  font-family: "Intro-Regular";
+  font-size: 12px;
+  color: #645FC9;
 }
 
 .filter-checkbox {
@@ -436,6 +444,10 @@ h3.our-shelter {
   display: block;
 }
 
+.desktop-dogs-pic img {
+  border-radius: 4px 4px 0 0;
+}
+
 @media screen and (max-width: 769px) {
   hr {
     width: 90%;
@@ -484,7 +496,7 @@ h3.our-shelter {
     margin-left: 0;
   }
   .big, .middle {
-    margin-left: 55px;
+    margin-left: 50px;
   }
   .character {
     display: none;
@@ -498,9 +510,13 @@ h3.our-shelter {
     height: 100%;
     -o-object-fit: cover;
        object-fit: cover;
+    border-radius: 4px 4px 0 0;
   }
   .desktop-dogs-pic {
     display: none;
+  }
+  .rectangle {
+    max-width: 310px;
   }
 }
 /*# sourceMappingURL=shelters-search.component.css.map */

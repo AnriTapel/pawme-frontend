@@ -96,15 +96,22 @@
         <div>
             <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;"
                 class="main-content">
-                    <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]">
+                    <!-- <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]"> -->
+                <div class="search-content">
                     <div class="search-right">
                         <div class="dog-mobile">
-                            <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
-                                <!-- <div *ngFor="let data of data.photoPreview" class=""> -->
-                                <div class="">
+                            <div class="mobile-puppies" *ngIf="data.numPuppies>0" >
+                                <div>{{data.numPuppies}}</div>
+                                <div *ngIf="data.numPuppies==1">щенок</div>
+                                <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">щенка</div>
+                                <div *ngIf="data.numPuppies>=5">щенков</div>
+                            </div>
+                            <mdb-carousel class="slider-img carousel slide carousel-fade" [animation]="'fade'">
+                                <div *ngFor="let data of data.photoPreview">
+                                <!-- <div class=""> -->
                                     <mdb-carousel-item>
                                         <div class="view w-100 ">
-                                        <img class="d-block w-100" src="/img/{{data.photoPreview[0]}}.jpg" alt="First slide">
+                                        <img class="d-block w-100" src="/img/{{data}}.jpg" alt="First slide">
                                         <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
                                         </div>
                                     </mdb-carousel-item>
@@ -132,7 +139,7 @@
                                 </div>
                             </div>
                             <p class="p-text">{{data.description}}</p>
-                            <div *ngIf="data.numPuppies>0" class="number">
+                            <div class="desktop-puppies" *ngIf="data.numPuppies>0" >
                                 <div>{{data.numPuppies}}</div>
                                 <div *ngIf="data.numPuppies==1">доступный щенок</div>
                                 <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">доступных
