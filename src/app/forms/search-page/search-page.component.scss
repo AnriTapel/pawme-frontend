@@ -696,20 +696,21 @@ div.metaName {
     }
 
     .search-content {
-        width: 332px !important;
+        // width: 332px !important;
         height: auto !important;
         border: solid 1px #cbd8f6 !important;
-        max-width: 332px !important;
+        // max-width: 332px !important;
         width: 100% !important;
         h3 {
             font-size: 18px;
         }
 
         img {
-            border-radius: none;
-
-            width: 100% !important;
-            max-width: 330px;
+            // border-radius: none;
+            // height: 100% !important;
+            // object-fit: cover !important;
+            // width: 100% !important;
+            // max-width: 330px;
             margin: 0 !important;
         }
 
@@ -735,13 +736,18 @@ div.metaName {
             margin-left: -13px;
             object-fit: contain;
             width: 100%;
-            max-width: 332px;
+           // max-width: 332px;
             margin: 0;
             img {
                 border-top-right-radius: 4px;
                 border-top-left-radius: 4px;
+                width: 343px !important;
+                height: 328px !important;
+                min-height: 100%;
+                // -o-object-fit: contain;
+                // object-fit: contain;
+                // overflow: hidden;
             }
-
         }
     }
     .slider-img {
@@ -791,9 +797,11 @@ div.metaName {
         height: 0 !important;
         margin: 5px 0 0 0 !important;
     }
+
     .serach-sub-right {
         height: 80px;
     }
+
       .breedI {
         margin-left: 5px !important;
         margin-right: 5px !important;
@@ -839,6 +847,11 @@ div.metaName {
 
     .desktop-puppies {
         display: none !important;
+    }
+
+    .main {
+        width: 100% !important;
+        // overflow: hidden;
     }
 
 }

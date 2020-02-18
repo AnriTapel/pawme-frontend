@@ -709,19 +709,14 @@ div.metaName {
     margin-left: 70px;
   }
   .search-content {
-    width: 332px !important;
     height: auto !important;
     border: solid 1px #cbd8f6 !important;
-    max-width: 332px !important;
     width: 100% !important;
   }
   .search-content h3 {
     font-size: 18px;
   }
   .search-content img {
-    border-radius: none;
-    width: 100% !important;
-    max-width: 330px;
     margin: 0 !important;
   }
   .search-content .serach-content-girl,
@@ -743,12 +738,17 @@ div.metaName {
     -o-object-fit: contain;
        object-fit: contain;
     width: 100%;
-    max-width: 332px;
     margin: 0;
   }
   .search-right .dog-mobile img {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
+    height: 328px !important;
+    width: 100%;
+    min-height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    overflow: hidden;
   }
   .slider-img {
     position: relative;
@@ -841,6 +841,9 @@ div.metaName {
   }
   .desktop-puppies {
     display: none !important;
+  }
+  .main {
+    width: 100% !important;
   }
 }
 /*# sourceMappingURL=search-page.component.css.map */

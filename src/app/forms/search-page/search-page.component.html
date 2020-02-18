@@ -93,7 +93,7 @@
         </div>
     </div>
     <div *ngIf="getSearchData" class="search-content-wrap">
-        <div>
+        <div class="main">
             <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;"
                 class="main-content">
                     <!-- <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]"> -->
