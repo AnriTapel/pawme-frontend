@@ -207,14 +207,8 @@ app-header {
         margin: 50px 0 0 0;
         opacity: 0.6;
         height: 95px;
-        //max-width: 447px;
         width: 447px;
         overflow-y: scroll;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // display: -webkit-box;
-        // -webkit-line-clamp: 5;
-        // -webkit-box-orient: vertical;
     }
 }
 
@@ -227,7 +221,7 @@ app-header {
 .serach-sub-right {
     display: flex;
     justify-content: space-between;
-    height: 90px;
+   // height: 90px;
 }
 
 .desktop-puppies { //number
@@ -519,12 +513,6 @@ div.metaName {
     display: none;
 }
 
-// .desktop-puppies {
-//     display: block;
-// }
-
-
-
 @media screen and (max-width: 1200px) {
     .search-content-wrap {
         flex-flow: column-reverse;
@@ -539,14 +527,14 @@ div.metaName {
 }
 
 @media screen and (max-width: 769px) {
-    .main {
+    .main-search {
         margin-top: 22px;
     }
     .breeds {
-        margin-top: 16px;
+        margin-top: 0;
     }
     .breed-class {
-        margin-top: 16px;
+        margin-top: 0; 
     }
     .search-content-wrap {
         flex-flow: column-reverse;
@@ -557,11 +545,13 @@ div.metaName {
     .main-content {
         justify-content: center;
     }
+    
     .main {
         &.extra-pading{
             padding-top: 75px;
         }
     }
+
     .search-input {
         justify-content: center;
     }
@@ -629,7 +619,6 @@ div.metaName {
     }
 
     .container {
-
         .top-line {
             width: 328px;
             height: 1px;
@@ -696,26 +685,18 @@ div.metaName {
     }
 
     .search-content {
-        // width: 332px !important;
         height: auto !important;
         border: solid 1px #cbd8f6 !important;
-        // max-width: 332px !important;
         width: 100% !important;
         h3 {
             font-size: 18px;
         }
 
         img {
-            // border-radius: none;
-            // height: 100% !important;
-            // object-fit: cover !important;
-            // width: 100% !important;
-            // max-width: 330px;
             margin: 0 !important;
         }
 
-        .serach-content-girl,
-        .dog {
+        .serach-content-girl, .dog {
             display: none !important;
         }
     }
@@ -723,35 +704,33 @@ div.metaName {
     .search-right {
        // margin: -31px 0 0 0 !important;
         margin: 0 !important;   
+        width: 100%;
+        height: auto;
 
         .main-serach-sub-right {
             padding: 20px !important;
-            margin-top: 20px;
+            margin-top: 0;
+            width: 100%;
+            height: auto;
         }
 
         .dog-mobile {
             display: block;
-            height: 284px;
             margin-top: -1px;
             margin-left: -13px;
-            object-fit: contain;
             width: 100%;
-           // max-width: 332px;
             margin: 0;
+            height: auto;
             img {
                 border-top-right-radius: 4px;
                 border-top-left-radius: 4px;
-                transform: scale(1);
-                max-width: 100%;
-                // width: 343px !important;
-                height: 328px !important;
-                // min-height: 100%;
-                // -o-object-fit: contain;
-                // object-fit: contain;
-                // overflow: hidden;
+                overflow: hidden;
+                width: 100%;
+                height: auto;
             }
         }
     }
+
     .slider-img {
          position: relative;
     }
@@ -765,28 +744,23 @@ div.metaName {
         top: 0;
         max-width: 420px;
         left: 0;
-
         .circle {
             width: 8px;
             height: 8px;
             background-color: #645fc9;
             border-radius: 50%;
         }
-
         p {
             font-size: 14px;
             margin: 0px;
         }
-
         &>div {
             font-size: 13px;
             margin-top: 15px;
             display: flex;
-
             img {
                 display: none;
             }
-
             &>div:last-child {
                 margin: -5px 0 0 10px !important;
             }
@@ -800,14 +774,10 @@ div.metaName {
         margin: 5px 0 0 0 !important;
     }
 
-    .serach-sub-right {
-        height: 80px;
-    }
-
-      .breedI {
+    .breedI {
         margin-left: 5px !important;
         margin-right: 5px !important;
-      }
+    }
   
     .mobile-puppies  { //number
         position: absolute;
@@ -836,14 +806,13 @@ div.metaName {
             text-align: center;
             margin-top: 5px;
         }
-    
         div:last-child {
             margin-left: 5px;
             margin-top: 5px;
         }
     }
 
-      .location-content-sub {
+    .location-content-sub {
         font-size: 14px;
     }
 
@@ -851,19 +820,8 @@ div.metaName {
         display: none !important;
     }
 
-    .main {
+    .main-search {
         width: 100% !important;
          overflow: hidden;
     }
-
-}
-
-
-@media screen and (max-width: 411px) {
-    .dog-mobile {
-        img {
-            width: 379px !important;
-        }
-    }
-
 }
