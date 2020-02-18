@@ -741,9 +741,11 @@ div.metaName {
             img {
                 border-top-right-radius: 4px;
                 border-top-left-radius: 4px;
-                width: 343px !important;
+                transform: scale(1);
+                max-width: 100%;
+                // width: 343px !important;
                 height: 328px !important;
-                min-height: 100%;
+                // min-height: 100%;
                 // -o-object-fit: contain;
                 // object-fit: contain;
                 // overflow: hidden;
@@ -851,7 +853,17 @@ div.metaName {
 
     .main {
         width: 100% !important;
-        // overflow: hidden;
+         overflow: hidden;
+    }
+
+}
+
+
+@media screen and (max-width: 411px) {
+    .dog-mobile {
+        img {
+            width: 379px !important;
+        }
     }
 
 }
