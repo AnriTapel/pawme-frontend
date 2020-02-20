@@ -2,11 +2,16 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
 
+.carousel .carousel-control-next-icon, .carousel .carousel-control-prev-icon {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+}
 
-// .carousel .carousel-control-next-icon, .carousel .carousel-control-prev-icon {
-//     display: none !important;
-//     background: none !important;
-// }
+.carousel .carousel-indicators li {
+    background-color: #FFFFFF !important;
+    width: 10px !important;
+    height: 10px !important;
+}
 
 .ng-input {
     padding-top: 8px;
@@ -287,6 +292,11 @@ app-menu {
 }
 
 @media screen and (max-width: 769px) {
+
+    .carousel .carousel-control-next-icon, .carousel .carousel-control-prev-icon {
+    display: none !important;
+    background: none !important;
+}
     .carousel .carousel-indicators li {
         background-color: #FFFFFF !important;
         width: 10px !important;

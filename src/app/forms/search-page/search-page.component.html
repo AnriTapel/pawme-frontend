@@ -97,7 +97,7 @@
             <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;"
                 class="main-content">
                 <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]">
-                    <div class="search-right">
+                    <div class="search-right"></div>
                         <div class="dog-mobile">
                             <div class="mobile-puppies" *ngIf="data.numPuppies>0" >
                                 <div>{{data.numPuppies}}</div>
@@ -149,14 +149,14 @@
                     </div>
                     <div class="dog">
                         <mdb-carousel class="carousel slide carousel-fade dog" [animation]="'fade'">
-                            <!-- <div *ngFor="let data of data.photoPreview" class=""> -->
+                            <div *ngFor="let data of data.photoPreview" class="">
                                 <mdb-carousel-item>
                                     <div class="view w-100 ">
-                                    <img class="d-block w-100" src="/img/{{data.photoPreview[0]}}.jpg" alt="First slide">
+                                    <img class="d-block w-100" src="/img/{{data}}.jpg" alt="First slide">
                                     <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
                                     </div>
                                 </mdb-carousel-item>
-                            <!-- </div> -->
+                            </div>
                         </mdb-carousel>
                     </div>
                 </div>
