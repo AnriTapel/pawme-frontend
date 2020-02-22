@@ -187,14 +187,12 @@ app-header {
     h3 {
         font-size: 22px;
         color: #0e0b4d;
-       // margin-top: 18px;
     }
 
     p {
         font-size: 14px;
         line-height: 1.36;
         color: #0e0b4d;
-        // margin: 5px;
     }
 
     p:first-child {
@@ -203,17 +201,13 @@ app-header {
     }
 
     .p-text {
-        //margin: 37px 0 0 0;
-        margin: 50px 0 0 0;
+        margin: 40px 0 0 0;
         opacity: 0.6;
-        height: 95px;
+         height: 95px;
         width: 447px;
         overflow-y: scroll;
     }
 }
-
-
-
 
 .search-right {
     margin: 20px 26px 0 26px;
@@ -221,7 +215,6 @@ app-header {
 .serach-sub-right {
     display: flex;
     justify-content: space-between;
-   // height: 90px;
 }
 
 .desktop-puppies { //number
@@ -265,6 +258,11 @@ app-header {
         margin-left: 1px;
     }
 }
+
+.location-content {
+    height: 20px;
+    //min-height: 20px;;
+} 
 
 .location-content-sub {
     display: flex;
@@ -823,5 +821,9 @@ div.metaName {
     .main-search {
         width: 100% !important;
          overflow: hidden;
+    }
+
+    .location-content {
+        height:  auto !important;
     }
 }
