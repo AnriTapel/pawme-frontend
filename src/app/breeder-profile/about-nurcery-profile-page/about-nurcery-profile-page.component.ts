@@ -224,7 +224,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       this.nurceryData.alias = null;
     }
     if (this.nurceryData.alias) {
-      this.nurceryData.alias.toLowerCase();
+      this.nurceryData.alias = this.nurceryData.alias.toLowerCase();
     }  
   
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)

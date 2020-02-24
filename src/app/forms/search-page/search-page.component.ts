@@ -118,6 +118,8 @@ export class SearchPageComponent implements OnInit {
         let replaceCitiesList = [];
 
         this.citiesList = [];
+        console.log( 'this.appService.citiess[0]', this.appService.citiess[0]);
+        console.log( 'this.appService.cities[0]', this.appService.cities[0]);
         this.appService.cities.forEach((item, index) => {
           this.citiesList.push(
             {
@@ -125,6 +127,7 @@ export class SearchPageComponent implements OnInit {
               disabled: true
             }
           )
+          console.log()
           this.getMetaSearchData['cities'].forEach(element => {
             if (item === element) {
               this.citiesList[index].disabled = false;
