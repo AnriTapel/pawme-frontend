@@ -1,33 +1,13 @@
-// .outer-conteiner {
-//     padding: 0 16px;
-// }
-
-// .header {
-//     display: flex;
-//     justify-content: space-between;
-//     max-width: 1200px;
-//     margin-top: 25px !important;
-//     margin: 0 auto;
-
-//     padding: 0;
-//     padding-bottom: 23px;
-//     border-bottom: 1px solid rgba(14, 11, 77, 0.1);
-
-//     .logo img {
-//         width: 150px;
-//         outline: none;
-//     }
-
-// }
-
-
-
 
 hr {
     width: 80%;
     max-width: 1280px;
     margin: -15px auto 0;
     background-color: #f8f9fb;
+}
+
+:host {
+    background: #ffffff !important;
 }
 
 button:focus {
@@ -141,8 +121,9 @@ h3.our-shelter {
     font-family: "Intro-Book";
     background: #FFFFFF;
     border: 1px solid #CBD8F6;
-    font-size: 14px;
+    font-size: 16px;
     color: #979797 !important;
+    height: 50px;
 }
 
 .dogs-content {
@@ -399,7 +380,8 @@ h3.our-shelter {
         border-radius: 4px 4px 0 0;
     }
 }
- 
+
+
   @media screen and (max-width: 769px) {
     hr {
       width: 90%;
@@ -411,6 +393,10 @@ h3.our-shelter {
 
     .filter-mobile {
         display: block;
+    }
+
+    .content-right {
+        display: none;
     }
 
     .block-shelters {
@@ -453,9 +439,10 @@ h3.our-shelter {
         margin-top: 16px;
         margin-left: 0;
     }
-    .content-right {
+    .mobile-content-right{
         width: 100%;
         margin-left: 0;
+        margin-top: -20px;
     }
 
     .big, .middle {
@@ -483,6 +470,9 @@ h3.our-shelter {
 
     .rectangle {
         max-width: 310px;
+    }
+    .size-pic {
+        margin-bottom: 16px;
     }
  
   }

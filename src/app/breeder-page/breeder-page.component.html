@@ -44,7 +44,7 @@
                         </div>
                         <div class="location d-flex align-items-center">
                             <i class="icon icon-location"></i>
-                            <span>{{subpageStatus().generalInfo ? appService.userData.generalInfo.city : ''}}</span>
+                            <span>{{subpageStatus().generalInfo ? appService.userData.generalInfo.city.name : ''}}</span>
                         </div>
                         <div *ngIf="subpageStatus().generalInfo && appService.userData.generalInfo.site" class="link d-flex align-items-center">
                             <i class="icon icon-link" (click)="openPageByUrl(appService.userData.generalInfo.site)"></i>

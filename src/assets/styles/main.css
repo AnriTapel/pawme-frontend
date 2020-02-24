@@ -87,6 +87,15 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 0 !important;
 }
 
+
+.header-shelters header {
+  background-color: unset !important;
+}
+
+.header-shelters header nav {
+  background-color: unset !important;
+}
+
 .header-for-profile {
   width: 80%;
   margin: 0 auto;

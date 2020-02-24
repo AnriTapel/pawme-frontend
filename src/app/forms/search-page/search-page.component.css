@@ -214,7 +214,7 @@ app-header {
 }
 
 .search-content .p-text {
-  margin: 50px 0 0 0;
+  margin: 40px 0 0 0;
   opacity: 0.6;
   height: 95px;
   width: 447px;
@@ -232,7 +232,6 @@ app-header {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 90px;
 }
 
 .desktop-puppies {
@@ -278,6 +277,10 @@ app-header {
   max-height: 100%;
   margin-top: -2px;
   margin-left: 1px;
+}
+
+.location-content {
+  height: 20px;
 }
 
 .location-content-sub {
@@ -567,14 +570,14 @@ div.metaName {
 }
 
 @media screen and (max-width: 769px) {
-  .main {
+  .main-search {
     margin-top: 22px;
   }
   .breeds {
-    margin-top: 16px;
+    margin-top: 0;
   }
   .breed-class {
-    margin-top: 16px;
+    margin-top: 0;
   }
   .search-content-wrap {
     -webkit-box-orient: vertical;
@@ -719,36 +722,34 @@ div.metaName {
   .search-content img {
     margin: 0 !important;
   }
-  .search-content .serach-content-girl,
-  .search-content .dog {
+  .search-content .serach-content-girl, .search-content .dog {
     display: none !important;
   }
   .search-right {
     margin: 0 !important;
+    width: 100%;
+    height: auto;
   }
   .search-right .main-serach-sub-right {
     padding: 20px !important;
-    margin-top: 20px;
+    margin-top: 0;
+    width: 100%;
+    height: auto;
   }
   .search-right .dog-mobile {
     display: block;
-    height: 284px;
     margin-top: -1px;
     margin-left: -13px;
-    -o-object-fit: contain;
-       object-fit: contain;
     width: 100%;
     margin: 0;
+    height: auto;
   }
   .search-right .dog-mobile img {
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
-    height: 328px !important;
-    width: 100%;
-    min-height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover;
     overflow: hidden;
+    width: 100%;
+    height: auto;
   }
   .slider-img {
     position: relative;
@@ -791,9 +792,6 @@ div.metaName {
     width: 99% !important;
     height: 0 !important;
     margin: 5px 0 0 0 !important;
-  }
-  .serach-sub-right {
-    height: 80px;
   }
   .breedI {
     margin-left: 5px !important;
@@ -842,8 +840,12 @@ div.metaName {
   .desktop-puppies {
     display: none !important;
   }
-  .main {
+  .main-search {
     width: 100% !important;
+    overflow: hidden;
+  }
+  .location-content {
+    height: auto !important;
   }
 }
 /*# sourceMappingURL=search-page.component.css.map */

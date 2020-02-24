@@ -26,7 +26,7 @@ export class AppComponent {
   readonly classes = this.theme.addStyleSheet(STYLES);
   // Routes of pages with custom header
   private noGeneralHeaderRoutes = ['/breeder-landing', '/admin-panel', '/client-page', '/search-page','/about-us', '/contact-us', '/'];
-  private noGeneralHeaderPathnames = ['/breeder-landing', '/search-page', '/?'];
+  private noGeneralHeaderPathnames = ['/breeder-landing', '/search-page', '/shelters-search', '/?'];
   // Routes of pages with custom footer
   private noGeneralFooterRoutes = ['/admin-panel'];
   private noGeneralFooterPathnames = [];

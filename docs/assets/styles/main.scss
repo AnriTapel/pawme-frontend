@@ -67,6 +67,17 @@ input[type=number]::-webkit-outer-spin-button {
 
 }
 
+.header-shelters {
+    header{
+        background-color: unset !important;
+
+        nav{
+            background-color: unset !important;
+        }
+    }
+  
+  }
+
 .custom-btn{
     border-radius: 28px;
     padding: 10px 25px;

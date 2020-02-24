@@ -214,7 +214,6 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       return;
     }
     this.customeValidator = false;
-
     this.isLoading = true;
     this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
     if (!this.nurceryData.name)
@@ -226,8 +225,8 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     }
     if (this.nurceryData.alias) {
       this.nurceryData.alias.toLowerCase();
-    } 
-   
+    }  
+  
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
         if (!this.appService.userData.generalInfo) {

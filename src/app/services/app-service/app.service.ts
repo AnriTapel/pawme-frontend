@@ -42,15 +42,14 @@ export class AppService {
 
         this.http.get('/api/dict').subscribe(dict => {
           this.breeds = dict['breeds'].sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-          this.citiess = dict['cities'].sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
-          //console.log('this.cities', this.citiess);
+          this.citiess = dict['cities']; //.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
           this.puppyTests = dict['puppyTests'];
           for (let breed in this.breeds) {
            this.breedsById[this.breeds[breed].id]= this.breeds[breed].name;
-            }
+          }
           for (let city in this.citiess) {
-            this.citiesById[this.cities[city].id]= this.citiess[city].name;
-            }
+            this.citiesById[this.citiess[city].id]= this.citiess[city].name;
+          }
           if (window.location.href.indexOf('/breeder-guide.pdf') != -1 && window.location.href.indexOf('/docs/breeder-guide.pdf') == -1) {
             window.location.href = "/docs/breeder-guide.pdf";
             resolve();

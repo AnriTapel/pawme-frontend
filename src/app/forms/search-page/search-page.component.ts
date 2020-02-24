@@ -68,8 +68,10 @@ export class SearchPageComponent implements OnInit {
   selectedBreedChar;
 
   showMenu;
+  citiesById;
 
   ngOnInit() {
+    this.citiesById = this.appService.citiesById;
 
     this.route.queryParamMap.subscribe(params => {
       this.breed = params.getAll('breed');
@@ -158,6 +160,9 @@ export class SearchPageComponent implements OnInit {
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
+        for (let el in this.getSearchData) {
+          this.getSearchData[el].city= this.citiesById[this.getSearchData[el].cityId];
+        }
         if (this.searchData.breed == null) {
           for (let key in this.getSearchData) {
             this.appService.breeds.forEach(val => {
@@ -192,6 +197,14 @@ export class SearchPageComponent implements OnInit {
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
         this.getSearchData = <any>res;
+        for (let el in this.getSearchData) {
+          this.getSearchData[el].city= this.citiesById[this.getSearchData[el].cityId];
+        }
+        this.getSearchData.forEach(element => {
+          if (element.city === this.searchData.breed) {
+            this.getBreedCharacterization(element);
+          }
+        });
         if (this.searchData.breed == null) {
           for (let key in this.getSearchData) {
             this.appService.breeds.forEach(val => {

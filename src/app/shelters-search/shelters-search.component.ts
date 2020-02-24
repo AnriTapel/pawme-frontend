@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SheltersSearchComponent implements OnInit {
   p: any = 1;
+  isOpen: boolean = false;
   constructor() { }
 
   ngOnInit() {
