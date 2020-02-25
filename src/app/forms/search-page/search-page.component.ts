@@ -75,6 +75,7 @@ export class SearchPageComponent implements OnInit {
 
     this.route.queryParamMap.subscribe(params => {
       this.breed = params.getAll('breed');
+      //@ts-ignore
       this.searchData.cities = params.getAll('cities');
       if (params.getAll('currentPage').length) {
         this.p = +params.getAll('currentPage');
@@ -118,15 +119,17 @@ export class SearchPageComponent implements OnInit {
         let replaceCitiesList = [];
 
         this.citiesList = [];
-        this.appService.cities.forEach((item, index) => {
+        
+        this.appService.citiess.forEach((item, index) => {
           this.citiesList.push(
             {
-              name: item,
+              name: item.name,
+              id:item.id,
               disabled: true
             }
           )
           this.getMetaSearchData['cities'].forEach(element => {
-            if (item === element) {
+            if (item.id === element) {
               this.citiesList[index].disabled = false;
             }
           });

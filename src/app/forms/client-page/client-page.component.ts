@@ -118,11 +118,9 @@ export class ClientPageComponent implements OnInit {
 
 
   public showClinet(id) {
-    console.log("value", id);
     this.id = id;
     this.jsonDataService.getClientJSON().subscribe(data => {
       this.clientData = data.clients;
-      console.log("this.clientData", this.clientData);
       for (let i = 0; i < this.clientData.length; i++) {
         if (this.clientData[i].id === id) {
           this.showData = this.clientData[i];

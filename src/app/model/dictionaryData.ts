@@ -10,12 +10,14 @@
  * Do not edit the class manually.
  */
 import { IterableBreed } from './iterableBreed';
+import { IterableCity } from './iterableCity';
 import { IterableParentTest } from './iterableParentTest';
 import { IterablePuppyTest } from './iterablePuppyTest';
 
 
 export interface DictionaryData { 
     breeds?: IterableBreed;
+    cities?: IterableCity;
     parentTests?: IterableParentTest;
     puppyTests?: IterablePuppyTest;
 }

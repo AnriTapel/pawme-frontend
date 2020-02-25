@@ -16,7 +16,7 @@ export interface BreederSearchEntry {
     breed0?: number;
     breed1?: number;
     breed2?: number;
-    city?: string;
+    cityId?: number;
     description?: string;
     id?: number;
     name?: string;

@@ -11,7 +11,8 @@
  */
 
 
-export interface SearchMeta { 
-    breeds?: Array<number>;
-    cities?: Array<number>;
+export interface City { 
+    id?: number;
+    name?: string;
+    region?: string;
 }

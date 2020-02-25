@@ -12,7 +12,7 @@
 
 
 export interface BreederForAdmin { 
-    city?: string;
+    city?: number;
     createDate?: Date;
     customRating?: number;
     email?: string;

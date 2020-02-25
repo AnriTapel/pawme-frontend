@@ -11,7 +11,5 @@
  */
 
 
-export interface SearchMeta { 
-    breeds?: Array<number>;
-    cities?: Array<number>;
+export interface IterableCity { 
 }
