@@ -14,4 +14,5 @@
 export interface SearchTerms { 
     breed?: number;
     cities?: Array<number>;
+    range?: number;
 }

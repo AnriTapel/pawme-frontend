@@ -6,6 +6,7 @@
         <app-image-cropper *ngSwitchCase="'image-cropper'" [params]="popupService.getPopupParams()"></app-image-cropper>
         <app-breeder-message *ngSwitchCase="'breeder-message'"></app-breeder-message>
         <app-client-chat *ngSwitchCase="'client-chat'" [params]="popupService.getPopupParams()"></app-client-chat>
+        <app-about-more *ngSwitchCase="'about-more'" [params]="popupService.getPopupParams()"></app-about-more>
         <app-first-message *ngSwitchCase="'first-message'" [params]="popupService.getPopupParams()"></app-first-message>
         <app-image-gallery *ngSwitchCase="'image-gallery'" [params]="popupService.getPopupParams()"></app-image-gallery>
     </app-popup-template>

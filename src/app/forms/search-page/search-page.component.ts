@@ -7,6 +7,7 @@ import { PetSelectionRequest } from '../../model/petSelectionRequest';
 import { BreederSearchEntry } from '../../model/breederSearchEntry';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { JsonDataService } from 'src/app/services/json-data/json-data.service';
+import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 
 
 
@@ -22,19 +23,20 @@ import { JsonDataService } from 'src/app/services/json-data/json-data.service';
 })
 export class SearchPageComponent implements OnInit {
 
-
   constructor(
     public appService: AppService,
     private searchControllerService: SearchControllerService,
     private route: ActivatedRoute,
     private breederService: BreederControllerService,
     private router: Router,
-    private jsonDataService: JsonDataService
+    private jsonDataService: JsonDataService,
+    private popupService: PopupTemplateService
   ) { }
 
   searchData: SearchTerms = {
     breed: null,
-    cities: null
+    cities: null,
+    range: null
   };
 
   SearchMetaData: SearchMeta = {
@@ -64,11 +66,13 @@ export class SearchPageComponent implements OnInit {
 
   breedList;
   citiesList;
+  rangeList;
 
   selectedBreedChar;
 
   showMenu;
   citiesById;
+  isOpen: boolean = false;
 
   ngOnInit() {
     this.citiesById = this.appService.citiesById;
@@ -135,6 +139,16 @@ export class SearchPageComponent implements OnInit {
           });
         });
 
+        this.rangeList = [];
+        this.appService.range.forEach((item, index) => {
+          this.rangeList.push(
+            {
+              name: item,
+              disabled: false
+            }
+          )
+        });
+   
         this.citiesList.forEach((item) => {
           if (!item.disabled) {
             replaceCitiesList.push(item);
@@ -159,6 +173,12 @@ export class SearchPageComponent implements OnInit {
         }
 
       });
+
+      if (this.searchData.range) {
+        //@ts-ignore
+      let range = this.searchData.range.match(/\d+/)[0];
+      this.searchData.range = range;
+     }
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
@@ -196,6 +216,13 @@ export class SearchPageComponent implements OnInit {
     }
   }
   public changeInput(event) {
+    console.log('event', event); 
+    this.showRangePopup();
+     if (this.searchData.range) {
+        //@ts-ignore
+      this.searchData.range = this.searchData.range.match(/\d+/)[0];
+     }
+ 
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
@@ -326,11 +353,25 @@ export class SearchPageComponent implements OnInit {
       });
   }
 
-  getTopBreeder(ev){
+  getTopBreeder(ev) {
     if (ev.name === "Топ заводчиков") {
       this.searchData.breed = null;
       this.searchData.cities = null;
       this.changeInput(event);
     }
   }
+
+  showAboutMorePopup(): void {
+    this.popupService.setCurrentForm('about-more');
+    this.popupService.setShowStatus(true);
+  }
+
+  showRangePopup(): void {
+    this.isOpen = !this.isOpen; 
+  }
+
+  hideRangePopup(): void {
+    this.isOpen = false; 
+  }
+
 }

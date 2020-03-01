@@ -25,6 +25,7 @@ export class AppService {
   breedsById = {};
   citiesById = {};
   citiess: any;
+  range: Array<string> = ["+10km", "+100km","+200km","+500km","+1500km","+3000km"]
 
   puppyTests: Array<PuppyTest>;
 
