@@ -24,7 +24,7 @@
 
 .ng-select-container {
     background: #fff !important;
-    border: 1px solid #cbd8f6 ! important;
+    border: 1px solid #cbd8f6 !important;
     font-size: 14px !important;
     font-family: 'Intro-Book' !important;
     height: 50px !important;
@@ -64,21 +64,34 @@
 }
 
 .ng-clear-wrapper {
-    width: 30% !important;
+    width: 37% !important; //30% !important;
     height: 28px !important;
     font-size: 14px !important;
     margin-top: 10px;
 }
 
 .ng-clear-wrapper::after {
-
-
-
     margin-top: 1px !important;
     content: "Сбросить выбор";
     font-size: 14px !important;
-
     float: right;
+}
+
+.delivery-input .ng-clear-wrapper::after {
+    content: "" !important;
+}
+.delivery-input .ng-clear-wrapper {
+    display: none !important;
+}
+
+.delivery-input ng-select ng-dropdown-panel div.ng-option .checkbox-item .name {
+    overflow: inherit !important;
+}
+
+.delivery-input .ng-clear-wrapper {
+    width: 8% !important;
+    height: 32px !important;
+    margin-top: 10px;
 }
 
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
@@ -292,6 +305,12 @@ app-menu {
 }
 
 @media screen and (max-width: 769px) {
+    .delivery-input .ng-clear-wrapper {
+        display: none !important;
+    }
+    .ng-select .ng-select-container {
+        border-radius: 0px !important;
+    }
 
     .carousel .carousel-control-next-icon, .carousel .carousel-control-prev-icon {
     display: none !important;

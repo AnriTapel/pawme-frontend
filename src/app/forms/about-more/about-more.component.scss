@@ -1,0 +1,60 @@
+.about-more {
+    width: 400px !important;
+    background-color: red;
+}
+.main {
+    padding: 20px;
+    text-align: center;
+}
+
+h3 {
+    color: #0E0B4D;
+    font-family: "Intro-Regular";
+    font-size: 20px;
+    line-height: 120%;
+    text-align: left;
+}
+
+.text {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+    line-height: 21px;
+    font-family: "Intro-Book";
+    color: #0E0B4D !important;
+    margin-top: 20px;
+    text-align: left;
+
+}
+
+.do-you-know {
+    background: #645FC9;
+    text-align: center !important;
+    margin-top: 20px; 
+    border-radius: 44px;
+    font-family: "Intro-Regular";
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #FFFFFF;
+    height: 40px;
+    padding: 13px 89px;
+    &:hover {
+        background: #7975ce;
+    }
+}
+
+.number {
+   font-family: "Intro-Regular" !important;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.chat{ 
+    margin-left: 3px;
+    text-decoration: underline;
+    a {
+        color: #645FC9 !important;
+        text-decoration: underline;
+    }
+} 

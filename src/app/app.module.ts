@@ -69,6 +69,8 @@ import { ChatRoomsPipe } from './pipes/chat-rooms.pipe';
 import { SheltersSearchComponent } from './shelters-search/shelters-search.component';
 
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { AboutMoreComponent } from './forms/about-more/about-more.component';
+import { IntercomModule } from 'ng-intercom';
 
 declare var Hammer: any;
 
@@ -146,7 +148,8 @@ export function initApp(appSerivce: AppService){
     ClientChatComponent,
     FirstMessageComponent,
     ChatRoomsPipe,
-    SheltersSearchComponent
+    SheltersSearchComponent,
+    AboutMoreComponent
   ],
   imports: [
     BrowserModule,
@@ -163,7 +166,11 @@ export function initApp(appSerivce: AppService){
     NgSelectModule,
     CommonModule,
     NgxPaginationModule,
-    FilterPipeModule
+    FilterPipeModule,
+    IntercomModule.forRoot({
+      appId: 'xauts69y', // from your Intercom config
+      updateOnRouterChange: true // will automatically run `update` on router event changes. Default: `false`
+    })
   ],
   exports: [
     ClickOutsideDirective

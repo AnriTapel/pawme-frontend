@@ -7011,6 +7011,14 @@
       "integrity": "sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==",
       "dev": true
     },
+    "ng-intercom": {
+      "version": "8.0.2",
+      "resolved": "https://registry.npmjs.org/ng-intercom/-/ng-intercom-8.0.2.tgz",
+      "integrity": "sha512-Kgzu6FXvGdUSze5WpjMjwYtYOoxzcSNzAbmBMHQrnE9RVMlZu9bJO4BZo75W5xosaWqJK02nyrZ3iQYIjx7O2g==",
+      "requires": {
+        "tslib": "^1.9.0"
+      }
+    },
     "ngx-filter-pipe": {
       "version": "2.1.2",
       "resolved": "https://registry.npmjs.org/ngx-filter-pipe/-/ngx-filter-pipe-2.1.2.tgz",
