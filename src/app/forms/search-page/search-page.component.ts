@@ -216,8 +216,11 @@ export class SearchPageComponent implements OnInit {
     }
   }
   public changeInput(event) {
-    console.log('event', event); 
+    if (localStorage.getItem('showRangeModal') !='value') {
+      this.showRangePopup();
+    }
     this.showRangePopup();
+
      if (this.searchData.range) {
         //@ts-ignore
       this.searchData.range = this.searchData.range.match(/\d+/)[0];
@@ -367,6 +370,8 @@ export class SearchPageComponent implements OnInit {
   }
 
   showRangePopup(): void {
+    localStorage.setItem('showRangeModal', 'value');
+
     this.isOpen = !this.isOpen; 
   }
 

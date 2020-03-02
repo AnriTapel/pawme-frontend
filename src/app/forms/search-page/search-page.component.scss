@@ -138,6 +138,7 @@ app-header {
 }
 
 .search-input {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     margin-left: -10px;
@@ -569,8 +570,8 @@ div.metaName {
     height: 135px !important;
     padding: 20px !important;
     position: absolute;
-    top: 72%;
-    left: 45%;
+    top: 68px;
+    right: 90px;
     z-index: 12;
 }
 
@@ -981,8 +982,8 @@ div.metaName {
     }
 
     .range-modal {
-        top: 42%;
-        left: 7%;
+        top: 145px;
+        left: 8px;
     }
  
 }
