@@ -148,7 +148,6 @@ app-header {
 }
 
 .search-input {
-  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -400,6 +399,7 @@ app-header {
 }
 
 .delivery-input {
+  position: relative;
   width: 120px !important;
 }
 
@@ -634,8 +634,8 @@ div.metaName {
   height: 135px !important;
   padding: 20px !important;
   position: absolute;
-  top: 68px;
-  right: 90px;
+  top: 270px;
+  right: 452px;
   z-index: 12;
 }
 
@@ -1027,8 +1027,8 @@ div.metaName {
     display: none;
   }
   .range-modal {
-    top: 145px;
-    left: 8px;
+    top: 342px;
+    left: 26px;
   }
 }
 /*# sourceMappingURL=search-page.component.css.map */

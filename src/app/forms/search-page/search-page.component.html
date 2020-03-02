@@ -100,7 +100,7 @@
                 (change)="changeInput($event)"
                 bindValue="name" 
                 [virtualScroll]="true" 
-                [(ngModel)]="searchData.range"
+                [(ngModel)]="range"
                 >
                 <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                     <div class="checkbox-item">
@@ -159,25 +159,18 @@
                         [selectableGroupAsModel]="false"
                         [closeOnSelect]="true" 
                         bindValue="name" 
-                        [(ngModel)]="searchData.range" 
+                        [(ngModel)]="range" 
                         [virtualScroll]="true"
                         [clearSearchOnAdd]="true">
-                            <!-- <ng-template ng-multi-label-tmp let-items="items">
-                                Выбрано {{items.length}}
-                            </ng-template> -->
                            <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                                 <div class="checkbox-item">
                                     <div [title]="item.name" class="name">{{item.name}}</div>
                                     <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
-                                    <!-- <div *ngIf="item.disabled" class="coming-soon">
-                                        Уже скоро
-                                    </div> -->
                                 </div>
                             </ng-template> 
                         </ng-select>
                 </div>
                 <img (click)="showAboutMorePopup()"  class="help" src="./assets/img/search-page/help.svg" alt="" />
-               
             </div>
         </div>
         <div *ngIf="getSearchData" class="search-content-wrap">

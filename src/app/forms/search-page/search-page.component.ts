@@ -73,6 +73,7 @@ export class SearchPageComponent implements OnInit {
   showMenu;
   citiesById;
   isOpen: boolean = false;
+  range;
 
   ngOnInit() {
     this.citiesById = this.appService.citiesById;
@@ -174,10 +175,8 @@ export class SearchPageComponent implements OnInit {
 
       });
 
-      if (this.searchData.range) {
-        //@ts-ignore
-      let range = this.searchData.range.match(/\d+/)[0];
-      this.searchData.range = range;
+      if (this.range) {
+        this.searchData.range = this.range.match(/\d+/)[0];
      }
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
@@ -216,15 +215,19 @@ export class SearchPageComponent implements OnInit {
     }
   }
   public changeInput(event) {
-    if (localStorage.getItem('showRangeModal') !='value') {
-      this.showRangePopup();
+    if (event !=undefined && event != '') {   
+      this.searchData.cities.forEach(element => {
+      if (element === event[0].id) {
+        if (localStorage.getItem('showRangeModal') !='value') {
+          this.showRangePopup();
+        }
+      }
+    });
     }
-    this.showRangePopup();
 
-     if (this.searchData.range) {
-        //@ts-ignore
-      this.searchData.range = this.searchData.range.match(/\d+/)[0];
-     }
+    if (this.range) {
+      this.searchData.range = this.range.match(/\d+/)[0];
+    }
  
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
