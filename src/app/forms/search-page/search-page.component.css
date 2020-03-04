@@ -183,7 +183,17 @@ app-header {
   outline: none;
 }
 
+.bottom-delivery-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
 .search-content {
+  position: relative;
   margin-top: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -385,6 +395,10 @@ app-header {
   padding-right: 33px;
 }
 
+.delivery-mobile {
+  display: none;
+}
+
 .about-more {
   border-top: 1px solid #645FC9;
   font-family: "Intro-Regular";
@@ -426,6 +440,8 @@ app-header {
   background-position: right bottom;
   background-repeat: no-repeat;
   padding: 44px 0px 44px 27px;
+  width: 100% !important;
+  height: 210px;
 }
 
 .info-left {
@@ -728,7 +744,10 @@ div.metaName {
 
 @media screen and (max-width: 769px) {
   .main-search {
-    margin-top: 22px;
+    margin-top: -10px;
+  }
+  .main {
+    margin-top: 30px;
   }
   .breeds {
     margin-top: 0;
@@ -947,11 +966,18 @@ div.metaName {
   .delivery {
     width: 100% !important;
     height: auto;
-    position: relative !important;
     margin: 0 !important;
+    margin-top: 50px !important;
+    position: -webkit-sticky !important;
+    position: sticky !important;
     max-width: 420px;
     left: 0;
-    top: 35px !important;
+  }
+  .delivery-desktop {
+    display: none;
+  }
+  .delivery-mobile {
+    display: block;
   }
   .p-text {
     display: none !important;

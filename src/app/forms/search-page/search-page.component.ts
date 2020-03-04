@@ -73,7 +73,7 @@ export class SearchPageComponent implements OnInit {
   showMenu;
   citiesById;
   isOpen: boolean = false;
-  range;
+  range = "+10км";
 
   ngOnInit() {
     this.citiesById = this.appService.citiesById;
@@ -82,6 +82,9 @@ export class SearchPageComponent implements OnInit {
       this.breed = params.getAll('breed');
       //@ts-ignore
       this.searchData.cities = params.getAll('cities');
+       //@ts-ignore
+      this.searchData.range = params.getAll('range');
+
       if (params.getAll('currentPage').length) {
         this.p = +params.getAll('currentPage');
       } else {
@@ -176,8 +179,9 @@ export class SearchPageComponent implements OnInit {
       });
 
       if (this.range) {
-        this.searchData.range = this.range.match(/\d+/)[0];
+        this.searchData.range = parseInt(this.range.match(/\d+/)[0]);
      }
+
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
@@ -215,9 +219,9 @@ export class SearchPageComponent implements OnInit {
     }
   }
   public changeInput(event) {
-    if (event !=undefined && event != '') {   
+    if (event !=undefined && event != '' && event[0]) {   
       this.searchData.cities.forEach(element => {
-      if (element === event[0].id) {
+      if (element == event[0].id) {
         if (localStorage.getItem('showRangeModal') !='value') {
           this.showRangePopup();
         }
@@ -226,9 +230,9 @@ export class SearchPageComponent implements OnInit {
     }
 
     if (this.range) {
-      this.searchData.range = this.range.match(/\d+/)[0];
+      this.searchData.range = parseInt(this.range.match(/\d+/)[0]);
     }
- 
+
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
@@ -348,6 +352,7 @@ export class SearchPageComponent implements OnInit {
 
     if (this.searchData.cities && this.searchData.cities.length)
       queryParams['cities'] = this.searchData.cities;
+      queryParams['range'] = this.searchData.range;
       
       queryParams['currentPage'] = this.p;
 
@@ -374,7 +379,6 @@ export class SearchPageComponent implements OnInit {
 
   showRangePopup(): void {
     localStorage.setItem('showRangeModal', 'value');
-
     this.isOpen = !this.isOpen; 
   }
 

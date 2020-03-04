@@ -125,6 +125,10 @@
     margin-top: 5px !important;
 }
 
+// .delivery-input .ng-select .ng-arrow-wrapper {
+//     //display: none !important;
+// }
+
 .ng-select.disable-arrow .ng-arrow-wrapper .ng-arrow {
     font-size: 30px !important;
     margin-left: 120px;
@@ -475,4 +479,8 @@ app-menu {
     font-size: 14px !important;
     font-family: 'Intro-Book' !important;
     position: absolute;
+}
+
+.delivery-input .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+    display: none !important;
 }

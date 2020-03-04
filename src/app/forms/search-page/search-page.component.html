@@ -95,7 +95,7 @@
                 [multiple]="false" 
                 bindLabel="name" 
                 clearAllText=""
-                placeholder="+0 km" 
+                placeholder="+10 км" 
                 [closeOnSelect]="true"
                 (change)="changeInput($event)"
                 bindValue="name" 
@@ -242,7 +242,16 @@
                                 </div>
                             </mdb-carousel>
                         </div>
-                    </div>     
+                    </div>
+                    <div *ngIf="i == 0"  class="delivery delivery-mobile">
+                        <img src="./assets/img/search-page/Illustation.svg" alt="" />
+                        <p class="delivery-russian">Доставка по России</p>
+                        <p class="delivery-text">
+                            Вы можете с легкостью перевезти щенка по стране 
+                            с помощью наших заводчиков или доставки от Petman, используя систему карго или сопровождение человека.
+                        </p>
+                        <div class="about-more">Узнать подробное ...</div>
+                    </div>   
                 </div>
             </div>
               <!-- <div *ngIf="selectedBreedChar && getSearchData.length" class="dogs-parod">
@@ -268,8 +277,47 @@
                     <div *ngIf="selectedBreedChar.allergens === 'Да'" class="">Высокая аллергенность</div>
                     <div *ngIf="selectedBreedChar.allergens === 'Нет'" class="">Гипоаллергенная</div>
                 </div>
-            </div> -->
-            <div class="delivery">
+            </div>  -->
+             <div *ngIf="getSearchData.length > 0" class="delivery delivery-desktop">
+                <img src="./assets/img/search-page/Illustation.svg" alt="" />
+                <p class="delivery-russian">Доставка по России</p>
+                <p class="delivery-text">
+                    Вы можете с легкостью перевезти щенка по стране 
+                    с помощью наших заводчиков или доставки от Petman, используя систему карго или сопровождение человека.
+                </p>
+                <div class="about-more">Узнать подробное ...</div>
+            </div> 
+        </div>
+       <div class="bottom-delivery-content">
+            <div *ngIf="!showBox" class="search-info">
+                <div class="info-right">
+                    <h3>Не нашли подходящего заводчика на платформе?</h3>
+                    <p>Оставьте заявку и наши специалисты постараются найти для вас профессионала</p>
+                </div>
+                <div class="info-left">
+                    <div class="dropdown-text-input">
+                        <input type="email" placeholder="Ваш e-mail" class="form-control custom-form-control-border"
+                            name="email" [(ngModel)]="sendEmaillData.email"
+                            [class.invalid-form-field-value]="invalidFields.includes('email')"
+                            (change)="fieldEdited('email')" />
+                        <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите
+                            действительный
+                            E-mail</span>
+                    </div>
+                    <input type="button" class="custom-btn btn-purple" value="Отправить" (click)="sendEmail()" />
+                </div>
+            </div>
+            <div *ngIf="showBox" class="heart-info">
+                <div class="info-right info-bottom">
+                    <h3 class="thaks">Спасибо за заявку!</h3>
+                    <p>Мы уже работаем над вашим запросом</p>
+                </div>
+                <div class="info-left send-form">
+                    <img src="./assets/img/search-page/mail.svg" alt="" />
+                    <div class="heart-chat"><img src="./assets/img/search-page/heart.svg" alt="" /></div>
+                </div>
+            </div> 
+            <div *ngIf="getSearchData && !getSearchData.length" class="delivery">
                 <img src="./assets/img/search-page/Illustation.svg" alt="" />
                 <p class="delivery-russian">Доставка по России</p>
                 <p class="delivery-text">
@@ -278,36 +326,8 @@
                 </p>
                 <div class="about-more">Узнать подробное ...</div>
             </div>
-        </div>
-       
-        <div *ngIf="!showBox" class="search-info">
-            <div class="info-right">
-                <h3>Не нашли подходящего заводчика на платформе?</h3>
-                <p>Оставьте заявку и наши специалисты постараются найти для вас профессионала</p>
-            </div>
-            <div class="info-left">
-                <div class="dropdown-text-input">
-                    <input type="email" placeholder="Ваш e-mail" class="form-control custom-form-control-border"
-                        name="email" [(ngModel)]="sendEmaillData.email"
-                        [class.invalid-form-field-value]="invalidFields.includes('email')"
-                        (change)="fieldEdited('email')" />
-                    <span *ngIf="invalidFields.includes('email')" class="invalid-field-message">Пожалуйста, введите
-                        действительный
-                        E-mail</span>
-                </div>
-                <input type="button" class="custom-btn btn-purple" value="Отправить" (click)="sendEmail()" />
-            </div>
-        </div>
-        <div *ngIf="showBox" class="heart-info">
-            <div class="info-right info-bottom">
-                <h3 class="thaks">Спасибо за заявку!</h3>
-                <p>Мы уже работаем над вашим запросом</p>
-            </div>
-            <div class="info-left send-form">
-                <img src="./assets/img/search-page/mail.svg" alt="" />
-                <div class="heart-chat"><img src="./assets/img/search-page/heart.svg" alt="" /></div>
-            </div>
-        </div>
+       </div>
+      
         <div *ngIf="lenghtSearchData > 10" class="pagenation">
             <pagination-controls (pageChange)="p = $event; scrollTop(); updateParam();" previousLabel=" " nextLabel=" ">
             </pagination-controls>

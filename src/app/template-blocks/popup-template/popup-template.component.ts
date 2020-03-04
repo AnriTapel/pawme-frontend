@@ -11,6 +11,7 @@ export class PopupTemplateComponent implements AfterViewInit {
   constructor(public popupService: PopupTemplateService) { }
 
   ngAfterViewInit() {
+    
   }
 
   closePopup(){

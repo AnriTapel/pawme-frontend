@@ -166,8 +166,15 @@ app-header {
     outline: none;
 }
 
+.bottom-delivery-content {
+   display: flex;
+   flex-wrap: wrap;
+   margin-bottom: 30px;
+
+}
+
 .search-content {
-    // position: relative;
+    position: relative;
     margin-top: 30px;
     display: flex;
     flex-wrap: nowrap;
@@ -345,6 +352,9 @@ app-header {
     padding-left: 33px;
     padding-right: 33px;
   }
+  .delivery-mobile {
+      display: none;
+  }
 
   .about-more {
     border-top: 1px solid #645FC9;
@@ -382,6 +392,8 @@ app-header {
     background-position: right bottom;
     background-repeat: no-repeat;
     padding: 44px 0px 44px 27px;
+    width: 100% !important;
+    height: 210px;
 }
 
 .info-left {
@@ -656,17 +668,38 @@ div.metaName {
     }
 }
 
+// .bottom-delivery-content {
+//     // display: flex;
+//     // flex-wrap: wrap !important;
+// }
+// .no-search-delivery {
+// //    margin-left: 76% !important;
+// }
 
+@media screen and (max-width: 1024px) {
+    // .delivery {
+    //     position: inherit;
+    //     margin-top: 45px !important;
+    // }
+
+}
 @media screen and (max-width: 769px) {
     .main-search {
-        margin-top: 22px;
+        margin-top: -10px;//22px;
     }
+
+    .main {
+        margin-top: 30px; 
+    }
+
     .breeds {
         margin-top: 0;
     }
+
     .breed-class {
         margin-top: 0; 
     }
+
     .search-content-wrap {
         flex-flow: column-reverse;
         align-items: center;
@@ -819,6 +852,7 @@ div.metaName {
         height: auto !important;
         border: solid 1px #cbd8f6 !important;
         width: 100% !important;
+        //margin-top: 0px;
         h3 {
             font-size: 18px;
         }
@@ -833,10 +867,11 @@ div.metaName {
     }
 
     .search-right {
-       // margin: -31px 0 0 0 !important;
+        //margin: -31px 0 0 0 !important;
         margin: 0 !important;   
         width: 100%;
         height: auto;
+
 
         .main-serach-sub-right {
             padding: 20px !important;
@@ -901,12 +936,24 @@ div.metaName {
     .delivery {
     width: 100% !important;
     height: auto;
-    position: relative !important;
+    // position: relative !important;
     margin: 0 !important;
+    margin-top: 50px !important;
+    position: sticky !important;
+    // top: 110px !important; 
+    //margin-bottom: 20px !important;
     max-width: 420px;
     left: 0;
-    top: 35px !important;
+    // top: 35px !important;
     }
+
+    .delivery-desktop {
+        display: none;
+    }
+
+     .delivery-mobile {
+         display: block;
+     }
 
     .p-text {
         display: none !important;
@@ -963,7 +1010,7 @@ div.metaName {
 
     .main-search {
         width: 100% !important;
-         overflow: hidden;
+        overflow: hidden;
     }
 
     .location-content {
