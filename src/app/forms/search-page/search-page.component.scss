@@ -814,7 +814,7 @@ div.metaName {
     }
 
     .info-left {
-        margin: 12px 0 0 0;
+        margin: -5px 0 0 0;//12px 0 0 0;
         width: 100%;
 
         .custom-btn {
@@ -1018,6 +1018,10 @@ div.metaName {
     .range-modal {
         top: 342px;
         left: 26px;
+    }
+
+    .delivery-nosearch {
+        margin-top: 20px !important;
     }
  
 }
