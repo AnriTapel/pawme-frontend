@@ -152,7 +152,7 @@ app-header {
     &>div {
         margin: 12px;
         width: 100%;
-        max-width: 336px;//420px; 338
+        max-width: 336px;//420
         height: 50px;
         &:first-child{
             margin-left: 0;
@@ -371,7 +371,7 @@ app-header {
 
 .delivery-input {
     position: relative;
-    width: 120px !important;
+    width: 120px !important; //134
     ng-select, ng-placeholder  {
         color: #0E0B4D !important; 
     } 
@@ -668,8 +668,6 @@ div.metaName {
         top: 0;
     }
 }
-
-
 
 
 @media screen and (max-width: 769px) {
@@ -1023,5 +1021,13 @@ div.metaName {
     .delivery-nosearch {
         margin-top: 20px !important;
     }
+
+    .bottom-delivery-content {
+        justify-content: center !important;
+    }
+
+    // .delivery-input {
+    //     width: 107px !important;
+    // }
  
 }
