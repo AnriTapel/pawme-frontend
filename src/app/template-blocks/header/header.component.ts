@@ -5,6 +5,8 @@ import { PopupTemplateService } from '../../services/popup-service/popup-templat
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ChatService } from 'src/app/services/chat-service/chat.service';
+import { SharedService } from 'src/app/services/shared-services/shared.service';
 
 @Component({
   selector: 'app-header',
@@ -13,12 +15,59 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HeaderComponent implements OnInit {
 
+  allUnreadCount = 0;
+  chatToken;
+  ws;
+  rooms;
+
   private nonProfileHeaderPathnames = ['/breeder-landing', '/?'];
 
-  constructor(public appService: AppService, public popupService: PopupTemplateService, private http: HttpClient,
-    private notificationService: NotificationBarService, private router: Router) { }
+  constructor(
+    public appService: AppService,
+    public popupService: PopupTemplateService,
+    private http: HttpClient,
+    private notificationService: NotificationBarService,
+    private router: Router,
+    private chatService: ChatService,
+    private sharedService: SharedService
+  ) { }
 
   ngOnInit() {
+    this.socketInit();
+    this.initChatMess();
+    this.sharedService.updateNotifMessage.subscribe( (res) => this.allUnreadCount = +res);
+  }
+
+  initChatMess() {
+    this.chatService.getRooms().subscribe(rooms => {
+      this.rooms = rooms;
+      this.allUnreadCount = 0;
+      this.rooms.forEach(element => {
+        this.allUnreadCount += element.unreadCount
+      });
+    });
+  }
+
+  socketInit() {
+    return new Promise(resolve => {
+      this.chatService.getToken().subscribe((data: any) => {
+        this.chatToken = data.token;
+        this.ws = new WebSocket("wss://dev.petman.co/ws/chat/" + this.chatToken);
+        this.ws.onopen = function (e) {
+          resolve('isOpen')
+        };
+        this.ws.onmessage = (message) => {
+          let response = JSON.parse(message.data);
+          console.log(response);
+          this.initChatMess();
+        };
+        this.ws.onclose = () => {
+          this.socketInit()
+        };
+      });
+
+    })
+
   }
 
   logout(): void {

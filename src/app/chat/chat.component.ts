@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
 import { ChatService } from '../services/chat-service/chat.service';
 import { AppService } from '../services/app-service/app.service';
+import { SharedService } from '../services/shared-services/shared.service';
 
 @Component({
   selector: 'app-chat',
@@ -32,7 +33,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
   constructor(
     private chatService: ChatService,
     private appService: AppService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private sharedService: SharedService
   ) {
 
     this.meData = this.appService.meData;
@@ -185,6 +187,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     room.unreadCount = 0
     this.selectedRoom = room;
     this.chatService.getMessages(this.selectedRoom.id).subscribe(history => {
+      this.sharedService.updateNotifMessage.emit(this.allUnreadCount);
       this.history = history;
       if (!this.ref['destroyed']) {
         this.ref.detectChanges();
