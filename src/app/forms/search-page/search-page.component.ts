@@ -374,6 +374,7 @@ export class SearchPageComponent implements OnInit {
 
   showAboutMorePopup(): void {
     this.popupService.setCurrentForm('about-more');
+    this.popupService.setPopupParams({'width': 'about-more-modal'});
     this.popupService.setShowStatus(true);
   }
 

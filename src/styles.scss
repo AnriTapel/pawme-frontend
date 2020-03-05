@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
-
 .carousel .carousel-control-next-icon, .carousel .carousel-control-prev-icon {
     width: 1.25rem !important;
     height: 1.25rem !important;
@@ -16,11 +15,6 @@
 .ng-input {
     padding-top: 8px;
 }
-
-// .ng-option-tmp {
-//     // display: flex !important;
-//     // flex-wrap: nowrap;
-// }
 
 .ng-select-container {
     background: #fff !important;

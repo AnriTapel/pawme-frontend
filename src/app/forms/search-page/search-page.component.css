@@ -3,6 +3,15 @@ input[type=checkbox]:checked {
   display: none !important;
 }
 
+.about-more {
+  width: 400px !important;
+}
+
+.otherClass {
+  width: 100%;
+  max-width: 400px;
+}
+
 app-header {
   display: none;
 }

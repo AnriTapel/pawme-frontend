@@ -14,9 +14,7 @@ export class AboutMoreComponent implements OnInit {
   constructor(public popupService: PopupTemplateService) { }
 
   ngOnInit() {
-    //this.popupService.setPopupParams("width: '400px'");
-    //this.popupService.setPopupParams("width: 400px");
-    //this.popupService.getPopupParams().width;
+  
   }
 
   closePopup(){
