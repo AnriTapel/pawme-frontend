@@ -12,7 +12,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   @ViewChild('chatWrap', { static: true }) chatWrap;
 
-  selectedTab = 'all'
+  selectedTab = 'all';
+  selectedTabAdmin;
 
   message;
   chatToken;
@@ -29,6 +30,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   meSendFlag;
 
   allUnreadCount = 0;
+  allFlagsCount = 0;
 
   constructor(
     private chatService: ChatService,
@@ -38,37 +40,53 @@ export class ChatComponent implements OnInit, AfterViewInit {
   ) {
 
     this.meData = this.appService.meData;
+    console.log(this.meData.type === "ADMIN");
+
     this.socketInit();
-    this.chatService.getRooms().subscribe(rooms => {
-      this.rooms = rooms;
-      this.rooms.forEach(element => {
-        this.allUnreadCount += element.unreadCount
-      });
-      this.selectedRoom = this.rooms[0];
-      this.rooms.forEach(element => {
-        element.users.forEach(ures => {
-          this.listUser[ures.id] = ures;
+    if (this.meData.type === "ADMIN") {
+      this.selectedTabAdmin = 'active';
+      this.chatService.getRoomsAdmin().subscribe((rooms: any) => {
+        console.log(rooms, 'asd');
+        rooms.forEach(element => {
+          if (element.summonAdmin)
+            this.allFlagsCount++
         });
-
+        this.roomsInit(rooms);
       });
-
-      if (this.selectedRoom)
-        this.chatService.getMessages(this.selectedRoom.id).subscribe(history => {
-          this.history = history;
-          let interval = setInterval(() => {
-            if (this.chatWrap && this.chatWrap.nativeElement) {
-              this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
-              clearInterval(interval);
-            }
-          }, 50);
-
-
-        });
-
-    });
+    } else {
+      this.chatService.getRooms().subscribe(rooms => {
+        this.roomsInit(rooms);
+      });
+    }
   }
 
   ngOnInit() {
+  }
+
+  roomsInit(rooms) {
+    this.rooms = rooms;
+    this.rooms.forEach(element => {
+      this.allUnreadCount += element.unreadCount
+    });
+    this.selectedRoom = this.rooms[0];
+    this.rooms.forEach(element => {
+      element.users.forEach(ures => {
+        this.listUser[ures.id] = ures;
+      });
+
+    });
+
+    if (this.selectedRoom)
+      this.chatService.getMessages(this.selectedRoom.id).subscribe(history => {
+        this.history = history;
+
+        let interval = setInterval(() => {
+          if (this.chatWrap && this.chatWrap.nativeElement) {
+            this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+            clearInterval(interval);
+          }
+        }, 50);
+      });
   }
 
   socketInit() {
@@ -83,8 +101,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
           let response = JSON.parse(message.data);
 
+          console.log(message.data);
 
-          if (response.type === "msg") {
+          if (response.type === "msg" || "admin") {
             response.read = false;
             if (response.roomId === this.selectedRoom.id) {
               this.history.messages.push(response);
@@ -189,6 +208,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.chatService.getMessages(this.selectedRoom.id).subscribe(history => {
       this.sharedService.updateNotifMessage.emit(this.allUnreadCount);
       this.history = history;
+      console.log(this.history, 'this.history');
+
       if (!this.ref['destroyed']) {
         this.ref.detectChanges();
       }
@@ -252,6 +273,28 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
     }
 
+  }
+
+  inviteSupport() {
+    this.chatService.inviteSupport(this.selectedRoom.id).subscribe(res => {
+      console.log(res, 'inviteSupport');
+      if (this.ws.readyState === this.ws.OPEN) {
+        // this.ws.send(newMessage);
+      } else {
+        this.socketInit().then(data => { });
+      }
+    })
+  }
+  unSupport(room) {
+    console.log();
+    let selectedTab = this.selectedTabAdmin;
+    this.selectedTabAdmin = 'update';
+    this.chatService.unSupport(room.id).subscribe(res => {
+      console.log(res, 'unSupport');
+      room.summonAdmin = false;
+      this.allFlagsCount--;
+      this.selectedTabAdmin = selectedTab;
+    })
   }
 
 }

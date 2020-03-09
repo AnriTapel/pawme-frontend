@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   chatToken;
   ws;
   rooms;
+  meData;
 
   private nonProfileHeaderPathnames = ['/breeder-landing', '/?'];
 
@@ -33,9 +34,20 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.socketInit();
-    this.initChatMess();
-    this.sharedService.updateNotifMessage.subscribe( (res) => this.allUnreadCount = +res);
+
+    this.meData = this.appService.meData;
+
+    if (this.meData.type !== "ADMIN") {
+      this.socketInit();
+      this.initChatMess();
+      this.sharedService.updateNotifMessage.subscribe((res) => {
+        if (res) {
+          this.allUnreadCount = +res
+        } else {
+          this.initChatMess();
+        }
+      });
+    }
   }
 
   initChatMess() {

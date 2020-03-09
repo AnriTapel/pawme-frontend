@@ -114,6 +114,22 @@ hr {
   }
 }
 
+.default {
+  width: 300px;
+  height: 50px;
+  border: solid 1px #cbd8f6;
+  background-color: #ffffff;
+  color: #0e0b4d;
+  font-size: 18px;
+  font-family: "Intro-Book";
+  display: flex;
+  justify-content: center;
+
+  .unread-text {
+    opacity: 0.5;
+  }
+}
+
 .count {
   background: #4dbebb;
   color: #ffffff;
@@ -320,6 +336,27 @@ input:focus {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 0;
+}
+
+.name-info-wrap {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  margin-bottom: 17px;
+  max-width: 100%;
+  margin-bottom: 16px;
+}
+
+.problem-confirm {
+  padding: 4px 0;
+  font-size: 12px;
+  width: 83px;
+  background: #4dbebb;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 4px 7px 15px -4px #00000080;
 }
 
 .message {
@@ -426,6 +463,10 @@ input:focus {
       width: 13px;
       height: 13px;
       margin-top: 5px !important;
+      min-width: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -602,5 +643,22 @@ input:focus {
     .unread-text {
       opacity: 1;
     }
+  }
+}
+
+.invite-admin {
+  display: flex;
+  padding: 14px;
+  justify-content: flex-end;
+}
+
+.all.tab.admin {
+  width: 205px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .count {
+    margin: 0;
   }
 }

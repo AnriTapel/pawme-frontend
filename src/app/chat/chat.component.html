@@ -5,7 +5,7 @@
             <div class="container ">
                 <div class="text-block">
                     <h3 class="">Сообщения</h3>
-                    <div *ngIf="rooms && rooms.length" class="buttons desktop-button">
+                    <div *ngIf="rooms && rooms.length && meData.type !== 'ADMIN'" class="buttons desktop-button">
                         <button (click)="selectedTab = 'all'" [ngClass]="{'active': selectedTab === 'all'}"
                             class="all tab">Все</button>
                         <button (click)="selectedTab = 'unread'" [ngClass]="{'active': selectedTab === 'unread'}"
@@ -14,8 +14,25 @@
                             <div *ngIf="allUnreadCount" class="count count-mob">{{allUnreadCount}}</div>
                         </button>
                     </div>
+                    <div *ngIf="rooms && rooms.length && meData.type === 'ADMIN'" class="buttons desktop-button">
+                        <button (click)="selectedTabAdmin = 'only_flags'"
+                            [ngClass]="{'active': selectedTabAdmin === 'only_flags'}" class="all tab admin">
+                            <div>
+                                Только с флагами
+                            </div>
+                            <div *ngIf="allFlagsCount" class="count count-mob">{{allFlagsCount}}</div>
+                        </button>
+                        <button style="width: 150px;" (click)="selectedTabAdmin = 'active'"
+                            [ngClass]="{'active': selectedTabAdmin === 'active'}" class="default tab">
+                            <div class="unread-text">Все активные</div>
+                        </button>
+                        <button style="width: 180px;" (click)="selectedTabAdmin = 'inactive'"
+                            [ngClass]="{'active': selectedTabAdmin === 'inactive'}" class="unread tab">
+                            <div class="unread-text">Все неактивные</div>
+                        </button>
+                    </div>
                 </div>
-                <div *ngIf="rooms && rooms.length" class="buttons mobile-button">
+                <div *ngIf="rooms && rooms.length && meData.type !== 'ADMIN'" class="buttons mobile-button">
                     <button (click)="selectedTab = 'all'" [ngClass]="{'active': selectedTab === 'all'}"
                         class="all tab">Все</button>
                     <button (click)="selectedTab = 'unread'" [ngClass]="{'active': selectedTab === 'unread'}"
@@ -28,14 +45,26 @@
                     <!-- <div class="left deckto"> -->
                     <div class="left desktop">
                         <ng-container *ngIf="rooms && rooms.length; else emptyChat">
-                            <div *ngFor="let room of rooms | chatRooms: selectedTab">
+                            <div *ngFor="let room of rooms | chatRooms: selectedTab: selectedTabAdmin">
                                 <ng-container *ngFor="let item of room.users">
-                                    <div *ngIf="item.id !== meData.id" (click)="selectRoom(room)"
-                                        [ngClass]="{'active': this.selectedRoom === room}" class="chat-info">
+                                    <div *ngIf="(meData.type !== 'ADMIN' && item.id !== meData.id) || (meData.type === 'ADMIN' && item.avatar)"
+                                        (click)="selectRoom(room)" [ngClass]="{'active': this.selectedRoom === room}"
+                                        class="chat-info">
                                         <div class="name">
-                                            <p class="name-info" [title]="item.name">{{item.name}}</p>
-                                            <div *ngIf="room.unreadCount" class="count">
+                                            <div class="name-info-wrap"
+                                                [ngStyle]="{'max-width': (meData.type === 'ADMIN' && room.summonAdmin) ? 'calc(100% - 90px)': 'calc(100% - 34px)'}">
+                                                <p class="name-info" [title]="item.name">
+                                                    {{item.name}}
+                                                </p>
+                                                <span *ngIf="meData.type === 'ADMIN'">, id:{{item.id}}</span>
+                                            </div>
+                                            <div *ngIf="room.unreadCount && meData.type !== 'ADMIN'" class="count">
                                                 {{room.unreadCount}}
+                                            </div>
+                                            <div *ngIf="meData.type === 'ADMIN' && room.summonAdmin">
+                                                <button (click)="unSupport(room)" class="problem-confirm">
+                                                    Проблема решена
+                                                </button>
                                             </div>
                                         </div>
                                         <!-- *ngIf="room.messages"  -->
@@ -113,7 +142,7 @@
 
                                     <ng-container *ngFor="let message of history?.messages">
                                         <div
-                                            [ngClass]="{'left-chat': message.senderId === meData.id, 'right-chat': message.senderId !== meData.id}">
+                                            [ngClass]="{'left-chat': message.senderId === meData.id || (message.type === 'admin' && meData.type === 'ADMIN'), 'right-chat': message.senderId !== meData.id && !(message.type === 'admin' && meData.type === 'ADMIN')}">
                                             <div class="">
 
                                                 <a *ngIf="listUser[message.senderId] && listUser[message.senderId].avatar"
@@ -126,11 +155,15 @@
                                                     class="icon-name">
                                                     {{listUser[message.senderId].name.slice(0, 2)}}
                                                 </div>
+                                                <div *ngIf="message.type === 'admin'" class="icon-name"
+                                                    style="background: white; border: 3px solid #645fc9;">
+                                                    <img src="assets/img/paw-in-signup-btn.png" alt="">
+                                                </div>
                                             </div>
                                             <div class="text">{{message.body}}</div>
                                         </div>
                                         <p
-                                            [ngClass]="{'time-left-chat': message.senderId === meData.id, 'time-right-chat': message.senderId !== meData.id}">
+                                            [ngClass]="{'time-left-chat': message.senderId === meData.id || (message.type === 'admin' && meData.type === 'ADMIN'), 'time-right-chat': message.senderId !== meData.id && !(message.type === 'admin' && meData.type === 'ADMIN')}">
                                             <span *ngIf="message.read" style="display: inline-flex;">
                                                 <img src="assets/img/tick_pet.svg" alt="">
                                             </span>
@@ -181,6 +214,9 @@
                         </ng-container>
 
                     </div>
+                </div>
+                <div *ngIf="meData.type !== 'ADMIN'" class="invite-admin">
+                    <button class="custom-btn btn-purple" (click)="inviteSupport()">Пригласить администратора</button>
                 </div>
             </div>
         </div>

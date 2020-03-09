@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BreederControllerService, AdminControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
+import { SharedService } from 'src/app/services/shared-services/shared.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,9 @@ export class LoginComponent {
     private http: HttpClient,
     private adminService: AdminControllerService,
     private breederService: BreederControllerService,
-    private notificationService: NotificationBarService
+    private notificationService: NotificationBarService,
+    private sharedService: SharedService,
+    
     ) {
     if (this.appService.meData.type == "BREEDER"){
       if (this.appService.userData.id == this.appService.meData.id)
@@ -79,6 +82,8 @@ export class LoginComponent {
     this.breederService.meUsingGET().subscribe((me) => {
       scroll(0, 0);
       this.appService.meData = me;
+      this.sharedService.updateNotifMessage.emit();
+
       if (me.type == 'BREEDER')
         this.breederService.getBreederUsingGET(me.id).subscribe(res => {
           //@ts-ignore

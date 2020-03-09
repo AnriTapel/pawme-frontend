@@ -22,9 +22,19 @@ export class ChatService {
   public sendMessage(roomId, message) {
     return this.http.post(`/api/chat/${roomId}/message`, {text: message});
   }
+  public inviteSupport(roomId) {
+    return this.http.post(`/api/chat/${roomId}/summon`, {});
+  }
+  public unSupport(roomId) {
+    return this.http.post(`/api/chat/${roomId}/unsummon`, {});
+  }
 
   public getRooms() {
     return this.http.get('/api/chat/rooms');
+  }
+
+  public getRoomsAdmin() {
+    return this.http.get('/api/chat/admin/rooms');
   }
 
  

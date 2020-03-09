@@ -25,7 +25,7 @@ export class AppService {
   breedsById = {};
   citiesById = {};
   citiess: any;
-  range: Array<string> = ["+10км","+100км","+200км","+500км","+1500км","+3000км"]
+  range: Array<string> = ["+10км", "+100км", "+200км", "+500км", "+1500км", "+3000км"]
 
   puppyTests: Array<PuppyTest>;
 
@@ -42,22 +42,25 @@ export class AppService {
         this.meData = res;
 
         this.http.get('/api/dict').subscribe(dict => {
-          this.breeds = dict['breeds'].sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+          this.breeds = dict['breeds'].sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
           this.citiess = dict['cities']; //.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
           this.puppyTests = dict['puppyTests'];
           for (let breed in this.breeds) {
-           this.breedsById[this.breeds[breed].id]= this.breeds[breed].name;
+            this.breedsById[this.breeds[breed].id] = this.breeds[breed].name;
           }
           for (let city in this.citiess) {
-            this.citiesById[this.citiess[city].id]= this.citiess[city].name;
+            this.citiesById[this.citiess[city].id] = this.citiess[city].name;
           }
           if (window.location.href.indexOf('/breeder-guide.pdf') != -1 && window.location.href.indexOf('/docs/breeder-guide.pdf') == -1) {
             window.location.href = "/docs/breeder-guide.pdf";
             resolve();
           } else if (this.meData.type == 'ADMIN') {
-            if (/\/breeder\/[0-9]*$/.test(window.location.href))
+            if (/\/breeder\/[0-9]*$/.test(window.location.href)) {
               resolve();
-            else {
+            }
+            else if (/\/chat\/*$/.test(window.location.href)) {
+              resolve();
+            } else {
               router.navigateByUrl('/admin-panel');
               resolve();
             }
@@ -227,7 +230,7 @@ export class AppService {
     if (event.srcElement.value == '') {
       event.srcElement.value = "+7";
     }
-   };
+  };
 
   getImageDataForUpload(data: any): FormData {
     const body = new FormData();
