@@ -64,6 +64,31 @@
             <div class="dropdown-text-input desktop-city dropdown-style">
                 <ng-select 
                 [items]="citiesList" 
+                [multiple]="false" 
+                bindLabel="name" 
+                clearAllText="Clear All"
+                placeholder="Все города" 
+                [closeOnSelect]="true"
+                (change)="changeInput($event)"
+                bindValue="id" 
+                [virtualScroll]="true" 
+                [(ngModel)]="city"
+                >
+                <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <div class="checkbox-item" [ngClass]="{'disabled': item?.disabled}">
+                        <div [title]="item.name" class="name">{{item.name}}</div>
+                        <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
+                        <div *ngIf="item.disabled" class="coming-soon">
+                            Уже скоро
+                        </div>
+                    </div>
+                </ng-template>
+                </ng-select>
+            </div>
+            <!--city multiple part  */ -->
+            <!-- <div class="dropdown-text-input desktop-city dropdown-style">
+                <ng-select 
+                [items]="citiesList" 
                 [multiple]="true" 
                 (change)="changeInput($event)" 
                 bindLabel="name"
@@ -88,7 +113,7 @@
                         </div>
                     </ng-template>
                 </ng-select>
-            </div>
+            </div> -->
             <div class="dropdown-text-input dropdown-style desktop-delivery delivery-input">
                 <ng-select 
                 [items]="rangeList" 
@@ -123,7 +148,7 @@
                 <div class="dropdown-text-input dropdown-style">
                     <ng-select 
                     [items]="citiesList" 
-                    [multiple]="true" 
+                    [multiple]="false" 
                     (change)="changeInput($event)" 
                     bindLabel="name"
                     placeholder="Все города" 
@@ -131,12 +156,12 @@
                     [selectableGroupAsModel]="false"
                     [closeOnSelect]="true" 
                     bindValue="id" 
-                    [(ngModel)]="searchData.cities" 
+                    [(ngModel)]="city" 
                     [virtualScroll]="true"
                     [clearSearchOnAdd]="true">
-                    <ng-template ng-multi-label-tmp let-items="items">
+                    <!-- <ng-template ng-multi-label-tmp let-items="items">
                         Выбрано {{items.length}}
-                    </ng-template>
+                    </ng-template> -->
                     <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                         <div class="checkbox-item">
                             <div [title]="item.name" class="name">{{item.name}}</div>

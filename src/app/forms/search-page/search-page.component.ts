@@ -54,7 +54,7 @@ export class SearchPageComponent implements OnInit {
 
   getSearchData: any = null;
 
-  getMetaSearchData: SearchMeta = null;//BreederSearchEntry = null;
+  getMetaSearchData: SearchMeta = null;
   lenghtSearchData: number;
   showTableData: boolean = false;
   p: any = 1;
@@ -74,14 +74,24 @@ export class SearchPageComponent implements OnInit {
   citiesById;
   isOpen: boolean = false;
   range = "+10км";
+  city: string[];
 
   ngOnInit() {
     this.citiesById = this.appService.citiesById;
 
     this.route.queryParamMap.subscribe(params => {
       this.breed = params.getAll('breed');
+
+      /* city multiple part  */
       //@ts-ignore
-      this.searchData.cities = params.getAll('cities');
+      //this.searchData.cities = params.getAll('cities');
+
+      if (params.getAll('cities').length) {
+        //@ts-ignore
+        this.city = parseInt(params.getAll('cities'));
+      } else {
+        this.searchData.cities = [];
+      }
        //@ts-ignore
       this.searchData.range = params.getAll('range');
 
@@ -94,7 +104,8 @@ export class SearchPageComponent implements OnInit {
 
     if (this.breed.length !== 0) {
       this.searchData.breed = Number(this.breed);
-    };
+    }
+
 
     this.searchControllerService.getSearchMetaUsingGET()
       .subscribe((res) => {
@@ -152,7 +163,7 @@ export class SearchPageComponent implements OnInit {
             }
           )
         });
-   
+       
         this.citiesList.forEach((item) => {
           if (!item.disabled) {
             replaceCitiesList.push(item);
@@ -165,7 +176,7 @@ export class SearchPageComponent implements OnInit {
         });
 
         this.citiesList = replaceCitiesList;
-
+      
         if (this.searchData.breed) {
           this.breedList.forEach(element => {
             if (element.id === this.searchData.breed) {
@@ -181,6 +192,14 @@ export class SearchPageComponent implements OnInit {
       if (this.range) {
         this.searchData.range = parseInt(this.range.match(/\d+/)[0]);
      }
+
+      if (this.city && this.city) {
+        this.searchData.cities = [];
+        this.searchData.cities.push(Number(this.city));
+      }
+      else {
+        this.searchData.cities = [];
+      }
 
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
@@ -233,6 +252,13 @@ export class SearchPageComponent implements OnInit {
       this.searchData.range = parseInt(this.range.match(/\d+/)[0]);
     }
 
+    if (this.city && this.city) {
+      this.searchData.cities = [];
+      this.searchData.cities.push(Number(this.city));
+    }
+     else {
+      this.searchData.cities = [];
+    }
     this.searchControllerService.findUsingPOST(this.searchData)
       .subscribe((res) => {
         this.lenghtSearchData = res.length;
@@ -349,9 +375,13 @@ export class SearchPageComponent implements OnInit {
 
     if (this.searchData.breed)
       queryParams['breed'] = this.searchData.breed;
+      /* city multiple part  */
+    // if (this.searchData.cities && this.searchData.cities.length)
+    //   queryParams['cities'] = this.searchData.cities;
 
-    if (this.searchData.cities && this.searchData.cities.length)
-      queryParams['cities'] = this.searchData.cities;
+    if (this.city) {
+      queryParams['cities'] = Number(this.city);
+    }
       queryParams['range'] = this.searchData.range;
       
       queryParams['currentPage'] = this.p;
