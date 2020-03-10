@@ -145,7 +145,7 @@
             </div>
             <img class="help desktop-help" (click)="showAboutMorePopup()" src="./assets/img/search-page/help.svg" alt="" />
             <div class="mobile-input-content">
-                <div class="dropdown-text-input dropdown-style">
+                <div class="dropdown-text-input dropdown-city-moble dropdown-style">
                     <ng-select 
                     [items]="citiesList" 
                     [multiple]="false" 
@@ -159,9 +159,7 @@
                     [(ngModel)]="city" 
                     [virtualScroll]="true"
                     [clearSearchOnAdd]="true">
-                    <!-- <ng-template ng-multi-label-tmp let-items="items">
-                        Выбрано {{items.length}}
-                    </ng-template> -->
+
                     <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                         <div class="checkbox-item">
                             <div [title]="item.name" class="name">{{item.name}}</div>
