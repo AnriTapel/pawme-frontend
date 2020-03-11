@@ -119,7 +119,7 @@
                         <ng-container>
                             <div class="right-chat-content" #chatWrap (scroll)="scrollTop()">
                                 <ng-container *ngIf="rooms && rooms.length;">
-                                    <div class="center-text" style="padding: 0 10px;">
+                                    <div class="center-text" style="padding: 0 10px; max-width: 620px; margin: auto;">
                                         <img src="./assets/img/chat-lapa.svg" alt="">
                                         <span [ngSwitch]="meData.type">
                                             <p *ngSwitchCase="'CUSTOMER'">

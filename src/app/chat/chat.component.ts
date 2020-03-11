@@ -145,10 +145,10 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
               this.history.messages.push(response);
               if (this.meData.id !== response.id) {
                 setTimeout(() => {
-                  if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
+                  // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
 
-                    this.readMessage();
-                  }
+                  this.readMessage();
+                  // }
                 }, 100);
               }
 
@@ -252,6 +252,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     this.chatService.getMessages(this.selectedRoom.id).subscribe(history => {
       this.sharedService.updateNotifMessage.emit(this.allUnreadCount);
       this.history = history;
+      this.readMessage();
       if (!this.ref['destroyed']) {
         this.ref.detectChanges();
       }

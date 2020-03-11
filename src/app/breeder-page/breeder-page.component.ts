@@ -221,7 +221,7 @@ export class BreederPageComponent implements OnInit, OnDestroy {
     showBreederMessagePopup(): void {
         // this.popupService.setCurrentForm('breeder-message');
         // this.popupService.setShowStatus(true);
-        let params = { breederId: this.route.snapshot.paramMap.get('id') }
+        let params = { breederId: this.appService.userData.id }
         if (this.appService.meData.type == 'BREEDER') {
             this.notificationService.setContext('Пожалуйста, выйдите из аккаунта заводчика', false);
             this.notificationService.setVisibility(true);
