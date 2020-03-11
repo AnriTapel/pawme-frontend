@@ -42,8 +42,15 @@
                     *ngIf="!appService.userData || !appService.userData.generalInfo || !appService.userData.generalInfo.profilePhoto">ЛК</a>
                 <img *ngIf="appService.userData && appService.userData.generalInfo && appService.userData.generalInfo.profilePhoto"
                     src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg" />
+                <div *ngIf="allUnreadCount" class="notif-indicator">
+                    {{allUnreadCount}}
+                </div>
             </div>
             <div class="dropdown-menu custom-header-dropdown-menu">
+                <a class="dropdown-item" (click)="openChatCustomer()">
+                    <img src="assets/img/chat_icon.svg" alt="" width="16px" height="12px" style="margin-right: 8px;" />
+                    Сообщения <b *ngIf="allUnreadCount">{{allUnreadCount}}</b>
+                </a>
                 <a class="dropdown-item" (click)="logout()"><img src="./assets/img/menu-log-out.png" width="15px"
                         height="15px" alt="Выйти" style="margin-right: 9px;" />Выйти</a>
             </div>

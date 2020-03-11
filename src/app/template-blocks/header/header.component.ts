@@ -40,7 +40,8 @@ export class HeaderComponent implements OnInit {
     if (this.meData.type !== "ADMIN") {
       this.socketInit();
       this.initChatMess();
-      this.sharedService.updateNotifMessage.subscribe((res) => {
+      let subscriber = this.sharedService.updateNotifMessage;
+      subscriber.subscribe((res) => {
         if (res) {
           this.allUnreadCount = +res
         } else {
@@ -121,8 +122,12 @@ export class HeaderComponent implements OnInit {
   openMyPage(): void {
     window.open('/breeder/' + this.appService.meData.id, '_blank');
   }
+
   openChat(): void {
     window.open('/chat/', '_blank');
+  }
+  openChatCustomer(): void {
+    this.router.navigate(['/chat'])
   }
 }
 

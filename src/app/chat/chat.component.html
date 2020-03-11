@@ -32,18 +32,37 @@
                         </button>
                     </div>
                 </div>
-                <div *ngIf="rooms && rooms.length && meData.type !== 'ADMIN'" class="buttons mobile-button">
-                    <button (click)="selectedTab = 'all'" [ngClass]="{'active': selectedTab === 'all'}"
-                        class="all tab">Все</button>
-                    <button (click)="selectedTab = 'unread'" [ngClass]="{'active': selectedTab === 'unread'}"
-                        class="unread tab">
+                <div *ngIf="rooms && rooms.length && meData.type !== 'ADMIN'" [ngClass]="{'show': showChatsListMobile}"
+                    class="mobile-button">
+                    <button (click)="selectedTab = 'all'; showChatsListMobile = true;"
+                        [ngClass]="{'active': selectedTab === 'all'}">
+                        Все
+                    </button>
+                    <button (click)="selectedTab = 'unread'; showChatsListMobile = true;"
+                        [ngClass]="{'active': selectedTab === 'unread'}">
                         <div class="unread-text">Непрочитанные</div>
-                        <div *ngIf="allUnreadCount" class="count count-mob">{{allUnreadCount}}</div>
+                        <div *ngIf="allUnreadCount" class="count-mob">{{allUnreadCount}}</div>
+                    </button>
+                </div>
+                <div *ngIf="rooms && rooms.length && meData.type === 'ADMIN'" [ngClass]="{'show': showChatsListMobile}"
+                    class="mobile-button">
+                    <button (click)="selectedTabAdmin = 'only_flags'; showChatsListMobile = true;"
+                        [ngClass]="{'active': selectedTabAdmin === 'only_flags'}">
+                        Только с флагами
+                        <div *ngIf="allFlagsCount" class="count-mob">{{allFlagsCount}}</div>
+                    </button>
+                    <button (click)="selectedTabAdmin = 'active'; showChatsListMobile = true;"
+                        [ngClass]="{'active': selectedTabAdmin === 'active'}">
+                        <div class="unread-text">Все активные</div>
+                    </button>
+                    <button (click)="selectedTabAdmin = 'inactive'; showChatsListMobile = true;"
+                        [ngClass]="{'active': selectedTabAdmin === 'inactive'}">
+                        <div class="unread-text">Все неактивные</div>
                     </button>
                 </div>
                 <div class="chat-content">
                     <!-- <div class="left deckto"> -->
-                    <div class="left desktop">
+                    <div class="left desktop" [ngClass]="{'show': showChatsListMobile}">
                         <ng-container *ngIf="rooms && rooms.length; else emptyChat">
                             <div *ngFor="let room of rooms | chatRooms: selectedTab: selectedTabAdmin">
                                 <ng-container *ngFor="let item of room.users">
@@ -95,7 +114,7 @@
                         </div> -->
                     </div>
                     <!-- <div class="right desktop-version"> -->
-                    <div class="right">
+                    <div class="right" [ngClass]="{'show': !showChatsListMobile}">
 
                         <ng-container>
                             <div class="right-chat-content" #chatWrap (scroll)="scrollTop()">
@@ -129,12 +148,21 @@
                                         </div>
                                     </div>
                                     <p class="main-time time-left-chat">22:22</p> -->
-                                    <div class="mobile-user-name">
+                                    <div class="mobile-user-name align-items-center"
+                                        (click)="showChatsListMobile = true">
                                         <div class="back"><img src="./assets/img/arrow_back.svg" alt=""></div>
                                         <span class="user-name" *ngIf="selectedRoom && selectedRoom.users">
                                             <ng-container *ngFor="let item of selectedRoom.users">
-                                                <ng-container *ngIf="item.id !== meData.id">
-                                                    {{item.name}}
+                                                <ng-container
+                                                    *ngIf="item.id !== meData.id && !(meData.type === 'ADMIN' && !item.avatar)">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="user-icon" *ngIf="item.avatar">
+                                                            <img src="/img/{{item.avatar}}.jpg" alt="">
+                                                        </div>
+                                                        <span>
+                                                            {{item.name}}
+                                                        </span>
+                                                    </div>
                                                 </ng-container>
                                             </ng-container>
                                         </span>
@@ -156,8 +184,8 @@
                                                     {{listUser[message.senderId].name.slice(0, 2)}}
                                                 </div>
                                                 <div *ngIf="message.type === 'admin'" class="icon-name"
-                                                    style="background: white; border: 3px solid #645fc9;">
-                                                    <img src="assets/img/paw-in-signup-btn.png" alt="">
+                                                    style="background: white;">
+                                                    <img src="assets/img/admin_avatar.svg" alt="">
                                                 </div>
                                             </div>
                                             <div class="text">{{message.body}}</div>
@@ -170,7 +198,7 @@
                                             <span style="display: inline-flex;">
                                                 <img src="assets/img/tick_pet.svg" alt="">
                                             </span>
-                                            {{message.timestamp | date : 'H:mm'}}
+                                            {{message.timestamp | messageTime}}
                                         </p>
                                     </ng-container>
 
@@ -189,12 +217,20 @@
                                 </ng-container>
                                 <ng-container *ngIf="!rooms || !rooms.length;">
                                     <div class="empty-chat" style="padding-top: 74px; flex-flow: column;">
-                                        <div>
-                                            Вы можете начать переписку с любым из заводчиков
-                                        </div>
-                                        <div>
-                                            <a [routerLink]="[ '/search-page' ]">Топ заводчиков</a>
-                                        </div>
+                                        <ng-container *ngIf="meData.type !== 'BREEDER'">
+                                            <div>
+                                                Вы можете начать переписку с любым из заводчиков
+                                            </div>
+                                            <div>
+                                                <a [routerLink]="[ '/search-page' ]">Топ заводчиков</a>
+                                            </div>
+                                        </ng-container>
+                                        <ng-container *ngIf="meData.type === 'BREEDER'">
+                                            <div style="text-align: center; max-width: 500px;">
+                                                Заинтересованные покупатели напишут вам в этот чат. Не забывайте
+                                                регулярно проверять свой личный кабинет!
+                                            </div>
+                                        </ng-container>
                                     </div>
                                 </ng-container>
                             </div>
@@ -206,7 +242,7 @@
                                 </div>
                                 <!-- <input [(ngModel)]="message" type="text" placeholder="Напишите сообщение…"> -->
                                 <button class="custom-btn btn-purple" (click)="sendMessage()">Отправить</button>
-                                <div class="send">
+                                <div class="send" (click)="sendMessage()">
                                     <img src="./assets/img/send.svg" alt="">
                                 </div>
                             </div>
@@ -215,8 +251,12 @@
 
                     </div>
                 </div>
-                <div *ngIf="meData.type !== 'ADMIN'" class="invite-admin">
-                    <button class="custom-btn btn-purple" (click)="inviteSupport()">Пригласить администратора</button>
+                <div *ngIf="meData.type !== 'ADMIN'" class="invite-admin" [ngClass]="{'show': !showChatsListMobile}">
+                    <div class="comment">Нужна помощь?</div>
+                    <button [ngClass]="{'disable': !canInviteSuppotr}" (click)="inviteSupport()">
+                        <img src="assets/img/paw-in-signup-btn.png" alt="">
+                        Пригласить Petman в чат
+                    </button>
                 </div>
             </div>
         </div>
