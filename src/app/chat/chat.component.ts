@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { ChatService } from '../services/chat-service/chat.service';
 import { AppService } from '../services/app-service/app.service';
 import { SharedService } from '../services/shared-services/shared.service';
@@ -9,7 +9,7 @@ import * as moment from 'moment';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewInit {
+export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('chatWrap', { static: true }) chatWrap;
 
@@ -62,6 +62,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
         this.roomsInit(rooms).then(() => this.readMessage());
       });
     }
+
+    this.sharedService.headerType.emit('2')
+  }
+
+  ngOnDestroy(): void {
+    this.sharedService.headerType.emit('1')
   }
 
   ngOnInit() {
@@ -315,7 +321,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   checkInviteSupportTime() {
     clearInterval(this.canInviteIntervar);
-    if (localStorage.getItem('inviteSupportTime') && +localStorage.getItem('meId') === +this.meData.id ) {
+    if (localStorage.getItem('inviteSupportTime') && +localStorage.getItem('meId') === +this.meData.id) {
       let endDate = moment(localStorage.getItem('inviteSupportTime')).add(15, 'minutes');
       this.canInviteIntervar = setInterval(() => {
         this.canInviteSuppotr = !moment().isBetween(localStorage.getItem('inviteSupportTime'), endDate, 'minutes', '[]');

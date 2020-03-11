@@ -1,4 +1,3 @@
-<hr>
 <div class="wrapper">
     <main>
         <div class="block-detail">
@@ -87,7 +86,8 @@
                                             </div>
                                         </div>
                                         <!-- *ngIf="room.messages"  -->
-                                        <p class="message">{{room?.messages[0].body}}</p>
+                                        <p [ngStyle]="{'max-width': (meData.type === 'ADMIN' && room.summonAdmin) ? 'calc(100% - 90px)': 'calc(100% - 34px)'}"
+                                            class="message">{{room?.messages[0].body}}</p>
                                     </div>
                                 </ng-container>
                             </div>
@@ -119,19 +119,31 @@
                         <ng-container>
                             <div class="right-chat-content" #chatWrap (scroll)="scrollTop()">
                                 <ng-container *ngIf="rooms && rooms.length;">
-                                    <div class="center-text">
+                                    <div class="center-text" style="padding: 0 10px;">
                                         <img src="./assets/img/chat-lapa.svg" alt="">
-                                        <p class="">
-                                            Вы начали чат с “
-                                            <ng-container *ngFor="let item of selectedRoom.users">
-                                                <ng-container *ngIf="item.id !== meData.id">
-                                                    <span>{{item.name}}</span>
+                                        <span [ngSwitch]="meData.type">
+                                            <p *ngSwitchCase="'CUSTOMER'">
+                                                Вы начали чат с “
+                                                <ng-container *ngFor="let item of selectedRoom.users">
+                                                    <ng-container *ngIf="item.id !== meData.id">
+                                                        <span>{{item.name}}</span>
+                                                    </ng-container>
                                                 </ng-container>
-                                            </ng-container>
-                                            ”. Если в процессе у вас возникнут проблемы
-                                            или
-                                            понадобится помощь, напишите в чат @petman и мы поможем.
-                                        </p>
+                                                ”. Напишите кратко о себе и задайте сразу все интересующие вас вопросы.
+                                                Заводчик ответит на них, как только зайдет в чат.
+                                            </p>
+                                            <p *ngSwitchCase="'BREEDER'">
+                                                <ng-container *ngFor="let item of selectedRoom.users">
+                                                    <ng-container *ngIf="item.id !== meData.id">
+                                                        <span>{{item.name}}</span>
+                                                    </ng-container>
+                                                </ng-container> начал с вами чат. Не забудьте уточнить, подходит ли
+                                                покупатель под
+                                                ваши требования и в каком городе он живет.
+                                            </p>
+
+                                        </span>
+
                                         <div class="line"></div>
                                     </div>
                                     <!-- <div class="main-chat">
@@ -195,7 +207,7 @@
                                             <span *ngIf="message.read" style="display: inline-flex;">
                                                 <img src="assets/img/tick_pet.svg" alt="">
                                             </span>
-                                            <span style="display: inline-flex;">
+                                            <span *ngIf="message.senderId === meData.id" style="display: inline-flex;">
                                                 <img src="assets/img/tick_pet.svg" alt="">
                                             </span>
                                             {{message.timestamp | messageTime}}

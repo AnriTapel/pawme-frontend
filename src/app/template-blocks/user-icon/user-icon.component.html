@@ -52,10 +52,13 @@
 <div *ngIf="getMenuType() == 0" class="my-2 my-lg-0">
     <div *ngIf="!isNonProfileHeader()">
         <div class="user-empty-wrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class="icon" src="assets/img/icons8-user_male_circle 1.svg" alt="user">
-            <div>
-                Профиль
+            <div class="d-flex align-items-center b-none-mobile">
+                <img class="icon" src="assets/img/icons8-user_male_circle 1.svg" alt="user">
+                <div>
+                    Профиль
+                </div>
             </div>
+            <img class="d-block-desktop" src="assets/img/burger-menu.svg" alt="">
         </div>
         <div class="dropdown-menu custom-header-dropdown-menu user-empty">
             <a [routerLink]="['/login']" class="dropdown-item">

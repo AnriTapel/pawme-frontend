@@ -69,3 +69,10 @@
         font-size: 13px !important;
     }
 }
+
+.dropdown-menu {
+    right: 0 !important;
+    left: unset !important;
+    top: 100% !important;
+    transform: none !important;
+}

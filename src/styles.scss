@@ -298,8 +298,16 @@ app-menu {
         font-family: "Intro-Regular";
     }
 }
-
+.d-block-desktop {
+    display: none;
+}
 @media screen and (max-width: 769px) {
+    .b-none-mobile{
+        display: none !important;
+    }
+    .d-block-desktop {
+        display: block;
+    }
     .delivery-input .ng-clear-wrapper {
         display: none !important;
     }
