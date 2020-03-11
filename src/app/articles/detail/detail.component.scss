@@ -463,6 +463,29 @@ a.title_link:hover:before {
 
   }
 }
+.chat{ 
+  margin-top: -33px;
+  margin-bottom: 33px;
+  a {
+      color: #645FC9 !important;
+      text-decoration: underline;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+} 
+.link {
+  margin-top: -33px;
+  margin-bottom: 33px;
+  color: #0000FF;
+   a {
+    text-decoration: underline;
+   }
+   &:hover {
+    cursor: pointer;
+  }
+
+}
 
 @media (max-width: 413px) {
   .wrap-base__img {
