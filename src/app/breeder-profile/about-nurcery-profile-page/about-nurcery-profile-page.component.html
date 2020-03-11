@@ -24,7 +24,7 @@
         <label for="nurcery-location">Город / населенный пункт</label><span class="red-star">*</span>
         <div class="dropdown-text-input">
             <input *ngIf="appService.cities" type="text" class="city-disabled form-control custom-form-control-border"
-                name="nurcery-location" [(ngModel)]="nurceryData.city.name"
+                name="nurcery-location" [(ngModel)]="nurceryData.city"
                 [class.invalid-form-field-value]="(isFocused['city'] && errors && errors.includes('city')) || (customeValidator && errors && errors.includes('city'))"
                 id="city"
                 [ngbTypeahead]="appService.fieldAutocomplete(appService.cities, cityFocus$, cityClick$, cityInstance)"

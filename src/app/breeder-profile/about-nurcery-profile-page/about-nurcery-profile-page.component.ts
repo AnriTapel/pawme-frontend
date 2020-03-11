@@ -303,10 +303,15 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.nurceryData.city.name || this.nurceryData.city.name == "" || this.nurceryData.city.name.length > 128 || this.appService.cities.filter(it => it == this.nurceryData.city.name).length == 0) {
+    if (!this.nurceryData.city || this.nurceryData.city == ""  || this.appService.cities.filter(it => it == this.nurceryData.city).length == 0) {
       this.profileService.invalidFields.push('city');
       isValid = false;
     }
+
+    // if (!this.nurceryData.city.name || this.nurceryData.city.name == "" || this.nurceryData.city.name.length > 128 || this.appService.cities.filter(it => it == this.nurceryData.city.name).length == 0) {
+    //   this.profileService.invalidFields.push('city');
+    //   isValid = false;
+    // }
 
     if (!this.nurceryData.description || this.nurceryData.description == "" || this.nurceryData.description.length > 600) {
       this.profileService.invalidFields.push('desc');
