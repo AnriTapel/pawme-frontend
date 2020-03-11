@@ -1,0 +1,71 @@
+.menu-btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    border-radius: 50%;
+    background-image: radial-gradient(circle at 27% 0, #80c3f3, #4a90e2);
+    cursor: pointer;
+    position: relative;
+
+    a {
+        color: #fff;
+        margin: auto;
+
+        &:hover {
+            color: #fff !important;
+        }
+    }
+
+    img {
+        border-radius: 50%;
+        height: 100%;
+    }
+
+    .notif-indicator {
+        position: absolute;
+        right: -8px;
+        top: -8px;
+        width: 25px;
+        height: 25px;
+        background: #46bdbf;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        border-radius: 100px;
+        border: 2px solid #f8f9fb;
+        font-size: 14px;
+    }
+}
+
+.white-login-btn {
+    border: 1px solid white;
+    color: #fff !important;
+
+    &:hover {
+        color: #645fc9 !important;
+    }
+}
+
+.user-empty-wrap {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #645FC9;
+    cursor: pointer;
+
+    .icon {
+        margin-right: 11px;
+    }
+}
+
+.dropdown-menu.user-empty {
+    padding: 9px 0 !important;
+
+    .dropdown-item {
+        padding: 9px 18px !important;
+        font-size: 13px !important;
+    }
+}

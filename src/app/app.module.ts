@@ -71,6 +71,7 @@ import { SheltersSearchComponent } from './shelters-search/shelters-search.compo
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { AboutMoreComponent } from './forms/about-more/about-more.component';
 import { MessageTimePipe } from './pipes/message-time.pipe';
+import { UserIconComponent } from './template-blocks/user-icon/user-icon.component';
 
 declare var Hammer: any;
 
@@ -150,7 +151,8 @@ export function initApp(appSerivce: AppService){
     ChatRoomsPipe,
     SheltersSearchComponent,
     AboutMoreComponent,
-    MessageTimePipe
+    MessageTimePipe,
+    UserIconComponent
   ],
   imports: [
     BrowserModule,

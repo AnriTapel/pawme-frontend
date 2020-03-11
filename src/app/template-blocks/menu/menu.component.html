@@ -1,13 +1,80 @@
-
-<div (clickOutside)="showMenu = false" class="d-flex">
+<div *ngIf="getMenuType() !== 1" (clickOutside)="showMenu = false" class="d-flex">
     <div [ngClass]="{'show': showMenu}" class="nav-menu">
-        <div class="nav-menu--item" *ngFor="let item of menuItems" (click)="showMenu = false; ">
-        <a (click)="reloadTopBreeder(item)" [routerLink]="[ item.url ]">{{item.name}}</a>
-        <!-- <a [routerLink]="[ item.url ]">{{item.name}}</a> -->
-        <!-- <a (click)="reloadTopBreeder()">{{item.name}}</a> -->
+        <ng-container *ngIf="getMenuType() == 0">
+            <div class="nav-menu--item d-block-mobile">
+                <a [routerLink]="['/login']">
+                    Войти
+                </a>
+            </div>
+        </ng-container>
+
+        <div class="nav-menu--item" *ngFor="let item of menuItems; let i = index;" (click)="showMenu = false; ">
+            <a (click)="reloadTopBreeder(item)" [routerLink]="[ item.url ]">{{item.name}}</a>
+            <!-- <a [routerLink]="[ item.url ]">{{item.name}}</a> -->
+            <!-- <a (click)="reloadTopBreeder()">{{item.name}}</a> -->
+        </div>
+
+        <div class="d-block-mobile">
+            <!-- <ng-container *ngIf="getMenuType() == 1">
+                <div class="nav-menu--item">
+                    <a [routerLink]="['/breeder-profile']">
+                        {{appService.userData && appService.userData.profileFill > 4 ? 'Личный кабинет' : 'Заполнить анкету'}}
+                    </a>
+                </div>
+                <div class="nav-menu--item">
+                    <a (click)="openMyPage()">
+                        Моя страница
+                    </a>
+                </div>
+
+                <div class="nav-menu--item">
+                    <a (click)="openChat()">
+                        Сообщения
+                    </a>
+                </div>
+                <div class="nav-menu--item">
+                    <a [routerLink]="['/faq']">
+                        Помощь
+                    </a>
+                </div>
+                <div class="nav-menu--item">
+                    <a (click)="logout()">
+                        Выйти
+                    </a>
+                </div>
+            </ng-container> -->
+            <ng-container *ngIf="getMenuType() == 2">
+                <div class="nav-menu--item" style="border-top: none;">
+                    <a (click)="openChatCustomer()">
+                        Сообщения <b *ngIf="allUnreadCount">{{allUnreadCount}}</b>
+                    </a>
+                </div>
+                <div class="nav-menu--item">
+                    <a (click)="logout()">
+                        Выйти
+                    </a>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="getMenuType() == 0">
+
+                <div class="nav-menu--item" style="border-top: none;">
+                    <a [routerLink]="['/breeder-landing']">
+                        Для заводчиков
+                    </a>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="nav-menu--item d-none-mobile">
+            <app-user-icon (unreadCount)="allUnreadCount = $event"></app-user-icon>
         </div>
     </div>
     <button (click)="showMenu = !showMenu" class="menu-toggle">
-    <img src="assets/img/burger-menu.svg" alt="">
+        <app-user-icon style="pointer-events: none;"></app-user-icon>
     </button>
 </div>
+<ng-container *ngIf="getMenuType() === 1">
+    <div style="position: relative;">
+        <app-user-icon></app-user-icon>
+    </div>
+</ng-container>

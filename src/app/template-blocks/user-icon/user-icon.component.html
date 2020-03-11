@@ -1,0 +1,73 @@
+<div *ngIf="getMenuType() == 1" class="my-2 my-lg-0">
+    <div class="menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a
+            *ngIf="!appService.userData || !appService.userData.generalInfo || !appService.userData.generalInfo.profilePhoto">ЛК</a>
+        <img *ngIf="appService.userData && appService.userData.generalInfo && appService.userData.generalInfo.profilePhoto"
+            src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg" />
+        <div *ngIf="allUnreadCount" class="notif-indicator">
+            {{allUnreadCount}}
+        </div>
+    </div>
+    <div class="dropdown-menu custom-header-dropdown-menu">
+        <a class="dropdown-item" style="color: #4dbebb;" [routerLink]="['/breeder-profile']"><img
+                src="./assets/img/menu-user.png" alt="Личный кабинет" width="13px" height="15px"
+                style="margin-right: 10px;" />
+            {{appService.userData && appService.userData.profileFill > 4 ? 'Личный кабинет' : 'Заполнить анкету'}}</a>
+        <a class="dropdown-item" (click)="openMyPage()">
+            <img src="./assets/img/menu-eye.png" alt="Моя страница" width="16px" height="12px"
+                style="margin-right: 8px;" />
+            Моя страница
+        </a>
+        <a class="dropdown-item" (click)="openChat()">
+            <img src="assets/img/chat_icon.svg" alt="" width="16px" height="12px" style="margin-right: 8px;" />
+            Сообщения <b *ngIf="allUnreadCount">{{allUnreadCount}}</b>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" [routerLink]="['/faq']"><img src="./assets/img/menu-help.png" alt="Помощь" width="16px"
+                height="16px" style="margin-right: 8px;" />Помощь</a>
+        <a class="dropdown-item" (click)="logout()"><img src="./assets/img/menu-log-out.png" width="15px" height="15px"
+                alt="Выйти" style="margin-right: 9px;" />Выйти</a>
+    </div>
+</div>
+<div *ngIf="getMenuType() == 2" class="my-2 my-lg-0">
+    <div class="menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a>
+            ЛК
+        </a>
+        <!-- <img *ngIf="appService.userData && appService.userData.generalInfo && appService.userData.generalInfo.profilePhoto"
+            src="/img/{{appService.userData.generalInfo.profilePhoto.preview}}.jpg" /> -->
+        <div *ngIf="allUnreadCount" class="notif-indicator">
+            {{allUnreadCount}}
+        </div>
+    </div>
+    <div class="dropdown-menu custom-header-dropdown-menu">
+        <a class="dropdown-item" (click)="openChatCustomer()">
+            <img src="assets/img/chat_icon.svg" alt="" width="16px" height="12px" style="margin-right: 8px;" />
+            Сообщения <b *ngIf="allUnreadCount">{{allUnreadCount}}</b>
+        </a>
+        <a class="dropdown-item" (click)="logout()"><img src="./assets/img/menu-log-out.png" width="15px" height="15px"
+                alt="Выйти" style="margin-right: 9px;" />Выйти</a>
+    </div>
+</div>
+<div *ngIf="getMenuType() == 0" class="my-2 my-lg-0">
+    <div *ngIf="!isNonProfileHeader()">
+        <div class="user-empty-wrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="icon" src="assets/img/icons8-user_male_circle 1.svg" alt="user">
+            <div>
+                Профиль
+            </div>
+        </div>
+        <div class="dropdown-menu custom-header-dropdown-menu user-empty">
+            <a [routerLink]="['/login']" class="dropdown-item">
+                <!-- <img src="assets/img/chat_icon.svg" alt="" width="16px" height="12px" style="margin-right: 8px;" /> -->
+                Войти
+            </a>
+            <a class="dropdown-item" [routerLink]="['/breeder-landing']">
+                Для заводчиков
+            </a>
+        </div>
+    </div>
+    <input *ngIf="isNonProfileHeader()" type="button" class="custom-btn btn-transparent"
+        [class.white-login-btn]="isNonProfileHeader() && router.url !== '/chat'" value="Войти"
+        [routerLink]="['/login']" />
+</div>
