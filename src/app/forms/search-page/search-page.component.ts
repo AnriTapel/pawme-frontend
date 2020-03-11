@@ -238,9 +238,9 @@ export class SearchPageComponent implements OnInit {
     }
   }
   public changeInput(event) {
-    if (event !=undefined && event != '' && event[0]) {   
-      this.searchData.cities.forEach(element => {
-      if (element == event[0].id) {
+    if (event !=undefined && event != '') {   
+      this.appService.citiess.forEach(element => {
+      if (element.id == event.id) {
         if (localStorage.getItem('showRangeModal') !='value') {
           this.showRangePopup();
         }
