@@ -208,6 +208,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   }
 
   saveChanges(forPreview: boolean) {
+   
     if (!this.validateInputFields()) {
       this.customeValidator = true;
       this.scrollToError();
@@ -215,6 +216,15 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     }
     this.customeValidator = false;
     this.isLoading = true;
+    this.appService.citiess.forEach(element => {
+      if (element.name == this.nurceryData.city) {
+        this.nurceryData.city = {
+          id: element.id,
+          name: element.name
+        }
+      }
+    });
+   
     this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
     if (!this.nurceryData.name)
       this.nurceryData.name = this.appService.userData.name + " " + this.appService.userData.surname;
@@ -303,15 +313,15 @@ export class AboutNurceryProfilePageComponent implements OnInit {
       isValid = false;
     }
 
-    if (!this.nurceryData.city || this.nurceryData.city == ""  || this.appService.cities.filter(it => it == this.nurceryData.city).length == 0) {
-      this.profileService.invalidFields.push('city');
-      isValid = false;
-    }
-
-    // if (!this.nurceryData.city.name || this.nurceryData.city.name == "" || this.nurceryData.city.name.length > 128 || this.appService.cities.filter(it => it == this.nurceryData.city.name).length == 0) {
+    // if (!this.nurceryData.city || this.nurceryData.city == ""  || this.appService.cities.filter(it => it == this.nurceryData.city).length == 0) {
     //   this.profileService.invalidFields.push('city');
     //   isValid = false;
     // }
+
+    if (!this.nurceryData.city.name || this.nurceryData.city.name == "" || this.nurceryData.city.name.length > 128 || this.appService.cities.filter(it => it == this.nurceryData.city.name).length == 0) {
+      this.profileService.invalidFields.push('city');
+      isValid = false;
+    }
 
     if (!this.nurceryData.description || this.nurceryData.description == "" || this.nurceryData.description.length > 600) {
       this.profileService.invalidFields.push('desc');
