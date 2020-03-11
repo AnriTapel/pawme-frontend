@@ -78,5 +78,12 @@ export class DetailComponent implements OnInit, OnDestroy {
     });
 
   }
+  opneIntercom() {
+    //@ts-ignore
+    Intercom('show');
+   }
+   opneArtical() {
+     
+   }
   
 }
