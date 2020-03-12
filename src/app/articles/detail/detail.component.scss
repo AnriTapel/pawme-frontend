@@ -463,12 +463,12 @@ a.title_link:hover:before {
 
   }
 }
-.chat{ 
-  margin-top: -33px;
-  margin-bottom: 33px;
+.chat { 
   a {
       color: #645FC9 !important;
       text-decoration: underline;
+      font-size: 20px !important;
+      font-family: "Intro-Regular-Italic", sans-serif !important;
   }
   &:hover {
     cursor: pointer;
@@ -480,6 +480,11 @@ a.title_link:hover:before {
   color: #0000FF;
    a {
     text-decoration: underline;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: normal;
+    margin-bottom: 30px;
+    font-family: "Intro-Book" !important;
    }
    &:hover {
     cursor: pointer;
