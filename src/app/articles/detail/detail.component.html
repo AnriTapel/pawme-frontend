@@ -30,7 +30,7 @@
                                 'paragraph': item.type === 'paragraph'
                             }">
                             <div *ngIf="item.type === 'intercom-link'" class="chat"><a (click)="opneIntercom()" > чат поддержки</a></div>
-                            <div *ngIf="item.type === 'link'"  [routerLink]="[ '/article/16' ]" class="link"><a> статье.</a></div>
+                            <div *ngIf="item.type === 'link'"   class="link"><a [routerLink]="[ '/article/16' ]" target="_blank">  статье.</a></div>
                             <span *ngIf="item.type !== 'list'">{{item.text}}</span>
                             <ol *ngIf="item.type === 'list'">
                                 <li *ngFor="let listElem of item.text">
