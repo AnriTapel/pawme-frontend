@@ -204,7 +204,7 @@
                                         </div>
                                         <p
                                             [ngClass]="{'time-left-chat': message.senderId === meData.id || (message.type === 'admin' && meData.type === 'ADMIN'), 'time-right-chat': message.senderId !== meData.id && !(message.type === 'admin' && meData.type === 'ADMIN')}">
-                                            <span *ngIf="message.read" style="display: inline-flex;">
+                                            <span *ngIf="message.read && message.senderId === meData.id" style="display: inline-flex;">
                                                 <img src="assets/img/tick_pet.svg" alt="">
                                             </span>
                                             <span *ngIf="message.senderId === meData.id" style="display: inline-flex;">

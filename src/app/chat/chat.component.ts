@@ -37,6 +37,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
   showChatsListMobile = true;
 
+  isDestroy;
+
   constructor(
     private chatService: ChatService,
     private appService: AppService,
@@ -71,7 +73,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sharedService.headerType.emit('1')
+    this.sharedService.headerType.emit('1');
+    console.log('ceerfff la');
+    this.isDestroy = true;
   }
 
   ngOnInit() {
@@ -101,7 +105,6 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.selectedRoom)
         this.chatService.getMessages(this.selectedRoom.id).subscribe(history => {
           this.history = history;
-
           let interval = setInterval(() => {
             if (this.chatWrap && this.chatWrap.nativeElement) {
               this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
@@ -123,84 +126,87 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
         };
         this.ws.onmessage = (message) => {
 
-          let response = JSON.parse(message.data);
+          if (!this.isDestroy) {
+            let response = JSON.parse(message.data);
 
-          let hasRoom;
+            console.log(response, 'JSON.parse(message.data)');
 
-          this.rooms.forEach(room => {
-            if (response.roomId === room.id) {
-              hasRoom = true;
+            let hasRoom;
+
+            this.rooms.forEach(room => {
+              if (response.roomId === room.id) {
+                hasRoom = true;
+              }
+            });
+            if (!hasRoom) {
+              this.chatService.getRooms().subscribe(rooms => {
+                this.rooms = rooms;
+                this.allUnreadCount++;
+                if (!this.ref['destroyed']) {
+                  this.ref.detectChanges();
+                }
+              });
             }
-          });
-          if (!hasRoom) {
-            this.chatService.getRooms().subscribe(rooms => {
-              this.rooms = rooms;
-              this.allUnreadCount++;
+
+            if (response.type === "msg" || response.type === "admin") {
+
+              response.read = false;
+
+              if (response.roomId === this.selectedRoom.id) {
+                if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
+                  setTimeout(() => {
+                    this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+                  }, 300);
+                }
+                this.history.messages.push(response);
+                if (this.meData.id !== response.id && !this.showChatsListMobile) {
+                  setTimeout(() => {
+                    // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
+                    this.readMessage();
+                    // }
+                  }, 100);
+                }
+
+              }
+
+              this.rooms.forEach(room => {
+                if (room.id === response.roomId) {
+                  room.messages[0] = response;
+                  if (response.senderId !== this.meData.id) {
+                    room.unreadCount++;
+                    this.allUnreadCount++;
+                  }
+                }
+              });
+
+
               if (!this.ref['destroyed']) {
                 this.ref.detectChanges();
               }
-            });
-          }
-
-          if (response.type === "msg" || response.type === "admin") {
-
-            response.read = false;
-            if (response.roomId === this.selectedRoom.id) {
-              if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
-                setTimeout(() => {
-                  this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
-                }, 100);
-              }
-              this.history.messages.push(response);
-              if (this.meData.id !== response.id && this.showChatsListMobile) {
-                setTimeout(() => {
-                  // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
-
-                  this.readMessage();
-                  // }
-                }, 100);
+              if (this.meSendFlag) {
+                this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+                this.meSendFlag = false;
               }
 
-            }
+            } else {
+              if (response.roomId === this.selectedRoom.id) {
 
-            this.rooms.forEach(room => {
-              if (room.id === response.roomId) {
-                room.messages[0] = response;
-                if (response.senderId !== this.meData.id) {
-                  room.unreadCount++;
-                  this.allUnreadCount++;
+                let BreakException = {};
+                try {
+                  this.history.messages.forEach((element, index) => {
+                    if (element.hasOwnProperty('read')) {
+                      this.history.messages[index].read = true;
+                    }
+                    if (element.id === response.lastReadMsgId) {
+                      throw BreakException;
+                    }
+                  });
+                } catch (e) {
+                  if (e !== BreakException) throw e;
                 }
               }
-            });
-
-
-            if (!this.ref['destroyed']) {
-              this.ref.detectChanges();
-            }
-            if (this.meSendFlag) {
-              this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
-              this.meSendFlag = false;
-            }
-
-          } else {
-            if (response.roomId === this.selectedRoom.id) {
-
-              let BreakException = {};
-              try {
-                this.history.messages.forEach((element, index) => {
-                  if (element.hasOwnProperty('read')) {
-                    this.history.messages[index].read = true;
-                  }
-                  if (element.id === response.lastReadMsgId) {
-                    throw BreakException;
-                  }
-                });
-              } catch (e) {
-                if (e !== BreakException) throw e;
-              }
             }
           }
-
         };
         this.ws.onclose = () => {
           // Try to reconnect in 5 seconds
@@ -261,6 +267,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     this.chatService.getMessages(this.selectedRoom.id).subscribe(history => {
       this.sharedService.updateNotifMessage.emit(this.allUnreadCount);
       this.history = history;
+      console.log(this.history, 'this.history');
+
       this.readMessage();
       if (!this.ref['destroyed']) {
         this.ref.detectChanges();
@@ -301,9 +309,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
 
-    if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
-      this.readMessage();
-    }
+    // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
+    //   this.readMessage();
+    // }
 
   }
 
@@ -318,6 +326,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
     for (let i = this.history['messages'].length - 1; i !== -1; i--) {
       if (this.history['messages'][i].senderId !== this.meData.id) {
+        console.log(this.history['messages'][i], 'this.history[asdsa][i]');
+
         this.ws.send(JSON.stringify(
           {
             roomId: this.selectedRoom.id,

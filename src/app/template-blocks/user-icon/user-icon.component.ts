@@ -40,19 +40,25 @@ export class UserIconComponent implements OnInit {
 
     this.meData = this.appService.meData;
 
-    if (this.meData.type !== "ADMIN" && this.meData.type !== "ANONYMOUS" ) {
+    if (this.meData.type !== "ADMIN" && this.meData.type !== "ANONYMOUS") {
       this.socketInit();
       this.initChatMess();
-      let subscriber = this.sharedService.updateNotifMessage;
-      subscriber.subscribe((res) => {
-        if (res) {
-          this.allUnreadCount = +res;
-          this.unreadCount.emit(this.allUnreadCount);
-        } else {
-          this.initChatMess();
-        }
-      });
     }
+
+    let subscriber = this.sharedService.updateNotifMessage;
+    subscriber.subscribe((res) => {
+      if (!this.ws) {
+        this.socketInit();
+      }
+      if (res || res === 0) {
+        this.allUnreadCount = +res;
+        this.unreadCount.emit(this.allUnreadCount);
+      } else {
+        console.log('getRooms()getRooms()getRooms()');
+
+        this.initChatMess();
+      }
+    });
   }
 
   initChatMess() {
@@ -67,25 +73,26 @@ export class UserIconComponent implements OnInit {
   }
 
   socketInit() {
-    return new Promise(resolve => {
-      this.chatService.getToken().subscribe((data: any) => {
-        this.chatToken = data.token;
-        this.ws = new WebSocket("wss://dev.petman.co/ws/chat/" + this.chatToken);
-        this.ws.onopen = function (e) {
-          resolve('isOpen')
-        };
-        this.ws.onmessage = (message) => {
-          let response = JSON.parse(message.data);
-          console.log(response);
-          this.initChatMess();
-        };
-        this.ws.onclose = () => {
-          this.socketInit()
-        };
-      });
-
-    })
-
+    // if (this.chatToken) {
+    //   new WebSocket("wss://dev.petman.co/ws/chat/" + this.chatToken).onerror = (error) => {
+    //     console.log(error, 'error');
+    //   }
+    // }
+    this.chatService.getToken().subscribe((data: any) => {
+      this.chatToken = data.token;
+      this.ws = new WebSocket("wss://dev.petman.co/ws/chat/" + this.chatToken);
+      this.ws.onopen = function (e) {
+        // resolve('isOpen')
+      };
+      this.ws.onmessage = (message) => {
+        let response = JSON.parse(message.data);
+        this.initChatMess();
+      };
+      this.ws.onclose = (e) => {
+        // console.log(e, 'this.ws.onclose');
+        this.socketInit()
+      };
+    });
   }
 
   logout(): void {
