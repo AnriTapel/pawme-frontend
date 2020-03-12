@@ -117,6 +117,24 @@
                     <div class="right" [ngClass]="{'show': !showChatsListMobile}">
 
                         <ng-container>
+                            <div class="mobile-user-name align-items-center" (click)="showChatsListMobile = true">
+                                <div class="back"><img src="./assets/img/arrow_back.svg" alt=""></div>
+                                <span class="user-name" *ngIf="selectedRoom && selectedRoom.users">
+                                    <ng-container *ngFor="let item of selectedRoom.users">
+                                        <ng-container
+                                            *ngIf="item.id !== meData.id && !(meData.type === 'ADMIN' && !item.avatar)">
+                                            <div class="d-flex align-items-center">
+                                                <div class="user-icon" *ngIf="item.avatar">
+                                                    <img src="/img/{{item.avatar}}.jpg" alt="">
+                                                </div>
+                                                <span>
+                                                    {{item.name}}
+                                                </span>
+                                            </div>
+                                        </ng-container>
+                                    </ng-container>
+                                </span>
+                            </div>
                             <div class="right-chat-content" #chatWrap (scroll)="scrollTop()">
                                 <ng-container *ngIf="rooms && rooms.length;">
                                     <div class="center-text" style="padding: 0 10px; max-width: 620px; margin: auto;">
@@ -160,25 +178,7 @@
                                         </div>
                                     </div>
                                     <p class="main-time time-left-chat">22:22</p> -->
-                                    <div class="mobile-user-name align-items-center"
-                                        (click)="showChatsListMobile = true">
-                                        <div class="back"><img src="./assets/img/arrow_back.svg" alt=""></div>
-                                        <span class="user-name" *ngIf="selectedRoom && selectedRoom.users">
-                                            <ng-container *ngFor="let item of selectedRoom.users">
-                                                <ng-container
-                                                    *ngIf="item.id !== meData.id && !(meData.type === 'ADMIN' && !item.avatar)">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="user-icon" *ngIf="item.avatar">
-                                                            <img src="/img/{{item.avatar}}.jpg" alt="">
-                                                        </div>
-                                                        <span>
-                                                            {{item.name}}
-                                                        </span>
-                                                    </div>
-                                                </ng-container>
-                                            </ng-container>
-                                        </span>
-                                    </div>
+
 
                                     <ng-container *ngFor="let message of history?.messages">
                                         <div

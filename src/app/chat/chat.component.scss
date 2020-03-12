@@ -110,6 +110,7 @@ hr {
   height: calc(100vh - 302px);
   overflow-y: auto;
   min-height: 260px;
+  padding-top: 10px;
 }
 
 .all {
@@ -684,7 +685,6 @@ input:focus {
     background: white;
     z-index: 1;
     border-radius: 15px 15px 0 0;
-    margin-bottom: 18px;
 
     .user-name {
       font-family: "Intro-Regular";

@@ -40,7 +40,7 @@ export class UserIconComponent implements OnInit {
 
     this.meData = this.appService.meData;
 
-    if (this.meData.type !== "ADMIN") {
+    if (this.meData.type !== "ADMIN" && this.meData.type !== "ANONYMOUS" ) {
       this.socketInit();
       this.initChatMess();
       let subscriber = this.sharedService.updateNotifMessage;

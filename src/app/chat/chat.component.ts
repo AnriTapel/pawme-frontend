@@ -35,7 +35,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   canInviteSuppotr = true;
   canInviteIntervar;
 
-  showChatsListMobile;
+  showChatsListMobile = true;
 
   constructor(
     private chatService: ChatService,
@@ -47,21 +47,25 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     this.meData = this.appService.meData;
     console.log(this.meData.type);
 
-    this.socketInit();
-    if (this.meData.type === "ADMIN") {
-      this.selectedTabAdmin = 'active';
-      this.chatService.getRoomsAdmin().subscribe((rooms: any) => {
-        rooms.forEach(element => {
-          if (element.summonAdmin)
-            this.allFlagsCount++
+    if (this.meData.type !== 'ANONYMOUS') {
+      this.socketInit();
+      if (this.meData.type === "ADMIN") {
+        this.selectedTabAdmin = 'active';
+        this.chatService.getRoomsAdmin().subscribe((rooms: any) => {
+          rooms.forEach(element => {
+            if (element.summonAdmin)
+              this.allFlagsCount++
+          });
+          this.roomsInit(rooms).then(() => this.readMessage());
         });
-        this.roomsInit(rooms).then(() => this.readMessage());
-      });
-    } else {
-      this.chatService.getRooms().subscribe(rooms => {
-        this.roomsInit(rooms).then(() => this.readMessage());
-      });
+      } else {
+        this.chatService.getRooms().subscribe(rooms => {
+          this.roomsInit(rooms).then(() => this.readMessage());
+        });
+      }
     }
+
+
 
     this.sharedService.headerType.emit('2')
   }
@@ -142,8 +146,13 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
             response.read = false;
             if (response.roomId === this.selectedRoom.id) {
+              if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
+                setTimeout(() => {
+                  this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+                }, 100);
+              }
               this.history.messages.push(response);
-              if (this.meData.id !== response.id) {
+              if (this.meData.id !== response.id && this.showChatsListMobile) {
                 setTimeout(() => {
                   // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
 
