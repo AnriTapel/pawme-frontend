@@ -34,6 +34,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   customeValidator;
   progress;
   isShow: boolean;
+  city: string;
 
 
   @ViewChild('cityInstance', { static: true }) cityInstance: NgbTypeahead;
@@ -108,6 +109,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
 
     this.isAdditionalBreed = this.nurceryData.extraBreed ? true : false;
     this.curMainBreed = this.nurceryData.mainBreed ? this.nurceryData.mainBreed.name : null;
+    this.city = this.nurceryData.city ? this.nurceryData.city.name : null;
     this.curExtraBreed = this.nurceryData.extraBreed ? this.nurceryData.extraBreed.name : null;
     this.nurceryData.city = this.nurceryData.city ? this.nurceryData.city : null;
     this.saveChagesEvent = this.eventService.subscribe('save-changes-after-dialog', (forPreview) => this.saveChanges(forPreview));
@@ -208,7 +210,6 @@ export class AboutNurceryProfilePageComponent implements OnInit {
   }
 
   saveChanges(forPreview: boolean) {
-   
     if (!this.validateInputFields()) {
       this.customeValidator = true;
       this.scrollToError();
@@ -216,26 +217,22 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     }
     this.customeValidator = false;
     this.isLoading = true;
-    this.appService.citiess.forEach(element => {
-      if (element.name == this.nurceryData.city) {
-        this.nurceryData.city = {
-          id: element.id,
-          name: element.name
-        }
-      }
-    });
-   
+
+
     this.nurceryData.mainBreed = this.appService.breeds.filter(it => it.name == this.curMainBreed)[0] || { name: this.curMainBreed };
     if (!this.nurceryData.name)
       this.nurceryData.name = this.appService.userData.name + " " + this.appService.userData.surname;
     if (this.curExtraBreed && this.curExtraBreed != "")
       this.nurceryData.extraBreed = this.appService.breeds.filter(it => it.name == this.curExtraBreed)[0] || { name: this.curExtraBreed };
+      
     if (this.nurceryData.alias == "") {
       this.nurceryData.alias = null;
     }
     if (this.nurceryData.alias) {
       this.nurceryData.alias = this.nurceryData.alias.toLowerCase();
-    }  
+    } 
+    this.nurceryData.city = this.appService.citiess.filter(it => it.name == this.city)[0] || { name: this.city };
+ 
   
     this.breederService.setGeneralInfoUsingPUT(this.nurceryData, this.appService.userData.id)
       .subscribe(() => {
@@ -318,7 +315,7 @@ export class AboutNurceryProfilePageComponent implements OnInit {
     //   isValid = false;
     // }
 
-    if (!this.nurceryData.city.name || this.nurceryData.city.name == "" || this.nurceryData.city.name.length > 128 || this.appService.cities.filter(it => it == this.nurceryData.city.name).length == 0) {
+    if (!this.city || this.city.length > 128 || this.appService.cities.filter(it => it == this.city).length == 0) {
       this.profileService.invalidFields.push('city');
       isValid = false;
     }

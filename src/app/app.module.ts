@@ -73,28 +73,28 @@ import { AboutMoreComponent } from './forms/about-more/about-more.component';
 import { MessageTimePipe } from './pipes/message-time.pipe';
 import { UserIconComponent } from './template-blocks/user-icon/user-icon.component';
 
-declare var Hammer: any;
+// declare var Hammer: any;
 
 
-export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any> {
-    'pan': { direction: Hammer.DIRECTION_All },
-    'swipe': { direction: Hammer.DIRECTION_VERTICAL },
-  };
+// export class MyHammerConfig extends HammerGestureConfig {
+//   overrides = <any> {
+//     'pan': { direction: Hammer.DIRECTION_All },
+//     'swipe': { direction: Hammer.DIRECTION_VERTICAL },
+//   };
 
-  buildHammer(element: HTMLElement) {
-    const mc = new Hammer(element, {
-      touchAction: 'auto',
-          inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput,
-          recognizers: [
-            [Hammer.Swipe, {
-              direction: Hammer.DIRECTION_HORIZONTAL
-            }]
-          ]
-    });
-    return mc;
-  }
-}
+//   buildHammer(element: HTMLElement) {
+//     const mc = new Hammer(element, {
+//       touchAction: 'auto',
+//           inputClass: Hammer.SUPPORT_POINTER_EVENTS ? Hammer.PointerEventInput : Hammer.TouchInput,
+//           recognizers: [
+//             [Hammer.Swipe, {
+//               direction: Hammer.DIRECTION_HORIZONTAL
+//             }]
+//           ]
+//     });
+//     return mc;
+//   }
+// }
 
 export function initApp(appSerivce: AppService){
   return (): Promise<any> => {
@@ -188,7 +188,7 @@ export function initApp(appSerivce: AppService){
     ChatService,
     { provide: APP_INITIALIZER, useFactory: initApp, deps: [AppService], multi: true },
     { provide: LY_THEME, useClass: MinimaLight, multi: true },
-    { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
+    // { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig },
    
   ],
   bootstrap: [AppComponent]
