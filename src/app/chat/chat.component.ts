@@ -39,6 +39,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isDestroy;
 
+  isEndOfHistory;
+
   constructor(
     private chatService: ChatService,
     private appService: AppService,
@@ -153,19 +155,31 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
               response.read = false;
 
               if (response.roomId === this.selectedRoom.id) {
-                if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
-                  setTimeout(() => {
-                    this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
-                  }, 300);
-                }
+
+                // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
+                //   this.chatWrap.nativeElement.scrollTop = 10000;
+                // }
+
                 this.history.messages.push(response);
                 if (this.meData.id !== response.id && !this.showChatsListMobile) {
                   setTimeout(() => {
                     // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
                     this.readMessage();
+                    if (this.isEndOfHistory) {
+                      this.chatWrap.nativeElement.scrollTop += 1000;
+                      console.log(this.chatWrap.nativeElement.scrollTop);
+                    }
                     // }
                   }, 100);
                 }
+
+                if (this.isEndOfHistory) {
+                  this.chatWrap.nativeElement.scrollTop += 1000;
+                  console.log(this.chatWrap.nativeElement.scrollTop);
+
+                }
+
+
 
               }
 
@@ -309,9 +323,12 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
 
-    // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
-    //   this.readMessage();
-    // }
+    if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
+      // this.readMessage();
+      this.isEndOfHistory = true;
+    } else {
+      this.isEndOfHistory = false;
+    }
 
   }
 
