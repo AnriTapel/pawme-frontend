@@ -183,7 +183,7 @@
                                     <ng-container *ngFor="let message of history?.messages">
                                         <div
                                             [ngClass]="{'left-chat': message.senderId === meData.id || (message.type === 'admin' && meData.type === 'ADMIN'), 'right-chat': message.senderId !== meData.id && !(message.type === 'admin' && meData.type === 'ADMIN')}">
-                                            <div class="">
+                                            <div class="massage-counter">
 
                                                 <a *ngIf="listUser[message.senderId] && listUser[message.senderId].avatar"
                                                     [routerLink]="[ '/breeder/' + message.senderId ]">

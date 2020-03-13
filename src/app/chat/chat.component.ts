@@ -166,20 +166,22 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
                     // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
                     this.readMessage();
                     if (this.isEndOfHistory) {
-                      this.chatWrap.nativeElement.scrollTop += 1000;
-                      console.log(this.chatWrap.nativeElement.scrollTop);
+                      this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
                     }
                     // }
                   }, 100);
                 }
 
-                setTimeout(() => {
+                let intervar = setInterval(() => {
                   if (this.isEndOfHistory) {
-                    this.chatWrap.nativeElement.scrollTop += 1000;
-                    console.log(this.chatWrap.nativeElement.scrollTop);
+                    if (document.getElementsByClassName('massage-counter') && this.history.messages.length === document.getElementsByClassName('massage-counter').length) {
+                      this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+                      clearInterval(intervar);
+                    }
+                  } else {
+                    clearInterval(intervar);
                   }
                 }, 500);
-
               }
 
               this.rooms.forEach(room => {
