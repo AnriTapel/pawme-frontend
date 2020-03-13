@@ -173,13 +173,12 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
                   }, 100);
                 }
 
-                if (this.isEndOfHistory) {
-                  this.chatWrap.nativeElement.scrollTop += 1000;
-                  console.log(this.chatWrap.nativeElement.scrollTop);
-
-                }
-
-
+                setTimeout(() => {
+                  if (this.isEndOfHistory) {
+                    this.chatWrap.nativeElement.scrollTop += 1000;
+                    console.log(this.chatWrap.nativeElement.scrollTop);
+                  }
+                }, 500);
 
               }
 
