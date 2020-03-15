@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { ChatService } from '../services/chat-service/chat.service';
 import { AppService } from '../services/app-service/app.service';
 import { SharedService } from '../services/shared-services/shared.service';
@@ -11,7 +11,7 @@ import * as moment from 'moment';
 })
 export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('chatWrap', { static: true }) chatWrap;
+  @ViewChild('chatWrap', { static: false, read: ElementRef }) chatWrap: ElementRef<any>;
 
   selectedTab = 'all';
   selectedTabAdmin;
@@ -250,6 +250,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   sendMessage() {
+    this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+
     if (this.message && this.message !== '' && this.message !== "↵") {
 
       this.meSendFlag = true;
