@@ -298,8 +298,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
- @HostListener('scroll', ['$event']) // for scroll events of the current element
-  scrollTop() {
+  @HostListener('scroll')
+  scrollTop(): void {
     console.log('1');
 
     if (this.chatWrap.nativeElement.scrollTop === 0) {
