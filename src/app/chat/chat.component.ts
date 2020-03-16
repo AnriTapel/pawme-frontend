@@ -175,7 +175,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
                 let intervar = setInterval(() => {
                   if (this.isEndOfHistory) {
                     if (document.getElementsByClassName('massage-counter') && this.history.messages.length === document.getElementsByClassName('massage-counter').length) {
-                      this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+                      setTimeout(() => {
+                        this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+                      }, 3000);
                       clearInterval(intervar);
                     }
                   } else {
