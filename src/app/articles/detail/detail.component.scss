@@ -430,6 +430,9 @@ a.title_link:hover:before {
     margin: 0 8px 24px 8px;
   }
 
+  .link {
+    margin-left: 281px;
+  }
   .wrap-about__img {
     height: 262px;
   }
@@ -480,17 +483,8 @@ a.title_link:hover:before {
   color: #0000FF;
   margin-left: 70px;
    a {
-    text-decoration: underline;
-    font-size: 20px;
-    line-height: 1.5;
-    letter-spacing: normal;
-    margin-bottom: 30px;
-    font-family: "Intro-Book" !important;
+    font-size: 14px;
    }
-   &:hover {
-    cursor: pointer;
-  }
-
 }
 
 @media (max-width: 413px) {
@@ -505,6 +499,15 @@ a.title_link:hover:before {
 
   .block-base__title {
     font-size: 18px;
+  }
+
+  .link {
+    margin-left: 143px !important;
+  }
+  .chat { 
+    a {
+        font-size: 14px !important;
+    }
   }
 
   .block-base__subtitle {
@@ -659,5 +662,24 @@ a.title_link:hover:before {
   margin-bottom: 24px;
   font-family: "Intro-Regular";
 }
+.link {
+  margin-top: -61px;
+  margin-bottom: 44px;
+  color: #0000FF;
+  margin-left: 70px;
+   a {
+    text-decoration: underline;
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: normal;
+    margin-bottom: 30px;
+    font-family: "Intro-Book" !important;
+   }
+   &:hover {
+    cursor: pointer;
+  }
+
+}
+
 
 /*# sourceMappingURL=style.css.map */
