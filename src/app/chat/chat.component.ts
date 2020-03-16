@@ -238,9 +238,6 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.chatWrap.nativeElement.addEventListener('scroll', (e) => {
-      this.scrollTop();
-    });
   }
 
   getFilter(query) {
@@ -340,7 +337,12 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     } else {
       this.isEndOfHistory = false;
     }
-
+    if (this.chatWrap.nativeElement.scrollTop + window.innerHeight >= this.chatWrap.nativeElement.scrollHeight) {
+      this.isEndOfHistory = true;
+    }
+    if (document.getElementById('chatWrap').scrollTop + document.getElementById('chatWrap').offsetHeight >= document.getElementById('chatWrap').scrollHeight) {
+      this.isEndOfHistory = true;
+    }
   }
 
   readMessage() {
@@ -396,6 +398,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
+
   unSupport(room) {
     let selectedTab = this.selectedTabAdmin;
     this.selectedTabAdmin = 'update';
