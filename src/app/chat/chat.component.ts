@@ -165,24 +165,29 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
                   setTimeout(() => {
                     // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
                     this.readMessage();
-                    if (this.isEndOfHistory) {
-                      this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
-                    }
+                    // if (this.isEndOfHistory) {
+                    // }
+                    this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
                     // }
                   }, 100);
                 }
 
                 let intervar = setInterval(() => {
-                  if (this.isEndOfHistory) {
-                    console.log();
+                  // if (this.isEndOfHistory) {
 
-                    if (document.getElementsByClassName('massage-counter') && this.history.messages.length === document.getElementsByClassName('massage-counter').length) {
-                      setTimeout(() => {
-                        this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
-                      }, 3000);
-                      clearInterval(intervar);
-                    }
-                  } else {
+                  //   if (document.getElementsByClassName('massage-counter') && this.history.messages.length === document.getElementsByClassName('massage-counter').length) {
+                  //     setTimeout(() => {
+                  //       this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+                  //     }, 3000);
+                  //     clearInterval(intervar);
+                  //   }
+                  // } else {
+                  //   clearInterval(intervar);
+                  // }
+                  if (document.getElementsByClassName('massage-counter') && this.history.messages.length === document.getElementsByClassName('massage-counter').length) {
+                    setTimeout(() => {
+                      this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+                    }, 3000);
                     clearInterval(intervar);
                   }
                 }, 500);
@@ -298,9 +303,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  @HostListener('scroll')
-  scrollTop(): void {
-    console.log('1');
+  scrollTop() {
 
     if (this.chatWrap.nativeElement.scrollTop === 0) {
       let query = {
