@@ -454,13 +454,12 @@ a.title_link:hover:before {
   .block-base:after {
     bottom: -44px;
   }
-  .paragraph {
+  .paragraph, .paragraph1 {
     font-size: 14px !important;
   
   }
   .title{
     font-size: 20px !important;
-
   }
 }
 .chat { 
@@ -474,10 +473,12 @@ a.title_link:hover:before {
     cursor: pointer;
   }
 } 
+
 .link {
-  margin-top: -33px;
-  margin-bottom: 33px;
+  margin-top: -61px;
+  margin-bottom: 44px;
   color: #0000FF;
+  margin-left: 70px;
    a {
     text-decoration: underline;
     font-size: 20px;
@@ -622,9 +623,8 @@ a.title_link:hover:before {
     padding: 6px 0 24px;
   }
 
-  .paragraph {
+  .paragraph, .paragraph11 {
     font-size: 14px !important;
-  
   }
   .title{
     font-size: 20px !important;
@@ -633,14 +633,20 @@ a.title_link:hover:before {
 
 }
 
-.paragraph {
-  font-size: 20px;
+.paragraph, .paragraph1 {
+  font-size: 20px !important;
   line-height: 1.5;
   letter-spacing: normal;
   color: #0e0b4d;
   margin-bottom: 30px;
   font-family: "Intro-Book";
 }
+.chatIntercom1 {
+  width: 170px;
+  margin-left: 664px;
+  margin-top: -60px;
+}
+
 .title{
   font-size: 28px;
   font-weight: normal;
