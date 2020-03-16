@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild, OnDestroy, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit, ViewChild, OnDestroy, ElementRef, HostListener } from '@angular/core';
 import { ChatService } from '../services/chat-service/chat.service';
 import { AppService } from '../services/app-service/app.service';
 import { SharedService } from '../services/shared-services/shared.service';
@@ -174,6 +174,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
                 let intervar = setInterval(() => {
                   if (this.isEndOfHistory) {
+                    console.log();
+
                     if (document.getElementsByClassName('massage-counter') && this.history.messages.length === document.getElementsByClassName('massage-counter').length) {
                       setTimeout(() => {
                         this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
@@ -296,7 +298,9 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+ @HostListener('scroll', ['$event']) // for scroll events of the current element
   scrollTop() {
+    console.log('1');
 
     if (this.chatWrap.nativeElement.scrollTop === 0) {
       let query = {
