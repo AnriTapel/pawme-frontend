@@ -22,6 +22,7 @@ import { Admin } from '../model/admin';
 import { AdminInfo } from '../model/adminInfo';
 import { Breed } from '../model/breed';
 import { BreederForAdmin } from '../model/breederForAdmin';
+import { CustomerForAdmin } from '../model/customerForAdmin';
 import { MessageToBreeder } from '../model/messageToBreeder';
 import { PetSelectionRequest } from '../model/petSelectionRequest';
 
@@ -352,6 +353,42 @@ export class AdminControllerService {
         ];
 
         return this.httpClient.get<Array<BreederForAdmin>>(`${this.basePath}/api/admin/breeders`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * listCustomers
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public listCustomersUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CustomerForAdmin>>;
+    public listCustomersUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CustomerForAdmin>>>;
+    public listCustomersUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CustomerForAdmin>>>;
+    public listCustomersUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CustomerForAdmin>>(`${this.basePath}/api/admin/customers`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

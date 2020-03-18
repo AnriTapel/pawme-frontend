@@ -7,6 +7,7 @@ export * from './breederForAdmin';
 export * from './breederInfo';
 export * from './breederSearchEntry';
 export * from './city';
+export * from './customerForAdmin';
 export * from './dictionaryData';
 export * from './iterable';
 export * from './iterableBreed';

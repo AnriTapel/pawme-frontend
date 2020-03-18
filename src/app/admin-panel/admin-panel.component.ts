@@ -18,6 +18,7 @@ export class AdminPanelComponent implements OnInit {
   messages: MessageToBreeder[] = null;
   admins: Admin[] = null;
   dogs : any = null; 
+  petmanCustomers : any = null;
 
   ADMIN_INFO_OBJECT : AdminInfo = {
     name: null,
@@ -158,7 +159,14 @@ export class AdminPanelComponent implements OnInit {
             }
         });
     }
-
+    else if (this.activeSection == 'petman-customers') {
+      this.adminService.listCustomersUsingGET().subscribe(
+        (res) => {
+          this.petmanCustomers = res;
+          console.log(this.petmanCustomers);
+      });
+  }
+   
   }
 
   openBreederPage(id: number): void {

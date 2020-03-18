@@ -11,7 +11,7 @@
             <span [class.active]="activeSection == 'breeders'">Заводчики</span>
         </div>
         <div (click)="switchSection('customers')">
-            <span [class.active]="activeSection == 'customers'">Покупатели</span>
+            <span [class.active]="activeSection == 'customers'">Анонимные сообщения</span>
         </div>
         <div (click)="switchSection('add-breeds')">
             <span [class.active]="activeSection == 'add-breeds'">Породы</span>
@@ -24,6 +24,9 @@
         </div>
         <div (click)="switchSection('select-dogs')">
             <span [class.active]="activeSection == 'select-dogs'">Заявки на подбор собаки</span>
+        </div>
+        <div (click)="switchSection('petman-customers')">
+            <span [class.active]="activeSection == 'petman-customers'">Покупатели</span>
         </div>
     </aside>
     <section>
@@ -269,6 +272,34 @@
                         <td>{{dog.city}}</td>
                         <td>{{dog.breed}}</td>
                         <td>{{dog.email}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+         <!-- Customers-->
+         <div *ngIf="activeSection == 'petman-customers' && petmanCustomers">
+            <div class="section-top-bar">
+                <span>Customers: {{petmanCustomers.length}}</span>
+                <a *ngIf="appService.meData.roles.includes('DOWNLOAD_DB')"
+                    (click)="tableToExcel('customer-table', 'Petman customers', customers)">Скачать список</a>
+            </div>
+            <div class="data-container">
+                <table id="customer-table">
+                    <tr>
+                        <th>Id</th>
+                        <th>Create Date</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr *ngFor="let customer of petmanCustomers">
+                        <td style="text-align: center;">{{customer.id}}</td>
+                        <td style="text-align: center;">{{customer.createDate | date: "short" }}</td>
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.phone}}</td>
+                        <td>{{customer.status}}</td>
                     </tr>
                 </table>
             </div>
