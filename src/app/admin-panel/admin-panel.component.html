@@ -281,7 +281,7 @@
             <div class="section-top-bar">
                 <span>Customers: {{petmanCustomers.length}}</span>
                 <a *ngIf="appService.meData.roles.includes('DOWNLOAD_DB')"
-                    (click)="tableToExcel('customer-table', 'Petman customers', customers)">Скачать список</a>
+                    (click)="tableToExcel('customer-table', 'Petman customers', petmanCustomers)">Скачать список</a>
             </div>
             <div class="data-container">
                 <table id="customer-table">
