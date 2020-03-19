@@ -93,8 +93,12 @@ export class SearchPageComponent implements OnInit {
         this.searchData.cities = [];
       }
        //@ts-ignore
-      this.searchData.range = params.getAll('range');
-
+       if (params.getAll('range').length) {
+        //@ts-ignore
+        this.range = params.getAll('range');
+        this.range = '+' + this.range + 'km';
+       }
+     
       if (params.getAll('currentPage').length) {
         this.p = +params.getAll('currentPage');
       } else {
@@ -191,8 +195,7 @@ export class SearchPageComponent implements OnInit {
 
       if (this.range) {
         this.searchData.range = parseInt(this.range.match(/\d+/)[0]);
-     }
-
+      }
       if (this.city) {
         this.searchData.cities = [];
         this.searchData.cities.push(Number(this.city));
@@ -404,6 +407,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   showAboutMorePopup(): void {
+    this.hideRangePopup();
     this.popupService.setCurrentForm('about-more');
     this.popupService.setPopupParams({'width': 'about-more-modal'});
     this.popupService.setShowStatus(true);
