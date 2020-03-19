@@ -45,6 +45,7 @@ export class AdminPanelComponent implements OnInit {
   invalidFields: string[] = [];
   breeds: Breed = null;
   breedsById: any;
+  cityById: any;
   enableEdit = false;
   enableEditIndex = null;
 
@@ -56,6 +57,7 @@ export class AdminPanelComponent implements OnInit {
     this.adminService.listBreedersUsingGET().subscribe(res => this.breeders = this.initEntityOperations(res));
     this.breeds = this.appService.breeds;
     this.breedsById = this.appService.breedsById;
+    this.cityById = this.appService.citiesById;
   }
 
   logout(): void {
@@ -154,7 +156,10 @@ export class AdminPanelComponent implements OnInit {
             this.dogs = res;
             for (let key in this.dogs) {
               if (this.dogs[key].breed !== null) {
-              this.dogs[key].breed = this.breedsById[key];
+              this.dogs[key].breed = this.breedsById[this.dogs[key].breed];
+              }
+              if (this.dogs[key].city !== null) {
+                this.dogs[key].city = this.cityById[this.dogs[key].city];
               }
             }
         });
@@ -163,7 +168,6 @@ export class AdminPanelComponent implements OnInit {
       this.adminService.listCustomersUsingGET().subscribe(
         (res) => {
           this.petmanCustomers = res;
-          console.log(this.petmanCustomers);
       });
   }
    
