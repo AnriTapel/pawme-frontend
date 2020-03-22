@@ -202,55 +202,58 @@
                     class="main-content">
                     <!-- <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]"> -->
                     <div class="search-content">
-                        <div [routerLink]="[ '/breeder/' + data.id ]" class="search-right">
-                            <div class="dog-mobile">
-                                <div  class="mobile-puppies" *ngIf="data.numPuppies>0" >
-                                    <div>{{data.numPuppies}}</div>
-                                    <div *ngIf="data.numPuppies==1">щенок</div>
-                                    <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">щенка</div>
-                                    <div *ngIf="data.numPuppies>=5">щенков</div>
+                        <div class="search-main" [routerLink]="[ '/breeder/' + data.id ]">
+                            <div  class="search-right">
+                                <div class="dog-mobile">
+                                    <div  class="mobile-puppies" *ngIf="data.numPuppies>0" >
+                                        <div>{{data.numPuppies}}</div>
+                                        <div *ngIf="data.numPuppies==1">щенок</div>
+                                        <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">щенка</div>
+                                        <div *ngIf="data.numPuppies>=5">щенков</div>
+                                    </div>
+                                    <mdb-carousel [interval]=" '0' " class="slider-img carousel slide carousel-fade" [animation]="'fade'">
+                                        <div *ngFor="let data of data.photoPreview">
+                                            <mdb-carousel-item>
+                                                <div class="view w-100 ">
+                                                <img class="d-block w-100" src="/img/{{data}}.jpg" alt="First slide">
+                                                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                                                </div>
+                                            </mdb-carousel-item>
+                                        </div>
+                                    </mdb-carousel>
                                 </div>
-                                <mdb-carousel [interval]=" '0' " class="slider-img carousel slide carousel-fade" [animation]="'fade'">
-                                    <div *ngFor="let data of data.photoPreview">
-                                        <mdb-carousel-item>
-                                            <div class="view w-100 ">
-                                            <img class="d-block w-100" src="/img/{{data}}.jpg" alt="First slide">
-                                            <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                                <div class="main-serach-sub-right">
+                                    <div class="serach-sub-right">
+                                        <div class="location-content">
+                                            <div [className]="data.breedValue0? 'breed-class' : 'breeds'">
+                                                <div *ngIf="data.breedValue0" class="breed">{{data.breedValue0}}</div>
+                                                <div *ngIf="data.breedValue1" class="breed breedI">И</div>
+                                                <div *ngIf="data.breedValue1" class="breed">{{data.breedValue1}}</div>
+                                                <div *ngIf="data.breedValue2" class="breed breedI">И</div>
+                                                <div *ngIf="data.breedValue2" class="breed">{{data.breedValue2}}</div>
                                             </div>
-                                        </mdb-carousel-item>
-                                    </div>
-                                </mdb-carousel>
-                            </div>
-                            <div class="main-serach-sub-right">
-                                <div class="serach-sub-right">
-                                    <div class="location-content">
-                                        <div [className]="data.breedValue0? 'breed-class' : 'breeds'">
-                                            <div *ngIf="data.breedValue0" class="breed">{{data.breedValue0}}</div>
-                                            <div *ngIf="data.breedValue1" class="breed breedI">И</div>
-                                            <div *ngIf="data.breedValue1" class="breed">{{data.breedValue1}}</div>
-                                            <div *ngIf="data.breedValue2" class="breed breedI">И</div>
-                                            <div *ngIf="data.breedValue2" class="breed">{{data.breedValue2}}</div>
+                                            <h3 class=breed-h3>{{data.name}}</h3>
+                                            <div class="location-content-sub">
+                                                <div class="location"><i class="icon icon-location"></i></div>
+                                                <div>{{data.city}}</div>
+                                            </div>
                                         </div>
-                                        <h3 class=breed-h3>{{data.name}}</h3>
-                                        <div class="location-content-sub">
-                                            <div class="location"><i class="icon icon-location"></i></div>
-                                            <div>{{data.city}}</div>
+                                        <div class="serach-content-girl avatar-wrap">
+                                            <img src="/img/{{data.avatarPreview}}.jpg" alt="">
                                         </div>
                                     </div>
-                                    <div class="serach-content-girl avatar-wrap">
-                                        <img src="/img/{{data.avatarPreview}}.jpg" alt="">
+                                    <p class="p-text">{{data.description}}</p>
+                                    <div class="desktop-puppies" *ngIf="data.numPuppies>0" >
+                                        <div>{{data.numPuppies}}</div>
+                                        <div *ngIf="data.numPuppies==1">доступный щенок</div>
+                                        <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">доступных
+                                            щенка</div>
+                                        <div *ngIf="data.numPuppies>=5">доступных щенков</div>
                                     </div>
-                                </div>
-                                <p class="p-text">{{data.description}}</p>
-                                <div class="desktop-puppies" *ngIf="data.numPuppies>0" >
-                                    <div>{{data.numPuppies}}</div>
-                                    <div *ngIf="data.numPuppies==1">доступный щенок</div>
-                                    <div *ngIf="data.numPuppies ==2 || data.numPuppies ==3 || data.numPuppies ==4">доступных
-                                        щенка</div>
-                                    <div *ngIf="data.numPuppies>=5">доступных щенков</div>
                                 </div>
                             </div>
                         </div>
+                      
                         <div class="dog">
                             <mdb-carousel [interval]=" '0' " class="carousel slide carousel-fade dog" [animation]="'fade'">
                                 <div *ngFor="let photo of data.photoPreview" class="">
@@ -301,7 +304,7 @@
                     <div *ngIf="selectedBreedChar.allergens === 'Нет'" class="">Гипоаллергенная</div>
                 </div>
             </div>  -->
-             <div *ngIf="getSearchData.length > 0" class="delivery delivery-desktop">
+              <div *ngIf="getSearchData.length > 0" class="delivery delivery-desktop">
                 <img src="./assets/img/search-page/Illustation.svg" alt="" />
                 <p class="delivery-russian">Доставка по России</p>
                 <p class="delivery-text">
