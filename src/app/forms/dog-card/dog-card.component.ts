@@ -3,6 +3,9 @@ import { DogCardService } from 'src/app/services/dog-card-service/dog-card.servi
 import { CarouselComponent } from 'angular-bootstrap-md';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 import { AppService } from 'src/app/services/app-service/app.service';
+// import { NotificationBarService } from '../services/nofitication-service/notification-bar.service';
+import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
+
 
 @Component({
   selector: 'app-dog-card',
@@ -17,7 +20,10 @@ export class DogCardComponent implements OnInit {
   @ViewChild(CarouselComponent, {static: true})
   gallery: CarouselComponent
 
-  constructor(private appService: AppService, public dogCardService: DogCardService, private popupService: PopupTemplateService) {
+  constructor(private appService: AppService, 
+    public dogCardService: DogCardService,
+    private notificationService: NotificationBarService, 
+    private popupService: PopupTemplateService) {
     this.dog = dogCardService.getDog();
     if (this.dog.price == null) {
       this.dog.price = "уточняйте у заводчика"
@@ -71,11 +77,30 @@ export class DogCardComponent implements OnInit {
   }
 
   showBreederMessagePopup(): void{
-    this.popupService.setPopupParams(null);
-    this.popupService.setPopupParams({'width': 'about-more'});
-    this.popupService.setCurrentForm('breeder-message');
-    this.dogCardService.setVisible(false);
-    this.popupService.setShowStatus(true);
+    // this.popupService.setPopupParams(null);
+    // this.popupService.setPopupParams({'width': 'about-more'});
+    // this.popupService.setCurrentForm('breeder-message');
+    // this.dogCardService.setVisible(false);
+    // this.popupService.setShowStatus(true);
+
+    let params = { breederId: this.appService.userData.id }
+    if (this.appService.meData.type == 'BREEDER') {
+        this.notificationService.setContext('Пожалуйста, выйдите из аккаунта заводчика', false);
+        this.dogCardService.setVisible(false);
+        this.notificationService.setVisibility(true);
+    }
+    else if (this.appService.meData.type == 'CUSTOMER') {
+        this.popupService.setPopupParams(params);
+        this.popupService.setCurrentForm('first-message');
+        this.dogCardService.setVisible(false);
+        this.popupService.setShowStatus(true);
+
+    } else {
+        this.popupService.setPopupParams(params);
+        this.popupService.setCurrentForm('client-chat');
+        this.dogCardService.setVisible(false);
+        this.popupService.setShowStatus(true);
+    }
   }
 
   closeCard(): void{
