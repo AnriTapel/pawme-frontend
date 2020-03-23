@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { AppService } from 'src/app/services/app-service/app.service';
 import { PopupTemplateService } from '../../services/popup-service/popup-template.service';
 
@@ -14,15 +14,15 @@ import { SharedService } from 'src/app/services/shared-services/shared.service';
   templateUrl: './user-icon.component.html',
   styleUrls: ['./user-icon.component.scss']
 })
-export class UserIconComponent implements OnInit {
+export class UserIconComponent implements OnInit, OnDestroy {
 
   @Output('unreadCount') unreadCount = new EventEmitter;
 
   allUnreadCount = 0;
-  chatToken;
-  ws;
+
   rooms;
   meData;
+  wsEventsSubscribe;
 
   private nonProfileHeaderPathnames = ['/breeder-landing', '/?', '/chat'];
 
@@ -35,21 +35,26 @@ export class UserIconComponent implements OnInit {
     private chatService: ChatService,
     private sharedService: SharedService
   ) { }
+  ngOnDestroy(): void {
+    this.wsEventsSubscribe.unsubscribe();
+  }
 
   ngOnInit() {
 
     this.meData = this.appService.meData;
 
+    this.wsEventsSubscribe = this.chatService.wsEvents.subscribe(res => {
+      if (res.eventName === 'onmessage' && res.data) {
+        this.initChatMess();
+      }
+    });
+
     if (this.meData.type !== "ADMIN" && this.meData.type !== "ANONYMOUS") {
-      this.socketInit();
       this.initChatMess();
     }
 
     let subscriber = this.sharedService.updateNotifMessage;
     subscriber.subscribe((res) => {
-      if (!this.ws) {
-        this.socketInit();
-      }
       if (res || res === 0) {
         this.allUnreadCount = +res;
         this.unreadCount.emit(this.allUnreadCount);
@@ -69,29 +74,6 @@ export class UserIconComponent implements OnInit {
         this.allUnreadCount += element.unreadCount
       });
       this.unreadCount.emit(this.allUnreadCount);
-    });
-  }
-
-  socketInit() {
-    // if (this.chatToken) {
-    //   new WebSocket("wss://dev.petman.co/ws/chat/" + this.chatToken).onerror = (error) => {
-    //     console.log(error, 'error');
-    //   }
-    // }
-    this.chatService.getToken().subscribe((data: any) => {
-      this.chatToken = data.token;
-      this.ws = new WebSocket("wss://dev.petman.co/ws/chat/" + this.chatToken);
-      this.ws.onopen = function (e) {
-        // resolve('isOpen')
-      };
-      this.ws.onmessage = (message) => {
-        let response = JSON.parse(message.data);
-        this.initChatMess();
-      };
-      this.ws.onclose = (e) => {
-        // console.log(e, 'this.ws.onclose');
-        this.socketInit()
-      };
     });
   }
 

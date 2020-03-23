@@ -4,6 +4,7 @@ import { LyTheme2, ThemeVariables } from '@alyle/ui';
 import { AppService } from './services/app-service/app.service';
 import { Router } from '@angular/router';
 import { SharedService } from './services/shared-services/shared.service';
+import { ChatService } from './services/chat-service/chat.service';
 
 const STYLES = (theme: ThemeVariables) => ({
   '@global': {
@@ -38,11 +39,13 @@ export class AppComponent {
     private appService: AppService, 
     public popupService: PopupTemplateService,
     public router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private chatService: ChatService,
     ) {
       this.sharedService.headerType.subscribe( type => {
           this.headerType = type
-      })
+      });
+      this.chatService.wsInit();
     }
 
   showGeneralHeader(): boolean{

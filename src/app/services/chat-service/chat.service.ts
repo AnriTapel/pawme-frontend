@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
+  chatToken;
+  ws;
+  wsEvents = new EventEmitter;
+
   constructor(private http: HttpClient) { }
-  
+
   public getToken() {
     return this.http.get('/api/chat/token');
   }
@@ -20,7 +25,7 @@ export class ChatService {
   }
 
   public sendMessage(roomId, message) {
-    return this.http.post(`/api/chat/${roomId}/message`, {text: message});
+    return this.http.post(`/api/chat/${roomId}/message`, { text: message });
   }
   public inviteSupport(roomId) {
     return this.http.post(`/api/chat/${roomId}/summon`, {});
@@ -37,8 +42,45 @@ export class ChatService {
     return this.http.get('/api/chat/admin/rooms');
   }
 
- 
+
   public getMessages(roomId, params?) {
     return this.http.get(`/api/chat/${roomId}/history` + (params ? params : ''));
+  }
+
+  wsInit() {
+    this.getToken().subscribe((data: any) => {
+      this.chatToken = data.token;
+      this.ws = new WebSocket(`wss://${environment.production ? '' : 'dev.'}petman.co/ws/chat/` + this.chatToken);
+
+      this.ws.onopen = (e) => {
+        this.wsEvents.emit(({
+          eventName: 'onopen',
+          data: null
+        }));
+      };
+      this.ws.onmessage = (message) => {
+        this.wsEvents.emit(({
+          eventName: 'onmessage',
+          data: message
+        }));
+      };
+      this.ws.onclose = () => {
+        // Try to reconnect in 5 seconds
+        this.wsEvents.emit(({
+          eventName: 'onclose',
+          data: null
+        }));
+        this.wsInit();
+      };
+    });
+  }
+
+  wsSend(obj) {
+    this.ws.send(JSON.stringify(
+      {
+        roomId: obj.roomId,
+        lastRead: obj.lastRead
+      }
+    ));
   }
 }

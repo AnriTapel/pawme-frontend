@@ -17,8 +17,6 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedTabAdmin;
 
   message;
-  chatToken;
-  ws;
   meData: any;
   rooms;
   selectedRoom: any = {
@@ -41,6 +39,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isEndOfHistory;
 
+  wsEventsSubscribe;
+
   constructor(
     private chatService: ChatService,
     private appService: AppService,
@@ -52,7 +52,13 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.meData.type);
 
     if (this.meData.type !== 'ANONYMOUS') {
-      this.socketInit();
+
+     this.wsEventsSubscribe = chatService.wsEvents.subscribe(res => {
+        if (res.eventName === 'onmessage' && res.data) {
+          this.socketInit(res.data);
+        }
+      });
+
       if (this.meData.type === "ADMIN") {
         this.selectedTabAdmin = 'active';
         this.chatService.getRoomsAdmin().subscribe((rooms: any) => {
@@ -76,8 +82,8 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sharedService.headerType.emit('1');
-    console.log('ceerfff la');
     this.isDestroy = true;
+    this.wsEventsSubscribe.unsubscribe();
   }
 
   ngOnInit() {
@@ -118,123 +124,105 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  socketInit() {
-    return new Promise(resolve => {
-      this.chatService.getToken().subscribe((data: any) => {
-        this.chatToken = data.token;
-        this.ws = new WebSocket("wss://dev.petman.co/ws/chat/" + this.chatToken);
-        this.ws.onopen = function (e) {
-          resolve('isOpen')
-        };
-        this.ws.onmessage = (message) => {
+  socketInit(message) {
+    if (!this.isDestroy) {
+      let response = JSON.parse(message.data);
 
-          if (!this.isDestroy) {
-            let response = JSON.parse(message.data);
+      console.log(response, 'JSON.parse(message.data)');
 
-            console.log(response, 'JSON.parse(message.data)');
+      let hasRoom;
 
-            let hasRoom;
+      this.rooms.forEach(room => {
+        if (response.roomId === room.id) {
+          hasRoom = true;
+        }
+      });
+      if (!hasRoom) {
+        this.chatService.getRooms().subscribe(rooms => {
+          this.rooms = rooms;
+          this.allUnreadCount++;
+          if (!this.ref['destroyed']) {
+            this.ref.detectChanges();
+          }
+        });
+      }
 
-            this.rooms.forEach(room => {
-              if (response.roomId === room.id) {
-                hasRoom = true;
-              }
-            });
-            if (!hasRoom) {
-              this.chatService.getRooms().subscribe(rooms => {
-                this.rooms = rooms;
-                this.allUnreadCount++;
-                if (!this.ref['destroyed']) {
-                  this.ref.detectChanges();
-                }
-              });
-            }
+      if (response.type === "msg" || response.type === "admin") {
 
-            if (response.type === "msg" || response.type === "admin") {
+        response.read = false;
 
-              response.read = false;
+        if (response.roomId === this.selectedRoom.id) {
 
-              if (response.roomId === this.selectedRoom.id) {
+          // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
+          //   this.chatWrap.nativeElement.scrollTop = 10000;
+          // }
 
-                // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
-                //   this.chatWrap.nativeElement.scrollTop = 10000;
-                // }
-
-                this.history.messages.push(response);
-                if (this.meData.id !== response.id && !this.showChatsListMobile) {
-                  setTimeout(() => {
-                    // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
-                    this.readMessage();
-                    if (this.isEndOfHistory) {
-                      this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
-                    }
-                    // }
-                  }, 100);
-                }
-
-                let intervar = setInterval(() => {
-                  if (this.isEndOfHistory) {
-                    console.log();
-
-                    if (document.getElementsByClassName('massage-counter') && this.history.messages.length === document.getElementsByClassName('massage-counter').length) {
-                      setTimeout(() => {
-                        this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
-                      }, 3000);
-                      clearInterval(intervar);
-                    }
-                  } else {
-                    clearInterval(intervar);
-                  }
-                }, 500);
-              }
-
-              this.rooms.forEach(room => {
-                if (room.id === response.roomId) {
-                  room.messages[0] = response;
-                  if (response.senderId !== this.meData.id) {
-                    room.unreadCount++;
-                    this.allUnreadCount++;
-                  }
-                }
-              });
-
-
-              if (!this.ref['destroyed']) {
-                this.ref.detectChanges();
-              }
-              if (this.meSendFlag) {
+          this.history.messages.push(response);
+          if (this.meData.id !== response.id && !this.showChatsListMobile) {
+            setTimeout(() => {
+              // if (this.chatWrap.nativeElement.scrollTop === this.chatWrap.nativeElement.scrollHeight - this.chatWrap.nativeElement.clientHeight) {
+              this.readMessage();
+              if (this.isEndOfHistory) {
                 this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
-                this.meSendFlag = false;
               }
+              // }
+            }, 100);
+          }
 
+          let intervar = setInterval(() => {
+            if (this.isEndOfHistory) {
+              console.log();
+
+              if (document.getElementsByClassName('massage-counter') && this.history.messages.length === document.getElementsByClassName('massage-counter').length) {
+                setTimeout(() => {
+                  this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+                }, 3000);
+                clearInterval(intervar);
+              }
             } else {
-              if (response.roomId === this.selectedRoom.id) {
+              clearInterval(intervar);
+            }
+          }, 500);
+        }
 
-                let BreakException = {};
-                try {
-                  this.history.messages.forEach((element, index) => {
-                    if (element.hasOwnProperty('read')) {
-                      this.history.messages[index].read = true;
-                    }
-                    if (element.id === response.lastReadMsgId) {
-                      throw BreakException;
-                    }
-                  });
-                } catch (e) {
-                  if (e !== BreakException) throw e;
-                }
-              }
+        this.rooms.forEach(room => {
+          if (room.id === response.roomId) {
+            room.messages[0] = response;
+            if (response.senderId !== this.meData.id) {
+              room.unreadCount++;
+              this.allUnreadCount++;
             }
           }
-        };
-        this.ws.onclose = () => {
-          // Try to reconnect in 5 seconds
-          this.socketInit()
-        };
-      });
+        });
 
-    })
 
+        if (!this.ref['destroyed']) {
+          this.ref.detectChanges();
+        }
+        if (this.meSendFlag) {
+          this.chatWrap.nativeElement.scrollTop = this.chatWrap.nativeElement.scrollHeight;
+          this.meSendFlag = false;
+        }
+
+      } else {
+        if (response.roomId === this.selectedRoom.id) {
+
+          let BreakException = {};
+          try {
+            this.history.messages.forEach((element, index) => {
+              if (element.hasOwnProperty('read')) {
+                this.history.messages[index].read = true;
+              }
+              if (element.id === response.lastReadMsgId) {
+                throw BreakException;
+              }
+            });
+          } catch (e) {
+            if (e !== BreakException) throw e;
+          }
+        }
+      }
+    }
   }
 
   ngAfterViewInit() {
@@ -270,11 +258,11 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
         //   roomId: this.selectedRoom.id
         // }
 
-        if (this.ws.readyState === this.ws.OPEN) {
-          // this.ws.send(newMessage);
-        } else {
-          this.socketInit().then(data => { });
-        }
+        // if (this.ws.readyState === this.ws.OPEN) {
+        //   // this.ws.send(newMessage);
+        // } else {
+
+        // }
         this.message = null;
       })
     }
@@ -357,13 +345,13 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     for (let i = this.history['messages'].length - 1; i !== -1; i--) {
       if (this.history['messages'][i].senderId !== this.meData.id) {
         console.log(this.history['messages'][i], 'this.history[asdsa][i]');
+        
+        let obj = {
+          roomId: this.selectedRoom.id,
+          lastRead: this.history['messages'][i].id
+        }
+        this.chatService.wsSend(obj);
 
-        this.ws.send(JSON.stringify(
-          {
-            roomId: this.selectedRoom.id,
-            lastRead: this.history['messages'][i].id
-          }
-        ));
         break;
       }
     }
@@ -390,11 +378,11 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
       localStorage.setItem('meId', this.meData.id);
 
       this.chatService.inviteSupport(this.selectedRoom.id).subscribe(res => {
-        if (this.ws.readyState === this.ws.OPEN) {
-          // this.ws.send(newMessage);
-        } else {
-          this.socketInit().then(data => { });
-        }
+        // if (this.ws.readyState === this.ws.OPEN) {
+        //   // this.ws.send(newMessage);
+        // } else {
+
+        // }
       });
     }
   }
