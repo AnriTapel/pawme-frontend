@@ -83,7 +83,10 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.sharedService.headerType.emit('1');
     this.isDestroy = true;
-    this.wsEventsSubscribe.unsubscribe();
+
+    if (this.wsEventsSubscribe) {
+      this.wsEventsSubscribe.unsubscribe();
+    }
   }
 
   ngOnInit() {

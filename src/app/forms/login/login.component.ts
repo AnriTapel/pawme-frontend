@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { BreederControllerService, AdminControllerService } from 'src/app/api/api';
 import { NotificationBarService } from 'src/app/services/nofitication-service/notification-bar.service';
 import { SharedService } from 'src/app/services/shared-services/shared.service';
+import { ChatService } from 'src/app/services/chat-service/chat.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ export class LoginComponent {
     private breederService: BreederControllerService,
     private notificationService: NotificationBarService,
     private sharedService: SharedService,
+    private chatService: ChatService,
     
     ) {
     if (this.appService.meData.type == "BREEDER"){
@@ -83,6 +85,10 @@ export class LoginComponent {
       scroll(0, 0);
       this.appService.meData = me;
       this.sharedService.updateNotifMessage.emit();
+
+      if (me.type !== 'ANONYMOUS') {
+        this.chatService.wsInit();
+      }
 
       if (me.type == 'BREEDER')
         this.breederService.getBreederUsingGET(me.id).subscribe(res => {

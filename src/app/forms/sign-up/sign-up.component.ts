@@ -4,6 +4,7 @@ import { AppService } from 'src/app/services/app-service/app.service';
 import { BreederControllerService } from 'src/app/api/breederController.service';
 import { RegisterBreeder } from 'src/app/model/registerBreeder';
 import { Router } from '@angular/router';
+import { ChatService } from 'src/app/services/chat-service/chat.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -27,7 +28,10 @@ export class SignUpComponent implements OnInit {
   isLoading: boolean = false;
 
   constructor(private popupService: PopupTemplateService, public appService: AppService,
-    private breederService: BreederControllerService, private router: Router) { scroll(0, 0) }
+    private breederService: BreederControllerService, 
+    private router: Router,
+    private chatService: ChatService
+    ) { scroll(0, 0) }
 
   ngOnInit() {
     document.body.style.overflowY = 'scroll';
@@ -56,6 +60,9 @@ export class SignUpComponent implements OnInit {
         gtag('event', 'Registration');
        
         this.router.navigate(['/confirm-email', this.breederData.email]);
+
+        this.chatService.wsInit();
+        
         window.scrollTo(0, 0);
       }, error => {
         this.isLoading = false;

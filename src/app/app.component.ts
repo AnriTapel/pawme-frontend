@@ -33,6 +33,7 @@ export class AppComponent {
   private noGeneralFooterPathnames = [];
   
   headerType;
+  meData;
 
   constructor(
     private theme: LyTheme2, 
@@ -45,7 +46,11 @@ export class AppComponent {
       this.sharedService.headerType.subscribe( type => {
           this.headerType = type
       });
-      this.chatService.wsInit();
+
+      this.meData = this.appService.meData;
+      if (this.meData.type !== 'ANONYMOUS') {
+        this.chatService.wsInit();
+      }
     }
 
   showGeneralHeader(): boolean{

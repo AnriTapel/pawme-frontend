@@ -7,6 +7,7 @@ import { PopupTemplateService } from 'src/app/services/popup-service/popup-templ
 import { NotificationBarService } from '../../services/nofitication-service/notification-bar.service';
 import { BreederControllerService } from 'src/app/api/api';
 import { HttpClient } from '@angular/common/http';
+import { ChatService } from 'src/app/services/chat-service/chat.service';
 
 
 
@@ -41,6 +42,7 @@ export class ClientChatComponent implements OnInit {
     public popupService: PopupTemplateService,
     private notificationService: NotificationBarService,
     private breederService: BreederControllerService,
+    private chatService: ChatService,
     private http: HttpClient) { }
 
   ngOnInit() {
@@ -68,6 +70,8 @@ export class ClientChatComponent implements OnInit {
         this.popupService.setPopupParams(this.params);
         this.popupService.setCurrentForm('first-message');
         this.popupService.setShowStatus(true);
+
+        this.chatService.wsInit();
 
       }, error => {
         this.isLoading = false;
@@ -99,7 +103,11 @@ export class ClientChatComponent implements OnInit {
       body.append('password', this.credentials.password);
 
       this.http.post('/api/login', body, { responseType: 'text' }).subscribe(
-        data => this.onLoginSuccess(),
+        data => {
+          this.onLoginSuccess();
+          this.chatService.wsInit();
+        }
+        ,
         error => {
           this.errorText = "Неверный логин или пароль";
           this.loginError = true;
