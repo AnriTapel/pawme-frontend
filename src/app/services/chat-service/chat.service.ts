@@ -1,6 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +49,7 @@ export class ChatService {
   wsInit() {
     this.getToken().subscribe((data: any) => {
       this.chatToken = data.token;
-      this.ws = new WebSocket(`wss://${environment.production ? '' : 'dev.'}petman.co/ws/chat/` + this.chatToken);
+      this.ws = new WebSocket(`wss://${window.origin === 'https://petman.co' ? '' : 'dev.'}petman.co/ws/chat/` + this.chatToken);
 
       this.ws.onopen = (e) => {
         this.wsEvents.emit(({
