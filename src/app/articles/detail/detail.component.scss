@@ -487,7 +487,7 @@ a.title_link:hover:before {
    }
 }
 
-@media (max-width: 413px) {
+@media (max-width: 414px) {
   .wrap-base__img {
     width: 82%;
     height: 233px;
@@ -502,12 +502,19 @@ a.title_link:hover:before {
   }
 
   .link {
-    margin-left: 143px !important;
+    margin-left: 280px !important;
   }
   .chat { 
     a {
         font-size: 14px !important;
     }
+  }
+  .chatIntercom1 {
+    width: 170px !important;
+    margin-top: -31px !important;
+    text-align: left !important;
+    margin-left: 0 !important;
+    font-size: 14px !important;
   }
 
   .block-base__subtitle {
@@ -629,12 +636,39 @@ a.title_link:hover:before {
   .paragraph, .paragraph11 {
     font-size: 14px !important;
   }
-  .title{
+  .title {
     font-size: 20px !important;
 
   }
 
 }
+@media (max-width: 768px) {
+  // .link {
+  //   // margin-left: 160px !important;
+  //   text-align: right;
+  // }
+  .chatIntercom1 {
+    text-align: right !important;
+    margin-top: -20px !important;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .chatIntercom1 {
+    width: 170px !important;
+    margin-top: -31px !important;
+    text-align: left !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .link {
+    margin-left: 140px !important;
+  }
+}
+
 
 .paragraph, .paragraph1 {
   font-size: 20px !important;
@@ -644,6 +678,7 @@ a.title_link:hover:before {
   margin-bottom: 30px;
   font-family: "Intro-Book";
 }
+
 .chatIntercom1 {
   width: 170px;
   margin-left: 664px;

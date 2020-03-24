@@ -470,7 +470,7 @@ a.title_link:hover:before {
   font-size: 14px;
 }
 
-@media (max-width: 413px) {
+@media (max-width: 414px) {
   .wrap-base__img {
     width: 82%;
     height: 233px;
@@ -482,9 +482,16 @@ a.title_link:hover:before {
     font-size: 18px;
   }
   .link {
-    margin-left: 143px !important;
+    margin-left: 280px !important;
   }
   .chat a {
+    font-size: 14px !important;
+  }
+  .chatIntercom1 {
+    width: 170px !important;
+    margin-top: -31px !important;
+    text-align: left !important;
+    margin-left: 0 !important;
     font-size: 14px !important;
   }
   .block-base__subtitle {
@@ -584,6 +591,29 @@ a.title_link:hover:before {
   }
   .title {
     font-size: 20px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .chatIntercom1 {
+    text-align: right !important;
+    margin-top: -20px !important;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .chatIntercom1 {
+    width: 170px !important;
+    margin-top: -31px !important;
+    text-align: left !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .link {
+    margin-left: 140px !important;
   }
 }
 
