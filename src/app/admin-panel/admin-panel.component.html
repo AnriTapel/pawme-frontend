@@ -10,8 +10,8 @@
         <div (click)="switchSection('breeders')">
             <span [class.active]="activeSection == 'breeders'">Заводчики</span>
         </div>
-        <div (click)="switchSection('customers')">
-            <span [class.active]="activeSection == 'customers'">Анонимные сообщения</span>
+        <div (click)="switchSection('petman-customers')">
+            <span [class.active]="activeSection == 'petman-customers'">Покупатели</span>
         </div>
         <div (click)="switchSection('add-breeds')">
             <span [class.active]="activeSection == 'add-breeds'">Породы</span>
@@ -25,9 +25,10 @@
         <div (click)="switchSection('select-dogs')">
             <span [class.active]="activeSection == 'select-dogs'">Заявки на подбор собаки</span>
         </div>
-        <div (click)="switchSection('petman-customers')">
-            <span [class.active]="activeSection == 'petman-customers'">Покупатели</span>
+        <div (click)="switchSection('customers')">
+            <span [class.active]="activeSection == 'customers'">Анонимные сообщения</span>
         </div>
+       
     </aside>
     <section>
         <!-- Заводчики -->
@@ -100,32 +101,30 @@
             </div>
         </div>
 
-        <!-- Сообщения -->
-        <div *ngIf="activeSection == 'customers' && appService.meData.roles.includes('VIEW_MESSAGES') && messages">
+        <!-- Customers-->
+        <div *ngIf="activeSection == 'petman-customers' && petmanCustomers">
             <div class="section-top-bar">
-                <span>Отправлено сообщений: {{messages.length}}</span>
-                <a (click)="tableToExcel('messages-table', 'Petman messages', null)">Скачать список</a>
+                <span>Customers: {{petmanCustomers.length}}</span>
+                <a *ngIf="appService.meData.roles.includes('DOWNLOAD_DB')"
+                    (click)="tableToExcel('customer-table', 'Petman customers', petmanCustomers)">Скачать список</a>
             </div>
-
             <div class="data-container">
-                <table id="messages-table">
+                <table id="customer-table">
                     <tr>
-                        <th>Имя</th>
+                        <th>Id</th>
+                        <th>Create Date</th>
+                        <th>Name</th>
                         <th>Email</th>
-                        <th>Телефон</th>
-                        <th>Cообщение</th>
-                        <th>Время сообщение</th>
-                        <th>Страница заводчика</th>
+                        <th>Phone</th>
+                        <th>Status</th>
                     </tr>
-                    <tr *ngFor="let message of messages">
-                        <td>{{message.name}}</td>
-                        <td>{{message.email}}</td>
-                        <td>{{message.phone}}</td>
-                        <td>{{message.message}}</td>
-                        <td>{{message.createDate | date: "short" }}</td> 
-                        <td (click)='openBreederPage(message.breeder.id)' style="cursor: pointer;color: #0094c5;">
-                            https://petman.co/breeder/{{message.breeder.id}}
-                        </td>
+                    <tr *ngFor="let customer of petmanCustomers">
+                        <td style="text-align: center;">{{customer.id}}</td>
+                        <td style="text-align: center;">{{customer.createDate | date: "short" }}</td>
+                        <td>{{customer.name}}</td>
+                        <td>{{customer.email}}</td>
+                        <td>{{customer.phone}}</td>
+                        <td>{{customer.status}}</td>
                     </tr>
                 </table>
             </div>
@@ -276,30 +275,32 @@
                 </table>
             </div>
         </div>
-         <!-- Customers-->
-         <div *ngIf="activeSection == 'petman-customers' && petmanCustomers">
+
+        <!-- Сообщения -->
+        <div *ngIf="activeSection == 'customers' && appService.meData.roles.includes('VIEW_MESSAGES') && messages">
             <div class="section-top-bar">
-                <span>Customers: {{petmanCustomers.length}}</span>
-                <a *ngIf="appService.meData.roles.includes('DOWNLOAD_DB')"
-                    (click)="tableToExcel('customer-table', 'Petman customers', petmanCustomers)">Скачать список</a>
+                <span>Отправлено сообщений: {{messages.length}}</span>
+                <a (click)="tableToExcel('messages-table', 'Petman messages', null)">Скачать список</a>
             </div>
             <div class="data-container">
-                <table id="customer-table">
+                <table id="messages-table">
                     <tr>
-                        <th>Id</th>
-                        <th>Create Date</th>
-                        <th>Name</th>
+                        <th>Имя</th>
                         <th>Email</th>
-                        <th>Phone</th>
-                        <th>Status</th>
+                        <th>Телефон</th>
+                        <th>Cообщение</th>
+                        <th>Время сообщение</th>
+                        <th>Страница заводчика</th>
                     </tr>
-                    <tr *ngFor="let customer of petmanCustomers">
-                        <td style="text-align: center;">{{customer.id}}</td>
-                        <td style="text-align: center;">{{customer.createDate | date: "short" }}</td>
-                        <td>{{customer.name}}</td>
-                        <td>{{customer.email}}</td>
-                        <td>{{customer.phone}}</td>
-                        <td>{{customer.status}}</td>
+                    <tr *ngFor="let message of messages">
+                        <td>{{message.name}}</td>
+                        <td>{{message.email}}</td>
+                        <td>{{message.phone}}</td>
+                        <td>{{message.message}}</td>
+                        <td>{{message.createDate | date: "short" }}</td> 
+                        <td (click)='openBreederPage(message.breeder.id)' style="cursor: pointer;color: #0094c5;">
+                            https://petman.co/breeder/{{message.breeder.id}}
+                        </td>
                     </tr>
                 </table>
             </div>
