@@ -1259,6 +1259,7 @@ span, p, div {
 @media screen and (max-width: 769px) {
   .outer-header {
     padding: 0 16px;
+    margin-bottom: -35px;
   }
   .header {
     position: relative;
