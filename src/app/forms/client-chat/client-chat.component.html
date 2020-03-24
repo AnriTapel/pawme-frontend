@@ -7,7 +7,7 @@
 </div>
 
 <form>
-    <div *ngIf="isOpen" class="registration">
+    <div *ngIf="!isOpen" class="registration">
         <div class="form-group popup-form-group">
             <label for="name">Имя</label><span class="red-star">*</span>
             <input type="text" class="form-control custom-form-control-border" name="name" [(ngModel)]="clientData.name"
@@ -54,7 +54,7 @@
         </div>
     </div>
 
-    <div *ngIf="!isOpen" class="login">
+    <div *ngIf="isOpen" class="login">
         <div class="form-group popup-form-group">
             <label for="email">Ваш Email</label><span class="red-star">*</span>
             <input type="email" class="form-control custom-form-control-border" id="username" name="username" (change)="fieldEdited('username')"
