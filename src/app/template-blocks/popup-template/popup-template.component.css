@@ -29,6 +29,18 @@
   padding: 8px;
 }
 
+.otherClass {
+  max-width: 400px !important;
+  width: 100%;
+  padding: 0 !important;
+}
+
+.otherClass img {
+  margin-top: -25px !important;
+  color: #8785A6;
+  margin-left: 15px !important;
+}
+
 @media screen and (max-width: 769px) {
   .popup-block {
     width: 100%;
@@ -44,6 +56,10 @@
     top: 13px;
     width: 35px;
     height: 35px;
+  }
+  .otherClass img {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
   }
 }
 /*# sourceMappingURL=popup-template.component.css.map */

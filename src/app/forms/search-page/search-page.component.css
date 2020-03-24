@@ -3,21 +3,19 @@ input[type=checkbox]:checked {
   display: none !important;
 }
 
-.about-more {
-  width: 400px !important;
-}
-
-.otherClass {
-  width: 100%;
-  max-width: 400px;
-}
-
 app-header {
   display: none;
 }
 
 .outer-conteiner {
   padding: 0 16px;
+}
+
+.delivery-range {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .breeds {
@@ -237,11 +235,20 @@ app-header {
   opacity: 0.6;
   height: 95px;
   width: 447px;
-  overflow-y: scroll;
+  font-family: 'Intro-Book';
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
 .search-right {
   margin: 20px 26px 0 26px;
+  max-width: 450px !important;
+}
+
+.search-main {
+  width: 628px !important;
 }
 
 .serach-sub-right {
@@ -284,7 +291,6 @@ app-header {
   height: 320px;
   padding: 1px;
   padding-right: 0;
-  padding-left: 49px;
   text-align: right;
   margin-top: -25px;
 }
@@ -296,6 +302,8 @@ app-header {
   max-height: 100%;
   margin-top: -2px;
   margin-left: 1px;
+  width: 370px !important;
+  height: 320px !important;
 }
 
 .location-content {
@@ -659,8 +667,8 @@ div.metaName {
   height: 135px !important;
   padding: 20px !important;
   position: absolute;
-  top: 270px;
-  right: 452px;
+  top: 72px;
+  right: 210px;
   z-index: 12;
 }
 
@@ -877,7 +885,7 @@ div.metaName {
     margin-top: 5px;
   }
   .info-left {
-    margin: 12px 0 0 0;
+    margin: -5px 0 0 0;
     width: 100%;
   }
   .info-left .custom-btn {
@@ -1062,8 +1070,22 @@ div.metaName {
     display: none;
   }
   .range-modal {
-    top: 342px;
-    left: 26px;
+    top: 150px;
+    left: 6px;
+  }
+  .delivery-nosearch {
+    margin-top: 20px !important;
+  }
+  .bottom-delivery-content {
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+  }
+  .dropdown-city-moble {
+    min-width: 190px;
+  }
+  .delivery-range {
+    margin-top: -61px !important;
   }
 }
 /*# sourceMappingURL=search-page.component.css.map */

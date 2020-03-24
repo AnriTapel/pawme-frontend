@@ -114,36 +114,47 @@
                     </ng-template>
                 </ng-select>
             </div> -->
-            <div class="dropdown-text-input dropdown-style desktop-delivery delivery-input">
-                <ng-select 
-                [items]="rangeList" 
-                [multiple]="false" 
-                bindLabel="name" 
-                clearAllText=""
-                placeholder="+10 км" 
-                [closeOnSelect]="true"
-                (change)="changeInput($event)"
-                bindValue="name" 
-                [virtualScroll]="true" 
-                [(ngModel)]="range"
-                >
-                <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
-                    <div class="checkbox-item">
-                        <div [title]="item.name" class="name">{{item.name}}</div>
-                        <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
+            <div class="delivery-range">
+                <div class="dropdown-text-input dropdown-style desktop-delivery delivery-input">
+                    <ng-select 
+                    [items]="rangeList" 
+                    [multiple]="false" 
+                    bindLabel="name" 
+                    clearAllText=""
+                    placeholder="+10 км" 
+                    [closeOnSelect]="true"
+                    (change)="changeInput($event)"
+                    bindValue="name" 
+                    [virtualScroll]="true" 
+                    [(ngModel)]="range"
+                    >
+                    <ng-template let-clear="clear" ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                        <div class="checkbox-item">
+                            <div [title]="item.name" class="name">{{item.name}}</div>
+                            <img *ngIf="!item.disabled" src="./assets/img/search-page/search-checkbox.png" alt="" />
+                        </div>
+                    </ng-template> 
+                    </ng-select>
+                </div>
+                <div *ngIf="isOpen" class="range-modal">
+                    <div class="range-modal-content">
+                    <div class=""><img src="./assets/img/search-page/Warning.svg" alt="" /></div>
+                    <div class="tooltip-text">Не стоит ограничиваться заводчиками из вашего города</div>
+                    <div (click)="hideRangePopup()" class="hide-button"><img src="./assets/img/search-page/Union.svg" alt="" /></div>
                     </div>
-                </ng-template> 
-                </ng-select>
+                    <div (click)="showAboutMorePopup()" class="about-more-range">Узнать подробнее ...</div>
+                </div>
+                <img class="help desktop-help" (click)="showAboutMorePopup()" src="./assets/img/search-page/help.svg" alt="" />
             </div>
-            <div *ngIf="isOpen" class="range-modal">
+            <!-- <div *ngIf="isOpen" class="range-modal">
                 <div class="range-modal-content">
                 <div class=""><img src="./assets/img/search-page/Warning.svg" alt="" /></div>
                 <div class="tooltip-text">Не стоит ограничиваться заводчиками из вашего города</div>
                 <div (click)="hideRangePopup()" class="hide-button"><img src="./assets/img/search-page/Union.svg" alt="" /></div>
                 </div>
                 <div (click)="showAboutMorePopup()" class="about-more-range">Узнать подробнее ...</div>
-            </div>
-            <img class="help desktop-help" (click)="showAboutMorePopup()" src="./assets/img/search-page/help.svg" alt="" />
+            </div> -->
+            <!-- <img class="help desktop-help" (click)="showAboutMorePopup()" src="./assets/img/search-page/help.svg" alt="" /> -->
             <div class="mobile-input-content">
                 <div class="dropdown-text-input dropdown-city-moble dropdown-style">
                     <ng-select 
@@ -200,7 +211,6 @@
             <div class="main-search">
                 <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;"
                     class="main-content">
-                    <!-- <div class="search-content" [routerLink]="[ '/breeder/' + data.id ]"> -->
                     <div class="search-content">
                         <div class="search-main" [routerLink]="[ '/breeder/' + data.id ]">
                             <div  class="search-right">

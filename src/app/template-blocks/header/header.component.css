@@ -10,38 +10,4 @@ header {
   width: 150px;
   outline: none;
 }
-
-.menu-btn {
-  width: 50px;
-  height: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  border-radius: 50%;
-  background-image: radial-gradient(circle at 27% 0, #80c3f3, #4a90e2);
-  cursor: pointer;
-}
-
-.menu-btn a {
-  color: #fff;
-  margin: auto;
-}
-
-.menu-btn a:hover {
-  color: #fff !important;
-}
-
-.menu-btn img {
-  border-radius: 50%;
-  height: 100%;
-}
-
-.white-login-btn {
-  border: 1px solid white;
-  color: #fff !important;
-}
-
-.white-login-btn:hover {
-  color: #645fc9 !important;
-}
 /*# sourceMappingURL=header.component.css.map */

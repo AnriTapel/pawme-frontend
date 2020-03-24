@@ -417,6 +417,9 @@ a.title_link:hover:before {
     width: calc(100%/2 - 16px);
     margin: 0 8px 24px 8px;
   }
+  .link {
+    margin-left: 281px;
+  }
   .wrap-about__img {
     height: 262px;
   }
@@ -437,12 +440,34 @@ a.title_link:hover:before {
   .block-base:after {
     bottom: -44px;
   }
-  .paragraph {
+  .paragraph, .paragraph1 {
     font-size: 14px !important;
   }
   .title {
     font-size: 20px !important;
   }
+}
+
+.chat a {
+  color: #645FC9 !important;
+  text-decoration: underline;
+  font-size: 20px !important;
+  font-family: "Intro-Regular-Italic", sans-serif !important;
+}
+
+.chat:hover {
+  cursor: pointer;
+}
+
+.link {
+  margin-top: -61px;
+  margin-bottom: 44px;
+  color: #0000FF;
+  margin-left: 70px;
+}
+
+.link a {
+  font-size: 14px;
 }
 
 @media (max-width: 413px) {
@@ -455,6 +480,12 @@ a.title_link:hover:before {
   }
   .block-base__title {
     font-size: 18px;
+  }
+  .link {
+    margin-left: 143px !important;
+  }
+  .chat a {
+    font-size: 14px !important;
   }
   .block-base__subtitle {
     font-size: 18px;
@@ -548,7 +579,7 @@ a.title_link:hover:before {
     font-size: 18px;
     padding: 6px 0 24px;
   }
-  .paragraph {
+  .paragraph, .paragraph11 {
     font-size: 14px !important;
   }
   .title {
@@ -556,13 +587,19 @@ a.title_link:hover:before {
   }
 }
 
-.paragraph {
-  font-size: 20px;
+.paragraph, .paragraph1 {
+  font-size: 20px !important;
   line-height: 1.5;
   letter-spacing: normal;
   color: #0e0b4d;
   margin-bottom: 30px;
   font-family: "Intro-Book";
+}
+
+.chatIntercom1 {
+  width: 170px;
+  margin-left: 664px;
+  margin-top: -60px;
 }
 
 .title {
@@ -576,5 +613,25 @@ a.title_link:hover:before {
   margin-top: 42px;
   margin-bottom: 24px;
   font-family: "Intro-Regular";
+}
+
+.link {
+  margin-top: -61px;
+  margin-bottom: 44px;
+  color: #0000FF;
+  margin-left: 70px;
+}
+
+.link a {
+  text-decoration: underline;
+  font-size: 20px;
+  line-height: 1.5;
+  letter-spacing: normal;
+  margin-bottom: 30px;
+  font-family: "Intro-Book" !important;
+}
+
+.link:hover {
+  cursor: pointer;
 }
 /*# sourceMappingURL=detail.component.css.map */

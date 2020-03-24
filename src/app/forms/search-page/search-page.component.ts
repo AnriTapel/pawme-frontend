@@ -244,7 +244,7 @@ export class SearchPageComponent implements OnInit {
     if (event !=undefined && event != '') {   
       this.appService.citiess.forEach(element => {
       if (element.id == event.id) {
-        //this.showRangePopup();
+        this.showRangePopup();
         if (localStorage.getItem('showRangeModal') !='value') {
           this.showRangePopup();
         }

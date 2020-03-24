@@ -20,6 +20,7 @@
   cursor: pointer;
   margin-left: 38px;
   white-space: nowrap;
+  position: relative;
 }
 
 .nav-menu--item a {
@@ -35,7 +36,17 @@
   font-family: Intro-Book;
 }
 
+.d-block-mobile {
+  display: none !important;
+}
+
 @media screen and (max-width: 769px) {
+  .d-none-mobile {
+    display: none !important;
+  }
+  .d-block-mobile {
+    display: block !important;
+  }
   .menu-toggle {
     display: -webkit-box;
     display: -ms-flexbox;

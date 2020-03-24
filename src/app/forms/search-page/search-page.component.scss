@@ -12,6 +12,10 @@ app-header {
 .outer-conteiner {
     padding: 0 16px;
 }
+.delivery-range {
+    position: relative;
+    display: flex;
+}
 .breeds {
     display: flex;
     flex-wrap: wrap;
@@ -597,8 +601,8 @@ div.metaName {
     height: 135px !important;
     padding: 20px !important;
     position: absolute;
-    top: 270px;
-    right: 452px;
+    top: 72px;
+    right: 210px;
     z-index: 12;
 }
 
@@ -933,13 +937,13 @@ div.metaName {
     }
 
     .delivery {
-    width: 100% !important;
-    height: auto;
-    margin: 0 !important;
-    margin-top: 50px !important;
-    position: sticky !important;
-    max-width: 420px;
-    left: 0;
+        width: 100% !important;
+        height: auto;
+        margin: 0 !important;
+        margin-top: 50px !important;
+        position: sticky !important;
+        max-width: 420px;
+        left: 0;
     }
 
     .delivery-desktop {
@@ -1026,8 +1030,8 @@ div.metaName {
     }
 
     .range-modal {
-        top: 342px;
-        left: 26px;
+        top: 150px;
+        left: 6px;
     }
 
     .delivery-nosearch {
@@ -1040,6 +1044,10 @@ div.metaName {
 
     .dropdown-city-moble {
         min-width: 190px;
+    }
+
+    .delivery-range {
+        margin-top: -61px !important;
     }
  
 }
