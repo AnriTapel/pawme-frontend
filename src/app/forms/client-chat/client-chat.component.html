@@ -1,9 +1,22 @@
-<h3>Написать заводчику</h3>
 
-<p>Пожалуйста, зарегистрируйтесь или войдите, чтобы начать чат с заводчиком</p>
+<div *ngIf="!isOpen" class="">
+    <h3>Написать заводчику</h3>
 
-<div *ngIf="errorText" class="form-error-message-block">
-    <span class="invalid-field-message">{{errorText}}</span>
+    <p>Пожалуйста, зарегистрируйтесь или войдите, чтобы начать чат с заводчиком</p>
+    
+    <div *ngIf="errorText" class="form-error-message-block">
+        <span class="invalid-field-message">{{errorText}}</span>
+    </div>
+</div>
+
+<div *ngIf="isOpen" class="login-center">
+    <h3>Написать заводчику</h3>
+
+    <p>Пожалуйста, зарегистрируйтесь или войдите, чтобы начать чат с заводчиком</p>
+    
+    <div *ngIf="errorText" class="form-error-message-block">
+        <span class="invalid-field-message">{{errorText}}</span>
+    </div>
 </div>
 
 <form>

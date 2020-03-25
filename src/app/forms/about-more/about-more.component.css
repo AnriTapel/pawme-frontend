@@ -59,4 +59,10 @@ h3 {
   color: #645FC9 !important;
   text-decoration: underline;
 }
+
+@media screen and (max-width: 769px) {
+  .main {
+    margin-top: 45%;
+  }
+}
 /*# sourceMappingURL=about-more.component.css.map */

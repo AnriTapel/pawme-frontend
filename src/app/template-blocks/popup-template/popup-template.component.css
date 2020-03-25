@@ -52,10 +52,10 @@
     border-radius: 0;
   }
   .popup-block > div {
-    right: 10px;
+    right: 20px;
     top: 13px;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
   }
   .otherClass img {
     margin-top: 0 !important;

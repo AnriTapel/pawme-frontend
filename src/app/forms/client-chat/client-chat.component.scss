@@ -20,7 +20,10 @@ span {
     }
 }
 
-@media screen and (max-width: 769px){
+@media screen and (max-width: 769px) {
+    .login-center {
+        padding-top: 47% !important;
+    } 
 
     h3{
         font-size: 20px;
