@@ -16,6 +16,7 @@ import { PopupTemplateService } from '../../services/popup-service/popup-templat
 
 
 
+
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
@@ -75,6 +76,7 @@ export class SearchPageComponent implements OnInit {
   isOpen: boolean = false;
   range = "+10км";
   city: string[];
+  isLoading: boolean = false;
 
   ngOnInit() {
     this.citiesById = this.appService.citiesById;
@@ -314,9 +316,11 @@ export class SearchPageComponent implements OnInit {
     }
 
   }
+
   fieldEdited(field: string): void {
     this.invalidFields = this.invalidFields.filter(it => it != field);
   }
+
   private validateFields(): boolean {
     let isValid = true;
     this.invalidFields = [];
@@ -329,12 +333,7 @@ export class SearchPageComponent implements OnInit {
     return isValid;
   }
   public sendEmail() {
-    //@ts-ignore
-    ym(55779592, 'reachGoal', 'MatchRequest');
-    //@ts-ignore
-    gtag('event', 'MatchRequest');
-    //@ts-ignore
-    Intercom('trackEvent', 'MatchRequest');
+  
     if (!this.validateFields())
       return;
 
@@ -343,9 +342,18 @@ export class SearchPageComponent implements OnInit {
     if (this.searchData.cities && this.searchData.cities !== null) {
       this.sendEmaillData.city = this.searchData.cities.join(", ");
     }
+
+    this.isLoading = true;
     this.searchControllerService.savePetSelectionRequestUsingPOST(this.sendEmaillData)
       .subscribe((res) => {
-        this.showBox = true;
+        //@ts-ignore
+      ym(55779592, 'reachGoal', 'MatchRequest');
+      //@ts-ignore
+      gtag('event', 'MatchRequest');
+      //@ts-ignore
+      Intercom('trackEvent', 'MatchRequest'); 
+      this.showBox = true;
+      this.isLoading = true;
       }, (err) => {
         if (err.status == 404)
           console.log('error', err)
@@ -353,7 +361,7 @@ export class SearchPageComponent implements OnInit {
 
   }
   scrollTop() {
-    window.scrollTo(0, 200)
+    window.scrollTo(0, 200);
   }
   getBreedCharacterization(selectedBreed) {
     let haveSuccess = false;

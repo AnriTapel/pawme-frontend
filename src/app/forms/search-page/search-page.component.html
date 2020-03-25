@@ -340,7 +340,11 @@
                             действительный
                             E-mail</span>
                     </div>
-                    <input type="button" class="custom-btn btn-purple" value="Отправить" (click)="sendEmail()" />
+                    <button type="submit" class="custom-btn btn-purple email-button" (click)="sendEmail()"
+                    [disabled]="isLoading">{{!isLoading ? 'Отправить' : ''}}
+                    <div *ngIf="isLoading" class="loader"></div>
+                    </button>
+                    <!-- <input type="button" class="custom-btn btn-purple" value="Отправить" (click)="sendEmail()" /> -->
                 </div>
             </div>
             <div *ngIf="showBox" class="heart-info">

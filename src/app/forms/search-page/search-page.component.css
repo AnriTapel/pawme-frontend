@@ -496,6 +496,7 @@ app-header {
 }
 
 .heart-info {
+  width: 100%;
   margin-top: 30px;
   margin-bottom: 32px;
   max-width: 870px;
@@ -864,13 +865,19 @@ div.metaName {
     background-image: none;
     margin-left: auto;
     margin-right: auto;
-    max-width: 332px;
-    width: 100%;
+    width: 100% !important;
+    height: 225px;
+  }
+  .email-button {
+    margin-top: 22px !important;
   }
   .heart-info {
-    width: 332px;
+    width: 100% !important;
     padding: 20px;
     background-image: none;
+  }
+  .invalid-field-message {
+    font-size: 13px !important;
   }
   .info-right h3 {
     width: 100%;
