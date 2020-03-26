@@ -65,7 +65,9 @@ input[type=number]::-webkit-outer-spin-button {
   background: url("/assets/img/articales/img/articles/oval-bottom.svg") no-repeat bottom left;
   overflow: hidden;
 }
-
+.paragraph2, .paragraph3 {
+  display: none;
+}
 .block-base__title {
   font-size: 22px;
   color: #645fc9;
@@ -457,7 +459,7 @@ a.title_link:hover:before {
   .block-base:after {
     bottom: -44px;
   }
-  .paragraph, .paragraph1 {
+  .paragraph, .paragraph1, .paragraph2, .paragraph3, .paragraph4  {
     font-size: 14px !important;
   
   }
@@ -633,7 +635,7 @@ a.title_link:hover:before {
     padding: 6px 0 24px;
   }
 
-  .paragraph, .paragraph11 {
+  .paragraph, .paragraph1, .paragraph2, .paragraph3, .paragraph4  {
     font-size: 14px !important;
   }
   .title {
@@ -647,11 +649,27 @@ a.title_link:hover:before {
     text-align: right !important;
     margin-top: -20px !important;
     margin-left: 0;
+     a {
+      font-size: 20px !important;
+     }
   }
   .chat-intercom {
     margin-top: -22px !important;
     margin-left: 200px !important;
     font-size: 14px !important;
+  }
+
+  .paragraph2 {
+    margin-top: -28px !important;
+    margin-bottom: 0 !important;
+    margin-left: 180px !important;
+  }
+
+  .paragraph2, .paragraph3 {
+    display: block;
+  }
+  .paragraph4 {
+    display: none;
   }
 }
 
@@ -671,7 +689,7 @@ a.title_link:hover:before {
 }
 
 
-.paragraph, .paragraph1 {
+.paragraph, .paragraph1, .paragraph2, .paragraph3, .paragraph4 {
   font-size: 20px !important;
   line-height: 1.5;
   letter-spacing: normal;

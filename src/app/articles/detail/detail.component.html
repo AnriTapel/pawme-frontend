@@ -30,7 +30,10 @@
                         <div *ngFor="let item of showData.body" [ngClass]="{
                                 'title': item.type === 'title',
                                 'paragraph': item.type === 'paragraph', 
-                                'paragraph1': item.type === 'paragraph1'
+                                'paragraph1': item.type === 'paragraph1',
+                                'paragraph2': item.type === 'paragraph2',
+                                'paragraph3': item.type === 'paragraph3',
+                                'paragraph4': item.type === 'paragraph4'
                             }">
                             <div *ngIf="item.type === 'link'"  class="link"><a [routerLink]="[ '/article/16' ]" target="_blank">  статье.</a></div>
                             <div *ngIf="item.type === 'intercom1'"  class="chat chatIntercom1"><a (click)="opneIntercom()" >обратиться к нам</a></div>
