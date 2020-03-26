@@ -643,14 +643,15 @@ a.title_link:hover:before {
 
 }
 @media (max-width: 768px) {
-  // .link {
-  //   // margin-left: 160px !important;
-  //   text-align: right;
-  // }
   .chatIntercom1 {
     text-align: right !important;
     margin-top: -20px !important;
     margin-left: 0;
+  }
+  .chat-intercom {
+    margin-top: -22px !important;
+    margin-left: 200px !important;
+    font-size: 14px !important;
   }
 }
 
@@ -685,7 +686,7 @@ a.title_link:hover:before {
   margin-top: -60px;
 }
 
-.title{
+.title {
   font-size: 28px;
   font-weight: normal;
   font-stretch: normal;
