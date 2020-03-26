@@ -252,6 +252,9 @@ export class SearchPageComponent implements OnInit {
       }
     });
     }
+    if (this.breed.length || this.searchData.cities) {
+      this.p = 1;
+    }
 
     if (this.range) {
       this.searchData.range = parseInt(this.range.match(/\d+/)[0]);

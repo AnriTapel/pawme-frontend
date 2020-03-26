@@ -21,15 +21,27 @@ span {
 }
 
 @media screen and (max-width: 769px) {
-    .login-center {
-        padding-top: 47% !important;
+    .main-content-registration {
+        margin: 0 auto;
+        position: absolute;
+        top: 10%;
+        z-index: 222;
+        width: 100% !important;
     } 
 
-    h3{
+    .main-content-login {
+        margin: 0 auto;
+        position: absolute;
+        top: 25%;
+        z-index: 222;
+        width: 100% !important;
+    } 
+
+    h3 {
         font-size: 20px;
     }
 
-    p{
+    p {
         width: 80%;
     }
 }

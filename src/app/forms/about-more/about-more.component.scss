@@ -60,6 +60,7 @@ h3 {
 
 @media screen and (max-width: 769px) {
    .main {
-       margin-top: 45%;
+       position: absolute;
+       top: 20%;
    }
 }
