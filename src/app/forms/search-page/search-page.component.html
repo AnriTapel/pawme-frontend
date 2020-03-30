@@ -207,6 +207,10 @@
                 <img (click)="showAboutMorePopup()"  class="help" src="./assets/img/search-page/help.svg" alt="" />
             </div>
         </div>
+        <div  *ngIf="!getSearchData" class="">
+           <div class="search-content search-after-load"></div>
+           <div class="search-info search-after-load"></div>
+        </div>
         <div *ngIf="getSearchData" class="search-content-wrap">
             <div class="main-search">
                 <div *ngFor="let data of getSearchData | paginate: { itemsPerPage: 10, currentPage: p }; let i = index;"

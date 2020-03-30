@@ -3,12 +3,14 @@ input[type=checkbox]:checked {
     display: none !important;
 }
 
-
-
 app-header {
     display: none;
 }
-
+.search-after-load {
+    background: #F5F5F5 !important;
+    background-image: none !important;
+    border: 1px solid #979797 !important;
+}
 .outer-conteiner {
     padding: 0 16px;
 }
@@ -16,12 +18,14 @@ app-header {
     position: relative;
     display: flex;
 }
+
 .breeds {
     display: flex;
     flex-wrap: wrap;
     display: block;
     margin-top: 18px;
 }
+
 .breed-class {
     margin-top: 0;
     display: block;
