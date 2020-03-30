@@ -6,6 +6,8 @@
         <app-menu [showMenu]="showMenu"></app-menu>
     </div>
 </div>
+<div class="background-color" *ngIf="!appService.userData">
+</div>
 <ng-container *ngIf="appService.userData">
 
     <div *ngIf="isPreviewMode" class="back-to-profile-bar" (click)="backToProfile()">
