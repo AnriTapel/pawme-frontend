@@ -3,6 +3,10 @@ $white: #FFFFFF;
 $screen-lg: 1202px;
 $screen-sm: 769px;
 
+:host {
+    background: #FFFFFF;
+}
+
 @mixin background($width, $height, $url) {
     content: '';
     width: $width;
